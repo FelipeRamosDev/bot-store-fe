@@ -1,0 +1,20 @@
+@import "../../style/scss/variables.scss";
+
+header {
+   background-color: $background-dark;
+   padding: 0.7rem 0;
+   position: sticky;
+   top: 0;
+   width: 100%;
+   
+   .container {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .logo-image {
+      width: 55px;
+      height: 55px;
+   }
+}

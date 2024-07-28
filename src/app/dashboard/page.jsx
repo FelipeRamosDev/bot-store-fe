@@ -1,7 +1,9 @@
-import BasePage from "@/templates/BasePage";
+import BasePage from "@/templates/basePage/BasePage";
 
 export default function DashboardPage() {
    return <BasePage>
-      <h1>Dashboard</h1>
+      <div className="container">
+         <h1>Dashboard</h1>
+      </div>
    </BasePage>;
 }
