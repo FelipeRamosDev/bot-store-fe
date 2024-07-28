@@ -5,7 +5,6 @@ export default function TopHeader() {
    return <header>
       <div className="container">
          <Logo />
-
          <TopNav />
       </div>
    </header>
