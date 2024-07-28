@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import CTAButton from '@/components/common/CTAButton/CTAButton';
+import CTAButton from '@/components/common/ctaButton/CTAButton';
 
 export default function TopNav() {
    const router = useRouter();
