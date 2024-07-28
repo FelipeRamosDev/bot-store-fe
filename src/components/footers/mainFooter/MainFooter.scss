@@ -1,0 +1,15 @@
+@import "@/style/scss/variables.scss";
+
+footer {
+   background-color: $background-dark;
+   padding: 0.6rem;
+   position: sticky;
+   bottom: 0;
+   width: 100%;
+
+   p {
+      text-align: center;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+   }
+}
