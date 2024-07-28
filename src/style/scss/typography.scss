@@ -1,6 +1,12 @@
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
    margin-top: 0.5em;
    margin-bottom: 1em;
+   line-height: 1em;
 }
 
 h1 {
@@ -25,23 +31,28 @@ h5 {
 
 h6 {
    font-size: 1.1rem;
+   line-height: 1em;
 }
 
 p {
    font-size: 1rem;
+   line-height: 1em;
    margin-bottom: 1rem;
 }
 
 span {
    font-size: 1rem;
+   line-height: 1em;
 }
 
 b {
    font-size: 1.1rem;
+   line-height: 1em;
 }
 
 a {
    color: $success;
+   line-height: 1em;
 }
 
 a:visited {
@@ -62,4 +73,13 @@ ul {
 
 li {
    margin-left: 1rem;
+}
+
+.grad-txt {
+   background: $grad-primary-tertiary-light;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   color: transparent;
+   font-size: 1em;
 }

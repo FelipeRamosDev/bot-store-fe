@@ -1,9 +1,8 @@
 import BasePage from "@/templates/basePage/BasePage";
+import HomeTopBanner from "@/components/banners/homeTopBanner/HomeTopBanner";
 
 export default function HomePage() {
    return <BasePage>
-      <div className="container">
-         <h1>Home</h1>
-      </div>
+      <HomeTopBanner />
    </BasePage>;
 }
