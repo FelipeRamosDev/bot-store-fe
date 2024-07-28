@@ -6,6 +6,7 @@ header {
    position: sticky;
    top: 0;
    width: 100%;
+   z-index: 1;
    
    .container {
       align-items: center;
@@ -24,6 +25,10 @@ header {
       align-items: center;
       gap: 5rem;
 
+      a {
+         font-size: 1.05rem;
+      }
+
       a, a:visited {
          color: $text;
          text-decoration: none;
@@ -39,8 +44,6 @@ header {
 footer {
    background-color: $background-dark;
    padding: 0.6rem;
-   position: sticky;
-   bottom: 0;
    width: 100%;
 
    p {
