@@ -17,4 +17,35 @@ header {
       width: 55px;
       height: 55px;
    }
+
+   nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 5rem;
+
+      a, a:visited {
+         color: $text;
+         text-decoration: none;
+         transition: color 150ms;
+      }
+
+      a:hover {
+         color: $tertiary-light;
+      }
+   }
+}
+
+footer {
+   background-color: $background-dark;
+   padding: 0.6rem;
+   position: sticky;
+   bottom: 0;
+   width: 100%;
+
+   p {
+      text-align: center;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+   }
 }
