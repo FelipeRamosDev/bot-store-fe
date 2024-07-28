@@ -13,6 +13,7 @@ $tertiary-dark: darken($color: $tertiary, $amount: 20);
 $background: #212A2D;
 $background-paper: #252A2A;
 $background-dark: #1C2122;
+$background-grey: #222728;
 $background-grad: radial-gradient(100vh, #28373C, #212A2D);
 
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary-light);
@@ -34,3 +35,10 @@ $text-secondary: #0F282F;
 $text-tertiary: #254331;
 $text-warn: #3A290E;
 $text-disabled: rgba(250,250,250,0.7);
+
+// Breakpoints
+$screen-xs: 375px;
+$screen-s: 425px;
+$screen-m: 768px;
+$screen-l: 1024px;
+$screen-xl: 1440px;
