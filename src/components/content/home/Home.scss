@@ -1,0 +1,32 @@
+@import "../../../style/scss/variables.scss";
+
+.home-content {
+   .features {
+      padding: 3rem 0;
+      background-color: $background-grey;
+
+      .content {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 10rem 0;
+
+         .column {
+            flex: 1;
+         }
+      }
+
+      .image-spot {
+         display: flex;
+         align-items: center;
+
+         &.right {
+            justify-content: right;
+         }
+      }
+   }
+
+   .title {
+      text-align: center;
+   }
+}
