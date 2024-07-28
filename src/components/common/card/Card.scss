@@ -1,0 +1,54 @@
+@import "../../../style/scss/variables.scss";
+
+.card {
+   background-color: $background-grey2;
+   margin-bottom: 1rem;
+
+   &.r-xs {
+      border-radius: 0.2rem
+   }
+
+   &.r-s {
+      border-radius: 0.4rem
+   }
+
+   &.r-m {
+      border-radius: 0.6rem
+   }
+
+   &.r-l {
+      border-radius: 0.8rem
+   }
+
+   &.r-xl {
+      border-radius: 1rem
+   }
+
+   &.r-xxl {
+      border-radius: 1.2rem
+   }
+
+   &.p-xs {
+      padding: 0.75rem;
+   }
+
+   &.p-s {
+      padding: 1.25rem;
+   }
+
+   &.p-m {
+      padding: 1.75rem;
+   }
+
+   &.p-l {
+      padding: 2.25rem;
+   }
+
+   &.p-xl {
+      padding: 2.75rem;
+   }
+
+   &.p-xxl {
+      padding: 3.25rem;
+   }
+}
