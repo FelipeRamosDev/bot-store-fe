@@ -1,0 +1,12 @@
+.content-sidebar {
+   display: flex;
+   gap: 2rem;
+
+   .content {
+      flex: 80%;
+   }
+
+   .sidebar {
+      flex: 30%;
+   }
+}

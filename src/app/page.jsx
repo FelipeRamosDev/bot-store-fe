@@ -3,7 +3,7 @@ import HomeTopBanner from "@/components/banners/homeTopBanner/HomeTopBanner";
 import HomeContent from "@/components/content/home/Home";
 
 export default function HomePage() {
-   return <BasePage>
+   return <BasePage fullContainer={false}>
       <HomeTopBanner />
 
       <HomeContent />
