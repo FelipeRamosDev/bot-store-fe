@@ -32,8 +32,8 @@ $warn-light: lighten($color: $warn, $amount: 20);
 $warn-dark: darken($color: $warn, $amount: 20);
 
 $grey: #808080;
-$grey-light: lighten($color: $grey, $amount: 20);
-$grey-dark: darken($color: $grey, $amount: 20);
+$grey-light: lighten($color: $grey, $amount: 25);
+$grey-dark: darken($color: $grey, $amount: 25);
 
 $text: #FAFAFA;
 $text-secondary: #0F282F;
@@ -49,3 +49,13 @@ $screen-s: 425px;
 $screen-m: 768px;
 $screen-l: 1024px;
 $screen-xl: 1440px;
+
+// Effects
+$shadow-5: 0 0 50px #111111DD;
+
+// Radius
+$radius-xs: 3px;
+$radius-s: 5px;
+$radius-m: 7px;
+$radius-l: 10px;
+$radius-xl: 12px;

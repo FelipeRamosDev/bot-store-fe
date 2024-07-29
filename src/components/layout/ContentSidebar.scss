@@ -1,8 +1,8 @@
 @import "../../style/scss/variables.scss";
 
 .page > .content-sidebar {
-   margin-top: 18vh;
-   margin-bottom: 2rem;
+   margin-top: 10vh;
+   margin-bottom: 5rem;
 }
 
 .content-sidebar {
@@ -15,10 +15,12 @@
    }
 
    .content {
-      flex: 80%;
+      flex: 1;
+      max-width: calc(70% - 1rem);
    }
 
    .sidebar {
-      flex: 30%;
+      flex: 1;
+      max-width: calc(30% - 1rem);
    }
 }

@@ -1,9 +1,31 @@
 import './EdgeLight.scss';
 
-export default function EdgeLight({ label = '', size = '1rem', side = 'left', color = 'disabled', className = '', ...props }) {
+function numberColor(number) {
+   if (typeof number !== 'number') {
+      throw 'The "number" param should be a valid number!';
+   }
+
+   if (number > 0) {
+      return 'success';
+   }
+
+   if (number < 0) {
+      return 'error';
+   }
+
+   if (number === 0) {
+      return 'disabled';
+   }
+}
+
+export default function EdgeLight({ label = '', size = '1rem', side = 'left', colorValue, color = 'disabled', className = '', ...props }) {
    const style = {
       position: 'absolute'
    };
+
+   if (colorValue) {
+      color = numberColor(colorValue);
+   }
 
    switch (side) {
       case 'left':
