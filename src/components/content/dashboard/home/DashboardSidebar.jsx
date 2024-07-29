@@ -1,9 +1,11 @@
-import Card from '@/components/common/card/Card';
+import UserInstance from "@/components/tiles/userInstance/Userinstance";
+
+const DUMMY_USER_INSTANCE = {
+   status: 'online'
+};
 
 export default function DashboardSidebar() {
    return <>
-      <Card padding="xl" radius="l" elevation={50}>
-         
-      </Card>
+      <UserInstance instance={DUMMY_USER_INSTANCE} />
    </>;
 }
