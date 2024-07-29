@@ -1,10 +1,18 @@
-.page .content-sidebar {
+@import "../../style/scss/variables.scss";
+
+.page > .content-sidebar {
    margin-top: 18vh;
+   margin-bottom: 2rem;
 }
 
 .content-sidebar {
    display: flex;
    gap: 2rem;
+   flex-direction: column;
+
+   @media screen and (min-width: $screen-m) {
+      flex-direction: row;
+   }
 
    .content {
       flex: 80%;
