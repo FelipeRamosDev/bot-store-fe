@@ -1,3 +1,4 @@
+import './DashboardHome.scss';
 import ContentSidebar from "@/components/layout/ContentSidebar";
 import DashboardContent from "./DashboardContent";
 import DashboardSidebar from "./DashboardSidebar";
