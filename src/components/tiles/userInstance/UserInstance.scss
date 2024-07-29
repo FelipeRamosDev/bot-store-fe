@@ -1,0 +1,31 @@
+.user-instance {
+   display: flex;
+   gap: 1rem;
+   padding: 0;
+   overflow: hidden;
+
+   p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1rem;
+      margin: 0;
+   }
+
+   small {
+      font-size: 0.8rem;
+      line-height: 0.8rem;
+      margin: 0;
+   }
+
+   .status {
+      padding: 0.7rem 0;
+   }
+
+   .power-btn {
+      width: 3.5rem;
+      height: auto;
+      min-width: auto;
+      padding: 0;
+      border-radius: 0;
+   }
+}
