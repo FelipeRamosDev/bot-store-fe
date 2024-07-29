@@ -3,6 +3,8 @@
    gap: 1rem;
    padding: 0;
    overflow: hidden;
+   -webkit-user-select: none;
+   user-select: none;
 
    p {
       font-size: 1rem;
@@ -18,11 +20,11 @@
    }
 
    .status {
-      padding: 0.7rem 0;
+      padding: 1rem 0;
    }
 
    .power-btn {
-      width: 3.5rem;
+      width: 3.7rem;
       height: auto;
       min-width: auto;
       padding: 0;

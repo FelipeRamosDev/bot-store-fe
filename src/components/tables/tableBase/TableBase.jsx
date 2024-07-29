@@ -15,6 +15,7 @@ export default function SlotsTable({
    elevate = true,
    borderLastRow = true,
    maxHeight = 440,
+   hideHeader = false,
    pagination,
    headerConfigs,
    CustomTableItem,
@@ -41,7 +42,7 @@ export default function SlotsTable({
    return <div className={`table-base ${className} ${elevate ? 'elevate' : ''} ${borderLastRow ? 'lastrow-noborder' : ''}`} {...props}>
       <TableContainer sx={{ maxHeight }}>
          <Table stickyHeader>
-            <TableBaseHeader headerConfigs={headerConfigs} />
+            {!hideHeader && <TableBaseHeader headerConfigs={headerConfigs} />}
 
             <TableBody>
                {slicedSlots.map((item) => <TableItem key={Math.random()} item={item} headerConfigs={headerConfigs} />)}

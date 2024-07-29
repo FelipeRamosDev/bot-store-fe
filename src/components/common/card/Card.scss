@@ -4,6 +4,10 @@
    background-color: $background-grey2;
    margin-bottom: 1rem;
 
+   .card-title {
+      font-size: 1.1rem;
+   }
+
    &.r-xs {
       border-radius: 0.2rem
    }

@@ -22,5 +22,14 @@
    .sidebar {
       flex: 1;
       max-width: calc(30% - 1rem);
+
+      >* {
+         margin-bottom: 2rem;
+      }
+
+      .section-title {
+         font-size: 1.2rem;
+         text-align: center;
+      }
    }
 }
