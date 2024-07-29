@@ -1,0 +1,45 @@
+@import "../../../style/scss/variables.scss";
+
+.mastertile-default {
+   position: relative;
+   overflow: hidden;
+   padding: 1rem 1rem 1rem 1.3rem;
+   -webkit-user-select: none;
+   user-select: none;
+
+   .title {
+      font-size: 1.03rem;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+   }
+
+   .badges-line {
+      width: 100%;
+   }
+
+   .tile-data {
+      display: flex;
+      margin-top: 1rem;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .data {
+         margin-bottom: -0.25rem;
+         color: $grey-light;
+
+         p, b {
+            font-size: 0.8rem;
+            margin: 0;
+         }
+      }
+
+      .price-display {
+         text-align: right;
+
+         @media screen and (min-width: $screen-l) {
+            font-size: 1.5rem;
+         }
+      }
+   }
+}

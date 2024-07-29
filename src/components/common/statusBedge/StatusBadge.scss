@@ -1,0 +1,45 @@
+@import "../../../style/scss/variables.scss";
+
+.status-badge {
+   border-radius: 3px;
+   display: inline-block;
+   font-size: 0.7rem;
+   font-weight: 600;
+   padding: 0.2rem 0.4rem;
+   text-align: center;
+
+   &[color=disabled] {
+      background-color: $grey;
+      color: $text;
+   }
+
+   &[color=primary] {
+      background-color: $primary;
+      color: $text;
+   }
+
+   &[color=secondary] {
+      background-color: $secondary;
+      color: $text-secondary;
+   }
+
+   &[color=tertiary] {
+      background-color: $tertiary;
+      color: $text-tertiary;
+   }
+
+   &[color=success] {
+      background-color: $success;
+      color: $text-success;
+   }
+
+   &[color=warn] {
+      background-color: $warn;
+      color: $text-warn;
+   }
+
+   &[color=error] {
+      background-color: $error;
+      color: $text-error;
+   }
+}

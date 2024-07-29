@@ -31,10 +31,16 @@ $warn: #D7C150;
 $warn-light: lighten($color: $warn, $amount: 20);
 $warn-dark: darken($color: $warn, $amount: 20);
 
+$grey: #808080;
+$grey-light: lighten($color: $grey, $amount: 20);
+$grey-dark: darken($color: $grey, $amount: 20);
+
 $text: #FAFAFA;
 $text-secondary: #0F282F;
 $text-tertiary: #254331;
+$text-success: darken($color: $success, $amount: 40);
 $text-warn: #3A290E;
+$text-error: darken($color: $error, $amount: 40);
 $text-disabled: rgba(250,250,250,0.7);
 
 // Breakpoints
