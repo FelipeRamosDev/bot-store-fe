@@ -18,7 +18,7 @@ function numberColor(number) {
    }
 }
 
-export default function EdgeLight({ label = '', size = '1rem', side = 'left', colorValue, color = 'disabled', className = '', ...props }) {
+export default function EdgeLight({ label = '', size = '1.1rem', side = 'left', colorValue, color = 'disabled', className = '', ...props }) {
    const style = {
       position: 'absolute'
    };

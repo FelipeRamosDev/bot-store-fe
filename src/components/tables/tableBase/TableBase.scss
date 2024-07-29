@@ -1,0 +1,33 @@
+@import "../../../style/scss/variables.scss";
+
+.table-base {
+   margin-top: 1.5rem;
+   background-color: $background-grey1;
+   border-radius: $radius-m;
+   overflow: hidden;
+   -webkit-user-select: none;
+   user-select: none;
+
+   &.elevate {
+      box-shadow: $shadow-5;
+   }
+
+   &.lastrow-noborder {
+      tr:last-child td {
+         border-bottom: none;
+      }
+   }
+
+   p {
+      font-size: 0.9rem;
+      margin: 0;
+   }
+
+   small {
+      font-size: 0.8rem;
+   }
+
+   tr {
+      cursor: pointer;
+   }
+}

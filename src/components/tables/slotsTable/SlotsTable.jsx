@@ -1,46 +1,35 @@
 'use client';
-import './SlotsTable.scss';
-import { useState } from 'react';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TablePagination from '@mui/material/TablePagination';
-import SlotsTableRow from './SlotsTableRow';
+import Price from '@/components/displays/price/Price';
+import StatusBadge from '@/components/common/statusBedge/StatusBadge';
+import TableBase from '@/components/tables/tableBase/TableBase';
+import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 
-import SlotsTableHeader from './SlotsTableHeader';
+export default function SlotsTable({ slots = [] }) {
+   return <TableBase
+      pagination={{}}
+      items={slots}
+      headerConfigs={[
+         {
+            label: 'Symbol / Master', format: (__, item) => {
+               return (<>
+                  <EdgeLight colorValue={item.pnl} />
 
-export default function SlotsTable({ className = '', slots = [], elevate = true, borderLastRow = true, maxHeight = 440, ...props }) {
-   const [page, setPage] = useState(0);
-   const [rowsPerPage, setRowsPerPage] = useState(7);
-   const slicedSlots = slots.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-   const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-   };
-
-   const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
-   };
-
-   return <div className={`slots-table ${className} ${elevate ? 'elevate' : ''} ${borderLastRow ? 'lastrow-noborder' : ''}`} {...props}>
-      <TableContainer sx={{ maxHeight }}>
-         <Table stickyHeader aria-label="sticky table">
-            <SlotsTableHeader />
-
-            <TableBody>
-               {slicedSlots.map((slot) => <SlotsTableRow key={Math.random()} slot={slot} />)}
-            </TableBody>
-         </Table>
-      </TableContainer>
-      <TablePagination
-         rowsPerPageOptions={[10, 25, 100]}
-         component="div"
-         count={slots.length}
-         rowsPerPage={rowsPerPage}
-         page={page}
-         onPageChange={handleChangePage}
-         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-   </div>;
+                  <p>{item.name}</p>
+                  <small>{item.master?.name}</small>
+               </>);
+            }
+         },
+         {
+            label: 'PNL / ROI', align: 'right', format: (__, item) => {
+               return <Price amount={item.pnl} />
+            }
+         },
+         {
+            propKey: 'type', label: 'Type', align: 'right', format: (value) => {
+               return <StatusBadge type="account-type">{value}</StatusBadge>
+            }
+         }
+      ]}
+   />
 }
+
