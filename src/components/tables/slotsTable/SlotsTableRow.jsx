@@ -1,4 +1,3 @@
-import './SlotsTable.scss';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
@@ -24,7 +23,7 @@ export default function SlotsTableRow({ slot }) {
          </TableCell>
          
          <TableCell align="right">
-            <StatusBadge type="slot-status">{slot.type}</StatusBadge>
+            <StatusBadge type="account-type">{slot.type}</StatusBadge>
          </TableCell>
       </TableRow>
    );
