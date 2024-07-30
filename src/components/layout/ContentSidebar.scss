@@ -16,12 +16,12 @@
 
    .content {
       flex: 1;
-      max-width: calc(70% - 1rem);
+      min-width: calc(70% - 1rem);
    }
 
    .sidebar {
       flex: 1;
-      max-width: calc(30% - 1rem);
+      min-width: calc(30% - 1rem);
 
       >* {
          margin-bottom: 3rem;
