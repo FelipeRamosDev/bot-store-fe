@@ -7,7 +7,10 @@ const DUMMY_MASTER = [
    { type: 'master-demo', pnl: -5.10 },
    { type: 'master-demo', pnl: -105.35 },
    { type: 'master-live', pnl: 505.00 },
-   { type: 'master-demo', pnl: 75.81 }
+   { type: 'master-demo', pnl: 75.81 },
+   { type: 'master-demo', pnl: 75.81 },
+   { type: 'master-demo', pnl: 75.81 },
+   { type: 'master-demo', pnl: 75.81 },
 ];
 
 const DUMMY_SLOT = [

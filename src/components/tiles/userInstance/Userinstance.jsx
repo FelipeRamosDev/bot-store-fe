@@ -31,7 +31,7 @@ export default function UserInstance({ instance }) {
       disabled = true;
    }
 
-   return <Card className="user-instance" radius="l" elevation={50}>
+   return <Card className="user-instance" radius="s" elevation={50}>
       <Button className="power-btn" variant="contained" color={btnColor} disabled={disabled}>
          <PowerSettingsNewIcon />
       </Button>
