@@ -17,6 +17,11 @@ header {
    .logo-image {
       width: 55px;
       height: 55px;
+
+      @media screen and (max-width: $screen-m) {
+         width: 35px;
+         height: 35px;
+      }
    }
 
    nav {
@@ -24,6 +29,10 @@ header {
       justify-content: flex-end;
       align-items: center;
       gap: 5rem;
+
+      @media screen and (max-width: $screen-m) {
+         display: none;
+      }
 
       a {
          font-size: 1.05rem;

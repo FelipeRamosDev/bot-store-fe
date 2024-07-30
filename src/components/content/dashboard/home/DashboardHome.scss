@@ -17,6 +17,6 @@
 
    .column {
       flex: 1;
-      max-width: calc(50% - 1.5rem);
+      min-width: calc(50% - 1.5rem);
    }
 }
