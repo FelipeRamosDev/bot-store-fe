@@ -4,7 +4,7 @@ import StatusBadge from "@/components/common/statusBedge/StatusBadge";
 import TableBase from '@/components/tables/tableBase/TableBase';
 
 export default function ActivitiesTable({ activities }) {
-   return <div className="activities-table" padding="s" radius="l">
+   return <div className="activities-table">
       <h3 className="section-title">Activities</h3>
 
       <TableBase
@@ -28,5 +28,5 @@ export default function ActivitiesTable({ activities }) {
             }
          ]}
       />
-   </div>
+   </div>;
 }

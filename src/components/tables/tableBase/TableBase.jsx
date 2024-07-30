@@ -9,7 +9,7 @@ import TableBaseRow from './TableBaseRow';
 import TableBaseHeader from './TableBaseHeader';
 import ColumnConfig from '@/models/TableColumnConfig';
 
-export default function SlotsTable({
+export default function TableBase({
    className = '',
    items = [],
    elevate = true,
