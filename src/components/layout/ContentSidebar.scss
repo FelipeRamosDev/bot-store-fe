@@ -1,0 +1,35 @@
+@import "../../style/scss/variables.scss";
+
+.page > .content-sidebar {
+   margin-top: 10vh;
+   margin-bottom: 5rem;
+}
+
+.content-sidebar {
+   display: flex;
+   gap: 2rem;
+   flex-direction: column;
+
+   @media screen and (min-width: $screen-m) {
+      flex-direction: row;
+   }
+
+   .content {
+      flex: 1;
+      max-width: calc(70% - 1rem);
+   }
+
+   .sidebar {
+      flex: 1;
+      max-width: calc(30% - 1rem);
+
+      >* {
+         margin-bottom: 3rem;
+      }
+
+      .section-title {
+         font-size: 1.2rem;
+         text-align: center;
+      }
+   }
+}

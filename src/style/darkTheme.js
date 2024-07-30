@@ -37,6 +37,9 @@ export const darkTheme = createTheme({
       },
       warn: {
          main: '#D7C150'
+      },
+      disabled: {
+         main: '#808080'
       }
    }
 });

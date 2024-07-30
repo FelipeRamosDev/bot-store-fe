@@ -1,0 +1,28 @@
+@import "../../../style/scss/variables.scss";
+
+.masters-grid {
+   display: flex;
+   flex-wrap: wrap;
+   width: 100%;
+   column-gap: 2%;
+   row-gap: 0.7rem;
+
+   .tile {
+      flex: 100%;
+
+      @media screen and (min-width: $screen-s) {
+         flex: 49%;
+         max-width: 49%;
+      }
+
+      @media screen and (min-width: $screen-l) {
+         flex: 32%;
+         max-width: 32%;
+      }
+
+      @media screen and (min-width: $screen-xl) {
+         flex: 23.5%;
+         max-width: 23.5%;
+      }
+   }
+}
