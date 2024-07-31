@@ -1,4 +1,4 @@
-export async function register(ev, form, API) {
+export async function register(ev, form, API, router) {
    ev.preventDefault();
 
    try {
@@ -11,7 +11,7 @@ export async function register(ev, form, API) {
    }
 }
 
-export async function login(ev, form, API) {
+export async function login(ev, form, API, router) {
    ev.preventDefault();
 
    try {
