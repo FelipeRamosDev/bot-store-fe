@@ -26,9 +26,7 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
    }
 
    return (
-      <form className={`register-form ${className}`} {...props} onSubmit={(ev) => {
-         onSubmit(ev, form.current);
-      }}>
+      <form className={`register-form ${className}`} {...props} onSubmit={(ev) => onSubmit(ev, form.current)}>
          <div className="input-wrap">
             <TextInput
                label="First Name"
