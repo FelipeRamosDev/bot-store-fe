@@ -37,7 +37,7 @@ export default function MastersTileDefault({ className = '', master, ...props })
    >
       <EdgeLight color={edgeColor} />
 
-      <h3 className="title">Master's Name</h3>
+      <h3 className="title">Master&lsquo;s Name</h3>
 
       <div className="badges-line">
          <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
