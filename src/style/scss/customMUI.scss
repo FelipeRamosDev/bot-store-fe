@@ -5,3 +5,19 @@
       color: $text;
    }
 }
+
+.MuiInputLabel-root {
+   color: $text-darken;
+}
+
+.MuiButton-containedPrimary {
+   color: $text;
+}
+
+.MuiButton-containedSecondary {
+   color: $text-secondary;
+}
+
+.MuiButton-containedTertiary {
+   color: $text-tertiary;
+}

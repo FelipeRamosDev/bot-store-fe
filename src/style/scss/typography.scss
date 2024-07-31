@@ -50,13 +50,10 @@ b {
    line-height: 1em;
 }
 
-a {
-   color: $success;
-   line-height: 1em;
-}
-
+a,
 a:visited {
-   color: $warn-light;
+   color: $tertiary;
+   line-height: 1em;
 }
 
 ul {

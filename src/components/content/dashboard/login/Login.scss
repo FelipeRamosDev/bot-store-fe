@@ -1,11 +1,16 @@
 .login-content {
    display: flex;
    margin-top: 15vh;
+   gap: 5rem;
 
    .card {
       margin-left: auto;
-      margin-right: 10%;
+      margin-right: 5%;
       width: 80%;
       max-width: 600px;
+   }
+
+   .create-message {
+      margin-top: 1.3rem;
    }
 }
