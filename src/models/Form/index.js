@@ -14,7 +14,16 @@ export default class Form {
    toObject() {
       const data = {};
 
-      this._data.forEach((item, key) => (data[key] = item));
+      this._data.forEach((item, key) => {
+         const schema = this.getSchema(key);
+
+         if (schema) {
+            data[key] = schema.parse();
+         } else {
+            data[key] = item;
+         }
+      });
+
       return data;
    }
 
@@ -37,6 +46,7 @@ export default class Form {
 
       const fieldSchema = this.getSchema(key);
       if (fieldSchema) {
+         fieldSchema.validateType();
          fieldSchema.validate();
       }
 

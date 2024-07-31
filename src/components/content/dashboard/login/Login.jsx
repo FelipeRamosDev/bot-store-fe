@@ -2,6 +2,7 @@
 import "./Login.scss";
 import { useRouter } from 'next/navigation';
 import LoginForm from "@/components/forms/loginForm/LoginForm";
+import RegisterForm from "@/components/forms/registerForm/RegisterForm";
 import Card from "@/components/common/card/Card";
 import Link from "next/link";
 
@@ -16,7 +17,7 @@ export default function Login({ isRegister }) {
             ev.preventDefault();
 
             router.push('/dashboard');
-         }} />
+         }}/>
 
          <p className="card-title create-message">
             Don't you have an account yet? <Link
@@ -28,11 +29,12 @@ export default function Login({ isRegister }) {
       {isRegister && <Card padding="s" elevation={60}>
          <h1 className="card-title">Create new Account</h1>
 
-         <LoginForm onSubmit={(ev) => {
+         <RegisterForm onSubmit={(ev, form) => {
             ev.preventDefault();
 
-            router.push('/dashboard');
-         }} />
+            console.log(form.toObject());
+            // router.push('/dashboard');
+         }}/>
 
          <p className="card-title create-message">
             Do you already have an account? <Link
