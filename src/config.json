@@ -1,0 +1,7 @@
+{
+   "apiHost": {
+      "DEV": "https://localhost",
+      "STG": "https://192.168.15.102",
+      "PROD": "https://35.246.109.228"
+   }
+}
