@@ -22,7 +22,7 @@ export default function Login({ isRegister }) {
          <p className="card-title create-message">
             Don&apos;t you have an account yet? <Link
                href="/dashboard/login?register=true"
-            >Create one here</Link>
+            >Create Account</Link>
          </p>
       </Card>}
 
