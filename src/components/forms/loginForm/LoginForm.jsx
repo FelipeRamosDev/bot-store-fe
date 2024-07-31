@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Form from '@/models/Form';
 import { loginForm } from './LoginForm.config';
 
-export default function LoginForm({ className, ...props }) {
+export default function LoginForm({ className, onSubmit, ...props }) {
    const [ errors, setErrors ] = useState();
    const form = useRef();
 
@@ -26,7 +26,7 @@ export default function LoginForm({ className, ...props }) {
    }
 
    return (
-      <form className={`login-form ${className}`} {...props}>
+      <form className={`login-form ${className}`} {...props} onSubmit={(ev) => onSubmit(ev, form.current)}>
          <div className="input-wrap">
             <TextInput
                label="E-mail"
