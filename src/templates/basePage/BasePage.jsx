@@ -10,6 +10,6 @@ export default function BasePage({ className = '', fullContainer, children }) {
          {children}
       </div>
 
-      <MainFooter className={className} />
+      <MainFooter className="absolute-bottom" />
    </>);
 }

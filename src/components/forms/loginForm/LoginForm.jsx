@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import TextInput from '@/inputs/textInput/TextInput';
+import TextInput from '@/components/inputs/textInput/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Form from '@/models/Form';
 import { loginForm } from './LoginForm.config';

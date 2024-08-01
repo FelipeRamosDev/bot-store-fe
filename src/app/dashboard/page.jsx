@@ -1,8 +1,8 @@
-import BasePage from "@/templates/basePage/BasePage";
+import AuthBasePage from "@/templates/authBasePage/AuthBasePage";
 import DashboardHome from "@/components/content/dashboard/home/DashboardHome";
 
 export default function DashboardPage() {
-   return <BasePage>
+   return <AuthBasePage>
       <DashboardHome />
-   </BasePage>;
+   </AuthBasePage>;
 }
