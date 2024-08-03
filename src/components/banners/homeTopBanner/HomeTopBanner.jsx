@@ -1,5 +1,5 @@
 import './HomeTopBanner.scss';
-import CTAButton from '@/components/common/ctaButton/CTAButton';
+import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
 export default function HomeTopBanner() {
    return <section className="top-banner">

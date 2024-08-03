@@ -1,14 +1,15 @@
-import { Button } from '@mui/material';
 import TextInput from '@/components/inputs/textInput/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Form from '@/models/Form';
 import { registerForm } from './RegisterForm.config';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
+import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import { parseValidationErrorMsg } from '@/helpers/format';
 
 export default function RegisterForm({ className, onSubmit, ...props }) {
-   const [errors, setErrors] = useState();
-   const [alertDialog, setAlertDialog] = useState();
+   const [ loading, setLoading ] = useState();
+   const [ errors, setErrors ] = useState();
+   const [ alertDialog, setAlertDialog ] = useState();
    const form = useRef();
 
    useEffect(() => {
@@ -38,6 +39,7 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
       }
 
       try {
+         setLoading(true);
          return await onSubmit(form.current);
       } catch (error) {
          const serverValidationErrors = parseValidationErrorMsg(error?.message);
@@ -47,6 +49,8 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
          } else {
             setAlertDialog(error);
          }
+      } finally {
+         setLoading(false);
       }
    }
 
@@ -104,11 +108,12 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
          </div>
 
          <div className="buttons">
-            <Button
+            <LoadingButton
                type="submit"
                variant="contained"
                color="tertiary"
-            >Sign Up</Button>
+               loading={loading}
+            >Sign Up</LoadingButton>
          </div>
       </form>
    </>);
