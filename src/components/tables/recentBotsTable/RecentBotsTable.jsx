@@ -1,8 +1,14 @@
 'use client';
+
+import { useContext } from 'react';
 import Price from '@/components/displays/price/Price';
 import TableBase from '@/components/tables/tableBase/TableBase';
+import DBQueryContext from '@/contexts/DBQuery';
 
-export default function RecentBotsTable({ bots = [] }) {
+export default function RecentBotsTable() {
+   const { query = [] } = useContext(DBQueryContext);
+   const bots = query;
+
    return <div className="activities-table">
       <h3 className="section-title">Recent Bots</h3>
 

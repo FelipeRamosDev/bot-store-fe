@@ -16,6 +16,8 @@ export function AuthUserProvider({ children }) {
    const router = useRouter();
 
    useEffect(() => {
+      if (userAuth) return;
+
       instance.auth.checkUser().then(authData => {
          if (authData.isLogged) {
             setUserAuth(authData);

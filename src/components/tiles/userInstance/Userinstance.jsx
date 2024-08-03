@@ -1,9 +1,15 @@
+'use client';
 import "./UserInstance.scss";
+
+import { useContext } from 'react';
 import Card from '@/components/common/card/Card';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Button } from '@mui/material';
+import DBQueryContext from "@/contexts/DBQuery";
 
-export default function UserInstance({ instance }) {
+export default function UserInstance() {
+   const { doc, socket } = useContext(DBQueryContext);
+   const instance = doc;
    let message = '';
    let displayStatus = '';
    let btnColor;

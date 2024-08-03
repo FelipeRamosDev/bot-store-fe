@@ -37,7 +37,7 @@ export default function MastersTileDefault({ className = '', master, ...props })
    >
       <EdgeLight color={edgeColor} />
 
-      <h3 className="title">Master&lsquo;s Name</h3>
+      <h3 className="title">{master.name}</h3>
 
       <div className="badges-line">
          <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
@@ -45,8 +45,8 @@ export default function MastersTileDefault({ className = '', master, ...props })
 
       <div className="tile-data">
          <div className="data">
-            <p><b>Label 1:</b> Value</p>
-            <p><b>Label 2:</b> Value</p>
+            <p><b>Day PNL:</b> {master.results.dayPnl.toFixed(2)} / {master.results.dayRoi.toFixed(2)}%</p>
+            <p><b>Month PNL:</b> {master.results.monthPnl.toFixed(2)} / {master.results.monthRoi.toFixed(2)}%</p>
          </div>
 
          <Price amount={master.pnl} />
