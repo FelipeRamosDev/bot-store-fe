@@ -1,11 +1,15 @@
-import { Button } from '@mui/material';
-import TextInput from '@/inputs/textInput/TextInput';
+import TextInput from '@/components/inputs/textInput/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Form from '@/models/Form';
 import { registerForm } from './RegisterForm.config';
+import AlertModal from '@/components/modals/alertModal/AlertModal';
+import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
+import { parseValidationErrorMsg } from '@/helpers/format';
 
 export default function RegisterForm({ className, onSubmit, ...props }) {
+   const [ loading, setLoading ] = useState();
    const [ errors, setErrors ] = useState();
+   const [ alertDialog, setAlertDialog ] = useState();
    const form = useRef();
 
    useEffect(() => {
@@ -25,10 +29,40 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
       form.current.setValue(key, value);
    }
 
-   return (
-      <form className={`register-form ${className}`} {...props} onSubmit={(ev) => {
-         onSubmit(ev, form.current);
-      }}>
+   const handleSubmit = async (ev) => {
+      ev.preventDefault();
+      const validated = form.current.validateForm();
+
+      if (validated.hasError) {
+         setErrors(validated.errors);
+         return;
+      }
+
+      try {
+         setLoading(true);
+         return await onSubmit(form.current);
+      } catch (error) {
+         const serverValidationErrors = parseValidationErrorMsg(error?.message);
+
+         if (serverValidationErrors) {
+            setAlertDialog({ error, message: serverValidationErrors });
+         } else {
+            setAlertDialog(error);
+         }
+      } finally {
+         setLoading(false);
+      }
+   }
+
+   return (<>
+      <AlertModal
+         open={alertDialog} handleOk={() => setAlertDialog(false)}
+         title="Login Error"
+      >
+         <p>{alertDialog?.message}</p>
+      </AlertModal>
+
+      <form className={`register-form ${className}`} {...props} onSubmit={handleSubmit}>
          <div className="input-wrap">
             <TextInput
                label="First Name"
@@ -74,12 +108,13 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
          </div>
 
          <div className="buttons">
-            <Button
+            <LoadingButton
                type="submit"
                variant="contained"
                color="tertiary"
-            >Sign Up</Button>
+               loading={loading}
+            >Sign Up</LoadingButton>
          </div>
       </form>
-   );
+   </>);
 }

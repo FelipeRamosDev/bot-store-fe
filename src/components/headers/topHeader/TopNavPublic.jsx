@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import CTAButton from '@/components/common/ctaButton/CTAButton';
+import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
 export default function TopNav() {
    const router = useRouter();
@@ -12,7 +12,7 @@ export default function TopNav() {
       <Link href="/pricing">Pricing</Link>
       <Link href="/earn-commission">Earn Commissions</Link>
 
-      <CTAButton size="large" onClick={() => router.push('/dashboard/login')}>
+      <CTAButton size="large" onClick={() => router.push('/dashboard')}>
          START
       </CTAButton>
    </nav>;
