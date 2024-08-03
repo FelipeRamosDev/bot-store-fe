@@ -1,6 +1,7 @@
 @import "../../../style/scss/variables.scss";
 
 .table-base {
+   position: relative;
    margin-top: 1.5rem;
    background-color: $background-grey1;
    border-radius: $radius-m;

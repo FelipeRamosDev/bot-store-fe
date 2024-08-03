@@ -6,7 +6,7 @@ import TableBase from '@/components/tables/tableBase/TableBase';
 import DBQueryContext from '@/contexts/DBQuery';
 
 export default function RecentBotsTable() {
-   const { query = [] } = useContext(DBQueryContext);
+   const { query = [], isLoading } = useContext(DBQueryContext);
    const bots = query;
 
    return <div className="activities-table">
@@ -15,6 +15,7 @@ export default function RecentBotsTable() {
       <TableBase
          items={bots}
          pagination={{}}
+         loading={isLoading}
          headerConfigs={[
             {
                label: 'Bot',

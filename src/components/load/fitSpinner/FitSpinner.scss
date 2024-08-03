@@ -1,0 +1,29 @@
+@import "../../../style/scss/variables.scss";
+
+.fit-spinner {
+   background-color: $background-grey1;
+   min-height: 300px;
+
+   .spinner-block {
+      transform: translateY(-75%);
+
+      .spinner-item {
+         margin-bottom: 0;
+
+         .lds-ring {
+            height: 41px;
+            width: 41px;
+   
+            div {
+               height: 35px;
+               width: 35px;
+            }
+         }
+      }
+
+      p.message {
+         font-size: 1rem;
+         font-weight: 400;
+      }
+   }
+}

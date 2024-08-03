@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useRef } from 'react';
 import APIContext from './4HandsAPI';
 
 const DBQueryContext = createContext();
@@ -7,9 +7,10 @@ export default DBQueryContext;
 
 export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, children }) {
    const instance = useContext(APIContext);
+   const [ loading, setLoading ] = useState(true);
    const [ query, setQuery ] = useState([]);
    const [ doc, setDoc ] = useState();
-   let socket;
+   const socket = useRef();
 
    if (!type || !collection) {
       throw new Error('Required Params: "type" and "collection" are required!');
@@ -41,11 +42,13 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
       switch (type) {
          case 'query':
             if (subscribe) {
-               socket = dbQuery.subscribeQuery({
+               socket.current = dbQuery.subscribeQuery({
                   onData: query => {
                      setQuery(query);
+                     setLoading(false);
                   },
                   onError: err => {
+                     setLoading(false);
                      throw err;
                   }
                });
@@ -54,17 +57,21 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
                   setQuery(query);
                }).catch(err => {
                   throw err;
+               }).finally(() => {
+                  setLoading(false);
                });
             }
 
             break;
          case 'doc':
             if (subscribe) {
-               socket = dbQuery.subscribeDoc({
+               socket.current = dbQuery.subscribeDoc({
                   onData: doc => {
                      setDoc(doc);
+                     setLoading(false);
                   },
                   onError: err => {
+                     setLoading(false);
                      throw err;
                   }
                });
@@ -73,15 +80,18 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
                   setDoc(doc);
                }).catch(err => {
                   throw err;
+               }).finally(() => {
+                  setLoading(false);
                });
             }
 
             break;
       }
-   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod ]);
+   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query.length, subscribe, doc ]);
 
    return <DBQueryContext.Provider value={{
       socket,
+      isLoading: loading,
       doc: doc,
       query: query
    }}>

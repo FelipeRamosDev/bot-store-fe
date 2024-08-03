@@ -7,12 +7,13 @@ import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
 
 export default function SlotsTable() {
-   const { query = [] } = useContext(DBQueryContext);
+   const { query = [], isLoading } = useContext(DBQueryContext);
    const slots = query;
 
    return <TableBase
       pagination={{}}
       items={slots}
+      loading={isLoading}
       headerConfigs={[
          {
             label: 'Symbol / Master', format: (__, item) => {

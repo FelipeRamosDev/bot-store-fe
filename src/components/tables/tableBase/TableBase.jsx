@@ -8,6 +8,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableBaseRow from './TableBaseRow';
 import TableBaseHeader from './TableBaseHeader';
 import ColumnConfig from '@/models/TableColumnConfig';
+import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
+import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 
 export default function TableBase({
    className = '',
@@ -16,6 +18,7 @@ export default function TableBase({
    borderLastRow = true,
    maxHeight = 440,
    hideHeader = false,
+   loading = true,
    pagination,
    headerConfigs,
    CustomTableItem,
@@ -40,15 +43,26 @@ export default function TableBase({
    headerConfigs = headerConfigs.map(item => new ColumnConfig(item));
 
    return <div className={`table-base ${className} ${elevate ? 'elevate' : ''} ${borderLastRow ? 'lastrow-noborder' : ''}`} {...props}>
-      <TableContainer sx={{ maxHeight }}>
+      {loading && <FitSpinner color="tertiary-dark" spinner="Loading" />}
+
+      {!loading && <TableContainer sx={{ maxHeight }}>
          <Table stickyHeader>
             {!hideHeader && <TableBaseHeader headerConfigs={headerConfigs} />}
 
             <TableBody>
-               {slicedSlots.map((item) => <TableItem key={Math.random()} item={item} headerConfigs={headerConfigs} />)}
+               {(slicedSlots.length > 0) && (
+                  slicedSlots.map((item) => (
+                     <TableItem key={Math.random()} item={item} headerConfigs={headerConfigs} />
+                  )
+               ))}
             </TableBody>
          </Table>
-      </TableContainer>
+      </TableContainer>}
+
+      
+      {(!loading && slicedSlots.length === 0) && (
+         <NoDocumentsTile noBorder={true} Icon={false} message={`There is no documents to list!`} />
+      )}
 
       {pagination && <TablePagination
          rowsPerPageOptions={rowsPerPageOptions}
