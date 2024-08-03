@@ -1,5 +1,4 @@
-export async function register(ev, form, API, router) {
-   ev.preventDefault();
+export async function register(form, API) {
    const parsedBody = form.toObject();
 
    try {
@@ -11,8 +10,7 @@ export async function register(ev, form, API, router) {
    }
 }
 
-export async function login(ev, form, API, router) {
-   ev.preventDefault();
+export async function login(form, API, router) {
    const parsedBody = form.toObject();
 
    try {

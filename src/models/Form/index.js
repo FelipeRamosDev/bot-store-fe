@@ -70,6 +70,20 @@ export default class Form {
       this._onChange(...args);
    }
 
+   validateForm() {
+      this._schema.forEach(item => {
+         item.validateType();
+         item.validate();
+      });
+
+      const errors = this.getFieldErrors();
+      const validatedKeys = Object.keys(errors);
+      return {
+         hasError: validatedKeys.some(key => errors[key].length),
+         errors
+      }
+   }
+
    getFieldErrors() {
       const errors = {};
 

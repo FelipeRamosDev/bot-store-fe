@@ -12,7 +12,7 @@ export default function TopNav() {
       <Link href="/pricing">Pricing</Link>
       <Link href="/earn-commission">Earn Commissions</Link>
 
-      <CTAButton size="large" onClick={() => router.push('/dashboard/login')}>
+      <CTAButton size="large" onClick={() => router.push('/dashboard')}>
          START
       </CTAButton>
    </nav>;

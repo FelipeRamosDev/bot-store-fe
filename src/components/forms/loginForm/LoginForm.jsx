@@ -1,11 +1,13 @@
-import { Button } from '@mui/material';
-import TextInput from '@/components/inputs/textInput/TextInput';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@mui/material';
 import Form from '@/models/Form';
+import TextInput from '@/components/inputs/textInput/TextInput';
 import { loginForm } from './LoginForm.config';
+import AlertModal from '@/components/modals/alertModal/AlertModal';
 
 export default function LoginForm({ className, onSubmit, ...props }) {
    const [ errors, setErrors ] = useState();
+   const [ alertDialog, setAlertDialog ] = useState();
    const form = useRef();
 
    useEffect(() => {
@@ -25,8 +27,31 @@ export default function LoginForm({ className, onSubmit, ...props }) {
       form.current.setValue(key, value);
    }
 
-   return (
-      <form className={`login-form ${className}`} {...props} onSubmit={(ev) => onSubmit(ev, form.current)}>
+   const handleSubmit = async (ev) => {
+      ev.preventDefault();
+      const validated = form.current.validateForm();
+
+      if (validated.hasError) {
+         setErrors(validated.errors);
+         return;
+      }
+
+      try {
+         return await onSubmit(form.current);
+      } catch (error) {
+         setAlertDialog(error);
+      }
+   }
+
+   return (<>
+      <AlertModal
+         open={alertDialog} handleOk={() => setAlertDialog(false)}
+         title="Login Error"
+      >
+         <p>{alertDialog?.message}</p>
+      </AlertModal>
+
+      <form className={`login-form ${className}`} {...props} onSubmit={handleSubmit}>
          <div className="input-wrap">
             <TextInput
                label="E-mail"
@@ -54,5 +79,5 @@ export default function LoginForm({ className, onSubmit, ...props }) {
             >Get In</Button>
          </div>
       </form>
-   );
+   </>);
 }

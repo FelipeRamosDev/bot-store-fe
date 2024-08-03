@@ -69,6 +69,9 @@ export default class FieldSchema {
 
    validateType() {
       const currentValue = this.form[this.key];
+      if (!currentValue) {
+         return;
+      }
       
       switch (this.type) {
          case String:

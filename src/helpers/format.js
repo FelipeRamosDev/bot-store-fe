@@ -22,8 +22,22 @@ function toMoneyString(amount, opt) {
    return toMoney(amount, { fractional, symbol });
 }
 
+
+function parseValidationErrorMsg(msg) {
+   if (msg.indexOf('ValidateModel validation failed:') === 0) {
+      const removeTitle = msg.replace('ValidateModel validation failed: ', '');
+      const listTheErrors = removeTitle.split(',');
+
+      return listTheErrors.map(item => {
+         const parsed = item.split(': ');
+         return '- ' + parsed[1];
+      }).join('\n');
+   }
+}
+
 module.exports = {
    toMoney,
    toMoneyString,
-   formatFractional
+   formatFractional,
+   parseValidationErrorMsg
 };
