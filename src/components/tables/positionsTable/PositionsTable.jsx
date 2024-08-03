@@ -7,12 +7,13 @@ import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
 
 export default function PositionsTable() {
-   const { query = [] } = useContext(DBQueryContext);
+   const { query = [], isLoading } = useContext(DBQueryContext);
    const positions = query;
 
    return <TableBase
       pagination={{}}
       items={positions}
+      loading={isLoading}
       headerConfigs={[
          {
             propKey: 'symbol', label: 'Symbol', format: (value, item) => {

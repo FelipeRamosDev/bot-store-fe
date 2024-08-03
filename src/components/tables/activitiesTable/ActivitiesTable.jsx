@@ -7,7 +7,7 @@ import TableBase from '@/components/tables/tableBase/TableBase';
 import DBQueryContext from '@/contexts/DBQuery';
 
 export default function ActivitiesTable() {
-   const { query = [] } = useContext(DBQueryContext);
+   const { query = [], isLoading } = useContext(DBQueryContext);
    const activities = query;
 
    return <div className="activities-table">
@@ -16,6 +16,7 @@ export default function ActivitiesTable() {
       <TableBase
          items={activities}
          hideHeader={true}
+         loading={isLoading}
          headerConfigs={[
             {
                propKey: 'type',
