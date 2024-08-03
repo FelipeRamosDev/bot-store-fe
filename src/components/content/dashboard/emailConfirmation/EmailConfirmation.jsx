@@ -13,7 +13,7 @@ export default function EmailConfirmation({ confirmationToken }) {
       confirmEmail(API, confirmationToken, router).catch(err => {
          throw err;
       });
-   }, []);
+   }, [ API, confirmationToken, router ]);
 
    return <></>;
 }

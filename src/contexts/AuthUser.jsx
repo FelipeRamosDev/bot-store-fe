@@ -25,7 +25,7 @@ export function AuthUserProvider({ children }) {
          setError(err);
          throw err;
       });
-   }, []);
+   }, [ instance.auth, router ]);
 
    return <APIContext.Provider value={userAuth}>
       {!userAuth && !error && <LoadingPage message="Validating User" />}
