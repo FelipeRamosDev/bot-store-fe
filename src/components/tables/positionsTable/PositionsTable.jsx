@@ -1,10 +1,15 @@
 'use client';
+import { useContext } from 'react';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import Price from '@/components/displays/price/Price';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
+import DBQueryContext from '@/contexts/DBQuery';
 
-export default function PositionsTable({ positions = [] }) {
+export default function PositionsTable() {
+   const { query = [] } = useContext(DBQueryContext);
+   const positions = query;
+
    return <TableBase
       pagination={{}}
       items={positions}

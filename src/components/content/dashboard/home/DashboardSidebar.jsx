@@ -1,28 +1,39 @@
+'use client';
+import { useContext } from 'react';
 import ActivitiesTable from "@/components/tables/activitiesTable/ActivitiesTable";
 import RecentBotsTable from "@/components/tables/recentBotsTable/RecentBotsTable";
 import UserInstance from "@/components/tiles/userInstance/Userinstance";
-
-const DUMMY_USER_INSTANCE = {
-   status: 'online'
-};
-
-const DUMMY_ACTIVITIES = [
-   { type: 'msg', subject: 'Subject Here', summary: 'Reference site about Lorem Ipsum, giving information on its origins.' },
-   { type: 'error', subject: 'Subject Here', summary: 'Reference site about Lorem Ipsum, giving information on its origins.' },
-   { type: 'warn', subject: 'Subject Here', summary: 'Reference site about Lorem Ipsum, giving information on its origins.' },
-];
-
-const DUMMY_BOTS = [
-   { name: 'Peter Griffin', score: 1562 },
-   { name: 'Bender', score: -485 },
-   { name: 'Burns', score: 4500 },
-   { name: 'Terminator', score: -300 },
-];
+import { DBQuery } from '@/contexts/DBQuery';
+import AuthUserContext from "@/contexts/AuthUser";
 
 export default function DashboardSidebar() {
+   const { user } = useContext(AuthUserContext);
+
+   if (!user) {
+      return <></>;
+   }
+
    return <>
-      <UserInstance instance={DUMMY_USER_INSTANCE} />
-      <ActivitiesTable activities={DUMMY_ACTIVITIES} />
-      <RecentBotsTable bots={DUMMY_BOTS} />
+      <DBQuery
+         type="doc"
+         collection="user_instances"
+         filter={{ user: user._id }}
+         subscribe={true}
+      >
+         <UserInstance />
+      </DBQuery>
+
+      <DBQuery
+         type="query"
+         collection="activities"
+         filter={{ user: user._id }}
+         subscribe={true}
+      >
+         <ActivitiesTable />
+      </DBQuery>
+
+      <DBQuery type="query" collection="bots">
+         <RecentBotsTable />
+      </DBQuery>
    </>;
 }

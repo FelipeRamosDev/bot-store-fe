@@ -1,9 +1,15 @@
 'use client';
 import "./ActivitiesTable.scss";
+
+import { useContext } from 'react';
 import StatusBadge from "@/components/common/statusBedge/StatusBadge";
 import TableBase from '@/components/tables/tableBase/TableBase';
+import DBQueryContext from '@/contexts/DBQuery';
 
-export default function ActivitiesTable({ activities }) {
+export default function ActivitiesTable() {
+   const { query = [] } = useContext(DBQueryContext);
+   const activities = query;
+
    return <div className="activities-table">
       <h3 className="section-title">Activities</h3>
 

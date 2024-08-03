@@ -1,10 +1,15 @@
 'use client';
+import { useContext } from 'react';
 import Price from '@/components/displays/price/Price';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
+import DBQueryContext from '@/contexts/DBQuery';
 
-export default function SlotsTable({ slots = [] }) {
+export default function SlotsTable() {
+   const { query = [] } = useContext(DBQueryContext);
+   const slots = query;
+
    return <TableBase
       pagination={{}}
       items={slots}
