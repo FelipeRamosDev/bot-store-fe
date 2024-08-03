@@ -6,7 +6,8 @@ import APIContext from './4HandsAPI';
 import LoadingPage from '@/app/loading';
 import ErrorPage from '@/app/error';
 
-export default createContext();
+const AuthUserContext = createContext();
+export default AuthUserContext;
 
 export function AuthUserProvider({ children }) {
    const [ userAuth, setUserAuth ] = useState();
@@ -27,10 +28,10 @@ export function AuthUserProvider({ children }) {
       });
    }, [ instance.auth, router ]);
 
-   return <APIContext.Provider value={userAuth}>
+   return <AuthUserContext.Provider value={userAuth}>
       {!userAuth && !error && <LoadingPage message="Validating User" />}
 
       {userAuth && !error && children}
       {error && <ErrorPage error={error} />}
-   </APIContext.Provider>
+   </AuthUserContext.Provider>
 }
