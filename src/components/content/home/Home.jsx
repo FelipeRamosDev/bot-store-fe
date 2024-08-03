@@ -1,7 +1,7 @@
 import './Home.scss';
 import Image from 'next/image';
 import SlotTileImage from '@/assets/slot_tile.svg';
-import CTAButton from '@/components/common/ctaButton/CTAButton';
+import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
 export default function Home() {
    return <section className="home-content">

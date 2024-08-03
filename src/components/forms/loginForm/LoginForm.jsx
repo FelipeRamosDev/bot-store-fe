@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button } from '@mui/material';
+import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import Form from '@/models/Form';
 import TextInput from '@/components/inputs/textInput/TextInput';
 import { loginForm } from './LoginForm.config';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
 
 export default function LoginForm({ className, onSubmit, ...props }) {
+   const [ loading, setLoading ] = useState();
    const [ errors, setErrors ] = useState();
    const [ alertDialog, setAlertDialog ] = useState();
    const form = useRef();
@@ -29,24 +30,27 @@ export default function LoginForm({ className, onSubmit, ...props }) {
 
    const handleSubmit = async (ev) => {
       ev.preventDefault();
-      const validated = form.current.validateForm();
 
+      const validated = form.current.validateForm();
       if (validated.hasError) {
          setErrors(validated.errors);
          return;
       }
 
       try {
+         setLoading(true);
          return await onSubmit(form.current);
       } catch (error) {
          setAlertDialog(error);
+      } finally {
+         setLoading(false);
       }
    }
 
    return (<>
       <AlertModal
          open={alertDialog} handleOk={() => setAlertDialog(false)}
-         title="Login Error"
+         title="Error"
       >
          <p>{alertDialog?.message}</p>
       </AlertModal>
@@ -72,11 +76,12 @@ export default function LoginForm({ className, onSubmit, ...props }) {
          </div>
 
          <div className="buttons">
-            <Button
+            <LoadingButton
                type="submit"
                variant="contained"
                color="tertiary"
-            >Get In</Button>
+               loading={loading}
+            >Get In</LoadingButton>
          </div>
       </form>
    </>);

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import APIContext from '@/contexts/4HandsAPI';
 import Link from 'next/link';
-import CTAButton from '@/components/common/ctaButton/CTAButton';
+import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
 export default function TopNav() {
    const instance = useContext(APIContext);
