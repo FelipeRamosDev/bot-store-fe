@@ -1,10 +1,11 @@
 import { Stack } from '@mui/material';
-import Card from '@/components/common/card/Card';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/inputs/formInput/FormInput';
 import createMasterForm from './CreateMasterForm.config';
+import MasterLimitsForm from './masterLimitsForm/MasterLimitsForm';
+import Card from '@/components/common/card/Card';
 
-export default function CreateMasterForm({ className = '', ...props }) {
+export default function CreateMasterForm() {
    async function onSubmit(data) {
       return await new Promise((resolve) => {
          setTimeout(() => {
@@ -23,27 +24,20 @@ export default function CreateMasterForm({ className = '', ...props }) {
       <Stack flexDirection="row" justifyContent="space-between" gap="1.5rem" marginBottom="2rem">
          <Stack flexDirection="column" flex={1} gap="1rem">
             <FormInput path="name" />
+            <FormInput path="description" multiline={true} minRows={5} />
 
-            <FormInput path="description" multiline={true} />
-         </Stack>
+            <Card padding="xs" elevation={15}>
+               <h3 className="card-title">Risk Management</h3>
 
-         <Stack flexDirection="row" flex={1}>
-            <Card padding="xs" elevation={10}>
-               <h4 className="card-title">Configurations</h4>
-
-               <Stack flexDirection="row" gap="1rem" marginBottom="1rem">
-                  <FormInput path="limits.tradeLoss.money" />
-
-                  <FormInput path="limits.tradeLoss.percent" />
-               </Stack>
-
-               <Stack flexDirection="row" gap="1rem" marginBottom="1rem">
-                  <FormInput path="limits.dailyLoss.money" />
-
-                  <FormInput path="limits.dailyLoss.percent" />
+               <Stack flexDirection="row" flex={1} gap="1rem">
+                  <FormInput path="limits.leverage" />
+                  <FormInput path="limits.tradesMinInterval" />
+                  <FormInput path="limits.marginRatioCommit" />
                </Stack>
             </Card>
          </Stack>
+
+         <MasterLimitsForm />
       </Stack>
    </FormBase>);
 }

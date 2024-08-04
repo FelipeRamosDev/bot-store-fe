@@ -6,7 +6,8 @@ export default function Card({
    radius = 'm',
    elevation = 20,
    shadowColor = '#111111DD',
-   children
+   children,
+   ...props
 }) {
    let customPad = '';
 
@@ -19,6 +20,7 @@ export default function Card({
       style={{
          boxShadow: elevation ? `0 0 ${elevation}px ${shadowColor}` : 'none'
       }}
+      {...props}
    >
       {children}
    </div>;
