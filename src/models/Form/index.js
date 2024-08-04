@@ -7,6 +7,7 @@ export default class Form {
       this._data = new Map();
       this._schema = new Map();
       this._onChange = onChange.bind(this);
+      this.setErrors = () => {};
 
       schema.map(item => this.setSchema(item.key, item));
    }
@@ -123,6 +124,7 @@ export default class Form {
       const path = key.split('.');
       if (path.length > 1) {
          let schema;
+
          path.map((currKey, i) => {
             if (!i) {
                schema = this.getSchema(currKey);
@@ -143,7 +145,26 @@ export default class Form {
    }
 
    getSchema(key) {
-      return this._schema.get(key);
+      if (typeof key !== 'string') {
+         return;
+      }
+
+      const path = key.split('.');
+      if (path.length > 1) {
+         let schema;
+
+         path.map((currKey, i) => {
+            if (!i) {
+               schema = this.getSchema(currKey);
+            } else {
+               schema = schema?.subForm.getSchema(currKey);
+            }
+         });
+
+         return schema;
+      } else {
+         return this._schema.get(key);
+      }
    }
 
    setSchema(key, value) {
@@ -162,13 +183,15 @@ export default class Form {
 
       const errors = this.getFieldErrors();
       const validatedKeys = Object.keys(errors);
+
+      this.setErrors(errors);
       return {
          hasError: validatedKeys.some(key => errors[key].length),
          errors
       }
    }
 
-   getFieldErrors() {
+   getFieldErrors(path) {
       let errors = {};
 
       this._schema.forEach(item => {
@@ -183,6 +206,20 @@ export default class Form {
          errors[item.key] = item.getErrors();
       });
 
-      return errors;
+      if (path) {
+         return errors[path];
+      } else {
+         return errors;
+      }
+   }
+
+   errorSetter(setter) {
+      if (typeof setter === 'function') {
+         Object.defineProperty(this, 'setErrors', {
+            get: () => setter,
+            enumerable: true,
+            configurable: true
+         });
+      }
    }
 }
