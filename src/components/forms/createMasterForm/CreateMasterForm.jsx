@@ -6,34 +6,33 @@ import createMasterForm from './CreateMasterForm.config';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
 import { Stack } from '@mui/material';
 import Card from '@/components/common/card/Card';
+import FormInput from '@/components/inputs/formInput/FormInput';
 
 export default function CreateMasterForm({ className = '', onSubmit = () => {}, ...props }) {
    const [ loading, setLoading ] = useState();
    const [ errors, setErrors ] = useState();
    const [ alertDialog, setAlertDialog ] = useState();
-   const form = useRef();
+   const [ form, setForm ] = useState();
 
    useEffect(() => {
       // Declaring the Form instance
-      if (!form.current) {
-         form.current = new Form({
-            ...createMasterForm,
-            onChange: function () {
-               setErrors(this.getFieldErrors());
-            }
-         });
+      if (!form) {
+         createMasterForm.errorSetter(setErrors);
+         setForm(createMasterForm);
+
+         window.form = form;
       }
    }, []);
 
    const handleInput = (ev, key) => {
       const value = ev?.target?.value;
-      form.current.setValue(key, value);
+      form.setValue(key, value);
    }
 
    const handleSubmit = async (ev) => {
       ev.preventDefault();
 
-      const validated = form.current.validateForm();
+      const validated = form.validateForm();
       if (validated.hasError) {
          setErrors(validated.errors);
          return;
@@ -41,7 +40,7 @@ export default function CreateMasterForm({ className = '', onSubmit = () => {}, 
 
       try {
          setLoading(true);
-         return await onSubmit(form.current);
+         return await onSubmit(form);
       } catch (error) {
          setAlertDialog(error);
       } finally {
@@ -60,18 +59,16 @@ export default function CreateMasterForm({ className = '', onSubmit = () => {}, 
       <form className={`create-master-form ${className}`} {...props} onSubmit={handleSubmit}>
          <Stack flexDirection="row" justifyContent="space-between" gap="1.5rem" marginBottom="2rem">
             <Stack flexDirection="column" flex={1} gap="1rem">
-               <TextInput
-                  label="Account Name"
-                  placeholder="Enter a name..."
-                  onChange={(ev) => handleInput(ev, 'name')}
-                  errors={errors?.name}
+               <FormInput
+                  path="name"
+                  form={form}
+                  errors={errors}
                />
 
-               <TextInput
-                  label="Description"
-                  placeholder="You can describe the account..."
-                  onChange={(ev) => handleInput(ev, 'description')}
-                  errors={errors?.description}
+               <FormInput
+                  path="description"
+                  form={form}
+                  errors={errors}
                   multiline={true}
                />
             </Stack>
@@ -81,41 +78,30 @@ export default function CreateMasterForm({ className = '', onSubmit = () => {}, 
                   <h4 className="card-title">Configurations</h4>
 
                   <Stack flexDirection="row" gap="1rem" marginBottom="1rem">
-                     <TextInput
-                        label="Trade Amount"
-                        placeholder=""
-                        onChange={(ev) => handleInput(ev, 'money')}
+                     <FormInput
+                        path="limits.tradeLoss.money"
+                        form={form}
+                        errors={errors}
                      />
-                     <TextInput
-                        label="Trade Percent"
-                        placeholder=""
-                        onChange={(ev) => handleInput(ev, 'percent')}
+
+                     <FormInput
+                        path="limits.tradeLoss.percent"
+                        form={form}
+                        errors={errors}
                      />
                   </Stack>
 
                   <Stack flexDirection="row" gap="1rem" marginBottom="1rem">
-                     <TextInput
-                        label="Daily Amount"
-                        placeholder=""
-                        onChange={(ev) => handleInput(ev, 'money')}
+                     <FormInput
+                        path="limits.dailyLoss.money"
+                        form={form}
+                        errors={errors}
                      />
-                     <TextInput
-                        label="Daily Percent"
-                        placeholder=""
-                        onChange={(ev) => handleInput(ev, 'percent')}
-                     />
-                  </Stack>
 
-                  <Stack flexDirection="row" gap="1rem" marginBottom="1rem">
-                     <TextInput
-                        label="Monthly Amount"
-                        placeholder=""
-                        onChange={(ev) => handleInput(ev, 'money')}
-                     />
-                     <TextInput
-                        label="Monthly Percent"
-                        placeholder=""
-                        onChange={(ev) => handleInput(ev, 'percent')}
+                     <FormInput
+                        path="limits.dailyLoss.percent"
+                        form={form}
+                        errors={errors}
                      />
                   </Stack>
                </Card>

@@ -4,9 +4,12 @@ export default class FieldSchema {
    constructor (setup, form) {
       const {
          key,
+         label,
+         placeholder,
          defaultValue,
          type = String,
          required = false,
+         inputType = 'text',
          validators = [],
          subForm
       } = Object(setup);
@@ -20,6 +23,9 @@ export default class FieldSchema {
       this.defaultValue = defaultValue;
       this.type = type;
       this.required = required;
+      this.label = label;
+      this.placeholder = placeholder;
+      this.inputType = inputType;
       this.errors = new Map();
 
       this.validators = validators.map(validator => {

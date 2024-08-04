@@ -1,15 +1,20 @@
 import MasterLimitsFormConfig from "./masterLimitsForm/MasterLimitsForm.config";
+import Form from '@/models/Form';
 
-export default {
+export default new Form({
    schema: [
       {
          key: 'name',
          type: String,
-         required: true
+         required: true,
+         label: 'Account Name',
+         placeholder: 'Enter a name...'
       },
       {
          key: 'description',
-         type: String
+         type: String,
+         label: 'Description',
+         placeholder: 'Enter a description for the account...'
       },
       {
          key: 'limits',
@@ -17,4 +22,4 @@ export default {
          subForm: MasterLimitsFormConfig
       }
    ]
-};
+});
