@@ -1,16 +1,23 @@
 'use client';
 import './MastersGrid.scss';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import MasterTileDefault from '@/components/tiles/masterTileDefault/MasterTileDefault';
 import DBQueryContext from '@/contexts/DBQuery';
 import Skeleton from '@mui/material/Skeleton';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
+import ContentModal from '@/components/modals/contentModal/ContentModal';
+import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 
 export default function MastersGrid() {
    const { query = [], isLoading } = useContext(DBQueryContext);
+   const [ createMasterModal, setCreateMasterModal ] = useState()
    const masters = query;
    const skeletonNum = 3;
    const skeletons = new Array(skeletonNum).fill('', 0, skeletonNum);
+
+   const handleSubmit = (form) => {
+      debugger
+   }
 
    return <div className="masters-grid">
       {isLoading && skeletons.map(() => (
@@ -23,7 +30,10 @@ export default function MastersGrid() {
       ))}
 
       {!isLoading && (query.length === 0) && (
-         <NoDocumentsTile message={`You doesn't have any master account yet. Create one to start!`} />
+         <NoDocumentsTile
+            message={`You doesn't have any master account yet. Create one to start!`}
+            onClick={() => setCreateMasterModal(true)}
+         />
       )}
 
       {!isLoading && (query.length > 0) && masters.map(master => (
@@ -33,5 +43,15 @@ export default function MastersGrid() {
             className="tile"
          />
       ))}
+
+      <ContentModal
+         title="Create Master"
+         padding="m"
+         size="large"
+         open={createMasterModal}
+         onClose={() => setCreateMasterModal(false)}
+      >
+         <CreateMasterForm onSubmit={handleSubmit} />
+      </ContentModal>
    </div>
 }
