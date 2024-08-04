@@ -9,15 +9,11 @@ import ContentModal from '@/components/modals/contentModal/ContentModal';
 import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 
 export default function MastersGrid() {
+   const [ createMasterModal, setCreateMasterModal ] = useState();
    const { query = [], isLoading } = useContext(DBQueryContext);
-   const [ createMasterModal, setCreateMasterModal ] = useState()
    const masters = query;
    const skeletonNum = 3;
    const skeletons = new Array(skeletonNum).fill('', 0, skeletonNum);
-
-   const handleSubmit = (form) => {
-      debugger
-   }
 
    return <div className="masters-grid">
       {isLoading && skeletons.map(() => (
@@ -51,7 +47,7 @@ export default function MastersGrid() {
          open={createMasterModal}
          onClose={() => setCreateMasterModal(false)}
       >
-         <CreateMasterForm onSubmit={handleSubmit} />
+         <CreateMasterForm />
       </ContentModal>
    </div>
 }

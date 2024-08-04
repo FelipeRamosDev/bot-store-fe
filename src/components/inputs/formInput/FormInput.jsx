@@ -1,10 +1,15 @@
+'use client';
+import { useContext } from 'react';
 import TextInput from '@/components/inputs/textInput/TextInput';
+import FormBaseContext from '@/components/forms/formBase/FormBase';
 
-export default function FormInput({ form, path, errors = {}, ...props }) {
+export default function FormInput({ path, ...props }) {
+   const { form, errors, loading } = useContext(FormBaseContext);
+
    if (!form) {
       return <></>;
    }
-
+   
    const schema = form.getSchema(path);
    if (!schema) {
       return <></>;
@@ -28,6 +33,7 @@ export default function FormInput({ form, path, errors = {}, ...props }) {
       onChange={handleInput}
       errors={errors[path]}
       defaultValue={form.getValue(path) || ''}
+      disabled={loading}
       {...props}
    />
 }
