@@ -28,34 +28,118 @@ export default class Form {
    }
 
    getValue(key) {
-      return this._data.get(key);
+      if (typeof key !== 'string') {
+         return;
+      }
+
+      const path = key.split('.');
+      if (path.length > 1) {
+         let currentSchema;
+         let current;
+         let result;
+
+         path.map((currKey, i) => {
+            if (!i) {
+               current = this.getValue(currKey);
+               currentSchema = this.getSchema(currKey);
+            } else if (current) {
+               const schema = current.getSchema(currKey);
+               if (!schema) return;
+
+               if (schema.type === Object) {
+                  current = current?.getValue(currKey);
+                  currentSchema = current?.getSchema(currKey);
+               } else {
+                  result = current.getValue(currKey);
+               }
+            }
+         });
+
+         return result;
+      } else {
+         return this._data.get(key);
+      }
    }
 
    setValue(key, value) {
-      this._data.set(key, value);
+      if (typeof key !== 'string') {
+         return;
+      }
 
-      if (!this[key]) {
-         Object.defineProperty(this, key, {
-            get: () => {
-               return this.getValue(key);
-            },
-            enumerable: true,
-            configurable: true
+      const path = key.split('.');
+      if (path.length > 1) {
+         let currentSchema;
+         let current;
+
+         path.map((currKey, i) => {
+            if (!i) {
+               current = this.getValue(currKey);
+               currentSchema = this.getSchema(currKey);
+            } else if (current) {
+               const schema = current.getSchema(currKey)
+
+               if (schema.type === Object) {
+                  current = current?.getValue(currKey);
+                  currentSchema = current?.getSchema(currKey);
+               } else {
+                  current.setValue(currKey, value);
+               }
+            }
          });
-      }
+      } else {
+         this._data.set(key, value);
+   
+         if (!this[key]) {
+            Object.defineProperty(this, key, {
+               get: () => {
+                  const getterValue = this.getValue(key);
 
-      const fieldSchema = this.getSchema(key);
-      if (fieldSchema) {
-         fieldSchema.validateType();
-         fieldSchema.validate();
+                  if (getterValue instanceof Form) {
+                     return getterValue.toObject();
+                  } else {
+                     return this.getValue(key);
+                  }
+               },
+               enumerable: true,
+               configurable: true
+            });
+         }
+   
+         const fieldSchema = this.getSchema(key);
+         if (fieldSchema) {
+            fieldSchema.validateType();
+            fieldSchema.validate();
+         }
+   
+         this.triggerChange(key, fieldSchema?.getErrors() || []);
       }
-
-      this.triggerChange(key, fieldSchema?.getErrors() || []);
    }
 
    deleteValue(key) {
-      delete this[key];
-      this._data.delete(key);
+      if (typeof key !== 'string') {
+         return;
+      }
+
+      const path = key.split('.');
+      if (path.length > 1) {
+         let schema;
+         path.map((currKey, i) => {
+            if (!i) {
+               schema = this.getSchema(currKey);
+            } else {
+               schema = schema?.subForm.getSchema(currKey);
+            }
+   
+            if (schema?.type === Object) {
+               schema.subForm.deleteValue(currKey);
+            } else if (schema) {
+               schema.form.deleteValue(currKey);
+            }
+         });
+      } else {
+         delete this[key];
+         this._data.delete(key);
+      }
    }
 
    getSchema(key) {
@@ -85,9 +169,20 @@ export default class Form {
    }
 
    getFieldErrors() {
-      const errors = {};
+      let errors = {};
 
-      this._schema.forEach(item => (errors[item.key] = item.getErrors()));
+      this._schema.forEach(item => {
+         if (item.type === Object) {
+            const subErrors = item.subForm.getFieldErrors();
+
+            Object.keys(subErrors).map(key => {
+               errors[item.key + '.' + key] = subErrors[key];
+            });
+         }
+
+         errors[item.key] = item.getErrors();
+      });
+
       return errors;
    }
 }

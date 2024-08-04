@@ -1,3 +1,5 @@
+import Form from ".";
+
 export default class FieldSchema {
    constructor (setup, form) {
       const {
@@ -5,7 +7,8 @@ export default class FieldSchema {
          defaultValue,
          type = String,
          required = false,
-         validators = []
+         validators = [],
+         subForm
       } = Object(setup);
 
       if (!form) {
@@ -26,10 +29,26 @@ export default class FieldSchema {
 
          return validator;
       });
+
+      if (this.type === Object && subForm) {
+         this.form.setValue(this.key, new Form(subForm, this));
+      } else if (this.defaultValue) {
+         if (typeof this.defaultValue === 'function') {
+            this.form.setValue(this.key, this.defaultValue());
+         } else {
+            this.form.setValue(this.key, this.defaultValue);
+         }
+      }
    }
 
    get form() {
       return this._form();
+   }
+
+   get subForm() {
+      if (this.type === Object) {
+         return this.form.getValue(this.key);
+      }
    }
 
    get error() {
@@ -64,7 +83,13 @@ export default class FieldSchema {
          this.clearError('Required Field');
       }
 
-      return Boolean(this.getErrors().length);
+      let errors = this.getErrors();
+      if (this.type === Object) {
+         this.subForm.validateForm();
+         errors = {...errors, ...this.subForm.getFieldErrors()};
+      }
+
+      return Boolean(errors.length);
    }
 
    validateType() {
