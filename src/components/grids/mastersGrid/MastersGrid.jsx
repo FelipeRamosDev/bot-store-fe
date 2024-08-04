@@ -43,7 +43,7 @@ export default function MastersGrid() {
       <ContentModal
          title="Create Master"
          padding="m"
-         size="large"
+         size="x-large"
          open={createMasterModal}
          onClose={() => setCreateMasterModal(false)}
       >
