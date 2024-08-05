@@ -8,8 +8,7 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
 import ContentModal from '@/components/modals/contentModal/ContentModal';
 import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 
-export default function MastersGrid() {
-   const [ createMasterModal, setCreateMasterModal ] = useState();
+export default function MastersGrid({ createMasterModal }) {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const masters = query;
    const skeletonNum = 3;
@@ -28,7 +27,7 @@ export default function MastersGrid() {
       {!isLoading && (query.length === 0) && (
          <NoDocumentsTile
             message={`You doesn't have any master account yet. Create one to start!`}
-            onClick={() => setCreateMasterModal(true)}
+            onClick={() => createMasterModal(true)}
          />
       )}
 
@@ -39,15 +38,5 @@ export default function MastersGrid() {
             className="tile"
          />
       ))}
-
-      <ContentModal
-         title="Create Master"
-         padding="m"
-         size="x-large"
-         open={createMasterModal}
-         onClose={() => setCreateMasterModal(false)}
-      >
-         <CreateMasterForm onSuccess={() => setCreateMasterModal(false)} />
-      </ContentModal>
    </div>
 }
