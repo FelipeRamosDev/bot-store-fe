@@ -6,6 +6,8 @@
    padding: 1rem 1rem 1rem 1.3rem;
    -webkit-user-select: none;
    user-select: none;
+   cursor: pointer;
+   transition: box-shadow 100ms;
 
    .title {
       font-size: 1.03rem;
