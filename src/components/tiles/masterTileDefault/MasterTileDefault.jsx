@@ -1,38 +1,51 @@
 import './MasterTileDefault.scss';
+import { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Card from '@/components/common/card/Card';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import Price from '@/components/displays/price/Price';
+import { formatMasterBadges } from '@/helpers/format';
+
+const INITIAL_ELEVATION = 30;
+const FINAL_ELEVATION = 40;
 
 export default function MastersTileDefault({ className = '', master, ...props }) {
-   let edgeColor = 'disabled';
-   let badgeColor = 'disabled';
-   let accountType = '---';
+   const router = useRouter();
+   const [ elevation, setElevation ] = useState(INITIAL_ELEVATION);
+   const lastMousePosition = useRef();
+   const { edgeColor, badgeColor, accountType } = formatMasterBadges(master);
 
    if (!master) {
       return <></>;
    }
 
-   if (master.pnl === 0) {
-      edgeColor = 'disabled';
-   } else if (master.pnl > 0) {
-      edgeColor = 'success';
-   } else if (master.pnl < 0) {
-      edgeColor = 'error';
+   const handleMouseOver = () => {
+      if (!lastMousePosition.current) {
+         lastMousePosition.current = true;
+         setElevation(FINAL_ELEVATION);
+      }
    }
 
-   if (master.type === 'master-live') {
-      accountType = 'LIVE';
-      badgeColor = 'success';
-   } else if(master.type === 'master-demo') {
-      accountType = 'DEMO';
-      badgeColor = 'warn';
+   const handleMouseLeave = () => {
+      if (lastMousePosition.current) {
+         lastMousePosition.current = false;
+         setElevation(INITIAL_ELEVATION);
+      }
+   }
+
+   const handleMouseDown = () => {
+      setElevation(INITIAL_ELEVATION);
    }
 
    return <Card
       className={`mastertile-default ${className}`}
       radius="s"
-      elevation={30}
+      elevation={elevation}
+      onClick={() => router.push(`/dashboard/master-accounts/${master.index}`)}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseDown}
       {...props}
    >
       <EdgeLight color={edgeColor} />

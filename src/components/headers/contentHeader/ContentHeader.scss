@@ -1,0 +1,32 @@
+@import "../../../style/scss/variables.scss";
+
+.content-header {
+   display: flex;
+   width: 100%;
+   padding: $padding-m 0;
+
+   .header-title {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      flex: 1;
+      gap: 1rem;
+
+      .title {
+         font-size: 1.3rem;
+         margin: 0;
+      }
+
+      .description {
+         min-width: 100%;
+      }
+   }
+
+   .toolbar {
+      display: flex;
+      justify-content: flex-end;
+      flex: 0;
+      gap: 1rem;
+   }
+}

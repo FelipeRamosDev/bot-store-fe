@@ -35,9 +35,42 @@ function parseValidationErrorMsg(msg) {
    }
 }
 
+function formatMasterBadges(master) {
+   let edgeColor = 'disabled';
+   let badgeColor = 'disabled';
+   let accountType = '---';
+
+   if (!master) {
+      return {};
+   }
+
+   if (master.pnl === 0) {
+      edgeColor = 'disabled';
+   } else if (master.pnl > 0) {
+      edgeColor = 'success';
+   } else if (master.pnl < 0) {
+      edgeColor = 'error';
+   }
+
+   if (master.type === 'master-live') {
+      accountType = 'LIVE';
+      badgeColor = 'success';
+   } else if(master.type === 'master-demo') {
+      accountType = 'DEMO';
+      badgeColor = 'warn';
+   }
+
+   return {
+      edgeColor,
+      badgeColor,
+      accountType
+   };
+}
+
 module.exports = {
    toMoney,
    toMoneyString,
    formatFractional,
-   parseValidationErrorMsg
+   parseValidationErrorMsg,
+   formatMasterBadges
 };
