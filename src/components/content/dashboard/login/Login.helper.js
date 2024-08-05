@@ -1,18 +1,16 @@
-export async function register(form, API) {
-   const parsedBody = form.toObject();
-
+export async function register(parsedBody, API) {
    try {
       const created = await API.auth.register(parsedBody);
-      
-      return created;
+
+      if (created) {
+         router.push('/');
+      }
    } catch (err) {
       throw err;
    }
 }
 
-export async function login(form, API, router) {
-   const parsedBody = form.toObject();
-
+export async function login(parsedBody, API, router) {
    try {
       const logged = await API.auth.login(parsedBody.email, parsedBody.password);
 

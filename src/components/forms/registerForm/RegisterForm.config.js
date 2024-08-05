@@ -1,3 +1,7 @@
+import Form from '@/models/Form';
+import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
+import PasswordFieldSchema from '@/models/Form/fieldTypes/PasswordFieldSchema';
+
 const passwordValidators = [
    function(value) {
       const lowercaseRegex = /[a-z]/;
@@ -56,21 +60,25 @@ const passwordValidators = [
    }
 ];
 
-export const registerForm = {
+export default new Form({
+   formID: 'register-form',
    schema: [
-      {
+      new TextFieldSchema({
          key: 'firstName',
-         type: String,
+         label: 'First Name',
+         placeholder: 'Your first name',
          required: true
-      },
-      {
+      }),
+      new TextFieldSchema({
          key: 'lastName',
-         type: String,
+         label: 'Last Name',
+         placeholder: 'Your last name',
          required: true
-      },
-      {
+      }),
+      new TextFieldSchema({
          key: 'email',
-         type: String,
+         label: 'E-mail',
+         placeholder: 'emailname@domail.com',
          required: true,
          validators: [
             function(value) {
@@ -85,16 +93,18 @@ export const registerForm = {
                }
             }
          ]
-      },
-      {
+      }),
+      new PasswordFieldSchema({
          key: 'password',
-         type: String,
+         label: 'Password',
+         placeholder: 'Your password',
          required: true,
          validators: passwordValidators
-      },
-      {
+      }),
+      new PasswordFieldSchema({
          key: 'confirmPassword',
-         type: String,
+         label: 'Confirm Password',
+         placeholder: 'Enter the same password',
          required: true,
          validators: [
             function(value) {
@@ -105,6 +115,6 @@ export const registerForm = {
                }
             }
          ]
-      }
+      })
    ]
-};
+});

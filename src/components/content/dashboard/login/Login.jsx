@@ -13,8 +13,8 @@ export default function Login({ isRegister }) {
    const API = useContext(APIContext);
    const router = useRouter();
 
-   const handleLogin = (form) => login(form, API, router);
-   const handleRegister = (form) => register(form, API, router);
+   const handleLogin = (data) => login(data, API, router);
+   const handleRegister = (data) => register(data, API, router);
 
    return <div className="login-content container text-center">
       {!isRegister && <Card padding="s" elevation={60}>
