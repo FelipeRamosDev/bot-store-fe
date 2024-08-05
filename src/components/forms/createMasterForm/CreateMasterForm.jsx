@@ -1,19 +1,34 @@
+'use client';
+import { useContext } from 'react';
 import { Stack } from '@mui/material';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
 import createMasterForm from './CreateMasterForm.config';
 import MasterLimitsForm from './masterLimitsForm/MasterLimitsForm';
 import Card from '@/components/common/card/Card';
-import RadioGroup from '@/components/inputs/radioGroupInput/RadioGroupInput';
+import APIContext from '@/contexts/4HandsAPI';
+import AuthUser from '@/contexts/AuthUser';
 
-export default function CreateMasterForm() {
+export default function CreateMasterForm({ onSuccess }) {
+   const API = useContext(APIContext);
+   const { user } = useContext(AuthUser);
+
    async function onSubmit(data) {
-      return await new Promise((resolve) => {
-         setTimeout(() => {
-            console.log(data);
-            resolve();
-         }, 5000);
-      });
+      data.user = user._id;
+
+      try {
+         const created = await API.ajax.authPut('/master-account/create', data);
+         
+         if (created.error) {
+            throw created;
+         }
+
+         if (created.success) {
+            onSuccess(created.masterAccount);
+         }
+      } catch (err) {
+         throw err;
+      }
    }
 
    return (<FormBase

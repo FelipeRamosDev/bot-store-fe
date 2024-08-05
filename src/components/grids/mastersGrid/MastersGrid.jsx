@@ -47,7 +47,7 @@ export default function MastersGrid() {
          open={createMasterModal}
          onClose={() => setCreateMasterModal(false)}
       >
-         <CreateMasterForm />
+         <CreateMasterForm onSuccess={() => setCreateMasterModal(false)} />
       </ContentModal>
    </div>
 }
