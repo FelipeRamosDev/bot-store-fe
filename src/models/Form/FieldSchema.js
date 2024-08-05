@@ -7,18 +7,17 @@ export default class FieldSchema {
          label,
          placeholder,
          defaultValue,
+         subForm,
          type = String,
          required = false,
          inputType = 'text',
          validators = [],
-         subForm
+         onInput = (value) => {},
       } = Object(setup);
 
-      if (!form) {
-         throw new Error('The "form" param is required to build a FieldSchema!');
-      }
-
+      this.isFieldSchema = true;
       this._form = () => form;
+      this._subForm = () => subForm;
       this.key = key;
       this.defaultValue = defaultValue;
       this.type = type;
@@ -27,6 +26,7 @@ export default class FieldSchema {
       this.placeholder = placeholder;
       this.inputType = inputType;
       this.errors = new Map();
+      this.onInput = onInput;
 
       this.validators = validators.map(validator => {
          if (typeof validator !== 'function') {
@@ -35,16 +35,6 @@ export default class FieldSchema {
 
          return validator;
       });
-
-      if (this.type === Object && subForm) {
-         this.form.setValue(this.key, new Form(subForm, this));
-      } else if (this.defaultValue) {
-         if (typeof this.defaultValue === 'function') {
-            this.form.setValue(this.key, this.defaultValue());
-         } else {
-            this.form.setValue(this.key, this.defaultValue);
-         }
-      }
    }
 
    get form() {
@@ -59,6 +49,31 @@ export default class FieldSchema {
 
    get error() {
       return Boolean(this.errors.size);
+   }
+
+   init(form) {
+      this.setParentForm(form);
+      const subForm = this._subForm();
+
+      if (this.type === Object && subForm) {
+         this.form.setValue(this.key, new Form(subForm, this));
+      } else if (this.defaultValue) {
+         if (typeof this.defaultValue === 'function') {
+            this.form.setValue(this.key, this.defaultValue());
+         } else {
+            this.form.setValue(this.key, this.defaultValue);
+         }
+      }
+
+      return this;
+   }
+
+   setParentForm(form) {
+      if (form instanceof Form) {
+         this._form = () => form;
+      }
+
+      return this;
    }
 
    parse() {

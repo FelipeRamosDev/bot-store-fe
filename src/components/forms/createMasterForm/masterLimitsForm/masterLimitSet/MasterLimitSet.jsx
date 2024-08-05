@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import FormInput from '@/components/inputs/formInput/FormInput';
+import FormInput from '@/components/forms/formBase/FormInput';
 
 export default function MasterLimitsSet({ type }) {
    if (!type) {
