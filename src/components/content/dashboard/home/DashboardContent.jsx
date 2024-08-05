@@ -6,7 +6,7 @@ import { DBQuery } from '@/contexts/DBQuery';
 import { useContext } from 'react';
 import AuthUserContext from "@/contexts/AuthUser";
 
-export default function DashboardContent() {
+export default function DashboardContent({ createMasterModal }) {
    const { user } = useContext(AuthUserContext);
 
    if (!user) {
@@ -22,7 +22,7 @@ export default function DashboardContent() {
          limit={10}
          subscribe={true}
       >
-        <MastersGrid />
+        <MastersGrid createMasterModal={createMasterModal} />
       </DBQuery>
 
       <div className="slots-positions">

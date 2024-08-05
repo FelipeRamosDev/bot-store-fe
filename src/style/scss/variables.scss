@@ -1,4 +1,4 @@
-$primary: #2EB7E5;
+$primary: #1f9dc7;
 $primary-light: lighten($color: $primary, $amount: 20);
 $primary-dark: darken($color: $primary, $amount: 20);
 
@@ -37,7 +37,7 @@ $grey-dark: darken($color: $grey, $amount: 25);
 
 $text: #FAFAFA;
 $text-darken: darken($color: $text, $amount: 20);
-$text-secondary: darken($color: $secondary, $amount: 70);
+$text-secondary: lighten($color: $secondary, $amount: 90);
 $text-tertiary: darken($color: $tertiary, $amount: 70);
 $text-success: darken($color: $success, $amount: 40);
 $text-warn: darken($color: $warn, $amount: 70);

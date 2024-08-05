@@ -1,7 +1,7 @@
 @import "../../style/scss/variables.scss";
 
 .page > .content-sidebar {
-   padding-top: 10vh;
+   padding-top: 3rem;
    padding-bottom: 5rem;
 }
 
@@ -9,9 +9,18 @@
    display: flex;
    gap: 2rem;
    flex-direction: column;
+   flex-wrap: wrap;
 
    @media screen and (min-width: $screen-m) {
       flex-direction: row;
+   }
+
+   .layout-header {
+      min-width: 100%;
+   }
+
+   .toolbar {
+      text-align: right;
    }
 
    .content {

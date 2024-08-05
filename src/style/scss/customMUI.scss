@@ -10,7 +10,10 @@
    color: $text-darken;
 }
 
-.MuiButton-containedPrimary {
+.MuiButton-containedPrimary,
+.MuiRadio-colorPrimary,
+.MuiRadio-colorSecondary,
+.MuiRadio-colorTertiary {
    color: $text;
 }
 
@@ -32,4 +35,21 @@
 
 .MuiButton-containedError {
    color: $text-error;
+}
+
+[variant=contained] {
+   &.MuiIconButton-colorPrimary {
+      background-color: $primary;
+      color: $text;
+   }
+
+   &.MuiIconButton-colorSecondary {
+      background-color: $secondary;
+      color: $text-secondary;
+   }
+
+   &.MuiIconButton-colorTertiary {
+      background-color: $tertiary;
+      color: $text-tertiary;
+   }
 }
