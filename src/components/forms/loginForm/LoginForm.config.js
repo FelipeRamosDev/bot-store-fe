@@ -1,14 +1,21 @@
-export const loginForm = {
+import Form from '@/models/Form';
+import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
+import PasswordFieldSchema from '@/models/Form/fieldTypes/PasswordFieldSchema';
+
+export default new Form({
+   formID: 'login-form',
    schema: [
-      {
+      new TextFieldSchema({
          key: 'email',
-         type: String,
+         label: 'E-mail',
+         placeholder: 'emailname@domail.com',
          required: true
-      },
-      {
+      }),
+      new PasswordFieldSchema({
          key: 'password',
-         type: String,
+         label: 'Password',
+         placeholder: 'Your password',
          required: true
-      }
+      })
    ]
-};
+});

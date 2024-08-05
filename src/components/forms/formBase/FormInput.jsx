@@ -47,6 +47,18 @@ export default function FormInput({ path, ...props }) {
             {...props}
          />
 
+      case 'password':
+         return <TextInput
+            type={schema.inputType}
+            label={schema.label}
+            placeholder={schema.placeholder}
+            onChange={handleInput}
+            errors={errors[path]}
+            defaultValue={fixDefaultValue.current}
+            disabled={loading}
+            {...props}
+         />
+
       case 'radio-group':
          return <RadioGroupInput
             options={schema.options}
@@ -58,5 +70,9 @@ export default function FormInput({ path, ...props }) {
             disabled={loading}
             {...props}
          />
+      
+      default: {
+         return <></>;
+      }
    }
 }

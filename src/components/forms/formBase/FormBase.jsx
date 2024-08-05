@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
+import { parseValidationErrorMsg } from '@/helpers/format';
 
 const FormBaseContext = createContext();
 export default FormBaseContext;
@@ -41,7 +42,13 @@ export function FormBase({
 
          return await onSubmit.call(form, form.toObject());
       } catch (error) {
-         setAlertDialog(error);
+         const serverValidationErrors = parseValidationErrorMsg(error?.message);
+
+         if (serverValidationErrors) {
+            setAlertDialog({ error, message: serverValidationErrors });
+         } else {
+            setAlertDialog(error);
+         }
       } finally {
          setLoading(false);
       }
