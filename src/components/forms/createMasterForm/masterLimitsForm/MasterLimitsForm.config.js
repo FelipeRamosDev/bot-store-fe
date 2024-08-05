@@ -13,13 +13,13 @@ export default {
             schema: [
                new NumberFieldSchema({
                   key: 'money',
-                  label: 'Loss Amount',
+                  label: 'Loss (USD)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
                new NumberFieldSchema({
                   key: 'percent',
-                  label: 'Loss Percent',
+                  label: 'Loss (%)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
@@ -38,13 +38,13 @@ export default {
             schema: [
                new NumberFieldSchema({
                   key: 'money',
-                  label: 'Loss Amount',
+                  label: 'Loss (USD)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
                new NumberFieldSchema({
                   key: 'percent',
-                  label: 'Loss Percent',
+                  label: 'Loss (%)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
@@ -63,14 +63,14 @@ export default {
             schema: [
                new NumberFieldSchema({
                   key: 'money',
-                  label: 'Loss Amount',
+                  label: 'Loss (USD)',
                   placeholder: 'Enter a value...',
                   required: true,
                   defaultValue: 0
                }),
                new NumberFieldSchema({
                   key: 'percent',
-                  label: 'Loss Percent',
+                  label: 'Loss (%)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
@@ -89,13 +89,13 @@ export default {
             schema: [
                new NumberFieldSchema({
                   key: 'money',
-                  label: 'Gain Amount',
+                  label: 'Gain (USD)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
                new NumberFieldSchema({
                   key: 'percent',
-                  label: 'Gain Percent',
+                  label: 'Gain (%)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
@@ -114,13 +114,13 @@ export default {
             schema: [
                new NumberFieldSchema({
                   key: 'money',
-                  label: 'Gain Amount',
+                  label: 'Gain (USD)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
                new NumberFieldSchema({
                   key: 'percent',
-                  label: 'Gain Percent',
+                  label: 'Gain (%)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
@@ -139,17 +139,17 @@ export default {
             schema: [
                new NumberFieldSchema({
                   key: 'money',
-                  label: 'Gain Amount',
+                  label: 'Gain (USD)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
                new NumberFieldSchema({
                   key: 'percent',
-                  label: 'Gain Percent',
+                  label: 'Gain (%)',
                   placeholder: 'Enter a value...',
                   defaultValue: 0
                }),
-               new NumberFieldSchema({
+               new TextFieldSchema({
                   key: 'customResumeDayTime',
                   label: 'Time of day to return',
                   placeholder: 'Enter a time...',
