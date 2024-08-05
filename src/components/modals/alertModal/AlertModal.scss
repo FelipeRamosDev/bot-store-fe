@@ -1,0 +1,8 @@
+@import "../../../style/scss/variables.scss";
+
+.alert-dialog {
+   .MuiDialog-paper {
+      box-shadow: $acrylic-transparent-shadow;
+      background-color: $acrylic-transparent-dark;
+   }
+}

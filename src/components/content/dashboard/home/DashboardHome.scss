@@ -1,0 +1,22 @@
+@import "../../../../style/scss/variables.scss";
+
+.slots-positions {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem;
+   margin-top: 3rem;
+   
+   @media screen and (min-width: $screen-l) {
+      flex-direction: row;
+   }
+
+   .card-title {
+      font-size: 1.1rem;
+      margin: 0;
+   }
+
+   .column {
+      flex: 1;
+      min-width: calc(50% - 1.5rem);
+   }
+}

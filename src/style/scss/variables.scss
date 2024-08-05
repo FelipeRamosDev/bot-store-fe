@@ -1,0 +1,80 @@
+$primary: #1f9dc7;
+$primary-light: lighten($color: $primary, $amount: 20);
+$primary-dark: darken($color: $primary, $amount: 20);
+
+$secondary: #0C3845;
+$secondary-light: lighten($color: $secondary, $amount: 20);
+$secondary-dark: darken($color: $secondary, $amount: 20);
+
+$tertiary: #8BFFBC;
+$tertiary-light: lighten($color: $tertiary, $amount: 15);
+$tertiary-dark: darken($color: $tertiary, $amount: 20);
+
+$background: #212A2D;
+$background-paper: #252A2A;
+$background-dark: #1C2122;
+$background-grey1: #222728;
+$background-grey2: #252A2A;
+$background-grad: radial-gradient(100vh, #28373C, #212A2D);
+
+$grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);
+
+$success: #80d8a3;
+$success-light: lighten($color: $success, $amount: 20);
+$success-dark: darken($color: $success, $amount: 20);
+
+$error: #EF664B;
+$error-light: lighten($color: $error, $amount: 20);
+$error-dark: darken($color: $error, $amount: 20);
+
+$warn: #ddca6b;
+$warn-light: lighten($color: $warn, $amount: 20);
+$warn-dark: darken($color: $warn, $amount: 20);
+
+$grey: #808080;
+$grey-light: lighten($color: $grey, $amount: 25);
+$grey-dark: darken($color: $grey, $amount: 25);
+
+$text: #FAFAFA;
+$text-darken: darken($color: $text, $amount: 20);
+$text-secondary: lighten($color: $secondary, $amount: 90);
+$text-tertiary: darken($color: $tertiary, $amount: 70);
+$text-success: darken($color: $success, $amount: 40);
+$text-warn: darken($color: $warn, $amount: 70);
+$text-error: darken($color: $error, $amount: 40);
+$text-disabled: rgba(250, 250, 250, 0.7);
+
+// Alternatives
+$acrylic-transparent-dark: rgba(34, 39, 40, 0.7);
+$acrylic-transparent-shadow: 0 3px 0 #7695a0;
+
+// Breakpoints
+$screen-xs: 375px;
+$screen-s: 425px;
+$screen-m: 768px;
+$screen-l: 1024px;
+$screen-xl: 1440px;
+
+// Effects
+$shadow-5: 0 0 50px #111111DD;
+
+// Radius
+$radius-xs: 3px;
+$radius-s: 5px;
+$radius-m: 7px;
+$radius-l: 10px;
+$radius-xl: 12px;
+
+// Spacing
+$space-xs: 0.2rem;
+$space-s: 0.5rem;
+$space-m: 0.8rem;
+$space-l: 1.1rem;
+$space-xl: 1.4rem;
+
+// Padding
+$padding-xs: 0.4rem;
+$padding-s: 1.2rem;
+$padding-m: 1.8rem;
+$padding-l: 2.4rem;
+$padding-xl: 3rem;

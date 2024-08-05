@@ -1,0 +1,14 @@
+@import "../../../style/scss/variables.scss";
+
+.price-display {
+   font-size: 1.3rem;
+   font-weight: 700;
+
+   &[color=success] {
+      color: $success;
+   }
+
+   &[color=error] {
+      color: $error;
+   }
+}

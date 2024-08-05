@@ -1,0 +1,18 @@
+.full-container {
+   width: 97%;
+   margin: auto;
+}
+
+.container {
+   width: 95%;
+   margin: auto;
+
+   @media screen and (min-width: $screen-l) {
+      width: 90%;
+   }
+}
+
+.absolute-bottom {
+   position: absolute;
+   bottom: 0;
+}

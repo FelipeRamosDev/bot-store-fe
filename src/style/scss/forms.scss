@@ -1,0 +1,37 @@
+form {
+   width: 100%;
+
+   .form-column {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      >.input-wrap {
+         flex-direction: column;
+      }
+   }
+
+   .input-wrap:not(.input-wrap:last-child) {
+      display: flex;
+      margin-bottom: 1rem;
+      gap: 1rem;
+   }
+
+   .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+   }
+
+   .card {
+      margin-bottom: 0;
+      min-width: 100%;
+
+      .card-title {
+         font-size: 1rem;
+         text-align: center;
+      }
+   }
+}

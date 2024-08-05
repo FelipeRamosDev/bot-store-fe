@@ -1,0 +1,44 @@
+@import "../../style/scss/variables.scss";
+
+.page > .content-sidebar {
+   padding-top: 3rem;
+   padding-bottom: 5rem;
+}
+
+.content-sidebar {
+   display: flex;
+   gap: 2rem;
+   flex-direction: column;
+   flex-wrap: wrap;
+
+   @media screen and (min-width: $screen-m) {
+      flex-direction: row;
+   }
+
+   .layout-header {
+      min-width: 100%;
+   }
+
+   .toolbar {
+      text-align: right;
+   }
+
+   .content {
+      flex: 1;
+      min-width: calc(70% - 1rem);
+   }
+
+   .sidebar {
+      flex: 1;
+      min-width: calc(30% - 1rem);
+
+      >* {
+         margin-bottom: 3rem;
+      }
+
+      .section-title {
+         font-size: 1.2rem;
+         text-align: center;
+      }
+   }
+}
