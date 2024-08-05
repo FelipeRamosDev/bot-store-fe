@@ -10,7 +10,10 @@
    color: $text-darken;
 }
 
-.MuiButton-containedPrimary {
+.MuiButton-containedPrimary,
+.MuiRadio-colorPrimary,
+.MuiRadio-colorSecondary,
+.MuiRadio-colorTertiary {
    color: $text;
 }
 

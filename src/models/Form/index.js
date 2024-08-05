@@ -168,7 +168,11 @@ export default class Form {
    }
 
    setSchema(key, value) {
-      this._schema.set(key, new FieldSchema(value, this));
+      if (value.isFieldSchema) {
+         this._schema.set(key, value.init(this))
+      } else {
+         this._schema.set(key, new FieldSchema(value, this).init());
+      }
    }
 
    triggerChange(...args) {

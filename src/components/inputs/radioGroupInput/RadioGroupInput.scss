@@ -1,0 +1,15 @@
+@import "../../../style/scss/variables.scss";
+
+.radio-group-input {
+   text-align: center;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+
+   .group-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $text;
+      min-width: 100%;
+   }
+}
