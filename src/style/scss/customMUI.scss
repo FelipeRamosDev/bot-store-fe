@@ -36,3 +36,20 @@
 .MuiButton-containedError {
    color: $text-error;
 }
+
+[variant=contained] {
+   &.MuiIconButton-colorPrimary {
+      background-color: $primary;
+      color: $text;
+   }
+
+   &.MuiIconButton-colorSecondary {
+      background-color: $secondary;
+      color: $text-secondary;
+   }
+
+   &.MuiIconButton-colorTertiary {
+      background-color: $tertiary;
+      color: $text-tertiary;
+   }
+}
