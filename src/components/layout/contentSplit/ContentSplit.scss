@@ -1,0 +1,41 @@
+@import "../../../style/scss/variables.scss";
+
+.content-split {
+   display: flex;
+   gap: 2%;
+
+   @media screen and (max-width: $screen-xs) {
+      &.breakpoint-xs {
+         flex-direction: column;
+      }
+   }
+
+   @media screen and (max-width: $screen-s) {
+      &.breakpoint-s {
+         flex-direction: column;
+      }
+   }
+
+   @media screen and (max-width: $screen-m) {
+      &.breakpoint-m {
+         flex-direction: column;
+      }
+   }
+
+   @media screen and (max-width: $screen-l) {
+      &.breakpoint-l {
+         flex-direction: column;
+      }
+   }
+
+   @media screen and (max-width: $screen-xl) {
+      &.breakpoint-xl {
+         flex-direction: column;
+      }
+   }
+
+   >.content-a,
+   >.content-b {
+      flex: 48%;
+   }
+}

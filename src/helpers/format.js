@@ -18,8 +18,35 @@ function toMoney(amount, opt) {
 }
 
 function toMoneyString(amount, opt) {
-   const { fractional = 2, symbol = '$' } = Object(opt);
-   return toMoney(amount, { fractional, symbol });
+   const { fractional = 2, currency = 'USD' } = Object(opt);
+   const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+      fractional
+   });
+
+   return formatter.format(amount);
+}
+
+function toPercentString(value, opt) {
+   const { fractional = 2, fromDecimal = false } = Object(opt);
+   if (isNaN(value)) {
+      return;
+   } else {
+      value = Number(value);
+   }
+
+   if (!fromDecimal) {
+      value = value / 100;
+   }
+
+   const formatter = new Intl.NumberFormat('en-US', {
+      style: 'percent',
+      minimumFractionDigits: fractional, // Adjust the number of decimal places as needed
+      maximumFractionDigits: fractional
+   });
+   
+   return formatter.format(Number(value));
 }
 
 
@@ -70,6 +97,7 @@ function formatMasterBadges(master) {
 module.exports = {
    toMoney,
    toMoneyString,
+   toPercentString,
    formatFractional,
    parseValidationErrorMsg,
    formatMasterBadges
