@@ -1,4 +1,4 @@
-import ContentSidebar from "@/components/layout/ContentSidebar";
+import ContentSidebar from "@/components/layout/contentSidebar/ContentSidebar";
 
 export default function MasterAccounts({  }) {
    return <ContentSidebar>

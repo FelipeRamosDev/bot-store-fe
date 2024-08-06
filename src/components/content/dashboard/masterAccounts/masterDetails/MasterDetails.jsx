@@ -1,4 +1,4 @@
-import ContentSidebar from '@/components/layout/ContentSidebar';
+import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import MasterDetailsHeader from './MasterDetailsHeader';
 import MasterDetailsContent from './MasterDetailsContent';
 import MasterDetailsSidebar from './MasterDetailsSidebar';
