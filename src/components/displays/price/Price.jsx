@@ -1,7 +1,7 @@
 import './Price.scss';
-import { toMoneyString, toMoney } from '@/helpers/format'
+import { toMoneyString, toMoney } from '@/helpers/format';
 
-export default function Price({ className = '', symbol = '$', noSymbol = false, fractional, amount }) {
+export default function Price({ className = '', symbol = 'USD', noSymbol = false, fractional, amount, size }) {
    if (!amount && amount !== 0) {
       return <span className={`price-display`}>---</span>;
    }
@@ -23,6 +23,7 @@ export default function Price({ className = '', symbol = '$', noSymbol = false, 
 
    return <span
       color={color}
+      font-size={size}
       className={`price-display ${className}`}
    >{value}</span>;
 }
