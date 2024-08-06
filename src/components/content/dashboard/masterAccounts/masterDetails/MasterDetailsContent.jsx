@@ -20,6 +20,6 @@ export default function MasterDetailsContent() {
          <WalletGrid master={doc} />
       </ContentSplit>
 
-      <SlotsGrid slots={doc.slots} />
+      <SlotsGrid slots={doc.slots} masterType={doc.type} />
    </>;
 }
