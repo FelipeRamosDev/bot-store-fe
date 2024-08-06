@@ -70,7 +70,7 @@ export function FormBase({
             <LoadingButton
                type="submit"
                variant="contained"
-               color="primary"
+               color="tertiary"
                loading={loading}
             >{submitLabel}</LoadingButton>
          </div>
