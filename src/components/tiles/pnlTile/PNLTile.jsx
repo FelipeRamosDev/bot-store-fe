@@ -3,13 +3,13 @@ import Card from '@/components/common/card/Card';
 import Percent from '@/components/displays/percent/Percent';
 import Price from '@/components/displays/price/Price';
 
-export default function PNLTile({ type = 'money', borderSide, label, value, fractional, size, props }) {
+export default function PNLTile({ type = 'money', noColor = false, borderSide, label, elevation = 20, value, fractional, size, props }) {
    let borderColor;
    let numberValue = Number(value);
 
-   if (numberValue > 0) {
+   if (!noColor && numberValue > 0) {
       borderColor = 'success';
-   } else {
+   } else if (!noColor && numberValue < 0) {
       borderColor = 'error';
    }
 
@@ -20,7 +20,7 @@ export default function PNLTile({ type = 'money', borderSide, label, value, frac
          border-side={borderSide}
          padding="s"
          radius="s"
-         elevation={30}
+         elevation={elevation}
          {...props}
       >
          {label && <label>{label}</label>}

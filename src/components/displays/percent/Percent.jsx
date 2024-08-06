@@ -1,4 +1,3 @@
-import './Percent.scss';
 import { toPercentString } from '@/helpers/format';
 
 export default function Percent({ className = '', fractional = 2, value, size }) {
@@ -17,7 +16,7 @@ export default function Percent({ className = '', fractional = 2, value, size })
    const percent = toPercentString(value, { fractional });
    return <span
       color={color}
-      font-size={size}
+      display-size={size}
       className={`percent-display ${className}`}
    >{percent}</span>;
 }

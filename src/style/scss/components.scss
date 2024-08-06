@@ -29,3 +29,48 @@
       margin-top: 2rem;
    }
 }
+
+.price-display,
+.percent-display {
+   font-size: 1rem;
+   font-weight: 500;
+
+   &[color=success] {
+      color: $success;
+   }
+
+   &[color=error] {
+      color: $error;
+   }
+
+   &[display-size=xxs] {
+      font-size: xx-small;
+   }
+
+   &[display-size=xs] {
+      font-size: x-small;
+   }
+
+   &[display-size=s] {
+      font-size: small;
+   }
+
+   &[display-size=m] {
+      font-size: medium;
+   }
+
+   &[display-size=l] {
+      font-weight: 500;
+      font-size: large;
+   }
+
+   &[display-size=xl] {
+      font-weight: 600;
+      font-size: x-large;
+   }
+
+   &[display-size=xxl] {
+      font-weight: 700;
+      font-size: xx-large;
+   }
+}

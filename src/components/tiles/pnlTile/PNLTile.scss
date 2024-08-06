@@ -1,5 +1,22 @@
 @import "../../../style/scss/variables.scss";
 
+.pnl-grid {
+   display: flex;
+   gap: 1.5rem;
+   flex-wrap: wrap;
+
+   &.mini-tile {
+      .pnl-tile {
+         flex: calc(33% - 1.5rem);
+      }
+   }
+
+   .pnl-tile {
+      flex: calc(50% - 1.5rem);
+      margin-bottom: 0;
+   }
+}
+
 .pnl-tile {
    display: flex;
    flex-direction: column;
@@ -16,7 +33,8 @@
    }
 
    &[border-side=top] {
-      border-top: 5px solid $grey-light;
+      padding-bottom: calc(1.25rem - 4px);
+      border-top: 4px solid $grey-light;
    }
 
    &[border-side=right] {
@@ -28,11 +46,14 @@
    }
 
    &[border-side=bottom] {
-      border-bottom: 5px solid $grey-light;
+      padding-top: calc(1.25rem - 4px);
+      border-bottom: 4px solid $grey-light;
    }
 
    label {
+      font-size: 0.8rem;
       font-weight: 500;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.2rem;
+      color: $grey-light;
    }
 }
