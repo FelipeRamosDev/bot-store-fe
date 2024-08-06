@@ -4,6 +4,7 @@ import DBQueryContext from "@/contexts/DBQuery";
 import PageSpinner from '@/components/load/pageSpinner/PageSpinner';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import Card from '@/components/common/card/Card';
+import MasterPnlGrid from '@/components/grids/masterPnlGrid/MasterPnlGrid';
 import PNLTile from '@/components/tiles/pnlTile/PNLTile';
 
 export default function MasterDetailsContent() {
@@ -15,14 +16,38 @@ export default function MasterDetailsContent() {
 
    return <>
       <ContentSplit breakpoint="xl">
-         <div>
-            <PNLTile label="Day PNL" value={564.46} size="xl" borderSide="bottom" />
-            <PNLTile type="percent" fractional={2} label="Day ROI" value={-552.46} size="xl" borderSide="bottom" />
-         </div>
+         <MasterPnlGrid master={doc} />
          
-         <Card padding="s" elevation={25}>
-            <h3 className="card-title">Content B</h3>
-         </Card>
+         <div className="pnl-grid mini-tile" padding="s" elevation={25}>
+            <PNLTile
+               borderSide="left"
+               label="Acumulated PNL"
+               size="xl"
+               value={doc.pnl}
+            />
+
+            <PNLTile
+               borderSide="left"
+               label="Unrealized PNL"
+               size="xl"
+               value={doc.futuresWallet?.totalUnrealizedProfit}
+            />
+
+            <PNLTile
+               borderSide="left"
+               label="Realized PNL"
+               size="xl"
+               value={doc.futuresWallet?.totalRealizedPnl}
+            />
+
+            <PNLTile
+               borderSide="bottom"
+               label="Total Wallet"
+               size="xl"
+               noColor={true}
+               value={doc.futuresWallet?.totalWalletBalance}
+            />
+         </div>
       </ContentSplit>
    </>;
 }
