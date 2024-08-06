@@ -25,8 +25,8 @@ export default function PNLTile({ type = 'money', noColor = false, borderSide, l
       >
          {label && <label>{label}</label>}
 
-         {type === 'money' && <Price amount={value} size={size} fractional={fractional} />}
-         {type === 'percent' && <Percent value={value} size={size} fractional={fractional} />}
+         {type === 'money' && <Price noColor={noColor} amount={value} size={size} fractional={fractional} />}
+         {type === 'percent' && <Percent noColor={noColor} value={value} size={size} fractional={fractional} />}
       </Card>
    );
 }

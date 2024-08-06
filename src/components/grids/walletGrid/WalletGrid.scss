@@ -1,0 +1,10 @@
+.wallet-grid {
+   display: flex;
+   gap: 1.5rem;
+   flex-wrap: wrap;
+
+   .pnl-tile {
+      flex: calc(33% - 1.5rem);
+      margin-bottom: 0;
+   }
+}

@@ -1,6 +1,6 @@
 import './StatusBadge.scss';
 
-function parseSlotStatus(type) {
+function parseSlotType(type) {
    let badgeType = '';
    let badgeColor = '';
 
@@ -21,6 +21,30 @@ function parseSlotStatus(type) {
 
    return {
       type: badgeType,
+      color: badgeColor
+   }
+}
+
+function parseSlotStutus(status) {
+   let badgeStatus = '';
+   let badgeColor = '';
+
+   switch (status) {
+      case 'running':
+         badgeStatus = 'RUNNING';
+         badgeColor = 'success';
+         break;
+      case 'paused':
+         badgeStatus = 'PAUSED';
+         badgeColor = 'warn';
+         break;
+      case 'stopped':
+         badgeStatus = 'STOPPED';
+         break;
+   }
+
+   return {
+      status: badgeStatus,
       color: badgeColor
    }
 }
@@ -51,8 +75,15 @@ function parsePositionSide(side) {
 }
 
 export default function StatusBadge({ className = '', type, color = 'disabled', children }) {
+   if (type === 'slot-status') {
+      const parsed = parseSlotStutus(children);
+
+      color = parsed.color;
+      children = parsed.status;
+   }
+
    if (type === 'account-type') {
-      const parsed = parseSlotStatus(children);
+      const parsed = parseSlotType(children);
 
       color = parsed.color;
       children = parsed.type;

@@ -52,4 +52,19 @@
       background-color: $tertiary;
       color: $text-tertiary;
    }
+   
+   &.MuiIconButton-colorSuccess {
+      background-color: $success;
+      color: $text-success;
+   }
+
+   &.MuiIconButton-colorError {
+      background-color: $error;
+      color: $text-error;
+   }
+
+   &.MuiIconButton-colorWarn {
+      background-color: $warn;
+      color: $text-warn;
+   }
 }

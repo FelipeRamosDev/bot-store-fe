@@ -2,7 +2,7 @@
 
 .content-split {
    display: flex;
-   gap: 2%;
+   gap: 1.5rem;
 
    @media screen and (max-width: $screen-xs) {
       &.breakpoint-xs {
