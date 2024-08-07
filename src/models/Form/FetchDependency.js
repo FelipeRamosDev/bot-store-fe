@@ -1,6 +1,6 @@
 import { API } from '@/contexts/4HandsAPI';
 
-export default class DBDependency {
+export default class FetchDependency {
    constructor (setup, form) {
       const { id, queryType, collection, filter, limit, paginate, sort, filterUser = true } = Object(setup);
 
@@ -28,7 +28,6 @@ export default class DBDependency {
       this.id = id;
       this.queryType = queryType;
       this.dbQuery = dbQuery;
-      this.subscribe = subscribe;
    }
 
    async exec() {

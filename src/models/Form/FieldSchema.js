@@ -1,4 +1,4 @@
-import Form from ".";
+import Form from '.';
 
 export default class FieldSchema {
    constructor (setup, form) {
@@ -12,6 +12,7 @@ export default class FieldSchema {
          required = false,
          inputType = 'text',
          validators = [],
+         options = [],
          Input,
          onInput = (value) => {},
       } = Object(setup);
@@ -19,6 +20,7 @@ export default class FieldSchema {
       this.isFieldSchema = true;
       this._form = () => form;
       this._subForm = () => subForm;
+      this._options = options;
       this.key = key;
       this.defaultValue = defaultValue;
       this.type = type;
@@ -67,7 +69,22 @@ export default class FieldSchema {
          }
       }
 
+      this.setOptions();
       return this;
+   }
+
+   setOptions() {
+      if (typeof this._options === 'function') {
+         const parsed = this._options.call(this, this.form);
+
+         if (!Array.isArray(parsed)) {
+            throw new Error('Dynamic options function should return an array');
+         }
+
+         this.options = parsed;
+      } else if (Array.isArray(this._options) && this.OptionModel) {
+         this.options = this._options.map(opt => new this.OptionModel(opt, this));
+      }
    }
 
    setParentForm(form) {
