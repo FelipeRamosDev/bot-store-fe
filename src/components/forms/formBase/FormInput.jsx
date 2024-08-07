@@ -1,8 +1,6 @@
 'use client';
 import { useContext, useRef } from 'react';
-import TextInput from '@/components/inputs/textInput/TextInput';
 import FormBaseContext from '@/components/forms/formBase/FormBase';
-import RadioGroupInput from '@/components/inputs/radioGroupInput/RadioGroupInput';
 
 export default function FormInput({ path, ...props }) {
    const { form, errors, loading } = useContext(FormBaseContext);
@@ -33,46 +31,16 @@ export default function FormInput({ path, ...props }) {
       fixDefaultValue.current = form.getValue(path) || '';
    }
 
-   switch (schema.inputType) {
-      case 'text':
-      case 'number':
-         return <TextInput
-            type={schema.inputType}
-            label={schema.label}
-            placeholder={schema.placeholder}
-            onChange={handleInput}
-            errors={errors[path]}
-            defaultValue={fixDefaultValue.current}
-            disabled={loading}
-            {...props}
-         />
-
-      case 'password':
-         return <TextInput
-            type={schema.inputType}
-            label={schema.label}
-            placeholder={schema.placeholder}
-            onChange={handleInput}
-            errors={errors[path]}
-            defaultValue={fixDefaultValue.current}
-            disabled={loading}
-            {...props}
-         />
-
-      case 'radio-group':
-         return <RadioGroupInput
-            options={schema.options}
-            label={schema.label}
-            placeholder={schema.placeholder}
-            onChange={handleInput}
-            errors={errors[path]}
-            defaultValue={fixDefaultValue.current}
-            disabled={loading}
-            {...props}
-         />
-      
-      default: {
-         return <></>;
-      }
+   if (schema.Input) {
+      return <schema.Input
+         schema={schema}
+         onChange={handleInput}
+         errors={errors[path]}
+         defaultValue={fixDefaultValue.current}
+         disabled={loading}
+         {...props}
+      />;
    }
+
+   return <></>;
 }
