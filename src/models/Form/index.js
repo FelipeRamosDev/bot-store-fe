@@ -1,4 +1,5 @@
-import FieldSchema from "./FieldSchema";
+import FetchDependency from './FetchDependency';
+import FieldSchema from './FieldSchema';
 
 export default class Form {
    constructor (setup) {
@@ -185,8 +186,9 @@ export default class Form {
 
    setDependency(dependency) {
       if (!dependency) return;
+      const dep = new FetchDependency(dependency, this);
 
-      this._dependencies.set(dependency.id, dependency);
+      this._dependencies.set(dep.id, dep);
    }
 
    triggerChange(...args) {

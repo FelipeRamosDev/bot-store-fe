@@ -7,8 +7,8 @@ export default class SelectFieldSchema extends FieldSchema {
       const { options = [] } = Object(setup);
 
       this.type = String;
-      this.options = options.map(opt => new SelectFieldSchemaOption(opt, this));
 
+      this.OptionModel = SelectFieldSchemaOption;
       this.Input = SelectInput;
    }
 }

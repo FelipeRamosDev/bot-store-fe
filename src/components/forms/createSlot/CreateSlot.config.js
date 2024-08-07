@@ -26,12 +26,18 @@ export default new Form({
          key: 'bot',
          label: 'Choose a bot',
          placeholder: 'Pick an option',
-         options: [
-            { label: 'Bot 1', value: 'bot-1' },
-            { label: 'Bot 2', value: 'bot-2' },
-            { label: 'Bot 3', value: 'bot-3' },
-            { label: 'Bot 4', value: 'bot-4' },
-         ]
+         options: function (form) {
+            const dependency = form.getDependency('bots');
+
+            if (dependency && Array.isArray(dependency.data)) {
+               return dependency.data.map(doc => ({
+                  label: doc.name,
+                  value: doc._id
+               }));
+            } else {
+               return [];
+            }
+         }
       })
    ]
 });
