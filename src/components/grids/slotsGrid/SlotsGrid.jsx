@@ -23,7 +23,7 @@ export default function SlotsGrid({ slots = [], masterType, className = '' }) {
       console.log(data);
    }
 
-   return <div className={[ 'slots-grid', className ]}>
+   return <div className={`slots-grid ${className}`}>
       <ContentHeader>
          <h2 className="header-title">Slots</h2>
 

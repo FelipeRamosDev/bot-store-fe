@@ -2,14 +2,16 @@ import FieldSchema from "./FieldSchema";
 
 export default class Form {
    constructor (setup) {
-      const { schema = [], onChange = () => {} } = Object(setup);
+      const { schema = [], dependencies = [], onChange = () => {} } = Object(setup);
 
       this._data = new Map();
       this._schema = new Map();
+      this._dependencies = new Map();
       this._onChange = onChange.bind(this);
       this.setErrors = () => {};
 
       schema.map(item => this.setSchema(item.key, item));
+      dependencies.map(item => this.setDependency(item));
    }
 
    toObject() {
@@ -173,6 +175,18 @@ export default class Form {
       } else {
          this._schema.set(key, new FieldSchema(value, this).init());
       }
+   }
+
+   getDependency(id) {
+      if (!id) return;
+
+      return this._dependencies.set(id);
+   }
+
+   setDependency(dependency) {
+      if (!dependency) return;
+
+      this._dependencies.set(dependency.id, dependency);
    }
 
    triggerChange(...args) {

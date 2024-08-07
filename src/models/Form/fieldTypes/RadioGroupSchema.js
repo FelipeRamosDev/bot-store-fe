@@ -1,4 +1,5 @@
 import FieldSchema from "../FieldSchema";
+import RadioGroupInput from "@/components/inputs/radioGroupInput/RadioGroupInput";
 
 export default class RadioGroupSchema extends FieldSchema {
    constructor (setup, form) {
@@ -6,9 +7,10 @@ export default class RadioGroupSchema extends FieldSchema {
       const { options = [], rowDirection } = Object(setup);
 
       this.type = String;
-      this.inputType = 'radio-group';
       this.options = options.map(opt => new RadioGroupSchemaOption(opt, this));
       this.rowDirection = rowDirection;
+
+      this.Input = RadioGroupInput;
    }
 }
 

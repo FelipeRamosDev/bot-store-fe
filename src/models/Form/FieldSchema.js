@@ -12,6 +12,7 @@ export default class FieldSchema {
          required = false,
          inputType = 'text',
          validators = [],
+         Input,
          onInput = (value) => {},
       } = Object(setup);
 
@@ -27,6 +28,7 @@ export default class FieldSchema {
       this.inputType = inputType;
       this.errors = new Map();
       this.onInput = onInput;
+      this.Input = Input;
 
       this.validators = validators.map(validator => {
          if (typeof validator !== 'function') {
