@@ -170,6 +170,18 @@ export default class Form {
       }
    }
 
+   getUseDependencies() {
+      const result = [];
+
+      this._schema.forEach(item => {
+         if (item.useDependencies) {
+            result.push(item);
+         }
+      });
+
+      return result;
+   }
+
    setSchema(key, value) {
       if (value.isFieldSchema) {
          this._schema.set(key, value.init(this))
@@ -178,10 +190,26 @@ export default class Form {
       }
    }
 
+   async fetchDependencies() {
+      const dependencies = [];
+      this._dependencies.forEach(item => dependencies.push(item));
+
+      try {
+         for (const item of dependencies) {
+            await item.exec();
+         }
+
+         this.getUseDependencies().map(schema => schema?.setOptions());
+         return { success: true };
+      } catch (err) {
+         throw err;
+      }
+   }
+
    getDependency(id) {
       if (!id) return;
 
-      return this._dependencies.set(id);
+      return this._dependencies.get(id);
    }
 
    setDependency(dependency) {

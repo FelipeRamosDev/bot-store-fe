@@ -13,7 +13,7 @@ export default class FetchDependency {
       }
 
       if (filterUser) {
-         filter.user = 'fadfafa';
+         // filter.user = 'fadfafa';
       }
 
       const dbQuery = API.dbQuery(collection, filter);
@@ -28,6 +28,10 @@ export default class FetchDependency {
       this.id = id;
       this.queryType = queryType;
       this.dbQuery = dbQuery;
+   }
+
+   get form() {
+      return this._form();
    }
 
    async exec() {

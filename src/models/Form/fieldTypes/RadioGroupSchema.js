@@ -4,12 +4,12 @@ import RadioGroupInput from "@/components/inputs/radioGroupInput/RadioGroupInput
 export default class RadioGroupSchema extends FieldSchema {
    constructor (setup, form) {
       super(setup, form);
-      const { rowDirection } = Object(setup);
+      const { OptionModel, rowDirection } = Object(setup);
 
       this.type = String;
       this.rowDirection = rowDirection;
 
-      this.OptionModel = RadioGroupSchemaOption;
+      this.OptionModel = OptionModel || RadioGroupSchemaOption;
       this.Input = RadioGroupInput;
    }
 }

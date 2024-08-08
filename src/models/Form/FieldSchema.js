@@ -1,7 +1,7 @@
 import Form from '.';
 
 export default class FieldSchema {
-   constructor (setup, form) {
+   constructor (setup = {}, form) {
       const {
          key,
          label,
@@ -14,6 +14,7 @@ export default class FieldSchema {
          validators = [],
          options = [],
          Input,
+         useDependencies = false,
          onInput = (value) => {},
       } = Object(setup);
 
@@ -28,6 +29,7 @@ export default class FieldSchema {
       this.label = label;
       this.placeholder = placeholder;
       this.inputType = inputType;
+      this.useDependencies = useDependencies;
       this.errors = new Map();
       this.onInput = onInput;
       this.Input = Input;

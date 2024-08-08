@@ -2,13 +2,12 @@ import FieldSchema from '../FieldSchema';
 import SelectInput from '@/components/inputs/selectInput/SelectInput';
 
 export default class SelectFieldSchema extends FieldSchema {
-   constructor (setup, form) {
+   constructor (setup = {}, form) {
       super(setup, form);
-      const { options = [] } = Object(setup);
+      const { OptionModel } = setup;
 
       this.type = String;
-
-      this.OptionModel = SelectFieldSchemaOption;
+      this.OptionModel = OptionModel || SelectFieldSchemaOption;
       this.Input = SelectInput;
    }
 }
