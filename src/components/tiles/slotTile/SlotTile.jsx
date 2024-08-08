@@ -9,7 +9,7 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 
 export default function SlotTile({ slot = {}, className = '', ...props }) {
    return (
-      <Card className={`slot-tile ${className}`} padding="xs" {...props}>
+      <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
          <div className="tile-header">
             <div className="text-wrap">
                <Link href={`/dashboard/slots/${slot.index}`}>
