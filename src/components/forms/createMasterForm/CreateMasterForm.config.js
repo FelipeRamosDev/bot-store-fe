@@ -4,7 +4,7 @@ import Form from '@/models/Form';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 
-export default new Form({
+const createMasterForm = new Form({
    schema: [
       new RadioGroupSchema({
          key: 'type',
@@ -34,3 +34,5 @@ export default new Form({
       }
    ]
 });
+
+export default createMasterForm;

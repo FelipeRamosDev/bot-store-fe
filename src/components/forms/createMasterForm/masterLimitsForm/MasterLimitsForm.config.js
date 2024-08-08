@@ -2,7 +2,7 @@ import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import NumberFieldSchema from '@/models/Form/fieldTypes/NumberFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 
-export default {
+const masterLimitsForm = {
    schema: [
       new NumberFieldSchema({ key: 'leverage', defaultValue: 120, label: 'Max. Leverage Allowed' }),
       new NumberFieldSchema({ key: 'tradesMinInterval', defaultValue: 1, min: 1, max: 1440, label: 'Min. interval between trades' }),
@@ -159,4 +159,6 @@ export default {
          }
       })
    ]
-}
+};
+
+export default masterLimitsForm;

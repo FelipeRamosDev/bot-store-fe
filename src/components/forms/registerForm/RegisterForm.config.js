@@ -60,7 +60,7 @@ const passwordValidators = [
    }
 ];
 
-export default new Form({
+const registerForm = new Form({
    formID: 'register-form',
    schema: [
       new TextFieldSchema({
@@ -118,3 +118,5 @@ export default new Form({
       })
    ]
 });
+
+export default registerForm;

@@ -1,4 +1,4 @@
-export default {
+const masterLimitSet = {
    schema: [
       {
          key: 'money',
@@ -21,3 +21,5 @@ export default {
       },
    ]
 };
+
+export default masterLimitSet;

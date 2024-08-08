@@ -40,7 +40,7 @@ export function FormBase({
             throw err;
          });
       }
-   }, []);
+   }, [form, formSet]);
 
    const handleSubmit = async (ev) => {
       ev.preventDefault();
