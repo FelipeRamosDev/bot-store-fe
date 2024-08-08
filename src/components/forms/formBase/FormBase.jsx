@@ -1,8 +1,10 @@
-import { createContext, useEffect, useState } from 'react';
+import './FormBase.scss';
+import { createContext, useEffect, useState, useContext } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
 import { parseValidationErrorMsg } from '@/helpers/format';
 import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
+import AuthUserContext from '@/contexts/AuthUser';
 
 const FormBaseContext = createContext();
 export default FormBaseContext;
@@ -20,12 +22,16 @@ export function FormBase({
    const [ errors, setErrors ] = useState({});
    const [ alertDialog, setAlertDialog ] = useState();
    const [ form, setForm ] = useState();
+   const auth = useContext(AuthUserContext);
+
+   if (auth?.user?._id) {
+      formSet.setUser(auth.user);
+   }
 
    useEffect(() => {
       // Starting the Form instance
       if (!form) {
          formSet.errorSetter(setErrors);
-
          formSet.fetchDependencies().then(({ success }) => {
             if (!success) return;
 

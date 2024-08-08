@@ -4,9 +4,6 @@ import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 
 export default new Form({
-   dependencies: [
-      { queryType: 'query', id: 'bots', collection: 'bots', filter: {} }
-   ],
    schema: [
       new RadioGroupSchema({
          key: 'type',
@@ -20,12 +17,13 @@ export default new Form({
       new TextFieldSchema({
          key: 'name',
          label: 'Slot Name',
-         placeholder: 'Slot name identification'
+         placeholder: 'Slot name identification',
       }),
       new SelectFieldSchema({
          key: 'bot',
          label: 'Choose a bot',
          placeholder: 'Pick an option',
+         required: true,
          useDependencies: true,
          options: function (form) {
             const dependency = form.getDependency('bots');

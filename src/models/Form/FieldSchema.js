@@ -120,7 +120,7 @@ export default class FieldSchema {
       });
 
       if (this.required && !currentValue) {
-         this.setError('Required Field', `The "${this.key}" field is required!`)
+         this.setError('Required Field', `The "${this.label || this.key}" field is required!`)
       } else {
          this.clearError('Required Field');
       }

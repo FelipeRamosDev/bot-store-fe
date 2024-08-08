@@ -2,7 +2,7 @@ import { API } from '@/contexts/4HandsAPI';
 
 export default class FetchDependency {
    constructor (setup, form) {
-      const { id, queryType, collection, filter, limit, paginate, sort, filterUser = true } = Object(setup);
+      const { id, queryType, collection, filter = {}, limit, paginate, sort, filterUser = false } = Object(setup);
 
       if (!form) {
          throw new Error('The "form" param is required at FormDependency.contructor!');
@@ -10,10 +10,6 @@ export default class FetchDependency {
 
       if (!id) {
          throw new Error('The "id" param is required at FormDependency.contructor!');
-      }
-
-      if (filterUser) {
-         // filter.user = 'fadfafa';
       }
 
       const dbQuery = API.dbQuery(collection, filter);
@@ -28,6 +24,7 @@ export default class FetchDependency {
       this.id = id;
       this.queryType = queryType;
       this.dbQuery = dbQuery;
+      this.filterUser = filterUser;
    }
 
    get form() {
@@ -35,6 +32,11 @@ export default class FetchDependency {
    }
 
    async exec() {
+      const userUID = this.form.userUID;
+      if (this.filterUser && userUID) {
+         this.dbQuery.filter = { ...this.dbQuery.filter, user: userUID };
+      }
+
       try {
          if (this.queryType === 'query') {
             const query = await this.dbQuery.getQuery();

@@ -3,16 +3,23 @@ import FieldSchema from './FieldSchema';
 
 export default class Form {
    constructor (setup) {
-      const { schema = [], dependencies = [], onChange = () => {} } = Object(setup);
+      const { schema = [], dependencies = [], onChange = () => {}, user } = Object(setup);
 
       this._data = new Map();
       this._schema = new Map();
       this._dependencies = new Map();
       this._onChange = onChange.bind(this);
       this.setErrors = () => {};
+      this.user = user;
 
       schema.map(item => this.setSchema(item.key, item));
       dependencies.map(item => this.setDependency(item));
+   }
+
+   get userUID() {
+      if (this.user) {
+         return this.user._id;
+      }
    }
 
    toObject() {
@@ -29,6 +36,10 @@ export default class Form {
       });
 
       return data;
+   }
+
+   setUser(user) {
+      this.user = user;
    }
 
    getValue(key) {
