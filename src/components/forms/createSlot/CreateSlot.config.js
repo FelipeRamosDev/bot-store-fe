@@ -3,7 +3,7 @@ import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 
-export default new Form({
+const createSlotForm = new Form({
    schema: [
       new RadioGroupSchema({
          key: 'type',
@@ -40,3 +40,5 @@ export default new Form({
       })
    ]
 });
+
+export default createSlotForm;

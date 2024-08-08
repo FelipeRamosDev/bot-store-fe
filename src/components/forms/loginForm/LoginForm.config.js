@@ -2,7 +2,7 @@ import Form from '@/models/Form';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import PasswordFieldSchema from '@/models/Form/fieldTypes/PasswordFieldSchema';
 
-export default new Form({
+const loginForm = new Form({
    formID: 'login-form',
    schema: [
       new TextFieldSchema({
@@ -19,3 +19,5 @@ export default new Form({
       })
    ]
 });
+
+export default loginForm;
