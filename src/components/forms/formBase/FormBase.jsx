@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
 import { parseValidationErrorMsg } from '@/helpers/format';
+import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
 
 const FormBaseContext = createContext();
 export default FormBaseContext;
@@ -24,7 +25,14 @@ export function FormBase({
       // Starting the Form instance
       if (!form) {
          formSet.errorSetter(setErrors);
-         setForm(formSet);
+
+         formSet.fetchDependencies().then(({ success }) => {
+            if (!success) return;
+
+            setForm(formSet);
+         }).catch(err => {
+            throw err;
+         });
       }
    }, []);
 
@@ -63,7 +71,9 @@ export function FormBase({
          <p>{alertDialog?.message}</p>
       </AlertModal>
 
-      <form className={`${formID} form-base ${className}`} {...props} onSubmit={handleSubmit}>
+      {!form && <FitSpinner spinner={'Loading Dependencies'} noBackground={true} />}
+
+      {form && <form className={`${formID} form-base ${className}`} {...props} onSubmit={handleSubmit}>
          {children}
 
          <div className="buttons">
@@ -74,6 +84,6 @@ export function FormBase({
                loading={loading}
             >{submitLabel}</LoadingButton>
          </div>
-      </form>
+      </form>}
    </FormBaseContext.Provider>;
 }
