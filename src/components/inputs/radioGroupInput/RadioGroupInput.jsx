@@ -21,7 +21,7 @@ export default function RadioGroupInput({ schema, onChange, ...props }) {
             row={rowDirection}
             aria-labelledby={groupID}
             defaultValue={defaultValue}
-            onChange={(ev) => onChange(ev.target.value, ev)}
+            onChange={onChange}
             {...props}
          >
             {options.map(opt => (
