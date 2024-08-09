@@ -18,35 +18,31 @@ export default function PositionsTable({ positionsSet }) {
          {
             propKey: 'symbol',
             label: 'Symbol',
-            format: (value, item) => {
-               let colorNumber = 0;
-
-               if (item.positionType === 'long') {
-                  colorNumber = 1;
-               } else if (item.positionType === 'short') {
-                  colorNumber = -1;
-               }
-
-               return <>
-                  <EdgeLight colorValue={colorNumber} label={item.positionType?.toUpperCase()} />
-
-                  <p>{value}</p>
-               </>;
-            },
             style: {
                paddingLeft: '2rem',
                maxWidth: '10px',
+            },
+            format: (value, item) => {
+               return <>
+                  <EdgeLight colorValue={item.pnl} />
+
+                  <p>{value}</p>
+                  <StatusBadge type="account-type">{item.type}</StatusBadge>
+               </>;
             }
          },
          {
-            propKey: 'type',
-            label: 'Type',
+            label: 'Open / Close',
+            propKey: 'openTime',
             align: 'center',
             style: {
                maxWidth: '10px',
             },
-            format: (value) => {
-               return <StatusBadge type="account-type">{value}</StatusBadge>
+            format: (value, item) => {
+               return <>
+                  <p>{new Date(value).toLocaleString()}</p>
+                  <p>{new Date(item.closeTime).toLocaleString()}</p>
+               </>;
             }
          },
          {
@@ -76,6 +72,17 @@ export default function PositionsTable({ positionsSet }) {
          {
             label: 'Notional',
             propKey: 'totalBalance',
+            align: 'center',
+            style: {
+               maxWidth: '10px',
+            },
+            format: (value) => {
+               return <Price amount={value} />
+            }
+         },
+         {
+            label: 'Init. Margin',
+            propKey: 'initialMargin',
             align: 'center',
             style: {
                maxWidth: '10px',
