@@ -1,11 +1,11 @@
 import './ContentHeader.scss';
 
-export default function ContentHeader({ children }) {
+export default function ContentHeader({ children, Toolbar = () => <></> }) {
    return <div className="content-header">
-      {children.length && children[0]}
+      {children}
 
       <div className="toolbar">
-         {children.length > 1 && children[1]}
+         <Toolbar />
       </div>
    </div>
 }

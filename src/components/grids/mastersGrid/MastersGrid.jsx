@@ -1,12 +1,10 @@
 'use client';
 import './MastersGrid.scss';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import MasterTileDefault from '@/components/tiles/masterTileDefault/MasterTileDefault';
 import DBQueryContext from '@/contexts/DBQuery';
 import Skeleton from '@mui/material/Skeleton';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
-import ContentModal from '@/components/modals/contentModal/ContentModal';
-import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 
 export default function MastersGrid({ createMasterModal }) {
    const { query = [], isLoading } = useContext(DBQueryContext);

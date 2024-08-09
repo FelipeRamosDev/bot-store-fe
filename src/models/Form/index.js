@@ -39,7 +39,7 @@ export default class Form {
    }
 
    setUser(user) {
-      this.user = user;
+      this.setValue('user', user);
    }
 
    getValue(key) {

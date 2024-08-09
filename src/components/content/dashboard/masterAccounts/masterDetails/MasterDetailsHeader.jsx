@@ -13,9 +13,11 @@ export default function MasterDetailsHeader({  }) {
       return <></>;
    }
 
+   console.log(doc)
    return <ContentHeader>
       <div className="header-title">
          <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
+
          <h1 className="title">{doc.name}</h1>
          <p className="description">{doc.description}</p>
       </div>

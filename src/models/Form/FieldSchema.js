@@ -14,9 +14,14 @@ export default class FieldSchema {
          validators = [],
          options = [],
          Input,
+         parseInput,
          useDependencies = false,
          onInput = (value) => {},
       } = Object(setup);
+
+      if (parseInput && typeof parseInput !== 'function') {
+         throw new Error(`The "parseInput" param is should receive a function but received "${typeof parseInput}"!`);
+      }
 
       this.isFieldSchema = true;
       this._form = () => form;
@@ -32,6 +37,7 @@ export default class FieldSchema {
       this.useDependencies = useDependencies;
       this.errors = new Map();
       this.onInput = onInput;
+      this.parseInput = parseInput ? parseInput.bind(this) : undefined;
       this.Input = Input;
 
       this.validators = validators.map(validator => {
@@ -98,7 +104,11 @@ export default class FieldSchema {
    }
 
    parse() {
-      const currentValue = this.form[this.key];
+      let currentValue = this.form[this.key];
+
+      if (this.parseInput) {
+         currentValue = this.parseInput(currentValue);
+      }
 
       switch (this.type) {
          case String:
