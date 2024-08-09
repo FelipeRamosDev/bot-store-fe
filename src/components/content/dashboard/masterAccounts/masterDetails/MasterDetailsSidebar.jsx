@@ -1,6 +1,7 @@
 'use client';
 import { useContext } from 'react';
-import DBQueryContext from '@/contexts/DBQuery';
+import DBQueryContext, { DBQuery } from '@/contexts/DBQuery';
+import UserInstanceTile from '@/components/tiles/userInstanceTile/UserinstanceTile';
 
 export default function MasterDetailsSidebar() {
    const { doc, isLoading } = useContext(DBQueryContext);
@@ -10,6 +11,8 @@ export default function MasterDetailsSidebar() {
    }
 
    return <>
-      Sidebar
+      <DBQuery type="doc" collection="user_instances" filter={doc?.user?.userInstance} subscribe={true}>
+         <UserInstanceTile />
+      </DBQuery>
    </>;
 }
