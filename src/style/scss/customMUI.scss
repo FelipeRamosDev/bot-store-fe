@@ -17,6 +17,30 @@
    color: $text;
 }
 
+.MuiCheckbox-colorPrimary {
+   color: $primary;
+}
+
+.MuiCheckbox-colorSecondary {
+   color: $secondary;
+}
+
+.MuiCheckbox-colorTertiary {
+   color: $tertiary;
+}
+
+.MuiCheckbox-colorSuccess {
+   color: $success;
+}
+
+.MuiCheckbox-colorWarn {
+   color: $warn;
+}
+
+.MuiCheckbox-colorError {
+   color: $error;
+}
+
 .MuiButton-containedSecondary {
    color: $text-secondary;
 }
