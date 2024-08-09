@@ -1,13 +1,19 @@
-import Link from 'next/link';
-import Price from '@/components/displays/price/Price';
 import './SlotTile.scss';
+import Link from 'next/link';
+import { useContext, useState } from 'react';
+import Price from '@/components/displays/price/Price';
 import Card from "@/components/common/card/Card";
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import PlayIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
+import { runSlot, stopSlot } from './SlotTile.helper';
+import APIContext from '@/contexts/4HandsAPI';
 
 export default function SlotTile({ slot = {}, className = '', ...props }) {
+   const API = useContext(APIContext);
+   const [ disabled, setDisabled ] = useState(false);
+
    return (
       <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
          <div className="tile-header">
@@ -28,6 +34,8 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
                   Icon={PlayIcon}
                   size="small"
                   color="tertiary"
+                  disabled={disabled}
+                  onClick={() => runSlot(API, slot)}
                />}
 
                {slot.status !== 'stopped' && <RoundIconButton
@@ -35,6 +43,8 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
                   Icon={StopIcon}
                   size="small"
                   color="error"
+                  disabled={disabled}
+                  onClick={() => stopSlot(API, slot)}
                />}
             </div>
          </div>
