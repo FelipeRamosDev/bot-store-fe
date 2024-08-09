@@ -1,7 +1,7 @@
 import './ContentSidebar.scss';
 
-export default function ContentSidebar({ children, isFullContainer = false }) {
-   return <div className={`content-sidebar ${isFullContainer ? 'full-container' : 'container'}`}>
+export default function ContentSidebar({ className = '', children, isFullContainer = false }) {
+   return <div className={`${className} content-sidebar ${isFullContainer ? 'full-container' : 'container'}`}>
       <div className="layout-header">
          {children.length > 2 && children[2]}
       </div>
