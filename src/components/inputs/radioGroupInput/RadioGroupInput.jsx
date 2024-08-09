@@ -3,11 +3,11 @@ import { useRef } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-export default function RadioGroupInput({ label, defaultValue, rowDirection = true, options = [], onChange, ...props }) {
+export default function RadioGroupInput({ schema, onChange, ...props }) {
    const groupID = useRef();
+   const { label, defaultValue, rowDirection = true, options = [] } = schema || {};
    
    if (!groupID.current) {
       groupID.current = Math.floor(Math.random() * 1000000);

@@ -1,10 +1,12 @@
 import { TextField, FormControl, FormHelperText } from '@mui/material';
 
-export default function TextInput({ type = 'text', label, placeholder, color = 'tertiary', errors = [], fullWidth = true, ...props }) {
+export default function TextInput({ schema, errors = [], fullWidth = true, ...props }) {
+   const { inputType = 'text', label, placeholder, color = 'tertiary' } = schema || {};
+
    return (
       <FormControl fullWidth={fullWidth} error={errors.length}>
          <TextField
-            type={type}
+            type={inputType}
             label={label}
             placeholder={placeholder}
             variant="filled"

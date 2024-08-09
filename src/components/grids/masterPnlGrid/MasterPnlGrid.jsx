@@ -6,7 +6,7 @@ export default function MasterPnlGrid({ master = {}, className = '' }) {
          <PNLTile
             label="Month PNL"
             borderSide="left"
-            size="xl"
+            size="l"
             value={master.results?.monthPnl}
          />
 
@@ -14,14 +14,14 @@ export default function MasterPnlGrid({ master = {}, className = '' }) {
             type="percent"
             label="Month ROI"
             borderSide="left"
-            size="xl"
+            size="l"
             value={master.results?.monthPnl}
          />
 
          <PNLTile
             label="Day PNL"
             borderSide="left"
-            size="xl"
+            size="l"
             value={master.results?.dayPnl}
          />
 
@@ -29,7 +29,7 @@ export default function MasterPnlGrid({ master = {}, className = '' }) {
             type="percent"
             label="Day ROI"
             borderSide="left"
-            size="xl"
+            size="l"
             value={master.results?.dayPnl}
          />
       </div>

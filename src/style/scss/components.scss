@@ -65,7 +65,7 @@
    }
 
    &[display-size=xl] {
-      font-weight: 600;
+      font-weight: 700;
       font-size: x-large;
    }
 
@@ -73,4 +73,13 @@
       font-weight: 700;
       font-size: xx-large;
    }
+}
+
+.error-message {
+   font-size: 0.75rem;
+   font-weight: 400;
+   color: $error;
+   padding-inline-start: 1rem;
+   border-bottom: 1px solid #ef664b;
+   padding-bottom: 0.4rem;
 }

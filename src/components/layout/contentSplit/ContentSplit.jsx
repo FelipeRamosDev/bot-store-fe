@@ -1,6 +1,6 @@
 import './ContentSplit.scss';
 
-export default function ContentSplit({ breakpoint = 'm', children }) {
+export default function ContentSplit({ breakpoint = 'm', columnDirection = false, children }) {
    let breakpointCSS = '';
 
    if (breakpoint === 'xs') {
@@ -24,7 +24,7 @@ export default function ContentSplit({ breakpoint = 'm', children }) {
    }
 
    return (
-      <div className={`content-split ${breakpointCSS}`}>
+      <div className={`content-split ${breakpointCSS} ${columnDirection ? 'column-direction' : ''}`}>
          {children.length && <div className="content-a">
             {children[0]}
          </div>}

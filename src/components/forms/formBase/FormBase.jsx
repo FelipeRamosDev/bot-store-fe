@@ -1,7 +1,10 @@
-import { createContext, useEffect, useState } from 'react';
+import './FormBase.scss';
+import { createContext, useEffect, useState, useContext } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/alertModal/AlertModal';
 import { parseValidationErrorMsg } from '@/helpers/format';
+import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
+import AuthUserContext from '@/contexts/AuthUser';
 
 const FormBaseContext = createContext();
 export default FormBaseContext;
@@ -11,6 +14,7 @@ export function FormBase({
    formID = '',
    className = '',
    submitLabel = 'Send',
+   appendUserToBody = false,
    onSubmit = async () => {},
    children,
    ...props
@@ -19,14 +23,25 @@ export function FormBase({
    const [ errors, setErrors ] = useState({});
    const [ alertDialog, setAlertDialog ] = useState();
    const [ form, setForm ] = useState();
+   const auth = useContext(AuthUserContext);
+
+   if (auth?.user?._id && appendUserToBody) {
+      formSet.setUser(auth.user._id);
+   }
 
    useEffect(() => {
       // Starting the Form instance
       if (!form) {
          formSet.errorSetter(setErrors);
-         setForm(formSet);
+         formSet.fetchDependencies().then(({ success }) => {
+            if (!success) return;
+
+            setForm(formSet);
+         }).catch(err => {
+            throw err;
+         });
       }
-   }, []);
+   }, [form, formSet]);
 
    const handleSubmit = async (ev) => {
       ev.preventDefault();
@@ -63,17 +78,19 @@ export function FormBase({
          <p>{alertDialog?.message}</p>
       </AlertModal>
 
-      <form className={`${formID} form-base ${className}`} {...props} onSubmit={handleSubmit}>
+      {!form && <FitSpinner spinner={'Loading Dependencies'} noBackground={true} />}
+
+      {form && <form className={`${formID} form-base ${className}`} onSubmit={handleSubmit} {...props}>
          {children}
 
          <div className="buttons">
             <LoadingButton
                type="submit"
                variant="contained"
-               color="primary"
+               color="tertiary"
                loading={loading}
             >{submitLabel}</LoadingButton>
          </div>
-      </form>
+      </form>}
    </FormBaseContext.Provider>;
 }
