@@ -33,6 +33,11 @@ export default function CreateSlot({ defaultType, onSubmit }) {
                <div className="input-wrap">
                   <FormInput path="name" />
                </div>
+
+               <div className="input-wrap">
+                  <FormInput path="assets" />
+               </div>
+
                <div className="input-wrap">
                   <FormInput path="bot" />
                </div>

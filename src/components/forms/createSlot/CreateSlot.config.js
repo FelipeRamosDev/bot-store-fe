@@ -4,6 +4,16 @@ import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 
 const createSlotForm = new Form({
+   dependencies: [
+      {
+         id: 'symbolsData',
+         queryType: 'endpoint',
+         httpRequest: {
+            method: 'GET',
+            endpoint: '/exchange/get-assets'
+         }
+      }
+   ],
    schema: [
       new RadioGroupSchema({
          key: 'type',
@@ -32,6 +42,25 @@ const createSlotForm = new Form({
                return dependency.data.map(doc => ({
                   label: doc.name,
                   value: doc._id
+               }));
+            } else {
+               return [];
+            }
+         }
+      }),
+      new SelectFieldSchema({
+         key: 'assets',
+         label: 'Crypto Symbol',
+         placeholder: 'Pick an option',
+         required: true,
+         useDependencies: true,
+         options: function (form) {
+            const dependency = form.getDependency('symbolsData');
+
+            if (dependency && Array.isArray(dependency.data)) {
+               return dependency.data.map(item => ({
+                  label: item.symbol,
+                  value: item.symbol
                }));
             } else {
                return [];
