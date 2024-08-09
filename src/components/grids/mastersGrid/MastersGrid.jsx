@@ -6,13 +6,17 @@ import DBQueryContext from '@/contexts/DBQuery';
 import Skeleton from '@mui/material/Skeleton';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 
-export default function MastersGrid({ createMasterModal }) {
+export default function MastersGrid({ createMasterModal, verticalAlign = false, hideIfEmpty = false }) {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const masters = query;
    const skeletonNum = 3;
    const skeletons = new Array(skeletonNum).fill('', 0, skeletonNum);
 
-   return <div className="masters-grid">
+   if (hideIfEmpty && !masters.length) {
+      return <></>;
+   }
+
+   return <div className={`masters-grid ${verticalAlign ? 'vertical-align' : ''}`}>
       {isLoading && skeletons.map(() => (
          <Skeleton
             key={Math.random()}

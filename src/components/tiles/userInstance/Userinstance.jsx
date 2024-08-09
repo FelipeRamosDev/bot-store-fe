@@ -1,5 +1,5 @@
 'use client';
-import "./UserInstanceTile.scss";
+import "./UserInstance.scss";
 
 import { useContext } from 'react';
 import Card from '@/components/common/card/Card';
