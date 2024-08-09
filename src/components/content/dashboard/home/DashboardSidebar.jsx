@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import ActivitiesTable from "@/components/tables/activitiesTable/ActivitiesTable";
 import RecentBotsTable from "@/components/tables/recentBotsTable/RecentBotsTable";
-import UserInstance from "@/components/tiles/userInstance/UserInstance";
+import UserInstanceTile from "@/components/tiles/userInstance/UserInstanceTile";
 import { DBQuery } from '@/contexts/DBQuery';
 import AuthUserContext from "@/contexts/AuthUser";
 
@@ -20,7 +20,7 @@ export default function DashboardSidebar() {
          filter={{ user: user._id }}
          subscribe={true}
       >
-         <UserInstance />
+         <UserInstanceTile />
       </DBQuery>
 
       <DBQuery

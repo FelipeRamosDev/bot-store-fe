@@ -1,5 +1,5 @@
 'use client';
-import "./UserInstance.scss";
+import "./UserInstanceTile.scss";
 
 import { useContext } from 'react';
 import Card from '@/components/common/card/Card';
@@ -9,7 +9,7 @@ import { Button } from '@mui/material';
 import DBQueryContext from "@/contexts/DBQuery";
 import NoDocumentsTile from "../noDocumentsTile/NoDocumentsTile";
 
-export default function UserInstance() {
+export default function UserInstanceTile() {
    const { doc, isLoading } = useContext(DBQueryContext);
    const instance = doc;
    let message = '';
