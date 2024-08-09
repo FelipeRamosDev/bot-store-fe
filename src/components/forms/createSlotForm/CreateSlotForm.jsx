@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '../formBase/FormInput';
-import createSlotForm from './CreateSlot.config';
+import createSlotForm from './CreateSlotForm.config';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import AuthUserContext from '@/contexts/AuthUser';
 import APIContext from '@/contexts/4HandsAPI';
@@ -74,6 +74,7 @@ export default function CreateSlot({ master = {}, defaultType, onSuccess = () =>
             <>
                <Card padding="xs" elevation={15}>
                   <h3 className="card-title">Risk Management</h3>
+                  <p className="help-info text-center">You can customize the risk configurations or use the same as master account instead.</p>
 
                   <CheckBoxInput label="Custom risk management" onChange={(value) => setCustomRisk(value)} color="tertiary" />
                   {customRisk && <Stack flexDirection="row" flex={1} gap="1rem">

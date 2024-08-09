@@ -5,7 +5,7 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import SlotTile from "@/components/tiles/slotTile/SlotTile";
 import ContentModal from '@/components/modals/contentModal/ContentModal';
-import CreateSlot from '@/components/forms/createSlot/CreateSlot';
+import CreateSlot from '@/components/forms/createSlotForm/CreateSlotForm';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
@@ -37,6 +37,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
          variant="rounded"
          height={170}
       />)}
+
       {!slots.length ? <NoDocumentsTile message="You have no slots created yet! Create one to start." onClick={() => setCreateSlot(true)} /> : ''}
       {slots.map(slot => (
          <SlotTile key={Math.random()} slot={slot} />

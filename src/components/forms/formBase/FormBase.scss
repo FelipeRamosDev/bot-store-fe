@@ -1,5 +1,12 @@
+@import "../../../style/scss/variables.scss";
+
 .form-base {
    .buttons {
       margin-top: 2rem;
+   }
+
+   .help-info {
+      font-size: 0.9rem;
+      color: $text-darken;
    }
 }
