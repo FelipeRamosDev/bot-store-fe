@@ -18,7 +18,7 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
 
                <StatusBadge type="slot-status">{slot.status}</StatusBadge>
                <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
-                  <p>{slot.bot?.name}</p>
+                  {slot.bot?.name}
                </Link>
             </div>
 

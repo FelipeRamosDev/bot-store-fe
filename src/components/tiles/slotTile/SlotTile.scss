@@ -27,6 +27,9 @@
          }
 
          .bot-name {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: $grey-light;
             margin-bottom: 0;
             min-width: 100%;
          }
@@ -37,12 +40,6 @@
          font-weight: 600;
          margin-top: 0;
          margin-bottom: 0;
-      }
-
-      .bot-name {
-         font-size: 0.9rem;
-         font-weight: 400;
-         color: $grey-light;
       }
 
       .btn-wrap {
