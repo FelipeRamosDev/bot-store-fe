@@ -1,0 +1,35 @@
+@import "../../../style/scss/variables.scss";
+
+.check-button {
+   min-width: 0;
+
+   &.MuiButton-colorPrimary.checked {
+      background-color: $primary;
+      color: $text;
+   }
+
+   &.MuiButton-colorSecondary.checked {
+      background-color: $secondary;
+      color: $text-secondary;
+   }
+
+   &.MuiButton-colorTertiary.checked {
+      background-color: $tertiary;
+      color: $text-tertiary;
+   }
+
+   &.MuiButton-colorSuccess.checked {
+      background-color: $success;
+      color: $text-success;
+   }
+
+   &.MuiButton-colorWarn.checked {
+      background-color: $warn;
+      color: $text-warn;
+   }
+
+   &.MuiButton-colorError.checked {
+      background-color: $error;
+      color: $text-error;
+   }
+}
