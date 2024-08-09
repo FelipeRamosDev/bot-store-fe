@@ -16,7 +16,9 @@ export default function PositionsTable({ positionsSet }) {
       loading={isLoading}
       headerConfigs={[
          {
-            propKey: 'symbol', label: 'Symbol', format: (value, item) => {
+            propKey: 'symbol',
+            label: 'Symbol',
+            format: (value, item) => {
                let colorNumber = 0;
 
                if (item.positionType === 'long') {
@@ -28,21 +30,58 @@ export default function PositionsTable({ positionsSet }) {
                return <>
                   <EdgeLight colorValue={colorNumber} label={item.positionType?.toUpperCase()} />
 
-                  {value}
+                  <p>{value}</p>
                </>;
             },
             style: {
-               paddingLeft: '2rem'
+               paddingLeft: '2rem',
+               maxWidth: '10px',
             }
          },
          {
-            label: 'PNL / ROI', align: 'right', format: (__, item) => {
-               return <Price amount={item.pnl} />
-            }
-         },
-         {
-            propKey: 'type', label: 'Type', align: 'right', format: (value) => {
+            propKey: 'type',
+            label: 'Type',
+            align: 'center',
+            style: {
+               maxWidth: '10px',
+            },
+            format: (value) => {
                return <StatusBadge type="account-type">{value}</StatusBadge>
+            }
+         },
+         {
+            propKey: 'pnl',
+            label: 'PNL / ROI',
+            align: 'center',
+            style: {
+               maxWidth: '10px',
+            },
+            format: (value, item) => {
+               return <>
+                  <Price amount={value} /> / <Price amount={item.roi} />;
+               </>
+            }
+         },
+         {
+            label: 'Commission',
+            propKey: 'commission',
+            align: 'center',
+            style: {
+               maxWidth: '10px',
+            },
+            format: (value) => {
+               return <Price amount={value} />
+            }
+         },
+         {
+            label: 'Notional',
+            propKey: 'totalBalance',
+            align: 'center',
+            style: {
+               maxWidth: '10px',
+            },
+            format: (value) => {
+               return <Price amount={value} />
             }
          }
       ]}
