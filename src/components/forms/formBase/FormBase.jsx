@@ -14,6 +14,7 @@ export function FormBase({
    formID = '',
    className = '',
    submitLabel = 'Send',
+   appendUserToBody = false,
    onSubmit = async () => {},
    children,
    ...props
@@ -24,8 +25,8 @@ export function FormBase({
    const [ form, setForm ] = useState();
    const auth = useContext(AuthUserContext);
 
-   if (auth?.user?._id) {
-      formSet.setUser(auth.user);
+   if (auth?.user?._id && appendUserToBody) {
+      formSet.setUser(auth.user._id);
    }
 
    useEffect(() => {
@@ -79,7 +80,7 @@ export function FormBase({
 
       {!form && <FitSpinner spinner={'Loading Dependencies'} noBackground={true} />}
 
-      {form && <form className={`${formID} form-base ${className}`} {...props} onSubmit={handleSubmit}>
+      {form && <form className={`${formID} form-base ${className}`} onSubmit={handleSubmit} {...props}>
          {children}
 
          <div className="buttons">

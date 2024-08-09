@@ -35,9 +35,15 @@ h6 {
 }
 
 p {
+   font-family: Roboto, Helvetica, Arial, sans-serif;
    font-size: 1rem;
    line-height: 1.3em;
    margin-bottom: 1rem;
+}
+
+label {
+   -webkit-user-select: none;
+   user-select: none;
 }
 
 span {

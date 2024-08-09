@@ -68,6 +68,16 @@ const createSlotForm = new Form({
             } else {
                return [];
             }
+         },
+         parseInput: function (value) {
+            const currentName = this.form.getValue('name');
+
+            if (!currentName && value) {
+               const name = value.replace(/USDT|USDC/g, '');
+               this.form.setValue('name', name);
+            }
+
+            return [ value ];
          }
       }),
       new CheckButtonGroupSchema({
