@@ -6,9 +6,9 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
 
-export default function PositionsTable() {
+export default function PositionsTable({ positionsSet }) {
    const { query = [], isLoading } = useContext(DBQueryContext);
-   const positions = query;
+   const positions = positionsSet || query;
 
    return <TableBase
       pagination={{}}
