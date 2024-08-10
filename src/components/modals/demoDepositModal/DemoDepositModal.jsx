@@ -1,6 +1,6 @@
 import './DemoDepositModal.scss';
 import { useContext } from 'react';
-import ContentModal from '../contentModal/ContentModal';
+import ContentModal from '../base/contentModal/ContentModal';
 import DemoDepositForm from '@/components/forms/demoDepositForm/DemoDepositForm';
 import APIContext from '@/contexts/4HandsAPI';
 

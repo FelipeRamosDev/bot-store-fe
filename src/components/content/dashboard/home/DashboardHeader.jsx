@@ -1,4 +1,4 @@
-import ContentModal from '@/components/modals/contentModal/ContentModal';
+import ContentModal from '@/components/modals/base/contentModal/ContentModal';
 import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { Add } from '@mui/icons-material';

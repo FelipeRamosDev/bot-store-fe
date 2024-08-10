@@ -3,6 +3,7 @@ import { Divider, Button } from '@mui/material';
 import './ScheduleEditor.scss';
 import ScheduleTile from '@/components/tiles/scheduleTile/ScheduleTile';
 import TopBorderButton from '@/components/buttons/topBorderButton/TopBorderButton';
+import CreateScheduleForm from '@/components/forms/createScheduleForm/CreateScheduleForm';
 
 export default function ScheduleEditor({ masterUID }) {
    const [ editorState, setEditorState ] = useState('display');
@@ -57,7 +58,7 @@ export default function ScheduleEditor({ masterUID }) {
 
    if (editorState === 'create') {
       return <div className="schedules-editor">
-         <TopBorderButton color="error" onClick={() => setEditorState('display')}>Cancel</TopBorderButton>
+         <CreateScheduleForm />
       </div>
    }
 

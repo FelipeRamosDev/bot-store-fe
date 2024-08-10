@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import AlertModal from '../alertModal/AlertModal';
+import AlertModal from '../base/alertModal/AlertModal';
 
-export default function ConfirmationDialog({ children, handleConfirm = async () => {}, onClose = () => {}, ...props }) {
+export default function ConfirmationDialog({ confirmLabel = 'CONFIRM', children, handleConfirm = async () => {}, onClose = () => {}, ...props }) {
    const [ error, setError ] = useState(false);
    const [ loading, setLoading ] = useState(false);
 
@@ -18,7 +18,7 @@ export default function ConfirmationDialog({ children, handleConfirm = async () 
    }
 
    if (!error) {
-      return <AlertModal isConfirmation={true} loading={loading} handleOk={handleOk} onClose={onClose} {...props}>
+      return <AlertModal confirmLabel={confirmLabel} isConfirmation={true} loading={loading} handleOk={handleOk} onClose={onClose} {...props}>
          {children}
       </AlertModal>;
    } else {

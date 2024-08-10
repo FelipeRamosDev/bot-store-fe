@@ -4,7 +4,7 @@ import { Add } from '@mui/icons-material';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import SlotTile from "@/components/tiles/slotTile/SlotTile";
-import ContentModal from '@/components/modals/contentModal/ContentModal';
+import ContentModal from '@/components/modals/base/contentModal/ContentModal';
 import CreateSlot from '@/components/forms/createSlotForm/CreateSlotForm';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 import AuthUserContext from '@/contexts/AuthUser';
