@@ -22,7 +22,9 @@ export default function DeleteMasterConfirmDialog({ master = {}, open, setOpen }
       open={open}
       handleConfirm={handleConfirm}
       onClose={() => setOpen(false)}
+      confirmLabel="DELETE"
    >
-      <p>Are you sure you want to delete the "{master.name}" account? This can't be undone.</p>
+      <p style={{ marginBottom: 0 }}>Are you sure you want to delete the "{master.name}" account?</p>
+      <p style={{ marginBottom: 0 }}>This action can NOT be undone.</p>
    </ConfirmationDialog>
 }

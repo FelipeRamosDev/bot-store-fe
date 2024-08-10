@@ -4,9 +4,15 @@ import FieldSchema from '../FieldSchema';
 export default class CheckButtonGroupSchema extends FieldSchema {
    constructor (setup = {}, form) {
       super(setup, form);
-      const { OptionModel } = setup;
+      const { OptionModel, multiValue = false } = setup;
 
-      this.type = String;
+      this.multiValue = multiValue;
+      if (this.multiValue) {
+         this.type = Array;
+      } else {
+         this.type = String;
+      }
+
       this.OptionModel = OptionModel || CheckButtonGroupSchemaOption;
       this.Input = CheckButtonGroupInput;
    }
