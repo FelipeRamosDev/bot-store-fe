@@ -6,7 +6,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Tooltip from '@mui/material/Tooltip';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
@@ -14,9 +13,12 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import StopIcon from '@mui/icons-material/Stop';
 import Divider from '@mui/material/Divider';
 import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositModal';
+import ConfirmationDialog from '@/components/modals/confirmationDialog/ConfirmationDialog';
+import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
 
 export default function MasterMenu({ isDemo = false, master = {} }) {
    const [ demoDepositModal, setDemoDepositModal ] = useState();
+   const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState();
    const [ anchorEl, setAnchorEl ] = useState(null);
    const open = Boolean(anchorEl);
 
@@ -77,7 +79,7 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
                Archive
             </MenuItem>
 
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={() => setDeleteConfirmDialog(true)}>
                <ListItemIcon>
                   <DeleteForeverIcon color="error" fontSize="small" />
                </ListItemIcon>
@@ -86,6 +88,12 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
          </Menu>
 
          <DemoDepositModal open={demoDepositModal} setOpen={setDemoDepositModal} master={master} />
+
+         <DeleteMasterConfirmDialog
+            master={master}
+            open={deleteConfirmDialog}
+            setOpen={setDeleteConfirmDialog}
+         />
       </>
    );
 }
