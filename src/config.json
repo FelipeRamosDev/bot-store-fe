@@ -3,5 +3,8 @@
       "DEV": "https://localhost",
       "STG": "https://192.168.15.102",
       "PROD": "https://35.246.109.228"
+   },
+   "dateTime": {
+      "weekdays": ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
    }
 }
