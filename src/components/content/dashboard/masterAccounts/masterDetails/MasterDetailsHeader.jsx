@@ -14,7 +14,7 @@ export default function MasterDetailsHeader({  }) {
       return <></>;
    }
 
-   return <ContentHeader Toolbar={() => <MasterMenu isDemo={(doc.type === 'master-demo')} />}>
+   return <ContentHeader Toolbar={() => <MasterMenu isDemo={(doc.type === 'master-demo')} master={doc} />}>
       <div className="header-title">
          <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
 

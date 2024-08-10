@@ -12,9 +12,11 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import StopIcon from '@mui/icons-material/Stop';
-import { Divider } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositModal';
 
-export default function MasterMenu({ isDemo = false }) {
+export default function MasterMenu({ isDemo = false, master = {} }) {
+   const [ demoDepositModal, setDemoDepositModal ] = useState();
    const [ anchorEl, setAnchorEl ] = useState(null);
    const open = Boolean(anchorEl);
 
@@ -28,9 +30,7 @@ export default function MasterMenu({ isDemo = false }) {
 
    return (
       <>
-         <Tooltip title="Master's Menu">
-            <RoundIconButton Icon={MoreVertIcon} onClick={handleClick} />
-         </Tooltip>
+         <RoundIconButton Icon={MoreVertIcon} onClick={handleClick} />
 
          <Menu
             anchorEl={anchorEl}
@@ -40,37 +40,43 @@ export default function MasterMenu({ isDemo = false }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
-            {isDemo && <MenuItem onClick={handleClose}>
+            {isDemo && <MenuItem onClick={() => setDemoDepositModal(true)}>
                <ListItemIcon>
                   <AttachMoneyIcon fontSize="small" />
                </ListItemIcon>
                Demo Deposit
             </MenuItem>}
+
             <MenuItem onClick={handleClose} disabled>
                <ListItemIcon>
                   <PlayArrowIcon fontSize="small" />
                </ListItemIcon>
                Start All
             </MenuItem>
+
             <MenuItem onClick={handleClose} disabled>
                <ListItemIcon>
                   <StopIcon fontSize="small" />
                </ListItemIcon>
                Stop All
             </MenuItem>
+
             <Divider />
+
             <MenuItem onClick={handleClose}>
                <ListItemIcon>
                   <ModeEditIcon fontSize="small" />
                </ListItemIcon>
                Edit
             </MenuItem>
+
             <MenuItem onClick={handleClose}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>
                Archive
             </MenuItem>
+
             <MenuItem onClick={handleClose}>
                <ListItemIcon>
                   <DeleteForeverIcon color="error" fontSize="small" />
@@ -78,6 +84,8 @@ export default function MasterMenu({ isDemo = false }) {
                Delete Master
             </MenuItem>
          </Menu>
+
+         <DemoDepositModal open={demoDepositModal} setOpen={setDemoDepositModal} master={master} />
       </>
    );
 }
