@@ -1,0 +1,58 @@
+@import "../../../style/scss/variables.scss";
+
+.schedule-tile {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+   padding: $padding-s 0;
+   position: relative;
+
+   .weekdays {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0rem;
+
+      .day {
+         display: inline-block;
+         background-color: $background-dark;
+         border-radius: $radius-s;
+         padding: 0.5rem;
+         color: $success;
+         -webkit-user-select: none;
+         user-select: none;
+
+         &.disabled {
+            color: $grey;
+            text-decoration: line-through;
+         }
+      }
+   }
+
+   .start-end-time {
+      display: flex;
+      gap: 0.5rem;
+
+      .time {
+         flex: 50%;
+      }
+
+      .end {
+         text-align: right;
+      }
+
+      label {
+         font-size: 0.85rem;
+         color: $success;
+      }
+
+      p {
+         margin: 0;
+         font-size: 1.1rem;
+      }
+   }
+
+   .tile-header {
+      width: 100%;
+      text-align: right;
+   }
+}

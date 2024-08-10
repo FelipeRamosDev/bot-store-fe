@@ -5,6 +5,7 @@ import UserInstanceMaster from '@/components/tiles/userInstance/Userinstance';
 import AccountSettings from '../../../../../shared/accountSettings/AccountSettings';
 import MasterOpenedPositions from './MasterOpenedPositions';
 import MoreMasterAccounts from './MoreMasterAccounts';
+import MasterSchedules from './MasterSchedules';
 
 export default function MasterDetailsSidebar() {
    const { doc, isLoading } = useContext(DBQueryContext);
@@ -20,6 +21,7 @@ export default function MasterDetailsSidebar() {
       </DBQuery>  
        
       <AccountSettings account={doc} />
+      <MasterSchedules master={doc} />
       <MasterOpenedPositions master={doc} />
       <MoreMasterAccounts master={doc} />
    </>;
