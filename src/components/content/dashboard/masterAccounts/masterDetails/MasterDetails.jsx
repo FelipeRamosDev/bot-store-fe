@@ -2,7 +2,7 @@ import './MasterDetails.scss';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import MasterDetailsHeader from './MasterDetailsHeader';
 import MasterDetailsContent from './MasterDetailsContent';
-import MasterDetailsSidebar from './MasterDetailsSidebar';
+import MasterDetailsSidebar from './masterDetailsSidebar/MasterDetailsSidebar';
 import { DBQuery } from '@/contexts/DBQuery';
 
 export default function MasterDetails({ index }) {

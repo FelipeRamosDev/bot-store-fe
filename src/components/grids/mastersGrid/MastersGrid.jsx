@@ -26,7 +26,7 @@ export default function MastersGrid({ createMasterModal, verticalAlign = false, 
          />
       ))}
 
-      {!isLoading && (query.length === 0) && (
+      {!isLoading && (query.length === 0) && createMasterModal && (
          <NoDocumentsTile
             message={`You doesn't have any master account yet. Create one to start!`}
             onClick={() => createMasterModal(true)}
