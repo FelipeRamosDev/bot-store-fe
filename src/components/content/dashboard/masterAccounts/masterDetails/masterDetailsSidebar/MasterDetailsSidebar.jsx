@@ -5,6 +5,7 @@ import UserInstanceMaster from '@/components/tiles/userInstance/Userinstance';
 import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import MastersGrid from '@/components/grids/mastersGrid/MastersGrid';
+import AccountSettings from '../../../../../shared/accountSettings/AccountSettings';
 
 export default function MasterDetailsSidebar() {
    const { doc, isLoading } = useContext(DBQueryContext);
@@ -22,6 +23,8 @@ export default function MasterDetailsSidebar() {
    return <>
       <DBQuery type="doc" collection="user_instances" filter={doc?.user?.userInstance} subscribe={true}>
          <UserInstanceMaster />
+         
+         <AccountSettings account={doc} />
 
          <div className="opened-positions">
             <ContentHeader>
@@ -35,7 +38,14 @@ export default function MasterDetailsSidebar() {
                <h3 className="header-title">Master Accounts</h3>
             </ContentHeader>
 
-            <DBQuery type="query" collection="master_accounts" filter={{ user: userUID, $nor: [{ _id: doc._id }] }}>
+            <DBQuery
+               type="query"
+               collection="master_accounts"
+               filter={{
+                  user: userUID,
+                  $nor: [{ _id: doc._id }]
+               }}
+            >
                <MastersGrid verticalAlign={true} />
             </DBQuery>
          </div>
