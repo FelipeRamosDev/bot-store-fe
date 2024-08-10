@@ -4,6 +4,7 @@ import DBQueryContext from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import { formatMasterBadges } from '@/helpers/format';
+import MasterMenu from '@/components/menus/dropdown/masterMenu/MasterMenu';
 
 export default function MasterDetailsHeader({  }) {
    const { doc, isLoading } = useContext(DBQueryContext);
@@ -13,7 +14,7 @@ export default function MasterDetailsHeader({  }) {
       return <></>;
    }
 
-   return <ContentHeader>
+   return <ContentHeader Toolbar={() => <MasterMenu isDemo={(doc.type === 'master-demo')} />}>
       <div className="header-title">
          <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
 
