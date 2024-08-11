@@ -1,14 +1,12 @@
-import { useState, useContext } from 'react';
-import { Divider } from '@mui/material';
 import './ScheduleEditor.scss';
+import { useContext } from 'react';
 import ScheduleTile from '@/components/tiles/scheduleTile/ScheduleTile';
 import TopBorderButton from '@/components/buttons/topBorderButton/TopBorderButton';
 import CreateScheduleForm from '@/components/forms/createScheduleForm/CreateScheduleForm';
 import DBQueryContext from '@/contexts/DBQuery';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 
-export default function ScheduleEditor({ masterUID }) {
-   const [ editorState, setEditorState ] = useState('display');
+export default function ScheduleEditor({ masterUID, editorState, setEditorState }) {
    const { query = [] } = useContext(DBQueryContext);
 
    if (editorState === 'display') {
@@ -16,7 +14,6 @@ export default function ScheduleEditor({ masterUID }) {
          {query.map((doc) => <ScheduleTile key={Math.random()} schedule={doc} />)}
 
          {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
-         <TopBorderButton onClick={() => setEditorState('edit')}>Edit</TopBorderButton>
       </div>
    }
 
@@ -28,8 +25,7 @@ export default function ScheduleEditor({ masterUID }) {
 
          {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
          <div className="buttons-wrap">
-            <TopBorderButton color="error" onClick={() => setEditorState('display')}>Cancel</TopBorderButton>
-            <TopBorderButton onClick={() => setEditorState('create')}>Create</TopBorderButton>
+            <TopBorderButton onClick={() => setEditorState('create')}>ADD</TopBorderButton>
          </div>
       </div>
    }

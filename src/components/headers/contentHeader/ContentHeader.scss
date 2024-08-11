@@ -4,6 +4,8 @@
    display: flex;
    width: 100%;
    padding: $padding-m 0 0 0;
+   gap: 0.5rem;
+   align-items: center;
 
    .header-title {
       display: flex;
@@ -31,5 +33,13 @@
       justify-content: flex-end;
       flex: 0;
       gap: 1rem;
+   }
+
+   .card-title {
+      flex: 1;
+      margin-right: auto;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1rem;
    }
 }

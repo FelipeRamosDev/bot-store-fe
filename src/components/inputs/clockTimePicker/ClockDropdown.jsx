@@ -15,10 +15,13 @@ export default function ClockDropdown({ value, setValue }) {
    const handleClose = (ev) => {
       if (!ev) return setAnchorEl(null);
 
-      const hour = ev.hour();
-      const minute = ev.minute();
+      if (ev?.constructor?.name === 'M') {
+         const hour = ev.hour();
+         const minute = ev.minute();
+   
+         setValue(`${hour}:${minute}:00`);
+      }
 
-      setValue(`${hour}:${minute}:00`);
       setAnchorEl(null);
    };
 

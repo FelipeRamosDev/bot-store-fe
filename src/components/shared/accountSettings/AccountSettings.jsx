@@ -3,6 +3,9 @@ import Card from '@/components/common/card/Card';
 import SettingRow from './settingRow/SettingRow';
 import Price from '@/components/displays/price/Price';
 import Percent from '@/components/displays/percent/Percent';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import { Edit, Settings } from '@mui/icons-material';
 
 const DISPLAY_CONFIG = { noColor: true };
 
@@ -12,8 +15,15 @@ export default function AccountSettings({ account }) {
    }
 
    const { limits } = account;
+   function Toolbar() {
+      return <RoundIconButton size="small" Icon={Edit} onClick={() => console.log('Edit')} />;
+   }
 
    return <Card className="account-settings" padding="xs" elevation={30}>
+      <ContentHeader Toolbar={Toolbar}>
+         <Settings className="icon" /> <h3 className="card-title">Settings</h3>
+      </ContentHeader>
+
       <SettingRow label="Max. Leverage" value={`${limits.leverage}x`} />
       <SettingRow label="Min Trades Interval" value={`${limits.tradesMinInterval}H`} />
       <SettingRow label="Margin Ratio" value={`${limits.marginRatioCommit}%`} />
