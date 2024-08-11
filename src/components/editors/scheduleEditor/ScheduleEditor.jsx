@@ -13,30 +13,20 @@ export default function ScheduleEditor({ masterUID }) {
 
    if (editorState === 'display') {
       return <div className="schedules-editor">
-         {query.map((doc, index) => <>
-            <ScheduleTile schedule={doc} />
-
-            {index < query.length && <Divider />}
-         </>)}
+         {query.map((doc) => <ScheduleTile key={Math.random()} schedule={doc} />)}
 
          {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
-
          <TopBorderButton onClick={() => setEditorState('edit')}>Edit</TopBorderButton>
       </div>
    }
 
    if (editorState === 'edit') {
       return <div className="schedules-editor">
-         {query.map((doc, index) => <>
-            <div className="edit-wrap">
-               <ScheduleTile editMode={true} schedule={doc} setView={setEditorState} />
-            </div>
-
-            {index < query.length && <Divider />}
-         </>)}
+         {query.map((doc) => <div key={Math.random()} className="edit-wrap">
+            <ScheduleTile editMode={true} schedule={doc} setView={setEditorState} />
+         </div>)}
 
          {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
-
          <div className="buttons-wrap">
             <TopBorderButton color="error" onClick={() => setEditorState('display')}>Cancel</TopBorderButton>
             <TopBorderButton onClick={() => setEditorState('create')}>Create</TopBorderButton>
