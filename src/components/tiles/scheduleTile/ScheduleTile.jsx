@@ -31,7 +31,7 @@ export default function ScheduleTile({ editMode = false, schedule = {} }) {
       </div>
 
       {editMode && <div className="button-wrap">
-         <RoundIconButton className="delete-schedule" Icon={CloseIcon} />
+         <RoundIconButton className="delete-schedule" Icon={CloseIcon} size="small" />
       </div>}
    </>
 }

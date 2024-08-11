@@ -6,6 +6,8 @@ export default function MasterSchedules({ master = {} }) {
    return <Card className="master-schedules" padding="xs">
       <h3 className="card-title text-center">Master Schedules</h3>
 
-      <ScheduleEditor masterUID={master._id} />
+      <DBQuery type="query" collection="schedules" filter={{ master: master._id }} subscribe={true}>
+         <ScheduleEditor masterUID={master._id} />
+      </DBQuery>
    </Card>
 }
