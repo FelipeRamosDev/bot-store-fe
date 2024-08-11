@@ -1,28 +1,25 @@
-import { useState } from 'react';
-import { Divider, Button } from '@mui/material';
+import { useState, useContext } from 'react';
+import { Divider } from '@mui/material';
 import './ScheduleEditor.scss';
 import ScheduleTile from '@/components/tiles/scheduleTile/ScheduleTile';
 import TopBorderButton from '@/components/buttons/topBorderButton/TopBorderButton';
 import CreateScheduleForm from '@/components/forms/createScheduleForm/CreateScheduleForm';
+import DBQueryContext from '@/contexts/DBQuery';
+import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 
 export default function ScheduleEditor({ masterUID }) {
    const [ editorState, setEditorState ] = useState('display');
+   const { query = [] } = useContext(DBQueryContext);
 
    if (editorState === 'display') {
       return <div className="schedules-editor">
-         <ScheduleTile schedule={{
-            startTime: '08:00:00',
-            endTime: '19:00:00',
-            weekdays: ['MON', 'TUE', 'WED', 'THU', 'FRI']
-         }} />
+         {query.map((doc, index) => <>
+            <ScheduleTile schedule={doc} />
 
-         <Divider />
+            {index < query.length && <Divider />}
+         </>)}
 
-         <ScheduleTile schedule={{
-            startTime: '08:00:00',
-            endTime: '19:00:00',
-            weekdays: ['SUN', 'SAT']
-         }} />
+         {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
 
          <TopBorderButton onClick={() => setEditorState('edit')}>Edit</TopBorderButton>
       </div>
@@ -30,24 +27,15 @@ export default function ScheduleEditor({ masterUID }) {
 
    if (editorState === 'edit') {
       return <div className="schedules-editor">
-         <div className="edit-wrap">
-            <ScheduleTile editMode={true} schedule={{
-               startTime: '08:00:00',
-               endTime: '19:00:00',
-               weekdays: ['MON', 'TUE', 'WED', 'THU', 'FRI']
-            }} />
-         </div>
+         {query.map((doc, index) => <>
+            <div className="edit-wrap">
+               <ScheduleTile editMode={true} schedule={doc} />
+            </div>
 
-         <Divider />
+            {index < query.length && <Divider />}
+         </>)}
 
-
-         <div className="edit-wrap">
-            <ScheduleTile editMode={true} schedule={{
-               startTime: '08:00:00',
-               endTime: '19:00:00',
-               weekdays: ['SUN', 'SAT']
-            }} />
-         </div>
+         {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
 
          <div className="buttons-wrap">
             <TopBorderButton color="error" onClick={() => setEditorState('display')}>Cancel</TopBorderButton>
@@ -58,7 +46,7 @@ export default function ScheduleEditor({ masterUID }) {
 
    if (editorState === 'create') {
       return <div className="schedules-editor">
-         <CreateScheduleForm />
+         <CreateScheduleForm masterUID={masterUID} onSuccess={() => setEditorState('display') } />
       </div>
    }
 

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './CheckButtonGroupInput.scss';
 import CheckButton from '@/components/buttons/checkButton/CheckButton';
-import FormHelperText from '@mui/material/FormHelperText';
 
 export default function CheckButtonGroupInput({ className = '', schema = {}, errors = [], onChange = () => { }, ...props }) {
    const { label, options = [], defaultValue, multiValue } = schema;
@@ -9,16 +8,18 @@ export default function CheckButtonGroupInput({ className = '', schema = {}, err
 
    const handleChoose = (option) => {
       if (multiValue) {
-         setValue(prev => {
-            const indexOf = prev.indexOf(option.value);
-            const filtered = prev.filter(item => item !== option.value);
+         const indexOf = value.indexOf(option.value);
+         const filtered = value.filter(item => item !== option.value);
+         let newValue;
 
-            if (indexOf > -1) {
-               return filtered;
-            } else {
-               return [...filtered, option.value];
-            }
-         });
+         if (indexOf > -1) {
+            newValue = filtered;
+         } else {
+            newValue = [...filtered, option.value];
+         }
+
+         setValue(newValue);
+         onChange({ target: { value: newValue }});
       } else {
          setValue(option.value);
          onChange({ target: { value: option.value }});
