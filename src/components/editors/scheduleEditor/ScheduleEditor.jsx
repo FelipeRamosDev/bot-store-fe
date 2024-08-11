@@ -29,7 +29,7 @@ export default function ScheduleEditor({ masterUID }) {
       return <div className="schedules-editor">
          {query.map((doc, index) => <>
             <div className="edit-wrap">
-               <ScheduleTile editMode={true} schedule={doc} />
+               <ScheduleTile editMode={true} schedule={doc} setView={setEditorState} />
             </div>
 
             {index < query.length && <Divider />}
