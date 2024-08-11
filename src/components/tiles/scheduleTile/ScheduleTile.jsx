@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import APIContext from '@/contexts/4HandsAPI';
 import { useContext } from 'react';
 
-export default function ScheduleTile({ editMode = false, schedule = {}, setView = () => {} }) {
+export default function ScheduleTile({ editMode = false, schedule = {}, setView = () => {}, ...props }) {
    const API = useContext(APIContext);
 
    const handleDelete = async () => {
@@ -23,7 +23,7 @@ export default function ScheduleTile({ editMode = false, schedule = {}, setView 
    }
 
    return <>
-      <div className="schedule-tile">
+      <div className="schedule-tile" {...props}>
          <div className="weekdays">
             {config.dateTime.weekdays.map(item => {
                const contain = schedule.weekdays.find(day => day === item);
@@ -32,7 +32,7 @@ export default function ScheduleTile({ editMode = false, schedule = {}, setView 
                   return;
                }
 
-               return <span className={`day ${!contain ? 'disabled' : ''}`}>{item}</span>;
+               return <span key={Math.random()} className={`day ${!contain ? 'disabled' : ''}`}>{item}</span>;
             })}
          </div>
 

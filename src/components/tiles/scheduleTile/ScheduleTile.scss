@@ -1,11 +1,20 @@
 @import "../../../style/scss/variables.scss";
 
+.edit-wrap .schedule-tile {
+   border-bottom: none;
+}
+
 .schedule-tile {
    display: flex;
    flex-direction: column;
    gap: 0.5rem;
    padding: $padding-s 0;
    position: relative;
+   border-bottom: 1px solid $grey;
+   
+   &:last-of-type {
+      border-bottom: none;
+   }
 
    .weekdays {
       display: flex;

@@ -33,6 +33,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
       </ContentHeader>
 
       {isLoading && new Array(6).fill('').map(() => <Skeleton
+         key={Math.random()}
          className="slot-tile"
          variant="rounded"
          height={170}
@@ -50,7 +51,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
          open={createSlot}
          onClose={() => setCreateSlot(false)}
       >
-         <CreateSlot defaultType={slotType} onSuccess={(created) => setCreateSlot(false)} master={master} />
+         <CreateSlot defaultType={slotType} onSuccess={() => setCreateSlot(false)} master={master} />
       </ContentModal>
    </div>;
 }
