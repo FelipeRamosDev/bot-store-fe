@@ -1,6 +1,10 @@
-@import "../../../style/scss/variables.scss";
+@import "../../../../style/scss/variables.scss";
 
 .alert-dialog {
+   p {
+      color: $text-darken;
+   }
+
    .MuiModal-backdrop {
       background-color: rgb(44 73 81 / 50%);
       -webkit-backdrop-filter: blur(5px);

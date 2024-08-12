@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 80",
+    "dev-ssl": "next dev -p 443 --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -16,8 +17,10 @@
     "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.16.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/x-date-pickers": "^7.12.1",
     "4hands-api": "^0.7.1",
     "binance-sync": "^0.2.5",
+    "dayjs": "^1.11.12",
     "lightweight-charts": "^4.1.7",
     "next": "14.2.5",
     "react": "^18",

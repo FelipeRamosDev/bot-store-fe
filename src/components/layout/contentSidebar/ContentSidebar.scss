@@ -40,5 +40,20 @@
          font-size: 1.2rem;
          text-align: center;
       }
+
+      .content-header {
+         margin-bottom: 0.3rem;
+      }
+   }
+
+   .content-header {
+      display: flex;
+      padding-top: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+
+      .card-title {
+         margin: 0;
+      }
    }
 }

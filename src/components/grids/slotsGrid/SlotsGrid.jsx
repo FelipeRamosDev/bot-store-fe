@@ -4,7 +4,7 @@ import { Add } from '@mui/icons-material';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import SlotTile from "@/components/tiles/slotTile/SlotTile";
-import ContentModal from '@/components/modals/contentModal/ContentModal';
+import ContentModal from '@/components/modals/base/contentModal/ContentModal';
 import CreateSlot from '@/components/forms/createSlotForm/CreateSlotForm';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 import AuthUserContext from '@/contexts/AuthUser';
@@ -33,6 +33,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
       </ContentHeader>
 
       {isLoading && new Array(6).fill('').map(() => <Skeleton
+         key={Math.random()}
          className="slot-tile"
          variant="rounded"
          height={170}
@@ -50,7 +51,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
          open={createSlot}
          onClose={() => setCreateSlot(false)}
       >
-         <CreateSlot defaultType={slotType} onSuccess={(created) => setCreateSlot(false)} master={master} />
+         <CreateSlot defaultType={slotType} onSuccess={() => setCreateSlot(false)} master={master} />
       </ContentModal>
    </div>;
 }

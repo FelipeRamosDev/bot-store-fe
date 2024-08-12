@@ -35,7 +35,7 @@ export const darkTheme = createTheme({
          main: '#EF664B'
       },
       info: {
-         main: 'rgba(250,250,250,0.8)'
+         main: '#c7c7c7'
       },
       success: {
          main: '#5CE091'

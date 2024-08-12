@@ -13,7 +13,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import StopIcon from '@mui/icons-material/Stop';
 import Divider from '@mui/material/Divider';
 import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositModal';
-import ConfirmationDialog from '@/components/modals/confirmationDialog/ConfirmationDialog';
 import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
 
 export default function MasterMenu({ isDemo = false, master = {} }) {

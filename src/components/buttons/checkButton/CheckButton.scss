@@ -2,6 +2,7 @@
 
 .check-button {
    min-width: 0;
+   color: $text;
 
    &.MuiButton-colorPrimary.checked {
       background-color: $primary;
