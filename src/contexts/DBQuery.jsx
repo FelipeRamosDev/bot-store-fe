@@ -42,16 +42,18 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
       switch (type) {
          case 'query':
             if (subscribe) {
-               socket.current = dbQuery.subscribeQuery({
-                  onData: query => {
-                     setQuery(query);
-                     setLoading(false);
-                  },
-                  onError: err => {
-                     setLoading(false);
-                     throw err;
-                  }
-               });
+               if (!socket.current) {
+                  socket.current = dbQuery.subscribeQuery({
+                     onData: query => {
+                        setQuery(query);
+                        setLoading(false);
+                     },
+                     onError: err => {
+                        setLoading(false);
+                        throw err;
+                     }
+                  });
+               }
             } else {
                dbQuery.getQuery().then(query => {
                   setQuery(query);
@@ -65,16 +67,18 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
             break;
          case 'doc':
             if (subscribe) {
-               socket.current = dbQuery.subscribeDoc({
-                  onData: doc => {
-                     setDoc(doc);
-                     setLoading(false);
-                  },
-                  onError: err => {
-                     setLoading(false);
-                     throw err;
-                  }
-               });
+               if (!socket.current) {
+                  socket.current = dbQuery.subscribeDoc({
+                     onData: doc => {
+                        setDoc(doc);
+                        setLoading(false);
+                     },
+                     onError: err => {
+                        setLoading(false);
+                        throw err;
+                     }
+                  });
+               }
             } else {
                dbQuery.getDoc().then(doc => {
                   setDoc(doc);
