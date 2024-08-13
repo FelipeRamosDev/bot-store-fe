@@ -32,6 +32,7 @@ export function FormBase({
    useEffect(() => {
       // Starting the Form instance
       if (!form) {
+         formSet.formSetter(setForm);
          formSet.errorSetter(setErrors);
          formSet.fetchDependencies().then(({ success }) => {
             if (!success) return;

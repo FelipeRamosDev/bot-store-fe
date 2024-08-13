@@ -272,6 +272,16 @@ export default class Form {
       }
    }
 
+   formSetter(setter) {
+      if (typeof setter === 'function') {
+         Object.defineProperty(this, 'setForm', {
+            get: () => setter,
+            enumerable: true,
+            configurable: true
+         });
+      }
+   }
+
    errorSetter(setter) {
       if (typeof setter === 'function') {
          Object.defineProperty(this, 'setErrors', {

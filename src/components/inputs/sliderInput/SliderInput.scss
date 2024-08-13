@@ -1,0 +1,15 @@
+.slider-input {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1rem;
+
+   .slider {
+      flex: 1;
+   }
+
+   .input-text {
+      flex: 0;
+      min-width: 4rem;
+   }
+}

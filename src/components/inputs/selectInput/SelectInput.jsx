@@ -14,7 +14,6 @@ export default function SelectInput({ className = '', errors = [], schema = {}, 
       inputID.current = Math.random();
    }
 
-
    return <FormControl color="tertiary" className={`select-input ${className}`} variant="filled" error={errors.length} {...props}>
       {label && <InputLabel id={inputID.current}>{label}</InputLabel>}
 
