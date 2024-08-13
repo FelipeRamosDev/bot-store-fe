@@ -62,6 +62,10 @@ export default class FieldSchema {
    get error() {
       return Boolean(this.errors.size);
    }
+   
+   appendDispatch(dispatch) {
+      this.dispatch = dispatch;
+   }
 
    init(form) {
       this.setParentForm(form);

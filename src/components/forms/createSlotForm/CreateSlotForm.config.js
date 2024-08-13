@@ -69,6 +69,21 @@ const createSlotForm = new Form({
                return [];
             }
          },
+         onInput: function (value, schema) {
+            const assets = this.getDependency('symbolsData');
+            const assetsData = assets?.data;
+            const currAssetData = assetsData.find(item => item.symbol === value);
+            const leverageSchema = this.getSchema('limits.leverage');
+
+            if (currAssetData && leverageSchema) {
+               if (currAssetData.maxLeverage !== leverageSchema.max) {
+                  leverageSchema.dispatch(prev => {
+                     prev.max = currAssetData.maxLeverage;
+                     return prev;
+                  });
+               }
+            }
+         },
          parseInput: function (value) {
             const currentName = this.form.getValue('name');
 
