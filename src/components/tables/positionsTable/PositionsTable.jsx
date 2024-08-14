@@ -5,6 +5,7 @@ import Price from '@/components/displays/price/Price';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
+import Percent from '@/components/displays/percent/Percent';
 
 export default function PositionsTable({ positionsSet }) {
    const { query = [], isLoading } = useContext(DBQueryContext);
@@ -46,6 +47,17 @@ export default function PositionsTable({ positionsSet }) {
             }
          },
          {
+            label: 'Leverage',
+            propKey: 'usedLeverage',
+            align: 'center',
+            style: {
+               maxWidth: '10px',
+            },
+            format: (value) => {
+               return <b>{value}x</b>
+            }
+         },
+         {
             propKey: 'pnl',
             label: 'PNL / ROI',
             align: 'center',
@@ -54,30 +66,30 @@ export default function PositionsTable({ positionsSet }) {
             },
             format: (value, item) => {
                return <>
-                  <Price amount={value} /> / <Price amount={item.roi} />;
+                  <Price amount={value} size="m" /> / <Percent value={item.roi} />
                </>
             }
          },
          {
             label: 'Commission',
-            propKey: 'commission',
+            propKey: 'tradeFee',
             align: 'center',
             style: {
                maxWidth: '10px',
             },
             format: (value) => {
-               return <Price amount={value} />
+               return <Price amount={value} noColor={true} />
             }
          },
          {
             label: 'Notional',
-            propKey: 'totalBalance',
+            propKey: 'grossBalance',
             align: 'center',
             style: {
                maxWidth: '10px',
             },
             format: (value) => {
-               return <Price amount={value} />
+               return <Price amount={value} noColor={true} />
             }
          },
          {
@@ -88,7 +100,7 @@ export default function PositionsTable({ positionsSet }) {
                maxWidth: '10px',
             },
             format: (value) => {
-               return <Price amount={value} />
+               return <Price amount={value} noColor={true} />
             }
          }
       ]}

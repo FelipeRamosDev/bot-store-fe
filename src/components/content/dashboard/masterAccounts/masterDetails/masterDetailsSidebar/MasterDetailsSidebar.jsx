@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import DBQueryContext, { DBQuery } from '@/contexts/DBQuery';
 import UserInstanceMaster from '@/components/tiles/userInstance/Userinstance';
 import AccountSettings from '../../../../../shared/accountSettings/AccountSettings';
-import MasterOpenedPositions from './MasterOpenedPositions';
 import MoreMasterAccounts from './MoreMasterAccounts';
 import MasterSchedules from './MasterSchedules';
 
@@ -22,7 +21,6 @@ export default function MasterDetailsSidebar() {
        
       <AccountSettings account={doc} />
       <MasterSchedules master={doc} />
-      <MasterOpenedPositions master={doc} />
       <MoreMasterAccounts master={doc} />
    </>;
 }

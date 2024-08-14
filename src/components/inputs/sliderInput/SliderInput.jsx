@@ -28,7 +28,7 @@ export default function SliderInput({ schema, errors = [], fullWidth = true, ...
          {label && <label>{label}</label>}
 
          <div className="slider-input">
-            <Slider className="slider" min={min} max={max} value={value} onChange={handleSliderChange} />
+            <Slider className="slider" color={color} min={min} max={max} value={value} onChange={handleSliderChange} />
 
             <TextField
                type={inputType}
