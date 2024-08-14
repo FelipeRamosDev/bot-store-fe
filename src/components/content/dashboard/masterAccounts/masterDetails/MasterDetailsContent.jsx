@@ -8,6 +8,7 @@ import WalletGrid from '@/components/grids/walletGrid/WalletGrid';
 import SlotsGrid from '@/components/grids/slotsGrid/SlotsGrid';
 import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import MasterOpenedPositions from './MasterOpenedPositions';
 
 export default function MasterDetailsContent() {
    const { doc, isLoading } = useContext(DBQueryContext);
@@ -24,12 +25,13 @@ export default function MasterDetailsContent() {
       </ContentSplit>
 
       <SlotsGrid slots={doc.slots} master={doc} />
+      <MasterOpenedPositions master={doc} />
 
       <DBQuery
          type="query"
          collection="positions"
          filter={{ status: 'closed', master: masterUID }}
-         sort={{ pnl: -1 }}
+         sort={{ closeTime: -1 }}
          subscribe={true}
       >
          <div className="closed-positions">
