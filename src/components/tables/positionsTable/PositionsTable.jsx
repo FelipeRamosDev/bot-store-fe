@@ -66,7 +66,7 @@ export default function PositionsTable({ positionsSet }) {
             },
             format: (value, item) => {
                return <>
-                  <Price amount={value} size="m" /> / <Percent value={item.roi} />
+                  <Price amount={value} size="m" /> <Percent value={item.roi} />
                </>
             }
          },

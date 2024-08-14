@@ -14,10 +14,13 @@ import StopIcon from '@mui/icons-material/Stop';
 import Divider from '@mui/material/Divider';
 import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositModal';
 import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 
 export default function MasterMenu({ isDemo = false, master = {} }) {
    const [ demoDepositModal, setDemoDepositModal ] = useState();
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState();
+   const [ exchangeModal, setExchangeModal ] = useState();
    const [ anchorEl, setAnchorEl ] = useState(null);
    const open = Boolean(anchorEl);
 
@@ -41,13 +44,6 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
-            {isDemo && <MenuItem onClick={() => setDemoDepositModal(true)}>
-               <ListItemIcon>
-                  <AttachMoneyIcon fontSize="small" />
-               </ListItemIcon>
-               Demo Deposit
-            </MenuItem>}
-
             <MenuItem onClick={handleClose} disabled>
                <ListItemIcon>
                   <PlayArrowIcon fontSize="small" />
@@ -60,6 +56,22 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
                   <StopIcon fontSize="small" />
                </ListItemIcon>
                Stop All
+            </MenuItem>
+
+            {isDemo && <MenuItem onClick={() => setDemoDepositModal(true)}>
+               <ListItemIcon>
+                  <AttachMoneyIcon fontSize="small" />
+               </ListItemIcon>
+               Demo Deposit
+            </MenuItem>}
+
+            <Divider />
+
+            <MenuItem onClick={() => setExchangeModal(true)}>
+               <ListItemIcon>
+                  <CurrencyExchangeIcon fontSize="small" />
+               </ListItemIcon>
+               Binance API
             </MenuItem>
 
             <Divider />
@@ -87,6 +99,7 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
          </Menu>
 
          <DemoDepositModal open={demoDepositModal} setOpen={setDemoDepositModal} master={master} />
+         <ExchangeModal open={exchangeModal} setOpen={setExchangeModal} />
 
          <DeleteMasterConfirmDialog
             master={master}
