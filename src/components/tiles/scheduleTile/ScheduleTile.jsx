@@ -4,6 +4,7 @@ import config from '@/config.json';
 import CloseIcon from '@mui/icons-material/Close';
 import APIContext from '@/contexts/4HandsAPI';
 import { useContext } from 'react';
+import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 
 export default function ScheduleTile({ editMode = false, schedule = {}, setView = () => {}, ...props }) {
    const API = useContext(APIContext);
@@ -24,7 +25,7 @@ export default function ScheduleTile({ editMode = false, schedule = {}, setView 
 
    return <>
       <div className="schedule-tile" {...props}>
-         <div className="weekdays">
+         {schedule.type === 'runtime' && <div className="weekdays">
             {config.dateTime.weekdays.map(item => {
                const contain = schedule.weekdays.find(day => day === item);
 
@@ -34,9 +35,9 @@ export default function ScheduleTile({ editMode = false, schedule = {}, setView 
 
                return <span key={Math.random()} className={`day ${!contain ? 'disabled' : ''}`}>{item}</span>;
             })}
-         </div>
+         </div>}
 
-         <div className="start-end-time">
+         {schedule.type === 'runtime' && <div className="start-end-time">
             <div className="time start">
                <label>Start Time</label>
                <p>{schedule.startTime}</p>
@@ -45,7 +46,15 @@ export default function ScheduleTile({ editMode = false, schedule = {}, setView 
                <label>End Time</label>
                <p>{schedule.endTime}</p>
             </div>
-         </div>
+         </div>}
+
+         {schedule.type === 'goals' && <div className="scheduled-date">
+            {schedule.goalType === 'dailyGain' && <label color="gain">DAILY GAIN! Scheduled Resume:</label>}
+            {schedule.goalType === 'dailyLoss' && <label color="loss">DAILY LOSS! Scheduled Resume:</label>}
+            {schedule.goalType === 'MonthlyGain' && <label color="gain">MONTHLY GAIN! Scheduled Resume:</label>}
+            {schedule.goalType === 'MonthlyLoss' && <label color="loss">MONTHLY LOSS! Scheduled Resume:</label>}
+            <p><PrettyDate time={schedule.scheduledDate} /></p>
+         </div>}
       </div>
 
       {editMode && <div className="button-wrap">
