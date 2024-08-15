@@ -15,7 +15,7 @@ export default function ClockTimePicker({ className = '', errors = [], schema, o
 
    useEffect(() => {
       onChange({ target: { value: currentValue }});
-   }, [currentValue])
+   }, [currentValue, onChange])
 
    return (
       <div className={`clock-time-picker ${className}`}>

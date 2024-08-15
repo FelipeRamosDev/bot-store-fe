@@ -2,6 +2,7 @@ import './SliderInput.scss';
 import Slider from '@mui/material/Slider';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
+import FormHelperText from '@mui/material/FormHelperText';
 import { useState } from 'react';
 
 export default function SliderInput({ schema, errors = [], fullWidth = true, ...props }) {
