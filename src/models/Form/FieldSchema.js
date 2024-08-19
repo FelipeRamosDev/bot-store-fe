@@ -72,8 +72,16 @@ export default class FieldSchema {
       const subForm = this._subForm();
 
       if (this.type === Object && subForm) {
-         this.form.setValue(this.key, new Form(subForm, this));
-      } else if (this.defaultValue) {
+         if (this.form.editMode) {
+            subForm.editMode = true;
+            subForm.editData = this.form.editData[this.key];
+         }
+
+         const newForm = new Form(subForm, this);
+         this.form.setValue(this.key, newForm);
+      }
+      
+      else if (this.defaultValue && !this.form.editMode) {
          if (typeof this.defaultValue === 'function') {
             this.form.setValue(this.key, this.defaultValue());
          } else {
@@ -83,6 +91,10 @@ export default class FieldSchema {
 
       this.setOptions();
       return this;
+   }
+
+   getEditValue() {
+      return this.form.editData[this.key];
    }
 
    setOptions() {
@@ -121,7 +133,15 @@ export default class FieldSchema {
          case Number:
             return Number(currentValue);
          case Object:
-            return Object(currentValue);
+            if (this.form.editMode) {
+               if (!currentValue || !Object.keys(currentValue).length) {
+                  return;
+               }
+
+               return { ...this.getEditValue(), ...currentValue };
+            } else {
+               return Object(currentValue);
+            }
          case Date:
             return new Date(currentValue).getTime();
       }
@@ -129,12 +149,17 @@ export default class FieldSchema {
 
    validate() {
       const currentValue = this.form[this.key];
+
       this.validators.map(validator => {
+         if (!currentValue && this.form.editMode) {
+            return;
+         }
+
          validator.call(this, currentValue);
       });
 
-      if (this.required && !currentValue) {
-         this.setError('Required Field', `The "${this.label || this.key}" field is required!`)
+      if (this.required && !currentValue && !this.form?.editMode) {
+         this.setError('Required Field', `The "${this.label || this.key}" field is required!`);
       } else {
          this.clearError('Required Field');
       }
@@ -157,13 +182,17 @@ export default class FieldSchema {
       switch (this.type) {
          case String:
             if (typeof currentValue !== 'string') {
-               throw new Error(`The field "${this.key}" is required to be a valid string!`);
+               this.setError('Invalid Type', `The field "${this.key}" is required to be a valid string!`);
+            } else {
+               this.clearError('Invalid Type');
             }
 
             break;
          case Number:
             if (isNaN(currentValue)) {
-               throw new Error(`The field "${this.key}" is required to be a valid number! But received NaN.`);
+               this.setError('Invalid Type', `The field "${this.key}" is required to be a valid number!`);
+            } else {
+               this.clearError('Invalid Type');
             }
 
             break;
