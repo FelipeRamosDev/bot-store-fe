@@ -5,9 +5,15 @@ import TextField from '@mui/material/TextField';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useState } from 'react';
 
-export default function SliderInput({ schema, errors = [], fullWidth = true, ...props }) {
+export default function SliderInput({ schema, errors = [], fullWidth = true, onChange = () => {}, ...props }) {
    let { inputType = 'number', label, color = 'tertiary', min = 1, max = 100 } = schema || {};
-   const [ value, setValue ] = useState(min);
+   const [ value, setValue ] = useState();
+
+   if (schema.form.editMode && !value) {
+      setValue(schema.getEditValue());
+   } else if (!schema.form.editMode && !value) {
+      setValue(min);
+   }
 
    const handleSliderChange = (ev) => {
       let currentValue = ev?.target?.value;
@@ -21,6 +27,7 @@ export default function SliderInput({ schema, errors = [], fullWidth = true, ...
       }
 
       setValue(currentValue);
+      onChange(ev);
    }
 
    delete props.defaultValue;

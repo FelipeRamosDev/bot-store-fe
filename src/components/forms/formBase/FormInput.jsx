@@ -25,11 +25,13 @@ export default function FormInput({ path, ...props }) {
       const value = ev?.target?.value;
       form.setValue(path, value);
 
-      const validadedErrors = form.getFieldErrors();
-      const errorStr = JSON.stringify(errors);
-
-      if (errorStr !== JSON.stringify(validadedErrors)) {
-         form.setErrors(validadedErrors);
+      if (!form.editMode) {
+         const validadedErrors = form.getFieldErrors();
+         const errorStr = JSON.stringify(errors);
+   
+         if (errorStr !== JSON.stringify(validadedErrors)) {
+            form.setErrors(validadedErrors);
+         }
       }
 
       schema.onInput.call(form, value, schema);

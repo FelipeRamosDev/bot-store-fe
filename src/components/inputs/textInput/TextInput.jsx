@@ -2,6 +2,11 @@ import { TextField, FormControl, FormHelperText } from '@mui/material';
 
 export default function TextInput({ schema, errors = [], fullWidth = true, ...props }) {
    const { inputType = 'text', label, placeholder, color = 'tertiary' } = schema || {};
+   let defaultValue;
+
+   if (schema.form.editMode) {
+      defaultValue = schema.getEditValue();
+   }
 
    return (
       <FormControl fullWidth={fullWidth} error={errors.length}>
@@ -14,6 +19,7 @@ export default function TextInput({ schema, errors = [], fullWidth = true, ...pr
             error={errors.length}
             fullWidth={fullWidth}
             {...props}
+            defaultValue={defaultValue}
          />
 
          {errors.map(err => <FormHelperText key={Math.random()}>{err?.message}</FormHelperText>)}

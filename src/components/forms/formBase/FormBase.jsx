@@ -16,6 +16,7 @@ export function FormBase({
    submitLabel = 'Send',
    appendUserToBody = false,
    onSubmit = async () => {},
+   editData,
    children,
    ...props
 }) {
@@ -34,6 +35,12 @@ export function FormBase({
       if (!form) {
          formSet.formSetter(setForm);
          formSet.errorSetter(setErrors);
+
+         if (editData) {
+            formSet.clearAll();
+            formSet.setEditData(editData);
+         }
+
          formSet.fetchDependencies().then(({ success }) => {
             if (!success) return;
 

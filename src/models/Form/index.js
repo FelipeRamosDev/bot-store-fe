@@ -3,7 +3,7 @@ import FieldSchema from './FieldSchema';
 
 export default class Form {
    constructor (setup) {
-      const { schema = [], dependencies = [], onChange = () => {}, user } = Object(setup);
+      const { editMode = false, editData = {}, schema = [], dependencies = [], onChange = () => {}, user } = Object(setup);
 
       this._data = new Map();
       this._schema = new Map();
@@ -11,6 +11,8 @@ export default class Form {
       this._onChange = onChange.bind(this);
       this.setErrors = () => {};
       this.user = user;
+      this.editMode = editMode;
+      this.editData = editData;
 
       schema.map(item => this.setSchema(item.key, item));
       dependencies.map(item => this.setDependency(item));
@@ -29,9 +31,10 @@ export default class Form {
          const schema = this.getSchema(key);
 
          if (schema) {
-            data[key] = schema.parse();
+            const parsed = schema.parse();
+            if (parsed) data[key] = parsed;
          } else {
-            data[key] = item;
+            if (item) data[key] = item;
          }
       });
 
@@ -40,6 +43,14 @@ export default class Form {
 
    setUser(user) {
       this.setValue('user', user);
+   }
+
+   setEditData(data) {
+      if (data) {
+         this.editMode = true;
+         this.editData = data;
+         this._schema.forEach(item => item.init(this));
+      }
    }
 
    getValue(key) {
@@ -155,6 +166,15 @@ export default class Form {
       } else {
          delete this[key];
          this._data.delete(key);
+      }
+   }
+
+   clearAll() {
+      this._data.forEach((value, key) => this.deleteValue(key));
+      this._schema.forEach(item => item.init(this));
+
+      if (this.setForm) {
+         this.setForm(this);
       }
    }
 
