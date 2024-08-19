@@ -21,7 +21,7 @@ export default function PositionTile({ position = {}, className = '', ...props }
 
          <div className="column divide">
             <label>Open Time</label>
-            <PrettyDate hideYear={true} time={position.openTime} />
+            <PrettyDate hideYear={true} hideSeconds={true} time={position.openTime} divisor=" " />
          </div>
 
          <div className="column align-right">
