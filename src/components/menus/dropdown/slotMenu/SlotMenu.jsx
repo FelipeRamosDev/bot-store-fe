@@ -8,8 +8,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
 import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
+import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
 
 export default function SlotMenu({ slot = {} }) {
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
@@ -60,7 +60,7 @@ export default function SlotMenu({ slot = {} }) {
          </Menu>
 
          <CreateSlotModal editMode={true} open={editSlotModal} setOpen={setEditSlotModal} slot={slot} />
-         <DeleteMasterConfirmDialog
+         <DeleteSlotConfirmDialog
             slot={slot}
             open={deleteConfirmDialog}
             setOpen={setDeleteConfirmDialog}
