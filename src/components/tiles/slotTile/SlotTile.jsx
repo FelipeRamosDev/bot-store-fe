@@ -9,6 +9,7 @@ import StopIcon from '@mui/icons-material/Stop';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import { runSlot, stopSlot } from './SlotTile.helper';
 import APIContext from '@/contexts/4HandsAPI';
+import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 
 export default function SlotTile({ slot = {}, className = '', ...props }) {
    const API = useContext(APIContext);
@@ -22,7 +23,7 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
                   <span className="title">{slot.name}</span>
                </Link>
 
-               <StatusBadge type="slot-status">{slot.status}</StatusBadge>
+               <StatusBadge type="slot-status">{slot.status}</StatusBadge><SlotMenu slot={slot} />
                <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
                   {slot.bot?.name}
                </Link>
@@ -46,6 +47,8 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
                   disabled={disabled}
                   onClick={() => stopSlot(API, slot)}
                />}
+
+               
             </div>
          </div>
 
