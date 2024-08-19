@@ -66,9 +66,6 @@ export default function CreateSlot({ master = {}, defaultType, onSuccess = () =>
                <div className="input-wrap">
                   <FormInput path="assets" />
                </div>
-               <div className="input-wrap">
-                  <FormInput path="limits.leverage" />
-               </div>
 
                <Card className="input-wrap" padding="xs" elevation={15}>
                   <FormInput path="interval" />
@@ -79,11 +76,11 @@ export default function CreateSlot({ master = {}, defaultType, onSuccess = () =>
                   <h3 className="card-title">Risk Management</h3>
                   <p className="help-info text-center">You can customize the risk configurations or use the same as master account instead.</p>
 
-                  <CheckBoxInput label="Custom risk management" onChange={(value) => setCustomRisk(value)} color="tertiary" />
-                  {customRisk && <Stack flexDirection="row" flex={1} gap="1rem">
+                  <Stack flex={1} gap="1rem">
                      <FormInput path="limits.tradesMinInterval" />
                      <FormInput path="limits.marginRatioCommit" />
-                  </Stack>}
+                     <FormInput path="limits.leverage" />
+                  </Stack>
                </Card>
 
                <SlotLimitsForm />

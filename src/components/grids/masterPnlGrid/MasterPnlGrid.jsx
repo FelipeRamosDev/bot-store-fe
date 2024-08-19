@@ -15,7 +15,7 @@ export default function MasterPnlGrid({ master = {}, className = '' }) {
             label="Month ROI"
             borderSide="left"
             size="l"
-            value={master.results?.monthPnl}
+            value={master.results?.monthRoi}
          />
 
          <PNLTile
@@ -30,7 +30,7 @@ export default function MasterPnlGrid({ master = {}, className = '' }) {
             label="Day ROI"
             borderSide="left"
             size="l"
-            value={master.results?.dayPnl}
+            value={master.results?.dayRoi}
          />
       </div>
    );
