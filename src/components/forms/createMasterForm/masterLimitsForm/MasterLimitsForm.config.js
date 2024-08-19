@@ -1,12 +1,12 @@
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import NumberFieldSchema from '@/models/Form/fieldTypes/NumberFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
+import SliderFieldSchema from '@/models/Form/fieldTypes/SliderFieldSchema';
 
 const masterLimitsForm = {
    schema: [
-      new NumberFieldSchema({ key: 'leverage', defaultValue: 120, label: 'Max. Leverage Allowed' }),
-      new NumberFieldSchema({ key: 'tradesMinInterval', defaultValue: 1, min: 1, max: 1440, label: 'Min. interval between trades' }),
-      new NumberFieldSchema({ key: 'marginRatioCommit', defaultValue: 20, min: 1, max: 85, label: 'Margin Ratio' }),
+      new SliderFieldSchema({ key: 'tradesMinInterval', defaultValue: 1, min: 1, max: 1440, label: 'Min. interval between trades' }),
+      new SliderFieldSchema({ key: 'marginRatioCommit', defaultValue: 25, min: 1, max: 85, label: 'Margin Ratio' }),
       new ObjectFieldSchema({
          key: 'monthlyLoss',
          subForm: {
@@ -77,6 +77,7 @@ const masterLimitsForm = {
                new TextFieldSchema({
                   key: 'customResumeDayTime',
                   type: String,
+                  label: 'Time of day to return',
                   placeholder: 'Enter a time...',
                   defaultValue: '09:30:00'
                }),

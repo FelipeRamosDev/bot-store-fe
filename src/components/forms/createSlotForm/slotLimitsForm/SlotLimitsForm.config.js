@@ -6,8 +6,8 @@ import SliderFieldSchema from '@/models/Form/fieldTypes/SliderFieldSchema';
 const slotLimitsForm = {
    schema: [
       new SliderFieldSchema({ key: 'leverage', defaultValue: 0, min: 1, max: 125, label: 'Max. Leverage Allowed' }),
-      new NumberFieldSchema({ key: 'tradesMinInterval', defaultValue: 0, min: 0, max: 1440, label: 'Min. interval between trades' }),
-      new NumberFieldSchema({ key: 'marginRatioCommit', defaultValue: 0, min: 0, max: 85, label: 'Margin Ratio' }),
+      new SliderFieldSchema({ key: 'tradesMinInterval', defaultValue: 0, min: 0, max: 1440, label: 'Min. interval between trades' }),
+      new SliderFieldSchema({ key: 'marginRatioCommit', defaultValue: 0, min: 0, max: 85, label: 'Margin Ratio' }),
       new ObjectFieldSchema({
          key: 'tradeLoss',
          subForm: {

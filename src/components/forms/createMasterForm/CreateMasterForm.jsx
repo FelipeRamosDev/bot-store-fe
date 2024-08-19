@@ -47,8 +47,7 @@ export default function CreateMasterForm({ onSuccess }) {
             <Card padding="xs" elevation={15}>
                <h3 className="card-title">Risk Management</h3>
 
-               <Stack flexDirection="row" flex={1} gap="1rem">
-                  <FormInput path="limits.leverage" />
+               <Stack flex={1} gap="1rem">
                   <FormInput path="limits.tradesMinInterval" />
                   <FormInput path="limits.marginRatioCommit" />
                </Stack>
