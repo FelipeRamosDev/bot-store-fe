@@ -51,7 +51,7 @@ function toPercentString(value, opt) {
 
 
 function parseValidationErrorMsg(msg) {
-   if (msg.indexOf('ValidateModel validation failed:') === 0) {
+   if (typeof msg === 'string' && msg.indexOf('ValidateModel validation failed:') === 0) {
       const removeTitle = msg.replace('ValidateModel validation failed: ', '');
       const listTheErrors = removeTitle.split(',');
 
@@ -59,6 +59,8 @@ function parseValidationErrorMsg(msg) {
          const parsed = item.split(': ');
          return '- ' + parsed[1];
       }).join('\n');
+   } else {
+      return 'Unkown error caught!';
    }
 }
 

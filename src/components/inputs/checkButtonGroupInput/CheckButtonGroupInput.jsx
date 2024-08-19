@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './CheckButtonGroupInput.scss';
 import CheckButton from '@/components/buttons/checkButton/CheckButton';
 
 export default function CheckButtonGroupInput({ className = '', schema = {}, errors = [], onChange = () => { }, ...props }) {
    const { label, options = [], defaultValue, multiValue } = schema;
    const [ value, setValue ] = useState(defaultValue);
+
+   useEffect(() => {
+      if (schema.form.editMode) {
+         const editValue = schema.getEditValue();
+
+         if (editValue) {
+            setValue(editValue);
+         }
+      }
+   }, [schema.form.editMode, setValue]);
 
    const handleChoose = (option) => {
       if (multiValue) {

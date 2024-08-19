@@ -3,15 +3,15 @@ import Slider from '@mui/material/Slider';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import FormHelperText from '@mui/material/FormHelperText';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SliderInput({ schema, errors = [], fullWidth = true, onChange = () => {}, ...props }) {
    let { inputType = 'number', label, color = 'tertiary', min = 1, max = 100 } = schema || {};
-   const [ value, setValue ] = useState();
+   const [ value, setValue ] = useState('');
 
-   if (schema.form.editMode && !value) {
+   if (schema.form.editMode && !value && value !== 0) {
       setValue(schema.getEditValue());
-   } else if (!schema.form.editMode && !value) {
+   } else if (!schema.form.editMode && !value && value !== 0) {
       setValue(min);
    }
 

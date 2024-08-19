@@ -7,11 +7,22 @@ import FormHelperText from '@mui/material/FormHelperText';
 import MenuItem from '@mui/material/MenuItem';
 
 export default function SelectInput({ className = '', errors = [], schema = {}, onChange = () => {}, ...props }) {
-   const { label, value = '', options = [], useNoneOption = false } = schema;
+   const { label, options = [], useNoneOption = false } = schema;
+   let { value = '' } = schema;
    const inputID = useRef();
 
    if (!inputID.current) {
       inputID.current = Math.random();
+   }
+
+   if (schema.form.editMode && !value && value !== 0) {
+      const editValue = schema.getEditValue();
+
+      if (editValue?._id) {
+         value = editValue._id;
+      } else if (editValue) {
+         value = editValue;
+      }
    }
 
    return <FormControl color="tertiary" className={`select-input ${className}`} variant="filled" error={errors.length} {...props}>
