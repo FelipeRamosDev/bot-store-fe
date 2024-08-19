@@ -16,11 +16,13 @@ import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositMo
 import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
+import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
 
 export default function MasterMenu({ isDemo = false, master = {} }) {
-   const [ demoDepositModal, setDemoDepositModal ] = useState();
-   const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState();
-   const [ exchangeModal, setExchangeModal ] = useState();
+   const [ demoDepositModal, setDemoDepositModal ] = useState(false);
+   const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
+   const [ exchangeModal, setExchangeModal ] = useState(false);
+   const [ editMasterModal, setEditMasterModal ] = useState(false);
    const [ anchorEl, setAnchorEl ] = useState(null);
    const open = Boolean(anchorEl);
 
@@ -76,7 +78,7 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
 
             <Divider />
 
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={() => setEditMasterModal(true)}>
                <ListItemIcon>
                   <ModeEditIcon fontSize="small" />
                </ListItemIcon>
@@ -100,6 +102,7 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
 
          <DemoDepositModal open={demoDepositModal} setOpen={setDemoDepositModal} master={master} />
          <ExchangeModal open={exchangeModal} setOpen={setExchangeModal} />
+         <CreateMasterModal editMode={true} open={editMasterModal} setOpen={setEditMasterModal} master={master} />
 
          <DeleteMasterConfirmDialog
             master={master}
