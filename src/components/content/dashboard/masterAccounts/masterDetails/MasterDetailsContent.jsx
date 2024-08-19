@@ -9,13 +9,29 @@ import SlotsGrid from '@/components/grids/slotsGrid/SlotsGrid';
 import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import MasterOpenedPositions from './MasterOpenedPositions';
+import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
 
 export default function MasterDetailsContent() {
    const { doc, isLoading } = useContext(DBQueryContext);
    const masterUID = doc?._id;
+   const positions = [];
 
    if (isLoading) {
       return <PageSpinner spinner={isLoading ? 'Loading Account' : false}  />
+   }
+
+   if (doc) {
+      doc.slots.map(slot => {
+         slot.trades.map(trade => {
+            if (trade.status === 'opened') {
+               if (!trade.botSlot?.name) {
+                  trade.botSlot = { ...trade.botSlot, name: slot.name }
+               }
+
+               positions.push(trade);
+            }
+         });
+      })
    }
 
    return <>
@@ -24,8 +40,8 @@ export default function MasterDetailsContent() {
          <WalletGrid master={doc} />
       </ContentSplit>
 
+      {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
       <SlotsGrid slots={doc.slots} master={doc} />
-      <MasterOpenedPositions master={doc} />
 
       <DBQuery
          type="query"
