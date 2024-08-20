@@ -1,8 +1,10 @@
 import { toPercentString } from '@/helpers/format';
 
-export default function Percent({ className = '', noColor = false, fractional = 2, value, size }) {
-   if (!value && value !== 0) {
-      return <span className={`percent-display`}>---</span>;
+export default function Percent({ className = '', noColor = false, dashedZero = false, fractional = 2, value, size }) {
+   if (!value) {
+      if (dashedZero && value === 0) {
+         return <span className={`percent-display`}>---%</span>;
+      }
    }
 
    let color = 'disabled';

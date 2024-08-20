@@ -1,8 +1,10 @@
 import { toMoneyString, toMoney } from '@/helpers/format';
 
-export default function Price({ className = '', symbol = 'USD', noColor = false, noSymbol = false, fractional, amount, size }) {
-   if (!amount && amount !== 0) {
-      return <span className={`price-display`}>---</span>;
+export default function Price({ className = '', symbol = 'USD', noColor = false, noSymbol = false, dashedZero = false, fractional, amount, size }) {
+   if (!amount) {
+      if (dashedZero && amount === 0) {
+         return <span className={`price-display`}>$---</span>;
+      }
    }
 
    let value;

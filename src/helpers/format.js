@@ -1,4 +1,8 @@
 function formatFractional(amount, fractional) {
+   if (!amount) {
+      amount = 0;
+   }
+
    if (typeof amount !== 'number' || typeof fractional !== 'number' || fractional < 0) {
       throw new Error('Invalid input: amount and fractional should be numbers and fractional should be non-negative');
    }
