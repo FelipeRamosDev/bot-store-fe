@@ -49,7 +49,7 @@ export function FormBase({
             throw err;
          });
       }
-   }, [form, formSet]);
+   }, [ form, formSet ]);
 
    const handleSubmit = async (ev) => {
       ev.preventDefault();

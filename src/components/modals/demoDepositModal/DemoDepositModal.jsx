@@ -12,12 +12,12 @@ export default function DemoDepositModal({ open, setOpen, master = {} }) {
          const deposited = await API.ajax.authPut('/transfer/deposit-withdraw', data);
          
          if (deposited.error) {
-            debugger;
+            throw deposited;
          }
 
          setOpen(false);
       } catch (err) {
-         debugger
+         throw err;
       }
    }
 

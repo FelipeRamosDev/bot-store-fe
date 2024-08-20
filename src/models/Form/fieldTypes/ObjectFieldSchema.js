@@ -6,7 +6,6 @@ export default class ObjectFieldSchema extends FieldSchema {
       const { subForm } = setup;
 
       if (!subForm) {
-         debugger
          throw new Error('The param "subForm" is required for Object type fields!');
       }
 
