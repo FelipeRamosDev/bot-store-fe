@@ -9,18 +9,19 @@ import Card from '@/components/common/card/Card';
 import { Stack } from '@mui/material';
 import SlotLimitsForm from './slotLimitsForm/SlotLimitsForm';
 
-export default function CreateSlot({ slot = {}, defaultType, onSuccess = () => {}, editMode = false }) {
+export default function CreateSlot({ slot = {}, master = {}, defaultType, onSuccess = () => {}, editMode = false }) {
    const auth = useContext(AuthUserContext);
    const API = useContext(APIContext);
    const userUID = auth?.user?._id;
    const slotUID = slot._id;
+   const masterUID = master._id || slot.master;
    
    createSlotForm.setValue('type', defaultType);
    async function handleSubmit(data) {
       let reqHttp;
 
       if (editMode) {
-         const toUpdate = { slotUID: slot._id, data };
+         const toUpdate = { slotUID, data };
          reqHttp = async () => await API.ajax.authPost('/slots/edit', toUpdate);
       } else {
          reqHttp = async () => await API.ajax.authPut('/slots/create', data);
@@ -39,8 +40,8 @@ export default function CreateSlot({ slot = {}, defaultType, onSuccess = () => {
       }
    }
 
-   if (userUID && slotUID) {
-      createSlotForm.setValue('slot', slotUID);
+   if (userUID && masterUID) {
+      createSlotForm.setValue('master', masterUID);
       createSlotForm.setDependency({
          id: 'bots',
          queryType: 'query',
