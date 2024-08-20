@@ -1,0 +1,19 @@
+@import "../../../style/scss/variables.scss";
+
+.positions-table {
+   tr td {
+      span,
+      p,
+      b {
+         font-size: 0.85rem;
+      }
+
+      small {
+         color: $grey-light;
+      }
+
+      .status-badge {
+         font-size: 0.7rem;
+      }
+   }
+}

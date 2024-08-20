@@ -53,7 +53,7 @@ export default function MastersTileDefault({ className = '', master, ...props })
       <h3 className="title">{master.name}</h3>
 
       <div className="badges-line">
-         <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
+         <StatusBadge color={badgeColor} variant="light">{accountType}</StatusBadge>
       </div>
 
       <div className="tile-data">

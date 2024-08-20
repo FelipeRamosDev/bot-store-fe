@@ -52,7 +52,7 @@ export default function DashboardContent({ createMasterModal }) {
                limit={7}
                subscribe={true}
             >
-               <PositionsTable />
+               <PositionsTable include={['symbol', 'type', 'usedLeverage', 'pnl']} />
             </DBQuery>
          </div>
       </div>

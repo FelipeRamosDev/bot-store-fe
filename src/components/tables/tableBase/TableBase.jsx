@@ -22,6 +22,8 @@ export default function TableBase({
    pagination,
    headerConfigs,
    CustomTableItem,
+   include,
+   exclude, 
    ...props
 }) {
    const [page, setPage] = useState(0);
@@ -39,6 +41,14 @@ export default function TableBase({
          setPage(0);
       }
    } = Object(pagination);
+
+   if (Array.isArray(include)) {
+      headerConfigs = headerConfigs.filter(item => include.some(inc => inc === item.propKey))
+   }
+
+   if (Array.isArray(exclude)) {
+      headerConfigs = headerConfigs.filter(item => !exclude.some(exc => exc === item.propKey));
+   }
 
    headerConfigs = headerConfigs.map(item => new ColumnConfig(item));
 
