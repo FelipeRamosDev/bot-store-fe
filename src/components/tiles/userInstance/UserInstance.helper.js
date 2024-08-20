@@ -14,13 +14,21 @@ export function parseMessages(instance) {
 
    if (instance.status === 'offline') {
       displayStatus = 'Offline';
-      message = 'You need to turn on the instance to run the slots'
+      message = 'You need to turn on the instance to run the slots!'
       btnColor = 'warn';
    }
 
    if (instance.status === 'starting') {
       displayStatus = 'Starting Instance';
-      message = 'Message here';
+      message = 'Your instance is currently starting...';
+      btnColor = 'disabled';
+      disabled = true;
+   }
+
+   if (instance.status === 'starting-userstream') {
+      displayStatus = 'Opening User Stream';
+      message = 'User stream connection is currently opening...';
+      btnColor = 'disabled';
       disabled = true;
    }
 

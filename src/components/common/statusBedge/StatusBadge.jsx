@@ -38,8 +38,32 @@ function parseSlotStutus(status) {
          badgeStatus = 'PAUSED';
          badgeColor = 'warn';
          break;
+      case 'opening-position':
+         badgeStatus = 'OPENING TRADE';
+         badgeColor = 'warn';
+         break;
+      case 'closing-position':
+         badgeStatus = 'CLOSING TRADE';
+         badgeColor = 'warn';
+         break;
+      case 'fixing-position':
+         badgeStatus = 'FIXING POSITION';
+         badgeColor = 'warn';
+         break;
+      case 'starting':
+         badgeStatus = 'STARTING';
+         badgeColor = 'warn';
+         break;
+      case 'stopping':
+         badgeStatus = 'STOPPING';
+         badgeColor = 'warn';
+         break;
       case 'stopped':
          badgeStatus = 'STOPPED';
+         break;
+      case 'error':
+         badgeStatus = 'ERROR';
+         badgeColor = 'error';
          break;
    }
 
