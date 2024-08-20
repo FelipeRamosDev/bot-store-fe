@@ -5,11 +5,11 @@ import { useContext } from 'react';
 import Card from '@/components/common/card/Card';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import Skeleton from '@mui/material/Skeleton';
-import { Button } from '@mui/material';
 import DBQueryContext from '@/contexts/DBQuery';
 import APIContext from '@/contexts/4HandsAPI';
 import NoDocumentsTile from '../noDocumentsTile/NoDocumentsTile';
 import { parseMessages, switchPower } from './UserInstance.helper';
+import RubberButton from "@/components/buttons/rubberButton/RubberButton";
 
 export default function UserInstanceTile() {
    const { doc, isLoading } = useContext(DBQueryContext);
@@ -30,7 +30,7 @@ export default function UserInstanceTile() {
 
    const { message, displayStatus, btnColor, disabled } = parseMessages(instance);
    return <Card className="user-instance" radius="s" elevation={50}>
-      <Button
+      <RubberButton
          className="power-btn"
          variant="contained"
          color={btnColor}
@@ -38,7 +38,7 @@ export default function UserInstanceTile() {
          onClick={() => switchPower(API, instance)}
       >
          <PowerSettingsNewIcon />
-      </Button>
+      </RubberButton>
 
       <div className="status">
          <p>{displayStatus}</p>
