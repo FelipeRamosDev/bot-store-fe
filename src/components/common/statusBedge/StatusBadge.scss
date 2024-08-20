@@ -43,4 +43,36 @@
       background-color: $error;
       color: $text-error;
    }
+
+   &[variant=light] {
+      background-color: $background-paper-light;
+   }
+
+   &[color=disabled][variant=light] {
+      color: $text;
+   }
+
+   &[color=primary][variant=light] {
+      color: $primary;
+   }
+
+   &[color=secondary][variant=light] {
+      color: $secondary;
+   }
+
+   &[color=tertiary][variant=light] {
+      color: $tertiary;
+   }
+
+   &[color=success][variant=light] {
+      color: $success;
+   }
+
+   &[color=warn][variant=light] {
+      color: $warn;
+   }
+
+   &[color=error][variant=light] {
+      color: $error;
+   }
 }

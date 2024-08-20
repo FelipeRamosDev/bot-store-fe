@@ -1,4 +1,5 @@
 'use client';
+import './PositionsTable.scss';
 import { useContext } from 'react';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import Price from '@/components/displays/price/Price';
@@ -6,29 +7,33 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
 import Percent from '@/components/displays/percent/Percent';
+import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 
-export default function PositionsTable({ positionsSet }) {
+export default function PositionsTable({ positionsSet, include, exclude }) {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const positions = positionsSet || query;
 
    return <TableBase
+      className="positions-table"
       pagination={{}}
       items={positions}
       loading={isLoading}
+      include={include}
+      exclude={exclude}
       headerConfigs={[
          {
             propKey: 'symbol',
             label: 'Symbol',
             style: {
                paddingLeft: '2rem',
-               maxWidth: '10px',
+               minWidth: '130px',
             },
             format: (value, item) => {
                return <>
                   <EdgeLight colorValue={item.pnl} />
 
-                  <p>{value}</p>
-                  <StatusBadge type="account-type">{item.type}</StatusBadge>
+                  <small>{item.botSlot.name}</small>
+                  <p>{value} <StatusBadge variant="light" type="position-side">{item.positionType}</StatusBadge></p>
                </>;
             }
          },
@@ -37,13 +42,24 @@ export default function PositionsTable({ positionsSet }) {
             propKey: 'openTime',
             align: 'center',
             style: {
-               maxWidth: '10px',
+               minWidth: '150px',
             },
             format: (value, item) => {
                return <>
-                  <p>{new Date(value).toLocaleString()}</p>
-                  <p>{new Date(item.closeTime).toLocaleString()}</p>
+                  <p><PrettyDate hideYear={true} divisor=" " time={value} /></p>
+                  <p><PrettyDate hideYear={true} divisor=" " time={item.closeTime} /></p>
                </>;
+            }
+         },
+         {
+            label: 'Type',
+            propKey: 'type',
+            align: 'center',
+            style: {
+               minWidth: '40px',
+            },
+            format: (value) => {
+               return <StatusBadge variant="light" type="account-type">{value}</StatusBadge>;
             }
          },
          {
@@ -51,10 +67,21 @@ export default function PositionsTable({ positionsSet }) {
             propKey: 'usedLeverage',
             align: 'center',
             style: {
-               maxWidth: '10px',
+               minWidth: '70px',
             },
             format: (value) => {
                return <b>{value}x</b>
+            }
+         },
+         {
+            label: 'Quantity',
+            propKey: 'quantity',
+            align: 'center',
+            style: {
+               minWidth: '70px',
+            },
+            format: (value) => {
+               return <b>{value}</b>
             }
          },
          {
@@ -62,12 +89,23 @@ export default function PositionsTable({ positionsSet }) {
             label: 'PNL / ROI',
             align: 'center',
             style: {
-               maxWidth: '10px',
+               minWidth: '140px',
             },
             format: (value, item) => {
                return <>
-                  <Price amount={value} size="m" /> <Percent value={item.roi} />
+                  <Price amount={value} size="s" /> <Percent value={item.roi} />
                </>
+            }
+         },
+         {
+            propKey: 'realizedProfit',
+            label: 'Realized PNL',
+            align: 'center',
+            style: {
+               minWidth: '140px',
+            },
+            format: (value, item) => {
+               return <Price amount={value} size="m" />
             }
          },
          {
@@ -75,7 +113,7 @@ export default function PositionsTable({ positionsSet }) {
             propKey: 'tradeFee',
             align: 'center',
             style: {
-               maxWidth: '10px',
+               minWidth: '110px',
             },
             format: (value) => {
                return <Price amount={value} noColor={true} />
@@ -86,7 +124,7 @@ export default function PositionsTable({ positionsSet }) {
             propKey: 'grossBalance',
             align: 'center',
             style: {
-               maxWidth: '10px',
+               minWidth: '110px',
             },
             format: (value) => {
                return <Price amount={value} noColor={true} />
@@ -97,10 +135,23 @@ export default function PositionsTable({ positionsSet }) {
             propKey: 'initialMargin',
             align: 'center',
             style: {
-               maxWidth: '10px',
+               minWidth: '110px',
             },
             format: (value) => {
                return <Price amount={value} noColor={true} />
+            }
+         },
+         {
+            label: 'Stop / Gain',
+            propKey: 'stopPrice',
+            align: 'center',
+            style: {
+               minWidth: '110px',
+            },
+            format: (value, item) => {
+               return <>
+                  <Price amount={value} noColor={true} /> / <Price amount={item.gainPrice} dashedZero={true} noColor={true} />
+               </>
             }
          }
       ]}

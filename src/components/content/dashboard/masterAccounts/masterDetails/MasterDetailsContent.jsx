@@ -55,7 +55,7 @@ export default function MasterDetailsContent() {
                <h3 className="header-title">Closed Positions</h3>
             </ContentHeader>
 
-            <PositionsTable />
+            <PositionsTable exclude={['type']} />
          </div>
       </DBQuery>
    </>;

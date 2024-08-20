@@ -32,7 +32,7 @@ export default function SlotsTable() {
          },
          {
             propKey: 'type', label: 'Type', align: 'right', format: (value) => {
-               return <StatusBadge type="account-type">{value}</StatusBadge>
+               return <StatusBadge type="account-type" variant="light">{value}</StatusBadge>
             }
          }
       ]}

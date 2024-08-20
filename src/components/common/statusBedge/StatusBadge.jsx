@@ -74,7 +74,7 @@ function parsePositionSide(side) {
    }
 }
 
-export default function StatusBadge({ className = '', type, color = 'disabled', children }) {
+export default function StatusBadge({ className = '', type, variant, color = 'disabled', children }) {
    if (type === 'slot-status') {
       const parsed = parseSlotStutus(children);
 
@@ -99,5 +99,6 @@ export default function StatusBadge({ className = '', type, color = 'disabled', 
    return <span
       className={`${className} status-badge`}
       color={color}
+      variant={variant}
    >{children}</span>
 }
