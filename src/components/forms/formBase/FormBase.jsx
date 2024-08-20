@@ -37,7 +37,6 @@ export function FormBase({
          formSet.errorSetter(setErrors);
 
          if (editData && Object.keys(editData).length) {
-            // formSet.clearAll();
             formSet.setEditData(editData);
          }
 

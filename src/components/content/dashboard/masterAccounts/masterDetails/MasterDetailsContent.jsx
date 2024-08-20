@@ -8,10 +8,9 @@ import WalletGrid from '@/components/grids/walletGrid/WalletGrid';
 import SlotsGrid from '@/components/grids/slotsGrid/SlotsGrid';
 import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import MasterOpenedPositions from './MasterOpenedPositions';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
 
-export default function MasterDetailsContent() {
+export default function MasterDetailsContent({ uInstance }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const masterUID = doc?._id;
    const positions = [];
@@ -41,7 +40,7 @@ export default function MasterDetailsContent() {
       </ContentSplit>
 
       {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
-      <SlotsGrid slots={doc.slots} master={doc} />
+      <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} />
 
       <DBQuery
          type="query"

@@ -6,7 +6,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function AlertModal({ confirmLabel = 'CONFIRM', isConfirmation = false, loading = false, className = '', open = false, onClose = () => {}, handleOk, title = '', children, ...props }) {
+export default function AlertModal({
+   confirmLabel = 'CONFIRM',
+   isConfirmation = false,
+   loading = false,
+   className = '',
+   open = false,
+   onClose = () => {},
+   handleOk,
+   title = '',
+   children,
+   ...props
+}) {
    let okAction = onClose;
 
    if (typeof handleOk === 'function') {
@@ -29,7 +40,7 @@ export default function AlertModal({ confirmLabel = 'CONFIRM', isConfirmation = 
          </DialogContent>
 
          <DialogActions>
-            {!isConfirmation && <Button color="primary-light" onClick={okAction} autoFocus>
+            {!isConfirmation && <Button color="info" onClick={okAction} autoFocus>
                OK
             </Button>}
             {isConfirmation && <Button color="info" onClick={onClose} autoFocus>

@@ -1,5 +1,11 @@
-export async function runSlot(API, slot) {
+export async function runSlot(API, slot, isDisabled, setDisabled, setAlert) {
    if (!API || !slot) return;
+
+   if (isDisabled) {
+      return setAlert(true);
+   } else {
+      setDisabled(true);
+   }
 
    try {
       const running = await API.ajax.authPost('/slots/run', {
@@ -14,8 +20,14 @@ export async function runSlot(API, slot) {
    }
 }
 
-export async function stopSlot(API, slot) {
+export async function stopSlot(API, slot, isDisabled, setDisabled, setAlert) {
    if (!API || !slot) return;
+
+   if (isDisabled) {
+      return setAlert(true);
+   } else {
+      setDisabled(true);
+   }
 
    try {
       const running = await API.ajax.authPost('/slots/stop', {

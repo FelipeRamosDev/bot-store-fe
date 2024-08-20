@@ -32,7 +32,7 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                return <>
                   <EdgeLight colorValue={item.pnl} />
 
-                  <small>{item.botSlot.name}</small>
+                  <small>{item.botSlot?.name}</small>
                   <p>{value} <StatusBadge variant="light" type="position-side">{item.positionType}</StatusBadge></p>
                </>;
             }
