@@ -7,16 +7,34 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { Edit, Settings } from '@mui/icons-material';
 
-const DISPLAY_CONFIG = { noColor: true };
+const DISPLAY_CONFIG = { noColor: true, dashedZero: true };
 
 export default function AccountSettings({ account }) {
    if (!account) {
       return <></>;
    }
 
-   const { limits } = account;
+   const { limits: { tradesMinInterval, marginRatioCommit, tradeLoss, tradeGain, dailyLoss, dailyGain, monthlyLoss, monthlyGain } } = account;
+   const displayTrade = (tradeLoss.money || tradeGain.money || tradeLoss.percent || tradeGain.percent);
+   const displayDay = (dailyLoss.money || dailyGain.money || dailyLoss.percent || dailyGain.percent);
+   const displayMonth = (monthlyLoss.money || monthlyGain.money || monthlyLoss.percent || monthlyGain.percent);
+
    function Toolbar() {
       return <RoundIconButton size="small" Icon={Edit} onClick={() => console.log('Edit')} />;
+   }
+
+   function ParsePricePercent({ money, percent }) {
+      if (money || percent) {
+         return <p>
+            {money ? <Price amount={money} {...DISPLAY_CONFIG} /> : ''} {money && percent ? ' / ' : ''} {percent ? <Percent value={percent} {...DISPLAY_CONFIG} /> : ''}
+         </p>;
+      }
+   }
+
+   function ParseLabel({ money, percent, children }) {
+      if (money || percent) {
+         return <label>{children}</label>
+      }
    }
 
    return <Card className="account-settings" padding="xs" elevation={30}>
@@ -24,41 +42,40 @@ export default function AccountSettings({ account }) {
          <Settings className="icon" /> <h3 className="card-title">Settings</h3>
       </ContentHeader>
 
-      <SettingRow label="Max. Leverage" value={`${limits.leverage}x`} />
-      <SettingRow label="Min Trades Interval" value={`${limits.tradesMinInterval}H`} />
-      <SettingRow label="Margin Ratio" value={`${limits.marginRatioCommit}%`} />
+      <SettingRow label="Min Trades Interval" value={`${tradesMinInterval}H`} />
+      <SettingRow label="Margin Ratio" value={`${marginRatioCommit}%`} />
 
-      <SettingRow
+      {displayTrade ? <SettingRow
          Label={() => <>
-            <label>Trade Loss</label>
-            <label>Trade Gain</label>
+            <ParseLabel money={tradeLoss.money} percent={tradeLoss.percent}>Trade Loss</ParseLabel>
+            <ParseLabel money={tradeGain.money} percent={tradeGain.percent}>Trade Gain</ParseLabel>
          </>}
          Value={() => <>
-            <p><Price amount={limits.tradeLoss.money} {...DISPLAY_CONFIG} /> / <Percent value={limits.tradeLoss.percent} {...DISPLAY_CONFIG} /></p>
-            <p><Price amount={limits.tradeGain.money} {...DISPLAY_CONFIG} /> / <Percent value={limits.tradeGain.percent} {...DISPLAY_CONFIG} /></p>
+            <ParsePricePercent money={tradeLoss.money} percent={tradeLoss.percent} />
+            <ParsePricePercent money={tradeGain.money} percent={tradeGain.percent} />
          </>}
-      />
+      /> : ''}
 
-      <SettingRow
+      {displayDay ? <SettingRow
          Label={() => <>
-            <label>Day Loss</label>
-            <label>Day Gain</label>
+            <ParseLabel money={dailyLoss.money} percent={dailyLoss.percent}>Day Loss</ParseLabel>
+            <ParseLabel money={dailyGain.money} percent={dailyGain.percent}>Day Gain</ParseLabel>
          </>}
          Value={() => <>
-           <p><Price amount={limits.dailyLoss.money} {...DISPLAY_CONFIG} /> / <Percent value={limits.dailyLoss.percent} {...DISPLAY_CONFIG} /></p>
-           <p><Price amount={limits.dailyGain.money} {...DISPLAY_CONFIG} /> / <Percent value={limits.dailyGain.percent} {...DISPLAY_CONFIG} /></p>
+           <ParsePricePercent money={dailyLoss.money} percent={dailyLoss.percent} />
+           <ParsePricePercent money={dailyGain.money} percent={dailyGain.percent} />
          </>}
-      />
+      /> : ''}
 
-      <SettingRow
+      {displayMonth ? <SettingRow
          Label={() => <>
-            <label>Month Loss</label>
-            <label>Month Gain</label>
+            <ParseLabel money={monthlyLoss.money} percent={monthlyLoss.percent}>Month Loss</ParseLabel>
+            <ParseLabel money={monthlyGain.money} percent={monthlyGain.percent}>Month Gain</ParseLabel>
          </>}
          Value={() => <>
-            <p><Price amount={limits.monthlyLoss.money} {...DISPLAY_CONFIG} /> / <Percent value={limits.monthlyLoss.percent} {...DISPLAY_CONFIG} /></p>
-            <p><Price amount={limits.monthlyGain.money} {...DISPLAY_CONFIG} /> / <Percent value={limits.monthlyGain.percent} {...DISPLAY_CONFIG} /></p>
+            <ParsePricePercent money={monthlyLoss.money} percent={monthlyLoss.percent} />
+            <ParsePricePercent money={monthlyGain.money} percent={monthlyGain.percent} />
          </>}
-      />
+      /> : ''}
    </Card>;
 }
