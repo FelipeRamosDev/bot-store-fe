@@ -1,6 +1,6 @@
 import './SlotTile.scss';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Price from '@/components/displays/price/Price';
 import Card from "@/components/common/card/Card";
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
@@ -10,10 +10,19 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import { runSlot, stopSlot } from './SlotTile.helper';
 import APIContext from '@/contexts/4HandsAPI';
 import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
+import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
 
-export default function SlotTile({ slot = {}, className = '', ...props }) {
+export default function SlotTile({ slot = {}, className = '', uInstance, ...props }) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
+   const [ uiAlertState, setUiAlertState ] = useState(false);
+   const isStating = uInstance?.status === 'starting';
+   const isStatingStream = uInstance?.status === 'starting-userstream';
+   const isOffline = uInstance?.status === 'offline';
+
+   useEffect(() => {
+      setDisabled((!uInstance || isStating || isStatingStream || isOffline));
+   }, [ uInstance, isOffline, isStating, isStatingStream ])
 
    return (
       <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
@@ -34,18 +43,16 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
                   variant="contained"
                   Icon={PlayIcon}
                   size="small"
-                  color="tertiary"
-                  disabled={disabled}
-                  onClick={() => runSlot(API, slot)}
+                  color={disabled ? 'disabled' : 'success'}
+                  onClick={() => runSlot(API, slot, disabled, setDisabled, setUiAlertState)}
                />}
 
                {slot.status !== 'stopped' && <RoundIconButton
                   variant="contained"
                   Icon={StopIcon}
                   size="small"
-                  color="error"
-                  disabled={disabled}
-                  onClick={() => stopSlot(API, slot)}
+                  color={disabled ? 'disabled' : 'error'}
+                  onClick={() => stopSlot(API, slot, disabled, setDisabled, setUiAlertState)}
                />}
 
                
@@ -77,6 +84,8 @@ export default function SlotTile({ slot = {}, className = '', ...props }) {
                <Price amount={slot.pnl} size="xl" />
             </div>
          </div>
+
+         <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
       </Card>
    );
 }

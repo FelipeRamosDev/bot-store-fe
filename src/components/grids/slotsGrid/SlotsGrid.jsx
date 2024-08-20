@@ -10,7 +10,7 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
 import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 
-export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
+export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance }) {
    const [ createSlot, setCreateSlot ] = useState(false);
    const auth = useContext(AuthUserContext);
    const isLoading = (!auth || auth.isLoading);
@@ -41,7 +41,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '' }) {
 
       {!slots.length ? <NoDocumentsTile message="You have no slots created yet! Create one to start." onClick={() => setCreateSlot(true)} /> : ''}
       {slots.map(slot => (
-         <SlotTile key={Math.random()} slot={slot} />
+         <SlotTile key={Math.random()} slot={slot} uInstance={uInstance} />
       ))}
 
       <ContentModal

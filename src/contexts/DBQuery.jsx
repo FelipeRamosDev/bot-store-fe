@@ -5,7 +5,7 @@ import APIContext from './4HandsAPI';
 const DBQueryContext = createContext();
 export default DBQueryContext;
 
-export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, children }) {
+export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, onData = () => {}, children }) {
    const instance = useContext(APIContext);
    const [ loading, setLoading ] = useState(true);
    const [ query, setQuery ] = useState([]);
@@ -47,6 +47,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
                      onData: query => {
                         setQuery(query);
                         setLoading(false);
+                        onData(query);
                      },
                      onError: err => {
                         setLoading(false);
@@ -57,6 +58,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
             } else {
                dbQuery.getQuery().then(query => {
                   setQuery(query);
+                  onData(query);
                }).catch(err => {
                   throw err;
                }).finally(() => {
@@ -72,6 +74,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
                      onData: doc => {
                         setDoc(doc);
                         setLoading(false);
+                        onData(doc);
                      },
                      onError: err => {
                         setLoading(false);
@@ -82,6 +85,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
             } else {
                dbQuery.getDoc().then(doc => {
                   setDoc(doc);
+                  onData(doc);
                }).catch(err => {
                   throw err;
                }).finally(() => {
@@ -91,7 +95,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
 
             break;
       }
-   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query.length, subscribe, doc ]);
+   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query.length, subscribe, doc, onData ]);
 
    return <DBQueryContext.Provider value={{
       socket,

@@ -6,7 +6,7 @@ import AccountSettings from '../../../../../shared/accountSettings/AccountSettin
 import MoreMasterAccounts from './MoreMasterAccounts';
 import MasterSchedules from './MasterSchedules';
 
-export default function MasterDetailsSidebar() {
+export default function MasterDetailsSidebar({ setUInstance }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const userInstanceUID = doc?.user?.userInstance;
 
@@ -15,7 +15,7 @@ export default function MasterDetailsSidebar() {
    }
 
    return <>
-      <DBQuery type="doc" collection="user_instances" filter={userInstanceUID} subscribe={true}>
+      <DBQuery type="doc" collection="user_instances" filter={userInstanceUID} subscribe={true} onData={(data) => setUInstance(data)}>
          <UserInstanceMaster />
       </DBQuery>  
        

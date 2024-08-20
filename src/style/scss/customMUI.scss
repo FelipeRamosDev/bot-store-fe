@@ -91,4 +91,13 @@
       background-color: $warn;
       color: $text-warn;
    }
+
+   &.MuiIconButton-colorDisabled {
+      background-color: $grey-light;
+      color: $grey;
+   }
+
+   &.Mui-disabled {
+      background-color: $grey;
+   }
 }
