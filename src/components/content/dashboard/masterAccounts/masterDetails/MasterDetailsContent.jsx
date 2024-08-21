@@ -34,7 +34,7 @@ export default function MasterDetailsContent({ uInstance }) {
    }
 
    return <>
-      <ContentSplit breakpoint="xl">
+      <ContentSplit breakpoint="l">
          <MasterPnlGrid master={doc} />
          <WalletGrid master={doc} />
       </ContentSplit>

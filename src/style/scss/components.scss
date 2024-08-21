@@ -83,3 +83,30 @@
    border-bottom: 1px solid #ef664b;
    padding-bottom: 0.4rem;
 }
+
+.pnl-grid {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1.5rem;
+
+   @media screen and (max-width: $screen-l) {
+      gap: 1rem;
+   }
+
+   @media screen and (max-width: $screen-m) {
+      gap: 0.8rem;
+   }
+
+   @media screen and (max-width: $screen-s) {
+      gap: 0.5rem;
+   }
+
+   .pnl-tile {
+      flex: calc(50% - 1.5rem);
+      margin-bottom: 0;
+
+      @media screen and (max-width: $screen-l) {
+         flex: calc(25% - 1.5rem);
+      }
+   }
+}

@@ -8,6 +8,7 @@ import MasterLimitsForm from './masterLimitsForm/MasterLimitsForm';
 import Card from '@/components/common/card/Card';
 import APIContext from '@/contexts/4HandsAPI';
 import AuthUser from '@/contexts/AuthUser';
+import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 
 export default function CreateMasterForm({ onSuccess, editMode = false, master }) {
    const API = useContext(APIContext);
@@ -46,7 +47,7 @@ export default function CreateMasterForm({ onSuccess, editMode = false, master }
       onSubmit={onSubmit}
       editData={master}
    >
-      <Stack flexDirection="row" justifyContent="space-between" gap="1.5rem" marginBottom="2rem">
+      <ContentSplit breakpoint="l">
          <Stack flexDirection="column" flex={1} gap="1rem">
             {!editMode && <FormInput path="type" />}
 
@@ -64,6 +65,6 @@ export default function CreateMasterForm({ onSuccess, editMode = false, master }
          </Stack>
 
          <MasterLimitsForm />
-      </Stack>
+      </ContentSplit>
    </FormBase>);
 }
