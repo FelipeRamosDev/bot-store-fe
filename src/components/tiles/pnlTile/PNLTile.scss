@@ -1,22 +1,36 @@
 @import "../../../style/scss/variables.scss";
 
-.pnl-grid {
-   display: flex;
-   gap: 1.5rem;
-   flex-wrap: wrap;
-
-   .pnl-tile {
-      flex: calc(50% - 1.5rem);
-      margin-bottom: 0;
-   }
-}
-
 .pnl-tile {
    display: flex;
    flex-direction: column;
    text-align: center;
    justify-content: center;
    align-items: center;
+
+   @media screen and (max-width: $screen-m) {
+      flex-wrap: wrap;
+
+      &.card.p-s {
+         padding: 0.8rem;
+         min-width: 150px;
+      }
+
+      .price-display,
+      .percent-display {
+         font-size: 1.1rem;
+      }
+   }
+
+   @media screen and (max-width: $screen-s) {
+      &.card.p-s {
+         padding: 0.3rem 0.3rem 0.4rem 0.3rem;
+      }
+
+      .price-display,
+      .percent-display {
+         font-size: 1rem;
+      }
+   }
 
    &[border-color=success][border-side] {
       border-color: $success;
@@ -49,5 +63,13 @@
       font-weight: 500;
       margin-bottom: 0.2rem;
       color: $grey-light;
+
+      @media screen and (max-width: $screen-m) {
+         font-size: 0.9rem;
+      }
+
+      @media screen and (max-width: $screen-s) {
+         font-size: 0.7rem;
+      }
    }
 }

@@ -4,6 +4,22 @@
    display: flex;
    gap: 1.5rem;
 
+   @media screen and (max-width: $screen-xl) {
+      gap: 1.5rem;
+   }
+
+   @media screen and (max-width: $screen-l) {
+      gap: 1rem;
+   }
+
+   @media screen and (max-width: $screen-m) {
+      gap: 0.8rem;
+   }
+
+   @media screen and (max-width: $screen-s) {
+      gap: 0.5rem;
+   }
+
    &.column-direction {
       flex-direction: column;
    }

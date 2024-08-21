@@ -2,7 +2,7 @@ import PNLTile from '@/components/tiles/pnlTile/PNLTile';
 
 export default function MasterPnlGrid({ master = {}, className = '' }) {
    return (
-      <div className={`pnl-grid ${className}`}>
+      <div className={`master-pnl-grid pnl-grid ${className}`}>
          <PNLTile
             label="Month PNL"
             borderSide="left"
