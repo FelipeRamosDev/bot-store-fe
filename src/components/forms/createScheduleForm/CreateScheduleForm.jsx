@@ -1,4 +1,3 @@
-import './CreateScheduleForm.scss';
 import { useContext } from 'react';
 import APIContext from '@/contexts/4HandsAPI';
 import { FormBase } from '../formBase/FormBase';
