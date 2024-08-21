@@ -18,7 +18,7 @@
     "@mui/material": "^5.16.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-date-pickers": "^7.12.1",
-    "4hands-api": "^0.7.1",
+    "4hands-api": "^0.7.2",
     "binance-sync": "^0.2.5",
     "dayjs": "^1.11.12",
     "lightweight-charts": "^4.1.7",
