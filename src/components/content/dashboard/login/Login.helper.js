@@ -1,4 +1,4 @@
-export async function register(parsedBody, API) {
+export async function register(parsedBody, API, router) {
    try {
       const created = await API.auth.register(parsedBody);
 
