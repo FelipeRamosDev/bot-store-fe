@@ -7,6 +7,7 @@ import config from '@/config.json';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 
 const HOW_TO_URL = config.links.binanceHowToAPIKey;
+const MESSAGE = `You haven't linked your Binance account yet! It's required to link it in order to use the LIVE mode. You will need to generate the API keys on Binance's side.`;
 
 export default function ExchangeKeysMissingTopbar() {
    const [ control, setControl ] = useState(false);
@@ -29,7 +30,7 @@ export default function ExchangeKeysMissingTopbar() {
             throw err;
          })
       }
-   }, [doc]);
+   }, [doc, API.ajax]);
 
    return (<>
       <TopAlertBar
@@ -38,7 +39,7 @@ export default function ExchangeKeysMissingTopbar() {
          action={() => setExcModal(true)}
          close={() => setControl(false)}
       >
-         You haven't linked your Binance account yet! It's required to link it in order to use the LIVE mode. You will need to generate the API keys on Binance's side. <Link target="_blank" href={HOW_TO_URL}>Check how to generate the API keys here.</Link>
+         {MESSAGE} <Link target="_blank" href={HOW_TO_URL}>Check how to generate the API keys here.</Link>
       </TopAlertBar>
 
       <ExchangeModal open={excModal} setOpen={setExcModal} />

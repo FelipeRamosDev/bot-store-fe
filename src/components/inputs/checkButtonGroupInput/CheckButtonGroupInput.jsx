@@ -14,7 +14,7 @@ export default function CheckButtonGroupInput({ className = '', schema = {}, err
             setValue(editValue);
          }
       }
-   }, [schema.form.editMode, setValue]);
+   }, [schema, schema.form.editMode, setValue]);
 
    const handleChoose = (option) => {
       if (multiValue) {
