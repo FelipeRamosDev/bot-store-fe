@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import TopAlertBar from '../../base/topAlertBar/TopAlertBar';
 import DBQueryContext from '@/contexts/DBQuery';
 import APIContext from '@/contexts/4HandsAPI';
@@ -13,12 +13,17 @@ export default function ExchangeKeysMissingTopbar() {
    const [ excModal, setExcModal ] = useState(false);
    const { doc } = useContext(DBQueryContext);
    const API = useContext(APIContext);
+   const isValid = useRef();
 
    useEffect(() => {
+      if (isValid.current) return;
+
       if (doc?.type === 'master-live') {
          API.ajax.authGet('/user/binance-keys/check-keys').then(checked => {
             if (!checked.isValid) {
                setControl(true);
+            } else {
+               isValid.current = true;
             }
          }).catch(err => {
             throw err;
