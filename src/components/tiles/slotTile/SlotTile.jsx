@@ -55,8 +55,6 @@ export default function SlotTile({ slot = {}, className = '', uInstance, ...prop
                   color={disabled ? 'disabled' : 'error'}
                   onClick={() => stopSlot(API, slot, disabled, setDisabled, setUiAlertState)}
                />}
-
-               
             </div>
          </div>
 

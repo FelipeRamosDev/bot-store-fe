@@ -6,8 +6,8 @@ export const MenuProvider = ({ children }) => {
    const [anchorEl, setAnchorEl] = useState(null);
    const open = Boolean(anchorEl);
 
-   const handleMenuOpen = (event) => {
-      setAnchorEl({ left: event.clientX, top: event.clientY });
+   const handleMenuOpen = (event, id) => {
+      setAnchorEl({ id, left: event.clientX, top: event.clientY });
    };
 
    const handleMenuClose = () => {
