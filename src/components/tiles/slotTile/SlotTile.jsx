@@ -12,7 +12,7 @@ import APIContext from '@/contexts/4HandsAPI';
 import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
 
-export default function SlotTile({ slot = {}, className = '', uInstance, ...props }) {
+export default function SlotTile({ slot = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog, ...props }) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
@@ -33,7 +33,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, ...prop
                </Link>
 
                <StatusBadge type="slot-status">{slot.status}</StatusBadge>
-               <SlotMenu slot={slot} noTrasition={true} />
+               <SlotMenu slot={slot} noTrasition={true} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
                <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
                   {slot.bot?.name}
                </Link>

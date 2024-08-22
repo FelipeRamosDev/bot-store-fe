@@ -10,7 +10,7 @@ import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
 
-export default function MasterDetailsContent({ uInstance }) {
+export default function MasterDetailsContent({ uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const masterUID = doc?._id;
    const positions = [];
@@ -40,7 +40,7 @@ export default function MasterDetailsContent({ uInstance }) {
       </ContentSplit>
 
       {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
-      <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} />
+      <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
 
       <DBQuery
          type="query"

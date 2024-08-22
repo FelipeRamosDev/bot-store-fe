@@ -8,13 +8,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
-import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
 import { useMenu } from '@/contexts/MenuContext';
 
-export default function SlotMenu({ slot = {}, noTrasition = false }) {
-   const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
-   const [ editSlotModal, setEditSlotModal ] = useState(false);
+export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal, setDeleteConfirmDialog }) {
    const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
    const open = Boolean (anchorEl?.id === slot.cod);
 
@@ -32,11 +28,11 @@ export default function SlotMenu({ slot = {}, noTrasition = false }) {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             transitionDuration={noTrasition ? 0 : undefined}
          >
-            <MenuItem onClick={() => setEditSlotModal(true)}>
+            <MenuItem onClick={() => setEditSlotModal(slot)}>
                <ListItemIcon>
                   <ModeEditIcon fontSize="small" />
                </ListItemIcon>
-               Edit ({slot.cod})
+               Edit
             </MenuItem>
 
             <MenuItem onClick={handleMenuClose}>
@@ -46,20 +42,13 @@ export default function SlotMenu({ slot = {}, noTrasition = false }) {
                Archive
             </MenuItem>
 
-            <MenuItem onClick={() => setDeleteConfirmDialog(true)}>
+            <MenuItem onClick={() => setDeleteConfirmDialog(slot)}>
                <ListItemIcon>
                   <DeleteForeverIcon color="error" fontSize="small" />
                </ListItemIcon>
                Delete Slot
             </MenuItem>
          </Menu>
-
-         <CreateSlotModal editMode={true} open={editSlotModal} setOpen={setEditSlotModal} slot={slot} />
-         <DeleteSlotConfirmDialog
-            slot={slot}
-            open={deleteConfirmDialog}
-            setOpen={setDeleteConfirmDialog}
-         />
       </>
    );
 }
