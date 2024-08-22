@@ -11,6 +11,24 @@ import ColumnConfig from '@/models/TableColumnConfig';
 import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 
+/**
+ * A reusable table component that handles pagination, loading states, and customizable rows and headers.
+ *
+ * @param {Object} props - The props passed to the TableBase component.
+ * @param {string} [props.className=''] - Optional class names for styling.
+ * @param {Array} [props.items=[]] - The data to be displayed in the table.
+ * @param {boolean} [props.elevate=true] - Whether to apply elevation styles.
+ * @param {boolean} [props.borderLastRow=true] - Whether to apply border styles to the last row.
+ * @param {number} [props.maxHeight=440] - Maximum height of the table container.
+ * @param {boolean} [props.hideHeader=false] - Whether to hide the table header.
+ * @param {boolean} [props.loading=true] - Whether the table is in a loading state.
+ * @param {Object} [props.pagination] - Pagination settings including options and handlers.
+ * @param {Array} [props.headerConfigs] - Configuration for table headers.
+ * @param {React.Component} [props.CustomTableItem] - Custom component for rendering table rows.
+ * @param {Array} [props.include] - Optional array of column keys to include.
+ * @param {Array} [props.exclude] - Optional array of column keys to exclude.
+ * @returns {React.Element} The rendered table component.
+ */
 export default function TableBase({
    className = '',
    items = [],
