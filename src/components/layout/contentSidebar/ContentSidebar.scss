@@ -11,11 +11,12 @@
    flex-direction: column;
    flex-wrap: wrap;
 
-   @media screen and (min-width: $screen-m) {
+   @media screen and (min-width: $screen-l) {
       flex-direction: row;
    }
 
    .layout-header {
+      max-width: 100%;
       min-width: 100%;
    }
 
@@ -25,12 +26,20 @@
 
    .content {
       flex: 1;
-      min-width: calc(70% - 1rem);
+      max-width: 100%;
+
+      @media screen and (min-width: $screen-l) {
+         min-width: calc(70% - 1rem);
+      }
    }
 
    .sidebar {
       flex: 1;
-      min-width: calc(30% - 1rem);
+      max-width: 100%;
+
+      @media screen and (min-width: $screen-l) {
+         flex: calc(30% - 1rem);
+      }
 
       >* {
          margin-bottom: 1rem;

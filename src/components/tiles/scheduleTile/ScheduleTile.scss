@@ -20,6 +20,8 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 0rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
 
       .day {
          display: inline-block;
@@ -29,6 +31,7 @@
          color: $success;
          -webkit-user-select: none;
          user-select: none;
+         flex: 1;
 
          &.disabled {
             color: $grey;

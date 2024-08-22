@@ -1,25 +1,37 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useMemo, useRef } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import { formatMasterBadges } from '@/helpers/format';
 import MasterMenu from '@/components/menus/dropdown/masterMenu/MasterMenu';
+import { MenuProvider } from '@/contexts/MenuContext';
 
-export default function MasterDetailsHeader({  }) {
+export default function MasterDetailsHeader({ }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const { badgeColor, accountType } = formatMasterBadges(doc);
+   const stableDoc = useRef();
+
+   if (!stableDoc.current) {
+      stableDoc.current = doc;
+   }
+
+   const contentMemo = useMemo(() => {
+      return <ContentHeader Toolbar={() => <MasterMenu noTrasition={true} isDemo={(stableDoc.current?.type === 'master-demo')} master={stableDoc.current} />}>
+         <div className="header-title">
+            <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
+
+            <h1 className="title">{stableDoc.current?.name}</h1>
+            <p className="description">{stableDoc.current?.description}</p>
+         </div>
+      </ContentHeader>
+   }, [accountType, badgeColor]);
 
    if (isLoading) {
       return <></>;
    }
 
-   return <ContentHeader Toolbar={() => <MasterMenu isDemo={(doc.type === 'master-demo')} master={doc} />}>
-      <div className="header-title">
-         <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
-
-         <h1 className="title">{doc.name}</h1>
-         <p className="description">{doc.description}</p>
-      </div>
-   </ContentHeader>;
+   return <MenuProvider>
+      {contentMemo}
+   </MenuProvider>;
 }

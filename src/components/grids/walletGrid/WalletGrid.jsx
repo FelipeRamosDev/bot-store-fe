@@ -2,7 +2,7 @@ import './WalletGrid.scss';
 import PNLTile from '@/components/tiles/pnlTile/PNLTile';
 
 export default function WalletGrid({ master = {} }) {
-   return <div className="wallet-grid" padding="s" elevation={25}>
+   return <div className="wallet-grid pnl-grid" padding="s" elevation={25}>
       <PNLTile
          borderSide="left"
          label="Acumulated PNL"

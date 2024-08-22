@@ -21,6 +21,10 @@
       max-height: 80vh;
       overflow-y: auto;
 
+      @media screen and (max-width: $screen-m) {
+         border-radius: 0;
+      }
+
       .modal-header {
          position: sticky;
          top: 0;
@@ -34,23 +38,43 @@
 
       .modal-body {
          &.padding-xs {
-            padding: $padding-xs
+            padding: $padding-xs;
+
+            @media screen and (max-width: $screen-m) {
+               padding: $padding-xs / 2;
+            }
          }
 
          &.padding-s {
-            padding: $padding-s
+            padding: $padding-s;
+
+            @media screen and (max-width: $screen-m) {
+               padding: $padding-s / 2;
+            }
          }
 
          &.padding-m {
-            padding: $padding-m
+            padding: $padding-m;
+
+            @media screen and (max-width: $screen-m) {
+               padding: $padding-m / 2;
+            }
          }
 
          &.padding-l {
-            padding: $padding-l
+            padding: $padding-l;
+
+            @media screen and (max-width: $screen-m) {
+               padding: $padding-l / 2;
+            }
          }
 
          &.padding-xl {
-            padding: $padding-xl
+            padding: $padding-xl;
+
+            @media screen and (max-width: $screen-m) {
+               padding: $padding-xl / 2;
+            }
          }
       }
 
@@ -63,11 +87,25 @@
       &.x-large {
          width: 95%;
          max-width: $screen-xl;
+
+         @media screen and (max-width: $screen-m) {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            max-height: 100%;
+         }
       }
 
       &.large {
          width: 95%;
          max-width: $screen-l;
+
+         @media screen and (max-width: $screen-m) {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            max-height: 100%;
+         }
       }
 
       &.medium {

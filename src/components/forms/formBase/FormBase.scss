@@ -1,8 +1,13 @@
 @import "../../../style/scss/variables.scss";
 
 .form-base {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+
    .buttons {
-      margin-top: 2rem;
+      margin-top: 1rem;
    }
 
    .help-info {

@@ -22,7 +22,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, ...prop
 
    useEffect(() => {
       setDisabled((!uInstance || isStating || isStatingStream || isOffline));
-   }, [ uInstance, isOffline, isStating, isStatingStream ])
+   }, [ uInstance, isOffline, isStating, isStatingStream ]);
 
    return (
       <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
@@ -32,7 +32,8 @@ export default function SlotTile({ slot = {}, className = '', uInstance, ...prop
                   <span className="title">{slot.name}</span>
                </Link>
 
-               <StatusBadge type="slot-status">{slot.status}</StatusBadge><SlotMenu slot={slot} />
+               <StatusBadge type="slot-status">{slot.status}</StatusBadge>
+               <SlotMenu slot={slot} noTrasition={true} />
                <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
                   {slot.bot?.name}
                </Link>

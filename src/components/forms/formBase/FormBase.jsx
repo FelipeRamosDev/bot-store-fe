@@ -48,7 +48,7 @@ export function FormBase({
             throw err;
          });
       }
-   }, [ form, formSet ]);
+   }, [ form, formSet, editData ]);
 
    const handleSubmit = async (ev) => {
       ev.preventDefault();

@@ -8,7 +8,7 @@ export default DBQueryContext;
 export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, onData = () => {}, children }) {
    const instance = useContext(APIContext);
    const [ loading, setLoading ] = useState(true);
-   const [ query, setQuery ] = useState([]);
+   const [ query, setQuery ] = useState();
    const [ doc, setDoc ] = useState();
    const socket = useRef();
 
@@ -17,7 +17,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
    }
 
    useEffect(() => {
-      if (query.length || doc) {
+      if (query || doc) {
          return;
       }
 
@@ -95,13 +95,13 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
 
             break;
       }
-   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query.length, subscribe, doc, onData ]);
+   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query, subscribe, doc, onData ]);
 
    return <DBQueryContext.Provider value={{
       socket,
       isLoading: loading,
       doc: doc,
-      query: query
+      query: query || []
    }}>
       {children}
    </DBQueryContext.Provider>
