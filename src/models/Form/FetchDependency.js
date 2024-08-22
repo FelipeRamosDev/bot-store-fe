@@ -1,7 +1,29 @@
 import { API } from '@/contexts/4HandsAPI';
 
+/**
+ * FetchDependency Class
+ *
+ * This class handles fetching data either from a database query or an API endpoint.
+ * It can manage queries of different types, including endpoint requests and database queries,
+ * and supports filtering by user ID if specified.
+ */
 export default class FetchDependency {
-   constructor (setup, form) {
+   /**
+    * Creates an instance of FetchDependency.
+    *
+    * @param {Object} setup - Configuration settings for the fetch operation.
+    * @param {Function} form - The form instance that this dependency belongs to.
+    * @param {string} [setup.id] - The unique identifier for the dependency.
+    * @param {string} [setup.queryType] - The type of query to perform ('query', 'doc', or 'endpoint').
+    * @param {string} [setup.collection] - The collection to query from, used if `queryType` is not 'endpoint'.
+    * @param {number} [setup.limit] - The limit on the number of results.
+    * @param {Object} [setup.paginate] - Pagination settings.
+    * @param {Object} [setup.sort] - Sorting settings.
+    * @param {Object} [setup.httpRequest] - Configuration for an API endpoint request.
+    * @param {Object} [setup.filter] - Filtering criteria for the query.
+    * @param {boolean} [setup.filterUser=false] - Whether to filter results by the current user ID.
+    */
+   constructor(setup, form) {
       const {
          id,
          queryType,
@@ -15,16 +37,16 @@ export default class FetchDependency {
       } = Object(setup);
 
       if (!form) {
-         throw new Error('The "form" param is required at FormDependency.contructor!');
+         throw new Error('The "form" param is required at FormDependency.constructor!');
       }
 
       if (!id) {
-         throw new Error('The "id" param is required at FormDependency.contructor!');
+         throw new Error('The "id" param is required at FormDependency.constructor!');
       }
 
       if (queryType !== 'endpoint') {
          const dbQuery = API.dbQuery(collection, filter);
-   
+
          limit && dbQuery.limit(limit);
          paginate && dbQuery.paginate(paginate);
          sort && dbQuery.sort(sort);
@@ -43,10 +65,21 @@ export default class FetchDependency {
       }
    }
 
+   /**
+    * Gets the form instance associated with this dependency.
+    *
+    * @returns {Function} The form instance.
+    */
    get form() {
       return this._form();
    }
 
+   /**
+    * Executes the fetch operation based on the query type.
+    *
+    * @returns {Promise<Object>} The fetched data.
+    * @throws {Error} Throws an error if the fetch operation fails.
+    */
    async exec() {
       const userUID = this.form.userUID;
       if (this.filterUser && userUID) {
@@ -79,7 +112,7 @@ export default class FetchDependency {
             const response = await this.sendRequest();
 
             if (!response) return;
-            if (response.error) throw doc;
+            if (response.error) throw response;
 
             this.data = response;
             return response;
@@ -89,6 +122,12 @@ export default class FetchDependency {
       }
    }
 
+   /**
+    * Sends an HTTP request to the specified endpoint.
+    *
+    * @returns {Promise<Object>} The response from the HTTP request.
+    * @throws {Error} Throws an error if the request fails.
+    */
    async sendRequest() {
       if (!this.httpRequest) return;
       const { method = 'GET', body = {}, isAuth = false, endpoint } = this.httpRequest;
@@ -131,17 +170,38 @@ export default class FetchDependency {
    }
 }
 
+/**
+ * HttpRequestSetup Class
+ *
+ * This class represents the configuration for an HTTP request to an endpoint,
+ * including the method, request body, and authentication settings.
+ */
 export class HttpRequestSetup {
-   constructor (setup = {}, dependency) {
+   /**
+    * Creates an instance of HttpRequestSetup.
+    *
+    * @param {Object} setup - Configuration settings for the HTTP request.
+    * @param {FetchDependency} dependency - The fetch dependency this request setup is associated with.
+    * @param {string} setup.endpoint - The endpoint URL for the request.
+    * @param {string} [setup.method='GET'] - The HTTP method to use (e.g., 'GET', 'POST').
+    * @param {Object} [setup.body={}] - The request body to send.
+    * @param {boolean} [setup.isAuth=false] - Whether the request requires authentication.
+    */
+   constructor(setup = {}, dependency) {
       const { endpoint, method, body, isAuth } = setup;
 
-      this._dependency = () => dependency;
-      this.endpoint = endpoint;
-      this.method = method;
-      this.body = body;
-      this.isAuth = isAuth;
+      this._dependency = () => dependency; // Reference to the fetch dependency.
+      this.endpoint = endpoint; // The endpoint URL for the request.
+      this.method = method; // The HTTP method to use.
+      this.body = body; // The request body.
+      this.isAuth = isAuth; // Whether the request requires authentication.
    }
 
+   /**
+    * Gets the fetch dependency associated with this HTTP request setup.
+    *
+    * @returns {FetchDependency} The fetch dependency.
+    */
    get dependency() {
       return this._dependency();
    }
