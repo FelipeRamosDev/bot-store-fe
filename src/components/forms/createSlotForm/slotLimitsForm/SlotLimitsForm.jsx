@@ -5,6 +5,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SlotLimitSet from './slotLimitSet/SlotLimitSet';
 
+/**
+ * `SlotLimitsForm` component provides a form section for configuring slot limits.
+ * It displays a card with an accordion for trade limits, which includes
+ * settings for trade loss and trade gain.
+ *
+ * @returns {JSX.Element} - The rendered form section for slot limits.
+ */
 export default function SlotLimitsForm() {
    return (
       <Card className="account-limits input-wrap" padding="xs" elevation={10}>
