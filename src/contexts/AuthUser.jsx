@@ -6,9 +6,23 @@ import APIContext from './4HandsAPI';
 import LoadingPage from '@/app/loading';
 import ErrorPage from '@/app/error';
 
+// Create a context for the authenticated user
 const AuthUserContext = createContext();
 export default AuthUserContext;
 
+/**
+ * AuthUserProvider Component
+ *
+ * This component provides user authentication state to the React component tree
+ * via context. It handles checking the user's authentication status and redirects
+ * to the login page if the user is not authenticated. It also manages loading and
+ * error states.
+ *
+ * @param {Object} props - The properties passed to this component.
+ * @param {React.ReactNode} props.children - The child components to be rendered if the user is authenticated.
+ *
+ * @returns {JSX.Element} The context provider component with loading and error handling.
+ */
 export function AuthUserProvider({ children }) {
    const [ userAuth, setUserAuth ] = useState();
    const [ error, setError ] = useState();
@@ -30,10 +44,11 @@ export function AuthUserProvider({ children }) {
       });
    }, [ userAuth, instance.auth, router ]);
 
-   return <AuthUserContext.Provider value={userAuth}>
-      {!userAuth && !error && <LoadingPage message="Validating User" />}
-
-      {userAuth && !error && children}
-      {error && <ErrorPage error={error} />}
-   </AuthUserContext.Provider>
+   return (
+      <AuthUserContext.Provider value={userAuth}>
+         {!userAuth && !error && <LoadingPage message="Validating User" />}
+         {userAuth && !error && children}
+         {error && <ErrorPage error={error} />}
+      </AuthUserContext.Provider>
+   );
 }
