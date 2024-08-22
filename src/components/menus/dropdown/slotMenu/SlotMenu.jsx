@@ -10,6 +10,25 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { useMenu } from '@/contexts/MenuContext';
 
+/**
+ * SlotMenu component that provides actions for managing a slot entity.
+ *
+ * This component displays a menu with options to edit, archive, or delete a slot. It uses the `useMenu`
+ * context to handle the opening and closing of the menu based on user interactions. The `RoundIconButton`
+ * triggers the menu to open and provides access to the slot-specific actions.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} [props.slot={}] - The slot object to manage with actions.
+ * @param {boolean} [props.noTrasition=false] - Flag to disable menu transition animation.
+ * @param {Function} [props.setEditSlotModal] - Function to set the slot edit modal state.
+ * @param {Function} [props.setDeleteConfirmDialog] - Function to set the delete confirmation dialog state.
+ *
+ * @example
+ * return <SlotMenu slot={slotObject} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />;
+ *
+ * @returns {JSX.Element} A menu with actions for editing, archiving, or deleting a slot.
+ */
 export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal, setDeleteConfirmDialog }) {
    const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
    const open = Boolean (anchorEl?.id === slot.cod);
