@@ -12,6 +12,20 @@ import APIContext from '@/contexts/4HandsAPI';
 import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
 
+/**
+ * Represents a tile component displaying information about a slot.
+ * Allows interaction through action buttons to start or stop the slot.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.slot - The slot object containing information to display.
+ * @param {string} [props.className=''] - Additional CSS classes to apply.
+ * @param {Object} [props.uInstance] - User instance object containing status information.
+ * @param {Function} [props.setEditSlotModal] - Function to open the edit slot modal.
+ * @param {Function} [props.setDeleteConfirmDialog] - Function to open the delete confirmation dialog.
+ * @param {Object} [props.rest] - Additional properties to pass to the Card component.
+ * 
+ * @returns {JSX.Element} The rendered SlotTile component.
+ */
 export default function SlotTile({ slot = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog, ...props }) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);

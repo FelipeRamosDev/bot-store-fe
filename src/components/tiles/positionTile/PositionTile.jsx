@@ -1,9 +1,19 @@
 import Price from '@/components/displays/price/Price';
 import './PositionTile.scss';
 import PriceCard from '@/components/common/priceCard/PriceCard';
-import Percent from '@/components/displays/percent/Percent';
 import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 
+/**
+ * A component that displays a tile for a trading position, including details like the bot slot name, symbol, open time, and profit/loss.
+ * 
+ * This component is used to show summarized information about a trading position in a visually appealing card format.
+ * 
+ * @param {Object} props - The props for the component.
+ * @param {Object} [props.position={}] - The position data to display, which includes details like `botSlot`, `symbol`, `openTime`, and `pnl`.
+ * @param {string} [props.className=''] - An optional class name to apply additional styling to the component.
+ * 
+ * @returns {React.Element} The rendered PositionTile component displaying the position information.
+ */
 export default function PositionTile({ position = {}, className = '', ...props }) {
    return (
       <PriceCard
