@@ -9,6 +9,12 @@ import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 const HOW_TO_URL = config.links.binanceHowToAPIKey;
 const MESSAGE = `You haven't linked your Binance account yet! It's required to link it in order to use the LIVE mode. You will need to generate the API keys on Binance's side.`;
 
+/**
+ * `ExchangeKeysMissingTopbar` is a component that displays a top alert bar when the user hasn't linked their Binance account.
+ * It provides a link to instructions for generating Binance API keys and includes a modal for handling the exchange key linking process.
+ *
+ * @returns {JSX.Element} The rendered `ExchangeKeysMissingTopbar` component.
+ */
 export default function ExchangeKeysMissingTopbar() {
    const [ control, setControl ] = useState(false);
    const [ excModal, setExcModal ] = useState(false);
@@ -28,20 +34,22 @@ export default function ExchangeKeysMissingTopbar() {
             }
          }).catch(err => {
             throw err;
-         })
+         });
       }
    }, [doc, API.ajax]);
 
-   return (<>
-      <TopAlertBar
-         show={control}
-         actionLabel="Link"
-         action={() => setExcModal(true)}
-         close={() => setControl(false)}
-      >
-         {MESSAGE} <Link target="_blank" href={HOW_TO_URL}>Check how to generate the API keys here.</Link>
-      </TopAlertBar>
+   return (
+      <>
+         <TopAlertBar
+            show={control}
+            actionLabel="Link"
+            action={() => setExcModal(true)}
+            close={() => setControl(false)}
+         >
+            {MESSAGE} <Link target="_blank" href={HOW_TO_URL}>Check how to generate the API keys here.</Link>
+         </TopAlertBar>
 
-      <ExchangeModal open={excModal} setOpen={setExcModal} />
-   </>);
+         <ExchangeModal open={excModal} setOpen={setExcModal} />
+      </>
+   );
 }
