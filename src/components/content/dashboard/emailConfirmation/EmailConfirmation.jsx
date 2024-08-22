@@ -5,6 +5,15 @@ import { useRouter } from 'next/navigation';
 import { confirmEmail } from './EmailConfirmation.helper';
 import APIContext from '@/contexts/4HandsAPI';
 
+/**
+ * `EmailConfirmation` is a React component that handles the email confirmation process.
+ * It uses the provided confirmation token to confirm the email address via an API call.
+ * 
+ * @param {Object} props - The props object.
+ * @param {string} props.confirmationToken - The token used to confirm the email address.
+ * 
+ * @returns {JSX.Element} An empty React fragment.
+ */
 export default function EmailConfirmation({ confirmationToken }) {
    const API = useContext(APIContext);
    const router = useRouter();

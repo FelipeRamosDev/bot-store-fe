@@ -10,6 +10,13 @@ import ExchangeKeysMissingTopbar from '@/components/bars/topBars/exchangeKeysMis
 import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
 import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
 
+/**
+ * MasterDetails component displays detailed information and management options for a specific master account.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.index - The index of the master account to be displayed.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function MasterDetails({ index }) {
    const [ uInstance, setUInstance ] = useState();
    const [ editSlotModal, setEditSlotModal  ] = useState();
