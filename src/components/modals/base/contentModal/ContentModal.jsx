@@ -4,7 +4,22 @@ import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-
+/**
+ * A modal component for displaying content with customizable header and size.
+ *
+ * @param {Object} props - The properties to customize the modal.
+ * @param {boolean} [props.open=false] - Controls the open state of the modal.
+ * @param {boolean} [props.hideHeader=false] - If true, hides the header section of the modal.
+ * @param {string} [props.className=''] - Additional CSS class names for the modal.
+ * @param {string} [props.size='medium'] - Size of the modal. Can be 'small', 'medium', or 'large'.
+ * @param {string} [props.padding=''] - Padding around the content of the modal. Options are 'xs', 's', 'm', 'l', 'xl'.
+ * @param {function} [props.onClose=() => {}] - Callback function invoked when the modal is closed.
+ * @param {string} [props.title] - Title to display in the header of the modal.
+ * @param {React.ReactNode} [props.children] - Content to display inside the modal.
+ * @param {Object} [props.props] - Additional props passed to the `Modal` component.
+ *
+ * @returns {React.Element} The rendered modal dialog.
+ */
 export default function ContentModal({
    open = false,
    hideHeader = false,
@@ -16,6 +31,7 @@ export default function ContentModal({
    children,
    ...props
 }) {
+   // Determine header padding based on the padding prop
    const headerStyle = {};
 
    switch (padding) {

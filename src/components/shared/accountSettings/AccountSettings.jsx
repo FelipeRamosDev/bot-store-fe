@@ -9,6 +9,25 @@ import { Edit, Settings } from '@mui/icons-material';
 
 const DISPLAY_CONFIG = { noColor: true, dashedZero: true };
 
+/**
+ * AccountSettings component displays various account settings and limits in a card format.
+ * 
+ * It includes settings for trade intervals, margin ratios, and limits for trades, daily, and monthly gains/losses.
+ * The component uses `SettingRow` to display each setting with a label and value. It also includes parsing functions 
+ * to handle the display of money and percent values.
+ * 
+ * @param {Object} account - The account object containing settings and limits.
+ * @param {Object} account.limits - Limits related to the account.
+ * @param {number} account.limits.tradesMinInterval - Minimum interval between trades in hours.
+ * @param {number} account.limits.marginRatioCommit - Margin ratio commitment in percent.
+ * @param {Object} account.limits.tradeLoss - Loss limits for trades.
+ * @param {Object} account.limits.tradeGain - Gain limits for trades.
+ * @param {Object} account.limits.dailyLoss - Daily loss limits.
+ * @param {Object} account.limits.dailyGain - Daily gain limits.
+ * @param {Object} account.limits.monthlyLoss - Monthly loss limits.
+ * @param {Object} account.limits.monthlyGain - Monthly gain limits.
+ * @returns {JSX.Element} A Card component containing account settings.
+ */
 export default function AccountSettings({ account }) {
    if (!account) {
       return <></>;

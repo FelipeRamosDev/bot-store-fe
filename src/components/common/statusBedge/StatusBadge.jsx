@@ -1,5 +1,11 @@
 import './StatusBadge.scss';
 
+/**
+ * Parses and returns badge type and color based on the given slot type.
+ *
+ * @param {string} type - The slot type.
+ * @returns {Object} An object with `type` and `color` properties.
+ */
 function parseSlotType(type) {
    let badgeType = '';
    let badgeColor = '';
@@ -25,6 +31,12 @@ function parseSlotType(type) {
    }
 }
 
+/**
+ * Parses and returns badge status and color based on the given slot status.
+ *
+ * @param {string} status - The slot status.
+ * @returns {Object} An object with `status` and `color` properties.
+ */
 function parseSlotStutus(status) {
    let badgeStatus = '';
    let badgeColor = '';
@@ -73,13 +85,18 @@ function parseSlotStutus(status) {
    }
 }
 
+/**
+ * Parses and returns badge side and color based on the given position side.
+ *
+ * @param {string} side - The position side.
+ * @returns {Object} An object with `side` and `color` properties.
+ */
 function parsePositionSide(side) {
    let badgeColor = 'disabled';
 
    if (side) {
       side = side.toUpperCase();
    }
-
 
    switch (side) {
       case 'LONG':
@@ -98,6 +115,19 @@ function parsePositionSide(side) {
    }
 }
 
+/**
+ * `StatusBadge` is a component that displays a badge with a status or type.
+ * The badge appearance is based on the provided `type` and `children` values.
+ *
+ * @param {Object} props - The props object.
+ * @param {string} [props.className=''] - Additional CSS classes to apply to the badge.
+ * @param {string} [props.type=''] - The type of badge to display (e.g., 'slot-status', 'account-type', 'position-side').
+ * @param {string} [props.variant] - The variant of the badge (e.g., 'outlined', 'contained').
+ * @param {string} [props.color='disabled'] - The color of the badge.
+ * @param {string} [props.children] - The content to display inside the badge.
+ *
+ * @returns {JSX.Element} The rendered `span` element with the badge.
+ */
 export default function StatusBadge({ className = '', type, variant, color = 'disabled', children }) {
    if (type === 'slot-status') {
       const parsed = parseSlotStutus(children);

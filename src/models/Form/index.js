@@ -14,8 +14,8 @@ export default class Form {
     * @param {Object} setup - Configuration settings for the form.
     * @param {boolean} [setup.editMode=false] - Whether the form is in edit mode.
     * @param {Object} [setup.editData={}] - Initial data for the form in edit mode.
-    * @param {Object[]} [setup.schema=[]] - An array of field schemas for the form.
-    * @param {Object[]} [setup.dependencies=[]] - An array of dependencies to fetch.
+    * @param {FieldSchema[]} [setup.schema=[]] - An array of field schemas for the form.
+    * @param {FetchDependency[]} [setup.dependencies=[]] - An array of dependencies to fetch.
     * @param {Function} [setup.onChange=() => {}] - A function to call when the form data changes.
     * @param {Object} [setup.user] - User information associated with the form.
     */
@@ -49,7 +49,7 @@ export default class Form {
    /**
     * Converts the form data to a plain object.
     *
-    * @returns {Object} The form data as an object.
+    * @returns {Object} The form data as an parsed object.
     */
    toObject() {
       const data = {};
@@ -91,7 +91,11 @@ export default class Form {
    }
 
    /**
-    * Gets the value of a field by key, supporting nested keys.
+    * Gets the value of a field by key, supporting nested keys separated by a dot separated by a dot.
+    * Example:
+    *   form.getValue('fieldName');
+    *   or
+    *   form.getValue('path.to.fieldName');
     *
     * @param {string} key - The key of the field to retrieve.
     * @returns {*} The value of the field or undefined.
@@ -131,7 +135,7 @@ export default class Form {
    }
 
    /**
-    * Sets the value of a field by key, supporting nested keys.
+    * Sets the value of a field by key, supporting nested keys separated by a dot.
     *
     * @param {string} key - The key of the field to set.
     * @param {*} value - The value to set.
@@ -191,7 +195,7 @@ export default class Form {
    }
 
    /**
-    * Deletes a value by key, supporting nested keys.
+    * Deletes a value by key, supporting nested keys separated by a dot.
     *
     * @param {string} key - The key of the value to delete.
     */
@@ -236,7 +240,7 @@ export default class Form {
    }
 
    /**
-    * Gets the schema for a specific key, supporting nested keys.
+    * Gets the schema for a specific key, supporting nested keys separated by a dot.
     *
     * @param {string} key - The key of the schema to retrieve.
     * @returns {FieldSchema|undefined} The schema for the key or undefined.

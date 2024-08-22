@@ -9,6 +9,13 @@ import Card from '@/components/common/card/Card';
 import APIContext from '@/contexts/4HandsAPI';
 import { login, register } from './Login.helper';
 
+/**
+ * Login component that renders either the login form or the registration form based on the `isRegister` prop.
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isRegister - A flag indicating whether to show the registration form (`true`) or login form (`false`).
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function Login({ isRegister }) {
    const API = useContext(APIContext);
    const router = useRouter();

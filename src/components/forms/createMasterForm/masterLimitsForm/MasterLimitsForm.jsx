@@ -6,6 +6,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MasterLimitsSet from './masterLimitSet/MasterLimitSet';
 
+/**
+ * `MasterLimitsForm` component renders a form section for configuring various limits 
+ * for a master account. It includes settings for trade, daily, and monthly limits, 
+ * with each section being collapsible via an accordion.
+ *
+ * @returns {JSX.Element} - The rendered form section for configuring master account limits.
+ */
 export default function MasterLimitsForm() {
    return <Stack flexDirection="row" flex={1}>
       <Card padding="xs" elevation={10}>

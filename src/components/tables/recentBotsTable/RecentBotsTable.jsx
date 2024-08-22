@@ -5,6 +5,12 @@ import Price from '@/components/displays/price/Price';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import DBQueryContext from '@/contexts/DBQuery';
 
+/**
+ * A table component displaying a list of recent bots along with their scores.
+ * The component fetches bot data from a context and displays it in a table format.
+ *
+ * @returns {React.Element} The rendered table of recent bots.
+ */
 export default function RecentBotsTable() {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const bots = query;

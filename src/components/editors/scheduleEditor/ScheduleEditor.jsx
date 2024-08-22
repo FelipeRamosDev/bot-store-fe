@@ -5,8 +5,17 @@ import TopBorderButton from '@/components/buttons/topBorderButton/TopBorderButto
 import CreateScheduleForm from '@/components/forms/createScheduleForm/CreateScheduleForm';
 import DBQueryContext from '@/contexts/DBQuery';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
-import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 
+/**
+ * `ScheduleEditor` component for displaying, editing, and creating schedules.
+ *
+ * @param {Object} props - Component properties.
+ * @param {string} props.masterUID - The unique identifier for the master.
+ * @param {string} props.editorState - The current state of the editor ('display', 'edit', 'create').
+ * @param {Function} props.setEditorState - Function to update the editor state.
+ *
+ * @returns {JSX.Element} - Rendered component.
+ */
 export default function ScheduleEditor({ masterUID, editorState, setEditorState }) {
    const { query = [] } = useContext(DBQueryContext);
    const goalsSchedule = query.find(item => item.type === 'goals' && item.isActive);
