@@ -11,6 +11,18 @@ import NoDocumentsTile from '../noDocumentsTile/NoDocumentsTile';
 import { parseMessages, switchPower } from './UserInstance.helper';
 import RubberButton from "@/components/buttons/rubberButton/RubberButton";
 
+/**
+ * UserInstanceTile component that displays the status of a user instance.
+ *
+ * This component shows a card with a power button that allows the user to start or shut down the instance,
+ * depending on its current status. It also displays the current status and a message about the instance.
+ *
+ * @component
+ * @example
+ * return <UserInstanceTile />;
+ *
+ * @returns {JSX.Element} A card with a power button and status information, or a loading skeleton or no documents tile.
+ */
 export default function UserInstanceTile() {
    const { doc, isLoading } = useContext(DBQueryContext);
    const API = useContext(APIContext);

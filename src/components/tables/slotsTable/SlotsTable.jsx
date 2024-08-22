@@ -6,6 +6,14 @@ import TableBase from '@/components/tables/tableBase/TableBase';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
 
+/**
+ * A table component to display slot data with pagination and loading states.
+ * 
+ * This component fetches slot data from the DBQueryContext and displays it in a table format.
+ * It includes columns for slot symbol, master name, PNL/ROI, and type.
+ * 
+ * @returns {React.Element} The rendered table component with slot data.
+ */
 export default function SlotsTable() {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const slots = query;

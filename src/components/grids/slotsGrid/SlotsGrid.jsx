@@ -11,6 +11,33 @@ import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
 
+/**
+ * SlotsGrid component displays a grid of slots associated with a master entity.
+ *
+ * This component provides a layout for displaying slots in a grid format. It includes options to 
+ * create new slots, view existing slots, and handle various loading states. It also integrates 
+ * modals for creating new slots and handling user interactions.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Array} [props.slots=[]] - Array of slot objects to be displayed.
+ * @param {Object} [props.master={}] - The master entity to which slots belong, used for determining slot type.
+ * @param {string} [props.className=''] - Optional additional class names for styling.
+ * @param {Object} [props.uInstance={}] - The user instance, used for slot-specific data.
+ * @param {Function} [props.setEditSlotModal] - Function to set the edit slot modal state.
+ * @param {Function} [props.setDeleteConfirmDialog] - Function to set the delete confirmation dialog state.
+ *
+ * @example
+ * const slots = [
+ *   { _id: '1', name: 'Slot 1', status: 'running' },
+ *   { _id: '2', name: 'Slot 2', status: 'stopped' }
+ * ];
+ * const master = { type: 'master-live' };
+ *
+ * return <SlotsGrid slots={slots} master={master} />;
+ *
+ * @returns {JSX.Element} A grid layout displaying slots, with options to create and manage slots.
+ */
 export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
    const [ createSlot, setCreateSlot ] = useState(false);
    const auth = useContext(AuthUserContext);

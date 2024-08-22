@@ -19,6 +19,24 @@ import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
 import { useMenu } from '@/contexts/MenuContext';
 
+/**
+ * MasterMenu component that provides various actions for managing a master entity.
+ *
+ * This component displays a menu with options to start/stop all instances, perform actions specific
+ * to demo or master, and manage the master entity (e.g., edit, archive, delete). It also controls the
+ * visibility of related modals such as Demo Deposit, Exchange API, and Create/Edit Master.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {boolean} [props.isDemo=false] - Flag indicating if demo-specific actions should be shown.
+ * @param {Object} [props.master={}] - The master object which is used in modals.
+ * @param {boolean} [props.noTrasition=false] - Flag to disable menu transition animation.
+ *
+ * @example
+ * return <MasterMenu isDemo={true} master={masterObject} />;
+ *
+ * @returns {JSX.Element} A menu with action items and modals for managing a master entity.
+ */
 export default function MasterMenu({ isDemo = false, master = {}, noTrasition = false }) {
    const [ demoDepositModal, setDemoDepositModal ] = useState(false);
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);

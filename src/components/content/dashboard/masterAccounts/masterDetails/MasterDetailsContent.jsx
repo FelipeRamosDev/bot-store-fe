@@ -10,6 +10,16 @@ import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
 
+/**
+ * MasterDetailsContent component displays detailed information about a master account,
+ * including performance metrics, wallet details, ongoing positions, slots, and closed positions.
+ *
+ * @param {Object} props - Component props.
+ * @param {Object} props.uInstance - The user instance data.
+ * @param {Function} props.setEditSlotModal - Function to open or close the create/edit slot modal.
+ * @param {Function} props.setDeleteConfirmDialog - Function to open or close the delete slot confirmation dialog.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function MasterDetailsContent({ uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const masterUID = doc?._id;

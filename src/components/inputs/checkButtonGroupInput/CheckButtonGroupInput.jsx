@@ -2,6 +2,16 @@ import { useEffect, useState } from 'react';
 import './CheckButtonGroupInput.scss';
 import CheckButton from '@/components/buttons/checkButton/CheckButton';
 
+/**
+ * `CheckButtonGroupInput` renders a group of check buttons for single or multiple selections.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} [props.className=''] - Custom class name for styling.
+ * @param {Object} [props.schema={}] - Schema defining the input options and behavior.
+ * @param {Array} [props.errors=[]] - List of error messages to display.
+ * @param {Function} [props.onChange=() => {}] - Callback function to handle value changes.
+ * @returns {JSX.Element} - The rendered `CheckButtonGroupInput` component.
+ */
 export default function CheckButtonGroupInput({ className = '', schema = {}, errors = [], onChange = () => { }, ...props }) {
    const { label, options = [], defaultValue, multiValue } = schema;
    const [ value, setValue ] = useState(defaultValue);

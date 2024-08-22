@@ -4,6 +4,16 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ClockPicker from './ClockPicker';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
+/**
+ * `ClockDropdown` renders a button that opens a dropdown with a `ClockPicker`.
+ * It allows users to select a time, which is then set in the parent component.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.value - The current time value in 'HH:mm:ss' format.
+ * @param {Function} props.setValue - Function to set the time value in the parent component.
+ *
+ * @returns {JSX.Element} - The rendered `ClockDropdown` component.
+ */
 export default function ClockDropdown({ value, setValue }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const open = Boolean(anchorEl);
