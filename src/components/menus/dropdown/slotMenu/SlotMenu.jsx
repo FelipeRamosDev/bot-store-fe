@@ -10,32 +10,26 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
 import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
+import { useMenu } from '@/contexts/MenuContext';
 
-export default function SlotMenu({ slot = {} }) {
+export default function SlotMenu({ slot = {}, noTrasition = false }) {
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
    const [ editSlotModal, setEditSlotModal ] = useState(false);
-   const [ anchorEl, setAnchorEl ] = useState(null);
-   const open = Boolean(anchorEl);
-
-   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
-   };
+   const { anchorEl, open, handleMenuOpen, handleMenuClose } = useMenu();
 
    return (
       <>
-         <RoundIconButton size="small" Icon={MoreVertIcon} onClick={handleClick} />
+         <RoundIconButton size="small" Icon={MoreVertIcon} onClick={handleMenuOpen} />
 
          <Menu
-            anchorEl={anchorEl}
+            anchorPosition={anchorEl}
+            anchorReference='anchorPosition'
             open={open}
-            onClose={handleClose}
-            onClick={handleClose}
+            onClose={handleMenuClose}
+            onClick={handleMenuClose}
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            transitionDuration={noTrasition ? 0 : undefined}
          >
             <MenuItem onClick={() => setEditSlotModal(true)}>
                <ListItemIcon>
@@ -44,7 +38,7 @@ export default function SlotMenu({ slot = {} }) {
                Edit
             </MenuItem>
 
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleMenuClose}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>

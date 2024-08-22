@@ -17,43 +17,37 @@ import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDi
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
+import { useMenu } from '@/contexts/MenuContext';
 
-export default function MasterMenu({ isDemo = false, master = {} }) {
+export default function MasterMenu({ isDemo = false, master = {}, noTrasition = false }) {
    const [ demoDepositModal, setDemoDepositModal ] = useState(false);
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
    const [ exchangeModal, setExchangeModal ] = useState(false);
    const [ editMasterModal, setEditMasterModal ] = useState(false);
-   const [ anchorEl, setAnchorEl ] = useState(null);
-   const open = Boolean(anchorEl);
-
-   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-   };
-
-   const handleClose = () => {
-      setAnchorEl(null);
-   };
+   const { anchorEl, open, handleMenuOpen, handleMenuClose } = useMenu();
 
    return (
       <>
-         <RoundIconButton Icon={MoreVertIcon} onClick={handleClick} />
+         <RoundIconButton Icon={MoreVertIcon} onClick={handleMenuOpen} />
 
          <Menu
-            anchorEl={anchorEl}
+            anchorPosition={anchorEl}
+            anchorReference='anchorPosition'
             open={open}
-            onClose={handleClose}
-            onClick={handleClose}
+            onClose={handleMenuClose}
+            onClick={handleMenuClose}
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            transitionDuration={noTrasition ? 0 : undefined}
          >
-            <MenuItem onClick={handleClose} disabled>
+            <MenuItem onClick={handleMenuClose} disabled>
                <ListItemIcon>
                   <PlayArrowIcon fontSize="small" />
                </ListItemIcon>
                Start All
             </MenuItem>
 
-            <MenuItem onClick={handleClose} disabled>
+            <MenuItem onClick={handleMenuClose} disabled>
                <ListItemIcon>
                   <StopIcon fontSize="small" />
                </ListItemIcon>
@@ -85,7 +79,7 @@ export default function MasterMenu({ isDemo = false, master = {} }) {
                Edit
             </MenuItem>
 
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleMenuClose}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>
