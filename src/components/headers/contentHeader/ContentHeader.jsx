@@ -41,13 +41,3 @@ export default function ContentHeader({ children, Toolbar = () => <></> }) {
       </div>
    </div>
 }
-
-export default function ContentHeader({ children, Toolbar = () => <></> }) {
-   return <div className="content-header">
-      {children}
-
-      <div className="toolbar">
-         <Toolbar />
-      </div>
-   </div>
-}
