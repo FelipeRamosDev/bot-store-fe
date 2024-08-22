@@ -1,8 +1,25 @@
 import FetchDependency from './FetchDependency';
 import FieldSchema from './FieldSchema';
 
+/**
+ * Form Class
+ *
+ * This class represents a form with fields, schema definitions, dependencies, and validation. 
+ * It provides methods to manage form data, schema, and handle form validation and changes.
+ */
 export default class Form {
-   constructor (setup) {
+   /**
+    * Creates an instance of Form.
+    *
+    * @param {Object} setup - Configuration settings for the form.
+    * @param {boolean} [setup.editMode=false] - Whether the form is in edit mode.
+    * @param {Object} [setup.editData={}] - Initial data for the form in edit mode.
+    * @param {Object[]} [setup.schema=[]] - An array of field schemas for the form.
+    * @param {Object[]} [setup.dependencies=[]] - An array of dependencies to fetch.
+    * @param {Function} [setup.onChange=() => {}] - A function to call when the form data changes.
+    * @param {Object} [setup.user] - User information associated with the form.
+    */
+   constructor(setup) {
       const { editMode = false, editData = {}, schema = [], dependencies = [], onChange = () => {}, user } = Object(setup);
 
       this._data = new Map();
@@ -18,12 +35,22 @@ export default class Form {
       dependencies.map(item => this.setDependency(item));
    }
 
+   /**
+    * Gets the user ID from the user object.
+    *
+    * @returns {string|undefined} The user ID or undefined if no user is set.
+    */
    get userUID() {
       if (this.user) {
          return this.user._id;
       }
    }
 
+   /**
+    * Converts the form data to a plain object.
+    *
+    * @returns {Object} The form data as an object.
+    */
    toObject() {
       const data = {};
 
@@ -41,10 +68,20 @@ export default class Form {
       return data;
    }
 
+   /**
+    * Sets the user information in the form.
+    *
+    * @param {Object} user - The user object to set.
+    */
    setUser(user) {
       this.setValue('user', user);
    }
 
+   /**
+    * Sets the initial data for the form in edit mode.
+    *
+    * @param {Object} data - The data to set for editing.
+    */
    setEditData(data) {
       if (data) {
          this.editMode = true;
@@ -53,6 +90,12 @@ export default class Form {
       }
    }
 
+   /**
+    * Gets the value of a field by key, supporting nested keys.
+    *
+    * @param {string} key - The key of the field to retrieve.
+    * @returns {*} The value of the field or undefined.
+    */
    getValue(key) {
       if (typeof key !== 'string') {
          return;
@@ -87,6 +130,12 @@ export default class Form {
       }
    }
 
+   /**
+    * Sets the value of a field by key, supporting nested keys.
+    *
+    * @param {string} key - The key of the field to set.
+    * @param {*} value - The value to set.
+    */
    setValue(key, value) {
       if (typeof key !== 'string') {
          return;
@@ -141,6 +190,11 @@ export default class Form {
       }
    }
 
+   /**
+    * Deletes a value by key, supporting nested keys.
+    *
+    * @param {string} key - The key of the value to delete.
+    */
    deleteValue(key) {
       if (typeof key !== 'string') {
          return;
@@ -169,6 +223,9 @@ export default class Form {
       }
    }
 
+   /**
+    * Clears all form data and reinitializes the schema.
+    */
    clearAll() {
       this._data.forEach((value, key) => this.deleteValue(key));
       this._schema.forEach(item => item.init(this));
@@ -178,6 +235,12 @@ export default class Form {
       }
    }
 
+   /**
+    * Gets the schema for a specific key, supporting nested keys.
+    *
+    * @param {string} key - The key of the schema to retrieve.
+    * @returns {FieldSchema|undefined} The schema for the key or undefined.
+    */
    getSchema(key) {
       if (typeof key !== 'string') {
          return;
@@ -201,6 +264,11 @@ export default class Form {
       }
    }
 
+   /**
+    * Gets a list of field schemas that use dependencies.
+    *
+    * @returns {FieldSchema[]} An array of field schemas that use dependencies.
+    */
    getUseDependencies() {
       const result = [];
 
@@ -213,6 +281,12 @@ export default class Form {
       return result;
    }
 
+   /**
+    * Sets the schema for a specific key.
+    *
+    * @param {string} key - The key of the field schema.
+    * @param {Object|FieldSchema} value - The field schema or schema configuration.
+    */
    setSchema(key, value) {
       if (value.isFieldSchema) {
          this._schema.set(key, value.init(this))
@@ -221,6 +295,11 @@ export default class Form {
       }
    }
 
+   /**
+    * Fetches all dependencies and updates schemas that use dependencies.
+    *
+    * @returns {Promise<Object>} A promise that resolves with a success status.
+    */
    async fetchDependencies() {
       const dependencies = [];
       this._dependencies.forEach(item => dependencies.push(item));
@@ -237,12 +316,23 @@ export default class Form {
       }
    }
 
+   /**
+    * Gets a dependency by its ID.
+    *
+    * @param {string} id - The ID of the dependency.
+    * @returns {FetchDependency|undefined} The dependency or undefined.
+    */
    getDependency(id) {
       if (!id) return;
 
       return this._dependencies.get(id);
    }
 
+   /**
+    * Sets a dependency for the form.
+    *
+    * @param {Object} dependency - The dependency to set.
+    */
    setDependency(dependency) {
       if (!dependency) return;
       const dep = new FetchDependency(dependency, this);
@@ -250,10 +340,20 @@ export default class Form {
       this._dependencies.set(dep.id, dep);
    }
 
+   /**
+    * Triggers the onChange event with the given arguments.
+    *
+    * @param {...*} args - Arguments to pass to the onChange handler.
+    */
    triggerChange(...args) {
       this._onChange(...args);
    }
 
+   /**
+    * Validates the entire form and its fields.
+    *
+    * @returns {Object} An object containing validation results and errors.
+    */
    validateForm() {
       this._schema.forEach(item => {
          item.validateType();
@@ -270,6 +370,12 @@ export default class Form {
       }
    }
 
+   /**
+    * Gets field errors for the form, including nested fields.
+    *
+    * @param {string} [path] - The path of the field to get errors for.
+    * @returns {Object} An object containing field errors.
+    */
    getFieldErrors(path) {
       let errors = {};
 
@@ -292,6 +398,11 @@ export default class Form {
       }
    }
 
+   /**
+    * Sets a setter function for the form.
+    *
+    * @param {Function} setter - The setter function to set.
+    */
    formSetter(setter) {
       if (typeof setter === 'function') {
          Object.defineProperty(this, 'setForm', {
@@ -302,6 +413,11 @@ export default class Form {
       }
    }
 
+   /**
+    * Sets a setter function for handling form errors.
+    *
+    * @param {Function} setter - The setter function to set.
+    */
    errorSetter(setter) {
       if (typeof setter === 'function') {
          Object.defineProperty(this, 'setErrors', {

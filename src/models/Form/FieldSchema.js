@@ -1,7 +1,32 @@
 import Form from '.';
 
+/**
+ * FieldSchema Class
+ *
+ * This class defines a schema for a form field, including its type, validation rules, and other properties.
+ * It handles field initialization, validation, error management, and more.
+ */
 export default class FieldSchema {
-   constructor (setup = {}, form) {
+   /**
+    * Creates an instance of FieldSchema.
+    *
+    * @param {Object} setup - Configuration settings for the field schema.
+    * @param {Form} form - The form instance that this field schema belongs to.
+    * @param {string} [setup.key] - The unique key for the field.
+    * @param {string} [setup.label] - The label for the field.
+    * @param {string} [setup.placeholder] - The placeholder text for the field.
+    * @param {*} [setup.defaultValue] - The default value for the field.
+    * @param {Object} [setup.subForm] - The schema for a sub-form, if applicable.
+    * @param {Function} [setup.type=String] - The data type of the field (e.g., String, Number).
+    * @param {boolean} [setup.required=false] - Whether the field is required.
+    * @param {string} [setup.inputType='text'] - The HTML input type for the field (e.g., 'text', 'password').
+    * @param {Function[]} [setup.validators=[]] - An array of validation functions.
+    * @param {Object[]} [setup.options=[]] - Options for fields like select or radio buttons.
+    * @param {Function} [setup.parseInput] - A function to parse the input value.
+    * @param {boolean} [setup.useDependencies=false] - Whether to use dependencies for the field.
+    * @param {Function} [setup.onInput=(value) => {}] - A function to handle input changes.
+    */
+   constructor(setup = {}, form) {
       const {
          key,
          label,
@@ -20,7 +45,7 @@ export default class FieldSchema {
       } = Object(setup);
 
       if (parseInput && typeof parseInput !== 'function') {
-         throw new Error(`The "parseInput" param is should receive a function but received "${typeof parseInput}"!`);
+         throw new Error(`The "parseInput" param should receive a function but received "${typeof parseInput}"!`);
       }
 
       this.isFieldSchema = true;
@@ -49,24 +74,50 @@ export default class FieldSchema {
       });
    }
 
+   /**
+    * Gets the form instance associated with this field schema.
+    *
+    * @returns {Form} The form instance.
+    */
    get form() {
       return this._form();
    }
 
+   /**
+    * Gets the sub-form associated with this field schema, if applicable.
+    *
+    * @returns {Form|undefined} The sub-form instance or undefined.
+    */
    get subForm() {
       if (this.type === Object) {
          return this.form.getValue(this.key);
       }
    }
 
+   /**
+    * Checks if the field has any errors.
+    *
+    * @returns {boolean} True if there are errors, otherwise false.
+    */
    get error() {
       return Boolean(this.errors.size);
    }
    
+   /**
+    * Appends a dispatch function for handling field updates.
+    *
+    * @param {Function} dispatch - The dispatch function.
+    */
    appendDispatch(dispatch) {
       this.dispatch = dispatch;
    }
 
+   /**
+    * Initializes the field schema, setting default values and options.
+    *
+    * @param {Form} form - The form instance to set as the parent form.
+    * @returns {FieldSchema} The current instance of FieldSchema.
+    */
    init(form) {
       this.setParentForm(form);
       const subForm = this._subForm();
@@ -93,10 +144,18 @@ export default class FieldSchema {
       return this;
    }
 
+   /**
+    * Gets the value of the field in edit mode.
+    *
+    * @returns {*} The edit value of the field.
+    */
    getEditValue() {
       return this.form.editData[this.key];
    }
 
+   /**
+    * Sets the options for the field, handling dynamic and static options.
+    */
    setOptions() {
       if (typeof this._options === 'function') {
          const parsed = this._options.call(this, this.form);
@@ -111,6 +170,12 @@ export default class FieldSchema {
       }
    }
 
+   /**
+    * Sets the parent form for this field schema.
+    *
+    * @param {Form} form - The form instance to set as the parent form.
+    * @returns {FieldSchema} The current instance of FieldSchema.
+    */
    setParentForm(form) {
       if (form instanceof Form) {
          this._form = () => form;
@@ -119,6 +184,11 @@ export default class FieldSchema {
       return this;
    }
 
+   /**
+    * Parses the current value of the field based on its type.
+    *
+    * @returns {*} The parsed value.
+    */
    parse() {
       let currentValue = this.form[this.key];
 
@@ -147,6 +217,11 @@ export default class FieldSchema {
       }
    }
 
+   /**
+    * Validates the current value of the field using the provided validators.
+    *
+    * @returns {boolean} True if there are validation errors, otherwise false.
+    */
    validate() {
       const currentValue = this.form[this.key];
 
@@ -173,6 +248,11 @@ export default class FieldSchema {
       return Boolean(errors.length);
    }
 
+   /**
+    * Validates the type of the field value to ensure it matches the expected type.
+    *
+    * @throws {Error} Throws an error if the value type is incorrect.
+    */
    validateType() {
       const currentValue = this.form[this.key];
       if (!currentValue) {
@@ -220,6 +300,11 @@ export default class FieldSchema {
       }
    }
 
+   /**
+    * Gets the list of errors for the field.
+    *
+    * @returns {Object[]} An array of error objects.
+    */
    getErrors() {
       const output = [];
 
@@ -227,10 +312,21 @@ export default class FieldSchema {
       return output;
    }
 
+   /**
+    * Sets an error for the field.
+    *
+    * @param {string} name - The name of the error.
+    * @param {string} message - The error message.
+    */
    setError(name, message) {
-      this.errors.set(name, {name, message})
+      this.errors.set(name, {name, message});
    }
 
+   /**
+    * Clears an error for the field.
+    *
+    * @param {string} name - The name of the error to clear.
+    */
    clearError(name) {
       this.errors.delete(name);
    }
