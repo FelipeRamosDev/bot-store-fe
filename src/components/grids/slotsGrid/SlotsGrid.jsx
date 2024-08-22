@@ -9,6 +9,7 @@ import CreateSlot from '@/components/forms/createSlotForm/CreateSlotForm';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
 import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
+import { MenuProvider } from '@/contexts/MenuContext';
 
 export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance }) {
    const [ createSlot, setCreateSlot ] = useState(false);
@@ -40,9 +41,12 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
       />)}
 
       {!slots.length ? <NoDocumentsTile message="You have no slots created yet! Create one to start." onClick={() => setCreateSlot(true)} /> : ''}
-      {slots.map(slot => (
-         <SlotTile key={Math.random()} slot={slot} uInstance={uInstance} />
-      ))}
+
+      <MenuProvider>
+         {slots.map(slot => (
+            <SlotTile key={Math.random()} slot={slot} uInstance={uInstance} />
+         ))}
+      </MenuProvider>
 
       <ContentModal
          padding="m"
