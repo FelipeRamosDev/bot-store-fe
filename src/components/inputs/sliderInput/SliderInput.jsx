@@ -5,6 +5,19 @@ import TextField from '@mui/material/TextField';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useEffect, useState } from 'react';
 
+/**
+ * `SliderInput` is a component that combines a slider and a text input field, allowing users to adjust a numerical value.
+ * It integrates with Material-UI for styling and provides real-time updates between the slider and input field.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.schema - The schema object that defines the input's properties, including type, label, and range.
+ * @param {Array} [props.errors=[]] - An array of error messages to display below the input field.
+ * @param {boolean} [props.fullWidth=true] - If `true`, the component will take up the full width of its container.
+ * @param {Function} [props.onChange=() => {}] - A callback function to handle changes to the input value.
+ * @param {Object} [props] - Additional props to pass to the `TextField` component.
+ * 
+ * @returns {JSX.Element} - The rendered slider and text input field with optional error messages.
+ */
 export default function SliderInput({ schema, errors = [], fullWidth = true, onChange = () => {}, ...props }) {
    let { inputType = 'number', label, color = 'tertiary', min = 1, max = 100 } = schema || {};
    const [ value, setValue ] = useState('');
