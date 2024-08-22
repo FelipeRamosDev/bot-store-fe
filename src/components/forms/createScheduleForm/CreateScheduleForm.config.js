@@ -1,7 +1,7 @@
 import Form from '@/models/Form';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
 import config from '@/config.json';
-import TimeFieldSchema from '@/models/Form/fieldTypes/TimeFieldSchema';
+import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 
 const createScheduleForm = new Form({
    formID: 'create-schedule',
@@ -13,12 +13,12 @@ const createScheduleForm = new Form({
          defaultValue: config.dateTime.weekdays,
          options: config.dateTime.weekdays.map(day => ({ label: day, value: day }))
       }),
-      new TimeFieldSchema({
+      new TextFieldSchema({
          key: 'startTime',
          label: 'Start Time',
          required: true
       }),
-      new TimeFieldSchema({
+      new TextFieldSchema({
          key: 'endTime',
          label: 'End Time',
          required: true

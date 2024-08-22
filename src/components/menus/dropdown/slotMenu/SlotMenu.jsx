@@ -15,11 +15,12 @@ import { useMenu } from '@/contexts/MenuContext';
 export default function SlotMenu({ slot = {}, noTrasition = false }) {
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
    const [ editSlotModal, setEditSlotModal ] = useState(false);
-   const { anchorEl, open, handleMenuOpen, handleMenuClose } = useMenu();
+   const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
+   const open = Boolean (anchorEl?.id === slot.cod);
 
    return (
       <>
-         <RoundIconButton size="small" Icon={MoreVertIcon} onClick={handleMenuOpen} />
+         <RoundIconButton size="small" Icon={MoreVertIcon} onClick={(ev) => handleMenuOpen(ev, slot.cod)} />
 
          <Menu
             anchorPosition={anchorEl}
@@ -35,7 +36,7 @@ export default function SlotMenu({ slot = {}, noTrasition = false }) {
                <ListItemIcon>
                   <ModeEditIcon fontSize="small" />
                </ListItemIcon>
-               Edit
+               Edit ({slot.cod})
             </MenuItem>
 
             <MenuItem onClick={handleMenuClose}>
@@ -53,7 +54,7 @@ export default function SlotMenu({ slot = {}, noTrasition = false }) {
             </MenuItem>
          </Menu>
 
-         <CreateSlotModal editMode={true} open={editSlotModal} setOpen={setEditSlotModal} slot={slot} />
+         {editSlotModal && <CreateSlotModal editMode={true} open={editSlotModal} setOpen={setEditSlotModal} slot={slot} />}
          <DeleteSlotConfirmDialog
             slot={slot}
             open={deleteConfirmDialog}
