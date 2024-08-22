@@ -6,6 +6,19 @@ import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import MenuItem from '@mui/material/MenuItem';
 
+/**
+ * `SelectInput` is a component that renders a Material-UI `Select` dropdown with an optional label and error messages.
+ * It allows users to choose from a list of options, and includes the ability to add a "None" option.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} [props.className=''] - Additional class names to apply to the component.
+ * @param {Array} [props.errors=[]] - An array of error messages to display below the select field.
+ * @param {Object} [props.schema={}] - The schema object that defines the select's properties, including label, options, and default value.
+ * @param {Function} [props.onChange=() => {}] - A callback function to handle changes to the selected value.
+ * @param {Object} [props] - Additional props to pass to the `Select` component.
+ * 
+ * @returns {JSX.Element} - The rendered select dropdown with optional label and error messages.
+ */
 export default function SelectInput({ className = '', errors = [], schema = {}, onChange = () => {}, ...props }) {
    const { label, options = [], useNoneOption = false } = schema;
    let { value = '' } = schema;
