@@ -54,7 +54,7 @@ export default function SlotMenu({ slot = {}, noTrasition = false }) {
             </MenuItem>
          </Menu>
 
-         {editSlotModal && <CreateSlotModal editMode={true} open={editSlotModal} setOpen={setEditSlotModal} slot={slot} />}
+         <CreateSlotModal editMode={true} open={editSlotModal} setOpen={setEditSlotModal} slot={slot} />
          <DeleteSlotConfirmDialog
             slot={slot}
             open={deleteConfirmDialog}
