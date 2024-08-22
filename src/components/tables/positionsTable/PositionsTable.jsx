@@ -9,6 +9,16 @@ import DBQueryContext from '@/contexts/DBQuery';
 import Percent from '@/components/displays/percent/Percent';
 import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 
+/**
+ * A table component that displays trading positions with various details.
+ *
+ * @param {Object} props - The properties for the PositionsTable component.
+ * @param {Array} props.positionsSet - An optional array of positions to display. If not provided, data from the context will be used.
+ * @param {Array} [props.include] - Optional array of property keys to include in the table.
+ * @param {Array} [props.exclude] - Optional array of property keys to exclude from the table.
+ *
+ * @returns {React.Element} The rendered PositionsTable component.
+ */
 export default function PositionsTable({ positionsSet, include, exclude }) {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const positions = positionsSet || query;
