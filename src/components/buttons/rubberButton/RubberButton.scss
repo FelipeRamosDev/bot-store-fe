@@ -1,0 +1,39 @@
+@import "../../../style/scss/variables.scss";
+
+.rubber-button {
+   background-color: $background-paper-light;
+
+   &.MuiButton-containedPrimary {
+      color: $primary;
+   }
+
+   &.MuiButton-containedSecondary {
+      color: $secondary;
+   }
+
+   &.MuiButton-containedTertiary {
+      color: $tertiary;
+   }
+
+   &.MuiButton-containedSuccess {
+      color: $success;
+
+      &:hover {
+         color: $background-paper-light;
+         background-color: $success;
+      }
+   }
+
+   &.MuiButton-containedWarn {
+      color: $warn;
+
+      &:hover {
+         color: $background-paper-light;
+         background-color: $warn;
+      }
+   }
+
+   &.MuiButton-containedError {
+      color: $error;
+   }
+}

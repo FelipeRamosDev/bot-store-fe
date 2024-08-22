@@ -1,15 +1,27 @@
-import FieldSchema from "./FieldSchema";
+import FetchDependency from './FetchDependency';
+import FieldSchema from './FieldSchema';
 
 export default class Form {
    constructor (setup) {
-      const { schema = [], onChange = () => {} } = Object(setup);
+      const { editMode = false, editData = {}, schema = [], dependencies = [], onChange = () => {}, user } = Object(setup);
 
       this._data = new Map();
       this._schema = new Map();
+      this._dependencies = new Map();
       this._onChange = onChange.bind(this);
       this.setErrors = () => {};
+      this.user = user;
+      this.editMode = editMode;
+      this.editData = editData;
 
       schema.map(item => this.setSchema(item.key, item));
+      dependencies.map(item => this.setDependency(item));
+   }
+
+   get userUID() {
+      if (this.user) {
+         return this.user._id;
+      }
    }
 
    toObject() {
@@ -19,13 +31,26 @@ export default class Form {
          const schema = this.getSchema(key);
 
          if (schema) {
-            data[key] = schema.parse();
+            const parsed = schema.parse();
+            if (parsed) data[key] = parsed;
          } else {
-            data[key] = item;
+            if (item) data[key] = item;
          }
       });
 
       return data;
+   }
+
+   setUser(user) {
+      this.setValue('user', user);
+   }
+
+   setEditData(data) {
+      if (data) {
+         this.editMode = true;
+         this.editData = data;
+         this._schema.forEach(item => item.init(this));
+      }
    }
 
    getValue(key) {
@@ -144,6 +169,15 @@ export default class Form {
       }
    }
 
+   clearAll() {
+      this._data.forEach((value, key) => this.deleteValue(key));
+      this._schema.forEach(item => item.init(this));
+
+      if (this.setForm) {
+         this.setForm(this);
+      }
+   }
+
    getSchema(key) {
       if (typeof key !== 'string') {
          return;
@@ -167,12 +201,53 @@ export default class Form {
       }
    }
 
+   getUseDependencies() {
+      const result = [];
+
+      this._schema.forEach(item => {
+         if (item.useDependencies) {
+            result.push(item);
+         }
+      });
+
+      return result;
+   }
+
    setSchema(key, value) {
       if (value.isFieldSchema) {
          this._schema.set(key, value.init(this))
       } else {
          this._schema.set(key, new FieldSchema(value, this).init());
       }
+   }
+
+   async fetchDependencies() {
+      const dependencies = [];
+      this._dependencies.forEach(item => dependencies.push(item));
+
+      try {
+         for (const item of dependencies) {
+            await item.exec();
+         }
+
+         this.getUseDependencies().map(schema => schema?.setOptions());
+         return { success: true };
+      } catch (err) {
+         throw err;
+      }
+   }
+
+   getDependency(id) {
+      if (!id) return;
+
+      return this._dependencies.get(id);
+   }
+
+   setDependency(dependency) {
+      if (!dependency) return;
+      const dep = new FetchDependency(dependency, this);
+
+      this._dependencies.set(dep.id, dep);
    }
 
    triggerChange(...args) {
@@ -214,6 +289,16 @@ export default class Form {
          return errors[path];
       } else {
          return errors;
+      }
+   }
+
+   formSetter(setter) {
+      if (typeof setter === 'function') {
+         Object.defineProperty(this, 'setForm', {
+            get: () => setter,
+            enumerable: true,
+            configurable: true
+         });
       }
    }
 

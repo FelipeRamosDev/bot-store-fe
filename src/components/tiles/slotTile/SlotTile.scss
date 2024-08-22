@@ -1,0 +1,86 @@
+@import "../../../style/scss/variables.scss";
+
+.slot-tile {
+   width: 100%;
+
+   .status-badge {
+      font-size: 0.6rem;
+   }
+
+   .tile-header {
+      display: flex;
+      justify-content: space-between;
+
+      .text-wrap {
+         display: inline-flex;
+         align-items: center;
+         gap: 0.2rem 0.5rem;
+         flex-wrap: wrap;
+
+         a {
+            color: $text;
+            text-decoration: none;
+
+            &:hover {
+               text-decoration: underline;
+            }
+         }
+
+         .bot-name {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: $grey-light;
+            margin-bottom: 0;
+            min-width: 100%;
+         }
+      }
+
+      .title {
+         font-size: 1.3rem;
+         font-weight: 600;
+         margin-top: 0;
+         margin-bottom: 0;
+      }
+
+      .btn-wrap {
+         display: flex;
+         align-items: center;
+
+         >button {
+            margin-left: 0.5rem;
+         }
+      }
+   }
+
+   .slot-data {
+      display: flex;
+      width: 100%;
+      margin-top: 2rem;
+      justify-content: space-between;
+      margin-bottom: auto;
+
+      .column {
+         display: flex;
+         flex-direction: column;
+
+         .item {
+            color: $grey-light;
+            line-height: 0.9rem;
+            margin-bottom: 0.1rem;
+
+            label {
+               font-size: 0.8rem;
+               padding-inline-end: 0.4rem;
+            }
+
+            span {
+               font-size: 0.9rem;
+            }
+         }
+
+         .price-display {
+            margin-top: auto;
+         }
+      }
+   }
+}

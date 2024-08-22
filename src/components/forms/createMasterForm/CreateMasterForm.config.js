@@ -3,8 +3,9 @@ import Form from '@/models/Form';
 
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
+import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 
-export default new Form({
+const createMasterForm = new Form({
    schema: [
       new RadioGroupSchema({
          key: 'type',
@@ -27,10 +28,11 @@ export default new Form({
          label: 'Description',
          placeholder: 'Enter a description for the account...'
       }),
-      {
+      new ObjectFieldSchema({
          key: 'limits',
-         type: Object,
          subForm: MasterLimitsFormConfig
-      }
+      })
    ]
 });
+
+export default createMasterForm;

@@ -1,0 +1,75 @@
+@import "../../../style/scss/variables.scss";
+
+.pnl-tile {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+
+   @media screen and (max-width: $screen-m) {
+      flex-wrap: wrap;
+
+      &.card.p-s {
+         padding: 0.8rem;
+         min-width: 150px;
+      }
+
+      .price-display,
+      .percent-display {
+         font-size: 1.1rem;
+      }
+   }
+
+   @media screen and (max-width: $screen-s) {
+      &.card.p-s {
+         padding: 0.3rem 0.3rem 0.4rem 0.3rem;
+      }
+
+      .price-display,
+      .percent-display {
+         font-size: 1rem;
+      }
+   }
+
+   &[border-color=success][border-side] {
+      border-color: $success;
+   }
+
+   &[border-color=error][border-side] {
+      border-color: $error;
+   }
+
+   &[border-side=top] {
+      padding-bottom: calc(1.25rem - 4px);
+      border-top: 4px solid $grey-light;
+   }
+
+   &[border-side=right] {
+      border-right: 5px solid $grey-light;
+   }
+
+   &[border-side=left] {
+      border-left: 5px solid $grey-light;
+   }
+
+   &[border-side=bottom] {
+      padding-top: calc(1.25rem - 4px);
+      border-bottom: 4px solid $grey-light;
+   }
+
+   label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      color: $grey-light;
+
+      @media screen and (max-width: $screen-m) {
+         font-size: 0.9rem;
+      }
+
+      @media screen and (max-width: $screen-s) {
+         font-size: 0.7rem;
+      }
+   }
+}

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import DashboardHeader from "./DashboardHeader";
 import DashboardContent from "./DashboardContent";
 import DashboardSidebar from "./DashboardSidebar";
-import ContentSidebar from "@/components/layout/ContentSidebar";
+import ContentSidebar from "@/components/layout/contentSidebar/ContentSidebar";
 
 export default function DashboardHome() {
    const [ createMasterModal, setCreateMasterModal ] = useState(false);

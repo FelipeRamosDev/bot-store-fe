@@ -4,7 +4,7 @@ import { APIProvider } from '@/contexts/4HandsAPI';
 
 export default function RootProvider({ children }) {
    return (
-      <APIProvider intanceTag={process.env.instance}>
+      <APIProvider>
          <ThemeProvider theme={darkTheme}>
             {children}
          </ThemeProvider>

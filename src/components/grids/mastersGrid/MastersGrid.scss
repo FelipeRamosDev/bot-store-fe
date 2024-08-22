@@ -7,6 +7,12 @@
    column-gap: 2%;
    row-gap: 0.7rem;
 
+   &.vertical-align {
+      .tile {
+         flex: 100%;
+      }
+   }
+
    .tile {
       flex: 100%;
 
@@ -24,5 +30,11 @@
          flex: 23.5%;
          min-width: 23.5%;
       }
+   }
+}
+
+.sidebar {
+   .masters-grid {
+      margin-top: 1rem;
    }
 }

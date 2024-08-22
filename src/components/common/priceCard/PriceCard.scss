@@ -1,0 +1,33 @@
+@import "../../../style/scss/variables.scss";
+
+.price-card {
+   &[border-color=disabled][border-side] {
+      border-color: $grey;
+   }
+
+   &[border-color=success][border-side] {
+      border-color: $success;
+   }
+
+   &[border-color=error][border-side] {
+      border-color: $error;
+   }
+
+   &[border-side=top] {
+      padding-bottom: calc(1.25rem - 4px);
+      border-top: 4px solid $grey-light;
+   }
+
+   &[border-side=right] {
+      border-right: 5px solid $grey-light;
+   }
+
+   &[border-side=left] {
+      border-left: 5px solid $grey-light;
+   }
+
+   &[border-side=bottom] {
+      padding-top: calc(1.25rem - 4px);
+      border-bottom: 4px solid $grey-light;
+   }
+}

@@ -1,6 +1,6 @@
 import './StatusBadge.scss';
 
-function parseSlotStatus(type) {
+function parseSlotType(type) {
    let badgeType = '';
    let badgeColor = '';
 
@@ -21,6 +21,54 @@ function parseSlotStatus(type) {
 
    return {
       type: badgeType,
+      color: badgeColor
+   }
+}
+
+function parseSlotStutus(status) {
+   let badgeStatus = '';
+   let badgeColor = '';
+
+   switch (status) {
+      case 'running':
+         badgeStatus = 'RUNNING';
+         badgeColor = 'success';
+         break;
+      case 'paused':
+         badgeStatus = 'PAUSED';
+         badgeColor = 'warn';
+         break;
+      case 'opening-position':
+         badgeStatus = 'OPENING TRADE';
+         badgeColor = 'warn';
+         break;
+      case 'closing-position':
+         badgeStatus = 'CLOSING TRADE';
+         badgeColor = 'warn';
+         break;
+      case 'fixing-position':
+         badgeStatus = 'FIXING POSITION';
+         badgeColor = 'warn';
+         break;
+      case 'starting':
+         badgeStatus = 'STARTING';
+         badgeColor = 'warn';
+         break;
+      case 'stopping':
+         badgeStatus = 'STOPPING';
+         badgeColor = 'warn';
+         break;
+      case 'stopped':
+         badgeStatus = 'STOPPED';
+         break;
+      case 'error':
+         badgeStatus = 'ERROR';
+         badgeColor = 'error';
+         break;
+   }
+
+   return {
+      status: badgeStatus,
       color: badgeColor
    }
 }
@@ -50,9 +98,16 @@ function parsePositionSide(side) {
    }
 }
 
-export default function StatusBadge({ className = '', type, color = 'disabled', children }) {
+export default function StatusBadge({ className = '', type, variant, color = 'disabled', children }) {
+   if (type === 'slot-status') {
+      const parsed = parseSlotStutus(children);
+
+      color = parsed.color;
+      children = parsed.status;
+   }
+
    if (type === 'account-type') {
-      const parsed = parseSlotStatus(children);
+      const parsed = parseSlotType(children);
 
       color = parsed.color;
       children = parsed.type;
@@ -68,5 +123,6 @@ export default function StatusBadge({ className = '', type, color = 'disabled', 
    return <span
       className={`${className} status-badge`}
       color={color}
+      variant={variant}
    >{children}</span>
 }

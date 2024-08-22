@@ -17,6 +17,30 @@
    color: $text;
 }
 
+.MuiCheckbox-colorPrimary {
+   color: $primary;
+}
+
+.MuiCheckbox-colorSecondary {
+   color: $secondary;
+}
+
+.MuiCheckbox-colorTertiary {
+   color: $tertiary;
+}
+
+.MuiCheckbox-colorSuccess {
+   color: $success;
+}
+
+.MuiCheckbox-colorWarn {
+   color: $warn;
+}
+
+.MuiCheckbox-colorError {
+   color: $error;
+}
+
 .MuiButton-containedSecondary {
    color: $text-secondary;
 }
@@ -51,5 +75,29 @@
    &.MuiIconButton-colorTertiary {
       background-color: $tertiary;
       color: $text-tertiary;
+   }
+   
+   &.MuiIconButton-colorSuccess {
+      background-color: $success;
+      color: $text-success;
+   }
+
+   &.MuiIconButton-colorError {
+      background-color: $error;
+      color: $text-error;
+   }
+
+   &.MuiIconButton-colorWarn {
+      background-color: $warn;
+      color: $text-warn;
+   }
+
+   &.MuiIconButton-colorDisabled {
+      background-color: $grey-light;
+      color: $grey;
+   }
+
+   &.Mui-disabled {
+      background-color: $grey;
    }
 }

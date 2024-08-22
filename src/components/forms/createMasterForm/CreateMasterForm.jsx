@@ -8,23 +8,32 @@ import MasterLimitsForm from './masterLimitsForm/MasterLimitsForm';
 import Card from '@/components/common/card/Card';
 import APIContext from '@/contexts/4HandsAPI';
 import AuthUser from '@/contexts/AuthUser';
+import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 
-export default function CreateMasterForm({ onSuccess }) {
+export default function CreateMasterForm({ onSuccess, editMode = false, master }) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUser);
 
    async function onSubmit(data) {
       data.user = user._id;
+      let reqHttp;
+
+      if (editMode) {
+         const toUpdate = { masterUID: master._id, data };
+         reqHttp = async () => await API.ajax.authPost('/master-account/edit', toUpdate);
+      } else {
+         reqHttp = async () => await API.ajax.authPut('/master-account/create', data);
+      }
 
       try {
-         const created = await API.ajax.authPut('/master-account/create', data);
+         const response = await reqHttp();
          
-         if (created.error) {
-            throw created;
+         if (response.error) {
+            throw response;
          }
 
-         if (created.success) {
-            onSuccess(created.masterAccount);
+         if (response.success) {
+            onSuccess(response.masterAccount);
          }
       } catch (err) {
          throw err;
@@ -34,12 +43,13 @@ export default function CreateMasterForm({ onSuccess }) {
    return (<FormBase
       formID="create-master"
       formSet={createMasterForm}
-      submitLabel="Create"
+      submitLabel={editMode ? 'Save' : 'Create'}
       onSubmit={onSubmit}
+      editData={master}
    >
-      <Stack flexDirection="row" justifyContent="space-between" gap="1.5rem" marginBottom="2rem">
+      <ContentSplit breakpoint="l">
          <Stack flexDirection="column" flex={1} gap="1rem">
-            <FormInput path="type" />
+            {!editMode && <FormInput path="type" />}
 
             <FormInput path="name" />
             <FormInput path="description" multiline={true} minRows={5} />
@@ -47,8 +57,7 @@ export default function CreateMasterForm({ onSuccess }) {
             <Card padding="xs" elevation={15}>
                <h3 className="card-title">Risk Management</h3>
 
-               <Stack flexDirection="row" flex={1} gap="1rem">
-                  <FormInput path="limits.leverage" />
+               <Stack flex={1} gap="1rem">
                   <FormInput path="limits.tradesMinInterval" />
                   <FormInput path="limits.marginRatioCommit" />
                </Stack>
@@ -56,6 +65,6 @@ export default function CreateMasterForm({ onSuccess }) {
          </Stack>
 
          <MasterLimitsForm />
-      </Stack>
+      </ContentSplit>
    </FormBase>);
 }

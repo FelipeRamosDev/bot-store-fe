@@ -1,4 +1,5 @@
 import FieldSchema from "../FieldSchema";
+import TextInput from "@/components/inputs/textInput/TextInput";
 
 export default class PasswordFieldSchema extends FieldSchema {
    constructor (setup, form) {
@@ -6,5 +7,7 @@ export default class PasswordFieldSchema extends FieldSchema {
 
       this.type = String;
       this.inputType = 'password';
+
+      this.Input = TextInput;
    }
 }

@@ -1,0 +1,68 @@
+@import "../../../style/scss/variables.scss";
+
+.page > .content-sidebar {
+   padding-top: 3rem;
+   padding-bottom: 5rem;
+}
+
+.content-sidebar {
+   display: flex;
+   gap: 2rem;
+   flex-direction: column;
+   flex-wrap: wrap;
+
+   @media screen and (min-width: $screen-l) {
+      flex-direction: row;
+   }
+
+   .layout-header {
+      max-width: 100%;
+      min-width: 100%;
+   }
+
+   .toolbar {
+      text-align: right;
+   }
+
+   .content {
+      flex: 1;
+      max-width: 100%;
+
+      @media screen and (min-width: $screen-l) {
+         min-width: calc(70% - 1rem);
+      }
+   }
+
+   .sidebar {
+      flex: 1;
+      max-width: 100%;
+
+      @media screen and (min-width: $screen-l) {
+         flex: calc(30% - 1rem);
+      }
+
+      >* {
+         margin-bottom: 1rem;
+      }
+
+      .section-title {
+         font-size: 1.2rem;
+         text-align: center;
+      }
+
+      .content-header {
+         margin-bottom: 0.3rem;
+      }
+   }
+
+   .content-header {
+      display: flex;
+      padding-top: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+
+      .card-title {
+         margin: 0;
+      }
+   }
+}

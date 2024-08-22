@@ -5,10 +5,10 @@ import APIContext from './4HandsAPI';
 const DBQueryContext = createContext();
 export default DBQueryContext;
 
-export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, children }) {
+export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, onData = () => {}, children }) {
    const instance = useContext(APIContext);
    const [ loading, setLoading ] = useState(true);
-   const [ query, setQuery ] = useState([]);
+   const [ query, setQuery ] = useState();
    const [ doc, setDoc ] = useState();
    const socket = useRef();
 
@@ -17,7 +17,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
    }
 
    useEffect(() => {
-      if (query.length || doc) {
+      if (query || doc) {
          return;
       }
 
@@ -42,19 +42,23 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
       switch (type) {
          case 'query':
             if (subscribe) {
-               socket.current = dbQuery.subscribeQuery({
-                  onData: query => {
-                     setQuery(query);
-                     setLoading(false);
-                  },
-                  onError: err => {
-                     setLoading(false);
-                     throw err;
-                  }
-               });
+               if (!socket.current) {
+                  socket.current = dbQuery.subscribeQuery({
+                     onData: query => {
+                        setQuery(query);
+                        setLoading(false);
+                        onData(query);
+                     },
+                     onError: err => {
+                        setLoading(false);
+                        throw err;
+                     }
+                  });
+               }
             } else {
                dbQuery.getQuery().then(query => {
                   setQuery(query);
+                  onData(query);
                }).catch(err => {
                   throw err;
                }).finally(() => {
@@ -65,19 +69,23 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
             break;
          case 'doc':
             if (subscribe) {
-               socket.current = dbQuery.subscribeDoc({
-                  onData: doc => {
-                     setDoc(doc);
-                     setLoading(false);
-                  },
-                  onError: err => {
-                     setLoading(false);
-                     throw err;
-                  }
-               });
+               if (!socket.current) {
+                  socket.current = dbQuery.subscribeDoc({
+                     onData: doc => {
+                        setDoc(doc);
+                        setLoading(false);
+                        onData(doc);
+                     },
+                     onError: err => {
+                        setLoading(false);
+                        throw err;
+                     }
+                  });
+               }
             } else {
                dbQuery.getDoc().then(doc => {
                   setDoc(doc);
+                  onData(doc);
                }).catch(err => {
                   throw err;
                }).finally(() => {
@@ -87,13 +95,13 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
 
             break;
       }
-   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query.length, subscribe, doc ]);
+   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query, subscribe, doc, onData ]);
 
    return <DBQueryContext.Provider value={{
       socket,
       isLoading: loading,
       doc: doc,
-      query: query
+      query: query || []
    }}>
       {children}
    </DBQueryContext.Provider>

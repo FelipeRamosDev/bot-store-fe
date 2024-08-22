@@ -10,7 +10,10 @@ export default function MasterLimitsForm() {
    return <Stack flexDirection="row" flex={1}>
       <Card padding="xs" elevation={10}>
          <h4 className="card-title">Limits Configurations</h4>
-         <p className="text-center">You can set limits for the slots under this account, limits are goals that once they are reached, it pauses the account and return on the next period. You can set limits by: <b>Trade, Day or Month</b></p>
+         <p className="help-info text-center">
+            You can set limits for the slots under this account, limits are goals that once they are reached, it pauses the account and return on the next period. You can set limits by:
+         </p>
+         <p className="help-info text-center"><b>Trade, Day or Month</b></p>
 
          <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>

@@ -5,17 +5,16 @@ import { useContext } from 'react';
 import Card from '@/components/common/card/Card';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import Skeleton from '@mui/material/Skeleton';
-import { Button } from '@mui/material';
-import DBQueryContext from "@/contexts/DBQuery";
-import NoDocumentsTile from "../noDocumentsTile/NoDocumentsTile";
+import DBQueryContext from '@/contexts/DBQuery';
+import APIContext from '@/contexts/4HandsAPI';
+import NoDocumentsTile from '../noDocumentsTile/NoDocumentsTile';
+import { parseMessages, switchPower } from './UserInstance.helper';
+import RubberButton from "@/components/buttons/rubberButton/RubberButton";
 
-export default function UserInstance() {
+export default function UserInstanceTile() {
    const { doc, isLoading } = useContext(DBQueryContext);
+   const API = useContext(APIContext);
    const instance = doc;
-   let message = '';
-   let displayStatus = '';
-   let btnColor;
-   let disabled = false;
 
    if (isLoading) {
       return <Skeleton
@@ -29,28 +28,17 @@ export default function UserInstance() {
       return <NoDocumentsTile Icon={false} noBorder={true} />
    }
 
-   if (instance.status === 'online') {
-      displayStatus = 'Online';
-      message = 'The user instance is ONLINE and ready to use.';
-      btnColor = 'success';
-   }
-
-   if (instance.status === 'offline') {
-      displayStatus = 'Offline';
-      message = 'You need to turn on the instance to run the slots'
-      btnColor = 'warn';
-   }
-
-   if (instance.status === 'starting') {
-      displayStatus = 'Starting Instance';
-      message = 'Message here';
-      disabled = true;
-   }
-
+   const { message, displayStatus, btnColor, disabled } = parseMessages(instance);
    return <Card className="user-instance" radius="s" elevation={50}>
-      <Button className="power-btn" variant="contained" color={btnColor} disabled={disabled}>
+      <RubberButton
+         className="power-btn"
+         variant="contained"
+         color={btnColor}
+         disabled={disabled}
+         onClick={() => switchPower(API, instance)}
+      >
          <PowerSettingsNewIcon />
-      </Button>
+      </RubberButton>
 
       <div className="status">
          <p>{displayStatus}</p>

@@ -3,6 +3,7 @@
 .fit-spinner {
    background-color: $background-grey1;
    min-height: 300px;
+   position: relative;
 
    .spinner-block {
       transform: translateY(-75%);

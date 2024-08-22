@@ -1,0 +1,30 @@
+@import "../../../../style/scss/variables.scss";
+
+.top-alert-bar {
+   margin: 0;
+   width: 100%;
+   display: flex;
+   padding: 0.3rem 1.5%;
+   background-color: $warn;
+   align-items: center;
+
+   .message {
+      flex: 5;
+      color: $text-warn;
+      display: flex;
+      gap: 1rem;
+
+      p {
+         margin-bottom: 0;
+      }
+
+      a {
+         color: $text-warn;
+      }
+   }
+
+   .action-button,
+   .close-button {
+      flex: 0;
+   }
+}

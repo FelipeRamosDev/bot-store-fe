@@ -1,0 +1,44 @@
+@import "../../../style/scss/variables.scss";
+
+.position-tile {
+   width: 100%;
+   display: flex;
+   flex: 1;
+   gap: 1rem;
+   margin-bottom: 0;
+
+   .column {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      &.self-width {
+         flex: 0;
+      }
+
+      &.divide {
+         margin-right: auto;
+      }
+
+      &.align-right {
+         text-align: right;
+      }
+
+      &.align-left {
+         text-align: left;
+      }
+
+      &.align-center {
+         text-align: center;
+      }
+   }
+
+   label {
+      font-size: 0.7rem;
+      color: $grey-light;
+   }
+
+   .value, .pretty-date {
+      font-size: 0.9rem;
+   }
+}
