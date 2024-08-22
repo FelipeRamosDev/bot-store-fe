@@ -11,7 +11,7 @@ import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
 
-export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance }) {
+export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
    const [ createSlot, setCreateSlot ] = useState(false);
    const auth = useContext(AuthUserContext);
    const isLoading = (!auth || auth.isLoading);
@@ -44,7 +44,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
 
       <MenuProvider>
          {slots.map(slot => (
-            <SlotTile key={Math.random()} slot={slot} uInstance={uInstance} />
+            <SlotTile key={Math.random()} slot={slot} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
          ))}
       </MenuProvider>
 
