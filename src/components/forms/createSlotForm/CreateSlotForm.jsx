@@ -9,14 +9,34 @@ import Card from '@/components/common/card/Card';
 import { Stack } from '@mui/material';
 import SlotLimitsForm from './slotLimitsForm/SlotLimitsForm';
 
+/**
+ * `CreateSlot` component provides a form for creating or editing a slot.
+ * It uses `FormBase` for handling form state, validation, and submission.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} [props.slot={}] - The slot object to be edited (if in edit mode).
+ * @param {Object} [props.master={}] - The master object associated with the slot.
+ * @param {string} [props.defaultType] - The default type of the slot.
+ * @param {Function} [props.onSuccess=() => {}] - Callback function to be called upon successful form submission.
+ * @param {boolean} [props.editMode=false] - Flag to indicate if the form is in edit mode.
+ *
+ * @returns {JSX.Element} - The rendered form for creating or editing a slot.
+ */
 export default function CreateSlot({ slot = {}, master = {}, defaultType, onSuccess = () => {}, editMode = false }) {
    const auth = useContext(AuthUserContext);
    const API = useContext(APIContext);
    const userUID = auth?.user?._id;
    const slotUID = slot._id;
    const masterUID = master._id || slot.master;
-   
+
    createSlotForm.setValue('type', defaultType);
+
+   /**
+    * Handles the form submission for creating or editing a slot.
+    * Depending on the `editMode`, it either updates an existing slot or creates a new one.
+    *
+    * @param {Object} data - The form data to be submitted.
+    */
    async function handleSubmit(data) {
       let reqHttp;
 
