@@ -26,6 +26,7 @@ export const darkTheme = createTheme({
       },
       text: {
          primary: '#fafafa',
+         darken: '#c7c7c7',
          secondary: '#0F282F',
          tertiary:'#254331',
          warn: '#3A290E',
@@ -45,6 +46,9 @@ export const darkTheme = createTheme({
       },
       disabled: {
          main: '#808080'
+      },
+      grey: {
+         softMark: '#353535'
       }
    }
 });
