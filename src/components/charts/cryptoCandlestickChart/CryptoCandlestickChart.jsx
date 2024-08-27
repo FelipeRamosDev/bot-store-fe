@@ -35,9 +35,9 @@ export default function CryptoCandlestickChart({ symbol, interval, limit = 1500,
             }
          }
       })
-   }, []);
+   }, [ interval, limit, symbol ]);
 
    return (
-      <CandlestickChartBase candles={candles} symbol={symbol} interval={interval} />
+      <CandlestickChartBase candles={candles} symbol={symbol} interval={interval} position={position} />
    );
 }
