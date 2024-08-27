@@ -107,7 +107,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, setEdit
             </div>
          </div>
 
-         <CryptoCandlestickChart symbol={symbol} interval={interval} />
+         <CryptoCandlestickChart symbol={symbol} interval={interval} position={slot?.trades.length && slot.trades[0]} />
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
       </Card>
    );

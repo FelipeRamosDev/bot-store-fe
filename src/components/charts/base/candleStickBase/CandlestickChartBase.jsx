@@ -19,10 +19,12 @@ import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
  * 
  * @returns {JSX.Element} The rendered candlestick chart and a loading spinner.
  */
-export default function CandlestickChartBase({ candles, interval, className = '', chartOptions, styleOptions, wrapperProps }) {
+export default function CandlestickChartBase({ candles, interval, position, className = '', chartOptions, styleOptions, wrapperProps }) {
    const chartSpot = useRef();
    const chart = useRef();
    const candlestickSeries = useRef();
+   const stoplossLine = useRef();
+   const takeprofitLine = useRef();
 
    if (Array.isArray(candles)) {
       candles = candles.sort((a, b) => a.time - b.time);
@@ -57,6 +59,11 @@ export default function CandlestickChartBase({ candles, interval, className = ''
                   return `${day} ${month}`;
                }
             }
+         }
+      },
+      localization: {
+         timeFormatter: (time) => {
+            return new Date(time).toLocaleString()
          }
       },
       layout: {
@@ -94,12 +101,64 @@ export default function CandlestickChartBase({ candles, interval, className = ''
 
          candlestickSeries.current = chart.current.addCandlestickSeries(styleOptions);
          candlestickSeries.current.setData(candles);
+
+         const currentCandle = candles.length ? candles[0] : null;
+         const stringPrice = currentCandle ? currentCandle.open.toString() : null;
+         const [int, dec] = stringPrice ? stringPrice.split('.') : [];
+         let minMove;
+
+         if (!dec) {
+            minMove = 0;
+         } else {
+            minMove = 1 / Math.pow(10, dec.length);
+         }
+
+         if (typeof dec === 'string') {
+            candlestickSeries.current.applyOptions({
+               priceScaleId: 'right',
+               priceFormat: { type: 'price', precision: dec.length, minMove }
+            });
+         }
       }
 
       else if (candles && candlestickSeries.current) {
          candlestickSeries.current.setData(candles);
+
+         if (!stoplossLine.current && !takeprofitLine.current && position) {
+            stoplossLine.current = candlestickSeries.current.createPriceLine({
+               price: position.stopPrice,
+               color: darkTheme.palette.error.main,
+               lineWidth: 1,
+               lineStyle: 3,
+               axisLabelVisible: true,
+               title: 'P/L',
+            });
+
+            if (position.gainPrice) {
+               takeprofitLine.current = candlestickSeries.current.createPriceLine({
+                  price: position.gainPrice,
+                  color: darkTheme.palette.success.main,
+                  lineWidth: 1,
+                  lineStyle: 3,
+                  axisLabelVisible: true,
+                  title: 'T/P',
+               });
+            }
+         }
+
+         if (!position && (stoplossLine.current || takeprofitLine.current)) {
+            if (stoplossLine.current) {
+               candlestickSeries.current.removePriceLine(stoplossLine.current);
+               stoplossLine.current = null;
+            }
+
+            if (takeprofitLine.current) {
+               candlestickSeries.current.removePriceLine(takeprofitLine.current);
+               takeprofitLine.current = null;
+            }
+         }
       }
-   }, [candles]);
+   }, [candles, position, chartOptions, styleOptions]);
 
    return (<>
       <div className={`candlestick-chart ${candles ? 'hide' : ''} ${className}`}>
