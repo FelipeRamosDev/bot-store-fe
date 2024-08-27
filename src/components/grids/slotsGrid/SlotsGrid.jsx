@@ -1,5 +1,5 @@
 import './SlotsGrid.scss';
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import { Add } from '@mui/icons-material';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
@@ -10,6 +10,7 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
 import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
+import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 
 /**
  * SlotsGrid component displays a grid of slots associated with a master entity.
@@ -71,7 +72,13 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
 
       <MenuProvider>
          {slots.map(slot => (
-            <SlotTile key={Math.random()} slot={slot} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
+            <SlotTile
+               key={slot._id}
+               slot={slot}
+               uInstance={uInstance}
+               setEditSlotModal={setEditSlotModal}
+               setDeleteConfirmDialog={setDeleteConfirmDialog}
+            />
          ))}
       </MenuProvider>
 

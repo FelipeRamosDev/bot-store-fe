@@ -9,6 +9,8 @@ import SlotsGrid from '@/components/grids/slotsGrid/SlotsGrid';
 import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
+import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
+import Card from '@/components/common/card/Card';
 
 /**
  * MasterDetailsContent component displays detailed information about a master account,

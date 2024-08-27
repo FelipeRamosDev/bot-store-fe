@@ -22,7 +22,7 @@ export const darkTheme = createTheme({
       },
       background: {
          default: '#212A2D',
-         paper: '#252A2A'
+         paper: '#202424'
       },
       text: {
          primary: '#fafafa',

@@ -1,6 +1,6 @@
 import './SlotTile.scss';
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useMemo } from 'react';
 import Price from '@/components/displays/price/Price';
 import Card from "@/components/common/card/Card";
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
@@ -11,6 +11,7 @@ import { runSlot, stopSlot } from './SlotTile.helper';
 import APIContext from '@/contexts/4HandsAPI';
 import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
+import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 
 /**
  * Represents a tile component displaying information about a slot.
@@ -33,6 +34,8 @@ export default function SlotTile({ slot = {}, className = '', uInstance, setEdit
    const isStating = uInstance?.status === 'starting';
    const isStatingStream = uInstance?.status === 'starting-userstream';
    const isOffline = uInstance?.status === 'offline';
+   const symbol = slot?.assets?.length ? slot?.assets[0] : '';
+   const interval = slot?.interval;
 
    useEffect(() => {
       setDisabled((!uInstance || isStating || isStatingStream || isOffline));
@@ -47,7 +50,13 @@ export default function SlotTile({ slot = {}, className = '', uInstance, setEdit
                </Link>
 
                <StatusBadge type="slot-status">{slot.status}</StatusBadge>
-               <SlotMenu slot={slot} noTrasition={true} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
+               <SlotMenu
+                  slot={slot}
+                  noTrasition={true}
+                  setEditSlotModal={setEditSlotModal}
+                  setDeleteConfirmDialog={setDeleteConfirmDialog}
+               />
+
                <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
                   {slot.bot?.name}
                </Link>
@@ -98,6 +107,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, setEdit
             </div>
          </div>
 
+         <CryptoCandlestickChart symbol={symbol} interval={interval} />
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
       </Card>
    );
