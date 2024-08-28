@@ -32,6 +32,10 @@ export default function RecentBotsTable() {
                }
             },
             {
+               label: 'Summary',
+               propKey: 'description'
+            },
+            {
                label: 'SCORE',
                propKey: 'score',
                align: 'right',
