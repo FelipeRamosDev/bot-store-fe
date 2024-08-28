@@ -27,7 +27,7 @@ import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/C
  * 
  * @returns {JSX.Element} The rendered SlotTile component.
  */
-export default function SlotTile({ slot = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog, ...props }) {
+export default function SlotTile({ slot = {}, className = '', uInstance, chartsDisplay, setEditSlotModal, setDeleteConfirmDialog, ...props }) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
@@ -107,7 +107,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, setEdit
             </div>
          </div>
 
-         <CryptoCandlestickChart symbol={symbol} interval={interval} position={slot?.trades.length && slot.trades[0]} />
+         {chartsDisplay && <CryptoCandlestickChart symbol={symbol} interval={interval} position={slot?.trades.length && slot.trades[0]} />}
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
       </Card>
    );
