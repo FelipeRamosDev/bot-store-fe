@@ -45,7 +45,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, chartsD
       <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
          <div className="tile-header">
             <div className="text-wrap">
-               <Link href={`/dashboard/slots/${slot.index}`}>
+               <Link href={`https://botstore-temp.vercel.app/slot-details?slotuid=${slot._id}`}>
                   <span className="title">{slot.name}</span>
                </Link>
 
@@ -57,7 +57,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, chartsD
                   setDeleteConfirmDialog={setDeleteConfirmDialog}
                />
 
-               <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
+               <Link className="bot-name" href={`https://botstore-temp.vercel.app/bot-details?botuid=${slot.bot?._id || slot.bot}`}>
                   {slot.bot?.name}
                </Link>
             </div>
