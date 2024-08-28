@@ -47,13 +47,9 @@ export default function Price({
    }
 
    // Render the formatted monetary value
-   return (
-      <span
-         className={`price-display ${className}`}
-         style={{ color: color }}
-         data-size={size}
-      >
-         {value}
-      </span>
-   );
+   return <span
+      color={color}
+      display-size={size}
+      className={`price-display ${className}`}
+   >{value}</span>;
 }

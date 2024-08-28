@@ -6,7 +6,7 @@ import './Card.scss';
  *
  * @param {Object} props - The props object.
  * @param {string} [props.className=''] - Additional CSS classes to apply to the card.
- * @param {number|string} [props.padding] - Padding size for the card. If specified, it will be applied as a class (e.g., 'p-10').
+ * @param {number|string} [props.padding] - Padding size for the card. If specified, can be a predefined size like 's', 'm', 'l', etc.
  * @param {string} [props.radius='m'] - The border radius for the card. Can be a predefined size like 's', 'm', 'l', etc.
  * @param {number} [props.elevation=20] - The elevation of the card, which affects the shadow size. Higher values increase the shadow intensity.
  * @param {string} [props.shadowColor='#111111DD'] - The color of the shadow applied to the card.
@@ -22,6 +22,7 @@ export default function Card({
    elevation = 20,
    shadowColor = '#111111DD',
    children,
+   style,
    ...props
 }) {
    let customPad = '';
@@ -33,7 +34,8 @@ export default function Card({
    return <div
       className={`${className} card ${customPad} r-${radius}`}
       style={{
-         boxShadow: elevation ? `0 0 ${elevation}px ${shadowColor}` : 'none'
+         boxShadow: elevation ? `0 0 ${elevation}px ${shadowColor}` : 'none',
+         ...style
       }}
       {...props}
    >

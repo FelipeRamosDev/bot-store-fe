@@ -34,13 +34,10 @@ export default function Percent({
    const percent = toPercentString(value, { fractional });
 
    // Render the percentage value
-   return (
-      <span
-         className={`percent-display ${className}`}
-         style={{ color: color }}
-         data-size={size}
-      >
-         {percent}
-      </span>
-   );
+   return <span
+      color={color}
+      display-size={size}
+      className={`percent-display ${className}`}
+   >{percent}</span>;
+
 }
