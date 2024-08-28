@@ -97,6 +97,11 @@
       color: $grey;
    }
 
+   &.MuiIconButton-colorRubber {
+      background-color: $background-paper;
+      color: $text;
+   }
+
    &.Mui-disabled {
       background-color: $grey;
    }

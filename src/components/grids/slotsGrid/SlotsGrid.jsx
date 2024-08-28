@@ -10,7 +10,7 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
 import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
-import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
+import SlotConfigsMenu from '@/components/menus/dropdown/SlotConfigsMenu/SlotConfigsMenu';
 
 /**
  * SlotsGrid component displays a grid of slots associated with a master entity.
@@ -40,7 +40,9 @@ import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/C
  * @returns {JSX.Element} A grid layout displaying slots, with options to create and manage slots.
  */
 export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
+   const defaultChartDisplay = window.localStorage.getItem('slot_configs:charts_display') === 'true' ? true : false;
    const [ createSlot, setCreateSlot ] = useState(false);
+   const [ chartsDisplay, setChartsDisplay ] = useState(defaultChartDisplay);
    const auth = useContext(AuthUserContext);
    const isLoading = (!auth || auth.isLoading);
    const masterType = master.type;
@@ -55,10 +57,10 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
    }
 
    return <div className={`slots-grid ${className}`}>
-      <ContentHeader Toolbar={() => (
+      <ContentHeader Toolbar={() => (<>
          <RoundIconButton Icon={Add} variant="contained" color="tertiary" onClick={() => setCreateSlot(true)} />
-      )}>
-         <h2 className="header-title">Slots</h2>
+      </>)}>
+         <h2 className="header-title">Slots <SlotConfigsMenu chartsDisplay={chartsDisplay} setChartsDisplay={setChartsDisplay} /></h2>
       </ContentHeader>
 
       {isLoading && new Array(6).fill('').map(() => <Skeleton
@@ -78,6 +80,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
                uInstance={uInstance}
                setEditSlotModal={setEditSlotModal}
                setDeleteConfirmDialog={setDeleteConfirmDialog}
+               chartsDisplay={chartsDisplay}
             />
          ))}
       </MenuProvider>
