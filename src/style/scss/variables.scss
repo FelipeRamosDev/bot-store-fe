@@ -17,6 +17,7 @@ $background-dark: #1C2122;
 $background-grey1: #222728;
 $background-grey1-light: lighten($color: $background-grey1, $amount: 3);
 $background-grey2: #252A2A;
+$background-grey2-dark: darken($color: $background-grey2, $amount: 3);
 $background-grad: radial-gradient(100vh, #28373C, #212A2D);
 
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);

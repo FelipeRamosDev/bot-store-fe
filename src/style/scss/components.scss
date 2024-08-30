@@ -114,3 +114,46 @@
       }
    }
 }
+
+.contained-table {
+   $gap: 0.4rem;
+
+   display: flex;
+   flex-direction: column;
+   gap: $gap;
+
+   .table-row {
+      display: flex;
+      flex: 1;
+      gap: $gap;
+
+      .table-column {
+         display: flex;
+         align-items: center;
+         flex: 50%;
+         padding: 0.3rem;
+         border-radius: $radius-xs;
+         background-color: $background-paper-light;
+         color: $text-darken;
+
+         label,
+         p {
+            flex: 1;
+            margin: 0;
+         }
+
+         label {
+            font-size: 0.75rem;
+         }
+
+         &.value,
+         p,
+         .price-display {
+            justify-content: flex-end;
+            text-align: right;
+            font-size: 0.85rem;
+            font-weight: 400;
+         }
+      }
+   }
+}
