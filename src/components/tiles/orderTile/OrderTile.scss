@@ -1,0 +1,21 @@
+@import "../../../style/scss/variables.scss";
+
+.order-tile {
+   flex: 1;
+
+   &.price-card {
+      padding: 0;
+   }
+
+   .card-header {
+      margin: 0;
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      background-color: $background-grey2-dark;
+      color: $text-darken;
+   }
+
+   .card-body {
+      padding: 0.6rem;
+   }
+}
