@@ -1,0 +1,18 @@
+@import "../../../style/scss/variables.scss";
+
+.orders-grid {
+   $gap: 1rem;
+
+   display: flex;
+   flex-wrap: wrap;
+   gap: $gap;
+   margin-top: 2rem;
+
+   .order-tile {
+      flex: calc(50% - $gap);
+
+      @media screen and (max-width: $screen-m) {
+         flex: 100%;
+      }
+   }
+}

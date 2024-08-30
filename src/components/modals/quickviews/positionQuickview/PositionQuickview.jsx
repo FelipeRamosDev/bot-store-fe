@@ -3,7 +3,7 @@ import ContentModal from '../../base/contentModal/ContentModal';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import PositionValuesGrid from '@/components/grids/positionValuesGrid/PositionValuesGrid';
-import OrderTile from '@/components/tiles/orderTile/OrderTile';
+import OrdersGrid from '@/components/grids/ordersGrid/OrdersGrid';
 
 export default function PositionQuickview({ position, className = '', onClose = () => {}, ...props }) {
    const open = Boolean(position);
@@ -25,11 +25,7 @@ export default function PositionQuickview({ position, className = '', onClose = 
          <ContentSidebar isFullContainer={true}>
             <>
                <PositionValuesGrid position={position} />
-
-               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '2rem' }}>
-                  <OrderTile />
-                  <OrderTile />
-               </div>
+               <OrdersGrid orders={position.orders} />
             </>
             
             <>
