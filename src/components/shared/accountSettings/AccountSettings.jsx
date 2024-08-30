@@ -61,7 +61,7 @@ export default function AccountSettings({ account }) {
          <Settings className="icon" /> <h3 className="card-title">Settings</h3>
       </ContentHeader>
 
-      <SettingRow label="Min Trades Interval" value={`${tradesMinInterval}H`} />
+      <SettingRow label="Min Trades Interval" value={`${tradesMinInterval} min.`} />
       <SettingRow label="Margin Ratio" value={`${marginRatioCommit}%`} />
 
       {displayTrade ? <SettingRow

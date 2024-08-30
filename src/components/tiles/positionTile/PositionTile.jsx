@@ -10,18 +10,29 @@ import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
  * 
  * @param {Object} props - The props for the component.
  * @param {Object} [props.position={}] - The position data to display, which includes details like `botSlot`, `symbol`, `openTime`, and `pnl`.
+ * @param {Function} [props.openPosition=()=>{}] - Function that to open the mosition modal or redirect to the position page.
+ *                                                 This function will receive the _id of the position.
  * @param {string} [props.className=''] - An optional class name to apply additional styling to the component.
  * 
  * @returns {React.Element} The rendered PositionTile component displaying the position information.
  */
-export default function PositionTile({ position = {}, className = '', ...props }) {
+export default function PositionTile({ position = {}, className = '', openPosition, ...props }) {
+   let cursor = '';
+
+   if (!openPosition) {
+      openPosition = () => {};
+   } else {
+      cursor = 'cursor-pointer';
+   }
+
    return (
       <PriceCard
-         className={`position-tile ${className}`}
+         className={`position-tile ${className} ${cursor}`}
          padding="xs"
          radius="xs"
          elevation={20}
          value={position.pnl || 0}
+         onClick={() => openPosition(position._id)}
          {...props}
       >
          <div className="column self-width">

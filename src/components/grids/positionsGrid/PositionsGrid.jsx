@@ -1,6 +1,8 @@
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import './PositionsGrid.scss';
 import PositionTile from '@/components/tiles/positionTile/PositionTile';
+import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
+import { useState } from 'react';
 
 /**
  * PositionsGrid component displays a grid of positions with an optional title.
@@ -27,11 +29,24 @@ import PositionTile from '@/components/tiles/positionTile/PositionTile';
  * @returns {JSX.Element} A grid layout displaying position tiles with an optional title.
  */
 export default function PositionsGrid({ title = 'Positions', className = '', positions = [], ...props }) {
+   const [ modalPosition, setModalPosition ] = useState('');
+   let position;
+
+   if (modalPosition) {
+      positions.map(item => {
+         if (item._id === modalPosition) {
+            position = item;
+         }
+      });
+   }
+
    return <div className={`positions-grid ${className}`} {...props}>
       <ContentHeader>
          <h3 className="header-title">{title}</h3>
       </ContentHeader>
 
-      {positions.map(position => <PositionTile key={Math.random()} position={position} />)}
+      {positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />)}
+
+      <PositionQuickview position={position} onClose={() => setModalPosition('')} />
    </div>
 }
