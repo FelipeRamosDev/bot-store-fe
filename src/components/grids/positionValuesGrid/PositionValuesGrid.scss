@@ -1,0 +1,24 @@
+@import "../../../style/scss/variables.scss";
+
+.position-values-grid {
+   $gap: 1rem;
+
+   display: flex;
+   gap: $gap;
+   flex-wrap: wrap;
+
+   .price-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      flex: calc(33.33% - $gap);
+      margin: 0;
+
+      label {
+         font-size: 0.8rem;
+         color: $text-darken;
+         margin-bottom: 0.2rem;
+      }
+   }
+}
