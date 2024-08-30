@@ -1,5 +1,17 @@
 @import "../../../../style/scss/variables.scss";
 
 .position-quickview {
-   
+   .content-sidebar {
+      width: 100%;
+   }
+
+   .modal-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+
+      .status-badge {
+         transform: translateY(1px);
+      }
+   }
 }
