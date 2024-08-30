@@ -37,15 +37,6 @@ export default function DashboardSidebar() {
             <UserInstanceTileDash />
          </DBQuery>
 
-         <DBQuery
-            type="query"
-            collection="activities"
-            filter={{ user: user._id }}
-            subscribe={true}
-         >
-            <ActivitiesTable />
-         </DBQuery>
-
          <DBQuery type="query" collection="bots">
             <RecentBotsTable />
          </DBQuery>
