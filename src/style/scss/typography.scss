@@ -90,3 +90,12 @@ li {
 .text-center {
    text-align: center;
 }
+
+.link {
+   cursor: pointer;
+
+   &:hover {
+      color: $tertiary;
+      text-decoration: underline;
+   }
+}

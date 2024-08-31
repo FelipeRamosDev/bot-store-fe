@@ -27,7 +27,16 @@ import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/C
  * 
  * @returns {JSX.Element} The rendered SlotTile component.
  */
-export default function SlotTile({ slot = {}, className = '', uInstance, chartsDisplay, setEditSlotModal, setDeleteConfirmDialog, ...props }) {
+export default function SlotTile({
+   slot = {},
+   className = '',
+   uInstance,
+   chartsDisplay,
+   setEditSlotModal,
+   setDeleteConfirmDialog,
+   setSlotQuickview,
+   ...props
+}) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
@@ -45,9 +54,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, chartsD
       <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
          <div className="tile-header">
             <div className="text-wrap">
-               <Link href={`https://botstore-temp.vercel.app/slot-details?slotuid=${slot._id}`}>
-                  <span className="title">{slot.name}</span>
-               </Link>
+               <span className="title link" onClick={() => setSlotQuickview(slot._id)}>{slot.name}</span>
 
                <StatusBadge type="slot-status">{slot.status}</StatusBadge>
                <SlotMenu
