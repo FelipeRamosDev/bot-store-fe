@@ -24,9 +24,10 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
    const [ positionModal, setPositionModal ] = useState('');
    const { query = [], isLoading } = useContext(DBQueryContext);
    const positions = positionsSet || query;
+   const selectedPosition = positions.find(item => item._id === positionModal);
 
    return <>
-      <PositionQuickview position={positions.find(item => item._id === positionModal)} onClose={() => setPositionModal('')} />
+      <PositionQuickview position={selectedPosition} onClose={() => setPositionModal('')} />
 
       <TableBase
          className="positions-table"
