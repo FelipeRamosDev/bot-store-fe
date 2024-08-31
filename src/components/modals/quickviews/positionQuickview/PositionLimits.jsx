@@ -31,7 +31,7 @@ export default function PositionLimits({ position = {}, ...props }) {
 
             <PriceCard borderColor="success" {...priceCard}>
                <label>Takeprofit</label>
-               <Price amount={position.stopPrice} noColor={true} {...priceProps} />
+               <Price amount={position.gainPrice} noColor={true} {...priceProps} />
             </PriceCard>
          </div>
 
