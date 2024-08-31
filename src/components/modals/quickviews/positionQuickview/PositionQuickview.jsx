@@ -4,9 +4,8 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import PositionValuesGrid from '@/components/grids/positionValuesGrid/PositionValuesGrid';
 import OrdersGrid from '@/components/grids/ordersGrid/OrdersGrid';
-import PositionLimits from './PositionLimits';
-import ContainedTable from '@/components/tables/containedTable/ContainedTable';
-import Card from '@/components/common/card/Card';
+import PositionSidebar from './PositionSidebar';
+import PositionDetails from './PositionDetails';
 
 export default function PositionQuickview({ position, className = '', onClose = () => {}, ...props }) {
    const open = Boolean(position);
@@ -42,23 +41,12 @@ export default function PositionQuickview({ position, className = '', onClose = 
             <>
                <PositionValuesGrid position={position} />
 
-               {isMobile && <PositionLimits position={position} />}
-               <OrdersGrid orders={position.orders} />
+               {isMobile && <PositionSidebar position={position} isMobile={isMobile} />}
+               {position.type === 'position-demo' && <PositionDetails position={position} />}
+               {position.type === 'position-live' && <OrdersGrid orders={position.orders} />}
             </>
             
-            <>
-               {!isMobile && <PositionLimits position={position} />}
-
-               <Card padding="xs" radius="s" elevation={10}>
-                  <ContainedTable
-                     tableData={[
-                        { label: 'Position ID', value: position.cod },
-                        { label: 'Open Time', value: new Date(position.openTime).toLocaleString() },
-                        { label: 'Close Time', value: position.closeTime && new Date(position.closeTime).toLocaleString(), hide: !position.closeTime },
-                     ]}
-                  />
-               </Card>
-            </>
+            {!isMobile && <PositionSidebar position={position} isMobile={isMobile} />}
          </ContentSidebar>
       </ContentModal>
    );
