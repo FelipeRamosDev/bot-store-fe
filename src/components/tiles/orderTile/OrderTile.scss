@@ -1,0 +1,27 @@
+@import "../../../style/scss/variables.scss";
+
+.order-tile {
+   flex: 1;
+   margin: 0;
+   margin-bottom: auto;
+
+   &.price-card {
+      padding: 0;
+   }
+
+   .card-header {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      background-color: $background-grey2-dark;
+      color: $text-darken;
+      font-size: 0.85rem;
+      font-weight: 500;
+   }
+
+   .card-body {
+      padding: 0.6rem;
+   }
+}

@@ -1,0 +1,47 @@
+@import "../../../style/scss/variables.scss";
+
+.slot-results-grid {
+   $gap: 1rem;
+
+   display: flex;
+   flex-wrap: wrap;
+   gap: $gap;
+   width: 100%;
+   margin: 1rem 0;
+
+   .price-card {
+      $padding-x: 0.6rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      flex: calc(33.33% - $gap);
+      padding-top: $padding-x;
+      padding-bottom: calc($padding-x * 1.2);
+      margin: 0;
+
+      &.pointer {
+         cursor: pointer;
+         -webkit-user-select: none;
+         user-select: none;
+
+         * {
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+         }
+      }
+
+      label {
+         font-size: 0.75rem;
+         text-transform: uppercase;
+         color: $text-darken;
+         text-align: center;
+      }
+
+      p {
+         margin: 0;
+      }
+   }
+}

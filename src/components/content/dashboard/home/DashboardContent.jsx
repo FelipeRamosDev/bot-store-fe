@@ -33,7 +33,6 @@ export default function DashboardContent({ createMasterModal }) {
          collection="master_accounts"
          filter={{ user: user._id }}
          sort={{ pnl: -1 }}
-         limit={10}
          subscribe={true}
       >
          <MastersGrid createMasterModal={createMasterModal} />
@@ -49,7 +48,7 @@ export default function DashboardContent({ createMasterModal }) {
                collection="slots"
                filter={{ user: user._id }}
                sort={{ pnl: -1 }}
-               limit={7}
+               limit={20}
                subscribe={true}
             >
                <SlotsTable />
@@ -64,7 +63,7 @@ export default function DashboardContent({ createMasterModal }) {
                collection="positions"
                filter={{ user: user._id }}
                sort={{ modifiedAt: -1 }}
-               limit={7}
+               limit={20}
                subscribe={true}
             >
                <PositionsTable include={['symbol', 'type', 'usedLeverage', 'pnl']} />

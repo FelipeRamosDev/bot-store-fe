@@ -115,6 +115,21 @@ function parsePositionSide(side) {
    }
 }
 
+export function parseOrderStatus(status) {
+   let badgeColor = 'disabled';
+
+   switch (status) {
+      case 'FILLED':
+         badgeColor = 'success';
+         break;
+      case 'CANCELED':
+         badgeColor = 'error';
+         break;
+   }
+
+   return badgeColor;
+}
+
 /**
  * `StatusBadge` is a component that displays a badge with a status or type.
  * The badge appearance is based on the provided `type` and `children` values.
@@ -148,6 +163,11 @@ export default function StatusBadge({ className = '', type, variant, color = 'di
 
       color = parsed.color;
       children = parsed.side;
+   }
+
+   if (type === 'order-status') {
+      const parsedColor = parseOrderStatus(children);
+      color = parsedColor;
    }
 
    return <span

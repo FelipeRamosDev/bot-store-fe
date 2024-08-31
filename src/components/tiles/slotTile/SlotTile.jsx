@@ -1,6 +1,6 @@
 import './SlotTile.scss';
 import Link from 'next/link';
-import { useContext, useEffect, useState, useMemo } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import Price from '@/components/displays/price/Price';
 import Card from "@/components/common/card/Card";
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
@@ -27,15 +27,29 @@ import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/C
  * 
  * @returns {JSX.Element} The rendered SlotTile component.
  */
-export default function SlotTile({ slot = {}, className = '', uInstance, chartsDisplay, setEditSlotModal, setDeleteConfirmDialog, ...props }) {
+export default function SlotTile({
+   slot = {},
+   className = '',
+   uInstance,
+   chartsDisplay,
+   setEditSlotModal,
+   setDeleteConfirmDialog,
+   setSlotQuickview,
+   ...props
+}) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
+   const botName = useRef();
    const isStating = uInstance?.status === 'starting';
    const isStatingStream = uInstance?.status === 'starting-userstream';
    const isOffline = uInstance?.status === 'offline';
    const symbol = slot?.assets?.length ? slot?.assets[0] : '';
    const interval = slot?.interval;
+
+   if (!botName.current && slot.bot?.name) {
+      botName.current = slot.bot?.name;
+   } 
 
    useEffect(() => {
       setDisabled((!uInstance || isStating || isStatingStream || isOffline));
@@ -45,9 +59,7 @@ export default function SlotTile({ slot = {}, className = '', uInstance, chartsD
       <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
          <div className="tile-header">
             <div className="text-wrap">
-               <Link href={`/dashboard/slots/${slot.index}`}>
-                  <span className="title">{slot.name}</span>
-               </Link>
+               <span className="title link" onClick={() => setSlotQuickview(slot._id)}>{slot.name}</span>
 
                <StatusBadge type="slot-status">{slot.status}</StatusBadge>
                <SlotMenu
@@ -57,8 +69,8 @@ export default function SlotTile({ slot = {}, className = '', uInstance, chartsD
                   setDeleteConfirmDialog={setDeleteConfirmDialog}
                />
 
-               <Link className="bot-name" href={`/dashboard/bots/${slot.bot?.index}`}>
-                  {slot.bot?.name}
+               <Link className="bot-name" href={`https://botstore-temp.vercel.app/bot-details?botuid=${slot.bot?._id || slot.bot}`}>
+                  {botName.current}
                </Link>
             </div>
 

@@ -1,6 +1,12 @@
 @import "../../../style/scss/variables.scss";
 
 .price-card {
+   overflow: hidden;
+   
+   p {
+      margin: 0;
+   }
+
    &[border-color=disabled][border-side] {
       border-color: $grey;
    }

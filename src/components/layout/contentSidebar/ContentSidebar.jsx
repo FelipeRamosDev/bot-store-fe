@@ -26,13 +26,15 @@ import './ContentSidebar.scss';
  *   );
  * }
  * 
- * @param {string} [className=''] - Optional CSS class to apply additional styling.
- * @param {boolean} [isFullContainer=false] - Determines if the sidebar should occupy the full width of the container.
- * @param {React.ReactNode[]} children - The content to display in the header, main content area, and sidebar.
+ * @param {Object} [setup] - The component props.
+ * @param {string} [setup.className=''] - Optional CSS class to apply additional styling.
+ * @param {boolean} [setup.isFullContainer=false] - Determines if the sidebar should occupy the full width of the container.
+ * @param {boolean} [setup.fitMaxWidth=false] - Make the container fit 100% of width.
+ * @param {React.ReactNode[]} setup.children - The content to display in the header, main content area, and sidebar.
  * @returns {JSX.Element} A div element containing a header, main content area, and sidebar.
  */
-export default function ContentSidebar({ className = '', children, isFullContainer = false }) {
-   return <div className={`${className} content-sidebar ${isFullContainer ? 'full-container' : 'container'}`}>
+export default function ContentSidebar({ className = '', children, isFullContainer = false, fitMaxWidth = false }) {
+   return <div className={`${className} content-sidebar ${isFullContainer ? 'full-container' : 'container'} ${fitMaxWidth ? 'fit-maxwidth' : ''}`}>
       <div className="layout-header">
          {children.length > 2 && children[2]}
       </div>

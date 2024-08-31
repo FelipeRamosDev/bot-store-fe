@@ -22,6 +22,7 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
  * @param {number} [props.maxHeight=440] - Maximum height of the table container.
  * @param {boolean} [props.hideHeader=false] - Whether to hide the table header.
  * @param {boolean} [props.loading=true] - Whether the table is in a loading state.
+ * @param {Function} [props.onClickRow=()=>{}] - Function to handle the row's click event. It receives the current item as the first argument.
  * @param {Object} [props.pagination] - Pagination settings including options and handlers.
  * @param {Array} [props.headerConfigs] - Configuration for table headers.
  * @param {React.Component} [props.CustomTableItem] - Custom component for rendering table rows.
@@ -34,9 +35,10 @@ export default function TableBase({
    items = [],
    elevate = true,
    borderLastRow = true,
-   maxHeight = 440,
+   maxHeight = 886,
    hideHeader = false,
    loading = true,
+   onClickRow = () => {},
    pagination,
    headerConfigs,
    CustomTableItem,
@@ -44,8 +46,8 @@ export default function TableBase({
    exclude, 
    ...props
 }) {
-   const [page, setPage] = useState(0);
-   const [rowsPerPage, setRowsPerPage] = useState(10);
+   const [ page, setPage ] = useState(0);
+   const [ rowsPerPage, setRowsPerPage ] = useState(10);
    const slicedSlots = items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
    const TableItem = CustomTableItem || TableBaseRow;
 
@@ -80,7 +82,12 @@ export default function TableBase({
             <TableBody>
                {(slicedSlots.length > 0) && (
                   slicedSlots.map((item) => (
-                     <TableItem key={Math.random()} item={item} headerConfigs={headerConfigs} />
+                     <TableItem
+                        key={Math.random()}
+                        item={item}
+                        headerConfigs={headerConfigs}
+                        onClick={() => onClickRow(item)}
+                     />
                   )
                ))}
             </TableBody>

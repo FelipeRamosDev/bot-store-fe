@@ -32,6 +32,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
    const [ query, setQuery ] = useState();
    const [ doc, setDoc ] = useState();
    const socket = useRef();
+   const subscriptionID = useRef();
 
    if (!type || !collection) {
       throw new Error('Required Params: "type" and "collection" are required!');
@@ -65,6 +66,9 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
             if (subscribe) {
                if (!socket.current) {
                   socket.current = dbQuery.subscribeQuery({
+                     onSubscribe: (id) => {
+                        subscriptionID.current = id;
+                     },
                      onData: query => {
                         setQuery(query);
                         setLoading(false);
@@ -92,6 +96,9 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
             if (subscribe) {
                if (!socket.current) {
                   socket.current = dbQuery.subscribeDoc({
+                     onSubscribe: (id) => {
+                        subscriptionID.current = id;
+                     },
                      onData: doc => {
                         setDoc(doc);
                         setLoading(false);

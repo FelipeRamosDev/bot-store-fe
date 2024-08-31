@@ -11,6 +11,7 @@ import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
 import SlotConfigsMenu from '@/components/menus/dropdown/SlotConfigsMenu/SlotConfigsMenu';
+import SlotQuickview from '@/components/modals/quickviews/SlotQuickview/SlotQuickview';
 
 /**
  * SlotsGrid component displays a grid of slots associated with a master entity.
@@ -43,6 +44,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
    const defaultChartDisplay = window.localStorage.getItem('slot_configs:charts_display') === 'true' ? true : false;
    const [ createSlot, setCreateSlot ] = useState(false);
    const [ chartsDisplay, setChartsDisplay ] = useState(defaultChartDisplay);
+   const [ slotQuickview, setSlotQuickview ] = useState('');
    const auth = useContext(AuthUserContext);
    const isLoading = (!auth || auth.isLoading);
    const masterType = master.type;
@@ -80,6 +82,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
                uInstance={uInstance}
                setEditSlotModal={setEditSlotModal}
                setDeleteConfirmDialog={setDeleteConfirmDialog}
+               setSlotQuickview={setSlotQuickview}
                chartsDisplay={chartsDisplay}
             />
          ))}
@@ -94,5 +97,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
       >
          <CreateSlot defaultType={slotType} onSuccess={() => setCreateSlot(false)} master={master} />
       </ContentModal>
+
+      <SlotQuickview slot={master.slots.find(item => item._id === slotQuickview)} onClose={() => setSlotQuickview('')} />
    </div>;
 }

@@ -64,7 +64,7 @@ export default function MastersGrid({ createMasterModal, verticalAlign = false, 
 
       {!isLoading && (query.length > 0) && masters.map(master => (
          <MasterTileDefault
-            key={Math.random()}
+            key={master._id}
             master={master}
             className="tile"
          />

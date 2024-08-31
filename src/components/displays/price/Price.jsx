@@ -3,14 +3,15 @@ import { toMoneyString, toMoney } from '@/helpers/format';
 /**
  * Price component displays a formatted monetary value.
  *
- * @param {string} className - Additional CSS classes for styling.
- * @param {string} symbol - Currency symbol (default is 'USD').
- * @param {boolean} noColor - If true, disables color styling based on value.
- * @param {boolean} noSymbol - If true, hides the currency symbol.
- * @param {boolean} dashedZero - If true, shows "---" for zero values.
- * @param {number} fractional - Number of decimal places to display.
- * @param {number} amount - The monetary value to format and display.
- * @param {string} size - CSS size for display (e.g., 'small', 'medium', 'large').
+ * @param {Object} setup - The component's props.
+ * @param {string} setup.className - Additional CSS classes for styling.
+ * @param {string} setup.symbol - Currency symbol (default is 'USD').
+ * @param {boolean} setup.noColor - If true, disables color styling based on value.
+ * @param {boolean} setup.noSymbol - If true, hides the currency symbol.
+ * @param {boolean} setup.dashedZero - If true, shows "---" for zero values.
+ * @param {number} setup.fractional - Number of decimal places to display.
+ * @param {number} setup.amount - The monetary value to format and display.
+ * @param {string} setup.size - CSS size for display (e.g., 'small', 'medium', 'large').
  * @returns {JSX.Element} The formatted monetary value.
  */
 export default function Price({
@@ -24,8 +25,8 @@ export default function Price({
    size
 }) {
    // Handle dashed zero display
-   if (dashedZero && amount === 0) {
-      return <span className={`price-display ${className}`}>$---</span>;
+   if (dashedZero && !amount) {
+      return <span className={`price-display ${className}`}>$ ---</span>;
    }
 
    // Determine value and color based on props
