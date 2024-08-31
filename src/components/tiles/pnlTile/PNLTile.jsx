@@ -36,8 +36,8 @@ export default function PNLTile({ type = 'money', noColor = false, borderSide, l
          border-color={borderColor}
          border-side={borderSide}
          padding="s"
-         radius="s"
-         elevation={elevation}
+         radius={window.innerWidth < 768 ? 'xs' : 's'}
+         elevation={window.innerWidth < 768 ? elevation * 0.35 : elevation}
          {...props}
       >
          {label && <label>{label}</label>}

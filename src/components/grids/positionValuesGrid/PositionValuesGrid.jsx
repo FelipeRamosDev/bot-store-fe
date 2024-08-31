@@ -11,17 +11,17 @@ export default function PositionValuesGrid({ position = {}, className = '', ...p
       <div className={`position-values-grid ${className}`} {...props}>
          <PriceCard value={position.pnl} {...cardProps}>
             <label>PNL</label>
-            <Price amount={position.pnl} {...priceProps} />
+            <Price amount={position.pnl} {...priceProps} fractional={position.symbolFractional} />
          </PriceCard>
 
          <PriceCard value={position.roi} {...cardProps}>
             <label>ROI</label>
-            <Percent value={position.roi} {...priceProps} />
+            <Percent value={position.roi} {...priceProps} fractional={2} />
          </PriceCard>
 
          <PriceCard value={position.realizedProfit} {...cardProps}>
             <label>Realized</label>
-            <Price amount={position.realizedProfit} {...priceProps} />
+            <Price amount={position.realizedProfit} {...priceProps} fractional={position.symbolFractional} />
          </PriceCard>
 
          <PriceCard noColor={true} value={position.initialMargin} {...cardProps}>
