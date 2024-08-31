@@ -27,6 +27,10 @@ import PNLTile from '@/components/tiles/pnlTile/PNLTile';
  * @returns {JSX.Element} A grid layout displaying various PNL and ROI metrics.
  */
 export default function MasterPnlGrid({ master = {}, className = '' }) {
+   const commonProps = {
+      size: 'l'
+   };
+
    return (
       <div className={`master-pnl-grid pnl-grid ${className}`}>
          <PNLTile

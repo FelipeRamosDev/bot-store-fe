@@ -25,7 +25,7 @@ export default function Price({
    size
 }) {
    // Handle dashed zero display
-   if (dashedZero && amount === 0) {
+   if (dashedZero && !amount) {
       return <span className={`price-display ${className}`}>$ ---</span>;
    }
 
