@@ -55,6 +55,7 @@ export default function TopNavAuth() {
       <nav>
          <PageSpinner spinner={spinner} />
 
+         <Link href="/dashboard">Dashboard</Link>
          <Link href="/dashboard/my-bots">My Bots</Link>
          <Link href="/dashboard/master-accounts">Master Accounts</Link>
          <Link href="/slots">Slots</Link>
