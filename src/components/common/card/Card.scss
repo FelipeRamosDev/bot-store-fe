@@ -4,6 +4,27 @@
    background-color: $background-grey2;
    margin-bottom: 1rem;
 
+   &.clickable {
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      transition: all 80ms;
+
+      * {
+         cursor: pointer;
+         -webkit-user-select: none;
+         user-select: none;
+      }
+
+      &:hover {
+         background-color: lighten($color: $background-grey2, $amount: 2);
+      }
+
+      &:active {
+         transform: scale(0.95);
+      }
+   }
+
    .card-title {
       font-size: 1.1rem;
    }

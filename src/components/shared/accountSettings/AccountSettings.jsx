@@ -38,10 +38,6 @@ export default function AccountSettings({ account }) {
    const displayDay = (dailyLoss.money || dailyGain.money || dailyLoss.percent || dailyGain.percent);
    const displayMonth = (monthlyLoss.money || monthlyGain.money || monthlyLoss.percent || monthlyGain.percent);
 
-   function Toolbar() {
-      return <RoundIconButton size="small" Icon={Edit} onClick={() => console.log('Edit')} />;
-   }
-
    function ParsePricePercent({ money, percent }) {
       if (money || percent) {
          return <p>
@@ -57,7 +53,7 @@ export default function AccountSettings({ account }) {
    }
 
    return <Card className="account-settings" padding="xs" elevation={30}>
-      <ContentHeader Toolbar={Toolbar}>
+      <ContentHeader>
          <Settings className="icon" /> <h3 className="card-title">Settings</h3>
       </ContentHeader>
 

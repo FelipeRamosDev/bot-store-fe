@@ -1,10 +1,38 @@
 .slot-quickview {
+   .slot-results-grid {
+      margin-top: 0;
+   }
+
    .content-sidebar {
       gap: 1.5rem;
+
+      .content {
+         min-width: calc(60% - 1rem);
+      }
+
+      .sidebar {
+         min-width: calc(40% - 1rem);
+      }
    }
 
    .candlestick-chart {
-      margin: 0;
-      height: 400px;
+      margin: 1.5rem 0 0 0;
+      height: 450px;
+   }
+
+   .contained-table {
+      .table-row {
+         .table-column {
+            padding: 0.5rem;
+         }
+      }
+   }
+
+   .positions-table {
+      margin-bottom: 3rem;
+   }
+
+   .candlestick-chart {
+      margin-bottom: 1.5rem;
    }
 }
