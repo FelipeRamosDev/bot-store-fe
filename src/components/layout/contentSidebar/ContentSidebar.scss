@@ -14,6 +14,10 @@
    @media screen and (min-width: $screen-l) {
       flex-direction: row;
    }
+   
+   &.fit-maxwidth {
+      width: 100%;
+   }
 
    .layout-header {
       max-width: 100%;
