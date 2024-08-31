@@ -1,6 +1,5 @@
 import './OrderTile.scss';
 import PriceCard from '@/components/common/priceCard/PriceCard';
-import DetailsProp from './OrderTileDetailsProp';
 import Price from '@/components/displays/price/Price';
 import { useState } from 'react';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
@@ -11,6 +10,12 @@ const PRICE_CONFIG = {
    noColor: true
 };
 
+/**
+ * Parses the title for the order based on the clientOrderId.
+ * 
+ * @param {Object} currentOrder - The order object containing clientOrderId.
+ * @returns {string} The parsed title for the order.
+ */
 function parseTitle(currentOrder) {
    if (!currentOrder) return 'Order';
    const [ _, type ] = currentOrder.clientOrderId?.split('_');
@@ -34,6 +39,20 @@ function parseTitle(currentOrder) {
    return `${displayType}${!displayType || ' '}Order`;
 }
 
+/**
+ * OrderTile Component
+ * 
+ * This component displays a tile for a trading order with its details. It includes a header with the order type and status, and a 
+ * body with additional details that can be expanded or collapsed. The tile's border color is determined by the order side.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} [props.order={}] - An object representing the order data, which includes side, avgPrice, origQty, origType, 
+ *                                    clientOrderId, and orderId.
+ * @param {Object} [props.mainOrders={}] - An object representing main orders (not used in the current implementation).
+ * @param {string} [props.className=''] - Additional class names for custom styling.
+ * 
+ * @returns {JSX.Element} The rendered OrderTile component.
+ */
 export default function OrderTile({ order = {}, mainOrders = {}, className = '', ...props }) {
    const [ expanded, setExpanded ] = useState(false);
    let borderColor;

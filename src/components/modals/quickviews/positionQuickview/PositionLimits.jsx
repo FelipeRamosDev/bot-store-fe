@@ -10,6 +10,21 @@ const priceCard = {
    elevation: 10
 };
 
+/**
+ * PositionLimits Component
+ * 
+ * This component renders detailed information about the trading limits of a specific position within a card. It displays 
+ * key details such as the stop loss, take profit, leverage, quantity, and commission. Additionally, it includes a table 
+ * with the position's open and close prices, initial stop gap, and the ratio of the stop gap to the open price.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} [props.position={}] - An object representing the position data, which includes stopPrice, gainPrice, 
+ *                                       usedLeverage, quantity, tradeFee, openPrice, closePrice, initialStopSpread, and 
+ *                                       symbolFractional.
+ * @param {Object} [props] - Additional props passed to the Card component.
+ * 
+ * @returns {JSX.Element} The rendered PositionLimits component.
+ */
 export default function PositionLimits({ position = {}, ...props }) {
    const priceProps = { fractional: position.symbolFractional };
    const stopGapPercent = (position.initialStopSpread * 100) / position.openPrice;

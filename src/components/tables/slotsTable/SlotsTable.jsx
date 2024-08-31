@@ -15,7 +15,7 @@ import SlotQuickview from '@/components/modals/quickviews/SlotQuickview/SlotQuic
  * 
  * @returns {React.Element} The rendered table component with slot data.
  */
-export default function SlotsTable({}) {
+export default function SlotsTable() {
    const { query = [], isLoading } = useContext(DBQueryContext);
    const slots = query;
    const [ slotModal, setSlotModal ] = useState('');
