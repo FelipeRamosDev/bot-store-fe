@@ -39,7 +39,7 @@ export default function PositionTile({ position = {}, slotIsRunning = false, cla
       >
          {!isEmpty && <>
             <div className="column self-width">
-               <label>{position.botSlot?.name}</label>
+               <label>Symbol</label>
                <span className="value">{position.symbol}</span>
             </div>
 
