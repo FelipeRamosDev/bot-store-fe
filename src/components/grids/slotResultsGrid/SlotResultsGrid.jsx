@@ -4,6 +4,19 @@ import Percent from '@/components/displays/percent/Percent';
 import Price from '@/components/displays/price/Price';
 import { useState } from 'react';
 
+/**
+ * SlotResultsGrid Component
+ * 
+ * This component renders a grid displaying various financial results for a given slot, including PNL (Profit and Loss), ROI
+ * (Return on Investment), and realized/unrealized PNL. The component allows toggling between daily and monthly views for
+ * PNL and ROI using a clickable `PriceCard`.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} [props.slot={}] - An object representing the financial slot data, which includes dayPnl, monthPnl,
+ *                                   dayRoi, monthRoi, totalRealizedPnl, pnl, and totalUnrealizedPnl.
+ * 
+ * @returns {JSX.Element} The rendered SlotResultsGrid component.
+ */
 export default function SlotResultsGrid({ slot = {} }) {
    const [ pnlState, setPnlState ] = useState(true);
    const [ roiState, setRoiState ] = useState(true);

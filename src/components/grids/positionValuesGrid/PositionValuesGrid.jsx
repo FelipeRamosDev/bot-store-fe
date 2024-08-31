@@ -3,6 +3,20 @@ import PriceCard from "@/components/common/priceCard/PriceCard";
 import Percent from '@/components/displays/percent/Percent';
 import Price from "@/components/displays/price/Price";
 
+/**
+ * PositionValuesGrid Component
+ * 
+ * This component renders a grid displaying various financial metrics of a position, including PNL, ROI, Realized Profit,
+ * Initial Margin, Initial Notional, and Total Notional. Each metric is displayed using a `PriceCard` component with a label
+ * and a formatted value.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} [props.position={}] - An object representing the financial position data.
+ * @param {string} [props.className=''] - An optional additional CSS class to apply to the grid.
+ * @param {Object} props - Additional props are spread onto the root div element.
+ * 
+ * @returns {JSX.Element} The rendered PositionValuesGrid component.
+ */
 export default function PositionValuesGrid({ position = {}, className = '', ...props }) {
    const cardProps = { borderSide: 'bottom', padding: 'xs', radius: 'xs', elevation: 15 };
    const priceProps = { dashedZero: true, size: 'l' };
