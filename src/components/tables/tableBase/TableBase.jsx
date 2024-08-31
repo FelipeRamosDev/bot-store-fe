@@ -35,7 +35,7 @@ export default function TableBase({
    items = [],
    elevate = true,
    borderLastRow = true,
-   maxHeight = 440,
+   maxHeight = 886,
    hideHeader = false,
    loading = true,
    onClickRow = () => {},
