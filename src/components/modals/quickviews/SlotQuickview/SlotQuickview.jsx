@@ -1,6 +1,6 @@
+import './SlotQuickview.scss';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import ContentModal from '../../base/contentModal/ContentModal';
-import './SlotQuickview.scss';
 import SlotQuickviewContent from './SlotQuickviewContent';
 import SlotQuickviewSidebar from './SlotQuickviewSidebar';
 import { DBQuery } from '@/contexts/DBQuery';
