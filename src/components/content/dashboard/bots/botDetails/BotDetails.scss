@@ -1,0 +1,59 @@
+@import "../../../../../style/scss/variables.scss";
+
+.bot-details {
+   .content-header {
+      margin-bottom: 2rem;
+   }
+   .page-header {
+      margin: 0;
+      width: 100%;
+
+      .cover {
+         min-height: 200px;
+      }
+
+      .title {
+         font-size: 1.3rem;
+      }
+
+      .bot-info {
+         $height: 200px;
+
+         background-color: $background-grey2-dark;
+         padding: 1rem 0;
+         height: $height;
+         padding-left: 0.9%;
+         padding-right: 0.9%;
+
+         >.full-container {
+            display: flex;
+            gap: 1rem;
+         }
+
+         .avatar {
+            $side: $height * 1.4;
+
+            width: $side;
+            height: $side;
+            border-radius: $side;
+            background-color: $white;
+            transform: translateY(($side * 0.5) * -1);
+         }
+
+         .summary {
+            flex: 1;
+            padding: 0.5rem 1rem;
+
+            .brief {
+               padding-right: 3rem;
+               color: $text-darken;
+            }
+         }
+
+         .infos {
+            width: 35%;
+            transform: translateY(-40%);
+         }
+      }
+   }
+}
