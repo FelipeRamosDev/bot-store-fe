@@ -1,7 +1,7 @@
 @import "../../../../style/scss/variables.scss";
 
 .bot-thread {
-   $title-size: 1.1rem;
+   $title-size: 1rem;
    $header-padding: 1rem;
    $header-space: $title-size + calc($header-padding * 2);
    position: relative;
@@ -25,7 +25,7 @@
       justify-content: flex-start;
       gap: 1rem;
       flex-wrap: wrap;
-      padding: $title-size 0;
+      padding: calc($title-size * 2) 0 $title-size 0;
    }
 
    .content-header {
