@@ -1,0 +1,22 @@
+{
+	"Create React Component": {
+		"prefix": "react:component",
+		"body": [
+			"import './${1:ComponentName}.scss';",
+			"\n",
+			"export default function ${1:ComponentName}() {",
+			"\treturn ${2:<></>};",
+			"}",
+			""
+		],
+		"description": "Create a new React Component."
+	},
+	"Import React.useState": {
+		"prefix": "react:states:import",
+		"body": [
+			"import { ${1:useState, }${2:useContext, }${3:useRef, }${4:useEffect} } from 'react';",
+			""
+		],
+		"description": "Import the "
+	}
+}
