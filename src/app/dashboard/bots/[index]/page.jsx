@@ -1,8 +1,8 @@
+import BotDetails from '@/components/content/dashboard/bots/botDetails/BotDetails';
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
-import MasterDetails from '@/components/content/dashboard/masterAccounts/masterDetails/MasterDetails';
 
 /**
- * MasterAccountPage Component
+ * BotPage Component
  *
  * This component renders the Master Accounts page.
  * It uses the `AuthBasePage` template and includes the `MasterDetails` component.
@@ -13,10 +13,10 @@ import MasterDetails from '@/components/content/dashboard/masterAccounts/masterD
  *
  * @returns {JSX.Element} The rendered master accounts page.
  */
-export default function MasterAccountPage({ params: { index } }) {
+export default function BotPage({ params: { index } }) {
    return (
-      <AuthBasePage className="master-accounts-page">
-         <MasterDetails index={index} />
+      <AuthBasePage className="bot-details">
+         <BotDetails botIndex={index} />
       </AuthBasePage>
    );
 }
