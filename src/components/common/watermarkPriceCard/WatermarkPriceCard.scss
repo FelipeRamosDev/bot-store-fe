@@ -1,0 +1,21 @@
+@import "../../../style/scss/variables.scss";
+
+.watermark-price-card {
+   position: relative;
+   min-height: 15rem;
+
+   .watermark {
+      position: absolute;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: $background-grey2-darken;
+
+      &[border-side=left] {
+         transform: rotateZ(-90deg);
+      }
+
+      &[border-side=right] {
+         transform: rotateZ(-90deg);
+      }
+   }
+}
