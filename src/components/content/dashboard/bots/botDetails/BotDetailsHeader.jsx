@@ -6,7 +6,6 @@ import Card from '@/components/common/card/Card';
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
 
-   console.log(doc)
    return <div className="page-header">
       <div className="cover"></div>
 

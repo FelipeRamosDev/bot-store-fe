@@ -2,13 +2,14 @@
 
 .watermark-price-card {
    position: relative;
-   min-height: 15rem;
 
    .watermark {
       position: absolute;
       font-weight: 900;
       text-transform: uppercase;
       color: $background-grey2-darken;
+      -webkit-user-select: none;
+      user-select: none;
 
       &[border-side=left] {
          transform: rotateZ(-90deg);

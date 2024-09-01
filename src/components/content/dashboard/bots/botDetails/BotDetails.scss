@@ -4,6 +4,7 @@
    .content-header {
       margin-bottom: 2rem;
    }
+
    .page-header {
       margin: 0;
       width: 100%;
@@ -31,7 +32,7 @@
          }
 
          .avatar {
-            $side: $height * 1.4;
+            $side: $height * 1.1;
 
             width: $side;
             height: $side;
