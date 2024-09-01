@@ -5,6 +5,7 @@ import DBQueryContext from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';
 import HorizontalSplitIcon from '@mui/icons-material/HorizontalSplit';
+import Rule from '@/components/tiles/bot/rule/Rule';
 
 export default function BotThread({ threadID, title, color }) {
    const { doc = {} } = useContext(DBQueryContext);
@@ -35,6 +36,7 @@ export default function BotThread({ threadID, title, color }) {
                if (child.type === 'block') {
                   return (
                      <WatermarkPriceCard
+                        key={child._id}
                         watermark="Block"
                         radius="s"
                         elevation={10}
@@ -44,13 +46,7 @@ export default function BotThread({ threadID, title, color }) {
 
                if (child.type === 'evaluation') {
                   return (
-                     <WatermarkPriceCard
-                        watermark="Evaluate"
-                        radius="s"
-                        padding="xs"
-                        borderSide="bottom"
-                        elevation={10}
-                     >Rule</WatermarkPriceCard>
+                     <Rule key={child._id} rule={child} />
                   );
                }
             })}

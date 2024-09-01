@@ -1,6 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
+import { useRouter } from 'next/navigation';
 import Price from '@/components/displays/price/Price';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import DBQueryContext from '@/contexts/DBQuery';
@@ -13,6 +14,7 @@ import DBQueryContext from '@/contexts/DBQuery';
  */
 export default function RecentBotsTable() {
    const { query = [], isLoading } = useContext(DBQueryContext);
+   const nav = useRouter();
    const bots = query;
 
    return <div className="activities-table">
@@ -22,6 +24,7 @@ export default function RecentBotsTable() {
          items={bots}
          pagination={{}}
          loading={isLoading}
+         onClickRow={(doc) => nav.push(`/dashboard/bots/${doc.index}`)}
          headerConfigs={[
             {
                label: 'Bot',
