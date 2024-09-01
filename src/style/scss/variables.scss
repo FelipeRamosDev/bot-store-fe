@@ -18,6 +18,7 @@ $background-grey1: #222728;
 $background-grey1-light: lighten($color: $background-grey1, $amount: 3);
 $background-grey2: #252A2A;
 $background-grey2-dark: darken($color: $background-grey2, $amount: 2);
+$background-grey2-darken: darken($color: $background-grey2, $amount: 5);
 $background-grad: radial-gradient(100vh, #28373C, #212A2D);
 
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);
@@ -38,6 +39,9 @@ $grey: #808080;
 $grey-light: lighten($color: $grey, $amount: 25);
 $grey-dark: darken($color: $grey, $amount: 25);
 $grey-mark: #515151;
+
+$white: #FAFAFA;
+$black: #111;
 
 $text: #FAFAFA;
 $text-darken: darken($color: $text, $amount: 20);

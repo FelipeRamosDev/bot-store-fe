@@ -41,14 +41,16 @@ export default function SlotTile({
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
    const botName = useRef();
+   const botIndex = useRef();
    const isStating = uInstance?.status === 'starting';
    const isStatingStream = uInstance?.status === 'starting-userstream';
    const isOffline = uInstance?.status === 'offline';
    const symbol = slot?.assets?.length ? slot?.assets[0] : '';
    const interval = slot?.interval;
 
-   if (!botName.current && slot.bot?.name) {
+   if (!botName.current && slot.bot?.name && !botIndex.current && slot.bot?.index) {
       botName.current = slot.bot?.name;
+      botIndex.current = slot.bot?.index;
    } 
 
    useEffect(() => {
@@ -69,7 +71,7 @@ export default function SlotTile({
                   setDeleteConfirmDialog={setDeleteConfirmDialog}
                />
 
-               <Link className="bot-name" href={`https://botstore-temp.vercel.app/bot-details?botuid=${slot.bot?._id || slot.bot}`}>
+               <Link className="bot-name" href={`/dashboard/bots/${botIndex.current}`}>
                   {botName.current}
                </Link>
             </div>
