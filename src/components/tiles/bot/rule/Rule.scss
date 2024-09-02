@@ -1,4 +1,24 @@
+@import "../../../../style/scss/variables.scss";
+
 .bot-rule {
    display: flex;
-   gap: 1rem;
+   gap: 0.5rem;
+
+   @media screen and (max-width: $screen-m) {
+      flex-direction: column;
+   }
+
+   .bot-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $background-grey2;
+      padding: 0.5rem;
+      border-radius: $radius-s;
+
+      span {
+         font-size: 1.7rem;
+         font-weight: 900;
+      }
+   }
 }

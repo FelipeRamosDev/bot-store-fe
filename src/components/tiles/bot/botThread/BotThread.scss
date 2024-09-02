@@ -25,7 +25,12 @@
       justify-content: flex-start;
       gap: 1rem;
       flex-wrap: wrap;
-      padding: calc($title-size * 2) 0 $title-size 0;
+      padding: calc($title-size * 2) $title-size $title-size 0;
+
+      @media screen and (max-width: $screen-m) {
+         display: flex;
+         flex-direction: column;
+      }
    }
 
    .content-header {

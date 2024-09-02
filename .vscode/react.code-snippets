@@ -3,7 +3,7 @@
 		"prefix": "react:component",
 		"body": [
 			"import './${1:ComponentName}.scss';",
-			"\n",
+			"",
 			"export default function ${1:ComponentName}() {",
 			"\treturn ${2:<></>};",
 			"}",

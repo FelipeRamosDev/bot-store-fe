@@ -1,0 +1,38 @@
+@import "../../../../style/scss/variables.scss";
+
+.bot-value {
+   padding: 0.8rem;
+   border-radius: $radius-s;
+   background-color: $background-grey2;
+   min-width: 100px;
+
+   &.primitive {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+
+   .value-name {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin: 0;
+   }
+
+   .primitive-value {
+      &.number,
+      &.boolean {
+         font-size: 2rem;
+      }
+   }
+
+   .contained-table {
+      .table-row {
+         .table-column {
+            min-width: 80px;
+         }
+      }
+   }
+}

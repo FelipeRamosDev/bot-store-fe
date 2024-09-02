@@ -1,7 +1,9 @@
 import './Rule.scss';
+import BotValue from '../botValue/BotValue';
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';
+import configs from '@/config.json';
 
-export default function Rule({ rule = {} }) {
+export default function Rule({ rule = {}, ...props }) {
    if (!Array.isArray(rule.children)) {
       return <></>;
    }
@@ -13,12 +15,11 @@ export default function Rule({ rule = {} }) {
          radius="s"
          padding="xs"
          borderSide="bottom"
-         watermarkSize={23}
+         watermarkSize={window.innerWidth < configs.breakpoints.s ? 18 : 23}
          elevation={10}
+         {...props}
       >
-         {rule.children.map(value => {
-            return <pre key={value._id}>{value.configs}</pre>
-         })}
+         {rule.children.map(value => <BotValue key={value._id} botValue={value} />)}
       </WatermarkPriceCard>
    );
 }
