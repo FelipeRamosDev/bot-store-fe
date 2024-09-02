@@ -1,0 +1,12 @@
+@import "../../../../style/scss/variables.scss";
+
+.bot-block {
+   display: flex;
+   justify-content: flex-start;
+   gap: 1rem;
+   flex-wrap: wrap;
+   
+   @media screen and (max-width: $screen-m) {
+      flex-direction: column;
+   }
+}

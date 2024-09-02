@@ -1,8 +1,8 @@
 @import "../../../../style/scss/variables.scss";
 
 .bot-thread {
-   $title-size: 1rem;
-   $header-padding: 1rem;
+   $title-size: 0.95rem;
+   $header-padding: 0.75rem;
    $header-space: $title-size + calc($header-padding * 2);
    position: relative;
 
@@ -48,5 +48,20 @@
       margin: 0;
       font-size: $title-size;
       color: $text-darken;
+   }
+   
+   .bot-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $background-grey2;
+      padding: 0.5rem;
+      border-radius: $radius-s;
+
+      span {
+         font-size: 1rem;
+         text-transform: uppercase;
+         font-weight: 900;
+      }
    }
 }
