@@ -1,6 +1,6 @@
-export default function BotThreadDivider({ text }) {
+export default function BotThreadDivider({ mode, text }) {
    return (
-      <div className="bot-divider">
+      <div className={`bot-divider ${mode}`}>
          <span>{text}</span>
       </div>
    );

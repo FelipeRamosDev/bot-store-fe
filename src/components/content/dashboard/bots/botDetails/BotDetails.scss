@@ -22,13 +22,16 @@
 
          background-color: $background-grey2-dark;
          padding: 1rem 0;
-         height: $height;
          padding-left: 0.9%;
          padding-right: 0.9%;
 
          >.full-container {
             display: flex;
             gap: 1rem;
+
+            @media screen and (max-width: $screen-m) {
+               flex-direction: column;
+            }
          }
 
          .avatar {
@@ -39,6 +42,11 @@
             border-radius: $side;
             background-color: $white;
             transform: translateY(($side * 0.5) * -1);
+
+            @media screen and (max-width: $screen-m) {
+               margin: 0 auto;
+               margin-top: -calc($height / 2);
+            }
          }
 
          .summary {
@@ -54,6 +62,10 @@
          .infos {
             width: 35%;
             transform: translateY(-40%);
+            
+            @media screen and (max-width: $screen-m) {
+               width: 100%;
+            }
          }
       }
    }

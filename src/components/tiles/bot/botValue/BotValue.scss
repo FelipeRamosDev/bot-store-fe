@@ -16,7 +16,7 @@
    .value-name {
       text-align: center;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 700;
       text-transform: uppercase;
       margin: 0;
    }
@@ -25,6 +25,7 @@
       &.number,
       &.boolean {
          font-size: 2rem;
+         font-weight: 700;
       }
    }
 
