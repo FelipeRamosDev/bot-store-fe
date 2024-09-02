@@ -57,7 +57,7 @@ export default function WatermarkPriceCard({ className = '', watermark, watermar
                break;
          }
       }
-   }, [waterMark]);
+   }, [waterMark, borderSide, paddingSize]);
 
    return <PriceCard
       className={`watermark-price-card ${className}`}
