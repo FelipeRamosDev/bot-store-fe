@@ -71,7 +71,7 @@
    }
 
    .bot-settings {
-      &.content-sidebar {
+      &.content-split {
          row-gap: 0;
          padding-top: 3rem;
          padding-bottom: 2rem;
@@ -87,14 +87,10 @@
          flex-wrap: wrap;
 
          .bot-value-single {
-            flex: calc(25% - 1rem);
+            flex: calc(50% - 1rem);
             background-color: $background-paper-light;
 
             @media screen and (max-width: $screen-l) {
-               flex: calc(50% - 1rem);
-            }
-
-            @media screen and (max-width: $screen-m) {
                flex: 100%;
             }
          }

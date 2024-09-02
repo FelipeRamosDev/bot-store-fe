@@ -3,9 +3,9 @@ import BotValue from "../botValue/BotValue";
 import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 
-export default function BotValueSingle({ slug, title = 'Bot Value', ...props }) {
+export default function BotValueSingle({ botValue, slug, title = 'Bot Value', minify = false, ...props }) {
    const { doc } = useContext(DBQueryContext);
-   const foundValue = doc?.values?.find(item => item.slug === slug);
+   const foundValue = botValue || doc?.values?.find(item => item.slug === slug);
    let borderColor;
 
    if (!foundValue) {
@@ -36,6 +36,8 @@ export default function BotValueSingle({ slug, title = 'Bot Value', ...props }) 
          <BotValue
             className="single"
             botValue={foundValue}
+            minify={minify}
+            isSingle={true}
             {...props}
          />
       </WatermarkPriceCard>
