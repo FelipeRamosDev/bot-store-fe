@@ -1,6 +1,6 @@
 import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 
-export default function FunctionValue({ botValue = {}, ...props }) {
+export default function FunctionValue({ className = '', botValue = {}, ...props }) {
    const valueFunction = botValue.functionUID;
    const params = JSON.parse(botValue.configs);
    const tableData = [];
@@ -21,7 +21,7 @@ export default function FunctionValue({ botValue = {}, ...props }) {
    });
 
    return (
-      <div className="bot-value function" {...props}>
+      <div className={`bot-value function ${className}`} {...props}>
          <p className="value-name">{valueFunction.title}</p>
 
          <ContainedTable tableData={tableData} />
