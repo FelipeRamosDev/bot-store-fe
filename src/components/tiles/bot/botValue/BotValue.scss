@@ -6,6 +6,17 @@
    background-color: $background-grey2;
    min-width: 100px;
 
+   &.minified {
+      .value-name {
+         text-align: left;
+         font-size: 0.85rem;
+      }
+
+      .string-params {
+         font-size: 0.75rem;
+      }
+   }
+
    &.primitive {
       display: flex;
       flex-direction: column;
@@ -19,6 +30,7 @@
       font-weight: 700;
       text-transform: uppercase;
       margin: 0;
+      color: $text-darken;
    }
 
    .primitive-value {

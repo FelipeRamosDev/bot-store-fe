@@ -1,14 +1,24 @@
 'use client';
 
+import { useContext } from 'react';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import BotValueSingle from '@/components/tiles/bot/botValueSingle/BotValueSingle';
 import MoneyOffIcon from '@mui/icons-material/MoneyOff';
 import FunctionsIcon from '@mui/icons-material/Functions';
+import BotValuesGrid from '@/components/grids/botValuesGrid/BotValuesGrid';
+import DBQueryContext from '@/contexts/DBQuery';
+import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 
 export default function BotSettings() {
+   const { doc } = useContext(DBQueryContext);
+
+   if (!doc) {
+      return <></>;
+   }
+
    return (
-      <ContentSidebar className="bot-settings" isFullContainer={true}>
+      <ContentSplit className="bot-settings" useContainer={true}>
          <div className="loss-gain-settings">
             <ContentHeader>
                <MoneyOffIcon fontSize="small" /> <h2 className="header-title">Stoploss / Takeprofit</h2>
@@ -24,7 +34,9 @@ export default function BotSettings() {
             <ContentHeader>
                <FunctionsIcon fontSize="small" /> <h2 className="header-title">Values</h2>
             </ContentHeader>
+
+            <BotValuesGrid values={doc.values} />
          </div>
-      </ContentSidebar>
+      </ContentSplit>
    );
 }
