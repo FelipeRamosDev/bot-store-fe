@@ -85,7 +85,7 @@ export function FormBase({
 
          return await onSubmit.call(form, form.toObject());
       } catch (error) {
-         const serverValidationErrors = parseValidationErrorMsg(error?.message);
+         const serverValidationErrors = parseValidationErrorMsg(error);
 
          if (serverValidationErrors) {
             setAlertDialog({ error, message: serverValidationErrors });

@@ -2,7 +2,6 @@
 
 import { useContext } from 'react';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import BotValueSingle from '@/components/tiles/bot/botValueSingle/BotValueSingle';
 import MoneyOffIcon from '@mui/icons-material/MoneyOff';
 import FunctionsIcon from '@mui/icons-material/Functions';
