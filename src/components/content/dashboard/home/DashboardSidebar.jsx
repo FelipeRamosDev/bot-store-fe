@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import RecentBotsTable from '@/components/tables/recentBotsTable/RecentBotsTable';
+import BotsTable from '@/components/tables/botsTable/BotsTable';
 import UserInstanceTileDash from '@/components/tiles/userInstance/Userinstance';
 import { DBQuery } from '@/contexts/DBQuery';
 import AuthUserContext from "@/contexts/AuthUser";
@@ -12,7 +12,7 @@ import AuthUserContext from "@/contexts/AuthUser";
  * It includes:
  * - `UserInstanceTileDash`: A component displaying user instance details.
  * - `ActivitiesTable`: A table displaying recent activities related to the user.
- * - `RecentBotsTable`: A table displaying recent bots data.
+ * - `BotsTable`: A table displaying recent bots data.
  * 
  * It uses the `AuthUserContext` to fetch user information and `DBQuery` components to query relevant data from the database.
  * 
@@ -36,8 +36,8 @@ export default function DashboardSidebar() {
             <UserInstanceTileDash />
          </DBQuery>
 
-         <DBQuery type="query" collection="bots">
-            <RecentBotsTable />
+         <DBQuery type="query" collection="bots" sort={{ modifiedAt: -1 }}>
+            <BotsTable title="My Bots" />
          </DBQuery>
       </>
    );

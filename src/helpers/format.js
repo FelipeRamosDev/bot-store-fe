@@ -91,15 +91,22 @@ function toPercentString(value, opt) {
  * @param {string} msg - The error message.
  * @returns {string} - The parsed error message.
  */
-function parseValidationErrorMsg(msg) {
-   if (typeof msg === 'string' && msg.startsWith('ValidateModel validation failed:')) {
-      const errorList = msg.replace('ValidateModel validation failed: ', '').split(',');
+function parseValidationErrorMsg(err) {
+   if (typeof err === 'string' && err.startsWith('ValidateModel validation failed:')) {
+      const errorList = err.replace('ValidateModel validation failed: ', '').split(',');
 
       return errorList.map(item => {
          const parsed = item.split(': ');
          return `- ${parsed[1]}`;
       }).join('\n');
-   } else {
+   }
+   
+   else if (err.name === 'ValidationError') {
+      const [ pre, field, msg ] = err.message.split(':');
+      return msg || field || pre;
+   }
+   
+   else {
       return 'Unknown error caught!';
    }
 }
