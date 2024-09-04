@@ -16,7 +16,7 @@ import FormLabel from '@mui/material/FormLabel';
  * 
  * @returns {JSX.Element} - The rendered `RadioGroup` with radio buttons and optional label.
  */
-export default function RadioGroupInput({ schema, onChange, ...props }) {
+export default function RadioGroupInput({ schema, onChange, style, ...props }) {
    const groupID = useRef();
    const { label, defaultValue, rowDirection = true, options = [] } = schema || {};
    
@@ -25,7 +25,7 @@ export default function RadioGroupInput({ schema, onChange, ...props }) {
    }
 
    return (
-      <div className="radio-group-input">
+      <div className="radio-group-input" style={style}>
          {label && <FormLabel id={groupID} className="group-label">{label}</FormLabel>}
 
          <RadioGroup

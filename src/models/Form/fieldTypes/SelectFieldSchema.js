@@ -18,11 +18,12 @@ export default class SelectFieldSchema extends FieldSchema {
     */
    constructor(setup = {}, form) {
       super(setup, form);
-      const { OptionModel } = setup;
+      const { OptionModel, style } = setup;
 
       this.type = String;
       this.OptionModel = OptionModel || SelectFieldSchemaOption;
       this.Input = SelectInput;
+      this.style = { minWidth: 200, ...style };
    }
 }
 

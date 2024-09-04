@@ -1,5 +1,8 @@
 import FetchDependency from './FetchDependency';
 import FieldSchema from './FieldSchema';
+import NumberFieldSchema from './fieldTypes/NumberFieldSchema';
+import SelectFieldSchema from './fieldTypes/SelectFieldSchema';
+import TextFieldSchema from './fieldTypes/TextFieldSchema';
 
 /**
  * Form Class
@@ -66,6 +69,14 @@ export default class Form {
       });
 
       return data;
+   }
+
+   toJSON() {
+      try {
+         return JSON.stringify(this.toObject());
+      } catch (error) {
+         throw error;
+      }
    }
 
    /**
@@ -299,6 +310,13 @@ export default class Form {
       }
    }
 
+   toSchemaArray() {
+      const array = [];
+      
+      this._schema.forEach(item => array.push(item));
+      return array;
+   }
+
    /**
     * Fetches all dependencies and updates schemas that use dependencies.
     *
@@ -430,5 +448,31 @@ export default class Form {
             configurable: true
          });
       }
+   }
+
+   static buildFromBESchema(beSchema) {
+      if (!beSchema) {
+         throw new Error('The param "beSchema" is required to build from be schema!');
+      }
+
+      const schema = [];
+      Object.keys(beSchema).map(key => {
+         const current = beSchema[key];
+         const placeholder = current.default !== undefined ? `Default: ${current.default}` : 'Enter a value...';
+         
+         switch (current.type) {
+            case 'string':
+               schema.push(new TextFieldSchema({ key, ...current, type: String, placeholder }));
+               break;
+            case 'number':
+               schema.push(new NumberFieldSchema({ key, ...current, type: Number, placeholder }));
+               break;
+            case 'select':
+               schema.push(new SelectFieldSchema({ key, ...current, type: Number, placeholder }));
+               break;
+         }
+      });
+
+      return new Form({ schema });
    }
 }
