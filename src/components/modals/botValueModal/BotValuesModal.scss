@@ -1,0 +1,11 @@
+@import "../../../style/scss/variables.scss";
+
+.bot-value-modal {
+   .check-button-group {
+      .options-wrap {
+         background-color: $background-paper;
+         padding: 0.5rem;
+         border-radius: $radius-s;
+      }
+   }
+}
