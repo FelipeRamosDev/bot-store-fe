@@ -14,9 +14,9 @@ export default function FunctionValue({ className = '', minify, botValue = {} })
       const paramValue = params[key];
 
       if (paramValue) {
-         tableData.push({ label: key, value: paramValue });
+         tableData.push({ label: optValue.label || key, value: paramValue });
       } else {
-         tableData.push({ label: key, value: optValue.default });
+         tableData.push({ label: optValue.label || key, value: optValue.default });
       }
    });
 

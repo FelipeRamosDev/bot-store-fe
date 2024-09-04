@@ -1,8 +1,9 @@
 import './BotValueForm.scss';
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import botValueForm from './BotValueForm.config';
 import BotValueFormFunction from './BotValueFormFunction';
+import BotValueFormPrimitive from './BotValuePrimitive';
 import Button from '@mui/material/Button';
 import Form from '@/models/Form';
 import FormInput from '../formBase/FormInput';
@@ -87,6 +88,7 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
             submitLabel="Save"
          >
             {valueType === 'function' && <BotValueFormFunction onCustomChange={handleSetForm} />}
+            {valueType === 'primitive' && <BotValueFormPrimitive />}
          </FormBase>
 
          {paramsForm && <FormBase
@@ -98,10 +100,12 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
             {paramsFormFields.map(item => <FormInput key={item.key} path={item.key} />)}
          </FormBase>}
 
-         <Button onClick={() => {
-            formNode.current?.requestSubmit();
-            paramsFormNode.current?.requestSubmit();
-         }}>Submit</Button>
+         <div className="bot-value-form button-wrap">
+            <Button color="success" onClick={() => {
+               formNode.current?.requestSubmit();
+               paramsFormNode.current?.requestSubmit();
+            }}>Submit</Button>
+         </div>
       </>);
    }
 

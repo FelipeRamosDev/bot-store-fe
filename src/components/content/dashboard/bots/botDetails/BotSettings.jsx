@@ -8,8 +8,9 @@ import FunctionsIcon from '@mui/icons-material/Functions';
 import BotValuesGrid from '@/components/grids/botValuesGrid/BotValuesGrid';
 import DBQueryContext from '@/contexts/DBQuery';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
-import AddBotValuesMenu from '@/components/menus/dropdown/addBotValuesMenu/AddBotValuesMenu';
 import BotValueModal from '@/components/modals/botValueModal/BotValueModal';
+import AddBotValuesMenu from '@/components/menus/dropdown/addBotValuesMenu/AddBotValuesMenu';
+import AddBotValuesStopsMenu from '@/components/menus/dropdown/addBotValuesStopsMenu/AddBotValuesStopsMenu';
 
 export default function BotSettings() {
    const { doc } = useContext(DBQueryContext);
@@ -36,7 +37,7 @@ export default function BotSettings() {
       <ContentSplit className="bot-settings" useContainer={true}>
          <div className="loss-gain-settings">
             <ContentHeader
-               Toolbar={() => <AddBotValuesMenu bot={doc} setModalState={setCreateValueModal} />}
+               Toolbar={() => <AddBotValuesStopsMenu bot={doc} setModalState={setCreateValueModal} />}
             >
                <MoneyOffIcon fontSize="small" /> <h2 className="header-title">Stoploss / Takeprofit</h2>
             </ContentHeader>
@@ -50,7 +51,9 @@ export default function BotSettings() {
          </div>
 
          <div className="values-settings">
-            <ContentHeader>
+            <ContentHeader
+               Toolbar={() => <AddBotValuesMenu bot={doc} setModalState={setCreateValueModal} />}
+            >
                <FunctionsIcon fontSize="small" /> <h2 className="header-title">Values</h2>
             </ContentHeader>
 
