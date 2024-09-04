@@ -21,7 +21,9 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
 
    async function onSubmit(data) {
       try {
-         data.configs = paramsForm.toJSON();
+         if (paramsForm) {
+            data.configs = paramsForm.toJSON();
+         }
 
          const created = await API.ajax.authPut('/bot/add-value', data);
          if (created.error) {
@@ -104,7 +106,9 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
             <Button color="success" onClick={() => {
                formNode.current?.requestSubmit();
                paramsFormNode.current?.requestSubmit();
-            }}>Submit</Button>
+            }}>
+               Submit
+            </Button>
          </div>
       </>);
    }
