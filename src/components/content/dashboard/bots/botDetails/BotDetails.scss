@@ -19,6 +19,7 @@
 
       .bot-info {
          $height: 200px;
+         box-shadow: $shadow-5;
 
          background-color: $background-grey2-dark;
          padding: 1rem 0;
@@ -82,16 +83,38 @@
       }
 
       .loss-gain-settings {
+         $gap: 1rem;
+
          display: flex;
-         gap: 1rem;
+         gap: $gap;
          flex-wrap: wrap;
 
          .bot-value-single {
-            flex: calc(50% - 1rem);
+            flex: calc(50% - $gap);
             background-color: $background-paper-light;
 
             @media screen and (max-width: $screen-l) {
                flex: 100%;
+            }
+         }
+         
+         .no-documents-tile {
+            min-width: auto;
+            flex: calc(50% - $gap);
+            border-width: 3px;
+
+            &.stoploss {
+               border-color: $error;
+               color: $error;
+            }
+
+            &.takeprofit {
+               border-color: $success;
+               color: $success;
+            }
+
+            .message {
+               font-weight: 600;
             }
          }
       }

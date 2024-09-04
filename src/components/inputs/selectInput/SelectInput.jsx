@@ -20,7 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
  * @returns {JSX.Element} - The rendered select dropdown with optional label and error messages.
  */
 export default function SelectInput({ className = '', errors = [], schema = {}, onChange = () => {}, ...props }) {
-   const { label, options = [], useNoneOption = false } = schema;
+   const { label, options = [], useNoneOption = false, style } = schema;
    let { value = '' } = schema;
    const inputID = useRef();
 
@@ -38,7 +38,7 @@ export default function SelectInput({ className = '', errors = [], schema = {}, 
       }
    }
 
-   return <FormControl color="tertiary" className={`select-input ${className}`} variant="filled" error={errors.length} {...props}>
+   return <FormControl color="tertiary" className={`select-input ${className}`} style={style} variant="filled" error={errors.length} {...props}>
       {label && <InputLabel id={inputID.current}>{label}</InputLabel>}
 
       <Select
