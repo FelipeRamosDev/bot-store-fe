@@ -1,5 +1,5 @@
 import './BotValueForm.scss';
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import botValueForm from './BotValueForm.config';
 import BotValueFormFunction from './BotValueFormFunction';
@@ -10,28 +10,41 @@ import FormInput from '../formBase/FormInput';
 import AuthUserContext from '@/contexts/AuthUser';
 import APIContext from '@/contexts/4HandsAPI';
 
-export default function BotValueForm({ bot, slug, valueType = 'function', onSuccess = () => {} }) {
-   const { user } = useContext(AuthUserContext);
+export default function BotValueForm({ initView = 'ask', editMode = false, editData, bot, slug, valueType = 'function', onSuccess = () => {} }) {
    const API = useContext(APIContext);
-   const [ formType, setFormType ] = useState('ask');
+   const { user } = useContext(AuthUserContext);
+   const [ formType, setFormType ] = useState(initView);
    const [ paramsForm, setParamsForm ] = useState();
    const functions = useRef();
    const formNode = useRef();
    const paramsFormNode = useRef();
 
    async function onSubmit(data) {
+      let reqHttp;
+
+      if (!editMode) {
+         reqHttp = async () => await API.ajax.authPut('/bot/add-value', data);
+      } else {
+         reqHttp = async () => await API.ajax.authPost('/bot/update-value', {
+            userUID: user._id,
+            valueUID: editData._id,
+            botUID: editData.bot,
+            toUpdate: data
+         });
+      }
+
       try {
          if (paramsForm) {
             data.configs = paramsForm.toJSON();
          }
 
-         const created = await API.ajax.authPut('/bot/add-value', data);
-         if (created.error) {
-            throw created;
+         const response = await reqHttp();
+         if (response.error) {
+            throw response;
          }
          
-         if (created.success) {
-            onSuccess(created);
+         if (response.success) {
+            onSuccess(response);
          }
       } catch (err) {
          throw err;
@@ -47,7 +60,14 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
       const functionSchema = selected?.options;
 
       if (functionSchema) {
-         setParamsForm(Form.buildFromBESchema(functionSchema));
+         const newForm = Form.buildFromBESchema(functionSchema);
+
+         if (editMode && typeof editData?.configs === 'string' && value === editData.functionUID?._id) {
+            const parsedConfigs = JSON.parse(editData.configs);
+            Object.keys(parsedConfigs).map(key => newForm.setValue(key, parsedConfigs[key]));
+         }
+
+         setParamsForm(newForm);
       }
    }
 
@@ -66,10 +86,12 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
    }
 
    if (formType === 'create') {
-      botValueForm.setValue('author', user?._id);
-      botValueForm.setValue('bot', bot._id);
-      botValueForm.setValue('slug', slug);
-      botValueForm.setValue('valueType', valueType);
+      if (!editMode) {
+         botValueForm.setValue('author', user?._id);
+         botValueForm.setValue('bot', bot?._id);
+         botValueForm.setValue('slug', slug);
+         botValueForm.setValue('valueType', valueType);
+      }
 
       botValueForm.setDependency({
          id: 'functions',
@@ -80,6 +102,7 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
 
       const paramsFormFields = [];
       paramsForm?._schema.forEach(item => paramsFormFields.push(item));
+
       return (<>
          <FormBase
             anchorRef={formNode}
@@ -87,7 +110,14 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
             formSet={botValueForm}
             onSubmit={onSubmit}
             hideSubmit={true}
+            editData={editData}
             submitLabel="Save"
+            onReady={() => {
+               const functionUID = editData?.functionUID?._id;
+               if (editData?.functionUID?._id && !paramsForm) {
+                  handleSetForm(functionUID);
+               }
+            }}
          >
             {valueType === 'function' && <BotValueFormFunction onCustomChange={handleSetForm} />}
             {valueType === 'primitive' && <BotValueFormPrimitive />}
@@ -97,6 +127,7 @@ export default function BotValueForm({ bot, slug, valueType = 'function', onSucc
             anchorRef={paramsFormNode}
             formID="function-params-form"
             formSet={paramsForm}
+            editData={editData?.configs ? JSON.parse(editData?.configs) : undefined}
             hideSubmit={true}
          >
             {paramsFormFields.map(item => <FormInput key={item.key} path={item.key} />)}

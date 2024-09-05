@@ -1,5 +1,5 @@
 import './FormBase.scss';
-import { createContext, useEffect, useState, useContext } from 'react';
+import { createContext, useEffect, useState, useContext, useRef } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/base/alertModal/AlertModal';
 import { parseValidationErrorMsg } from '@/helpers/format';
@@ -34,6 +34,7 @@ export function FormBase({
    submitLabel = 'Send',
    appendUserToBody = false,
    onSubmit = async () => {},
+   onReady = () => {},
    hideSubmit = false,
    editData,
    children,
@@ -51,8 +52,11 @@ export function FormBase({
    }
 
    useEffect(() => {
+      const stringOldSchema = JSON.stringify(formSet?._schema?.keys().toArray());
+      const stringNewSchema = JSON.stringify(form?._schema.keys().toArray());
+
       // Initialize the Form instance
-      if (!form) {
+      if (!form || stringOldSchema !== stringNewSchema) {
          formSet.formSetter(setForm);
          formSet.errorSetter(setErrors);
 
@@ -69,6 +73,12 @@ export function FormBase({
          });
       }
    }, [ form, formSet, editData ]);
+
+   useEffect(() => {
+      if (form) {
+         setTimeout(() => onReady(), 0);
+      }
+   }, [ form ]);
 
    /**
     * Handle form submission, including validation and error handling.
