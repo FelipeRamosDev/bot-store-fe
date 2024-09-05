@@ -7,10 +7,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import BotValueModal from '@/components/modals/botValueModal/BotValueModal';
+import DeleteBotValueConfirmDialog from '@/components/modals/deleteBotValueConfirmDialog/DeleteBotValueConfirmDialog';
 
 export default function BotValuesMenu({ botValue = {} }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ modal, setModal ] = useState(false);
+   const [ deleteModal, setDeleteModal ] = useState(false);
    const open = Boolean(anchorEl);
 
    const handleMenuOpen = (event) => {
@@ -40,15 +42,16 @@ export default function BotValuesMenu({ botValue = {} }) {
                Edit
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={() => setDeleteModal(true)}>
                <ListItemIcon>
                   <DeleteForeverIcon color="error" fontSize="small" />
                </ListItemIcon>
-               Delete Slot
+               Delete
             </MenuItem>
          </Menu>
 
          <BotValueModal initView="create" open={modal} setModal={setModal} botValue={botValue} editMode={true} />
+         <DeleteBotValueConfirmDialog botValue={botValue} open={deleteModal} setOpen={setDeleteModal} />
       </>
    );
 }
