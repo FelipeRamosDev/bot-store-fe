@@ -42,6 +42,7 @@ export default class FieldSchema {
          parseInput,
          useDependencies = false,
          onInput = (value) => {},
+         style
       } = Object(setup);
 
       if (parseInput && typeof parseInput !== 'function') {
@@ -64,6 +65,7 @@ export default class FieldSchema {
       this.onInput = onInput;
       this.parseInput = parseInput ? parseInput.bind(this) : undefined;
       this.Input = Input;
+      this.style = style;
 
       this.validators = validators.map(validator => {
          if (typeof validator !== 'function') {

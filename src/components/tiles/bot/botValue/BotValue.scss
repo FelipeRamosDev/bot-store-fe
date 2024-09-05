@@ -24,12 +24,17 @@
       align-items: center;
    }
 
+   &.single:not(.primitive) {
+      .value-name {
+         margin-right: auto;
+      }
+   }
+
    .value-name {
       text-align: center;
       font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
-      margin: 0;
       color: $text-darken;
    }
 
@@ -47,5 +52,17 @@
             min-width: 80px;
          }
       }
+   }
+
+   .content-header {
+      padding-top: 0;
+      align-items: center;
+   }
+
+   .menu-wrap {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateX(-25%) translateY(25%);
    }
 }

@@ -33,7 +33,8 @@ export default class FetchDependency {
          sort,
          httpRequest,
          filter = {},
-         filterUser = false
+         filterUser = false,
+         onLoad = () => {}
       } = Object(setup);
 
       if (!form) {
@@ -59,6 +60,7 @@ export default class FetchDependency {
       this.id = id;
       this.queryType = queryType;
       this.filterUser = filterUser;
+      this.onLoad = onLoad;
 
       if (this.queryType === 'endpoint' && httpRequest) {
          this.httpRequest = new HttpRequestSetup(httpRequest, this);
@@ -119,6 +121,8 @@ export default class FetchDependency {
          }
       } catch (err) {
          throw err;
+      } finally {
+         this.onLoad();
       }
    }
 
