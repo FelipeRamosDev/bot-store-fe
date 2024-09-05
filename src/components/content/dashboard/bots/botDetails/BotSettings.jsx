@@ -47,13 +47,11 @@ export default function BotSettings() {
             <BotValueSingle slug="takeprofit_long" title="Takeprofit" openCreateModal={openCreateModal} />
             <BotValueSingle slug="takeprofit_short" title="Takeprofit" openCreateModal={openCreateModal} />
 
-            <BotValueModal bot={doc} open={createValueModal} setModal={setCreateValueModal} />
+            <BotValueModal initView="create" bot={doc} open={createValueModal} setModal={setCreateValueModal} />
          </div>
 
          <div className="values-settings">
-            <ContentHeader
-               Toolbar={() => <AddBotValuesMenu bot={doc} setModalState={setCreateValueModal} />}
-            >
+            <ContentHeader Toolbar={() => <AddBotValuesMenu bot={doc} setModalState={setCreateValueModal} />}>
                <FunctionsIcon fontSize="small" /> <h2 className="header-title">Values</h2>
             </ContentHeader>
 

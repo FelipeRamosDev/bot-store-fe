@@ -2,7 +2,7 @@ import './BotValuesModal.scss';
 import BotValueForm from "@/components/forms/botValueForm/BotValueForm";
 import ContentModal from "../base/contentModal/ContentModal";
 
-export default function BotValueModal({ bot, open, setModal = () => {} }) {
+export default function BotValueModal({ botValue, editMode, initView, bot, open, setModal = () => {} }) {
    const isOpen = Boolean(open);
    const { slug, valueType } = Object(open);
    let size = 'medium';
@@ -22,7 +22,14 @@ export default function BotValueModal({ bot, open, setModal = () => {} }) {
          size={size}
          onClose={() => setModal(null)}
       >
-         <BotValueForm slug={slug} valueType={valueType} bot={bot} onSuccess={() => setModal(null)} />
+         <BotValueForm
+            initView={initView}
+            slug={slug}
+            valueType={valueType}
+            bot={bot}
+            editMode={editMode}
+            editData={botValue}
+            onSuccess={() => setModal(null)} />
       </ContentModal>
    );
 }
