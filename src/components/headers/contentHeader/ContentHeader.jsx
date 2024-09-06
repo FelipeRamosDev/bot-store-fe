@@ -1,7 +1,5 @@
 import './ContentHeader.scss';
 
-import './ContentHeader.scss';
-
 /**
  * ContentHeader component is used to render a header with optional toolbar elements.
  *

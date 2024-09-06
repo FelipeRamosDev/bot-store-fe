@@ -17,14 +17,14 @@ export default function CheckButtonGroupInput({ className = '', schema = {}, err
    const [ value, setValue ] = useState(defaultValue);
 
    useEffect(() => {
-      if (schema.form.editMode) {
+      if (schema.form?.editMode) {
          const editValue = schema.getEditValue();
 
          if (editValue) {
             setValue(editValue);
          }
       }
-   }, [schema, schema.form.editMode, setValue]);
+   }, [schema, schema.form?.editMode, setValue]);
 
    const handleChoose = (option) => {
       if (multiValue) {
