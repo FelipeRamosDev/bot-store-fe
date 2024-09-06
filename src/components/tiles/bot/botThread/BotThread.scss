@@ -3,7 +3,7 @@
 .bot-thread {
    $title-size: 0.95rem;
    $header-padding: 0.75rem;
-   $header-space: $title-size + calc($header-padding * 2);
+   $header-space: $title-size + calc($header-padding * 2.7);
    position: relative;
 
    .card,
@@ -63,5 +63,15 @@
          text-transform: uppercase;
          font-weight: 900;
       }
+   }
+
+   .add-new {
+      border: 3px dashed $background-dark;
+      border-radius: $radius-m;
+      padding: 5rem 1rem;
+   }
+
+   .delete-button {
+      min-width: auto;
    }
 }
