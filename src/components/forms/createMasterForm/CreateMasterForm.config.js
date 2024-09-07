@@ -1,9 +1,9 @@
-import MasterLimitsFormConfig from './masterLimitsForm/MasterLimitsForm.config';
 import Form from '@/models/Form';
 
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
+import MasterLimitsFormConfig from './masterLimitsForm/MasterLimitsForm.config';
 
 const createMasterForm = new Form({
    schema: [
