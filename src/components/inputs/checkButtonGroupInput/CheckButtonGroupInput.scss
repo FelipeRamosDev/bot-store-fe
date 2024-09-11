@@ -20,5 +20,9 @@
       .check-button {
          flex: 1;
       }
+
+      &.vertical {
+         flex-direction: column;
+      }
    }
 }

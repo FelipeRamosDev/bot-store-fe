@@ -10,11 +10,10 @@ import Rule from '@/components/tiles/bot/rule/Rule';
 import Block from '../block/Block';
 import configs from '@/config.json';
 import NoDocumentsTile from '../../noDocumentsTile/NoDocumentsTile';
-import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import Add from '@mui/icons-material/Add';
 import LogicalOperatorForm from '@/components/forms/logicalOperatorForm/LogicalOperatorForm';
 import Delete from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import AddBotRuleMenu from '@/components/menus/dropdown/addBotRuleMenu/AddBotRuleMenu';
 
 export default function BotThread({ threadID, title, color, ...props }) {
    const API = useContext(APIContext);
@@ -97,7 +96,7 @@ export default function BotThread({ threadID, title, color, ...props }) {
             })}
             
             <div className="add-new">
-               <RoundIconButton Icon={Add} color="tertiary" variant="contained" />
+               <AddBotRuleMenu parentBlock={thread} />
             </div>
          </div>
       </WatermarkPriceCard>
