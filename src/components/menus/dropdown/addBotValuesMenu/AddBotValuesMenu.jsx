@@ -3,9 +3,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Add from '@mui/icons-material/Add';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import { ListItemIcon } from '@mui/material';
 
 export default function AddBotValuesMenu({ bot = {}, noTrasition = false, setModalState }) {
-   const [anchorEl, setAnchorEl] = useState(null);
+   const [ anchorEl, setAnchorEl ] = useState(null);
    const open = Boolean(anchorEl);
 
    const handleMenuOpen = (event) => {
@@ -32,12 +33,18 @@ export default function AddBotValuesMenu({ bot = {}, noTrasition = false, setMod
             <MenuItem onClick={() => setModalState({
                valueType: 'function' })}
             >
+               <ListItemIcon>
+                  <Add fontSize="small" />
+               </ListItemIcon>
                Dynamic Value
             </MenuItem>
 
             <MenuItem onClick={() => setModalState({
                valueType: 'primitive' })}
             >
+               <ListItemIcon>
+                  <Add fontSize="small" />
+               </ListItemIcon>
                Primitive Value
             </MenuItem>
          </Menu>

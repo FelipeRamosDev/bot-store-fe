@@ -10,7 +10,7 @@ import FormInput from '../formBase/FormInput';
 import AuthUserContext from '@/contexts/AuthUser';
 import APIContext from '@/contexts/4HandsAPI';
 
-export default function BotValueForm({ initView = 'ask', editMode = false, editData, bot, slug, valueType = 'function', onSuccess = () => {} }) {
+export default function BotValueForm({ initView = 'ask', parentRule, editMode = false, editData, bot, slug, valueType = 'function', onSuccess = () => {} }) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
    const [ formType, setFormType ] = useState(initView);
@@ -88,9 +88,13 @@ export default function BotValueForm({ initView = 'ask', editMode = false, editD
    if (formType === 'create') {
       if (!editMode) {
          botValueForm.setValue('author', user?._id);
-         botValueForm.setValue('bot', bot?._id);
+         botValueForm.setValue('parentBot', bot?._id);
          botValueForm.setValue('slug', slug);
          botValueForm.setValue('valueType', valueType);
+
+         if (parentRule) {
+            botValueForm.setValue('parentRule', parentRule._id);
+         }
       }
 
       botValueForm.setDependency({

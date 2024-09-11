@@ -29,33 +29,41 @@ export default function AddBotValuesStopsMenu({ bot = {}, noTrasition = false, s
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             transitionDuration={noTrasition ? 0 : undefined}
          >
-            <MenuItem onClick={() => setModalState({
-               slug: 'stoploss_long',
-               valueType: 'function' })}
+            <MenuItem
+               onClick={() => setModalState({
+                  slug: 'stoploss_long',
+                  valueType: 'function'
+               })}
                disabled={bot.values.find(item => item.slug === 'stoploss_long')}
             >
                Stoploss (Long)
             </MenuItem>
 
-            <MenuItem onClick={() => setModalState({
-               slug: 'stoploss_short',
-               valueType: 'function' })}
+            <MenuItem
+               onClick={() => setModalState({
+                  slug: 'stoploss_short',
+                  valueType: 'function' 
+               })}
                disabled={bot.values.find(item => item.slug === 'stoploss_short')}
             >
                Stoploss (Short)
             </MenuItem>
 
-            <MenuItem onClick={() => setModalState({
-               slug: 'takeprofit_long',
-               valueType: 'function' })}
+            <MenuItem
+               onClick={() => setModalState({
+                  slug: 'takeprofit_long',
+                  valueType: 'function'
+               })}
                disabled={bot.values.find(item => item.slug === 'takeprofit_long')}
             >
                Takeprofit (Long)
             </MenuItem>
 
-            <MenuItem onClick={() => setModalState({
-               slug: 'takeprofit_short',
-               valueType: 'function' })}
+            <MenuItem
+               onClick={() => setModalState({
+                  slug: 'takeprofit_short',
+                  valueType: 'function'
+               })}
                disabled={bot.values.find(item => item.slug === 'takeprofit_short')}
             >
                Takeprofit (Short)

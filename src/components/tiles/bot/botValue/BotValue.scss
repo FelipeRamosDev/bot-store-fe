@@ -22,9 +22,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
    }
 
-   &.single:not(.primitive) {
+   &:not(.primitive) {
       .value-name {
          margin-right: auto;
       }
