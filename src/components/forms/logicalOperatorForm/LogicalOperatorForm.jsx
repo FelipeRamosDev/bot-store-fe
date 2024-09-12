@@ -29,7 +29,6 @@ export default function LogicalOperatorForm({ className, botUID, block, onSucces
 
    return (
       <CheckButtonGroupInput className="logical-operator" onChange={handleChange} schema={{
-         key: 'isType',
          defaultValue: block?.ifType,
          options: [
             { label: 'AND', value: 'and' },
