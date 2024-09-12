@@ -67,6 +67,16 @@
             @media screen and (max-width: $screen-m) {
                width: 100%;
             }
+
+            .check-button-group {
+               .options-wrap {
+                  margin-top: 0;
+
+                  .check-button:not(.checked) {
+                     background-color: $background-paper-light;
+                  }
+               }
+            }
          }
       }
    }
