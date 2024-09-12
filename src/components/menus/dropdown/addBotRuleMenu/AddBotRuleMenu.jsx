@@ -21,14 +21,14 @@ export default function AddBotRuleMenu({ parentBlock = {} }) {
       setAnchorEl(null);
    };
 
-   async function createRule() {
+   async function createBlockRule(type) {
       if (!doc?._id || !parentBlock._id) {
          throw new Error('The bot UID or the parent block UID is missing!');
       }
 
       try {
          const created = await API.ajax.authPut('/bot/add-block-rule', {
-            type: 'rules',
+            type,
             botUID: doc._id,
             parentBlockUID: parentBlock._id
          });
@@ -40,14 +40,6 @@ export default function AddBotRuleMenu({ parentBlock = {} }) {
          if (created.success) {
             handleMenuClose();
          }
-      } catch (err) {
-         throw err;
-      }
-   }
-
-   async function createBlock() {
-      try {
-         
       } catch (err) {
          throw err;
       }
@@ -65,14 +57,14 @@ export default function AddBotRuleMenu({ parentBlock = {} }) {
             transformOrigin={{ horizontal: 'left', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
-            <MenuItem onClick={createRule}>
+            <MenuItem onClick={() => createBlockRule('rules')}>
                <ListItemIcon>
                   <Add fontSize="small" />
                </ListItemIcon>
                Add Evaluation Rule
             </MenuItem>
 
-            <MenuItem onClick={createBlock}>
+            <MenuItem onClick={() => createBlockRule('blocks')}>
                <ListItemIcon>
                   <Add fontSize="small" />
                </ListItemIcon>
