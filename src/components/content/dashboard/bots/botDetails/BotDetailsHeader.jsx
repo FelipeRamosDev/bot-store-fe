@@ -5,6 +5,9 @@ import Card from '@/components/common/card/Card';
 import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
 import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import APIContext from '@/contexts/4HandsAPI';
+import RubberButton from '@/components/buttons/rubberButton/RubberButton';
+import { Delete } from '@mui/icons-material';
+import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
 
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
@@ -59,6 +62,12 @@ export default function BotDetailsHeader() {
                   ]}
                />
             </Card>
+         </div>
+
+         <div className="settings-painel">
+            <h3 className="painel-title">BOT SETTINGS</h3>
+
+            <BotMenu />
          </div>
       </div>
    </div>;
