@@ -1,0 +1,23 @@
+@import "../../../style/scss/variables.scss";
+
+.doc-picker {
+   width: 100%;
+   margin: 1rem 0;
+
+   .doc-list {
+      background-color: $background-paper;
+      border-radius: $radius-s;
+      overflow: hidden;
+
+      .doc-list-item {
+         padding: $padding-xs $padding-xs $padding-xs 1.1rem;
+         cursor: pointer;
+         -webkit-user-select: none;
+         user-select: none;
+      }
+
+      .doc-list-item:hover {
+         background-color: $background-paper-light;
+      }
+   }
+}
