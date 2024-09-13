@@ -1,5 +1,5 @@
 import './BotValueForm.scss';
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import botValueForm from './BotValueForm.config';
 import BotValueFormFunction from './BotValueFormFunction';
@@ -9,6 +9,9 @@ import Form from '@/models/Form';
 import FormInput from '../formBase/FormInput';
 import AuthUserContext from '@/contexts/AuthUser';
 import APIContext from '@/contexts/4HandsAPI';
+import ListDocPicker from '@/components/inputs/listDocPicker/ListDocPicker';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import AbcIcon from '@mui/icons-material/Abc';
 
 export default function BotValueForm({ initView = 'ask', parentRule, editMode = false, editData, bot, slug, valueType = 'function', onSuccess = () => {} }) {
    const API = useContext(APIContext);
@@ -28,7 +31,7 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
          reqHttp = async () => await API.ajax.authPost('/bot/update-value', {
             userUID: user._id,
             valueUID: editData._id,
-            botUID: editData.bot,
+            botUID: editData.parentBot,
             toUpdate: data
          });
       }
@@ -71,14 +74,77 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
       }
    }
 
+   function parseListTitle(valueDoc) {
+      if (valueDoc.valueType === 'function') {
+         return valueDoc.functionUID?.title;
+      }
+
+      if (valueDoc.valueType === 'primitive') {
+         return `Primitive (${valueDoc.primitiveType})`;
+      }
+   }
+
+   function parseListSubTitle(valueDoc) {
+      if (valueDoc.valueType === 'function') {
+         const params = JSON.parse(valueDoc.configs);
+         const stringParams = Object.keys(params).map(key => `${key}: ${params[key]}`).join(' | ');
+         
+         return stringParams;
+      }
+
+      if (valueDoc.valueType === 'primitive') {
+         return valueDoc.primitiveValue;
+      }
+   }
+
+   async function handleListSelect(valueDoc) {
+      let updated;
+
+      try {
+         if (slug) {
+            updated = await API.ajax.authPost('/bot/update-value', {
+               userUID: user._id,
+               valueUID: valueDoc._id,
+               botUID: bot._id,
+               toUpdate: { slug }
+            });
+         } else {
+            updated = await API.ajax.authPost('/bot/update-rule', {
+               appendValue: valueDoc._id,
+               ruleUID: parentRule?._id,
+               botUID: bot._id
+            });
+         }
+
+         if (updated.error) {
+            throw updated;
+         }
+
+         if (updated.success) {
+            onSuccess(updated);
+         }
+      } catch (err) {
+         throw err;
+      }
+   }
+
    if (formType === 'ask') {
       return (
          <div className="buttons-wrap">
-            <Button color="info" fullWidth={true} onClick={() => setFormType('create')}>
+            <Button
+               color="info"
+               fullWidth={true}
+               onClick={() => setFormType('create')}
+            >
                Create New One
             </Button>
 
-            <Button color="info" fullWidth={true} onClick={() => setFormType('existent')}>
+            <Button
+               color="info"
+               fullWidth={true}
+               onClick={() => setFormType('existent')}
+               disabled={!Boolean(bot?.values?.length)}
+            >
                Use Existent One
             </Button>
          </div>
@@ -118,6 +184,7 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
             submitLabel="Save"
             onReady={() => {
                const functionUID = editData?.functionUID?._id;
+
                if (editData?.functionUID?._id && !paramsForm) {
                   handleSetForm(functionUID);
                }
@@ -149,7 +216,19 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
    }
 
    if (formType === 'existent') {
-      return <></>;
+      return (
+         <div className="existent-value">
+            <h4 className="title">Choose an existent bot value to use</h4>
+
+            <ListDocPicker
+               docList={bot.values}
+               onSelect={handleListSelect}
+               parsePrimary={parseListTitle}
+               parseSecondary={parseListSubTitle}
+               AvatarIcon={({ doc }) => (doc.valueType === 'function') ? <FunctionsIcon /> : <AbcIcon />}
+            />
+         </div>
+      )
    }
 
    return <></>;

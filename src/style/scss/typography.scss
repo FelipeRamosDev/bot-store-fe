@@ -74,7 +74,7 @@ ul {
    }
 }
 
-li {
+li:not(.MuiListItem-root) {
    margin-left: 1rem;
 }
 

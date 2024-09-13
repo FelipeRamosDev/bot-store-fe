@@ -27,18 +27,14 @@ export default function BotSettings() {
          case 'takeprofit_long':
          case 'takeprofit_short':
             setCreateValueModal({ slug, valueType: 'function' });
-         default: {
-            console.log('Common Value');
-         }
+            break;
       }
    }
 
    return (
       <ContentSplit className="bot-settings" useContainer={true}>
          <div className="loss-gain-settings">
-            <ContentHeader
-               Toolbar={() => <AddBotValuesStopsMenu bot={doc} setModalState={setCreateValueModal} />}
-            >
+            <ContentHeader Toolbar={() => <AddBotValuesStopsMenu bot={doc} setModalState={setCreateValueModal} />}>
                <MoneyOffIcon fontSize="small" /> <h2 className="header-title">Stoploss / Takeprofit</h2>
             </ContentHeader>
 
@@ -47,7 +43,7 @@ export default function BotSettings() {
             <BotValueSingle slug="takeprofit_long" title="Takeprofit" openCreateModal={openCreateModal} />
             <BotValueSingle slug="takeprofit_short" title="Takeprofit" openCreateModal={openCreateModal} />
 
-            <BotValueModal initView="create" bot={doc} open={createValueModal} setModal={setCreateValueModal} />
+            <BotValueModal bot={doc} open={createValueModal} setModal={setCreateValueModal} />
          </div>
 
          <div className="values-settings">
