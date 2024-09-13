@@ -14,7 +14,7 @@ export default function DeleteBotValueConfirmDialog({
       const deleted = await API.ajax.authDelete('/bot/delete-value', {
          userUID: user._id,
          valueUID: botValue._id,
-         botUID: botValue.bot
+         botUID: botValue.parentBot
       });
 
       if (deleted.error) {
