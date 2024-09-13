@@ -3,6 +3,10 @@
 .rubber-button {
    background-color: $background-paper-light;
 
+   &.MuiButton-containedInfo {
+      color: $text-darken;
+   }
+
    &.MuiButton-containedPrimary {
       color: $primary;
    }

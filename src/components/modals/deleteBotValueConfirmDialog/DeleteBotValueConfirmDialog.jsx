@@ -10,6 +10,7 @@ export default function DeleteBotValueConfirmDialog({
 }) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
+
    const handleConfirm = async () => {
       const deleted = await API.ajax.authDelete('/bot/delete-value', {
          userUID: user._id,
