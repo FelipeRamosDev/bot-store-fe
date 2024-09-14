@@ -1,11 +1,11 @@
 import './BotValueForm.scss';
+import { onCreateSubmit, presetForm, parseListTitle, parseListSubTitle, listSelect, onEditSubmit } from './BotValueForm.helper';
 import { useState, useRef, useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import botValueForm from './BotValueForm.config';
 import BotValueFormFunction from './BotValueFormFunction';
 import BotValueFormPrimitive from './BotValuePrimitive';
 import Button from '@mui/material/Button';
-import Form from '@/models/Form';
 import FormInput from '../formBase/FormInput';
 import AuthUserContext from '@/contexts/AuthUser';
 import APIContext from '@/contexts/4HandsAPI';
@@ -13,7 +13,16 @@ import ListDocPicker from '@/components/inputs/listDocPicker/ListDocPicker';
 import FunctionsIcon from '@mui/icons-material/Functions';
 import AbcIcon from '@mui/icons-material/Abc';
 
-export default function BotValueForm({ initView = 'ask', parentRule, editMode = false, editData, bot, slug, valueType = 'function', onSuccess = () => {} }) {
+export default function BotValueForm({
+   initView = 'ask',
+   parentRule,
+   editMode = false,
+   editData,
+   bot,
+   slug,
+   valueType = 'function',
+   onSuccess = () => {}
+}) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
    const [ formType, setFormType ] = useState(initView);
@@ -22,112 +31,12 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
    const formNode = useRef();
    const paramsFormNode = useRef();
 
-   async function onSubmit(data) {
-      let reqHttp;
+   const handleSubmit = async (data) => await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
+   const handleSetForm = (data) => presetForm(data, functions, botValueForm, editMode, editData, setParamsForm);
+   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, slug, parentRule, onSuccess);
+   const handleEditSubmit = () => onEditSubmit(formNode, paramsFormNode);
 
-      if (!editMode) {
-         reqHttp = async () => await API.ajax.authPut('/bot/add-value', data);
-      } else {
-         reqHttp = async () => await API.ajax.authPost('/bot/update-value', {
-            userUID: user._id,
-            valueUID: editData._id,
-            botUID: editData.parentBot,
-            toUpdate: data
-         });
-      }
-
-      try {
-         if (paramsForm) {
-            data.configs = paramsForm.toJSON();
-         }
-
-         const response = await reqHttp();
-         if (response.error) {
-            throw response;
-         }
-         
-         if (response.success) {
-            onSuccess(response);
-         }
-      } catch (err) {
-         throw err;
-      }
-   }
-
-   function handleSetForm(value) {
-      if (!functions.current) {
-         functions.current = botValueForm.getDependency('functions')?.data;
-      }
-
-      const selected = functions.current?.find(item => item.id === value);
-      const functionSchema = selected?.options;
-
-      if (functionSchema) {
-         const newForm = Form.buildFromBESchema(functionSchema);
-
-         if (editMode && typeof editData?.configs === 'string' && value === editData.functionUID?._id) {
-            const parsedConfigs = JSON.parse(editData.configs);
-            Object.keys(parsedConfigs).map(key => newForm.setValue(key, parsedConfigs[key]));
-         }
-
-         setParamsForm(newForm);
-      }
-   }
-
-   function parseListTitle(valueDoc) {
-      if (valueDoc.valueType === 'function') {
-         return valueDoc.functionUID?.title;
-      }
-
-      if (valueDoc.valueType === 'primitive') {
-         return `Primitive (${valueDoc.primitiveType})`;
-      }
-   }
-
-   function parseListSubTitle(valueDoc) {
-      if (valueDoc.valueType === 'function') {
-         const params = JSON.parse(valueDoc.configs);
-         const stringParams = Object.keys(params).map(key => `${key}: ${params[key]}`).join(' | ');
-         
-         return stringParams;
-      }
-
-      if (valueDoc.valueType === 'primitive') {
-         return valueDoc.primitiveValue;
-      }
-   }
-
-   async function handleListSelect(valueDoc) {
-      let updated;
-
-      try {
-         if (slug) {
-            updated = await API.ajax.authPost('/bot/update-value', {
-               userUID: user._id,
-               valueUID: valueDoc._id,
-               botUID: bot._id,
-               toUpdate: { slug }
-            });
-         } else {
-            updated = await API.ajax.authPost('/bot/update-rule', {
-               appendValue: valueDoc._id,
-               ruleUID: parentRule?._id,
-               botUID: bot._id
-            });
-         }
-
-         if (updated.error) {
-            throw updated;
-         }
-
-         if (updated.success) {
-            onSuccess(updated);
-         }
-      } catch (err) {
-         throw err;
-      }
-   }
-
+   // ASK MODE
    if (formType === 'ask') {
       return (
          <div className="buttons-wrap">
@@ -151,6 +60,7 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
       );
    }
 
+   // CREATE MODE
    if (formType === 'create') {
       if (!editMode) {
          botValueForm.setValue('author', user?._id);
@@ -178,7 +88,7 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
             anchorRef={formNode}
             formID="bot-value-form"
             formSet={botValueForm}
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit}
             hideSubmit={true}
             editData={editData}
             submitLabel="Save"
@@ -205,16 +115,12 @@ export default function BotValueForm({ initView = 'ask', parentRule, editMode = 
          </FormBase>}
 
          <div className="bot-value-form button-wrap">
-            <Button color="success" onClick={() => {
-               formNode.current?.requestSubmit();
-               paramsFormNode.current?.requestSubmit();
-            }}>
-               Submit
-            </Button>
+            <Button color="success" onClick={handleEditSubmit}>Submit</Button>
          </div>
       </>);
    }
 
+   // LINK EXISTENT MODE
    if (formType === 'existent') {
       return (
          <div className="existent-value">

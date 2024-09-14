@@ -5,28 +5,12 @@ import Card from '@/components/common/card/Card';
 import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
 import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import APIContext from '@/contexts/4HandsAPI';
-import RubberButton from '@/components/buttons/rubberButton/RubberButton';
-import { Delete } from '@mui/icons-material';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
+import { handleStatusChange } from './BotDetails.helper';
 
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
-
-   async function handleStatusChange({ target: { value }}) {
-      try {
-         const changed = await API.ajax.authPost('/bot/status-transition', {
-            botUID: doc._id,
-            newStatus: value
-         });
-
-         if (changed.error) {
-            throw changed;
-         }
-      } catch (err) {
-         throw err;
-      }
-   }
 
    return <div className="page-header">
       <div className="cover"></div>
@@ -42,7 +26,7 @@ export default function BotDetailsHeader() {
 
             <Card className="infos" padding="s" elevation={40}>
                {doc.status && <CheckButtonGroupInput
-                  onChange={handleStatusChange}
+                  onChange={(ev) => handleStatusChange(ev, API, doc)}
                   schema={{
                      key: 'status',
                      defaultValue: doc.status,
