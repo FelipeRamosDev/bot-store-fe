@@ -4,28 +4,28 @@ import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import NoDocumentsTile from "../../noDocumentsTile/NoDocumentsTile";
 
-export default function BotValueSingle({ botValue, slug, title = 'Bot Value', minify = false, openCreateModal = () => {}, ...props }) {
+export default function BotValueSingle({ botValue, eventName, slug, title = 'Bot Value', minify = false, openCreateModal = () => {}, ...props }) {
    const { doc } = useContext(DBQueryContext);
-   const foundValue = botValue || doc?.values?.find(item => item.slug === slug);
+   const foundValue = botValue || doc?.eval[eventName]?.linkedValue;
    let borderColor;
 
-   if (!foundValue && slug.indexOf('stoploss') >= 0 ) {
+   if (!foundValue && slug.indexOf('stoploss') >= 0) {
       if (slug === 'stoploss_long') {
-         return <NoDocumentsTile className="stoploss" message="STOPLOSS [LONG]" onClick={() => openCreateModal('stoploss_long')} />
+         return <NoDocumentsTile className="stoploss" message="STOPLOSS [LONG]" onClick={() => openCreateModal(eventName)} />
       }
 
       if (slug === 'stoploss_short') {
-         return <NoDocumentsTile className="stoploss" message="STOPLOSS [SHORT]" onClick={() => openCreateModal('stoploss_short')} />
+         return <NoDocumentsTile className="stoploss" message="STOPLOSS [SHORT]" onClick={() => openCreateModal(eventName)} />
       }
    }
 
-   if (!foundValue && slug.indexOf('takeprofit') >= 0 ) {
+   if (!foundValue && slug.indexOf('takeprofit') >= 0) {
       if (slug === 'takeprofit_long') {
-         return <NoDocumentsTile className="takeprofit" message="TAKEPROFIT [LONG]" onClick={() => openCreateModal('takeprofit_long')} />
+         return <NoDocumentsTile className="takeprofit" message="TAKEPROFIT [LONG]" onClick={() => openCreateModal(eventName)} />
       }
 
       if (slug === 'takeprofit_short') {
-         return <NoDocumentsTile className="takeprofit" message="TAKEPROFIT [SHORT]" onClick={() => openCreateModal('takeprofit_short')} />
+         return <NoDocumentsTile className="takeprofit" message="TAKEPROFIT [SHORT]" onClick={() => openCreateModal(eventName)} />
       }
    }
 

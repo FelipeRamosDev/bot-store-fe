@@ -16,6 +16,7 @@ import AbcIcon from '@mui/icons-material/Abc';
 export default function BotValueForm({
    initView = 'ask',
    parentRule,
+   parentThread,
    editMode = false,
    editData,
    bot,
@@ -70,6 +71,10 @@ export default function BotValueForm({
 
          if (parentRule) {
             botValueForm.setValue('parentRule', parentRule._id);
+         }
+
+         if (parentThread) {
+            botValueForm.setValue('parentThread', parentThread);
          }
       }
 
