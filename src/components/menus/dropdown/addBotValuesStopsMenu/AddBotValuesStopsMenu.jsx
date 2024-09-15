@@ -31,40 +31,40 @@ export default function AddBotValuesStopsMenu({ bot = {}, noTrasition = false, s
          >
             <MenuItem
                onClick={() => setModalState({
-                  slug: 'stoploss_long',
+                  evantName: 'stopLossLong',
                   valueType: 'function'
                })}
-               disabled={bot.values.find(item => item.slug === 'stoploss_long')}
+               disabled={bot.values.find(item => item.slug === 'stopLossLong')}
             >
                Stoploss (Long)
             </MenuItem>
 
             <MenuItem
                onClick={() => setModalState({
-                  slug: 'stoploss_short',
+                  evantName: 'stopLossShort',
                   valueType: 'function' 
                })}
-               disabled={bot.values.find(item => item.slug === 'stoploss_short')}
+               disabled={bot.values.find(item => item.slug === 'stopLossShort')}
             >
                Stoploss (Short)
             </MenuItem>
 
             <MenuItem
                onClick={() => setModalState({
-                  slug: 'takeprofit_long',
+                  evantName: 'takeProfitLong',
                   valueType: 'function'
                })}
-               disabled={bot.values.find(item => item.slug === 'takeprofit_long')}
+               disabled={bot.values.find(item => item.slug === 'takeProfitLong')}
             >
                Takeprofit (Long)
             </MenuItem>
 
             <MenuItem
                onClick={() => setModalState({
-                  slug: 'takeprofit_short',
+                  evantName: 'takeProfitShort',
                   valueType: 'function'
                })}
-               disabled={bot.values.find(item => item.slug === 'takeprofit_short')}
+               disabled={bot.values.find(item => item.slug === 'takeProfitShort')}
             >
                Takeprofit (Short)
             </MenuItem>

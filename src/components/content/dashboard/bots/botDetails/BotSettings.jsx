@@ -20,13 +20,16 @@ export default function BotSettings() {
       return <></>;
    }
 
-   function openCreateModal(slug) {
-      switch (slug) {
-         case 'stoploss_long':
-         case 'stoploss_short':
-         case 'takeprofit_long':
-         case 'takeprofit_short':
-            setCreateValueModal({ slug, valueType: 'function' });
+   function openCreateModal(eventName) {
+      switch (eventName) {
+         case 'stopLossLong':
+         case 'stopLossShort':
+         case 'takeProfitLong':
+         case 'takeProfitShort':
+            const thread = doc.eval[eventName];
+            if (!thread) return;
+
+            setCreateValueModal({ parentThreads: thread._id, valueType: 'function' });
             break;
       }
    }
@@ -38,10 +41,10 @@ export default function BotSettings() {
                <MoneyOffIcon fontSize="small" /> <h2 className="header-title">Stoploss / Takeprofit</h2>
             </ContentHeader>
 
-            <BotValueSingle slug="stoploss_long" title="Stoploss" openCreateModal={openCreateModal} />
-            <BotValueSingle slug="stoploss_short" title="Stoploss" openCreateModal={openCreateModal} />
-            <BotValueSingle slug="takeprofit_long" title="Takeprofit" openCreateModal={openCreateModal} />
-            <BotValueSingle slug="takeprofit_short" title="Takeprofit" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="stopLossLong" title="Stoploss" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="stopLossShort" title="Stoploss" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="takeProfitLong" title="Takeprofit" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="takeProfitShort" title="Takeprofit" openCreateModal={openCreateModal} />
 
             <BotValueModal bot={doc} open={createValueModal} setModal={setCreateValueModal} />
          </div>

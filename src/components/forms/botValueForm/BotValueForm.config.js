@@ -1,5 +1,6 @@
 import Form from '@/models/Form';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
+import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 
@@ -62,6 +63,9 @@ const botValueForm = new Form({
          label: 'Primitive Value',
          placeholder: 'Enter the value...',
          validators: [ validatePrimitive ]
+      }),
+      new TextFieldSchema({
+         key: 'parentThreads'
       })
    ]
 });
