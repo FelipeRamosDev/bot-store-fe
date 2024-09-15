@@ -9,10 +9,11 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import BotValueModal from '@/components/modals/botValueModal/BotValueModal';
 import DeleteBotValueConfirmDialog from '@/components/modals/deleteBotValueConfirmDialog/DeleteBotValueConfirmDialog';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
+import LinkOffIcon from '@mui/icons-material/LinkOff';
 import APIContext from '@/contexts/4HandsAPI';
 import DBQueryContext from '@/contexts/DBQuery';
 
-export default function BotValuesMenu({ botValue = {} }) {
+export default function BotValuesMenu({ botValue = {}, parentThread, parentRule }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ modal, setModal ] = useState(false);
    const [ deleteModal, setDeleteModal ] = useState(false);
@@ -43,6 +44,34 @@ export default function BotValuesMenu({ botValue = {} }) {
       }
    }
 
+   async function handleUnlink() {
+      let unlinkFrom = '';
+
+      if (parentThread) {
+         unlinkFrom = 'thread';
+      }
+
+      if (parentRule) {
+         unlinkFrom = 'rule';
+      }
+
+      try {
+         const unlinked = await API.ajax.authPost('/bot/unlink-value', {
+            botUID: doc?._id,
+            valueUID: botValue?._id,
+            threadUID: parentThread?._id,
+            ruleUID: parentRule?._id,
+            unlinkFrom
+         });
+
+         if (unlinked.error) {
+            throw unlinked;
+         }
+      } catch (err) {
+         throw err;
+      }
+   }
+
    return (
       <>
          <RoundIconButton size="small" Icon={MoreVertIcon} onClick={handleMenuOpen} />
@@ -67,6 +96,13 @@ export default function BotValuesMenu({ botValue = {} }) {
                   <FileCopyIcon fontSize="small" />
                </ListItemIcon>
                Clone
+            </MenuItem>
+
+            <MenuItem onClick={handleUnlink}>
+               <ListItemIcon>
+                  <LinkOffIcon fontSize="small" />
+               </ListItemIcon>
+               Unlink
             </MenuItem>
 
             <MenuItem onClick={() => setDeleteModal(true)}>

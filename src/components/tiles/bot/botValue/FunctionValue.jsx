@@ -2,7 +2,7 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import BotValuesMenu from '@/components/menus/dropdown/botValuesMenu/BotValuesMenu';
 import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 
-export default function FunctionValue({ className = '', minify, botValue = {}, ...props }) {
+export default function FunctionValue({ className = '', parentThread, parentRule, minify, botValue = {}, ...props }) {
    const valueFunction = botValue.functionUID;
    const params = JSON.parse(botValue.configs);
    const tableData = [];
@@ -25,7 +25,7 @@ export default function FunctionValue({ className = '', minify, botValue = {}, .
    const stringParams = Object.keys(params).map(key => `${key}: ${params[key]}`).join(' | ');
    return (
       <div className={`bot-value function ${className} ${minify ? 'minified' : ''}`} {...props}>
-         <ContentHeader Toolbar={() => <BotValuesMenu botValue={botValue} />}>
+         <ContentHeader Toolbar={() => <BotValuesMenu botValue={botValue} parentThread={parentThread} parentRule={parentRule} />}>
             <label className="value-name">{valueFunction.title}</label>
          </ContentHeader>
 

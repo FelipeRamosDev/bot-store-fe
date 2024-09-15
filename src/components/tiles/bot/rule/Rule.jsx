@@ -79,7 +79,7 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
                   </div>
                )}
 
-               <BotValue key={value._id} botValue={value} />
+               <BotValue key={value._id} botValue={value} parentRule={rule} />
             </>)
          })}
 
