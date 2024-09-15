@@ -34,7 +34,7 @@ export default function BotValueForm({
 
    const handleSubmit = async (data) => await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
    const handleSetForm = (data) => presetForm(data, functions, botValueForm, editMode, editData, setParamsForm);
-   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, slug, parentRule, onSuccess);
+   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, parentThread, parentRule, onSuccess);
    const handleEditSubmit = () => onEditSubmit(formNode, paramsFormNode);
 
    // ASK MODE

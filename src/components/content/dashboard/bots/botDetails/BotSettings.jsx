@@ -41,10 +41,10 @@ export default function BotSettings() {
                <MoneyOffIcon fontSize="small" /> <h2 className="header-title">Stoploss / Takeprofit</h2>
             </ContentHeader>
 
-            <BotValueSingle eventName="stopLossLong" slug="stoploss_long" title="Stoploss" openCreateModal={openCreateModal} />
-            <BotValueSingle eventName="stopLossShort" slug="stoploss_short" title="Stoploss" openCreateModal={openCreateModal} />
-            <BotValueSingle eventName="takeProfitLong" slug="takeprofit_long" title="Takeprofit" openCreateModal={openCreateModal} />
-            <BotValueSingle eventName="takeProfitShort" slug="takeprofit_short" title="Takeprofit" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="stopLossLong" title="Stoploss" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="stopLossShort" title="Stoploss" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="takeProfitLong" title="Takeprofit" openCreateModal={openCreateModal} />
+            <BotValueSingle eventName="takeProfitShort" title="Takeprofit" openCreateModal={openCreateModal} />
 
             <BotValueModal bot={doc} open={createValueModal} setModal={setCreateValueModal} />
          </div>
