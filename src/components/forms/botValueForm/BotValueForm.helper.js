@@ -75,16 +75,16 @@ export function parseListSubTitle(valueDoc) {
    }
 }
 
-export async function listSelect(valueDoc, API, user, bot, parentThread, parentRule, onSuccess) {
+export async function listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess) {
    let updated;
 
    try {
-      if (parentThread) {
+      if (parentThreads) {
          updated = await API.ajax.authPost('/bot/update-value', {
             userUID: user._id,
             valueUID: valueDoc._id,
             botUID: bot._id,
-            appendThread: parentThread
+            appendThread: parentThreads
          });
       } else {
          updated = await API.ajax.authPost('/bot/update-rule', {

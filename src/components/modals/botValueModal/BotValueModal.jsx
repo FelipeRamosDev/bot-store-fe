@@ -4,7 +4,7 @@ import ContentModal from "../base/contentModal/ContentModal";
 
 export default function BotValueModal({ botValue, parentRule, editMode, initView, bot, open, setModal = () => {} }) {
    const isOpen = Boolean(open);
-   const { slug, valueType, parentThread } = Object(open);
+   const { slug, valueType, parentThreads } = Object(open);
    let size = 'medium';
    let type = 'Dynamic Value';
 
@@ -28,7 +28,7 @@ export default function BotValueModal({ botValue, parentRule, editMode, initView
             valueType={valueType}
             bot={bot}
             parentRule={parentRule}
-            parentThread={parentThread}
+            parentThreads={parentThreads}
             editMode={editMode}
             editData={botValue}
             onSuccess={() => setModal(null)} />

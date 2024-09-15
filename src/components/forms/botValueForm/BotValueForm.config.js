@@ -65,7 +65,7 @@ const botValueForm = new Form({
          validators: [ validatePrimitive ]
       }),
       new TextFieldSchema({
-         key: 'parentThread'
+         key: 'parentThreads'
       })
    ]
 });

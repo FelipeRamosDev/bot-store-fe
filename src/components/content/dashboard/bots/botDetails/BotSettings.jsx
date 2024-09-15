@@ -29,7 +29,7 @@ export default function BotSettings() {
             const thread = doc.eval[eventName];
             if (!thread) return;
 
-            setCreateValueModal({ parentThread: thread._id, valueType: 'function' });
+            setCreateValueModal({ parentThreads: thread._id, valueType: 'function' });
             break;
       }
    }

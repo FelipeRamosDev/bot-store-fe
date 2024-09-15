@@ -16,7 +16,7 @@ import AbcIcon from '@mui/icons-material/Abc';
 export default function BotValueForm({
    initView = 'ask',
    parentRule,
-   parentThread,
+   parentThreads,
    editMode = false,
    editData,
    bot,
@@ -34,7 +34,7 @@ export default function BotValueForm({
 
    const handleSubmit = async (data) => await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
    const handleSetForm = (data) => presetForm(data, functions, botValueForm, editMode, editData, setParamsForm);
-   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, parentThread, parentRule, onSuccess);
+   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess);
    const handleEditSubmit = () => onEditSubmit(formNode, paramsFormNode);
 
    // ASK MODE
@@ -73,8 +73,8 @@ export default function BotValueForm({
             botValueForm.setValue('parentRule', parentRule._id);
          }
 
-         if (parentThread) {
-            botValueForm.setValue('parentThread', parentThread);
+         if (parentThreads) {
+            botValueForm.setValue('parentThreads', parentThreads);
          }
       }
 
