@@ -1,11 +1,42 @@
 @import "../../../../style/scss/variables.scss";
 
 .bot-rule {
+   $header-height: 2.4rem;
+
    display: flex;
    gap: 0.5rem;
 
+   &.watermark-price-card {
+      padding-top: calc($header-height + 1rem);
+   }
+
    @media screen and (max-width: $screen-m) {
       flex-direction: column;
+   }
+
+   .rule-header {
+      position: absolute;  
+      left: 0;
+      top: 0;
+      right: 0;
+      background-color: $background-paper;
+      height: $header-height;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      span {
+         font-size: 1.6rem;
+         font-weight: 900;
+         position: absolute;
+         bottom: -3px;
+         left: 15px;
+         color: $background-grey2-light;
+      }
+
+      .close-button {
+         margin-right: 0.3rem;
+      }
    }
 
    .bot-divider {
