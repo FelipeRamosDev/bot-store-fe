@@ -39,3 +39,18 @@ export function parseRuleTitle(operator) {
       }
    }
 }
+
+export async function deleteRule(API, rule, botUID) {
+   try {
+      const deleted = await API.ajax.authDelete('/bot/delete-rule', {
+         ruleUID: rule._id,
+         botUID: botUID
+      });
+
+      if (deleted.error) {
+         throw deleted;
+      }
+   } catch (err) {
+      throw err; 
+   }
+}

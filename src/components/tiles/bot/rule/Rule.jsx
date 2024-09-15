@@ -11,7 +11,7 @@ import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
 import APIContext from '@/contexts/4HandsAPI';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import { comparisonChange, parseRuleTitle } from './Rule.helper';
+import { comparisonChange, parseRuleTitle, deleteRule } from './Rule.helper';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { Close } from '@mui/icons-material';
 
@@ -22,6 +22,7 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
    const [ toCompare, setToCompare ] = useState(false);
 
    const toComparisonChange = (ev) => comparisonChange(ev, API, doc, rule, setToCompare);
+   const handleDelete = () => deleteRule(API, rule, doc._id);
 
    if (!Array.isArray(rule.children)) {
       return <></>;
@@ -42,7 +43,7 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
          <div className="rule-header">
             {rule.children.length > 0 && <span>{rule.children.length === 2 ? parseRuleTitle(rule.comparison) : 'IS TRUE'}</span>}
 
-            <RoundIconButton className="close-button" Icon={Close} size="small" />
+            <RoundIconButton className="close-button" Icon={Close} size="small" onClick={handleDelete} />
          </div>
 
          {rule.children.map((value, index) => {
