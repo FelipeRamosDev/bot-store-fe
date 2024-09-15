@@ -78,7 +78,7 @@ export function FormBase({
       if (form) {
          setTimeout(() => onReady(), 0);
       }
-   }, [ form ]);
+   }, [ form, onReady ]);
 
    /**
     * Handle form submission, including validation and error handling.

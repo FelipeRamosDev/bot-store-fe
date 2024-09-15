@@ -1,5 +1,5 @@
 import './Rule.scss';
-import { useContext, useState } from 'react';
+import { useContext, useState, Fragment } from 'react';
 import BotValue from '../botValue/BotValue';
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';
 import configs from '@/config.json';
@@ -55,9 +55,9 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
          {...props}
       >
          {rule.children.map((value, index) => {
-            return (<>
+            return (<Fragment key={value._id}>
                {index === 1 && (
-                  <div className="buttons" key={value._id + 'divider'}>
+                  <div className="buttons">
                      {!toCompare && <BotThreadDivider text={rule.comparison} onClick={() => setToCompare(true)} />}
 
                      {(toCompare || !rule.comparison) && <CheckButtonGroupInput
@@ -79,8 +79,8 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
                   </div>
                )}
 
-               <BotValue key={value._id} botValue={value} parentRule={rule} />
-            </>)
+               <BotValue botValue={value} parentRule={rule} />
+            </Fragment>)
          })}
 
          {!rule.children.length ? (

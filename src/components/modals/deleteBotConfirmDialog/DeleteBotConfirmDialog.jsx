@@ -35,7 +35,7 @@ export default function DeleteBotConfirmDialog({ open = false, setOpen = () => {
          onClose={() => setOpen(false)}
          confirmLabel="DELETE"
       >
-         <p style={{ marginBottom: 0 }}>Are you sure you want to delete the "{doc.name}" bot?</p>
+         <p style={{ marginBottom: 0 }}>{`Are you sure you want to delete the "${doc.name}" bot?`}</p>
          <p style={{ marginBottom: 0 }}>This action can NOT be undone.</p>
       </ConfirmationDialog>
    );
