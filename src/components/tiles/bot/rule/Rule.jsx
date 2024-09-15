@@ -11,6 +11,9 @@ import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
 import APIContext from '@/contexts/4HandsAPI';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import { comparisonChange, parseRuleTitle } from './Rule.helper';
+import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import { Close } from '@mui/icons-material';
 
 export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
    const { doc } = useContext(DBQueryContext);
@@ -18,28 +21,10 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
    const [ createValueModal, setCreateValueModal ] = useState('');
    const [ toCompare, setToCompare ] = useState(false);
 
+   const toComparisonChange = (ev) => comparisonChange(ev, API, doc, rule, setToCompare);
+
    if (!Array.isArray(rule.children)) {
       return <></>;
-   }
-
-   async function comparisonChange({ target: { value } }) {
-      try {
-         const updated = await API.ajax.authPost('/bot/update-rule', {
-            botUID: doc._id,
-            ruleUID: rule._id,
-            docData: { comparison: value }
-         });
-
-         if (updated.error) {
-            throw updated;
-         }
-
-         if (updated.success) {
-            setToCompare(false);
-         }
-      } catch (err) {
-         throw err;
-      }
    }
 
    return (<>
@@ -54,6 +39,12 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
          elevation={10}
          {...props}
       >
+         <div className="rule-header">
+            {rule.children.length > 0 && <span>{rule.children.length === 2 ? parseRuleTitle(rule.comparison) : 'IS TRUE'}</span>}
+
+            <RoundIconButton className="close-button" Icon={Close} size="small" />
+         </div>
+
          {rule.children.map((value, index) => {
             return (<Fragment key={value._id}>
                {index === 1 && (
@@ -61,7 +52,7 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
                      {!toCompare && <BotThreadDivider text={rule.comparison} onClick={() => setToCompare(true)} />}
 
                      {(toCompare || !rule.comparison) && <CheckButtonGroupInput
-                        onChange={comparisonChange}
+                        onChange={toComparisonChange}
                         schema={{
                            key: 'comparison',
                            defaultValue: rule.comparison,
