@@ -6,7 +6,8 @@ import NoDocumentsTile from "../../noDocumentsTile/NoDocumentsTile";
 
 export default function BotValueSingle({ botValue, eventName, title = 'Bot Value', minify = false, openCreateModal = () => {}, ...props }) {
    const { doc } = useContext(DBQueryContext);
-   const foundValue = botValue || doc?.eval[eventName]?.linkedValue;
+   const docThread = doc?.eval[eventName];
+   const foundValue = botValue || docThread?.linkedValue;
    let borderColor;
 
    if (!foundValue && eventName.indexOf('stopLoss') >= 0) {
@@ -57,6 +58,7 @@ export default function BotValueSingle({ botValue, eventName, title = 'Bot Value
          <BotValue
             className="single"
             botValue={foundValue}
+            parentThread={docThread}
             minify={minify}
             isSingle={true}
             {...props}
