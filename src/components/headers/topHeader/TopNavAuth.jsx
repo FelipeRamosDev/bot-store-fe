@@ -56,10 +56,9 @@ export default function TopNavAuth() {
          <PageSpinner spinner={spinner} />
 
          <Link href="/dashboard">Dashboard</Link>
-         <Link href="/dashboard/my-bots">My Bots</Link>
          <Link href="/dashboard/master-accounts">Master Accounts</Link>
-         <Link href="/slots">Slots</Link>
-         <Link href="/positions">Positions</Link>
+         {/* <Link href="/slots">Slots</Link> */}
+         {/* <Link href="/positions">Positions</Link> */}
 
          <CTAButton size="large" onClick={signOut}>
             SIGNOUT

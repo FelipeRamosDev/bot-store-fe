@@ -25,10 +25,10 @@ export default function TopNav() {
 
    return (
       <nav>
-         <Link href="/how-it-works">How It Works</Link>
-         <Link href="/store">Store</Link>
-         <Link href="/pricing">Pricing</Link>
-         <Link href="/earn-commission">Earn Commissions</Link>
+         {/* <Link href="/how-it-works">How It Works</Link> */}
+         {/* <Link href="/store">Store</Link> */}
+         {/* <Link href="/pricing">Pricing</Link> */}
+         {/* <Link href="/earn-commission">Earn Commissions</Link> */}
 
          <CTAButton size="large" onClick={() => router.push('/dashboard')}>
             START

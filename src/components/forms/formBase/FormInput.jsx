@@ -14,10 +14,11 @@ import FormBaseContext from '@/components/forms/formBase/FormBase';
  * @param {boolean} [props.disabled] - Boolean to disable the input.
  * @param {any} [props.defaultValue] - Default value for the input.
  * @param {Function} [props.onChange] - Optional callback function to handle input changes.
+ * @param {Function} [props.onCustomChange] - Optional callback function to handle input additional custom changes.
  *
  * @returns {JSX.Element} - Rendered input component based on the schema, or an empty fragment if no schema is found.
  */
-export default function FormInput({ path, ...props }) {
+export default function FormInput({ path, onCustomChange = () => {}, ...props }) {
    const { form, errors, loading } = useContext(FormBaseContext);
    const [ schemaState, setSchema ] = useState();
    const fixDefaultValue = useRef();
@@ -49,6 +50,7 @@ export default function FormInput({ path, ...props }) {
          }
       }
 
+      onCustomChange(value);
       schema.onInput.call(form, value, schema);
    }
 
@@ -58,6 +60,7 @@ export default function FormInput({ path, ...props }) {
 
    if (schema.Input) {
       return <schema.Input
+         className="form-input"
          schema={schemaState}
          onChange={handleInput}
          errors={errors[path]}

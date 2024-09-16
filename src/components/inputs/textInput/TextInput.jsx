@@ -13,7 +13,7 @@ import { TextField, FormControl, FormHelperText } from '@mui/material';
  * @returns {JSX.Element} - The rendered text input field with optional error messages.
  */
 export default function TextInput({ schema, errors = [], fullWidth = true, ...props }) {
-   const { inputType = 'text', label, placeholder, color = 'tertiary' } = schema || {};
+   const { inputType = 'text', label, placeholder, color = 'tertiary', style } = schema || {};
    let defaultValue;
 
    if (schema.form.editMode) {
@@ -21,7 +21,7 @@ export default function TextInput({ schema, errors = [], fullWidth = true, ...pr
    }
 
    return (
-      <FormControl fullWidth={fullWidth} error={errors.length}>
+      <FormControl fullWidth={fullWidth} error={errors.length} sx={style} {...props}>
          <TextField
             type={inputType}
             label={label}

@@ -11,9 +11,9 @@ import BasePage from '../basePage/BasePage';
  *
  * @returns {JSX.Element} The rendered `BasePage` component containing the `AuthUserProvider` and children.
  */
-export default function AuthBasePage({ children }) {
+export default function AuthBasePage({ children, ...props }) {
    return (
-      <BasePage headerMenu="auth">
+      <BasePage headerMenu="auth" {...props}>
          <AuthUserProvider>
             {children}
          </AuthUserProvider>

@@ -22,6 +22,7 @@ export default class FetchDependency {
     * @param {Object} [setup.httpRequest] - Configuration for an API endpoint request.
     * @param {Object} [setup.filter] - Filtering criteria for the query.
     * @param {boolean} [setup.filterUser=false] - Whether to filter results by the current user ID.
+    * @param {Function} [setup.onLoad=()=>{}] - The callback to execute when the dependency is loaded.
     */
    constructor(setup, form) {
       const {
@@ -33,7 +34,8 @@ export default class FetchDependency {
          sort,
          httpRequest,
          filter = {},
-         filterUser = false
+         filterUser = false,
+         onLoad = () => {}
       } = Object(setup);
 
       if (!form) {
@@ -59,6 +61,7 @@ export default class FetchDependency {
       this.id = id;
       this.queryType = queryType;
       this.filterUser = filterUser;
+      this.onLoad = onLoad;
 
       if (this.queryType === 'endpoint' && httpRequest) {
          this.httpRequest = new HttpRequestSetup(httpRequest, this);
@@ -119,6 +122,8 @@ export default class FetchDependency {
          }
       } catch (err) {
          throw err;
+      } finally {
+         this.onLoad();
       }
    }
 

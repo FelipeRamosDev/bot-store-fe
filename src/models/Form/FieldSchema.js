@@ -25,6 +25,7 @@ export default class FieldSchema {
     * @param {Function} [setup.parseInput] - A function to parse the input value.
     * @param {boolean} [setup.useDependencies=false] - Whether to use dependencies for the field.
     * @param {Function} [setup.onInput=(value) => {}] - A function to handle input changes.
+    * @param {Object} [s] - The CSS custom style.
     */
    constructor(setup = {}, form) {
       const {
@@ -42,6 +43,7 @@ export default class FieldSchema {
          parseInput,
          useDependencies = false,
          onInput = (value) => {},
+         style
       } = Object(setup);
 
       if (parseInput && typeof parseInput !== 'function') {
@@ -64,6 +66,7 @@ export default class FieldSchema {
       this.onInput = onInput;
       this.parseInput = parseInput ? parseInput.bind(this) : undefined;
       this.Input = Input;
+      this.style = style;
 
       this.validators = validators.map(validator => {
          if (typeof validator !== 'function') {

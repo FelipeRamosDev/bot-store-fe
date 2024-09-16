@@ -1,5 +1,5 @@
 import './FormBase.scss';
-import { createContext, useEffect, useState, useContext } from 'react';
+import { createContext, useEffect, useState, useContext, useRef } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/base/alertModal/AlertModal';
 import { parseValidationErrorMsg } from '@/helpers/format';
@@ -20,18 +20,23 @@ export default FormBaseContext;
  * @param {string} [props.submitLabel='Send'] - Label for the submit button.
  * @param {boolean} [props.appendUserToBody=false] - Flag to append user ID to the form data.
  * @param {Function} [props.onSubmit=async () => {}] - Function to call on form submission.
+ * @param {Function} [props.onReady=async () => {}] - Function to call when the form is ready to use.
+ * @param {Boolean} [props.hideSubmit] - If true, the submit button will not be displayed.
  * @param {Object} [props.editData] - Data to populate the form for editing.
  * @param {ReactNode} props.children - Child components or form fields to be rendered inside the form.
  *
  * @returns {JSX.Element} - The rendered form with context provider and handling for loading and alert states.
  */
 export function FormBase({
+   anchorRef,
    formSet,
    formID = '',
    className = '',
    submitLabel = 'Send',
    appendUserToBody = false,
    onSubmit = async () => {},
+   onReady = () => {},
+   hideSubmit = false,
    editData,
    children,
    ...props
@@ -48,8 +53,11 @@ export function FormBase({
    }
 
    useEffect(() => {
+      const stringOldSchema = JSON.stringify(formSet?._schema?.keys().toArray());
+      const stringNewSchema = JSON.stringify(form?._schema.keys().toArray());
+
       // Initialize the Form instance
-      if (!form) {
+      if (!form || stringOldSchema !== stringNewSchema) {
          formSet.formSetter(setForm);
          formSet.errorSetter(setErrors);
 
@@ -66,6 +74,12 @@ export function FormBase({
          });
       }
    }, [ form, formSet, editData ]);
+
+   useEffect(() => {
+      if (form) {
+         setTimeout(() => onReady(), 0);
+      }
+   }, [ form, onReady ]);
 
    /**
     * Handle form submission, including validation and error handling.
@@ -85,7 +99,7 @@ export function FormBase({
 
          return await onSubmit.call(form, form.toObject());
       } catch (error) {
-         const serverValidationErrors = parseValidationErrorMsg(error?.message);
+         const serverValidationErrors = parseValidationErrorMsg(error);
 
          if (serverValidationErrors) {
             setAlertDialog({ error, message: serverValidationErrors });
@@ -107,18 +121,17 @@ export function FormBase({
       </AlertModal>
 
       {!form && <FitSpinner spinner={'Loading Dependencies'} noBackground={true} />}
-
-      {form && <form className={`${formID} form-base ${className}`} onSubmit={handleSubmit} {...props}>
+      {form && <form ref={anchorRef} className={`${formID} form-base ${className}`} onSubmit={handleSubmit} {...props}>
          {children}
 
-         <div className="buttons">
+         {!hideSubmit && <div className="buttons">
             <LoadingButton
                type="submit"
                variant="contained"
                color="tertiary"
                loading={loading}
             >{submitLabel}</LoadingButton>
-         </div>
+         </div>}
       </form>}
    </FormBaseContext.Provider>;
 }

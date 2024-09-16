@@ -1,0 +1,71 @@
+@import "../../../../style/scss/variables.scss";
+
+.bot-block {
+   $header-height: 2.5rem;
+
+   display: flex;
+   justify-content: flex-start;
+   gap: 1rem;
+   flex-wrap: wrap;
+   position: relative;
+   min-width: 17rem;
+
+   &.price-card {
+      padding-top: calc($header-height + 1rem);
+   }
+
+   @media screen and (max-width: $screen-m) {
+      flex-direction: column;
+   }
+
+   .block-header {
+      position: absolute;  
+      left: 0;
+      top: 0;
+      right: 0;
+      background-color: $background-paper;
+      height: $header-height;
+      display: flex;
+      justify-content: flex-end;
+
+      span {
+         font-size: 1.9rem;
+         font-weight: 900;
+         position: absolute;
+         bottom: -3px;
+         left: 15px;
+         color: $background-grey2-light;
+      }
+
+      .check-button-group {
+         width: auto;
+
+         .options-wrap {
+            margin-top: 0;
+            gap: 0;
+
+            .check-button {
+               padding: 0.5rem 1rem;
+               line-height: 0.5rem;
+               border-radius: 0;
+               height: $header-height;
+               border-right: 1px solid $background-grey1-light;
+
+               &:first-child {
+                  border-left: 1px solid $background-grey1-light;
+               }
+            }
+
+            .check-button:not(.checked) {
+               background-color: $background-paper;
+            }
+         }
+      }
+
+      .delete-button.MuiButton-root {
+         margin: 0;
+         box-shadow: none;
+         border-radius: 0;
+      }
+   }
+}

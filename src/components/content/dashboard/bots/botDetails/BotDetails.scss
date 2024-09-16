@@ -1,0 +1,174 @@
+@import "../../../../../style/scss/variables.scss";
+
+.bot-details {
+   .content-header {
+      margin-bottom: 2rem;
+   }
+
+   .page-header {
+      margin: 0;
+      width: 100%;
+
+      .cover {
+         min-height: 200px;
+      }
+
+      .title {
+         font-size: 1.3rem;
+      }
+
+      .bot-info {
+         $height: 200px;
+         box-shadow: $shadow-5;
+
+         background-color: $background-grey2-dark;
+         padding: 1rem 0 0 0;
+
+         >.full-container {
+            display: flex;
+            gap: 1rem;
+
+            @media screen and (max-width: $screen-m) {
+               flex-direction: column;
+            }
+         }
+
+         .avatar {
+            $side: $height * 1.1;
+
+            width: $side;
+            height: $side;
+            border-radius: $side;
+            background-color: $white;
+            transform: translateY(($side * 0.5) * -1);
+
+            @media screen and (max-width: $screen-m) {
+               margin: 0 auto;
+               margin-top: -calc($height / 2);
+            }
+         }
+
+         .summary {
+            flex: 1;
+            padding: 0.5rem 1rem;
+
+            .brief {
+               padding-right: 3rem;
+               color: $text-darken;
+            }
+         }
+
+         .infos {
+            width: 35%;
+            transform: translateY(-40%);
+            
+            @media screen and (max-width: $screen-m) {
+               width: 100%;
+            }
+
+            .check-button-group {
+               .options-wrap {
+                  margin-top: 0;
+
+                  .check-button:not(.checked) {
+                     background-color: $background-paper-light;
+                  }
+               }
+            }
+         }
+         
+         .settings-painel {
+            width: 100%;
+            background-color: $background-grey3;
+            padding: 3rem 3% 0 3%;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .painel-title {
+               display: block;
+               transform: translateY(5px);
+               margin-top: 0;
+               margin-right: 0;
+               margin-left: 3%;
+               margin-bottom: 0;
+               color: $background-paper-dark;
+               font-size: 2.1rem;
+               font-weight: 800;
+
+               @media screen and (min-width: $screen-m) {
+                  font-size: 4rem;
+               }
+
+               @media screen and (min-width: $screen-s) and (max-width: $screen-m) {
+                  font-size: 3.2rem;
+               }
+            }
+
+            .rubber-button {
+               transform: translateY(-1.5rem);
+            }
+         }
+      }
+   }
+
+   .bot-settings {
+      &.content-split {
+         row-gap: 0;
+         padding-top: 3rem;
+         padding-bottom: 2rem;
+
+         .content-header {
+            margin-bottom: 0;
+         }
+      }
+
+      .loss-gain-settings {
+         $gap: 1rem;
+
+         display: flex;
+         gap: $gap;
+         flex-wrap: wrap;
+
+         .bot-value-single {
+            flex: calc(50% - $gap);
+            background-color: $background-paper-light;
+
+            @media screen and (max-width: $screen-l) {
+               flex: 100%;
+            }
+         }
+         
+         .no-documents-tile {
+            min-width: auto;
+            flex: calc(50% - $gap);
+            border-width: 3px;
+
+            &.stoploss {
+               border-color: $error;
+               color: $error;
+            }
+
+            &.takeprofit {
+               border-color: $success;
+               color: $success;
+            }
+
+            .message {
+               font-weight: 600;
+            }
+         }
+
+         >.content-header {
+            >.toolbar {
+               min-height: 37px;
+            }
+         }
+      }
+   }
+
+   .no-documents-tile {
+      margin-bottom: 1rem;
+   }
+}

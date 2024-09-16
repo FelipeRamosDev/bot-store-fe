@@ -1,0 +1,102 @@
+@import "../../../../style/scss/variables.scss";
+
+.bot-thread {
+   $title-size: 0.95rem;
+   $header-padding: 0.75rem;
+   $header-space: $title-size + calc($header-padding * 2.7);
+   position: relative;
+
+   .card,
+   &.card {
+      background-color: $background-paper-light;
+   }
+
+   .card {
+      margin-bottom: 0;
+   }
+
+   &.card {
+      padding-top: $header-space;
+      margin-bottom: 2rem;
+   }
+
+   .card-body {
+      display: flex;
+      justify-content: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: calc($title-size * 2) $title-size $title-size 0;
+
+      @media screen and (max-width: $screen-m) {
+         display: flex;
+         flex-direction: column;
+      }
+   }
+
+   >.content-header {
+      margin: 0 0 1rem 0;
+      padding: $header-padding;
+      background-color: $background-dark;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      color: $text-darken;
+   }
+
+   .thread-header {
+      .check-button-group {
+         .options-wrap {
+            .check-button {
+               @media screen and (max-width: $screen-m) {
+                  font-size: 0.8rem;
+                  line-height: 0.8rem;
+               }
+            }
+         }
+      }
+   }
+
+   .card-title {
+      margin: 0;
+      font-size: $title-size;
+      color: $text-darken;
+   }
+
+   .bot-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $background-grey2;
+      padding: 0.5rem;
+      border-radius: $radius-s;
+      cursor: pointer;
+
+      @media screen and (max-width: $screen-m) {
+         width: 100%;
+      }
+
+      span {
+         font-size: 1rem;
+         text-transform: uppercase;
+         font-weight: 900;
+      }
+   }
+
+   .add-new {
+      border: 3px dashed $background-dark;
+      border-radius: $radius-m;
+      padding: 5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media screen and (max-width: $screen-m) {
+         padding: 1rem;
+      }
+   }
+
+   .delete-button {
+      min-width: auto;
+   }
+}

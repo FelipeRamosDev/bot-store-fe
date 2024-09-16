@@ -1,8 +1,8 @@
-import AuthBasePage from "@/templates/authBasePage/AuthBasePage";
-import MasterDetails from "@/components/content/dashboard/masterAccounts/masterDetails/MasterDetails";
+import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
+import MasterDetails from '@/components/content/dashboard/masterAccounts/masterDetails/MasterDetails';
 
 /**
- * MasterAccountsPage Component
+ * MasterAccountPage Component
  *
  * This component renders the Master Accounts page.
  * It uses the `AuthBasePage` template and includes the `MasterDetails` component.
@@ -13,7 +13,7 @@ import MasterDetails from "@/components/content/dashboard/masterAccounts/masterD
  *
  * @returns {JSX.Element} The rendered master accounts page.
  */
-export default function MasterAccountsPage({ params: { index } }) {
+export default function MasterAccountPage({ params: { index } }) {
    return (
       <AuthBasePage className="master-accounts-page">
          <MasterDetails index={index} />

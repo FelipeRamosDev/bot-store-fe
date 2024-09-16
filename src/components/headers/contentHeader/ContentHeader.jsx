@@ -1,7 +1,5 @@
 import './ContentHeader.scss';
 
-import './ContentHeader.scss';
-
 /**
  * ContentHeader component is used to render a header with optional toolbar elements.
  *
@@ -11,6 +9,7 @@ import './ContentHeader.scss';
  *
  * @component
  * @param {Object} props - Component props.
+ * @param {string} props.className - Custom CSS classes.
  * @param {React.ReactNode} [props.children] - The content to be displayed in the header.
  * @param {React.ComponentType} [props.Toolbar=() => <></>] - A component to be rendered as a toolbar. Defaults to an empty component if not provided.
  *
@@ -32,8 +31,8 @@ import './ContentHeader.scss';
  * 
  * @returns {JSX.Element} A div containing the header content and the optional toolbar.
  */
-export default function ContentHeader({ children, Toolbar = () => <></> }) {
-   return <div className="content-header">
+export default function ContentHeader({ className = '', children, Toolbar = () => <></> }) {
+   return <div className={`content-header ${className}`}>
       {children}
 
       <div className="toolbar">

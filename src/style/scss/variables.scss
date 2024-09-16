@@ -13,11 +13,16 @@ $tertiary-dark: darken($color: $tertiary, $amount: 20);
 $background: #212A2D;
 $background-paper: #202424;
 $background-paper-light: lighten($color: $background-paper, $amount: 5);
+$background-paper-dark: darken($color: $background-paper, $amount: 3);
 $background-dark: #1C2122;
 $background-grey1: #222728;
 $background-grey1-light: lighten($color: $background-grey1, $amount: 3);
 $background-grey2: #252A2A;
+$background-grey2-light: lighten($color: $background-grey2, $amount: 3);
+$background-grey3: hsl(180, 7%, 15%);
+$background-grey3-light: lighten($color: $background-grey3, $amount: 8);
 $background-grey2-dark: darken($color: $background-grey2, $amount: 2);
+$background-grey2-darken: darken($color: $background-grey2, $amount: 5);
 $background-grad: radial-gradient(100vh, #28373C, #212A2D);
 
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);
@@ -38,6 +43,9 @@ $grey: #808080;
 $grey-light: lighten($color: $grey, $amount: 25);
 $grey-dark: darken($color: $grey, $amount: 25);
 $grey-mark: #515151;
+
+$white: #FAFAFA;
+$black: #111;
 
 $text: #FAFAFA;
 $text-darken: darken($color: $text, $amount: 20);

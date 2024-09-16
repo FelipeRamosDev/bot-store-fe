@@ -29,6 +29,8 @@ export const darkTheme = createTheme({
          darken: '#c7c7c7',
          secondary: '#0F282F',
          tertiary:'#254331',
+         success: '#002510',
+         error: '#651809',
          warn: '#3A290E',
          disabled: 'rgba(250,250,250,0.7)'
       },

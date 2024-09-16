@@ -1,0 +1,28 @@
+@import "../../../style/scss/variables.scss";
+
+.bot-values-grid {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1rem;
+   margin: 1rem auto 0 auto;
+
+   .price-card {
+      margin-bottom: 0;
+   }
+
+   .bot-value-single {
+      flex: 100%;
+
+      @media screen and (min-width: $screen-s) {
+         flex: calc(50% - 1rem);
+      }
+
+      @media screen and (min-width: $screen-xl) {
+         flex: calc(33.33% - 1rem);
+      }
+
+      .bot-value {
+         padding: 0;
+      }
+   }
+}

@@ -13,18 +13,18 @@ import CheckButton from '@/components/buttons/checkButton/CheckButton';
  * @returns {JSX.Element} - The rendered `CheckButtonGroupInput` component.
  */
 export default function CheckButtonGroupInput({ className = '', schema = {}, errors = [], onChange = () => { }, ...props }) {
-   const { label, options = [], defaultValue, multiValue } = schema;
+   const { label, options = [], defaultValue, multiValue, verticalAlign = false } = schema;
    const [ value, setValue ] = useState(defaultValue);
 
    useEffect(() => {
-      if (schema.form.editMode) {
+      if (schema.form?.editMode) {
          const editValue = schema.getEditValue();
 
          if (editValue) {
             setValue(editValue);
          }
       }
-   }, [schema, schema.form.editMode, setValue]);
+   }, [schema, schema.form?.editMode, setValue]);
 
    const handleChoose = (option) => {
       if (multiValue) {
@@ -49,7 +49,7 @@ export default function CheckButtonGroupInput({ className = '', schema = {}, err
    return <div className={`check-button-group ${className}`} {...props}>
       {label && <label>{label}</label>}
 
-      <div className="options-wrap">
+      <div className={`options-wrap ${verticalAlign ? 'vertical' : ''}`}>
          {options.map(option => {
             let checkValue = false;
 
