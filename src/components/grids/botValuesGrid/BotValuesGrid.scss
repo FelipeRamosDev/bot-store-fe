@@ -11,14 +11,14 @@
    }
 
    .bot-value-single {
-      flex: calc(50% - 1rem);
+      flex: 100%;
 
       @media screen and (min-width: $screen-s) {
-         flex: calc(33.33% - 1rem);
+         flex: calc(50% - 1rem);
       }
 
       @media screen and (min-width: $screen-xl) {
-         flex: calc(25% - 1rem);
+         flex: calc(33.33% - 1rem);
       }
 
       .bot-value {

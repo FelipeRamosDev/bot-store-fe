@@ -7,6 +7,7 @@ import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import APIContext from '@/contexts/4HandsAPI';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
 import { handleStatusChange } from './BotDetails.helper';
+import configs from '@/config.json';
 
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
@@ -49,7 +50,7 @@ export default function BotDetailsHeader() {
          </div>
 
          <div className="settings-painel">
-            <h3 className="painel-title">BOT SETTINGS</h3>
+            <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>
 
             <BotMenu />
          </div>

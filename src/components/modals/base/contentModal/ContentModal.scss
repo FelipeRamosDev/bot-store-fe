@@ -21,9 +21,9 @@
       max-height: 80vh;
       overflow-y: auto;
 
-      @media screen and (max-width: $screen-m) {
-         border-radius: 0;
-      }
+      // @media screen and (max-width: $screen-m) {
+      //    border-radius: 0;
+      // }
 
       .modal-header {
          position: sticky;
