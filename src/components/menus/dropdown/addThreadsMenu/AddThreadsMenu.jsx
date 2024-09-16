@@ -3,8 +3,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Add from '@mui/icons-material/Add';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import { darkTheme } from '@/style/darkTheme';
+import { Divider } from '@mui/material';
 
-export default function AddThreadsMenu({ setModalState }) {
+export default function AddThreadsMenu({ createThread }) {
    const [anchorEl, setAnchorEl] = useState(null);
    const open = Boolean(anchorEl);
 
@@ -14,6 +16,28 @@ export default function AddThreadsMenu({ setModalState }) {
 
    const handleMenuClose = () => {
       setAnchorEl(null);
+   };
+
+   const badgeStyle = {
+      display: 'inline-block',
+      marginRight: '0.5rem',
+      padding: '0.4rem',
+      textTransform: 'uppercase',
+      fontSize: '0.75rem',
+      fontWeight: 700,
+      borderRadius: 3
+   };
+
+   const greenBadgeStyle = {
+      ...badgeStyle,
+      backgroundColor: darkTheme.palette.success.light,
+      color: darkTheme.palette.text.success
+   };
+
+   const redBadgeStyle = { 
+      ...badgeStyle,
+      backgroundColor: darkTheme.palette.error.main,
+      color: darkTheme.palette.text.error
    };
 
    return (
@@ -28,20 +52,22 @@ export default function AddThreadsMenu({ setModalState }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
-            <MenuItem onClick={handleMenuClose}>
-               OPEN (Long)
+            <MenuItem onClick={() => createThread('openLong')}>
+               <span style={greenBadgeStyle}>Long</span> OPEN
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose}>
-               OPEN (Short)
+            <MenuItem onClick={() => createThread('openShort')}>
+               <span style={redBadgeStyle}>Short</span> OPEN
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose}>
-               CLOSE (Long)
+            <Divider />
+
+            <MenuItem onClick={() => createThread('closeLong')}>
+               <span style={greenBadgeStyle}>Long</span> CLOSE
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose}>
-               CLOSE (Short)
+            <MenuItem onClick={() => createThread('closeShort')}>
+               <span style={redBadgeStyle}>Short</span> CLOSE
             </MenuItem>
          </Menu>
       </>

@@ -15,7 +15,7 @@ import Delete from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import AddBotRuleMenu from '@/components/menus/dropdown/addBotRuleMenu/AddBotRuleMenu';
 
-export default function BotThread({ threadID, title, color, ...props }) {
+export default function BotThread({ threadID, createThread, title, color, ...props }) {
    const API = useContext(APIContext);
    const { doc = {} } = useContext(DBQueryContext);
    const evalThread = doc.eval;
@@ -23,21 +23,6 @@ export default function BotThread({ threadID, title, color, ...props }) {
    const thread = threadBlock && threadBlock.thread;
    const watermarkSize = window.innerWidth < configs.breakpoints.s ? 23 : 28;
    const paddingSize = window.innerWidth < configs.breakpoints.s ? 3 : 14;
-
-   async function createThread() {
-      try {
-         const created = await API.ajax.authPut('/bot/add-thread', {
-            eventName: threadID,
-            botUID: doc._id
-         });
-
-         if (created.error) {
-            throw created;
-         }
-      } catch (err) {
-         throw err;
-      }
-   }
 
    async function handleDelete() {
       try {
@@ -55,7 +40,7 @@ export default function BotThread({ threadID, title, color, ...props }) {
    }
 
    if (!thread && (threadID === 'openLong' || threadID === 'openShort')) {
-      return <NoDocumentsTile message={title} onClick={createThread} />;
+      return <NoDocumentsTile message={title} onClick={() => createThread(threadID)} />;
    }
 
    if (!thread) {
