@@ -23,6 +23,7 @@ export default function BotThread({ threadID, createThread, title, color, ...pro
    const thread = threadBlock && threadBlock.thread;
    const watermarkSize = window.innerWidth < configs.breakpoints.s ? 23 : 28;
    const paddingSize = window.innerWidth < configs.breakpoints.s ? 3 : 14;
+   const iconSize = window.innerWidth < configs.breakpoints.m ? 'small' : 'medium';
 
    async function handleDelete() {
       try {
@@ -59,11 +60,11 @@ export default function BotThread({ threadID, createThread, title, color, ...pro
          paddingSize={paddingSize}
          {...props}
       >
-         <ContentHeader Toolbar={() => <>
+         <ContentHeader className="thread-header" Toolbar={() => <>
             <LogicalOperatorForm botUID={doc._id} block={thread} />
 
             <Button className="delete-button" color="info" onClick={handleDelete}>
-               <Delete />
+               <Delete fontSize={iconSize} />
             </Button>
          </>}>
             <HorizontalSplitIcon fontSize="small" /> <h5 className="card-title">{title}</h5>

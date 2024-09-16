@@ -1,7 +1,15 @@
+@import "../../../style/scss/variables.scss";
+
 .logical-operator {
    min-width: 10rem;
+   display: flex;
+
+   @media screen and (max-width: $screen-m) {
+      min-width: 6.5rem;
+   }
 
    .options-wrap {
+      flex: 1;
       margin: 0;
    }
 }

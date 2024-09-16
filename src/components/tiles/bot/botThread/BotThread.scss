@@ -44,6 +44,19 @@
       color: $text-darken;
    }
 
+   .thread-header {
+      .check-button-group {
+         .options-wrap {
+            .check-button {
+               @media screen and (max-width: $screen-m) {
+                  font-size: 0.8rem;
+                  line-height: 0.8rem;
+               }
+            }
+         }
+      }
+   }
+
    .card-title {
       margin: 0;
       font-size: $title-size;
@@ -59,6 +72,10 @@
       border-radius: $radius-s;
       cursor: pointer;
 
+      @media screen and (max-width: $screen-m) {
+         width: 100%;
+      }
+
       span {
          font-size: 1rem;
          text-transform: uppercase;
@@ -73,6 +90,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      @media screen and (max-width: $screen-m) {
+         padding: 1rem;
+      }
    }
 
    .delete-button {
