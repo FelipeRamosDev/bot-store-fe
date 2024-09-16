@@ -4,6 +4,18 @@ import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import NoDocumentsTile from "../../noDocumentsTile/NoDocumentsTile";
 
+/**
+ * Renders a single bot value with a watermark and handles the display of "no documents" tiles if the bot value is missing.
+ * 
+ * @param {Object} props - The component's props.
+ * @param {Object} props.botValue - The bot value to display.
+ * @param {string} props.eventName - The event name associated with the bot value.
+ * @param {string} [props.title='Bot Value'] - The title to display in the watermark of the card.
+ * @param {boolean} [props.minify=false] - Whether to display the bot value in a minimized format.
+ * @param {Function} [props.openCreateModal=() => {}] - Function to open the create modal.
+ * 
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function BotValueSingle({ botValue, eventName, title = 'Bot Value', minify = false, openCreateModal = () => {}, ...props }) {
    const { doc } = useContext(DBQueryContext);
    const docThread = doc?.eval[eventName];

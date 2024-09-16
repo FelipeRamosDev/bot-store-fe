@@ -6,6 +6,18 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { darkTheme } from '@/style/darkTheme';
 import { Divider } from '@mui/material';
 
+/**
+ * AddThreadsMenu renders a button to open a menu for creating threads (open/close long or short).
+ * Each menu item is styled with a badge indicating whether it is a "Long" or "Short" action.
+ * 
+ * @component
+ * 
+ * @param {Object} props - The component props.
+ * @param {Function} props.createThread - Function to handle creating a thread. 
+ * It takes a string indicating the thread type (e.g., 'openLong', 'openShort').
+ * 
+ * @returns {JSX.Element} The AddThreadsMenu component.
+ */
 export default function AddThreadsMenu({ createThread }) {
    const [anchorEl, setAnchorEl] = useState(null);
    const open = Boolean(anchorEl);

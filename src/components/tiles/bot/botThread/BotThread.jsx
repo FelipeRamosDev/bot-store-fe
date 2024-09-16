@@ -15,6 +15,18 @@ import Delete from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import AddBotRuleMenu from '@/components/menus/dropdown/addBotRuleMenu/AddBotRuleMenu';
 
+/**
+ * Renders a bot thread card, which includes a header with a logical operator form and delete button,
+ * and displays the blocks and rules within the thread.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.threadID - The ID of the thread to display.
+ * @param {Function} props.createThread - Function to create a new thread if one does not exist.
+ * @param {string} props.title - The title of the thread card.
+ * @param {string} props.color - The color for the thread border.
+ * 
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function BotThread({ threadID, createThread, title, color, ...props }) {
    const API = useContext(APIContext);
    const { doc = {} } = useContext(DBQueryContext);
@@ -25,6 +37,13 @@ export default function BotThread({ threadID, createThread, title, color, ...pro
    const paddingSize = window.innerWidth < configs.breakpoints.s ? 3 : 14;
    const iconSize = window.innerWidth < configs.breakpoints.m ? 'small' : 'medium';
 
+   /**
+    * Handles the deletion of a thread block by sending a request to the API.
+    * 
+    * @async
+    * @function
+    * @throws {Error} Throws an error if the deletion request fails.
+    */
    async function handleDelete() {
       try {
          const deleted = await API.ajax.authDelete('/bot/delete-block', {
@@ -40,15 +59,19 @@ export default function BotThread({ threadID, createThread, title, color, ...pro
       }
    }
 
+   // Display a tile to create a new thread if the thread does not exist and the threadID is 'openLong' or 'openShort'.
    if (!thread && (threadID === 'openLong' || threadID === 'openShort')) {
       return <NoDocumentsTile message={title} onClick={() => createThread(threadID)} />;
    }
 
+   // If no thread is found, render nothing.
    if (!thread) {
       return <></>;
    }
 
+   // Combine blocks and rules into a single array for rendering.
    const threadChildren = [ ...thread.blocks, ...thread.rules ];
+
    return (
       <WatermarkPriceCard
          className="bot-thread"

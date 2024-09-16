@@ -7,11 +7,25 @@ import AddThreadsMenu from '@/components/menus/dropdown/addThreadsMenu/AddThread
 import APIContext from '@/contexts/4HandsAPI';
 import DBQueryContext from '@/contexts/DBQuery';
 
-
+/**
+ * `BotThreads` is a component responsible for managing and displaying bot threads.
+ * It interacts with the API to create new threads and utilizes context to fetch
+ * necessary data. The component also renders predefined threads with options to
+ * add more threads via a menu.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function BotThreads() {
    const API = useContext(APIContext);
    const { doc = {} } = useContext(DBQueryContext);
 
+   /**
+    * Creates a new bot thread by making an API call.
+    * 
+    * @param {string} threadID - The ID of the thread to be created.
+    * @returns {Promise<void>} A promise that resolves when the thread is created.
+    * @throws Will throw an error if the API call fails.
+    */
    async function createThread(threadID) {
       try {
          const created = await API.ajax.authPut('/bot/add-thread', {

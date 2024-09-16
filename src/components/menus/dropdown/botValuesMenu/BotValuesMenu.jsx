@@ -13,6 +13,19 @@ import LinkOffIcon from '@mui/icons-material/LinkOff';
 import APIContext from '@/contexts/4HandsAPI';
 import DBQueryContext from '@/contexts/DBQuery';
 
+/**
+ * BotValuesMenu renders a menu for managing bot values, with options to edit, clone, unlink, or delete a bot value.
+ * It interacts with the API to handle cloning and unlinking values from a parent thread or rule.
+ * 
+ * @component
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} props.botValue - The bot value object being managed.
+ * @param {Object} props.parentThread - The parent thread object, if any.
+ * @param {Object} props.parentRule - The parent rule object, if any.
+ * 
+ * @returns {JSX.Element} The BotValuesMenu component.
+ */
 export default function BotValuesMenu({ botValue = {}, parentThread, parentRule }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ modal, setModal ] = useState(false);
@@ -29,6 +42,11 @@ export default function BotValuesMenu({ botValue = {}, parentThread, parentRule 
       setAnchorEl(null);
    };
 
+   /**
+    * Clones the current bot value by sending a request to the backend API.
+    * 
+    * @throws {Error} If the cloning request fails.
+    */
    async function handleClone() {
       try {
          const cloned = await API.ajax.authPut('/bot/clone', {
@@ -44,6 +62,11 @@ export default function BotValuesMenu({ botValue = {}, parentThread, parentRule 
       }
    }
 
+   /**
+    * Unlinks the current bot value from its parent thread or rule.
+    * 
+    * @throws {Error} If the unlink request fails.
+    */
    async function handleUnlink() {
       let unlinkFrom = '';
 

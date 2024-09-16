@@ -1,3 +1,14 @@
+/**
+ * Handles the status change for a bot by sending an update request to the server.
+ * 
+ * @param {Object} ev - The event object from the status change action, typically a change event from a form control.
+ * @param {Object} API - The API context object used to make authenticated requests.
+ * @param {Object} doc - The bot document containing the current bot details.
+ * 
+ * @throws Will throw an error if the request fails or if the server responds with an error.
+ * 
+ * @returns {Promise<void>} A promise that resolves when the status change request is successfully completed.
+ */
 export async function handleStatusChange(ev, API, doc) {
    const value = ev?.target?.value;
 

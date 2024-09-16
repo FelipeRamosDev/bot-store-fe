@@ -13,6 +13,27 @@ import ListDocPicker from '@/components/inputs/listDocPicker/ListDocPicker';
 import FunctionsIcon from '@mui/icons-material/Functions';
 import AbcIcon from '@mui/icons-material/Abc';
 
+/**
+ * A form component for creating or selecting bot values.
+ * 
+ * This component provides different modes for handling bot values:
+ * - "ask" mode: Offers options to create a new bot value or use an existing one.
+ * - "create" mode: Allows for the creation of a new bot value, with additional forms for function parameters if needed.
+ * - "existent" mode: Allows the user to select an existing bot value from a list.
+ * 
+ * @param {Object} props - The component props.
+ * @param {string} [props.initView='ask'] - The initial view mode for the form ("ask", "create", or "existent").
+ * @param {Object} [props.parentRule] - The parent rule for the bot value (optional).
+ * @param {Array} [props.parentThreads] - The parent threads for the bot value (optional).
+ * @param {boolean} [props.editMode=false] - Whether the form is in edit mode.
+ * @param {Object} [props.editData] - The data to pre-fill the form in edit mode (optional).
+ * @param {Object} [props.bot] - The bot data (optional).
+ * @param {string} [props.slug] - The slug for the bot value (optional).
+ * @param {string} [props.valueType='function'] - The type of value ("function" or "primitive").
+ * @param {Function} [props.onSuccess=() => {}] - Callback function to be called on successful submission.
+ * 
+ * @returns {JSX.Element} The rendered form component.
+ */
 export default function BotValueForm({
    initView = 'ask',
    parentRule,

@@ -22,6 +22,7 @@ export default class FetchDependency {
     * @param {Object} [setup.httpRequest] - Configuration for an API endpoint request.
     * @param {Object} [setup.filter] - Filtering criteria for the query.
     * @param {boolean} [setup.filterUser=false] - Whether to filter results by the current user ID.
+    * @param {Function} [setup.onLoad=()=>{}] - The callback to execute when the dependency is loaded.
     */
    constructor(setup, form) {
       const {

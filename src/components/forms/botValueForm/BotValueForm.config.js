@@ -1,9 +1,14 @@
 import Form from '@/models/Form';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
-import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 
+/**
+ * Validator function for primitive value fields.
+ * 
+ * @param {any} value - The value to validate.
+ * @returns {boolean} True if the value is valid, false otherwise.
+ */
 function validatePrimitive(value) {
    const valueType = this.form.getValue('valueType');
 
@@ -16,6 +21,12 @@ function validatePrimitive(value) {
    }
 }
 
+/**
+ * Validator function for dynamic (function) value fields.
+ * 
+ * @param {any} value - The value to validate.
+ * @returns {boolean} True if the value is valid, false otherwise.
+ */
 function validateDynamic(value) {
    const valueType = this.form.getValue('valueType');
 
@@ -28,6 +39,11 @@ function validateDynamic(value) {
    }
 }
 
+/**
+ * Configuration for the bot value form.
+ * 
+ * @type {Form}
+ */
 const botValueForm = new Form({
    schema: [
       new SelectFieldSchema({
