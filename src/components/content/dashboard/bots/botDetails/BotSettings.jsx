@@ -11,6 +11,13 @@ import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import BotValueModal from '@/components/modals/botValueModal/BotValueModal';
 import AddBotValuesMenu from '@/components/menus/dropdown/addBotValuesMenu/AddBotValuesMenu';
 
+/**
+ * `BotSettings` is a component that manages and displays bot settings related to stoploss, takeprofit, and values.
+ * It interacts with the `DBQueryContext` to fetch bot data and provides modals for creating new bot values.
+ * The component also handles opening modals based on the selected event.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function BotSettings() {
    const { doc } = useContext(DBQueryContext);
    const [ createValueModal, setCreateValueModal ] = useState('');
@@ -19,6 +26,11 @@ export default function BotSettings() {
       return <></>;
    }
 
+   /**
+    * Opens a modal to create a new bot value based on the selected event.
+    *
+    * @param {string} eventName - The event name which determines the type of bot value to create.
+    */
    function openCreateModal(eventName) {
       switch (eventName) {
          case 'stopLossLong':

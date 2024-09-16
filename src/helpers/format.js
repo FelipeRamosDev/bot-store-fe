@@ -88,7 +88,7 @@ function toPercentString(value, opt) {
 /**
  * Parses a validation error message into a more readable format.
  *
- * @param {string} msg - The error message.
+ * @param {string|Object} err - The error message. Or the Error object.
  * @returns {string} - The parsed error message.
  */
 function parseValidationErrorMsg(err) {

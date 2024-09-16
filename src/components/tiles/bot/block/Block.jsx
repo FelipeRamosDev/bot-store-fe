@@ -12,6 +12,17 @@ import APIContext from '@/contexts/4HandsAPI';
 import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 
+/**
+ * Renders a block of bot logic including its header, child blocks, and rules.
+ * Allows editing and deleting the block, and adding new rules or blocks.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.block - The block data to display.
+ * @param {number} props.index - The index of the block in the list.
+ * @param {string} props.logicalOperator - The logical operator associated with the block.
+ * 
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function Block({ block = {}, index, logicalOperator }) {
    const API = useContext(APIContext);
    const { doc } = useContext(DBQueryContext);
@@ -19,6 +30,15 @@ export default function Block({ block = {}, index, logicalOperator }) {
    const paddingSize = window.innerWidth < configs.breakpoints.s ? 3 : 14;
    const blockUID = block._id;
 
+   /**
+    * Handles updating the logical operator of the block.
+    *
+    * @async
+    * @param {Object} event - The event object containing the new logical operator value.
+    * @param {Object} event.target - The target of the event.
+    * @param {string} event.target.value - The new logical operator value.
+    * @throws {Error} Throws an error if the update request fails.
+    */
    async function editLogicalOperator({ target: { value }}) {
       try {
          const updated = await API.ajax.authPost('/bot/update-block', {
@@ -35,6 +55,12 @@ export default function Block({ block = {}, index, logicalOperator }) {
       }
    }
 
+   /**
+    * Handles the deletion of the block.
+    *
+    * @async
+    * @throws {Error} Throws an error if the deletion request fails.
+    */
    async function deleteBlock() {
       try {
          const deleted = await API.ajax.authDelete('/bot/delete-block', {

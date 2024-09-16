@@ -71,6 +71,10 @@ export default class Form {
       return data;
    }
 
+   /**
+    * Retrieves an JSON string of the form data.
+    * @returns {JSON}
+    */
    toJSON() {
       try {
          return JSON.stringify(this.toObject());
@@ -310,6 +314,10 @@ export default class Form {
       }
    }
 
+   /**
+    * Converts the schema map to an array.
+    * @returns {FieldSchema[]}
+    */
    toSchemaArray() {
       const array = [];
       
@@ -450,6 +458,11 @@ export default class Form {
       }
    }
 
+   /**
+    * Build a Form instance using the BE schema.
+    * @param {Object} beSchema 
+    * @returns {Form}
+    */
    static buildFromBESchema(beSchema) {
       if (!beSchema) {
          throw new Error('The param "beSchema" is required to build from be schema!');

@@ -15,6 +15,19 @@ import { comparisonChange, parseRuleTitle, deleteRule } from './Rule.helper';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { Close } from '@mui/icons-material';
 
+/**
+ * Rule component represents a rule with associated bot values and comparison logic.
+ * It allows the user to view, add, edit, or delete bot values, and configure comparisons.
+ *
+ * @component
+ * 
+ * @param {Object} props - The component props.
+ * @param {number} props.index - The index of the rule in the list.
+ * @param {Object} props.rule - The rule object containing children bot values and comparison logic.
+ * @param {string} props.logicalOperator - The logical operator used for the rule (e.g., AND, OR).
+ * 
+ * @returns {JSX.Element} The Rule component.
+ */
 export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
    const { doc } = useContext(DBQueryContext);
    const API = useContext(APIContext);

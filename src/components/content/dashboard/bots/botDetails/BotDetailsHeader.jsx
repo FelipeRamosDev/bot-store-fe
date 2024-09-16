@@ -9,6 +9,12 @@ import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
 import { handleStatusChange } from './BotDetails.helper';
 import configs from '@/config.json';
 
+/**
+ * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
+ * status, and metadata. It also provides a settings panel for additional bot management.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);

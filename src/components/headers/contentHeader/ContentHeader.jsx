@@ -9,6 +9,7 @@ import './ContentHeader.scss';
  *
  * @component
  * @param {Object} props - Component props.
+ * @param {string} props.className - Custom CSS classes.
  * @param {React.ReactNode} [props.children] - The content to be displayed in the header.
  * @param {React.ComponentType} [props.Toolbar=() => <></>] - A component to be rendered as a toolbar. Defaults to an empty component if not provided.
  *

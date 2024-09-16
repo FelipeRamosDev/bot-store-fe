@@ -4,6 +4,18 @@ import APIContext from '@/contexts/4HandsAPI';
 import { useRouter } from 'next/navigation';
 import DBQueryContext from '@/contexts/DBQuery';
 
+/**
+ * DeleteBotConfirmDialog component displays a confirmation dialog for deleting a bot.
+ * It triggers a deletion request and navigates the user to the dashboard upon successful deletion.
+ * 
+ * @component
+ * 
+ * @param {Object} props - The component props.
+ * @param {boolean} [props.open=false] - Boolean indicating if the dialog is open.
+ * @param {Function} [props.setOpen=() => {}] - Function to set the dialog open state.
+ * 
+ * @returns {JSX.Element} The DeleteBotConfirmDialog component.
+ */
 export default function DeleteBotConfirmDialog({ open = false, setOpen = () => {} }) {
    const API = useContext(APIContext);
    const { doc = {} } = useContext(DBQueryContext);

@@ -11,6 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
  *
  * @param {Object} props - The component props.
  * @param {Object} props.schema - The schema object defining the radio group properties, including label, default value, and options.
+ * @param {Object} props.style - The CSS custom style.
  * @param {Function} [props.onChange] - Callback function triggered when a radio button selection changes.
  * @param {Object} [props] - Additional props to pass to the `RadioGroup` component.
  * 

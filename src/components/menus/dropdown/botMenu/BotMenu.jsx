@@ -10,6 +10,14 @@ import APIContext from '@/contexts/4HandsAPI';
 import { useRouter } from 'next/navigation';
 import DeleteBotConfirmDialog from '@/components/modals/deleteBotConfirmDialog/DeleteBotConfirmDialog';
 
+/**
+ * BotMenu renders a button that opens a menu with options to archive or delete a bot.
+ * The delete option opens a confirmation dialog, and the archive option is currently disabled.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The BotMenu component.
+ */
 export default function BotMenu() {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ deleteModal, setDeleteModal ] = useState(false);

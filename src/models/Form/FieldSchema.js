@@ -25,6 +25,7 @@ export default class FieldSchema {
     * @param {Function} [setup.parseInput] - A function to parse the input value.
     * @param {boolean} [setup.useDependencies=false] - Whether to use dependencies for the field.
     * @param {Function} [setup.onInput=(value) => {}] - A function to handle input changes.
+    * @param {Object} [s] - The CSS custom style.
     */
    constructor(setup = {}, form) {
       const {

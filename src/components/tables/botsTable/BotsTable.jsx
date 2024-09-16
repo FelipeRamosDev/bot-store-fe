@@ -14,6 +14,8 @@ import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 /**
  * A table component displaying a list of recent bots along with their scores.
  * The component fetches bot data from a context and displays it in a table format.
+ * @param {Object} props
+ * @param {string} props.title - The header title.
  *
  * @returns {React.Element} The rendered table of recent bots.
  */

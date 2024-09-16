@@ -14,6 +14,7 @@ import FormBaseContext from '@/components/forms/formBase/FormBase';
  * @param {boolean} [props.disabled] - Boolean to disable the input.
  * @param {any} [props.defaultValue] - Default value for the input.
  * @param {Function} [props.onChange] - Optional callback function to handle input changes.
+ * @param {Function} [props.onCustomChange] - Optional callback function to handle input additional custom changes.
  *
  * @returns {JSX.Element} - Rendered input component based on the schema, or an empty fragment if no schema is found.
  */
