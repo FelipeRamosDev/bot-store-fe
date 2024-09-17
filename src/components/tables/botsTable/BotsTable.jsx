@@ -42,7 +42,7 @@ export default function BotsTable({ title = 'Bots' }) {
          pagination={{}}
          loading={isLoading}
          onClickRow={(doc) => nav.push(`/dashboard/bots/${doc.index}`)}
-         usePagination={true}
+         useSeeMorePage={true}
          itemsPerPage={parsedLimit}
          onPageNav={goPage}
          onRowsPerPageChange={reloadLimit}

@@ -51,6 +51,9 @@ export const darkTheme = createTheme({
       },
       grey: {
          softMark: '#353535'
+      },
+      rubber: {
+         main: '#2c3232'
       }
    }
 });
