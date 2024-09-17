@@ -1,6 +1,6 @@
 'use client';
 import './TableBase.scss';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,7 +23,8 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
  * @param {boolean} [props.hideHeader=false] - Whether to hide the table header.
  * @param {boolean} [props.loading=true] - Whether the table is in a loading state.
  * @param {Function} [props.onClickRow=()=>{}] - Function to handle the row's click event. It receives the current item as the first argument.
- * @param {Object} [props.pagination] - Pagination settings including options and handlers.
+ * @param {number} [props.itemsPerPage] - The number of items to list per page.
+ * @param {boolean} [props.usePagination] - Set to true if you need the pagination footer.
  * @param {Array} [props.headerConfigs] - Configuration for table headers.
  * @param {React.Component} [props.CustomTableItem] - Custom component for rendering table rows.
  * @param {Array} [props.include] - Optional array of column keys to include.
@@ -39,7 +40,10 @@ export default function TableBase({
    hideHeader = false,
    loading = true,
    onClickRow = () => {},
-   pagination,
+   onPageNav = async () => {},
+   onRowsPerPageChange = async () => {},
+   itemsPerPage = 10,
+   usePagination,
    headerConfigs,
    CustomTableItem,
    include,
@@ -47,20 +51,27 @@ export default function TableBase({
    ...props
 }) {
    const [ page, setPage ] = useState(0);
-   const [ rowsPerPage, setRowsPerPage ] = useState(10);
+   const [ rowsPerPage, setRowsPerPage ] = useState(itemsPerPage);
    const slicedSlots = items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
    const TableItem = CustomTableItem || TableBaseRow;
+   const rowsPerPageCount = useRef();
 
-   const {
-      rowsPerPageOptions = [10, 25, 100],
-      handleChangePage = (event, newPage) => {
-         setPage(newPage);
-      },
-      handleChangeRowsPerPage = (event) => {
-         setRowsPerPage(+event.target.value);
-         setPage(0);
-      }
-   } = Object(pagination);
+   if (!rowsPerPageCount.current) {
+      rowsPerPageCount.current = rowsPerPage;
+   }
+
+   const rowsPerPageOptions = [1,2,3,4,5,6].map((_, index) => rowsPerPageCount.current * (index + 1));
+   const handleChangePage = async (event, newPage) => {
+      await onPageNav(newPage);
+      setPage(newPage);
+   }
+
+   const handleChangeRowsPerPage = async (event) => {
+      const newValue = +event.target.value;
+
+      await onRowsPerPageChange(newValue);
+      setRowsPerPage(newValue);
+   }
 
    if (Array.isArray(include)) {
       headerConfigs = headerConfigs.filter(item => include.some(inc => inc === item.propKey))
@@ -99,7 +110,7 @@ export default function TableBase({
          <NoDocumentsTile noBorder={true} Icon={false} message={`There is no documents to list!`} />
       )}
 
-      {pagination && <TablePagination
+      {usePagination && <TablePagination
          rowsPerPageOptions={rowsPerPageOptions}
          component="div"
          count={items.length}

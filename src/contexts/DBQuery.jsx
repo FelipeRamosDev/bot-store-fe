@@ -18,7 +18,7 @@ export default DBQueryContext;
  * @param {Object} [props.filter] - The filter criteria for the query. Uses the same standards of mongoose filter.
  * @param {number} [props.limit] - The maximum number of results to return.
  * @param {Object} [props.sort] - The sorting criteria for the results. For example: { fieldName: -1 }
- * @param {Object} [props.paginate] - Pagination options for the query.
+ * @param {Object} [props.page] - Pagination options for the query.
  * @param {string} [props.populateMethod] - Method to populate related data.
  * @param {boolean} [props.subscribe=false] - Whether to subscribe to real-time updates.
  * @param {Function} [props.onData=() => {}] - Callback function to handle real-time snapshot updates.
@@ -26,16 +26,83 @@ export default DBQueryContext;
  *
  * @returns {JSX.Element} The context provider component wrapping the children.
  */
-export function DBQuery({ type, collection, filter, limit, sort, paginate, populateMethod, subscribe = false, onData = () => {}, children }) {
+export function DBQuery({ type, collection, filter, limit, sort, page, populateMethod, subscribe = false, onData = () => {}, children }) {
    const instance = useContext(APIContext);
    const [ loading, setLoading ] = useState(true);
    const [ query, setQuery ] = useState();
    const [ doc, setDoc ] = useState();
    const socket = useRef();
    const subscriptionID = useRef();
+   const querySet = useRef();
+   const currentPage = useRef();
 
    if (!type || !collection) {
       throw new Error('Required Params: "type" and "collection" are required!');
+   }
+
+   if (!currentPage.current) {
+      currentPage.current = 1;
+   }
+
+   function handleQueryUpdate(loaded) {
+      setQuery(prev => {
+         const map = new Map();
+         const result = [];
+
+         prev.map(item => {
+            map.set(item._id, item);
+         });
+
+         loaded.map(item => {
+            map.set(item._id, item);
+         });
+
+         map.forEach(item => result.push(item));
+         onData(result);
+         return result;
+      });
+   }
+
+   async function reloadLimit(limit) {
+      try {
+         setLoading(true);
+         const loaded = await querySet.current.reloadLimit(limit);
+
+         if (loaded.error) {
+            throw loaded;
+         }
+
+         handleQueryUpdate(loaded);
+      } catch (err) {
+         throw err;
+      } finally {
+         setLoading(false);
+      }
+   }
+
+   async function goPage(pageNumber) {
+      const newPage = pageNumber + 1;
+
+      if (currentPage.current > newPage) {
+         return;
+      } else {
+         currentPage.current = newPage;
+      }
+
+      try {
+         setLoading(true);
+         const pageLoaded = await querySet.current.goPage(pageNumber + 1);
+
+         if (pageLoaded.error) {
+            throw pageLoaded;
+         }
+
+         handleQueryUpdate(pageLoaded);
+      } catch (err) {
+         throw err;
+      } finally {
+         setLoading(false);
+      }
    }
 
    useEffect(() => {
@@ -43,29 +110,29 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
          return;
       }
 
-      const dbQuery = instance.dbQuery(collection, filter);
+      querySet.current = instance.dbQuery(collection, filter);
 
       if (limit) {
-         dbQuery.limit(limit);
+         querySet.current.limit(limit);
       }
 
       if (sort) {
-         dbQuery.sort(sort);
+         querySet.current.sort(sort);
       }
 
-      if (paginate) {
-         dbQuery.paginate(paginate);
+      if (page) {
+         querySet.current.page(page);
       }
 
       if (populateMethod) {
-         dbQuery.populateMethod(populateMethod);
+         querySet.current.populateMethod(populateMethod);
       }
 
       switch (type) {
          case 'query':
             if (subscribe) {
                if (!socket.current) {
-                  socket.current = dbQuery.subscribeQuery({
+                  socket.current = querySet.current.subscribeQuery({
                      onSubscribe: (id) => {
                         subscriptionID.current = id;
                      },
@@ -81,7 +148,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
                   });
                }
             } else {
-               dbQuery.getQuery().then(query => {
+               querySet.current.getQuery().then(query => {
                   setQuery(query);
                   onData(query);
                }).catch(err => {
@@ -95,7 +162,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
          case 'doc':
             if (subscribe) {
                if (!socket.current) {
-                  socket.current = dbQuery.subscribeDoc({
+                  socket.current = querySet.current.subscribeDoc({
                      onSubscribe: (id) => {
                         subscriptionID.current = id;
                      },
@@ -111,7 +178,7 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
                   });
                }
             } else {
-               dbQuery.getDoc().then(doc => {
+               querySet.current.getDoc().then(doc => {
                   setDoc(doc);
                   onData(doc);
                }).catch(err => {
@@ -123,13 +190,16 @@ export function DBQuery({ type, collection, filter, limit, sort, paginate, popul
 
             break;
       }
-   }, [ instance, type, collection, filter, limit, sort, paginate, populateMethod, query, subscribe, doc, onData ]);
+   }, [ instance, type, collection, filter, limit, sort, page, populateMethod, query, subscribe, doc, onData ]);
 
    return <DBQueryContext.Provider value={{
       socket,
       isLoading: loading,
       doc: doc,
-      query: query || []
+      limit: querySet.current?.options?.limit || limit,
+      query: query || [],
+      goPage,
+      reloadLimit
    }}>
       {children}
    </DBQueryContext.Provider>

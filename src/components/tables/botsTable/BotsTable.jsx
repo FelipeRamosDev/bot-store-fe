@@ -20,10 +20,15 @@ import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
  * @returns {React.Element} The rendered table of recent bots.
  */
 export default function BotsTable({ title = 'Bots' }) {
-   const { query = [], isLoading } = useContext(DBQueryContext);
+   const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const [ createBotModal, setCreateBotModal ] = useState(false);
    const nav = useRouter();
    const bots = query;
+   let parsedLimit = limit;
+
+   if (limit) {
+      parsedLimit = limit -1;
+   }
 
    return <div className="bots-table">
       <ContentHeader
@@ -37,6 +42,10 @@ export default function BotsTable({ title = 'Bots' }) {
          pagination={{}}
          loading={isLoading}
          onClickRow={(doc) => nav.push(`/dashboard/bots/${doc.index}`)}
+         usePagination={true}
+         itemsPerPage={parsedLimit}
+         onPageNav={goPage}
+         onRowsPerPageChange={reloadLimit}
          headerConfigs={[
             {
                label: 'Bot',

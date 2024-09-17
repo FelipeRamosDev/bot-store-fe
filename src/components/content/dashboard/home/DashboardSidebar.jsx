@@ -36,7 +36,12 @@ export default function DashboardSidebar() {
             <UserInstanceTileDash />
          </DBQuery>
 
-         <DBQuery type="query" collection="bots" sort={{ modifiedAt: -1 }}>
+         <DBQuery
+            type="query"
+            collection="bots"
+            sort={{ modifiedAt: -1 }}
+            limit={6}
+         >
             <BotsTable title="My Bots" />
          </DBQuery>
       </>
