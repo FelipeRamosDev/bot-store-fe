@@ -15,6 +15,7 @@ import PositionQuickview from '@/components/modals/quickviews/positionQuickview/
  *
  * @param {Object} props - The properties for the PositionsTable component.
  * @param {Array} props.positionsSet - An optional array of positions to display. If not provided, data from the context will be used.
+ * @param {number} [props.itemsPerPage] - The number of items to list per page.
  * @param {Array} [props.include] - Optional array of property keys to include in the table.
  * @param {Array} [props.exclude] - Optional array of property keys to exclude from the table.
  *
@@ -22,21 +23,29 @@ import PositionQuickview from '@/components/modals/quickviews/positionQuickview/
  */
 export default function PositionsTable({ positionsSet, include, exclude }) {
    const [ positionModal, setPositionModal ] = useState('');
-   const { query = [], isLoading } = useContext(DBQueryContext);
+   const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const positions = positionsSet || query;
    const selectedPosition = positions.find(item => item._id === positionModal);
+   let parsedLimit = limit;
+
+   if (limit) {
+      parsedLimit = limit -1;
+   }
 
    return <>
       <PositionQuickview position={selectedPosition} onClose={() => setPositionModal('')} />
 
       <TableBase
          className="positions-table"
-         pagination={{}}
          items={positions}
          loading={isLoading}
          include={include}
          exclude={exclude}
          onClickRow={(doc) => setPositionModal(doc?._id)}
+         usePagination={true}
+         itemsPerPage={parsedLimit}
+         onPageNav={goPage}
+         onRowsPerPageChange={reloadLimit}
          headerConfigs={[
             {
                propKey: 'symbol',

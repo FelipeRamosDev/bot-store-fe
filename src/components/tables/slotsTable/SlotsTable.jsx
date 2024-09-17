@@ -16,10 +16,15 @@ import SlotQuickview from '@/components/modals/quickviews/SlotQuickview/SlotQuic
  * @returns {React.Element} The rendered table component with slot data.
  */
 export default function SlotsTable() {
-   const { query = [], isLoading } = useContext(DBQueryContext);
+   const { query = [], isLoading, limit, reloadLimit, goPage } = useContext(DBQueryContext);
    const slots = query;
    const [ slotModal, setSlotModal ] = useState('');
    const selectedSlot = slots.find(item => item._id === slotModal);
+   let parsedLimit = limit;
+
+   if (limit) {
+      parsedLimit = limit -1;
+   }
 
    return <>
       <SlotQuickview slot={selectedSlot} onClose={() => setSlotModal('')} />
@@ -29,6 +34,10 @@ export default function SlotsTable() {
          items={slots}
          loading={isLoading}
          onClickRow={(doc) => setSlotModal(doc?._id)}
+         usePagination={true}
+         itemsPerPage={parsedLimit}
+         onPageNav={goPage}
+         onRowsPerPageChange={reloadLimit}
          headerConfigs={[
             {
                label: 'Symbol / Master', format: (__, item) => {

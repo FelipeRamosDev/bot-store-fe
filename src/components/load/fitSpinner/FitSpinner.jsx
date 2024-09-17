@@ -23,8 +23,8 @@ import Spinner from '@/components/load/spinner/Spinner';
  *
  * @returns {JSX.Element} A spinner component with optional message and background customization.
  */
-export default function FitSpinner({ spinner, noBackground = false }) {
-   const style = {};
+export default function FitSpinner({ spinner, noBackground = false, style }) {
+   const sx = { ...style };
    let message;
 
    if (typeof spinner === 'string') {
@@ -32,11 +32,11 @@ export default function FitSpinner({ spinner, noBackground = false }) {
    }
 
    if (noBackground) {
-      style.background = 'none';
-      style.backgroundColor = 'none';
+      sx.background = 'none';
+      sx.backgroundColor = 'none';
    }
 
-   return <div className="fit-spinner" style={style}>
+   return <div className="fit-spinner" style={sx}>
       <Spinner color="tertiary-dark" message={message} />
    </div>;
 }
