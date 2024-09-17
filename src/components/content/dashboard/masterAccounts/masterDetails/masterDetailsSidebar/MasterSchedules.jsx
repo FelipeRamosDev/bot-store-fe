@@ -24,7 +24,7 @@ export default function MasterSchedules({ master = {} }) {
          <CalendarMonth className="icon" /> <h3 className="card-title">Master Schedules</h3>
       </ContentHeader>
 
-      <DBQuery type="query" collection="schedules" filter={{ master: master._id }} subscribe={true}>
+      <DBQuery type="query" collection="schedules" filter={{ master: master._id }}>
          <ScheduleEditor masterUID={master._id} editorState={editorState} setEditorState={setEditorState} />
       </DBQuery>
    </Card>

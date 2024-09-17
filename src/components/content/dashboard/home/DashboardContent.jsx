@@ -49,7 +49,6 @@ export default function DashboardContent({ createMasterModal }) {
                filter={{ user: user._id }}
                sort={{ pnl: -1 }}
                limit={20}
-               subscribe={true}
             >
                <SlotsTable />
             </DBQuery>
@@ -64,7 +63,6 @@ export default function DashboardContent({ createMasterModal }) {
                filter={{ user: user._id }}
                sort={{ modifiedAt: -1 }}
                limit={20}
-               subscribe={true}
             >
                <PositionsTable include={['symbol', 'type', 'usedLeverage', 'pnl']} />
             </DBQuery>
