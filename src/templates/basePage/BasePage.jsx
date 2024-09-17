@@ -1,3 +1,4 @@
+import React from 'react';
 import MainFooter from '@/components/footers/mainFooter/MainFooter';
 import './BasePage.scss';
 import TopHeader from '@/components/headers/topHeader/TopHeader';
@@ -16,7 +17,7 @@ import TopHeader from '@/components/headers/topHeader/TopHeader';
  */
 export default function BasePage({ className = '', fullContainer, headerMenu, children }) {
    return (
-      <>
+      <main>
          <TopHeader fullContainer={fullContainer} type={headerMenu} />
 
          <div className={`page ${className}`}>
@@ -24,6 +25,6 @@ export default function BasePage({ className = '', fullContainer, headerMenu, ch
          </div>
 
          <MainFooter className="absolute-bottom" />
-      </>
+      </main>
    );
 }
