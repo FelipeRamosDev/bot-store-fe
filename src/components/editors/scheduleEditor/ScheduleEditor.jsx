@@ -5,6 +5,7 @@ import TopBorderButton from '@/components/buttons/topBorderButton/TopBorderButto
 import CreateScheduleForm from '@/components/forms/createScheduleForm/CreateScheduleForm';
 import DBQueryContext from '@/contexts/DBQuery';
 import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile';
+import { useRouter } from 'next/navigation';
 
 /**
  * `ScheduleEditor` component for displaying, editing, and creating schedules.
@@ -17,6 +18,7 @@ import NoDocumentsTile from '@/components/tiles/noDocumentsTile/NoDocumentsTile'
  * @returns {JSX.Element} - Rendered component.
  */
 export default function ScheduleEditor({ masterUID, editorState, setEditorState }) {
+   const router = useRouter();
    const { query = [] } = useContext(DBQueryContext);
    const goalsSchedule = query.find(item => item.type === 'goals' && item.isActive);
    const runtimeSchedules = query.filter(item => item._id !== goalsSchedule?._id);
@@ -45,7 +47,7 @@ export default function ScheduleEditor({ masterUID, editorState, setEditorState 
 
    if (editorState === 'create') {
       return <div className="schedules-editor">
-         <CreateScheduleForm masterUID={masterUID} onSuccess={() => setEditorState('display') } />
+         <CreateScheduleForm masterUID={masterUID} onSuccess={() => router.refresh() } />
       </div>
    }
 
