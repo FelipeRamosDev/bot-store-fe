@@ -16,6 +16,7 @@ import MasterSchedules from './MasterSchedules';
 export default function MasterDetailsSidebar({ setUInstance }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const userInstanceUID = doc?.user?.userInstance;
+   const userUID = doc?.user?._id;
 
    if (isLoading) {
       return <></>;
@@ -23,19 +24,29 @@ export default function MasterDetailsSidebar({ setUInstance }) {
 
    return (
       <>
-         <DBQuery 
-            type="doc" 
-            collection="user_instances" 
-            filter={userInstanceUID} 
-            subscribe={true} 
+         <DBQuery
+            type="doc"
+            collection="user_instances"
+            filter={userInstanceUID}
+            subscribe={true}
             onData={(data) => setUInstance(data)}
          >
             <UserInstanceMaster />
-         </DBQuery>  
-         
+         </DBQuery>
+
          <AccountSettings account={doc} />
          <MasterSchedules master={doc} />
-         <MoreMasterAccounts master={doc} />
+
+         <DBQuery
+            type="query"
+            collection="master_accounts"
+            filter={{
+               user: userUID,
+               $nor: [{ _id: doc._id }]
+            }}
+         >
+            <MoreMasterAccounts />
+         </DBQuery>
       </>
    );
 }

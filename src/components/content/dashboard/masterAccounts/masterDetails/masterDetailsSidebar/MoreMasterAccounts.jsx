@@ -1,4 +1,5 @@
-import { DBQuery } from '@/contexts/DBQuery';
+import { useContext } from 'react';
+import DBQueryContext from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import MastersGrid from '@/components/grids/mastersGrid/MastersGrid';
 
@@ -12,8 +13,12 @@ import MastersGrid from '@/components/grids/mastersGrid/MastersGrid';
  * @param {string} props.master.user._id - The unique identifier of the user.
  * @returns {JSX.Element} The rendered component.
  */
-export default function MoreMasterAccounts({ master = {} }) {
-   const userUID = master?.user?._id;
+export default function MoreMasterAccounts() {
+   const { query = [] } = useContext(DBQueryContext);
+
+   if (!query.length) {
+      return <></>;
+   }
 
    return (
       <div className="master-accounts">
@@ -21,16 +26,7 @@ export default function MoreMasterAccounts({ master = {} }) {
             <h3 className="header-title">Master Accounts</h3>
          </ContentHeader>
 
-         <DBQuery
-            type="query"
-            collection="master_accounts"
-            filter={{
-               user: userUID,
-               $nor: [{ _id: master._id }]
-            }}
-         >
-            <MastersGrid verticalAlign={true} />
-         </DBQuery>
+         <MastersGrid verticalAlign={true} />
       </div>
    );
 }
