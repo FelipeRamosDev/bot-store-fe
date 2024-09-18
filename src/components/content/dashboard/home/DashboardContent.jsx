@@ -50,7 +50,7 @@ export default function DashboardContent({ createMasterModal }) {
                sort={{ pnl: -1 }}
                limit={6}
             >
-               <SlotsTable />
+               <SlotsTable exclude={['pnl']} />
             </DBQuery>
          </div>
 
