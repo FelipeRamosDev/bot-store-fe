@@ -22,7 +22,10 @@ export default function Price({
    dashedZero = false,
    fractional,
    amount,
-   size
+   size,
+   fontSize,
+   prefix,
+   posfix
 }) {
    // Handle dashed zero display
    if (dashedZero && !amount) {
@@ -51,6 +54,7 @@ export default function Price({
    return <span
       color={color}
       display-size={size}
+      style={{ fontSize }}
       className={`price-display ${className}`}
-   >{value}</span>;
+   >{prefix || ''}{value}{posfix || ''}</span>;
 }

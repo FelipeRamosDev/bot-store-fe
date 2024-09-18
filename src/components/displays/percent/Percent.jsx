@@ -17,7 +17,10 @@ export default function Percent({
    dashedZero = false,
    fractional = 2,
    value,
-   size
+   size,
+   fontSize,
+   prefix,
+   posfix
 }) {
    // Handle dashed zero case
    if (dashedZero && value === 0) {
@@ -37,7 +40,8 @@ export default function Percent({
    return <span
       color={color}
       display-size={size}
+      style={{ fontSize }}
       className={`percent-display ${className}`}
-   >{percent}</span>;
+   >{prefix || ''}{percent}{posfix || ''}</span>;
 
 }
