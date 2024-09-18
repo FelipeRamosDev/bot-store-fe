@@ -25,7 +25,7 @@ export default function MasterSchedules({ master = {} }) {
       </ContentHeader>
 
       <DBQuery type="query" collection="schedules" filter={{ master: master._id }}>
-         <ScheduleEditor masterUID={master._id} editorState={editorState} setEditorState={setEditorState} />
+         <ScheduleEditor master={master} masterUID={master._id} editorState={editorState} setEditorState={setEditorState} />
       </DBQuery>
    </Card>
 }

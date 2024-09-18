@@ -17,15 +17,15 @@ import { useRouter } from 'next/navigation';
  *
  * @returns {JSX.Element} - Rendered component.
  */
-export default function ScheduleEditor({ masterUID, editorState, setEditorState }) {
+export default function ScheduleEditor({ master, masterUID, editorState, setEditorState }) {
    const router = useRouter();
    const { query = [] } = useContext(DBQueryContext);
-   const goalsSchedule = query.find(item => item.type === 'goals' && item.isActive);
+   const goalsSchedule = master.goalSchedule;
    const runtimeSchedules = query.filter(item => item._id !== goalsSchedule?._id);
 
    if (editorState === 'display') {
       return <div className="schedules-editor">
-         {runtimeSchedules.map((doc) => <ScheduleTile key={Math.random()} schedule={doc} />)}
+         {runtimeSchedules.map((doc) => doc?.type === 'runtime' && <ScheduleTile key={Math.random()} schedule={doc} />)}
          {goalsSchedule && <ScheduleTile schedule={goalsSchedule} setView={setEditorState} />}
 
          {!query.length && <NoDocumentsTile Icon={false} message="There is any schedules created yet!" noBorder={true} />}
