@@ -59,6 +59,7 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
          collection="positions"
          filter={{ status: 'closed', master: masterUID }}
          sort={{ closeTime: -1 }}
+         limit={11}
       >
          <div className="closed-positions">
             <ContentHeader>
