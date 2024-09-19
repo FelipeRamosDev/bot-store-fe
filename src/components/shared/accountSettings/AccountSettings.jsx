@@ -33,7 +33,22 @@ export default function AccountSettings({ account }) {
       return <></>;
    }
 
-   const { limits: { tradesMinInterval, marginRatioCommit, tradeLoss, tradeGain, dailyLoss, dailyGain, monthlyLoss, monthlyGain } } = account;
+   const {
+      createdAt,
+      modifiedAt,
+      cod,
+      limits: {
+         tradesMinInterval,
+         marginRatioCommit,
+         tradeLoss,
+         tradeGain,
+         dailyLoss,
+         dailyGain,
+         monthlyLoss,
+         monthlyGain
+      }
+   } = account;
+
    const displayTrade = (tradeLoss.money || tradeGain.money || tradeLoss.percent || tradeGain.percent);
    const displayDay = (dailyLoss.money || dailyGain.money || dailyLoss.percent || dailyGain.percent);
    const displayMonth = (monthlyLoss.money || monthlyGain.money || monthlyLoss.percent || monthlyGain.percent);
@@ -57,6 +72,9 @@ export default function AccountSettings({ account }) {
          <Settings className="icon" /> <h3 className="card-title">Settings</h3>
       </ContentHeader>
 
+      <SettingRow label="Account ID" value={cod} />
+      <SettingRow label="Created At" value={new Date(createdAt)?.toLocaleString()} />
+      <SettingRow label="Modified At" value={new Date(modifiedAt)?.toLocaleString()} />
       <SettingRow label="Min Trades Interval" value={`${tradesMinInterval} min.`} />
       <SettingRow label="Margin Ratio" value={`${marginRatioCommit}%`} />
 
