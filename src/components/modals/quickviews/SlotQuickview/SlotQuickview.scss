@@ -15,8 +15,8 @@
       }
    }
 
-   .candlestick-chart {
-      margin: 1.5rem 0 0 0;
+   .candlestick-chart:not(.expanded) {
+      margin: 1.5rem 0;
       height: 450px;
    }
 
@@ -30,9 +30,5 @@
 
    .positions-table {
       margin-bottom: 3rem;
-   }
-
-   .candlestick-chart {
-      margin-bottom: 1.5rem;
    }
 }
