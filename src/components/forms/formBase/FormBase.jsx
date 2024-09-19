@@ -81,8 +81,6 @@ export function FormBase({
       }
    }, [ form, onReady ]);
 
-   useEffect(() => () => form?.clearAll(), [form]);
-
    /**
     * Handle form submission, including validation and error handling.
     * @param {Event} ev - The submit event.
@@ -99,7 +97,12 @@ export function FormBase({
       try {
          setLoading(true);
 
-         return await onSubmit.call(form, form.toObject());
+         const submitValidation = await onSubmit.call(form, form.toObject());
+         if (submitValidation?.hasError) {
+            return;
+         }
+
+         return form?.clearAll();
       } catch (error) {
          const serverValidationErrors = parseValidationErrorMsg(error);
 
