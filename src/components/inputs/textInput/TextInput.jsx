@@ -21,7 +21,7 @@ export default function TextInput({ schema, errors = [], fullWidth = true, ...pr
    }
 
    return (
-      <FormControl fullWidth={fullWidth} error={errors.length} sx={style} {...props}>
+      <FormControl className="form-input" fullWidth={fullWidth} error={errors.length} sx={style}>
          <TextField
             type={inputType}
             label={label}
