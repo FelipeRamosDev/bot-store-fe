@@ -176,7 +176,7 @@ export default function CandlestickChartBase({ candles, interval, position, clas
          <RoundIconButton
             className="expand-button"
             Icon={!expandState ? OpenInFull : CloseFullscreen}
-            size="small"
+            size={!expandState ? 'small' : 'medium'}
             variant="contained"
             color="rubber"
             onClick={expandCollapse}
