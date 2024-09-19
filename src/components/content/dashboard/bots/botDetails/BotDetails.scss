@@ -36,15 +36,24 @@
          .avatar {
             $side: $height * 1.1;
 
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: $side;
             height: $side;
             border-radius: $side;
-            background-color: $white;
+            background-color: $background;
+            box-shadow: $shadow-5;
             transform: translateY(($side * 0.5) * -1);
 
             @media screen and (max-width: $screen-m) {
                margin: 0 auto;
                margin-top: -calc($height / 2);
+            }
+
+            .robot-icon {
+               font-size: calc($side / 1.5);
+               color: $tertiary-light;
             }
          }
 

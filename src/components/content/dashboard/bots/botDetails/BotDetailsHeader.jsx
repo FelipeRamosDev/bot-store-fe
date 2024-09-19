@@ -7,6 +7,7 @@ import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import APIContext from '@/contexts/4HandsAPI';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
 import { handleStatusChange } from './BotDetails.helper';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import configs from '@/config.json';
 
 /**
@@ -24,7 +25,9 @@ export default function BotDetailsHeader() {
 
       <div className="bot-info">
          <div className="full-container">
-            <div className="avatar"></div>
+            <div className="avatar">
+               <SmartToyIcon className="robot-icon" />
+            </div>
 
             <div className="summary">
                <h1 className="title">{doc.name}</h1>
