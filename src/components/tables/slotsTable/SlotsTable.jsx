@@ -26,6 +26,12 @@ export default function SlotsTable({ include, exclude }) {
    const selectedSlot = slots.find(item => item._id === slotModal);
    let parsedLimit = limit;
 
+   const PERCENT_OPTIONS = {
+      prefix: '(',
+      posfix: ')',
+      fontSize: '0.8rem'
+   }
+
    if (limit) {
       parsedLimit = limit -1;
    }
@@ -58,7 +64,7 @@ export default function SlotsTable({ include, exclude }) {
 
                      <p>{item.name}</p>
                      <small>{item.master?.name}</small>{' '}
-                     <StatusBadge type="account-type" variant="light">{item.type}</StatusBadge>
+                     <StatusBadge type="account-type" variant="light" minified={true}>{item.type}</StatusBadge>
                   </>);
                }
             },
@@ -75,7 +81,7 @@ export default function SlotsTable({ include, exclude }) {
                align: 'center',
                format: (__, item) => {
                   return (<>
-                     <Price amount={item.results.dayPnl} /> <Percent prefix="(" posfix=")" fontSize="0.8rem" value={item.results.dayRoi} size="s" />
+                     <Price amount={item.results.dayPnl} /> <Percent {...PERCENT_OPTIONS} value={item.results.dayRoi} size="s" />
                   </>);
                }
             },
@@ -84,7 +90,7 @@ export default function SlotsTable({ include, exclude }) {
                align: 'center',
                format: (__, item) => {
                   return (<>
-                     <Price amount={item.results.monthPnl} /> <Percent prefix="(" posfix=")" fontSize="0.8rem" value={item.results.monthRoi} size="s" />
+                     <Price amount={item.results.monthPnl} /> <Percent {...PERCENT_OPTIONS} value={item.results.monthRoi} size="s" />
                   </>);
                }
             },

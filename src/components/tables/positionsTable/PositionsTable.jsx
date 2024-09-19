@@ -28,6 +28,12 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
    const selectedPosition = positions.find(item => item._id === positionModal);
    let parsedLimit = limit;
 
+   const PERCENT_OPTIONS = {
+      prefix: '(',
+      posfix: ')',
+      fontSize: '0.8rem'
+   }
+
    if (limit) {
       parsedLimit = limit -1;
    }
@@ -52,15 +58,74 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                label: 'Symbol',
                style: {
                   paddingLeft: '2rem',
-                  minWidth: '130px',
+                  minWidth: '200px',
                },
                format: (value, item) => {
                   return <>
                      <EdgeLight colorValue={item.pnl} />
 
-                     <small>{item.botSlot?.name}</small>
-                     <p>{value} <StatusBadge variant="light" type="position-side">{item.positionType}</StatusBadge></p>
+                     <small>{item.botSlot?.name} / {item.master?.name}</small>
+                     <p style={{ marginTop: 3 }}>
+                        {value}{' '}
+                        <StatusBadge variant="light" type="account-type" minified={true}>{item.type}</StatusBadge>{' '}
+                        <StatusBadge variant="light" type="position-side" minified={true}>{item.positionType}</StatusBadge>
+                     </p>
                   </>;
+               }
+            },
+            {
+               propKey: 'realizedProfit',
+               label: 'Realized',
+               align: 'center',
+               style: {
+                  minWidth: '140px',
+               },
+               format: (value, item) => {
+                  return <Price amount={value} fontSize="1rem" />
+               }
+            },
+            {
+               label: 'Leverage',
+               propKey: 'usedLeverage',
+               align: 'center',
+               style: {
+                  minWidth: '70px',
+               },
+               format: (value) => {
+                  return <b style={{ fontSize: '1rem' }}>{value}x</b>
+               }
+            },
+            {
+               label: 'Notional',
+               propKey: 'grossBalance',
+               align: 'center',
+               style: {
+                  minWidth: '110px',
+               },
+               format: (value) => {
+                  return <Price amount={value} noColor={true} />
+               }
+            },
+            {
+               label: 'Commission',
+               propKey: 'tradeFee',
+               align: 'center',
+               style: {
+                  minWidth: '110px',
+               },
+               format: (value) => {
+                  return <Price amount={value} noColor={true} />
+               }
+            },
+            {
+               label: 'Quantity',
+               propKey: 'quantity',
+               align: 'center',
+               style: {
+                  minWidth: '70px',
+               },
+               format: (value) => {
+                  return <b style={{ fontSize: '1rem' }}>{value}</b>
                }
             },
             {
@@ -78,39 +143,6 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                }
             },
             {
-               label: 'Type',
-               propKey: 'type',
-               align: 'center',
-               style: {
-                  minWidth: '40px',
-               },
-               format: (value) => {
-                  return <StatusBadge variant="light" type="account-type">{value}</StatusBadge>;
-               }
-            },
-            {
-               label: 'Leverage',
-               propKey: 'usedLeverage',
-               align: 'center',
-               style: {
-                  minWidth: '70px',
-               },
-               format: (value) => {
-                  return <b>{value}x</b>
-               }
-            },
-            {
-               label: 'Quantity',
-               propKey: 'quantity',
-               align: 'center',
-               style: {
-                  minWidth: '70px',
-               },
-               format: (value) => {
-                  return <b>{value}</b>
-               }
-            },
-            {
                propKey: 'pnl',
                label: 'PNL / ROI',
                align: 'center',
@@ -119,41 +151,8 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                },
                format: (value, item) => {
                   return <>
-                     <Price amount={value} size="s" /> <Percent value={item.roi} />
+                     <Price amount={value} size="s" /> <Percent {...PERCENT_OPTIONS} value={item.roi} />
                   </>
-               }
-            },
-            {
-               propKey: 'realizedProfit',
-               label: 'Realized PNL',
-               align: 'center',
-               style: {
-                  minWidth: '140px',
-               },
-               format: (value, item) => {
-                  return <Price amount={value} size="m" />
-               }
-            },
-            {
-               label: 'Commission',
-               propKey: 'tradeFee',
-               align: 'center',
-               style: {
-                  minWidth: '110px',
-               },
-               format: (value) => {
-                  return <Price amount={value} noColor={true} />
-               }
-            },
-            {
-               label: 'Notional',
-               propKey: 'grossBalance',
-               align: 'center',
-               style: {
-                  minWidth: '110px',
-               },
-               format: (value) => {
-                  return <Price amount={value} noColor={true} />
                }
             },
             {
