@@ -27,9 +27,18 @@ import PriceCard from '@/components/common/priceCard/PriceCard';
  *    <div>Your content here</div>
  * </WatermarkPriceCard>
  */
-export default function WatermarkPriceCard({ className = '', watermark, watermarkSize = 28, borderSide = 'left', paddingSize = 14, children, ...props }) {
+export default function WatermarkPriceCard({
+   className = '',
+   watermark,
+   absoluteHeader,
+   watermarkSize = 28,
+   borderSide = 'left',
+   paddingSize = 14,
+   children,
+   ...props
+}) {
    const [ waterMarkStyle, setWaterMarkStyle ] = useState({ fontSize: watermarkSize });
-   const [ cardStyle, setCardStyle ] = useState({});
+   const [ cardStyle, setCardStyle ] = useState({ paddingTop: absoluteHeader });
    const waterMark = useRef();
 
    useEffect(() => {

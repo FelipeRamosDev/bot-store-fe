@@ -50,6 +50,7 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
          padding="xs"
          borderSide="bottom"
          watermarkSize={window.innerWidth < configs.breakpoints.s ? 18 : 23}
+         absoluteHeader="3.4rem"
          elevation={10}
          {...props}
       >
