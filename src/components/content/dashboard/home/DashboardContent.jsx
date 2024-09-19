@@ -64,7 +64,7 @@ export default function DashboardContent({ createMasterModal }) {
                sort={{ modifiedAt: -1 }}
                limit={6}
             >
-               <PositionsTable include={['symbol', 'type', 'usedLeverage', 'pnl']} />
+               <PositionsTable include={['symbol', 'usedLeverage', 'realizedProfit', 'openTime' ]} />
             </DBQuery>
          </div>
       </div>
