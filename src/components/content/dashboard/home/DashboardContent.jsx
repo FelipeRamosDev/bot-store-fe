@@ -6,6 +6,8 @@ import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import { DBQuery } from '@/contexts/DBQuery';
 import { useContext } from 'react';
 import AuthUserContext from "@/contexts/AuthUser";
+import { DataArray, Money } from '@mui/icons-material';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 
 /**
  * DashboardContent component displays the main content for the dashboard.
@@ -41,7 +43,9 @@ export default function DashboardContent({ createMasterModal }) {
       {/* Slots and Positions Tables */}
       <div className="slots-positions">
          <div className="column">
-            <h2 className="card-title">Slots</h2>
+         <ContentHeader>
+               <DataArray /> <h2 className="card-title">Slots</h2>
+            </ContentHeader>
 
             <DBQuery
                type="query"
@@ -55,7 +59,9 @@ export default function DashboardContent({ createMasterModal }) {
          </div>
 
          <div className="column">
-            <h2 className="card-title">Positions</h2>
+            <ContentHeader>
+               <Money /> <h2 className="card-title">Positions</h2>
+            </ContentHeader>
 
             <DBQuery
                type="query"

@@ -34,6 +34,9 @@ export function AuthUserProvider({ children }) {
 
       instance.auth.checkUser().then(authData => {
          if (authData.isLogged) {
+            const userLetters = authData?.user?.fullName.split(' ').map(word => word[0]?.toUpperCase() || '').join('');
+
+            window.localStorage.setItem('userLetters', userLetters);
             setUserAuth(authData);
          } else {
             router.push('/dashboard/login');
