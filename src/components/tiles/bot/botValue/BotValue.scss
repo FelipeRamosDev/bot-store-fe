@@ -1,7 +1,9 @@
 @import "../../../../style/scss/variables.scss";
 
 .bot-value {
-   padding: 0.8rem;
+   $valuePadding: 0.8rem;
+
+   padding: $valuePadding;
    border-radius: $radius-s;
    background-color: $background-grey2;
    min-width: 100px;
@@ -23,6 +25,22 @@
       justify-content: center;
       align-items: center;
       position: relative;
+
+      &.single {
+         margin-bottom: 5px;
+
+         .value-name,
+         span {
+            transform: translateY(5px);
+         }
+      }
+   }
+
+   &.primitive:not(.single) {
+      .menu-wrap {
+         right: calc($valuePadding / 1.8);
+         top: calc($valuePadding / 1.5);
+      }
    }
 
    &:not(.primitive) {
