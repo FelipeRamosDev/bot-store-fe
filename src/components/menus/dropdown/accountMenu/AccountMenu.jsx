@@ -74,7 +74,7 @@ export default function AccountMenu({ setSpinner = () => {} }) {
 
             <MenuItem onClick={signOut}>
                <ListItemIcon>
-                  <Logout />
+                  <Logout color="error" />
                </ListItemIcon>
                Signout
             </MenuItem>
