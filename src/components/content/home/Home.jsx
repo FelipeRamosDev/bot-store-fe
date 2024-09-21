@@ -1,9 +1,8 @@
 import './Home.scss';
-import Image from 'next/image';
-import SlotTileImage from '@/assets/slot_tile.svg';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
+import SlotTilesImg from './img/SlotTilesImg';
 
 export default function HomeContent() {
    return (<>
@@ -16,15 +15,18 @@ export default function HomeContent() {
 
                <ContentSplit className="content">
                   <div className="column image-spot">
-                     <Image className="image" src={SlotTileImage} alt="Slot Tile" />
+                     <SlotTilesImg />
                   </div>
 
                   <div className="column marketing-cta right">
-                     <span className="message line1">Let the <span className="grad-txt">MACHINE TRADE</span></span>
-                     <span className="message line2">Choose a <span className="grad-txt">BOT to START</span></span>
+                     <span className="message line1">Create slots to <span className="grad-txt">CONTROL BOTS</span></span>
+                     <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to START</span>
 
-                     <p className="description">Go to the store session to check the bot available to use, use the rank to take the winner and always follow the bot developer recommendations.</p>
-                     <CTAButton className="d-large" size="medium">Go to Store</CTAButton>
+                     <p className="description">
+                        Control the bots you are using into slots to have better visibility of the current trade state, the stoploss and takeprofit.
+                     </p>
+
+                     <CTAButton className="d-large" size="medium">Let&apos;s Start</CTAButton>
                   </div>
                </ContentSplit>
             </div>
