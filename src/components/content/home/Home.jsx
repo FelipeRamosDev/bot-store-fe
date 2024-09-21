@@ -8,6 +8,7 @@ import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
 export default function HomeContent() {
    return (<>
       <HomeTopBanner />
+
       <div className="home-content">
          <section className="features">
             <div className="container">
@@ -23,7 +24,7 @@ export default function HomeContent() {
                      <span className="message line2">Choose a <span className="grad-txt">BOT to START</span></span>
 
                      <p className="description">Go to the store session to check the bot available to use, use the rank to take the winner and always follow the bot developer recommendations.</p>
-                     <CTAButton size="medium">Go to Store</CTAButton>
+                     <CTAButton className="d-large" size="medium">Go to Store</CTAButton>
                   </div>
                </ContentSplit>
             </div>

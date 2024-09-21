@@ -1,0 +1,30 @@
+@import "../../../../style/scss/variables.scss";
+
+.drawer-menu {
+   &.fit-content {
+      .MuiBackdrop-root {
+         background-color: transparent;
+      }
+
+      .MuiDrawer-paper {
+         height: auto;
+         margin-top: 4.1rem;
+         border-bottom-left-radius: $radius-m;
+      }
+   }
+
+   .cta-button.menu-cta {
+      border-radius: 0;
+      justify-content: left;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+
+      .MuiSvgIcon-root {
+         margin-right: 35px;
+      }
+   }
+
+   .MuiList-root {
+      padding-bottom: 0;
+   }
+}

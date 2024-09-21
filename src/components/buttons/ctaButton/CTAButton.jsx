@@ -11,10 +11,10 @@ import { Button } from "@mui/material";
  *
  * @returns {JSX.Element} The rendered `CTAButton` component.
  */
-export default function CTAButton({ children, ...props }) {
+export default function CTAButton({ className = '', children, ...props }) {
    return (
       <Button
-         className="cta-button"
+         className={`cta-button ${className}`}
          variant="contained"
          color="tertiary"
          {...props}
