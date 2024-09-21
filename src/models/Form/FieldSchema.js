@@ -217,6 +217,8 @@ export default class FieldSchema {
             }
          case Date:
             return new Date(currentValue).getTime();
+         case Boolean:
+            return Boolean(currentValue);
       }
    }
 
