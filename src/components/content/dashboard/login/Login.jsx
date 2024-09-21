@@ -26,8 +26,7 @@ export default function Login({ isRegister }) {
       elevation: 60
    };
    const iconOpt = {
-      fontSize: 'large',
-      // sx: { transform: 'translateY(1px)'}
+      fontSize: 'large'
    }
 
    const handleLogin = (data) => login(data, API, router);
