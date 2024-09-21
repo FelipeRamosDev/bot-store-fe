@@ -1,0 +1,47 @@
+@import "../../../style/scss/variables.scss";
+
+.top-header {
+   nav {
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2rem;
+
+      &.desktop-menu {
+         display: none;
+
+         @media screen and (min-width: $screen-m) {
+            display: flex;
+         }
+      }
+
+      &.mobile-menu {
+         @media screen and (min-width: $screen-m) {
+            display: none;
+         }
+      }
+
+      a {
+         font-size: 1.05rem;
+      }
+
+      a,
+      a:visited {
+         color: $text;
+         text-decoration: none;
+         transition: color 150ms;
+      }
+
+      a:hover {
+         color: $tertiary-light;
+      }
+   }
+
+   .menu-button {
+      min-width: auto;
+      padding: 0.6rem;
+
+      @media screen and (min-width: $screen-m) {
+         display: none;
+      }
+   }
+}

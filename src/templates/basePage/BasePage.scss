@@ -23,31 +23,6 @@ header {
          height: 35px;
       }
    }
-
-   nav {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 2rem;
-
-      @media screen and (max-width: $screen-m) {
-         display: none;
-      }
-
-      a {
-         font-size: 1.05rem;
-      }
-
-      a, a:visited {
-         color: $text;
-         text-decoration: none;
-         transition: color 150ms;
-      }
-
-      a:hover {
-         color: $tertiary-light;
-      }
-   }
 }
 
 .page {
