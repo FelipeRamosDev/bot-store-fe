@@ -9,7 +9,11 @@
          display: flex;
          justify-content: space-between;
          align-items: center;
-         padding: 10rem 0;
+         padding: 0 0 1rem 0;
+
+         @media screen and (min-width: $screen-m) {
+            padding: 10rem 0;
+         }
 
          .column {
             flex: 1;
@@ -19,14 +23,87 @@
       .image-spot {
          display: flex;
          align-items: center;
+         justify-content: center;
 
          &.right {
             justify-content: right;
+         }
+
+         .image {
+            width: 85%;
          }
       }
    }
 
    .title {
       text-align: center;
+      font-size: 1.4rem;
+
+      @media screen and (min-width: $screen-m) {
+         font-size: 2rem;
+      }
+   }
+}
+
+.marketing-cta {
+   text-align: center;
+   
+   .message {
+      text-align: center;
+   }
+
+   @media screen and (min-width: $screen-m) {   
+      &.left {
+         text-align: left;
+   
+         .message {
+            text-align: left;
+         }
+      }
+
+      &.right {
+         text-align: right;
+   
+         .message {
+            text-align: right;
+         }
+      }
+   }
+
+   .message {
+      display: inline-block;
+      width: 100%;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 0;
+
+      @media screen and (min-width: $screen-m) {
+         font-size: 3.1rem;
+      }
+
+      &.line1 {
+         font-size: 1.4rem;
+         line-height: 1.4em;
+         
+         @media screen and (min-width: $screen-m) {
+            font-size: 2.8rem;
+         }
+      }
+   }
+
+   .description {
+      margin-top: 1rem;
+      font-size: 0.97rem;
+      
+      @media screen and (min-width: $screen-m) {
+         font-size: 1.2rem;
+      }
+   }
+}
+
+.MuiButtonBase-root {
+   @media screen and (min-width: $screen-m) {
+      padding: 8px 22px;
+      font-size: 0.9375rem;
    }
 }

@@ -1,35 +1,3 @@
-.marketing-cta {
-   &.right {
-      text-align: right;
-
-      .message {
-         text-align: right;
-      }
-   }
-
-   .message {
-      display: inline-block;
-      width: 100%;
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0;
-
-      &.line1 {
-         font-size: 2.1rem;
-         line-height: 1.3em;
-      }
-   }
-
-   .description {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-   }
-
-   .cta-button {
-      margin-top: 2rem;
-   }
-}
-
 .price-display,
 .percent-display {
    font-size: 1rem;

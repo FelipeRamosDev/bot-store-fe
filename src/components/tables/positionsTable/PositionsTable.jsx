@@ -64,7 +64,7 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                   return <>
                      <EdgeLight colorValue={item.pnl} />
 
-                     <small>{item.botSlot?.name} / {item.master?.name}</small>
+                     <small>{item.master?.name} / {item.botSlot?.name}</small>
                      <p style={{ marginTop: 3 }}>
                         {value}{' '}
                         <StatusBadge variant="light" type="account-type" minified={true}>{item.type}</StatusBadge>{' '}
