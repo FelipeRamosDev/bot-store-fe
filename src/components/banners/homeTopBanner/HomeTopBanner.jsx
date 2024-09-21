@@ -17,8 +17,8 @@ export default function HomeTopBanner() {
       <section className="top-banner">
          <ContentSplit className="content container">
             <div className="column marketing-cta left">
-               <p className="message line1">Let the <span className="grad-txt">MACHINE TRADE</span></p>
-               <p className="message line2">Choose a <span className="grad-txt">BOT to START</span></p>
+               <p className="message line1">Let the <span className="grad-txt">Machine Trade</span> for you</p>
+               <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to Start</span>
 
                <p className="description">Choose a trader bot to start and automate your trades, let the machine trade for you.</p>
                <CTAButton className="d-large" size="medium" onClick={() => router.push('/dashboard')}>Let&apos;s Start</CTAButton>
