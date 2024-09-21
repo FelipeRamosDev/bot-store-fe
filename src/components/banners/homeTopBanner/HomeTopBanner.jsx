@@ -21,7 +21,7 @@ export default function HomeTopBanner() {
                <p className="message line2">Choose a <span className="grad-txt">BOT to START</span></p>
 
                <p className="description">Choose a trader bot to start and automate your trades, let the machine trade for you.</p>
-               <CTAButton className="d-large" size="medium" onClick={() => router.push('/dashboard')}>Let's Start</CTAButton>
+               <CTAButton className="d-large" size="medium" onClick={() => router.push('/dashboard')}>Let&apos;s Start</CTAButton>
             </div>
 
             <div className="column image-spot">
