@@ -2,6 +2,7 @@ import FetchDependency from './FetchDependency';
 import FieldSchema from './FieldSchema';
 import NumberFieldSchema from './fieldTypes/NumberFieldSchema';
 import SelectFieldSchema from './fieldTypes/SelectFieldSchema';
+import SwitchFieldSchema from './fieldTypes/SwitchFieldSchema';
 import TextFieldSchema from './fieldTypes/TextFieldSchema';
 
 /**
@@ -475,13 +476,16 @@ export default class Form {
          
          switch (current.type) {
             case 'string':
-               schema.push(new TextFieldSchema({ key, ...current, type: String, placeholder }));
+               schema.push(new TextFieldSchema({ key, ...current, placeholder, defaultValue: current.default }));
                break;
             case 'number':
-               schema.push(new NumberFieldSchema({ key, ...current, type: Number, placeholder }));
+               schema.push(new NumberFieldSchema({ key, ...current, placeholder, defaultValue: current.default }));
                break;
             case 'select':
-               schema.push(new SelectFieldSchema({ key, ...current, type: Number, placeholder }));
+               schema.push(new SelectFieldSchema({ key, ...current, placeholder, defaultValue: current.default }));
+               break;
+            case 'boolean':
+               schema.push(new SwitchFieldSchema({ key, ...current, placeholder, defaultValue: current.default }));
                break;
          }
       });
