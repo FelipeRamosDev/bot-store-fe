@@ -105,6 +105,27 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
       }
    }
 
+   async function refresh() {
+      const executedQuery = querySet.current?.executedQuery;
+
+      if (!executedQuery) {
+         return;
+      }
+
+      try {
+         switch (executedQuery) {
+            case 'getQuery':
+               const resultQuery = await querySet.current.getQuery()
+               return setQuery(resultQuery);
+            case 'getDoc':
+               const resultDoc = await querySet.current.getDoc();
+               return setDoc(resultDoc);
+         }
+      } catch (err) {
+         throw err;
+      }
+   }
+
    useEffect(() => {
       if (query || doc) {
          return;
@@ -132,6 +153,8 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
          case 'query':
             if (subscribe) {
                if (!socket.current) {
+                  querySet.current.executedQuery = 'subscribeQuery';
+
                   socket.current = querySet.current.subscribeQuery({
                      onSubscribe: (id) => {
                         subscriptionID.current = id;
@@ -148,6 +171,8 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
                   });
                }
             } else {
+               querySet.current.executedQuery = 'getQuery';
+
                querySet.current.getQuery().then(query => {
                   setQuery(query);
                   onData(query);
@@ -162,6 +187,8 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
          case 'doc':
             if (subscribe) {
                if (!socket.current) {
+                  querySet.current.executedQuery = 'subscribeDoc';
+
                   socket.current = querySet.current.subscribeDoc({
                      onSubscribe: (id) => {
                         subscriptionID.current = id;
@@ -178,6 +205,8 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
                   });
                }
             } else {
+               querySet.current.executedQuery = 'getDoc';
+
                querySet.current.getDoc().then(doc => {
                   setDoc(doc);
                   onData(doc);
@@ -199,7 +228,8 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
       limit: querySet.current?.options?.limit || limit,
       query: query || [],
       goPage,
-      reloadLimit
+      reloadLimit,
+      refresh
    }}>
       {children}
    </DBQueryContext.Provider>

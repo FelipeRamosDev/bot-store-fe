@@ -11,6 +11,7 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 import Card from '@/components/common/card/Card';
+import MasterClosedPositions from './MasterClosedPositions';
 
 /**
  * MasterDetailsContent component displays detailed information about a master account,
@@ -61,13 +62,7 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
          sort={{ closeTime: -1 }}
          limit={11}
       >
-         <div className="closed-positions">
-            <ContentHeader>
-               <h3 className="header-title">Closed Positions</h3>
-            </ContentHeader>
-
-            <PositionsTable exclude={['type']} />
-         </div>
+         <MasterClosedPositions />
       </DBQuery>
    </>;
 }
