@@ -4,6 +4,14 @@
    width: 100%;
    position: relative;
 
+   &.minified {
+      margin-bottom: 0;
+
+      .slot-data {
+         margin-top: 1rem;
+      }
+   }
+
    .status-badge {
       font-size: 0.6rem;
    }

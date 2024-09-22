@@ -6,6 +6,7 @@ import PositionValuesGrid from '@/components/grids/positionValuesGrid/PositionVa
 import OrdersGrid from '@/components/grids/ordersGrid/OrdersGrid';
 import PositionSidebar from './PositionSidebar';
 import PositionDetails from './PositionDetails';
+import PositionParents from './PositionParents';
 
 /**
  * PositionQuickview Component
@@ -56,6 +57,7 @@ export default function PositionQuickview({ position, className = '', onClose = 
          <ContentSidebar isFullContainer={true}>
             <>
                <PositionValuesGrid position={position} />
+               <PositionParents position={position} />
 
                {isMobile && <PositionSidebar position={position} isMobile={isMobile} />}
                {position.type === 'position-demo' && <PositionDetails position={position} />}

@@ -1,5 +1,6 @@
 import Card from "@/components/common/card/Card";
 import PriceCard from "@/components/common/priceCard/PriceCard";
+import StatusBadge from "@/components/common/statusBedge/StatusBadge";
 import Percent from "@/components/displays/percent/Percent";
 import Price from "@/components/displays/price/Price";
 import ContainedTable from "@/components/tables/containedTable/ContainedTable";
@@ -28,7 +29,7 @@ const priceCard = {
 export default function PositionLimits({ position = {}, ...props }) {
    const priceProps = { fractional: position.symbolFractional };
    const stopGapPercent = (position.initialStopSpread * 100) / position.openPrice;
-   const tablePriceProps = { noColor: true, dashedZero: true };
+   const tablePriceProps = { noColor: true, dashedZero: true, fractional: position.symbolFractional };
 
    return (
       <Card
@@ -63,12 +64,15 @@ export default function PositionLimits({ position = {}, ...props }) {
 
             <PriceCard {...priceCard}>
                <label>Commission</label>
-               <Price amount={position.tradeFee} noColor={true} />
+               <Price amount={position.tradeFee} noColor={true} {...priceProps} />
             </PriceCard>
          </div>
 
          <ContainedTable
             tableData={[
+               { label: 'Type', value: <StatusBadge type="account-type" variant="light">{position.type}</StatusBadge> },
+               { label: 'Status', value: <StatusBadge type="position-status" variant="light">{position.status}</StatusBadge> },
+               { label: 'Side', value: <StatusBadge type="position-side" variant="light">{position.positionType}</StatusBadge> },
                { label: 'Open Price', value: <Price amount={position.openPrice} {...tablePriceProps} /> },
                { label: 'Close Price', value: <Price amount={position.closePrice} {...tablePriceProps} />, hide: !position.closePrice },
                { label: 'Init. Stop Gap', value: <Price amount={position.initialStopSpread} {...tablePriceProps} /> },

@@ -9,6 +9,19 @@
    cursor: pointer;
    transition: box-shadow 100ms;
 
+   &.minified {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title {
+         display: flex;
+         gap: 0.5rem;
+         align-items: center;
+      }
+   }
+
    &:hover {
       background-color: $background-grey1-light;
    }

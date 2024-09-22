@@ -25,6 +25,9 @@ import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/C
  * @param {Function} [props.setEditSlotModal] - Function to open the edit slot modal.
  * @param {Function} [props.setDeleteConfirmDialog] - Function to open the delete confirmation dialog.
  * @param {Object} [props.rest] - Additional properties to pass to the Card component.
+ * @param {boolean} [props.demoMode] - Set true for demontration display on public areas.
+ * @param {boolean} [props.minified] - Set true to use the minified view.
+ * @param {Object[]} [props.dummyCandles] - The dummy candles for demontrtation mode.
  * 
  * @returns {JSX.Element} The rendered SlotTile component.
  */
@@ -32,6 +35,7 @@ export default function SlotTile({
    demoMode = false,
    slot = {},
    className = '',
+   minified = false,
    uInstance,
    chartsDisplay,
    setEditSlotModal,
@@ -61,15 +65,15 @@ export default function SlotTile({
    }, [ uInstance, isOffline, isStating, isStatingStream ]);
 
    return (
-      <Card className={`slot-tile ${className}`} padding="xs" elevation={50} {...props}>
+      <Card className={`slot-tile ${minified ? 'minified' : ''} ${className}`} padding="xs" elevation={50} {...props}>
          {demoMode && <div className="lock-layer"></div>}
 
          <div className="tile-header">
             <div className="text-wrap">
-               <span className="title link" onClick={() => setSlotQuickview(slot._id)}>{slot.name}</span>
+               <span className="title link" onClick={() => !minified && setSlotQuickview(slot._id)}>{slot.name}</span>
 
-               <StatusBadge type="slot-status">{slot.status}</StatusBadge>
-               {!demoMode && <SlotMenu
+               <StatusBadge type="slot-status" variant={minified ? 'light' : ''}>{slot.status}</StatusBadge>
+               {!demoMode && !minified && <SlotMenu
                   slot={slot}
                   noTrasition={true}
                   setEditSlotModal={setEditSlotModal}
@@ -81,7 +85,7 @@ export default function SlotTile({
                </Link>
             </div>
 
-            <div className="btn-wrap">
+            {!minified && <div className="btn-wrap">
                {slot.status !== 'running' && <RoundIconButton
                   variant="contained"
                   Icon={PlayIcon}
@@ -97,7 +101,7 @@ export default function SlotTile({
                   color={disabled && !demoMode ? 'disabled' : 'error'}
                   onClick={() => stopSlot(API, slot, disabled, setDisabled, setUiAlertState)}
                />}
-            </div>
+            </div>}
          </div>
 
          <div className="slot-data">
@@ -107,14 +111,16 @@ export default function SlotTile({
                   <span>{slot.cod}</span>
                </div>
 
-               <div className="item">
+               {!minified && <div className="item">
                   <label>Interval:</label>
                   <span>{slot.interval}</span>
-               </div>
-               <div className="item">
+               </div>}
+
+               {!minified && <div className="item">
                   <label>Symbol:</label>
                   <span>{slot.assets?.length ? slot.assets[0] : ''}</span>
-               </div>
+               </div>}
+
                <div className="item">
                   <label>Realized:</label>
                   <Price amount={slot.totalRealizedPnl} noColor={true} />
@@ -122,7 +128,7 @@ export default function SlotTile({
             </div>
 
             <div className="column">
-               <Price amount={slot.pnl} size="xl" />
+               <Price amount={slot.pnl} size={minified ? 'l' : 'xl'} />
             </div>
          </div>
 
