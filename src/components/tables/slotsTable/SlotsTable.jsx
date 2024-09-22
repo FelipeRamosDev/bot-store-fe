@@ -37,7 +37,7 @@ export default function SlotsTable({ include, exclude }) {
    }
 
    return <>
-      <SlotQuickview slot={selectedSlot} onClose={() => setSlotModal('')} />
+      <SlotQuickview master={selectedSlot?.master} slot={selectedSlot} onClose={() => setSlotModal('')} />
 
       <TableBase
          pagination={{}}

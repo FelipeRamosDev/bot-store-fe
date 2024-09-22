@@ -98,6 +98,6 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
          <CreateSlot defaultType={slotType} onSuccess={() => setCreateSlot(false)} master={master} />
       </ContentModal>
 
-      <SlotQuickview slot={master.slots.find(item => item._id === slotQuickview)} onClose={() => setSlotQuickview('')} />
+      <SlotQuickview master={master} slot={master.slots.find(item => item._id === slotQuickview)} onClose={() => setSlotQuickview('')} />
    </div>;
 }
