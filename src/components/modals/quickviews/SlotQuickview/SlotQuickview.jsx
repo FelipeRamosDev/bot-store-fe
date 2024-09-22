@@ -18,7 +18,7 @@ import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
  * 
  * @returns {JSX.Element} The rendered SlotQuickview component, or an empty fragment if no slot is provided.
  */
-export default function SlotQuickview({ slot, onClose, ...props }) {
+export default function SlotQuickview({ master, slot, onClose, ...props }) {
    const open = Boolean(slot);
 
    if (!slot) {
@@ -36,7 +36,7 @@ export default function SlotQuickview({ slot, onClose, ...props }) {
          {...props}
       >
          <ContentSidebar fitMaxWidth={true}>
-            <SlotQuickviewContent slot={slot} />
+            <SlotQuickviewContent master={master} slot={slot} />
             <SlotQuickviewSidebar slot={slot} />
          </ContentSidebar>
          
