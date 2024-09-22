@@ -18,6 +18,10 @@
    .card {
       .contained-table {
          margin: 0;
+
+         .table-row .table-column .status-badge {
+            background-color: $background-paper;
+         }
       }
    }
 
@@ -58,5 +62,9 @@
             font-weight: 500;
          }
       }
+   }
+
+   .position-parents {
+      margin-bottom: 2rem;
    }
 }

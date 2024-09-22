@@ -95,6 +95,30 @@ function parseSlotStutus(status) {
    }
 }
 
+function parsePositionStatus(status) {
+   let badgeColor = 'disabled';
+
+   switch (status) {
+      case 'opened':
+         badgeColor = 'success';
+         break;
+      case 'opening-position':
+      case 'closing-position':
+      case 'fixing-position':
+      case 'closed':
+         badgeColor = 'warn';
+         break;
+      case 'error':
+         badgeColor = 'error';
+         break;
+   }
+
+   return {
+      status: status.toUpperCase(),
+      color: badgeColor
+   }
+}
+
 /**
  * Parses and returns badge side and color based on the given position side.
  *
@@ -182,6 +206,13 @@ export default function StatusBadge({ className = '', type, variant, color = 'di
 
       color = parsed.color;
       children = parsed.side;
+   }
+
+   if (type === 'position-status') {
+      const parsed = parsePositionStatus(children);
+
+      color = parsed.color;
+      children = parsed.status;
    }
 
    if (type === 'order-status') {
