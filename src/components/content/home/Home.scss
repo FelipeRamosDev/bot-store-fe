@@ -56,7 +56,7 @@
 
             &.slot-a {
                left: 5%;
-               z-index: 10;
+               z-index: 3;
 
                @media screen and (min-width: $screen-m) {
                   left: 0;
@@ -66,7 +66,7 @@
             &.slot-b {
                right: 5%;
                margin-top: 25%;
-               z-index: 11;
+               z-index: 4;
 
                @media screen and (min-width: $screen-m) {
                   right: 5%;
