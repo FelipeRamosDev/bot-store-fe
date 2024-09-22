@@ -5,6 +5,12 @@ import DBQueryContext from '@/contexts/DBQuery';
 import { Money, Refresh } from '@mui/icons-material';
 import { useContext } from 'react';
 
+/**
+ * DashboardPositionTable component that renders a table displaying position data
+ * with a header and a refresh button to reload the data.
+ *
+ * @returns {JSX.Element} The rendered dashboard component with a positions table.
+ */
 export default function DashboardPositionTable() {
    const { refresh } = useContext(DBQueryContext);
 

@@ -6,6 +6,15 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import APIContext from '@/contexts/4HandsAPI';
 
+/**
+ * AccountMenu component that provides user account options such as viewing profile, 
+ * opening an exchange API modal, and signing out.
+ *
+ * @param {object} props - The component properties.
+ * @param {function} props.setSpinner - A callback function to display loading spinner during sign out. Defaults to an empty function.
+ * 
+ * @returns {JSX.Element} A menu with account-related actions and an avatar icon to toggle it.
+ */
 export default function AccountMenu({ setSpinner = () => {} }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ nameLetters, setNameLetters ] = useState('');
