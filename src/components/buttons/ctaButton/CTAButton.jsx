@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
  *
  * @param {Object} props - The props object.
  * @param {React.ReactNode} [props.children] - The content to be displayed inside the button.
- * @param {Object} [props] - Additional props to be passed to the MUI `Button` component.
+ * @param {string} [props.className] - CSS classes.
  *
  * @returns {JSX.Element} The rendered `CTAButton` component.
  */

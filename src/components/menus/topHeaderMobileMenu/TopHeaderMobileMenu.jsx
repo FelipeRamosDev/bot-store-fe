@@ -6,6 +6,18 @@ import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } f
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 
+/**
+ * TopHeaderMobileMenu component renders a mobile navigation menu with links to
+ * various sections and a sign-out option. It uses a drawer for the menu and handles
+ * signing out via the API context.
+ *
+ * @param {object} props - The component properties.
+ * @param {boolean} props.open - Determines whether the drawer menu is open or closed.
+ * @param {function} props.setOpen - A function to toggle the drawer menu open/close state.
+ * @param {function} props.setSpinner - A function to display a loading spinner during sign-out.
+ * 
+ * @returns {JSX.Element} The rendered mobile navigation menu inside a drawer.
+ */
 export default function TopHeaderMobileMenu({ open, setOpen, setSpinner }) {
    const router = useRouter();
    const API = useContext(APIContext);

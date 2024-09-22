@@ -11,6 +11,7 @@ import PositionTile from '@/components/tiles/positionTile/PositionTile';
  * 
  * @param {Object} props - The component props.
  * @param {Object} [props.slot={}] - An object representing the slot data, which includes assets, trades, status, and interval.
+ * @param {Object} [props.master] - An object representing the master data..
  * 
  * @returns {JSX.Element} The rendered SlotQuickviewContent component.
  */
