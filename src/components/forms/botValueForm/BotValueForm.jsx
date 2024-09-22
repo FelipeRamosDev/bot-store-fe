@@ -54,12 +54,18 @@ export default function BotValueForm({
    const paramsFormNode = useRef();
 
    const handleSubmit = async function (data) {
-      const paramsValidate = paramsForm.validateForm();
-      if (paramsValidate.hasError) {
-         return paramsValidate;
+      try {
+         if (paramsForm) {
+            const paramsValidate = paramsForm.validateForm();
+            if (paramsValidate.hasError) {
+               return paramsValidate;
+            }
+         }
+   
+         await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
+      } catch (err) {
+         throw err;
       }
-
-      await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
    }
 
    const handleSetForm = (data) => presetForm(data, functions, botValueForm, editMode, editData, setParamsForm);
