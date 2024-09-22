@@ -1,11 +1,10 @@
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
-import PageSpinner from '@/components/load/pageSpinner/PageSpinner';
 import DrawerMenu from '@/components/menus/base/drawerMenu/DrawerMenu';
 import APIContext from '@/contexts/4HandsAPI';
 import { AccountBalanceWallet, Storefront, Dashboard, Logout } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 export default function TopHeaderMobileMenu({ open, setOpen, setSpinner }) {
    const router = useRouter();

@@ -45,8 +45,7 @@ export default function TopHeader({ type = 'public', fullContainer = true }) {
          </Link>
 
          {type === 'public' && <TopNavPublic />}
-         {type === 'auth' && <TopNavAuth />}
-         {type === 'auth' && <TopHeaderMobileMenu open={open} setOpen={setOpen} />}
+         {type === 'auth' && <TopNavAuth mobileOpen={open} setMobileOpen={setOpen} />}
 
          {type === 'auth' && <Button className="menu-button" color="info" onClick={() => setOpen(true)}>
             <MenuIcon />
