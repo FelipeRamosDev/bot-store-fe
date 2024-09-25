@@ -14,12 +14,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
-      .title {
-         display: flex;
-         gap: 0.5rem;
-         align-items: center;
-      }
    }
 
    &:hover {
@@ -31,6 +25,9 @@
       font-weight: 500;
       margin-top: 0;
       margin-bottom: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
    }
 
    .badges-line {
