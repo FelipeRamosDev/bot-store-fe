@@ -37,7 +37,7 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
          slot.trades.map(trade => {
             if (trade.status === 'opened') {
                if (!trade.botSlot?.name) {
-                  trade.botSlot = { ...trade.botSlot, name: slot.name }
+                  trade.botSlot = slot;
                }
 
                positions.push(trade);
