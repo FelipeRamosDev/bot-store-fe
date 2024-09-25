@@ -82,8 +82,8 @@ export default function MastersTileDefault({ className = '', master, minified = 
 
       <div className="tile-data">
          <div className="data">
-            <p><b>Day PNL:</b> {master.results.dayPnl.toFixed(2)} / {master.results.dayRoi.toFixed(2)}%</p>
-            <p><b>Month PNL:</b> {master.results.monthPnl.toFixed(2)} / {master.results.monthRoi.toFixed(2)}%</p>
+            <p><b>Day PNL:</b> {master.results?.dayPnl?.toFixed(2)} / {master.results?.dayRoi?.toFixed(2)}%</p>
+            <p><b>Month PNL:</b> {master.results?.monthPnl?.toFixed(2)} / {master.results?.monthRoi?.toFixed(2)}%</p>
          </div>
 
          <Price amount={master.pnl} fontSize={18} />
