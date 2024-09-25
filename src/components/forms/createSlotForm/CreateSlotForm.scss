@@ -1,0 +1,16 @@
+@import "../../../style/scss/variables.scss";
+
+.slot-form {
+   .check-button-group {
+      .options-wrap {
+         .check-button {
+            flex: calc(20% - 0.5rem);
+            min-width: 3rem;
+   
+            @media screen and (min-width: $screen-m) {
+               flex: 1;
+            }
+         }
+      }
+   }
+}
