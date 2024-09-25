@@ -85,25 +85,17 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                }
             },
             {
-               label: 'Leverage',
-               propKey: 'usedLeverage',
+               label: 'Open / Close',
+               propKey: 'openTime',
                align: 'center',
                style: {
-                  minWidth: '70px',
+                  minWidth: '150px',
                },
-               format: (value) => {
-                  return <b style={{ fontSize: '1rem' }}>{value}x</b>
-               }
-            },
-            {
-               label: 'Notional',
-               propKey: 'grossBalance',
-               align: 'center',
-               style: {
-                  minWidth: '110px',
-               },
-               format: (value) => {
-                  return <Price amount={value} noColor={true} />
+               format: (value, item) => {
+                  return <>
+                     <p><PrettyDate hideYear={true} divisor=" " time={value} /></p>
+                     <p><PrettyDate hideYear={true} divisor=" " time={item.closeTime} /></p>
+                  </>;
                }
             },
             {
@@ -118,6 +110,28 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                }
             },
             {
+               label: 'Notional',
+               propKey: 'grossBalance',
+               align: 'center',
+               style: {
+                  minWidth: '110px',
+               },
+               format: (value) => {
+                  return <Price amount={value} noColor={true} />
+               }
+            },
+            {
+               label: 'Leverage',
+               propKey: 'usedLeverage',
+               align: 'center',
+               style: {
+                  minWidth: '70px',
+               },
+               format: (value) => {
+                  return <b style={{ fontSize: '1rem' }}>{value}x</b>
+               }
+            },
+            {
                label: 'Quantity',
                propKey: 'quantity',
                align: 'center',
@@ -126,20 +140,6 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                },
                format: (value) => {
                   return <b style={{ fontSize: '1rem' }}>{value}</b>
-               }
-            },
-            {
-               label: 'Open / Close',
-               propKey: 'openTime',
-               align: 'center',
-               style: {
-                  minWidth: '150px',
-               },
-               format: (value, item) => {
-                  return <>
-                     <p><PrettyDate hideYear={true} divisor=" " time={value} /></p>
-                     <p><PrettyDate hideYear={true} divisor=" " time={item.closeTime} /></p>
-                  </>;
                }
             },
             {

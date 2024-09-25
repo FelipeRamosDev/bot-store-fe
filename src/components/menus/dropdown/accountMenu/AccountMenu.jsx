@@ -65,7 +65,7 @@ export default function AccountMenu({ setSpinner = () => {} }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={handleMenuClose} disabled>
                <ListItemIcon>
                   <AccountCircle />
                </ListItemIcon>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AccountMenu from '../dropdown/accountMenu/AccountMenu';
+import { AccountBalanceWallet, Dashboard } from '@mui/icons-material';
 
 /**
  * TopHeaderDesktopMenu component renders a desktop navigation menu with links
@@ -14,8 +15,14 @@ import AccountMenu from '../dropdown/accountMenu/AccountMenu';
 export default function TopHeaderDesktopMenu({ setSpinner }) {
    return (
       <nav className="desktop-menu">
-         <Link href="/dashboard">Dashboard</Link>
-         {/* <Link href="/dashboard/master-accounts">Master Accounts</Link> */}
+         <Link href="/dashboard">
+            <Dashboard />
+            Dashboard
+         </Link>
+         <Link href="/dashboard/master-accounts">
+            <AccountBalanceWallet />
+            Master Accounts
+         </Link>
          {/* <Link href="/slots">Slots</Link> */}
          {/* <Link href="/positions">Positions</Link> */}
 
