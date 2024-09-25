@@ -19,7 +19,8 @@ export default class TextFieldSchema extends FieldSchema {
     * @param {Function} form - The form instance that this field schema belongs to.
     */
    constructor(setup, form) {
-      super(setup, form);
+      super(setup = {}, form);
+      const { inputMode } = setup;
 
       this.type = String; // Specifies that the type of field is String.
       this.inputType = 'text'; // Specifies that the input type is 'text' for standard text input.
