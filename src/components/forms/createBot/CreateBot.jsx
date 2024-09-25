@@ -15,13 +15,14 @@ import AuthUserContext from '@/contexts/AuthUser';
  * 
  * @param {Object} props - The component props.
  * @param {boolean} [props.editMode=false] - Indicates if the form is in edit mode.
+ * @param {Object} [props.editData] - The current bot data.
  * 
  * @returns {JSX.Element} The rendered form component.
  */
-export default function CreateBotForm({ editMode }) {
+export default function CreateBotForm({ editData, onSuccess = () => {} }) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
-   const router = useRouter();
+   const editMode = Boolean(editData);
 
    /**
     * Handles form submission by sending the form data to the API.
@@ -34,14 +35,25 @@ export default function CreateBotForm({ editMode }) {
       data.author = user._id;
 
       try {
-         const created = await API.ajax.authPut('/bot/create', data);
-         if (created.error) {
-            return created;
+         if (!editMode) {
+            const created = await API.ajax.authPut('/bot/create', data);
+            if (created.error) {
+               throw created;
+            }
+
+
+         } else {
+            const saved = await API.ajax.authPost('/bot/update', {
+               botUID: editData._id,
+               toUpdate: data
+            });
+
+            if (saved.error) {
+               throw saved;
+            }
          }
 
-         if (created.success) {
-            router.push(`/dashboard/bots/${created.bot?.index}`);
-         }
+         return onSuccess();
       } catch (err) {
          throw err;
       }
@@ -52,6 +64,7 @@ export default function CreateBotForm({ editMode }) {
          formID="bot-form"
          submitLabel={editMode ? 'Save' : 'Create'}
          formSet={createBotForm}
+         editData={editData}
          onSubmit={onSubmit}
       >
          <FormInput path="name" />
