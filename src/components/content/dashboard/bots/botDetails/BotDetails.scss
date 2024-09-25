@@ -14,7 +14,8 @@
       }
 
       .title {
-         font-size: 1.3rem;
+         font-size: 1.6rem;
+         margin-bottom: 2rem;
       }
 
       .bot-info {
@@ -44,12 +45,7 @@
             border-radius: $side;
             background-color: $background;
             box-shadow: $shadow-5;
-            transform: translateY(($side * 0.5) * -1);
-
-            @media screen and (max-width: $screen-m) {
-               margin: 0 auto;
-               margin-top: -calc($height / 2);
-            }
+            margin: calc(($side * 0.6) * -1) auto 0 auto;
 
             .robot-icon {
                font-size: calc($side / 1.5);
@@ -73,6 +69,8 @@
             
             @media screen and (max-width: $screen-m) {
                width: 100%;
+               transform: translateY(0);
+               margin-bottom: 3rem;
             }
 
             .check-button-group {
