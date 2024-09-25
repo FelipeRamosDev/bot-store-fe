@@ -1,10 +1,14 @@
+'use client';
 import './Home.scss';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
 import SlotTilesImg from './img/SlotTilesImg';
+import { useRouter } from 'next/navigation';
 
 export default function HomeContent() {
+   const router = useRouter();
+
    return (<>
       <HomeTopBanner />
 
@@ -26,7 +30,7 @@ export default function HomeContent() {
                         Control the bots you are using into slots to have better visibility of the current trade state, the stoploss and takeprofit.
                      </p>
 
-                     <CTAButton className="d-large" size="medium">Let&apos;s Start</CTAButton>
+                     <CTAButton className="d-large" size="medium" onClick={() => router.push('/dashboard')}>Let&apos;s Start</CTAButton>
                   </div>
                </ContentSplit>
             </div>
