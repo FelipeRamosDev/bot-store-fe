@@ -79,6 +79,7 @@ const registerForm = new Form({
          key: 'email',
          label: 'E-mail',
          placeholder: 'emailname@domail.com',
+         inputMode: 'email',
          required: true,
          validators: [
             function(value) {
