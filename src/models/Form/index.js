@@ -250,6 +250,10 @@ export default class Form {
       this._data.forEach((value, key) => this.deleteValue(key));
       this._schema.forEach(item => item.init(this));
 
+      if (this.editMode) {
+         this.editData = {};
+      }
+
       if (this.setForm) {
          this.setForm(this);
       }

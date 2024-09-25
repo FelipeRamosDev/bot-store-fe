@@ -61,7 +61,7 @@ export default function BotDetailsHeader() {
          <div className="settings-painel">
             <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>
 
-            <BotMenu />
+            <BotMenu bot={doc} />
          </div>
       </div>
    </div>;

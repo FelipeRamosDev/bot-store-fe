@@ -1,5 +1,5 @@
 import './FormBase.scss';
-import { createContext, useEffect, useState, useContext, useRef } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import LoadingButton from '@/components/buttons/spinnerButton/SpinnerButton';
 import AlertModal from '@/components/modals/base/alertModal/AlertModal';
 import { parseValidationErrorMsg } from '@/helpers/format';
@@ -63,6 +63,8 @@ export function FormBase({
 
          if (editData && Object.keys(editData).length) {
             formSet.setEditData(editData);
+         } else {
+            formSet.clearAll();
          }
 
          formSet.fetchDependencies().then(({ success }) => {
