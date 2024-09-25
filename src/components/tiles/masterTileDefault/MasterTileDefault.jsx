@@ -80,10 +80,6 @@ export default function MastersTileDefault({ className = '', master, minified = 
          <StatusBadge color={badgeColor} variant="light">{accountType}</StatusBadge>
       </h3>
 
-      {!minified && <div className="badges-line">
-         <StatusBadge color={badgeColor} variant="light">{accountType}</StatusBadge>
-      </div>}
-
       <div className="tile-data">
          <div className="data">
             <p><b>Day PNL:</b> {master.results.dayPnl.toFixed(2)} / {master.results.dayRoi.toFixed(2)}%</p>
