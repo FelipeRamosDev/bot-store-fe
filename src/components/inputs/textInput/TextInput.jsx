@@ -15,7 +15,7 @@ import { TextField, FormControl, FormHelperText } from '@mui/material';
 export default function TextInput({ schema, errors = [], fullWidth = true, ...props }) {
    const { inputType = 'text', label, placeholder, color = 'tertiary', style } = schema || {};
    let defaultValue;
-   let inputMode = schema.inputMode || 'text';
+   let inputMode = schema.inputMode;
 
    if (schema.form.editMode) {
       defaultValue = schema.getEditValue();

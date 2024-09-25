@@ -18,13 +18,13 @@ export default class TextFieldSchema extends FieldSchema {
     * @param {Object} setup.inputMode - The keyboard mode for mobiles.
     * @param {Function} form - The form instance that this field schema belongs to.
     */
-   constructor(setup, form) {
-      super(setup = {}, form);
+   constructor(setup = {}, form) {
+      super(setup, form);
       const { inputMode } = setup;
 
       this.type = String; // Specifies that the type of field is String.
       this.inputType = 'text'; // Specifies that the input type is 'text' for standard text input.
-      this.inputMode = inputMode || 'text';
+      this.inputMode = inputMode;
 
       this.Input = TextInput; // Specifies the input component as TextInput.
    }
