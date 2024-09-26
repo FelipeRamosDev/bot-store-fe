@@ -13,6 +13,7 @@ import ContainedTable from '@/components/tables/containedTable/ContainedTable';
  * @param {Object} [props.botValue={}] - The function bot value to display.
  * @param {Object} props.botValue.functionUID - The unique identifier for the function.
  * @param {string} props.botValue.configs - The configuration data for the function in JSON format.
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The rendered component.
  */

@@ -10,6 +10,7 @@ import BotValuesMenu from '@/components/menus/dropdown/botValuesMenu/BotValuesMe
  * @param {Object} [props.botValue={}] - The primitive bot value to display.
  * @param {string} props.botValue.primitiveType - The type of the primitive value.
  * @param {string} props.botValue.primitiveValue - The actual value of the primitive.
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The rendered component.
  */

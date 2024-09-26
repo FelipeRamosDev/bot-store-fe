@@ -26,6 +26,7 @@ import { Close } from '@mui/icons-material';
  * @param {number} props.index - The index of the rule in the list.
  * @param {Object} props.rule - The rule object containing children bot values and comparison logic.
  * @param {string} props.logicalOperator - The logical operator used for the rule (e.g., AND, OR).
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The Rule component.
  */
