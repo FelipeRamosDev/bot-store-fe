@@ -132,6 +132,7 @@ export default function BotValueForm({
             hideSubmit={true}
             editData={editData}
             submitLabel="Save"
+            clearPrevent={true}
             onReady={() => {
                const functionUID = editData?.functionUID?._id;
 

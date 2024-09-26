@@ -21,6 +21,7 @@ export default FormBaseContext;
  * @param {boolean} [props.appendUserToBody=false] - Flag to append user ID to the form data.
  * @param {Function} [props.onSubmit=async () => {}] - Function to call on form submission.
  * @param {Function} [props.onReady=async () => {}] - Function to call when the form is ready to use.
+ * @param {boolean} [props.clearPrevent=false] - Prevent the form to be cleared on initialization.
  * @param {Boolean} [props.hideSubmit] - If true, the submit button will not be displayed.
  * @param {Object} [props.editData] - Data to populate the form for editing.
  * @param {ReactNode} props.children - Child components or form fields to be rendered inside the form.
@@ -37,6 +38,7 @@ export function FormBase({
    onSubmit = async () => {},
    onReady = () => {},
    hideSubmit = false,
+   clearPrevent = false,
    editData,
    children,
    ...props
@@ -63,7 +65,7 @@ export function FormBase({
 
          if (editData && Object.keys(editData).length) {
             formSet.setEditData(editData);
-         } else {
+         } else if (!clearPrevent) {
             formSet.clearAll();
          }
 

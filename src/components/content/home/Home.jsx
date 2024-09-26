@@ -1,10 +1,10 @@
 'use client';
 import './Home.scss';
+import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
 import SlotTilesImg from './img/SlotTilesImg';
-import { useRouter } from 'next/navigation';
 
 export default function HomeContent() {
    const router = useRouter();
