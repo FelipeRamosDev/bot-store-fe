@@ -34,7 +34,7 @@ const FINAL_ELEVATION = 40;
  * 
  * @returns {React.Element} The rendered tile component with master account information.
  */
-export default function MastersTileDefault({ className = '', master, minified = false, ...props }) {
+export default function MastersTileDefault({ demoMode, className = '', master, minified = false, ...props }) {
    const router = useRouter();
    const [ elevation, setElevation ] = useState(INITIAL_ELEVATION);
    const lastMousePosition = useRef();

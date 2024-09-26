@@ -13,14 +13,14 @@ import BotValuesMenu from '@/components/menus/dropdown/botValuesMenu/BotValuesMe
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function PrimitiveValue({ className = '', parentThread, parentRule, botValue = {}, ...props }) {
+export default function PrimitiveValue({ className = '', demoMode, parentThread, parentRule, botValue = {}, ...props }) {
    const primitiveType = botValue.primitiveType;
 
    return (
       <div className={`bot-value primitive ${className}`} {...props}>
-         <div className="menu-wrap">
+         {!demoMode && <div className="menu-wrap">
             <BotValuesMenu botValue={botValue} parentThread={parentThread} parentRule={parentRule} />
-         </div>
+         </div>}
 
          <label className="value-name">Primitive</label>
          <span className={`primitive-value ${primitiveType}`}>{botValue.primitiveValue}</span>

@@ -1,0 +1,78 @@
+@import "../../../../style/scss/variables.scss";
+
+.home-banner-image {
+   position: relative;
+   min-height: 80vh;
+   margin: 4rem 1rem 0 1rem;
+
+   @media screen and (min-width: $screen-m) {
+      min-height: 60vh;
+      margin: 0;
+   }
+
+   .bot-rule,
+   .slot-tile,
+   .mastertile-default {
+      position: absolute;
+   }
+
+   .slot-tile {
+      width: 85%;
+      max-width: 600px;
+      right: 0;
+      top: 15vh;
+      z-index: 5;
+
+      @media screen and (min-width: $screen-m) {
+         right: 0;
+         width: 70%;
+      }
+
+      .candlestick-chart {
+         height: 200px;
+
+         @media screen and (min-width: $screen-m) {
+            height: 250px;
+         }
+      }
+   }
+
+   .mastertile-default {
+      bottom: 32vh;
+      left: 0;
+      width: 80%;
+      max-width: 450px;
+      z-index: 8;
+
+      @media screen and (min-width: $screen-m) {
+         left: 23%;
+         width: 60%;
+         bottom: 3vh;
+      }
+   }
+   
+   .bot-rule {
+      left: 0;
+      display: none;
+
+      @media screen and (min-width: $screen-m) {
+         display: flex;
+         left: 0;
+         z-index: 6;
+      }
+   }
+
+   .bot-value-single {
+      top: 0;
+      left: 0;
+      z-index: 5;
+      width: 80%;
+      max-width: 400px;
+
+      @media screen and (min-width: $screen-m) {
+         top: 21vh;
+         left: 15%;
+         z-index: 7;
+      }
+   }
+}

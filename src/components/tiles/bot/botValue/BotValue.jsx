@@ -14,10 +14,11 @@ import PrimitiveValue from './PrimitiveValue';
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function BotValue({ botValue = {}, parentThread, parentRule, isSingle, minify, ...props }) {
+export default function BotValue({ botValue = {}, demoMode, parentThread, parentRule, isSingle, minify, ...props }) {
    if (botValue.valueType === 'function') {
       return <FunctionValue
          botValue={botValue}
+         demoMode={demoMode}
          parentThread={parentThread}
          parentRule={parentRule}
          minify={minify}
@@ -28,6 +29,7 @@ export default function BotValue({ botValue = {}, parentThread, parentRule, isSi
    if (botValue.valueType === 'primitive') {
       return <PrimitiveValue
          botValue={botValue}
+         demoMode={demoMode}
          parentThread={parentThread}
          parentRule={parentRule}
          {...props}
