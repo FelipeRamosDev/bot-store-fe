@@ -77,7 +77,7 @@ export function FormBase({
             throw err;
          });
       }
-   }, [ form, formSet, editData ]);
+   }, [ form, formSet, editData, clearPrevent ]);
 
    useEffect(() => {
       if (form) {
