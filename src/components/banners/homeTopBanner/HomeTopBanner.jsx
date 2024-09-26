@@ -3,6 +3,7 @@ import './HomeTopBanner.scss';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import { useRouter } from 'next/navigation';
+import HomeBannerImage from './homeBannerImage/HomeBannerImage';
 
 /**
  * `HomeTopBanner` is a component that displays a promotional banner at the top of the home page.
@@ -21,12 +22,16 @@ export default function HomeTopBanner() {
                <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to Start</span>
 
                <p className="description">Choose a trader bot to start and automate your trades, let the machine trade for you.</p>
-               <CTAButton className="d-large" size="medium" onClick={() => router.push('/dashboard')}>Let&apos;s Start</CTAButton>
+               <CTAButton
+                  className="d-large"
+                  size="medium" 
+                  onClick={() => router.push('/dashboard')}
+               >
+                  Let&apos;s Start
+               </CTAButton>
             </div>
 
-            <div className="column image-spot">
-
-            </div>
+            <HomeBannerImage className="column image-spot" />
          </ContentSplit>
       </section>
    );

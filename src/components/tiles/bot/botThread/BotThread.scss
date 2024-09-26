@@ -71,9 +71,10 @@
       padding: 0.5rem;
       border-radius: $radius-s;
       cursor: pointer;
+      width: 100%;
 
-      @media screen and (max-width: $screen-m) {
-         width: 100%;
+      @media screen and (min-width: $screen-m) {
+         width: auto;
       }
 
       span {

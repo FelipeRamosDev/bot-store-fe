@@ -16,8 +16,9 @@ import NoDocumentsTile from "../../noDocumentsTile/NoDocumentsTile";
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function BotValueSingle({ botValue, eventName, title = 'Bot Value', minify = false, openCreateModal = () => {}, ...props }) {
-   const { doc } = useContext(DBQueryContext);
+export default function BotValueSingle({ botValue, eventName, title = 'Bot Value', minify = false, openCreateModal = () => {}, elevation, ...props }) {
+   const botContext = useContext(DBQueryContext);
+   const { doc } = botContext || {};
    const docThread = doc?.eval[eventName];
    const foundValue = botValue || docThread?.linkedValue;
    let borderColor;
@@ -65,6 +66,7 @@ export default function BotValueSingle({ botValue, eventName, title = 'Bot Value
          padding="xs"
          radius="s"
          borderSide="bottom"
+         elevation={elevation}
          borderColor={borderColor}
       >
          <BotValue

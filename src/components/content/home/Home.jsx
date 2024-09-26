@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
-import SlotTilesImg from './img/SlotTilesImg';
+import BTCSlotTilesImg from './img/BTCSlotTilesImg';
+import ETHSlotTilesImg from './img/ETHSlotTilesImg';
 
 export default function HomeContent() {
    const router = useRouter();
@@ -19,7 +20,8 @@ export default function HomeContent() {
 
                <ContentSplit className="content">
                   <div className="column image-spot">
-                     <SlotTilesImg />
+                     <BTCSlotTilesImg />
+                     <ETHSlotTilesImg />
                   </div>
 
                   <div className="column marketing-cta right">

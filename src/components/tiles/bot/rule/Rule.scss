@@ -40,6 +40,11 @@
       background-color: $background-grey2;
       padding: 0.5rem;
       border-radius: $radius-s;
+      width: 100%;
+
+      @media screen and (min-width: $screen-m) {
+         width: auto;
+      }
 
       span {
          font-size: 1.7rem;
