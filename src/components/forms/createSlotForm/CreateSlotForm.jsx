@@ -1,4 +1,3 @@
-import './CreateSlotForm.scss';
 import { useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '../formBase/FormInput';

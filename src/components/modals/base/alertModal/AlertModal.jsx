@@ -1,5 +1,4 @@
 import { LoadingButton } from '@mui/lab';
-import './AlertModal.scss';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';

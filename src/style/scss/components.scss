@@ -1,3 +1,109 @@
+// Banners
+@import "../../components/banners/homeTopBanner/HomeTopBanner.scss";
+@import "../../components/banners/homeTopBanner/homeBannerImage/HomeBannerImage.scss";
+
+// Bars
+@import "../../components/bars/base/topAlertBar/TopAlertBar.scss";
+
+// Buttons
+@import "../../components/buttons/checkButton/CheckButton.scss";
+@import "../../components/buttons/ctaButton/CTAButton.scss";
+@import "../../components/buttons/rubberButton/RubberButton.scss";
+
+// Charts
+@import "../../components/charts/base/candleStickBase/CandlestickChartBase.scss";
+
+// Common
+@import "../../components/common/card/Card.scss";
+@import "../../components/common/edgeLight/EdgeLight.scss";
+@import "../../components/common/priceCard/PriceCard.scss";
+@import "../../components/common/statusBedge/StatusBadge.scss";
+@import "../../components/common/watermarkPriceCard/WatermarkPriceCard.scss";
+
+// Content
+@import "../../components/content/dashboard/bots/botDetails/BotDetails.scss";
+@import "../../components/content/dashboard/home/DashboardHome.scss";
+@import "../../components/content/dashboard/login/Login.scss";
+@import "../../components/content/dashboard/masterAccounts/masterDetails/MasterDetails.scss";
+@import "../../components/content/home/Home.scss";
+
+// Editors
+@import "../../components/editors/scheduleEditor/ScheduleEditor.scss";
+
+// Forms
+@import "../../components/forms/botValueForm/BotValueForm.scss";
+@import "../../components/forms/createSlotForm/CreateSlotForm.scss";
+@import "../../components/forms/formBase/FormBase.scss";
+@import "../../components/forms/logicalOperatorForm/LogicalOperatorForm.scss";
+
+// Grids
+@import "../../components/grids/botValuesGrid/BotValuesGrid.scss";
+@import "../../components/grids/mastersGrid/MastersGrid.scss";
+@import "../../components/grids/ordersGrid/OrdersGrid.scss";
+@import "../../components/grids/positionsGrid/PositionsGrid.scss";
+@import "../../components/grids/positionValuesGrid/PositionValuesGrid.scss";
+@import "../../components/grids/slotResultsGrid/SlotResultsGrid.scss";
+@import "../../components/grids/slotsGrid/SlotsGrid.scss";
+@import "../../components/grids/walletGrid/WalletGrid.scss";
+
+// Headers
+@import "../../components/headers/contentHeader/ContentHeader.scss";
+@import "../../components/headers/topHeader/TopHeader.scss";
+
+// Inputs
+@import "../../components/inputs/checkButtonGroupInput/CheckButtonGroupInput.scss";
+@import "../../components/inputs/clockTimePicker/ClockTimePicker.scss";
+@import "../../components/inputs/listDocPicker/ListDocPicker.scss";
+@import "../../components/inputs/radioGroupInput/RadioGroupInput.scss";
+@import "../../components/inputs/selectInput/SelectInput.scss";
+@import "../../components/inputs/sliderInput/SliderInput.scss";
+
+// Layouts
+@import "../../components/layout/contentSidebar/ContentSidebar.scss";
+@import "../../components/layout/contentSplit/ContentSplit.scss";
+
+// Load
+@import "../../components/load/fitSpinner/FitSpinner.scss";
+@import "../../components/load/spinner/Spinner.scss";
+
+// Menus
+@import "../../components/menus/base/drawerMenu/DrawerMenu.scss";
+@import "../../components/menus/dropdown/masterMenu/MasterMenu.scss";
+@import "../../components/menus/dropdown/slotMenu/SlotMenu.scss";
+
+// Modals
+@import "../../components/modals/base/alertModal/AlertModal.scss";
+@import "../../components/modals/base/contentModal/ContentModal.scss";
+@import "../../components/modals/botValueModal/BotValuesModal.scss";
+@import "../../components/modals/demoDepositModal/DemoDepositModal.scss";
+@import "../../components/modals/quickviews/positionQuickview/PositionQuickview.scss";
+@import "../../components/modals/quickviews/SlotQuickview/SlotQuickview.scss";
+
+// Shared
+@import "../../components/shared/accountSettings/AccountSettings.scss";
+
+// Tables
+@import "../../components/tables/activitiesTable/ActivitiesTable.scss";
+@import "../../components/tables/botsTable/BotsTable.scss";
+@import "../../components/tables/containedTable/ContainedTable.scss";
+@import "../../components/tables/positionsTable/PositionsTable.scss";
+@import "../../components/tables/slotsTable/SlotsTable.scss";
+@import "../../components/tables/tableBase/TableBase.scss";
+
+// Tiles
+@import "../../components/tiles/bot/block/Block.scss";
+@import "../../components/tiles/bot/botThread/BotThread.scss";
+@import "../../components/tiles/bot/botValue/BotValue.scss";
+@import "../../components/tiles/bot/rule/Rule.scss";
+@import "../../components/tiles/masterTileDefault/MasterTileDefault.scss";
+@import "../../components/tiles/noDocumentsTile/NoDocumentsTile.scss";
+@import "../../components/tiles/orderTile/OrderTile.scss";
+@import "../../components/tiles/pnlTile/PNLTile.scss";
+@import "../../components/tiles/positionTile/PositionTile.scss";
+@import "../../components/tiles/scheduleTile/ScheduleTile.scss";
+@import "../../components/tiles/slotTile/SlotTile.scss";
+@import "../../components/tiles/userInstance/UserInstance.scss";
+
 .price-display,
 .percent-display {
    font-size: 1rem;

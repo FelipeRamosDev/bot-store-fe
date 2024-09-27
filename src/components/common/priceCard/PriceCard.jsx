@@ -1,4 +1,3 @@
-import './PriceCard.scss';
 import Card from '@/components/common/card/Card';
 
 /**

@@ -1,4 +1,3 @@
-import './CheckButton.scss';
 import { Button } from '@mui/material';
 
 /**

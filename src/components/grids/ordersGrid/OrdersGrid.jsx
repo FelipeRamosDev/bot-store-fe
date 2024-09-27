@@ -1,4 +1,3 @@
-import './OrdersGrid.scss';
 import OrderTile from '@/components/tiles/orderTile/OrderTile';
 
 /**

@@ -1,5 +1,4 @@
 'use client';
-import './Spinner.scss';
 
 /**
  * Spinner component displays a loading spinner with an optional message.

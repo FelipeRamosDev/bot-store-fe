@@ -1,4 +1,3 @@
-import './SlotResultsGrid.scss';
 import PriceCard from '@/components/common/priceCard/PriceCard';
 import Percent from '@/components/displays/percent/Percent';
 import Price from '@/components/displays/price/Price';

@@ -1,4 +1,3 @@
-import './ScheduleEditor.scss';
 import { useContext } from 'react';
 import ScheduleTile from '@/components/tiles/scheduleTile/ScheduleTile';
 import TopBorderButton from '@/components/buttons/topBorderButton/TopBorderButton';

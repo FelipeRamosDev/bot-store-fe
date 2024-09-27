@@ -1,4 +1,3 @@
-import './OrderTile.scss';
 import PriceCard from '@/components/common/priceCard/PriceCard';
 import Price from '@/components/displays/price/Price';
 import { useState } from 'react';

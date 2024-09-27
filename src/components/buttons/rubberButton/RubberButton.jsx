@@ -1,4 +1,3 @@
-import './RubberButton.scss';
 import Button from '@mui/material/Button';
 
 /**

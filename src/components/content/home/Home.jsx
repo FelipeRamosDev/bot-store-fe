@@ -1,5 +1,4 @@
 'use client';
-import './Home.scss';
 import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';

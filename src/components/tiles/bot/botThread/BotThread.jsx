@@ -1,5 +1,4 @@
 'use client';
-import './BotThread.scss';
 import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import APIContext from '@/contexts/4HandsAPI';

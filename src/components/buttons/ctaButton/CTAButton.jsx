@@ -1,4 +1,3 @@
-import './CTAButton.scss';
 import { Button } from "@mui/material";
 
 /**

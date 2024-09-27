@@ -1,5 +1,4 @@
 'use client';
-import './MasterDetails.scss';
 import { useState } from 'react';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import MasterDetailsHeader from './MasterDetailsHeader';

@@ -1,6 +1,5 @@
 'use client';
 
-import './CandlestickChartBase.scss';
 import { useEffect, useRef, useState } from 'react';
 import { createChart } from 'lightweight-charts';
 import { darkTheme } from '@/style/darkTheme';

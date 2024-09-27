@@ -1,6 +1,4 @@
 'use client';
-import "./UserInstance.scss";
-
 import { useContext } from 'react';
 import Card from '@/components/common/card/Card';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';

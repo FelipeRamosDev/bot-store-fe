@@ -1,4 +1,3 @@
-import './BotDetails.scss';
 import { DBQuery } from '@/contexts/DBQuery';
 import BotDetailsHeader from './BotDetailsHeader';
 import BotThreads from './BotThreads';

@@ -1,6 +1,4 @@
 'use client';
-import "./ActivitiesTable.scss";
-
 import { useContext } from 'react';
 import StatusBadge from "@/components/common/statusBedge/StatusBadge";
 import TableBase from '@/components/tables/tableBase/TableBase';

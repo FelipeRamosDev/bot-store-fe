@@ -1,4 +1,3 @@
-import './TopAlertBar.scss';
 import { Button } from '@mui/material';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 

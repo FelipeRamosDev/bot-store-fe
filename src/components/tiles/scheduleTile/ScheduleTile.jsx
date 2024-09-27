@@ -1,5 +1,4 @@
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import './ScheduleTile.scss';
 import config from '@/config.json';
 import CloseIcon from '@mui/icons-material/Close';
 import APIContext from '@/contexts/4HandsAPI';

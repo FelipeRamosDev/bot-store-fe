@@ -1,5 +1,4 @@
 'use client';
-import './Rule.scss';
 import { useContext, useState, Fragment } from 'react';
 import BotValue from '../botValue/BotValue';
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';

@@ -1,4 +1,3 @@
-import './SlotQuickview.scss';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import ContentModal from '../../base/contentModal/ContentModal';
 import SlotQuickviewContent from './SlotQuickviewContent';
