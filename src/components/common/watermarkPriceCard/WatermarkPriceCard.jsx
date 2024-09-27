@@ -1,5 +1,4 @@
 'use client';
-import './WatermarkPriceCard.scss';
 import { useEffect, useRef, useState } from 'react';
 import PriceCard from '@/components/common/priceCard/PriceCard';
 

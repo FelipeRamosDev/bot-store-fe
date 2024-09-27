@@ -1,4 +1,3 @@
-import './SlotsGrid.scss';
 import { useState, useContext, useMemo } from 'react';
 import { Add } from '@mui/icons-material';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';

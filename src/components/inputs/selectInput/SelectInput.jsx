@@ -1,4 +1,3 @@
-import './SelectInput.scss';
 import { useRef } from 'react';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';

@@ -1,4 +1,3 @@
-import './WalletGrid.scss';
 import PNLTile from '@/components/tiles/pnlTile/PNLTile';
 
 /**

@@ -1,5 +1,3 @@
-import './Card.scss';
-
 /**
  * `Card` is a customizable container component that supports various styling options, such as padding, border radius, elevation, and shadow color.
  * It is designed to be used as a card-like element in user interfaces.

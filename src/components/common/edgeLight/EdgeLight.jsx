@@ -1,5 +1,3 @@
-import './EdgeLight.scss';
-
 /**
  * Determines the color class based on the number value.
  *

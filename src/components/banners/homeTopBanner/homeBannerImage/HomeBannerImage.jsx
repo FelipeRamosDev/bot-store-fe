@@ -1,4 +1,3 @@
-import './HomeBannerImage.scss';
 import MasterTileImg from '@/components/content/home/img/MasterTileImg';
 import RuleTileImg from '@/components/content/home/img/RuleTileImg';
 import BTCSlotTilesImg from '@/components/content/home/img/BTCSlotTilesImg';

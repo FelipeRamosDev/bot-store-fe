@@ -1,5 +1,4 @@
 'use client';
-import './SlotTile.scss';
 import Link from 'next/link';
 import { useContext, useEffect, useState, useRef } from 'react';
 import Price from '@/components/displays/price/Price';

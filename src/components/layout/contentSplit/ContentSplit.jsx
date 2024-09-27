@@ -1,5 +1,3 @@
-import './ContentSplit.scss';
-
 /**
  * ContentSplit component divides the available space into two sections based on a specified breakpoint.
  * 

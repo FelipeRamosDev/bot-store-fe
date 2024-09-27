@@ -1,5 +1,4 @@
 'use client';
-import './DrawerMenu.scss';
 import { Drawer } from '@mui/material';
 
 /**

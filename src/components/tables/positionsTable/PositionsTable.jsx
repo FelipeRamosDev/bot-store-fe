@@ -1,5 +1,4 @@
 'use client';
-import './PositionsTable.scss';
 import { useContext, useState } from 'react';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import Price from '@/components/displays/price/Price';

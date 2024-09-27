@@ -1,4 +1,3 @@
-import './ListDocPicker.scss';
 import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import { Check } from '@mui/icons-material';
 

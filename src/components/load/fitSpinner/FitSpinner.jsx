@@ -1,4 +1,3 @@
-import "./FitSpinner.scss";
 import Spinner from '@/components/load/spinner/Spinner';
 
 /**

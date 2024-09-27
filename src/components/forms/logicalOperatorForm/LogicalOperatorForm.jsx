@@ -1,5 +1,3 @@
-import './LogicalOperatorForm.scss';
-
 import { useContext } from 'react';
 import APIContext from '@/contexts/4HandsAPI';
 import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';

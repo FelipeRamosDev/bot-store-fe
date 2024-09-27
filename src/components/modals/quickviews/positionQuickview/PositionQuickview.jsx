@@ -1,4 +1,3 @@
-import './PositionQuickview.scss';
 import ContentModal from '../../base/contentModal/ContentModal';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';

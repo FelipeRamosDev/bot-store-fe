@@ -1,4 +1,3 @@
-import './BotValueForm.scss';
 import { onCreateSubmit, presetForm, parseListTitle, parseListSubTitle, listSelect } from './BotValueForm.helper';
 import { useState, useRef, useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';

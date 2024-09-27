@@ -1,4 +1,3 @@
-import './SliderInput.scss';
 import Slider from '@mui/material/Slider';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';

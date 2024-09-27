@@ -1,5 +1,4 @@
 'use client';
-import './TopHeader.scss';
 import Logo from '@/components/common/Logo';
 import TopNavPublic from './TopNavPublic';
 import TopNavAuth from './TopNavAuth';

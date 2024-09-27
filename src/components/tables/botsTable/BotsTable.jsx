@@ -1,6 +1,4 @@
 'use client';
-
-import './BotsTable.scss';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Price from '@/components/displays/price/Price';

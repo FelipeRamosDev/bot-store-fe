@@ -1,4 +1,3 @@
-import './NoDocumentsTile.scss';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 /**

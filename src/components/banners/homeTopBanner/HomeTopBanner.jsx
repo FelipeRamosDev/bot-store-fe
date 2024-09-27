@@ -1,5 +1,4 @@
 'use client';
-import './HomeTopBanner.scss';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import { useRouter } from 'next/navigation';

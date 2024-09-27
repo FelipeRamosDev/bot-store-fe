@@ -1,5 +1,3 @@
-import './StatusBadge.scss';
-
 /**
  * Parses and returns badge type and color based on the given slot type.
  *

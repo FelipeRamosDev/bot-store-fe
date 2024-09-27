@@ -1,5 +1,4 @@
 'use client';
-import './ContentModal.scss';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
