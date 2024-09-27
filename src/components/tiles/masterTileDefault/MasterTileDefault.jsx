@@ -63,16 +63,17 @@ export default function MastersTileDefault({ demoMode, className = '', master, m
    }
 
    return <Card
-      className={`mastertile-default ${minified ? 'minified' : ''} ${className}`}
+      className={`mastertile-default ${minified ? 'minified' : ''} ${demoMode ? 'demo-mode' : ''} ${className}`}
       radius="s"
       padding={minified ? 'xs' : ''}
       elevation={elevation}
-      onClick={() => router.push(`/dashboard/master-accounts/${master.index}`)}
+      onClick={() => !demoMode && router.push(`/dashboard/master-accounts/${master.index}`)}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       {...props}
    >
+      {demoMode && <div className="lock-layer"></div>}
       {!minified && <EdgeLight color={edgeColor} />}
 
       <h3 className="title">
