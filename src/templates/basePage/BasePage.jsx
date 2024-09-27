@@ -1,7 +1,7 @@
 import React from 'react';
 import MainFooter from '@/components/footers/mainFooter/MainFooter';
-import './BasePage.scss';
 import TopHeader from '@/components/headers/topHeader/TopHeader';
+import RootPublicProvider from '@/providers/RootPublicProvider';
 
 /**
  * `BasePage` is a layout component that includes a top header and a main footer. 
@@ -17,14 +17,16 @@ import TopHeader from '@/components/headers/topHeader/TopHeader';
  */
 export default function BasePage({ className = '', fullContainer, headerMenu, children }) {
    return (
-      <main>
-         <TopHeader fullContainer={fullContainer} type={headerMenu} />
+      <main className={`${className} base-page page`}>
+         <RootPublicProvider>
+            <TopHeader fullContainer={fullContainer} type={headerMenu} />
 
-         <div className={`page ${className}`}>
-            {children}
-         </div>
+            <div className="page-content">
+               {children}
+            </div>
 
-         <MainFooter className="absolute-bottom" />
+            <MainFooter className="absolute-bottom" />
+         </RootPublicProvider>
       </main>
    );
 }
