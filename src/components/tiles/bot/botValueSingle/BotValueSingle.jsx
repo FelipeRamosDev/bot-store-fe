@@ -62,7 +62,6 @@ export default function BotValueSingle({ botValue, eventName, title = 'Bot Value
       <WatermarkPriceCard
          className="bot-value-single"
          watermark={title}
-         paddingSize={5}
          padding="xs"
          radius="s"
          borderSide="bottom"

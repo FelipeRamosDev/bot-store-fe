@@ -2,7 +2,29 @@
    $title-size: 0.95rem;
    $header-padding: 0.75rem;
    $header-space: $title-size + calc($header-padding * 2.7);
+   $markSize: 1em;
+   $padding: calc($markSize / 2.5);
+   $wideFactor: -1.8;
+
    position: relative;
+
+   &.watermark-price-card {
+      &.left {
+         padding-left: calc($markSize + $padding);
+      }
+   
+      &.right {
+         padding-right: calc($markSize + $padding);
+      }
+
+      .watermark[border-side=left] {
+         left: calc($markSize * $wideFactor);
+      }
+   
+      .watermark[border-side=right] {
+         right: calc($markSize * $wideFactor);
+      }
+   }
 
    .card,
    &.card {
@@ -45,6 +67,8 @@
    .thread-header {
       .check-button-group {
          .options-wrap {
+            margin-top: 0;
+
             .check-button {
                @media screen and (max-width: $screen-m) {
                   font-size: 0.8rem;
