@@ -1,5 +1,5 @@
-import { AuthUserProvider } from '@/contexts/AuthUser';
 import BasePage from '../basePage/BasePage';
+import RootAuthProvider from '@/providers/RootAuthProvider';
 
 /**
  * `AuthBasePage` is a wrapper component that provides a base layout for pages that require authentication.
@@ -13,10 +13,10 @@ import BasePage from '../basePage/BasePage';
  */
 export default function AuthBasePage({ children, ...props }) {
    return (
-      <BasePage headerMenu="auth" {...props}>
-         <AuthUserProvider>
+      <RootAuthProvider>
+         <BasePage headerMenu="auth" {...props}>
             {children}
-         </AuthUserProvider>
-      </BasePage>
+         </BasePage>
+      </RootAuthProvider>
    );
 }

@@ -1,5 +1,4 @@
 import '@/style/scss/style.scss';
-import MainRoot from '@/layouts/root/MainRoot';
 
 /**
  * Metadata for the BotStore application.
@@ -21,4 +20,12 @@ export const metadata = {
  *
  * @returns {JSX.Element} The root layout component for the application.
  */
-export default MainRoot;
+export default function HomeLayout({ children }) {
+   return (
+      <html lang="en">
+         <body>
+            {children}
+         </body>
+      </html>
+   );
+}
