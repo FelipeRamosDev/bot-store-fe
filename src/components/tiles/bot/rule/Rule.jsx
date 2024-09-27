@@ -68,6 +68,7 @@ export default function Rule({ demoMode, index, rule = {}, logicalOperator, ...p
          elevation={10}
          {...props}
       >
+         {demoMode && <div className="lock-layer"></div>}
          <div className="rule-header">
             {rule.children.length > 0 && <span>{rule.children.length === 2 ? parseRuleTitle(rule.comparison) : 'IS TRUE'}</span>}
 
