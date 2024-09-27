@@ -12,6 +12,9 @@ import { toMoneyString, toMoney } from '@/helpers/format';
  * @param {number} setup.fractional - Number of decimal places to display.
  * @param {number} setup.amount - The monetary value to format and display.
  * @param {string} setup.size - CSS size for display (e.g., 'small', 'medium', 'large').
+ * @param {number} setup.fontSize - Optional font-size of the displayed percentage.
+ * @param {string} setup.prefix - A prefix to be displayed before the element.
+ * @param {string} setup.posfix - A posfix to be displayed after the element.
  * @returns {JSX.Element} The formatted monetary value.
  */
 export default function Price({
@@ -22,7 +25,10 @@ export default function Price({
    dashedZero = false,
    fractional,
    amount,
-   size
+   size,
+   fontSize,
+   prefix,
+   posfix
 }) {
    // Handle dashed zero display
    if (dashedZero && !amount) {
@@ -51,6 +57,7 @@ export default function Price({
    return <span
       color={color}
       display-size={size}
+      style={{ fontSize }}
       className={`price-display ${className}`}
-   >{value}</span>;
+   >{prefix || ''}{value}{posfix || ''}</span>;
 }

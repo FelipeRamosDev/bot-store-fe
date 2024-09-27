@@ -13,10 +13,11 @@ import ContainedTable from '@/components/tables/containedTable/ContainedTable';
  * @param {Object} [props.botValue={}] - The function bot value to display.
  * @param {Object} props.botValue.functionUID - The unique identifier for the function.
  * @param {string} props.botValue.configs - The configuration data for the function in JSON format.
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function FunctionValue({ className = '', parentThread, parentRule, minify, botValue = {}, ...props }) {
+export default function FunctionValue({ demoMode, className = '', parentThread, parentRule, minify, botValue = {}, ...props }) {
    const valueFunction = botValue.functionUID;
    const params = JSON.parse(botValue.configs);
    const tableData = [];
@@ -39,7 +40,7 @@ export default function FunctionValue({ className = '', parentThread, parentRule
    const stringParams = Object.keys(params).map(key => `${key}: ${params[key]}`).join(' | ');
    return (
       <div className={`bot-value function ${className} ${minify ? 'minified' : ''}`} {...props}>
-         <ContentHeader Toolbar={() => <BotValuesMenu botValue={botValue} parentThread={parentThread} parentRule={parentRule} />}>
+         <ContentHeader Toolbar={() => !demoMode && <BotValuesMenu botValue={botValue} parentThread={parentThread} parentRule={parentRule} />}>
             <label className="value-name">{valueFunction.title}</label>
          </ContentHeader>
 

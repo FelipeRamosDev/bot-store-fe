@@ -38,6 +38,7 @@ export default function ScheduleTile({ editMode = false, schedule = {}, setView 
          }
 
          setView('display');
+         window.location.reload();
       } catch (err) {
          throw err;
       }

@@ -6,8 +6,18 @@
    padding: 1rem 1rem 1rem 1.3rem;
    -webkit-user-select: none;
    user-select: none;
-   cursor: pointer;
    transition: box-shadow 100ms;
+
+   &:not(.demo-mode) {
+      cursor: pointer;
+   }
+
+   &.minified {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+   }
 
    &:hover {
       background-color: $background-grey1-light;
@@ -18,6 +28,9 @@
       font-weight: 500;
       margin-top: 0;
       margin-bottom: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
    }
 
    .badges-line {

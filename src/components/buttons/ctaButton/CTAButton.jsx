@@ -7,14 +7,14 @@ import { Button } from "@mui/material";
  *
  * @param {Object} props - The props object.
  * @param {React.ReactNode} [props.children] - The content to be displayed inside the button.
- * @param {Object} [props] - Additional props to be passed to the MUI `Button` component.
+ * @param {string} [props.className] - CSS classes.
  *
  * @returns {JSX.Element} The rendered `CTAButton` component.
  */
-export default function CTAButton({ children, ...props }) {
+export default function CTAButton({ className = '', children, ...props }) {
    return (
       <Button
-         className="cta-button"
+         className={`cta-button ${className}`}
          variant="contained"
          color="tertiary"
          {...props}

@@ -1,3 +1,4 @@
+'use client';
 import './Rule.scss';
 import { useContext, useState, Fragment } from 'react';
 import BotValue from '../botValue/BotValue';
@@ -25,20 +26,33 @@ import { Close } from '@mui/icons-material';
  * @param {number} props.index - The index of the rule in the list.
  * @param {Object} props.rule - The rule object containing children bot values and comparison logic.
  * @param {string} props.logicalOperator - The logical operator used for the rule (e.g., AND, OR).
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The Rule component.
  */
-export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
-   const { doc } = useContext(DBQueryContext);
+export default function Rule({ demoMode, index, rule = {}, logicalOperator, ...props }) {
    const API = useContext(APIContext);
+   const queryContext = useContext(DBQueryContext);
    const [ createValueModal, setCreateValueModal ] = useState('');
    const [ toCompare, setToCompare ] = useState(false);
+   let watermarkSize;
+
+   if (!queryContext && !demoMode) {
+      return;
+   }
 
    const toComparisonChange = (ev) => comparisonChange(ev, API, doc, rule, setToCompare);
    const handleDelete = () => deleteRule(API, rule, doc._id);
-
+   
+   const { doc = {} } = queryContext || {};
    if (!Array.isArray(rule.children)) {
       return <></>;
+   }
+
+   if (!demoMode) {
+      watermarkSize = window.innerWidth < configs.breakpoints.s ? 18 : 23;
+   } else {
+      watermarkSize = 23;
    }
 
    return (<>
@@ -49,14 +63,16 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
          radius="s"
          padding="xs"
          borderSide="bottom"
-         watermarkSize={window.innerWidth < configs.breakpoints.s ? 18 : 23}
+         watermarkSize={watermarkSize}
+         absoluteHeader="3.4rem"
          elevation={10}
          {...props}
       >
+         {demoMode && <div className="lock-layer"></div>}
          <div className="rule-header">
             {rule.children.length > 0 && <span>{rule.children.length === 2 ? parseRuleTitle(rule.comparison) : 'IS TRUE'}</span>}
 
-            <RoundIconButton className="close-button" Icon={Close} size="small" onClick={handleDelete} />
+            {!demoMode && <RoundIconButton className="close-button" Icon={Close} size="small" onClick={handleDelete} />}
          </div>
 
          {rule.children.map((value, index) => {
@@ -84,7 +100,7 @@ export default function Rule({ index, rule = {}, logicalOperator, ...props }) {
                   </div>
                )}
 
-               <BotValue botValue={value} parentRule={rule} />
+               <BotValue demoMode={demoMode} botValue={value} parentRule={rule} />
             </Fragment>)
          })}
 

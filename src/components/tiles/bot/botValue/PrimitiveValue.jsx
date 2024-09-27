@@ -10,17 +10,18 @@ import BotValuesMenu from '@/components/menus/dropdown/botValuesMenu/BotValuesMe
  * @param {Object} [props.botValue={}] - The primitive bot value to display.
  * @param {string} props.botValue.primitiveType - The type of the primitive value.
  * @param {string} props.botValue.primitiveValue - The actual value of the primitive.
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function PrimitiveValue({ className = '', parentThread, parentRule, botValue = {}, ...props }) {
+export default function PrimitiveValue({ className = '', demoMode, parentThread, parentRule, botValue = {}, ...props }) {
    const primitiveType = botValue.primitiveType;
 
    return (
       <div className={`bot-value primitive ${className}`} {...props}>
-         <div className="menu-wrap">
+         {!demoMode && <div className="menu-wrap">
             <BotValuesMenu botValue={botValue} parentThread={parentThread} parentRule={parentRule} />
-         </div>
+         </div>}
 
          <label className="value-name">Primitive</label>
          <span className={`primitive-value ${primitiveType}`}>{botValue.primitiveValue}</span>

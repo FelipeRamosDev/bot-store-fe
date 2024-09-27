@@ -43,6 +43,11 @@ export default function SliderInput({ schema, errors = [], fullWidth = true, onC
       onChange(ev);
    }
 
+   const handleFocus = (ev) => {
+      const { target } = ev;
+      target?.select();
+   }
+
    delete props.defaultValue;
    return (
       <FormControl fullWidth={fullWidth} error={errors.length}>
@@ -61,6 +66,7 @@ export default function SliderInput({ schema, errors = [], fullWidth = true, onC
                max={max}
                value={value}
                onInput={handleSliderChange}
+               onFocus={handleFocus}
                {...props}
             />
          </div>

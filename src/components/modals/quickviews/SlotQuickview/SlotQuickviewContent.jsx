@@ -1,4 +1,5 @@
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
+import MastersTileDefault from '@/components/tiles/masterTileDefault/MasterTileDefault';
 import PositionTile from '@/components/tiles/positionTile/PositionTile';
 
 /**
@@ -10,18 +11,20 @@ import PositionTile from '@/components/tiles/positionTile/PositionTile';
  * 
  * @param {Object} props - The component props.
  * @param {Object} [props.slot={}] - An object representing the slot data, which includes assets, trades, status, and interval.
+ * @param {Object} [props.master] - An object representing the master data..
  * 
  * @returns {JSX.Element} The rendered SlotQuickviewContent component.
  */
-export default function SlotQuickviewContent({ slot = {} }) {
+export default function SlotQuickviewContent({ master, slot = {} }) {
    const symbol = slot.assets.length ? slot.assets[0] : '';
    const position = slot.trades.length ? slot.trades[0] : '';
    const isRunning = slot.status === 'running';
 
    return (
       <div className="chart-wrapper">
-         <PositionTile position={position} slotIsRunning={isRunning} />
+         <MastersTileDefault master={master} minified={true} />
          <CryptoCandlestickChart symbol={symbol} interval={slot.interval} position={position} />
+         {position && <PositionTile position={position} slotIsRunning={isRunning} />}
       </div>
    );
 }

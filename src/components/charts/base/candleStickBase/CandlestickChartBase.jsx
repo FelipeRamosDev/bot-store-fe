@@ -1,10 +1,12 @@
 'use client';
 
 import './CandlestickChartBase.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createChart } from 'lightweight-charts';
 import { darkTheme } from '@/style/darkTheme';
 import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
+import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import { OpenInFull, CloseFullscreen } from '@mui/icons-material';
 
 /**
  * A React component for rendering a candlestick chart using the lightweight-charts library.
@@ -20,6 +22,7 @@ import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
  * @returns {JSX.Element} The rendered candlestick chart and a loading spinner.
  */
 export default function CandlestickChartBase({ candles, interval, position, className = '', chartOptions, styleOptions, wrapperProps }) {
+   const [ expandState, setExpandState ] = useState(false);
    const chartSpot = useRef();
    const chart = useRef();
    const candlestickSeries = useRef();
@@ -94,6 +97,10 @@ export default function CandlestickChartBase({ candles, interval, position, clas
       ...styleOptions
    };
 
+   function expandCollapse() {
+      setExpandState(prev => !prev);
+   }
+
    useEffect(() => {
       // Initializing the candlestick chart
       if (candles && !chart.current && chartSpot.current) {
@@ -165,6 +172,15 @@ export default function CandlestickChartBase({ candles, interval, position, clas
          <FitSpinner spinner={'Loading Candlesticks'} noBackground={true} />
       </div>
 
-      <div ref={chartSpot} className={`candlestick-chart ${!candles ? 'hide' : ''} ${className}`} {...wrapperProps}></div>
+      <div ref={chartSpot} className={`candlestick-chart ${!candles ? 'hide' : ''} ${expandState ? 'expanded' : ''} ${className}`} {...wrapperProps}>
+         <RoundIconButton
+            className="expand-button"
+            Icon={!expandState ? OpenInFull : CloseFullscreen}
+            size={!expandState ? 'small' : 'medium'}
+            variant="contained"
+            color="rubber"
+            onClick={expandCollapse}
+         />
+      </div>
    </>);
 }

@@ -11,13 +11,15 @@ import PrimitiveValue from './PrimitiveValue';
  * @param {Object} [props.parentRule] - The parent rule associated with the bot value.
  * @param {boolean} [props.isSingle] - If true, the component is displayed in a single value format.
  * @param {boolean} [props.minify=false] - If true, displays a minified view of the function value.
+ * @param {boolean} [props.demoMode=false] - If true, uses the demontration mode, made for public pages.
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function BotValue({ botValue = {}, parentThread, parentRule, isSingle, minify, ...props }) {
+export default function BotValue({ botValue = {}, demoMode = false, parentThread, parentRule, isSingle, minify, ...props }) {
    if (botValue.valueType === 'function') {
       return <FunctionValue
          botValue={botValue}
+         demoMode={demoMode}
          parentThread={parentThread}
          parentRule={parentRule}
          minify={minify}
@@ -28,6 +30,7 @@ export default function BotValue({ botValue = {}, parentThread, parentRule, isSi
    if (botValue.valueType === 'primitive') {
       return <PrimitiveValue
          botValue={botValue}
+         demoMode={demoMode}
          parentThread={parentThread}
          parentRule={parentRule}
          {...props}

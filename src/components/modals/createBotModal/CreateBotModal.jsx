@@ -8,12 +8,13 @@ import ContentModal from "../base/contentModal/ContentModal";
  * @component
  * 
  * @param {Object} props - The component props.
+ * @param {Object} props.bot - The current bot data
  * @param {boolean} props.open - Determines whether the modal is open.
  * @param {Function} props.setModal - Function to control the modal state (open/close).
  * 
  * @returns {JSX.Element} The CreateBotModal component.
  */
-export default function CreateBotModal({ open, setModal }) {
+export default function CreateBotModal({ bot, open, setModal }) {
    return (
       <ContentModal
          title="Create Bot"
@@ -22,7 +23,7 @@ export default function CreateBotModal({ open, setModal }) {
          size="small"
          onClose={() => setModal(false)}
       >
-         <CreateBotForm />
+         <CreateBotForm editData={bot} onSuccess={() => setModal(false)} />
       </ContentModal>
    );
 }

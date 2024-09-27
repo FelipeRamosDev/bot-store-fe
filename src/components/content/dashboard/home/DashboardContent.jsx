@@ -6,6 +6,10 @@ import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import { DBQuery } from '@/contexts/DBQuery';
 import { useContext } from 'react';
 import AuthUserContext from "@/contexts/AuthUser";
+import { DataArray, Money } from '@mui/icons-material';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import DashboardSlotTable from './DashboardSlotTable';
+import DashboardPositionTable from './DashboardPositionTable';
 
 /**
  * DashboardContent component displays the main content for the dashboard.
@@ -40,35 +44,25 @@ export default function DashboardContent({ createMasterModal }) {
 
       {/* Slots and Positions Tables */}
       <div className="slots-positions">
-         <div className="column">
-            <h2 className="card-title">Slots</h2>
+         <DBQuery
+            type="query"
+            collection="slots"
+            filter={{ user: user._id }}
+            sort={{ pnl: -1 }}
+            limit={6}
+         >
+            <DashboardSlotTable />
+         </DBQuery>
 
-            <DBQuery
-               type="query"
-               collection="slots"
-               filter={{ user: user._id }}
-               sort={{ pnl: -1 }}
-               limit={20}
-               subscribe={true}
-            >
-               <SlotsTable />
-            </DBQuery>
-         </div>
-
-         <div className="column">
-            <h2 className="card-title">Positions</h2>
-
-            <DBQuery
-               type="query"
-               collection="positions"
-               filter={{ user: user._id }}
-               sort={{ modifiedAt: -1 }}
-               limit={20}
-               subscribe={true}
-            >
-               <PositionsTable include={['symbol', 'type', 'usedLeverage', 'pnl']} />
-            </DBQuery>
-         </div>
+         <DBQuery
+            type="query"
+            collection="positions"
+            filter={{ user: user._id }}
+            sort={{ modifiedAt: -1 }}
+            limit={6}
+         >
+            <DashboardPositionTable />
+         </DBQuery>
       </div>
    </>;
 }

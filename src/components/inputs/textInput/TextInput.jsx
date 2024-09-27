@@ -15,15 +15,25 @@ import { TextField, FormControl, FormHelperText } from '@mui/material';
 export default function TextInput({ schema, errors = [], fullWidth = true, ...props }) {
    const { inputType = 'text', label, placeholder, color = 'tertiary', style } = schema || {};
    let defaultValue;
+   let inputMode = schema.inputMode;
 
    if (schema.form.editMode) {
       defaultValue = schema.getEditValue();
    }
 
+   if (!schema.inputMode) {
+      switch (inputType) {
+         case 'number':
+            inputMode = 'numeric';
+            break;
+      }
+   }
+
    return (
-      <FormControl fullWidth={fullWidth} error={errors.length} sx={style} {...props}>
+      <FormControl className="form-input" fullWidth={fullWidth} error={errors.length} sx={style}>
          <TextField
             type={inputType}
+            inputMode={inputMode}
             label={label}
             placeholder={placeholder}
             variant="filled"

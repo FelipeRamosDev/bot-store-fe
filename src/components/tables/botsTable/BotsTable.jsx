@@ -10,6 +10,7 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import Add from '@mui/icons-material/Add';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
+import { SmartToy } from '@mui/icons-material';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
@@ -20,16 +21,21 @@ import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
  * @returns {React.Element} The rendered table of recent bots.
  */
 export default function BotsTable({ title = 'Bots' }) {
-   const { query = [], isLoading } = useContext(DBQueryContext);
+   const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const [ createBotModal, setCreateBotModal ] = useState(false);
    const nav = useRouter();
    const bots = query;
+   let parsedLimit = limit;
+
+   if (limit) {
+      parsedLimit = limit -1;
+   }
 
    return <div className="bots-table">
       <ContentHeader
          Toolbar={() => <RoundIconButton Icon={Add} color="tertiary" variant="contained" onClick={() => setCreateBotModal(true)} />}
       >
-         <h3 className="header-title">{title}</h3>
+         <SmartToy /> <h3 className="header-title">{title}</h3>
       </ContentHeader>
 
       <TableBase
@@ -37,6 +43,10 @@ export default function BotsTable({ title = 'Bots' }) {
          pagination={{}}
          loading={isLoading}
          onClickRow={(doc) => nav.push(`/dashboard/bots/${doc.index}`)}
+         useSeeMorePage={true}
+         itemsPerPage={parsedLimit}
+         onPageNav={goPage}
+         onRowsPerPageChange={reloadLimit}
          headerConfigs={[
             {
                label: 'Bot',

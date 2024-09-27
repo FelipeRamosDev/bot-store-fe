@@ -11,6 +11,7 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 import Card from '@/components/common/card/Card';
+import MasterClosedPositions from './MasterClosedPositions';
 
 /**
  * MasterDetailsContent component displays detailed information about a master account,
@@ -36,7 +37,7 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
          slot.trades.map(trade => {
             if (trade.status === 'opened') {
                if (!trade.botSlot?.name) {
-                  trade.botSlot = { ...trade.botSlot, name: slot.name }
+                  trade.botSlot = slot;
                }
 
                positions.push(trade);
@@ -59,15 +60,9 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
          collection="positions"
          filter={{ status: 'closed', master: masterUID }}
          sort={{ closeTime: -1 }}
-         subscribe={true}
+         limit={11}
       >
-         <div className="closed-positions">
-            <ContentHeader>
-               <h3 className="header-title">Closed Positions</h3>
-            </ContentHeader>
-
-            <PositionsTable exclude={['type']} />
-         </div>
+         <MasterClosedPositions />
       </DBQuery>
    </>;
 }

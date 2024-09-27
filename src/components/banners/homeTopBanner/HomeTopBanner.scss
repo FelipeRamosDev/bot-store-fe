@@ -14,7 +14,15 @@
    @media screen and (max-width: $screen-xl) {
       background-position: center;
    }
-   
+
+   >.content-split {
+      margin-top: 8rem;
+
+      @media screen and (min-width: $screen-m) {
+         margin-top: auto;
+      }
+   }
+
    .content {
       display: flex;
       justify-content: space-between;
@@ -23,9 +31,28 @@
       .column {
          flex: 1;
       }
+
+      .content-a {
+         flex: calc(40% - 1.5rem);
+      }
+
+      .content-b {
+         width: 100%;
+         flex: calc(60% - 1.5rem);
+      }
+
+      .image-spot {
+         .card {
+            background-color: $background-paper-light;
+         }
+      }
    }
 
    .cta-button {
-      margin-top: 2rem;
+      margin-top: 0;
+
+      @media screen and (min-width: $screen-m) {
+         margin-top: 2rem;
+      }
    }
 }

@@ -153,14 +153,3 @@ export async function listSelect(valueDoc, API, user, bot, parentThreads, parent
       throw err;
    }
 }
-
-/**
- * Submits both the main form and the parameters form if available.
- * 
- * @param {Object} formNode - Reference to the main form node.
- * @param {Object} paramsFormNode - Reference to the parameters form node.
- */
-export function onEditSubmit(formNode, paramsFormNode) {
-   formNode.current?.requestSubmit();
-   paramsFormNode.current?.requestSubmit();
-}

@@ -21,6 +21,8 @@ export default function PositionDetails({ position = {}, ...props }) {
                { label: 'ID', value: position.cod },
                { label: 'Open Time', value: new Date(position.openTime).toLocaleString() },
                { label: 'Close Time', value: position.closeTime && new Date(position.closeTime).toLocaleString(), hide: !position.closeTime },
+               { label: 'Symbol', value: position.symbol },
+               { label: 'Interval', value: position.interval },
             ]}
          />
       </Card>

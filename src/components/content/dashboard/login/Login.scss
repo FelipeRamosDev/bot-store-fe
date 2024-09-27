@@ -1,16 +1,30 @@
+@import "../../../../style/scss/variables.scss";
+
 .login-content {
    display: flex;
    margin-top: 15vh;
    gap: 5rem;
 
    .card {
-      margin-left: auto;
-      margin-right: 5%;
-      width: 80%;
+      width: 100%;
       max-width: 600px;
+      margin: 0 auto;
+
+      @media screen and (min-width: $screen-m) {
+         margin-left: auto;
+         margin-right: 5%;
+      }
+
+      .card-title {
+         display: inline-flex;
+         align-items: center;
+         gap: 0.5rem;
+         font-size: 1.2rem;
+      }
    }
 
    .create-message {
       margin-top: 1.3rem;
+      font-size: 0.95rem;
    }
 }

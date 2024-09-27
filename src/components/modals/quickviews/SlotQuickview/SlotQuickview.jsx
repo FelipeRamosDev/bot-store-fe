@@ -13,12 +13,13 @@ import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
  * and a table displaying closed positions associated with the slot. The modal is displayed only if a slot is provided as a prop.
  * 
  * @param {Object} props - The component props.
+ * @param {Object} [props.master] - The master object to display in the quick view. If null or undefined, the modal will not be rendered.
  * @param {Object} [props.slot] - The slot object to display in the quick view. If null or undefined, the modal will not be rendered.
  * @param {Function} props.onClose - A callback function to handle closing the modal.
  * 
  * @returns {JSX.Element} The rendered SlotQuickview component, or an empty fragment if no slot is provided.
  */
-export default function SlotQuickview({ slot, onClose, ...props }) {
+export default function SlotQuickview({ master, slot, onClose, ...props }) {
    const open = Boolean(slot);
 
    if (!slot) {
@@ -36,7 +37,7 @@ export default function SlotQuickview({ slot, onClose, ...props }) {
          {...props}
       >
          <ContentSidebar fitMaxWidth={true}>
-            <SlotQuickviewContent slot={slot} />
+            <SlotQuickviewContent master={master} slot={slot} />
             <SlotQuickviewSidebar slot={slot} />
          </ContentSidebar>
          

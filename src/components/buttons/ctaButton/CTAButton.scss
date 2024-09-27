@@ -3,4 +3,10 @@
 .cta-button {
    background: $grad-primary-tertiary-light;
    color: $text-tertiary;
+
+   &.MuiButton-sizeLarge {
+      @media screen and (max-width: $screen-m) {
+         padding: 6px 16px;
+      }
+   }
 }

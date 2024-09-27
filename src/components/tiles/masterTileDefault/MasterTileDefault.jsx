@@ -30,10 +30,11 @@ const FINAL_ELEVATION = 40;
  * @param {string} props.master.badges.edgeColor - The color for the edge light.
  * @param {string} props.master.badges.badgeColor - The color for the status badge.
  * @param {string} props.master.badges.accountType - The account type for the status badge.
+ * @param {boolean} props.minified - Set true to use the minified view.
  * 
  * @returns {React.Element} The rendered tile component with master account information.
  */
-export default function MastersTileDefault({ className = '', master, ...props }) {
+export default function MastersTileDefault({ demoMode, className = '', master, minified = false, ...props }) {
    const router = useRouter();
    const [ elevation, setElevation ] = useState(INITIAL_ELEVATION);
    const lastMousePosition = useRef();
@@ -62,30 +63,31 @@ export default function MastersTileDefault({ className = '', master, ...props })
    }
 
    return <Card
-      className={`mastertile-default ${className}`}
+      className={`mastertile-default ${minified ? 'minified' : ''} ${demoMode ? 'demo-mode' : ''} ${className}`}
       radius="s"
+      padding={minified ? 'xs' : ''}
       elevation={elevation}
-      onClick={() => router.push(`/dashboard/master-accounts/${master.index}`)}
+      onClick={() => !demoMode && router.push(`/dashboard/master-accounts/${master.index}`)}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       {...props}
    >
-      <EdgeLight color={edgeColor} />
+      {demoMode && <div className="lock-layer"></div>}
+      {!minified && <EdgeLight color={edgeColor} />}
 
-      <h3 className="title">{master.name}</h3>
-
-      <div className="badges-line">
+      <h3 className="title">
+         {master.name}
          <StatusBadge color={badgeColor} variant="light">{accountType}</StatusBadge>
-      </div>
+      </h3>
 
       <div className="tile-data">
          <div className="data">
-            <p><b>Day PNL:</b> {master.results.dayPnl.toFixed(2)} / {master.results.dayRoi.toFixed(2)}%</p>
-            <p><b>Month PNL:</b> {master.results.monthPnl.toFixed(2)} / {master.results.monthRoi.toFixed(2)}%</p>
+            <p><b>Day PNL:</b> {master.results?.dayPnl?.toFixed(2)} / {master.results?.dayRoi?.toFixed(2)}%</p>
+            <p><b>Month PNL:</b> {master.results?.monthPnl?.toFixed(2)} / {master.results?.monthRoi?.toFixed(2)}%</p>
          </div>
 
-         <Price amount={master.pnl} />
+         <Price amount={master.pnl} fontSize={18} />
       </div>
    </Card>;
 }

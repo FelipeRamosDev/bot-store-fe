@@ -1,5 +1,5 @@
 import './BotValueForm.scss';
-import { onCreateSubmit, presetForm, parseListTitle, parseListSubTitle, listSelect, onEditSubmit } from './BotValueForm.helper';
+import { onCreateSubmit, presetForm, parseListTitle, parseListSubTitle, listSelect } from './BotValueForm.helper';
 import { useState, useRef, useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import botValueForm from './BotValueForm.config';
@@ -53,10 +53,24 @@ export default function BotValueForm({
    const formNode = useRef();
    const paramsFormNode = useRef();
 
-   const handleSubmit = async (data) => await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
+   const handleSubmit = async function (data) {
+      try {
+         if (paramsForm) {
+            const paramsValidate = paramsForm.validateForm();
+            if (paramsValidate.hasError) {
+               return paramsValidate;
+            }
+         }
+   
+         await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
+      } catch (err) {
+         throw err;
+      }
+   }
+
    const handleSetForm = (data) => presetForm(data, functions, botValueForm, editMode, editData, setParamsForm);
    const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess);
-   const handleEditSubmit = () => onEditSubmit(formNode, paramsFormNode);
+   const handleEditSubmit = () => formNode.current?.requestSubmit();
 
    // ASK MODE
    if (formType === 'ask') {
@@ -118,6 +132,7 @@ export default function BotValueForm({
             hideSubmit={true}
             editData={editData}
             submitLabel="Save"
+            clearPrevent={true}
             onReady={() => {
                const functionUID = editData?.functionUID?._id;
 

@@ -1,14 +1,8 @@
 @import "../../../../style/scss/variables.scss";
 
 .bot-rule {
-   $rheader-height: 2.4rem;
-
    display: flex;
    gap: 0.5rem;
-
-   &.watermark-price-card {
-      padding-top: calc($rheader-height + 1rem);
-   }
 
    @media screen and (max-width: $screen-m) {
       flex-direction: column;
@@ -20,7 +14,7 @@
       top: 0;
       right: 0;
       background-color: $background-paper;
-      height: $rheader-height;
+      height: 2.4rem;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -46,6 +40,11 @@
       background-color: $background-grey2;
       padding: 0.5rem;
       border-radius: $radius-s;
+      width: 100%;
+
+      @media screen and (min-width: $screen-m) {
+         width: auto;
+      }
 
       span {
          font-size: 1.7rem;

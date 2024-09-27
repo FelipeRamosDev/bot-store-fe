@@ -6,9 +6,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Folder from '@mui/icons-material/Folder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import RubberButton from '@/components/buttons/rubberButton/RubberButton';
-import APIContext from '@/contexts/4HandsAPI';
-import { useRouter } from 'next/navigation';
 import DeleteBotConfirmDialog from '@/components/modals/deleteBotConfirmDialog/DeleteBotConfirmDialog';
+import { Edit } from '@mui/icons-material';
+import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 
 /**
  * BotMenu renders a button that opens a menu with options to archive or delete a bot.
@@ -18,11 +18,10 @@ import DeleteBotConfirmDialog from '@/components/modals/deleteBotConfirmDialog/D
  * 
  * @returns {JSX.Element} The BotMenu component.
  */
-export default function BotMenu() {
+export default function BotMenu({ bot }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
+   const [ editModal, setEditModal ] = useState(false);
    const [ deleteModal, setDeleteModal ] = useState(false);
-   const API = useContext(APIContext);
-   const router = useRouter();
    const open = Boolean(anchorEl);
 
    const handleMenuOpen = (event) => {
@@ -47,6 +46,13 @@ export default function BotMenu() {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
+            <MenuItem onClick={() => setEditModal(true)}>
+               <ListItemIcon>
+                  <Edit fontSize="small" />
+               </ListItemIcon>
+               Edit Bot
+            </MenuItem>
+
             <MenuItem onClick={handleMenuClose} disabled>
                <ListItemIcon>
                   <Folder fontSize="small" />
@@ -62,6 +68,7 @@ export default function BotMenu() {
             </MenuItem>
          </Menu>
 
+         <CreateBotModal bot={bot} open={editModal} setModal={setEditModal} />
          <DeleteBotConfirmDialog open={deleteModal} setOpen={setDeleteModal} />
       </>
    );

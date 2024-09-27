@@ -49,7 +49,7 @@ $black: #111;
 
 $text: #FAFAFA;
 $text-darken: darken($color: $text, $amount: 20);
-$text-secondary: lighten($color: $secondary, $amount: 90);
+$text-secondary: $text-darken;
 $text-tertiary: darken($color: $tertiary, $amount: 70);
 $text-success: darken($color: $success, $amount: 40);
 $text-warn: darken($color: $warn, $amount: 70);

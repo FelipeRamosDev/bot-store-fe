@@ -6,7 +6,7 @@ header {
    position: sticky;
    top: 0;
    width: 100%;
-   z-index: 2;
+   z-index: 10;
    
    .container, .full-container {
       align-items: center;
@@ -21,31 +21,6 @@ header {
       @media screen and (max-width: $screen-m) {
          width: 35px;
          height: 35px;
-      }
-   }
-
-   nav {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 5rem;
-
-      @media screen and (max-width: $screen-m) {
-         display: none;
-      }
-
-      a {
-         font-size: 1.05rem;
-      }
-
-      a, a:visited {
-         color: $text;
-         text-decoration: none;
-         transition: color 150ms;
-      }
-
-      a:hover {
-         color: $tertiary-light;
       }
    }
 }
@@ -63,6 +38,6 @@ footer {
    p {
       text-align: center;
       margin-bottom: 0;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
    }
 }

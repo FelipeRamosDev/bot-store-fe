@@ -8,6 +8,7 @@ import PriceCard from '@/components/common/priceCard/PriceCard';
  * 
  * @param {Object} props - The props object.
  * @param {string} [props.className=''] - Additional CSS class names for the component.
+ * @param {boolean} [props.absoluteHeader] - To use the absolute positioned header.
  * @param {string} [props.watermark] - The watermark text to display.
  * @param {number} [props.watermarkSize=28] - The font size of the watermark.
  * @param {'left' | 'top' | 'bottom' | 'right'} [props.borderSide='left'] - The side of the card where the watermark will be placed.
@@ -27,9 +28,18 @@ import PriceCard from '@/components/common/priceCard/PriceCard';
  *    <div>Your content here</div>
  * </WatermarkPriceCard>
  */
-export default function WatermarkPriceCard({ className = '', watermark, watermarkSize = 28, borderSide = 'left', paddingSize = 14, children, ...props }) {
+export default function WatermarkPriceCard({
+   className = '',
+   watermark,
+   absoluteHeader,
+   watermarkSize = 28,
+   borderSide = 'left',
+   paddingSize = 14,
+   children,
+   ...props
+}) {
    const [ waterMarkStyle, setWaterMarkStyle ] = useState({ fontSize: watermarkSize });
-   const [ cardStyle, setCardStyle ] = useState({});
+   const [ cardStyle, setCardStyle ] = useState({ paddingTop: absoluteHeader });
    const waterMark = useRef();
 
    useEffect(() => {

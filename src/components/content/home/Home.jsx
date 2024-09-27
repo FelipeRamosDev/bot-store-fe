@@ -1,46 +1,42 @@
+'use client';
 import './Home.scss';
-import Image from 'next/image';
-import SlotTileImage from '@/assets/slot_tile.svg';
+import { useRouter } from 'next/navigation';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
+import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
+import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
+import BTCSlotTilesImg from './img/BTCSlotTilesImg';
+import ETHSlotTilesImg from './img/ETHSlotTilesImg';
 
-export default function Home() {
-   return <section className="home-content">
-      <div className="features">
-         <div className="container">
-            <h2 className="title">Follow the TRADES your bot is doing with EASE</h2>
+export default function HomeContent() {
+   const router = useRouter();
 
-            <div className="content">
-               <div className="column image-spot">
-                  <Image src={SlotTileImage} alt="Slot Tile" />
-               </div>
+   return (<>
+      <HomeTopBanner />
 
-               <div className="column marketing-cta right">
-                  <span className="message line1">Let the <span className="grad-txt">MACHINE WORK</span> for you</span>
-                  <span className="message line2">Choose a <span className="grad-txt">BOT to START</span></span>
+      <div className="home-content">
+         <section className="features">
+            <div className="container">
+               <h2 className="title">Follow the TRADES your bot is doing with EASE</h2>
 
-                  <p className="description">Go to the store session to check the bot available to use, use the rank to take the winner and always follow the bot developer recommendations.</p>
-                  <CTAButton size="large">Go to Store</CTAButton>
-               </div>
+               <ContentSplit className="content">
+                  <div className="column image-spot">
+                     <BTCSlotTilesImg />
+                     <ETHSlotTilesImg />
+                  </div>
+
+                  <div className="column marketing-cta right">
+                     <span className="message line1">Create slots to <span className="grad-txt">CONTROL BOTS</span></span>
+                     <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to START</span>
+
+                     <p className="description">
+                        Control the bots you are using into slots to have better visibility of the current trade state, the stoploss and takeprofit.
+                     </p>
+
+                     <CTAButton className="d-large" size="medium" onClick={() => router.push('/dashboard')}>Let&apos;s Start</CTAButton>
+                  </div>
+               </ContentSplit>
             </div>
-         </div>
-
-         <div className="container">
-            <h2 className="title">Check the BOTs score on the STORE before choosing one</h2>
-
-            <div className="content">
-               <div className="column marketing-cta">
-                  <span className="message line1">Check the <span className="grad-txt">RANK</span></span>
-                  <span className="message line2">and take <span className="grad-txt">Winner Bot</span></span>
-
-                  <p className="description">Go to the store session to check the bot available to use, use the rank to take the winner and always follow the bot developer recommendations.</p>
-                  <CTAButton size="large">Go to Store</CTAButton>
-               </div>
-
-               <div className="column image-spot right">
-                  <Image src={SlotTileImage} alt="Slot Tile" />
-               </div>
-            </div>
-         </div>
+         </section>
       </div>
-   </section>;
+   </>);
 }

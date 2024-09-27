@@ -3,12 +3,16 @@ import { toPercentString } from '@/helpers/format';
 /**
  * Percent component displays a percentage value with optional styling.
  *
- * @param {string} className - Additional CSS classes for styling.
- * @param {boolean} noColor - If true, disables color styling.
- * @param {boolean} dashedZero - If true, displays "---%" for a zero value.
- * @param {number} fractional - Number of decimal places to show in the percentage.
- * @param {number} value - The percentage value to display.
- * @param {string} size - Optional size of the displayed percentage.
+ * @param {Object} props - The component properties.
+ * @param {string} props.className - Additional CSS classes for styling.
+ * @param {boolean} props.noColor - If true, disables color styling.
+ * @param {boolean} props.dashedZero - If true, displays "---%" for a zero value.
+ * @param {number} props.fractional - Number of decimal places to show in the percentage.
+ * @param {number} props.value - The percentage value to display.
+ * @param {string} props.size - Optional size of the displayed percentage.
+ * @param {number} props.fontSize - Optional font-size of the displayed percentage.
+ * @param {string} props.prefix - A prefix to be displayed before the element.
+ * @param {string} props.posfix - A posfix to be displayed after the element.
  * @returns {JSX.Element} The rendered percentage value with optional styling.
  */
 export default function Percent({
@@ -17,7 +21,10 @@ export default function Percent({
    dashedZero = false,
    fractional = 2,
    value,
-   size
+   size,
+   fontSize,
+   prefix,
+   posfix
 }) {
    // Handle dashed zero case
    if (dashedZero && value === 0) {
@@ -37,7 +44,8 @@ export default function Percent({
    return <span
       color={color}
       display-size={size}
+      style={{ fontSize }}
       className={`percent-display ${className}`}
-   >{percent}</span>;
+   >{prefix || ''}{percent}{posfix || ''}</span>;
 
 }

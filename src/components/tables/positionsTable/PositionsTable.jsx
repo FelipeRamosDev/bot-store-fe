@@ -15,6 +15,7 @@ import PositionQuickview from '@/components/modals/quickviews/positionQuickview/
  *
  * @param {Object} props - The properties for the PositionsTable component.
  * @param {Array} props.positionsSet - An optional array of positions to display. If not provided, data from the context will be used.
+ * @param {number} [props.itemsPerPage] - The number of items to list per page.
  * @param {Array} [props.include] - Optional array of property keys to include in the table.
  * @param {Array} [props.exclude] - Optional array of property keys to exclude from the table.
  *
@@ -22,36 +23,65 @@ import PositionQuickview from '@/components/modals/quickviews/positionQuickview/
  */
 export default function PositionsTable({ positionsSet, include, exclude }) {
    const [ positionModal, setPositionModal ] = useState('');
-   const { query = [], isLoading } = useContext(DBQueryContext);
+   const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const positions = positionsSet || query;
    const selectedPosition = positions.find(item => item._id === positionModal);
+   let parsedLimit = limit;
+
+   const PERCENT_OPTIONS = {
+      prefix: '(',
+      posfix: ')',
+      fontSize: '0.8rem'
+   }
+
+   if (limit) {
+      parsedLimit = limit -1;
+   }
 
    return <>
       <PositionQuickview position={selectedPosition} onClose={() => setPositionModal('')} />
 
       <TableBase
          className="positions-table"
-         pagination={{}}
          items={positions}
          loading={isLoading}
          include={include}
          exclude={exclude}
          onClickRow={(doc) => setPositionModal(doc?._id)}
+         usePagination={true}
+         itemsPerPage={parsedLimit}
+         onPageNav={goPage}
+         onRowsPerPageChange={reloadLimit}
          headerConfigs={[
             {
                propKey: 'symbol',
                label: 'Symbol',
                style: {
                   paddingLeft: '2rem',
-                  minWidth: '130px',
+                  minWidth: '200px',
                },
                format: (value, item) => {
                   return <>
                      <EdgeLight colorValue={item.pnl} />
 
-                     <small>{item.botSlot?.name}</small>
-                     <p>{value} <StatusBadge variant="light" type="position-side">{item.positionType}</StatusBadge></p>
+                     <small>{item.master?.name} / {item.botSlot?.name}</small>
+                     <p style={{ marginTop: 3 }}>
+                        {value}{' '}
+                        <StatusBadge variant="light" type="account-type" minified={true}>{item.type}</StatusBadge>{' '}
+                        <StatusBadge variant="light" type="position-side" minified={true}>{item.positionType}</StatusBadge>
+                     </p>
                   </>;
+               }
+            },
+            {
+               propKey: 'realizedProfit',
+               label: 'Realized',
+               align: 'center',
+               style: {
+                  minWidth: '140px',
+               },
+               format: (value, item) => {
+                  return <Price amount={value} fontSize="1rem" />
                }
             },
             {
@@ -66,63 +96,6 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                      <p><PrettyDate hideYear={true} divisor=" " time={value} /></p>
                      <p><PrettyDate hideYear={true} divisor=" " time={item.closeTime} /></p>
                   </>;
-               }
-            },
-            {
-               label: 'Type',
-               propKey: 'type',
-               align: 'center',
-               style: {
-                  minWidth: '40px',
-               },
-               format: (value) => {
-                  return <StatusBadge variant="light" type="account-type">{value}</StatusBadge>;
-               }
-            },
-            {
-               label: 'Leverage',
-               propKey: 'usedLeverage',
-               align: 'center',
-               style: {
-                  minWidth: '70px',
-               },
-               format: (value) => {
-                  return <b>{value}x</b>
-               }
-            },
-            {
-               label: 'Quantity',
-               propKey: 'quantity',
-               align: 'center',
-               style: {
-                  minWidth: '70px',
-               },
-               format: (value) => {
-                  return <b>{value}</b>
-               }
-            },
-            {
-               propKey: 'pnl',
-               label: 'PNL / ROI',
-               align: 'center',
-               style: {
-                  minWidth: '140px',
-               },
-               format: (value, item) => {
-                  return <>
-                     <Price amount={value} size="s" /> <Percent value={item.roi} />
-                  </>
-               }
-            },
-            {
-               propKey: 'realizedProfit',
-               label: 'Realized PNL',
-               align: 'center',
-               style: {
-                  minWidth: '140px',
-               },
-               format: (value, item) => {
-                  return <Price amount={value} size="m" />
                }
             },
             {
@@ -145,6 +118,41 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                },
                format: (value) => {
                   return <Price amount={value} noColor={true} />
+               }
+            },
+            {
+               label: 'Leverage',
+               propKey: 'usedLeverage',
+               align: 'center',
+               style: {
+                  minWidth: '70px',
+               },
+               format: (value) => {
+                  return <b style={{ fontSize: '1rem' }}>{value}x</b>
+               }
+            },
+            {
+               label: 'Quantity',
+               propKey: 'quantity',
+               align: 'center',
+               style: {
+                  minWidth: '70px',
+               },
+               format: (value) => {
+                  return <b style={{ fontSize: '1rem' }}>{value}</b>
+               }
+            },
+            {
+               propKey: 'pnl',
+               label: 'PNL / ROI',
+               align: 'center',
+               style: {
+                  minWidth: '140px',
+               },
+               format: (value, item) => {
+                  return <>
+                     <Price amount={value} size="s" /> <Percent {...PERCENT_OPTIONS} value={item.roi} />
+                  </>
                }
             },
             {
