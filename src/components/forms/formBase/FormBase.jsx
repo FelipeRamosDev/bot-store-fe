@@ -64,8 +64,6 @@ export function FormBase({
 
          if (editData && Object.keys(editData).length) {
             formSet.setEditData(editData);
-         } else if (!clearPrevent) {
-            formSet.clearAll();
          }
 
          formSet.fetchDependencies().then(({ success }) => {
@@ -121,9 +119,12 @@ export function FormBase({
 
    return <FormBaseContext.Provider value={{ form, errors, loading }}>
       <AlertModal
-         open={alertDialog}
-         handleOk={() => setAlertDialog(false)}
          title="Error"
+         open={alertDialog}
+         handleOk={() => {
+            form?.clearAll();
+            setAlertDialog(false)
+         }}
       >
          <p>{alertDialog?.message}</p>
       </AlertModal>
