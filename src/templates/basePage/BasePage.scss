@@ -23,8 +23,14 @@ header {
    }
 }
 
-.page {
-   padding-bottom: 5rem;
+.base-page {
+   position: relative;
+   min-height: 100vh;
+}
+
+.page-content {
+   padding-top: 3rem;
+   padding-bottom: 7rem;
 }
 
 footer {
