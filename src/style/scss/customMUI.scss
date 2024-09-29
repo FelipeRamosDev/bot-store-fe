@@ -6,7 +6,7 @@
    }
 }
 
-.MuiInputLabel-root {
+.MuiInputLabel-root.MuiInputLabel-formControl  {
    color: $text-darken;
 }
 
@@ -61,7 +61,7 @@
    color: $text-error;
 }
 
-[variant=contained] {
+.MuiButtonBase-root[variant=contained] {
    &.MuiIconButton-colorPrimary {
       background-color: $primary;
       color: $text;

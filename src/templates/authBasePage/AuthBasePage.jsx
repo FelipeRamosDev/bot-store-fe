@@ -14,7 +14,7 @@ import RootAuthProvider from '@/providers/RootAuthProvider';
 export default function AuthBasePage({ children, ...props }) {
    return (
       <RootAuthProvider>
-         <BasePage headerMenu="auth" {...props}>
+         <BasePage className="auth-page" headerMenu="auth" {...props}>
             {children}
          </BasePage>
       </RootAuthProvider>
