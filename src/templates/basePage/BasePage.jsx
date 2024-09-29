@@ -17,11 +17,11 @@ import RootPublicProvider from '@/providers/RootPublicProvider';
  */
 export default function BasePage({ className = '', fullContainer, headerMenu, children }) {
    return (
-      <main className={`${className} base-page page`}>
+      <main className={`${className} base-page`}>
          <RootPublicProvider>
             <TopHeader fullContainer={fullContainer} type={headerMenu} />
 
-            <div className="page-content">
+            <div className={`page-content ${className}`}>
                {children}
             </div>
 

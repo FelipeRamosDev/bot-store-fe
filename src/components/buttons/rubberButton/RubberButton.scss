@@ -1,5 +1,7 @@
 .rubber-button {
-   background-color: $background-paper-light;
+   &.MuiButton-contained {
+      background-color: $background-paper-light;
+   }
 
    &.MuiButton-containedInfo {
       color: $text-darken;

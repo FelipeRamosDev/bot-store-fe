@@ -23,8 +23,19 @@ header {
    }
 }
 
-.page {
-   padding-bottom: 5rem;
+.base-page {
+   position: relative;
+   min-height: 100vh;
+
+   &.auth-page {
+      .page-content {
+         padding-top: 3rem;
+      }
+   }
+}
+
+.page-content {
+   padding-bottom: 7rem;
 }
 
 footer {
