@@ -11,10 +11,16 @@ import RootAuthProvider from '@/providers/RootAuthProvider';
  *
  * @returns {JSX.Element} The rendered `BasePage` component containing the `AuthUserProvider` and children.
  */
-export default function AuthBasePage({ children, ...props }) {
+export default function AuthBasePage({ className, children, ...props }) {
+   if (className) {
+      className += ' auth-page';
+   } else {
+      className = 'auth-page'
+   }
+
    return (
       <RootAuthProvider>
-         <BasePage className="auth-page" headerMenu="auth" {...props}>
+         <BasePage className={className} headerMenu="auth" {...props}>
             {children}
          </BasePage>
       </RootAuthProvider>
