@@ -1,5 +1,6 @@
 import BasePage from '../basePage/BasePage';
 import RootAuthProvider from '@/providers/RootAuthProvider';
+import TopHeaderAuth from '@/components/headers/topHeader/TopHeaderAuth';
 
 /**
  * `AuthBasePage` is a wrapper component that provides a base layout for pages that require authentication.
@@ -20,7 +21,7 @@ export default function AuthBasePage({ className, children, ...props }) {
 
    return (
       <RootAuthProvider>
-         <BasePage className={className} headerMenu="auth" {...props}>
+         <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAuth} {...props}>
             {children}
          </BasePage>
       </RootAuthProvider>

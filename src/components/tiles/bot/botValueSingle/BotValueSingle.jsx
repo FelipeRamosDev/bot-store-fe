@@ -1,3 +1,4 @@
+'use client';
 import WatermarkPriceCard from "@/components/common/watermarkPriceCard/WatermarkPriceCard";
 import BotValue from "../botValue/BotValue";
 import { useContext } from 'react';

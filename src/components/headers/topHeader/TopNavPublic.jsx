@@ -1,6 +1,3 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
 /**
@@ -21,7 +18,6 @@ import CTAButton from '@/components/buttons/ctaButton/CTAButton';
  * @returns {JSX.Element} A navigation element containing public links and a call-to-action button.
  */
 export default function TopNav() {
-   const router = useRouter();
 
    return (
       <nav>
@@ -30,7 +26,7 @@ export default function TopNav() {
          {/* <Link href="/pricing">Pricing</Link> */}
          {/* <Link href="/earn-commission">Earn Commissions</Link> */}
 
-         <CTAButton size="large" onClick={() => router.push('/dashboard')}>
+         <CTAButton size="large" url="/dashboard">
             START
          </CTAButton>
       </nav>

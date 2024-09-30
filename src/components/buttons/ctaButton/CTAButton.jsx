@@ -1,4 +1,6 @@
-import { Button } from "@mui/material";
+'use client';
+import { useRouter } from 'next/navigation';
+import Button from '@mui/material/Button';
 
 /**
  * `CTAButton` is a call-to-action button component with predefined styling and variant.
@@ -10,12 +12,15 @@ import { Button } from "@mui/material";
  *
  * @returns {JSX.Element} The rendered `CTAButton` component.
  */
-export default function CTAButton({ className = '', children, ...props }) {
+export default function CTAButton({ url, className = '', children, ...props }) {
+   const router = useRouter();
+
    return (
       <Button
          className={`cta-button ${className}`}
          variant="contained"
          color="tertiary"
+         onClick={() => router.push(url)}
          {...props}
       >
          {children}
