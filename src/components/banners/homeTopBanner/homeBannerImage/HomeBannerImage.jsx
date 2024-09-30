@@ -1,15 +1,14 @@
-import MasterTileImg from '@/components/content/home/img/MasterTileImg';
-import RuleTileImg from '@/components/content/home/img/RuleTileImg';
-import BTCSlotTilesImg from '@/components/content/home/img/BTCSlotTilesImg';
-import BotValueSingleImg from '@/components/content/home/img/BotValueSingleImg';
+import RuleDummy from '@/components/tiles/bot/rule/RuleDummy';
+import MasterTileDummy from '@/components/tiles/masterTileDefault/MasterTileDummy';
+import BotValueSingleDummy from '@/components/tiles/bot/botValueSingle/BotValueSingleDummy';
 
-export default function HomeBannerImage({ className = '' }) {
+export default function HomeBannerImage({ className = '', chartCanvas }) {
    return (
       <div className={`home-banner-image ${className}`}>
-         <BTCSlotTilesImg />
-         <RuleTileImg />
-         <BotValueSingleImg />
-         <MasterTileImg />
+         {chartCanvas}
+         <RuleDummy />
+         <BotValueSingleDummy />
+         <MasterTileDummy />
       </div>
    );
 }

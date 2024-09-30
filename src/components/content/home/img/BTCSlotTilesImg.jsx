@@ -1,26 +1,45 @@
-import SlotTile from '@/components/tiles/slotTile/SlotTile';
-import btcDummy from '@/components/content/home/img/btcDummy.json';
+import CandlestickChartBase from "@/components/charts/base/candleStickBase/CandlestickChartBase";
+import btcDummy from './btcDummy.json';
 
 export default function BTCSlotTilesImg() {
    return (
-      <SlotTile
-         dummyCandles={btcDummy}
-         className="slot-b"
-         demoMode={true}
-         chartsDisplay={true}
-         elevation={60}
-         padding="s"
-         slot={{
-            cod: 'BA43245',
-            name: 'Bitcoin',
-            bot: { name: 'Mr.Kaioh II', index: 2 },
-            assets: ['BTCUSDT'],
-            interval: '15m',
-            status: 'running',
-            pnl: 8566,
-            totalRealizedPnl: 7450,
-            trades: [{ stopPrice: 62500, gainPrice: 64500 }]
-         }}
-      />
+      <div className="slot-tile  slot-b card p-s r-m" style={{ boxShadow: '0 0 60px #111111DD' }}>
+         <div className="lock-layer"></div>
+         <div className="tile-header">
+            <div className="text-wrap">
+               <span className="title link">Bitcoin</span>
+               <span className=" status-badge" color="success" variant="">RUNNING</span>
+               <a className="bot-name" href="#">Mr.Kaioh II</a>
+            </div>
+         </div>
+         
+         <div className="slot-data">
+            <div className="column">
+               <div className="item">
+                  <label>COD:</label>
+                  <span>BA43245</span>
+               </div>
+               <div className="item">
+                  <label>Interval:</label>
+                  <span>15m</span>
+               </div>
+               <div className="item">
+                  <label>Symbol:</label>
+                  <span>BTCUSDT</span>
+               </div>
+               <div className="item">
+                  <label>Realized:</label>
+                  <span color="disabled" className="price-display ">$7,450.00</span>
+               </div>
+            </div>
+            <div className="column">
+               <span color="success" display-size="xl" className="price-display ">$8,566.00</span>
+            </div>
+         </div>
+
+         <div className="candlestick-chart">
+            <CandlestickChartBase candles={btcDummy} />
+         </div>
+      </div>
    );
 }
