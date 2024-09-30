@@ -1,4 +1,6 @@
 import '@/style/scss/style.scss';
+import { ThemeProvider } from '@mui/material/styles';
+import { darkTheme } from '@/style/darkTheme';
 
 /**
  * Metadata for the BotStore application.
@@ -22,10 +24,12 @@ export const metadata = {
  */
 export default function HomeLayout({ children }) {
    return (
-      <html lang="en">
-         <body>
-            {children}
-         </body>
-      </html>
+      <ThemeProvider theme={darkTheme}>
+         <html lang="en">
+            <body>
+               {children}
+            </body>
+         </html>
+      </ThemeProvider>
    );
 }
