@@ -1,12 +1,14 @@
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
-// import BTCSlotTilesImg from './img/BTCSlotTilesImg';
-// import ETHSlotTilesImg from './img/ETHSlotTilesImg';
+import BTCSlotTilesImg from './img/BTCSlotTilesImg';
+import { useMemo } from 'react';
 
 export default function HomeContent() {
+   const chartCanvas = useMemo(async () => <BTCSlotTilesImg />, []);
+
    return (<>
-      <HomeTopBanner />
+      <HomeTopBanner chartCanvas={chartCanvas} />
 
       <div className="home-content">
          <section className="features">
@@ -15,8 +17,7 @@ export default function HomeContent() {
 
                <ContentSplit className="content">
                   <div className="column image-spot">
-                     {/* <BTCSlotTilesImg />
-                     <ETHSlotTilesImg /> */}
+                     {chartCanvas}
                   </div>
 
                   <div className="column marketing-cta right">

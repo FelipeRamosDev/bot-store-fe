@@ -1,5 +1,6 @@
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
+import HomeBannerImage from './homeBannerImage/HomeBannerImage';
 
 /**
  * `HomeTopBanner` is a component that displays a promotional banner at the top of the home page.
@@ -7,7 +8,7 @@ import CTAButton from '@/components/buttons/ctaButton/CTAButton';
  *
  * @returns {JSX.Element} The rendered `HomeTopBanner` component with promotional text and a CTA button.
  */
-export default function HomeTopBanner() {
+export default function HomeTopBanner({ chartCanvas }) {
    return (
       <section className="top-banner">
          <ContentSplit className="content container">
@@ -25,8 +26,7 @@ export default function HomeTopBanner() {
                </CTAButton>
             </div>
 
-            dasdasads
-            {/* <HomeBannerImage className="column image-spot" /> */}
+            <HomeBannerImage className="column image-spot" chartCanvas={chartCanvas} />
          </ContentSplit>
       </section>
    );

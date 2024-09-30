@@ -1,9 +1,10 @@
 .bot-rule {
    display: flex;
    gap: 0.5rem;
+   flex-direction: column;
 
-   @media screen and (max-width: $screen-m) {
-      flex-direction: column;
+   @media screen and (min-width: $screen-m) {
+      flex-direction: row;
    }
 
    .rule-header {
@@ -74,12 +75,13 @@
       display: flex;
 
       .rubber-button {
-         min-width: auto;
          padding: 0.4rem;
          font-size: 1.5rem;
+         width: 100%;
 
-         @media screen and (max-width: $screen-m) {
-            width: 100%;
+         @media screen and (min-width: $screen-m) {
+            min-width: auto;
+            width: auto;
          }
       }
    }
