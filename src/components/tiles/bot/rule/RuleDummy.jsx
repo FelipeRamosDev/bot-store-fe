@@ -48,7 +48,7 @@ export default function RuleDummy({ elevation = 50, fontSize = 23 }) {
             </div>
          </div>
 
-         <div class="bot-divider">
+         <div className="bot-divider">
             <span>{'>'}</span>
          </div>
 

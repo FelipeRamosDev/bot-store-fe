@@ -29,7 +29,7 @@ import Link from 'next/link';
 export default function TopHeaderPublic({ type = 'public', fullContainer = true }) {
    return <header className="top-header">
       <div className={fullContainer ? 'full-container' : 'container'}>
-         <Link href="/">
+         <Link className="logo-wrap" href="/">
             <Logo />
          </Link>
 
