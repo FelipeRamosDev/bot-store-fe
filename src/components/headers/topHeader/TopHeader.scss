@@ -1,4 +1,14 @@
 .top-header {
+   .logo-wrap {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      text-decoration: none;
+      color: $white;
+      font-size: 2rem;
+      font-weight: 700;
+   }
+
    nav {
       justify-content: flex-end;
       align-items: center;

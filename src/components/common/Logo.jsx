@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import LogoImage from '@/assets/logo.svg';
+import LogoImage from '@/assets/logo6.svg';
 
 /**
  * `Logo` is a component that displays the company's logo image.
