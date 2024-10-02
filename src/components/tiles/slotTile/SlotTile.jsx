@@ -1,5 +1,4 @@
 'use client';
-import './SlotTile.scss';
 import Link from 'next/link';
 import { useContext, useEffect, useState, useRef } from 'react';
 import Price from '@/components/displays/price/Price';
@@ -32,6 +31,7 @@ import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/C
  * @returns {JSX.Element} The rendered SlotTile component.
  */
 export default function SlotTile({
+   anchor,
    demoMode = false,
    slot = {},
    className = '',
@@ -65,7 +65,7 @@ export default function SlotTile({
    }, [ uInstance, isOffline, isStating, isStatingStream ]);
 
    return (
-      <Card className={`slot-tile ${minified ? 'minified' : ''} ${className}`} padding="xs" elevation={50} {...props}>
+      <Card anchor={anchor} className={`slot-tile ${minified ? 'minified' : ''} ${className}`} padding="xs" elevation={50} {...props}>
          {demoMode && <div className="lock-layer"></div>}
 
          <div className="tile-header">

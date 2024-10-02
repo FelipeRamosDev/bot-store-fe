@@ -1,9 +1,7 @@
-@import "../../../style/scss/variables.scss";
-
 .top-banner {
    background-image: url(../../../assets/bg_shape_1.svg);
    background-repeat: no-repeat;
-   background-position: 0;
+   background-position: center;
    background-size: auto 100%;
    width: 100%;
    min-height: 80vh;
@@ -11,8 +9,8 @@
    justify-content: space-between;
    align-items: center;
 
-   @media screen and (max-width: $screen-xl) {
-      background-position: center;
+   @media screen and (min-width: $screen-m) {
+      background-position: left;
    }
 
    >.content-split {
@@ -54,5 +52,9 @@
       @media screen and (min-width: $screen-m) {
          margin-top: 2rem;
       }
+   }
+
+   .big-logo {
+      margin-bottom: 2rem;
    }
 }

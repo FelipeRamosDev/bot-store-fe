@@ -1,5 +1,3 @@
-@import "../../../style/scss/variables.scss";
-
 .pnl-tile {
    display: flex;
    flex-direction: column;
@@ -17,7 +15,9 @@
 
       .price-display,
       .percent-display {
-         font-size: 1.1rem;
+         &[display-size=l] {
+            font-size: 1.1rem;
+         }
       }
    }
 
@@ -28,7 +28,9 @@
 
       .price-display,
       .percent-display {
-         font-size: 1rem;
+         &[display-size=l] {
+            font-size: 1rem;
+         }
       }
    }
 

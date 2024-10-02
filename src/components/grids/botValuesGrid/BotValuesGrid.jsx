@@ -1,4 +1,3 @@
-import './BotValuesGrid.scss';
 import BotValueSingle from '@/components/tiles/bot/botValueSingle/BotValueSingle';
 
 /**

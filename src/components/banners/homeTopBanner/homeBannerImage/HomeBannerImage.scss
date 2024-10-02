@@ -1,5 +1,3 @@
-@import "../../../../style/scss/variables.scss";
-
 .home-banner-image {
    position: relative;
    min-height: 80vh;
@@ -8,6 +6,102 @@
    @media screen and (min-width: $screen-m) {
       min-height: 60vh;
       margin: 0;
+   }
+
+   @keyframes floatingX1 {
+      0% {
+         transform: translateX(0);
+      }
+      
+      25% {
+         transform: translateX(-4vw);
+      }
+      
+      50% {
+         transform: translateX(0) translateY(0);
+      }
+      
+      75% {
+         transform: translateY(-4vh);
+      }
+
+      100% {
+         transform: translateY(0);
+      }
+   }
+
+   @keyframes floatingY1 {
+      0% {
+         transform: translateY(0);
+      }
+      
+      25% {
+         transform: translateY(-4vh);
+      }
+      
+      50% {
+         transform: translateY(0) translateX(0);
+      }
+      
+      75% {
+         transform: translateX(4vw);
+
+         @media screen and (min-width: $screen-m) {
+            transform: translateX(-4vw);
+         }
+      }
+
+      100% {
+         transform: translateX(0);
+      }
+   }
+
+   @keyframes floatingX2 {
+      0% {
+         transform: translateX(0);
+      }
+      
+      25% {
+         transform: translateX(-4vw);
+      }
+      
+      50% {
+         transform: translateX(0);
+      }
+      
+      75% {
+         transform: translateX(4vw);
+      }
+
+      100% {
+         transform: translateX(0);
+      }
+   }
+
+   @keyframes floatingY2 {
+      0% {
+         transform: translateY(0);
+      }
+      
+      25% {
+         transform: translateY(-4vh);
+      }
+      
+      50% {
+         transform: translateY(0) translateX(0);
+      }
+      
+      75% {
+         transform: translateX(6vw);
+
+         @media screen and (min-width: $screen-m) {
+            transform: translateX(-6vw);
+         }
+      }
+
+      100% {
+         transform: translateX(0);
+      }
    }
 
    .bot-rule,
@@ -22,6 +116,7 @@
       right: 0;
       top: 15vh;
       z-index: 5;
+      animation: floatingX1 60s ease-in-out infinite;
 
       @media screen and (min-width: $screen-m) {
          right: 0;
@@ -43,6 +138,7 @@
       width: 80%;
       max-width: 450px;
       z-index: 8;
+      animation: floatingY1 30s ease-in-out infinite;
 
       @media screen and (min-width: $screen-m) {
          left: 23%;
@@ -54,6 +150,7 @@
    .bot-rule {
       left: 0;
       display: none;
+      animation: floatingX2 45s ease-in-out infinite;
 
       @media screen and (min-width: $screen-m) {
          display: flex;
@@ -68,6 +165,7 @@
       z-index: 5;
       width: 80%;
       max-width: 400px;
+      animation: floatingY2 25s ease-in-out infinite;
 
       @media screen and (min-width: $screen-m) {
          top: 21vh;

@@ -1,4 +1,3 @@
-import './ClockTimePicker.scss';
 import { useEffect, useState } from 'react';
 import ClockDropdown from './ClockDropdown';
 import FilledInput from '@mui/material/FilledInput';

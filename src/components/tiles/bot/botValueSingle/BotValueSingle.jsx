@@ -1,3 +1,4 @@
+'use client';
 import WatermarkPriceCard from "@/components/common/watermarkPriceCard/WatermarkPriceCard";
 import BotValue from "../botValue/BotValue";
 import { useContext } from 'react';
@@ -62,7 +63,6 @@ export default function BotValueSingle({ botValue, eventName, title = 'Bot Value
       <WatermarkPriceCard
          className="bot-value-single"
          watermark={title}
-         paddingSize={5}
          padding="xs"
          radius="s"
          borderSide="bottom"

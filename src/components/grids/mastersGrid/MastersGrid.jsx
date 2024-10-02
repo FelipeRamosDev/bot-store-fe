@@ -1,5 +1,4 @@
 'use client';
-import './MastersGrid.scss';
 import { useContext } from 'react';
 import MasterTileDefault from '@/components/tiles/masterTileDefault/MasterTileDefault';
 import DBQueryContext from '@/contexts/DBQuery';

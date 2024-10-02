@@ -1,10 +1,12 @@
+'use client';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import DrawerMenu from '@/components/menus/base/drawerMenu/DrawerMenu';
 import APIContext from '@/contexts/4HandsAPI';
 import { AccountBalanceWallet, Storefront, Dashboard, Logout } from '@mui/icons-material';
-import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 
 /**
  * TopHeaderMobileMenu component renders a mobile navigation menu with links to
@@ -18,7 +20,8 @@ import { useContext } from 'react';
  * 
  * @returns {JSX.Element} The rendered mobile navigation menu inside a drawer.
  */
-export default function TopHeaderMobileMenu({ open, setOpen, setSpinner }) {
+export default function TopHeaderMobileMenu({ setSpinner }) {
+   const [ open, setOpen ] = useState(false);
    const router = useRouter();
    const API = useContext(APIContext);
 
@@ -36,6 +39,10 @@ export default function TopHeaderMobileMenu({ open, setOpen, setSpinner }) {
 
    return (
       <nav className="mobile-menu">
+         <Button className="menu-button" color="info" onClick={() => setOpen(true)}>
+            <MenuIcon />
+         </Button>
+
          <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
             <List>
                <ListItem disablePadding>

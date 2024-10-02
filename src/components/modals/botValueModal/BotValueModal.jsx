@@ -1,4 +1,3 @@
-import './BotValuesModal.scss';
 import BotValueForm from "@/components/forms/botValueForm/BotValueForm";
 import ContentModal from "../base/contentModal/ContentModal";
 

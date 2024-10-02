@@ -1,4 +1,4 @@
-import './MasterTileDefault.scss';
+'use client';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/common/card/Card';

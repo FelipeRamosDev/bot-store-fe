@@ -1,11 +1,9 @@
-import './AccountSettings.scss';
 import Card from '@/components/common/card/Card';
 import SettingRow from './settingRow/SettingRow';
 import Price from '@/components/displays/price/Price';
 import Percent from '@/components/displays/percent/Percent';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import { Edit, Settings } from '@mui/icons-material';
+import { Settings } from '@mui/icons-material';
 
 const DISPLAY_CONFIG = { noColor: true, dashedZero: true };
 

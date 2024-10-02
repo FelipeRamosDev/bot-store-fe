@@ -1,5 +1,4 @@
 import Price from '@/components/displays/price/Price';
-import './PositionTile.scss';
 import PriceCard from '@/components/common/priceCard/PriceCard';
 import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 

@@ -1,4 +1,3 @@
-import './PNLTile.scss';
 import Card from '@/components/common/card/Card';
 import Percent from '@/components/displays/percent/Percent';
 import Price from '@/components/displays/price/Price';

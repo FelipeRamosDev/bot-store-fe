@@ -1,5 +1,4 @@
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import './PositionsGrid.scss';
 import PositionTile from '@/components/tiles/positionTile/PositionTile';
 import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
 import { useState } from 'react';

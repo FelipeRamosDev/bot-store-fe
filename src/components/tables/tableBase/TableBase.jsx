@@ -1,5 +1,4 @@
 'use client';
-import './TableBase.scss';
 import { useState, useRef } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';

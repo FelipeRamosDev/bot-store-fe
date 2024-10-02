@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './CheckButtonGroupInput.scss';
 import CheckButton from '@/components/buttons/checkButton/CheckButton';
 
 /**

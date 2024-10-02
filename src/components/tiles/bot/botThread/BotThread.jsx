@@ -1,5 +1,4 @@
 'use client';
-import './BotThread.scss';
 import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import APIContext from '@/contexts/4HandsAPI';
@@ -27,15 +26,12 @@ import AddBotRuleMenu from '@/components/menus/dropdown/addBotRuleMenu/AddBotRul
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function BotThread({ threadID, createThread, title, color, ...props }) {
+export default function BotThread({ threadID, createThread, title, color, watermarkSize, iconSize, paddingSize, ...props }) {
    const API = useContext(APIContext);
    const { doc = {} } = useContext(DBQueryContext);
    const evalThread = doc.eval;
    const threadBlock = evalThread && evalThread[threadID];
    const thread = threadBlock && threadBlock.thread;
-   const watermarkSize = window.innerWidth < configs.breakpoints.s ? 23 : 28;
-   const paddingSize = window.innerWidth < configs.breakpoints.s ? 3 : 14;
-   const iconSize = window.innerWidth < configs.breakpoints.m ? 'small' : 'medium';
 
    /**
     * Handles the deletion of a thread block by sending a request to the API.

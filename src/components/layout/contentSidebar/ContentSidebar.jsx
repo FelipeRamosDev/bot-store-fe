@@ -1,5 +1,3 @@
-import './ContentSidebar.scss';
-
 /**
  * ContentSidebar component provides a layout with a main content area, a sidebar, and a header.
  *

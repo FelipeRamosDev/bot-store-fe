@@ -1,22 +1,59 @@
-@import "../../../style/scss/variables.scss";
-
 .watermark-price-card {
+   $markSize: 1em;
+   $padding: calc($markSize / 2.5);
+   $wideFactor: 1.6;
+
    position: relative;
+   font-size: 23px;
+   
+   @media screen and (min-width: $screen-m) {
+      font-size: 28px;
+   }
+
+   &.top {
+      padding-top: calc($markSize + $padding);
+   }
+
+   &.bottom {
+      padding-bottom: calc($markSize + $padding);
+   }
+
+   &.left {
+      padding-left: calc($markSize + $padding);
+   }
+
+   &.right {
+      padding-right: calc($markSize + $padding);
+   }
 
    .watermark {
       position: absolute;
       font-weight: 900;
+      font-size: 1em;
+      line-height: 1em;
       text-transform: uppercase;
       color: $background-grey2-dark;
       -webkit-user-select: none;
       user-select: none;
 
       &[border-side=left] {
-         transform: rotateZ(-90deg);
+         transform: rotateZ(-90deg) translateX(calc($markSize * $wideFactor));
+         left: calc($markSize * $wideFactor);
+         bottom: 0;
       }
 
       &[border-side=right] {
-         transform: rotateZ(-90deg);
+         transform: rotateZ(-90deg) translateX(calc($markSize * $wideFactor));
+         right: calc($markSize * $wideFactor);
+         bottom: 0;
+      }
+
+      &[border-side=top] {
+         top: -4px;
+      }
+
+      &[border-side=bottom] {
+         bottom: -2px;
       }
    }
 }

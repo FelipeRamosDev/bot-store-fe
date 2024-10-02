@@ -1,9 +1,8 @@
-'use client';
-import './HomeTopBanner.scss';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
-import { useRouter } from 'next/navigation';
 import HomeBannerImage from './homeBannerImage/HomeBannerImage';
+import Image from 'next/image';
+import Logo from '@/assets/logo.svg';
 
 /**
  * `HomeTopBanner` is a component that displays a promotional banner at the top of the home page.
@@ -11,13 +10,12 @@ import HomeBannerImage from './homeBannerImage/HomeBannerImage';
  *
  * @returns {JSX.Element} The rendered `HomeTopBanner` component with promotional text and a CTA button.
  */
-export default function HomeTopBanner() {
-   const router = useRouter();
-
+export default function HomeTopBanner({ chartCanvas }) {
    return (
       <section className="top-banner">
          <ContentSplit className="content container">
             <div className="column marketing-cta left">
+               <Image className="big-logo" src={Logo} alt="BotStore Logo" width={130} height={130} />
                <p className="message line1">Let the <span className="grad-txt">Machine Trade</span> for you</p>
                <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to Start</span>
 
@@ -25,13 +23,13 @@ export default function HomeTopBanner() {
                <CTAButton
                   className="d-large"
                   size="medium" 
-                  onClick={() => router.push('/dashboard')}
+                  url="/dashboard"
                >
                   Let&apos;s Start
                </CTAButton>
             </div>
 
-            <HomeBannerImage className="column image-spot" />
+            <HomeBannerImage className="column image-spot" chartCanvas={chartCanvas} />
          </ContentSplit>
       </section>
    );

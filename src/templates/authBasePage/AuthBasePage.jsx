@@ -1,5 +1,6 @@
-import { AuthUserProvider } from '@/contexts/AuthUser';
 import BasePage from '../basePage/BasePage';
+import RootAuthProvider from '@/providers/RootAuthProvider';
+import TopHeaderAuth from '@/components/headers/topHeader/TopHeaderAuth';
 
 /**
  * `AuthBasePage` is a wrapper component that provides a base layout for pages that require authentication.
@@ -11,12 +12,18 @@ import BasePage from '../basePage/BasePage';
  *
  * @returns {JSX.Element} The rendered `BasePage` component containing the `AuthUserProvider` and children.
  */
-export default function AuthBasePage({ children, ...props }) {
+export default function AuthBasePage({ className, children, ...props }) {
+   if (className) {
+      className += ' auth-page';
+   } else {
+      className = 'auth-page'
+   }
+
    return (
-      <BasePage headerMenu="auth" {...props}>
-         <AuthUserProvider>
+      <RootAuthProvider>
+         <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAuth} {...props}>
             {children}
-         </AuthUserProvider>
-      </BasePage>
+         </BasePage>
+      </RootAuthProvider>
    );
 }

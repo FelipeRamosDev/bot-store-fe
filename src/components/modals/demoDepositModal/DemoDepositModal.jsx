@@ -1,4 +1,3 @@
-import './DemoDepositModal.scss';
 import { useContext } from 'react';
 import ContentModal from '../base/contentModal/ContentModal';
 import DemoDepositForm from '@/components/forms/demoDepositForm/DemoDepositForm';

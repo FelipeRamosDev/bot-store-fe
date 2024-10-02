@@ -1,5 +1,3 @@
-import './ContainedTable.scss';
-
 /**
  * ContainedTableRow Component
  * 

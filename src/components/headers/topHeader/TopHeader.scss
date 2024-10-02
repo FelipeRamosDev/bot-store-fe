@@ -1,6 +1,29 @@
-@import "../../../style/scss/variables.scss";
-
 .top-header {
+   .logo-wrap {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      text-decoration: none;
+      color: $white;
+      font-size: 1.6rem;
+      font-weight: 800;
+
+      .grad-txt {
+         margin: 0;
+      }
+
+      .logotype {
+         font-size: 1.1rem;
+         font-weight: 800;
+         margin: 0;
+         margin-top: 0.4rem;
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 1.6rem;
+         }
+      }
+   }
+
    nav {
       justify-content: flex-end;
       align-items: center;

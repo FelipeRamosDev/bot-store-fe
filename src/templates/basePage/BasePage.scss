@@ -1,5 +1,3 @@
-@import "../../style/scss/variables.scss";
-
 header {
    background-color: $background-dark;
    padding: 0.7rem 0;
@@ -15,18 +13,30 @@ header {
    }
 
    .logo-image {
-      width: 55px;
-      height: 55px;
-
-      @media screen and (max-width: $screen-m) {
-         width: 35px;
-         height: 35px;
+      width: 45px;
+      height: 45px;
+      text-decoration: none;
+      
+      @media screen and (min-width: $screen-m) {
+         width: 55px;
+         height: 55px;
       }
    }
 }
 
-.page {
-   padding-bottom: 5rem;
+.base-page {
+   position: relative;
+   min-height: 100vh;
+
+   &.auth-page {
+      .page-content {
+         padding-top: 3rem;
+      }
+   }
+}
+
+.page-content {
+   padding-bottom: 7rem;
 }
 
 footer {

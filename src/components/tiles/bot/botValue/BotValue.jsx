@@ -1,4 +1,3 @@
-import './BotValue.scss';
 import FunctionValue from './FunctionValue';
 import PrimitiveValue from './PrimitiveValue';
 

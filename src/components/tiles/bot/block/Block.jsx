@@ -1,5 +1,4 @@
 'use client';
-import './Block.scss';
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';
 import BotThreadDivider from '../botThreadDivider/BotThreadDivider';
 import Rule from '../rule/Rule';
