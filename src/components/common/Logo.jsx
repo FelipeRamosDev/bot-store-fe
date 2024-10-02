@@ -20,8 +20,8 @@ export default function Logo({ ...props }) {
       alt="Company's Logo"
       src={LogoImage}
       priority={true}
-      height="55px"
-      width="55px"
+      height={55}
+      width={55}
       {...props}
    />
 }
