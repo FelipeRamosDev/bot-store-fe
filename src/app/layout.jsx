@@ -1,6 +1,12 @@
 import '@/style/scss/style.scss';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme } from '@/style/darkTheme';
+import { Montserrat } from 'next/font/google';
+
+const appFont = Montserrat({
+   weight: ['300', '400', '500', '600', '700', '800', '900'],
+   subsets: ['latin']
+});
 
 /**
  * Metadata for the BotStore application.
@@ -25,7 +31,7 @@ export const metadata = {
 export default function HomeLayout({ children }) {
    return (
       <ThemeProvider theme={darkTheme}>
-         <html lang="en">
+         <html lang="en" className={appFont.className}>
             <body>
                {children}
             </body>
