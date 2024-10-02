@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import LogoImage from '@/assets/logo6.svg';
+import LogoImage from '@/assets/logo.svg';
 
 /**
  * `Logo` is a component that displays the company's logo image.
@@ -20,8 +20,8 @@ export default function Logo({ ...props }) {
       alt="Company's Logo"
       src={LogoImage}
       priority={true}
-      height="50px"
-      width="50px"
+      height="55px"
+      width="55px"
       {...props}
    />
 }

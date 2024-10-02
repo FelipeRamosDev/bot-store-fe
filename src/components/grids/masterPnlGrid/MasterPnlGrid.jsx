@@ -28,38 +28,35 @@ import PNLTile from '@/components/tiles/pnlTile/PNLTile';
  */
 export default function MasterPnlGrid({ master = {}, className = '' }) {
    const commonProps = {
-      size: 'l'
+      size: 'l',
+      borderSide: 'left'
    };
 
    return (
       <div className={`master-pnl-grid pnl-grid ${className}`}>
          <PNLTile
+            {...commonProps}
             label="Month PNL"
-            borderSide="left"
-            size="l"
             value={master.results?.monthPnl}
          />
 
          <PNLTile
             type="percent"
+            {...commonProps}
             label="Month ROI"
-            borderSide="left"
-            size="l"
             value={master.results?.monthRoi}
          />
 
          <PNLTile
+            {...commonProps}
             label="Day PNL"
-            borderSide="left"
-            size="l"
             value={master.results?.dayPnl}
          />
 
          <PNLTile
             type="percent"
+            {...commonProps}
             label="Day ROI"
-            borderSide="left"
-            size="l"
             value={master.results?.dayRoi}
          />
       </div>

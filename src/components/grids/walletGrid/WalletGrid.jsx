@@ -26,31 +26,33 @@ import PNLTile from '@/components/tiles/pnlTile/PNLTile';
  * @returns {JSX.Element} A grid layout displaying various wallet and PNL metrics.
  */
 export default function WalletGrid({ master = {} }) {
+   const commonProps = {
+      size: 'l',
+      borderSide: 'left'
+   };
+
    return <div className="wallet-grid pnl-grid" padding="s" elevation={25}>
       <PNLTile
-         borderSide="left"
+         {...commonProps}
          label="Acumulated PNL"
-         size="l"
          value={master.pnl}
       />
 
       <PNLTile
-         borderSide="left"
+         {...commonProps}
          label="Unrealized PNL"
-         size="l"
          value={master.futuresWallet?.totalUnrealizedProfit}
       />
 
       <PNLTile
-         borderSide="left"
+         {...commonProps}
          label="Realized PNL"
-         size="l"
          value={master.futuresWallet?.totalRealizedPnl}
       />
 
       <PNLTile
-         borderSide="bottom"
          label="Total Wallet"
+         borderSide="bottom"
          size="l"
          noColor={true}
          value={master.futuresWallet?.totalWalletBalance}
