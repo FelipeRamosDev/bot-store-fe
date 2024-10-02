@@ -15,7 +15,9 @@
 
       .price-display,
       .percent-display {
-         font-size: 1.1rem;
+         &[display-size=l] {
+            font-size: 1.1rem;
+         }
       }
    }
 
@@ -26,7 +28,9 @@
 
       .price-display,
       .percent-display {
-         font-size: 1rem;
+         &[display-size=l] {
+            font-size: 1rem;
+         }
       }
    }
 

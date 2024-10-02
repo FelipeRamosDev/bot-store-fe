@@ -5,7 +5,7 @@
  * that will be used in the HTML document's head section.
  */
 export const metadata = {
-   title: "Master Accounts - BotStore Dashboard",
+   title: "Master Accounts - CandlePilot Dashboard",
    description: "Look after your master accounts.",
 };
 

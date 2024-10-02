@@ -1,6 +1,8 @@
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import HomeBannerImage from './homeBannerImage/HomeBannerImage';
+import Image from 'next/image';
+import Logo from '@/assets/logo.svg';
 
 /**
  * `HomeTopBanner` is a component that displays a promotional banner at the top of the home page.
@@ -13,6 +15,7 @@ export default function HomeTopBanner({ chartCanvas }) {
       <section className="top-banner">
          <ContentSplit className="content container">
             <div className="column marketing-cta left">
+               <Image className="big-logo" src={Logo} alt="BotStore Logo" width={130} height={130} />
                <p className="message line1">Let the <span className="grad-txt">Machine Trade</span> for you</p>
                <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to Start</span>
 

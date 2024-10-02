@@ -11,9 +11,9 @@
 }
 
 .MuiButton-containedPrimary,
-.MuiRadio-colorPrimary,
-.MuiRadio-colorSecondary,
-.MuiRadio-colorTertiary {
+.MuiRadio-root.MuiRadio-colorPrimary,
+.MuiRadio-root.MuiRadio-colorSecondary,
+.MuiRadio-root.MuiRadio-colorTertiary {
    color: $text;
 }
 
@@ -41,24 +41,26 @@
    color: $error;
 }
 
-.MuiButton-containedSecondary {
-   color: $text-secondary;
-}
+.MuiButtonBase-root:not(.rubber-button) {
+   &.MuiButton-containedSecondary {
+      color: $text-secondary;
+   }
 
-.MuiButton-containedTertiary {
-   color: $text-tertiary;
-}
+   &.MuiButton-containedTertiary {
+      color: $text-tertiary;
+   }
 
-.MuiButton-containedSuccess {
-   color: $text-success;
-}
+   &.MuiButton-containedSuccess {
+      color: $text-success;
+   }
 
-.MuiButton-containedWarn {
-   color: $text-warn;
-}
+   &.MuiButton-containedWarn {
+      color: $text-warn;
+   }
 
-.MuiButton-containedError {
-   color: $text-error;
+   &.MuiButton-containedError {
+      color: $text-error;
+   }
 }
 
 .MuiButtonBase-root[variant=contained] {

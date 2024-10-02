@@ -9,7 +9,7 @@ import { darkTheme } from '@/style/darkTheme';
  * description, and robots directive that will be used in the HTML document's head section.
  */
 export const metadata = {
-   title: 'BotStore',
+   title: 'CandlePilot',
    description: 'Use/Create trade bots for cryptocurrencies.',
    robots: 'noindex', // Prevents search engines from indexing this page
 };

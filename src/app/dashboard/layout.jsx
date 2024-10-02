@@ -5,8 +5,8 @@
  * that will be used in the HTML document's head section.
  */
 export const metadata = {
-   title: "Dashboard",
-   description: "Use/Create trade bots for cryptocurrencies.",
+   title: 'Dashboard',
+   description: 'Use/Create trade bots for cryptocurrencies.',
 };
 
 /**
