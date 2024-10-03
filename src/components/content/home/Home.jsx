@@ -37,7 +37,7 @@ export default function HomeContent() {
                      <span className="message line2">Sign-in to <span className="grad-txt">INTEGRATE</span></span>
 
                      <p className="description">
-                        You can integrate your Binance Futures account to be able of automate your trades. It's easy to generate an API Key on Binance side to connect your CandlePilot account with Binance Account.
+                        {"You can integrate your Binance Futures account to be able of automate your trades. It's easy to generate an API Key on Binance side to connect your CandlePilot account with Binance Account."}
                      </p>
 
                      <CTAButton className="d-large" size="medium" url="/dashboard">Let&apos;s Start</CTAButton>
