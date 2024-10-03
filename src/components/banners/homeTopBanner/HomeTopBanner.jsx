@@ -10,7 +10,7 @@ import Logo from '@/assets/logo.svg';
  *
  * @returns {JSX.Element} The rendered `HomeTopBanner` component with promotional text and a CTA button.
  */
-export default function HomeTopBanner({ chartCanvas }) {
+export default function HomeTopBanner() {
    return (
       <section className="top-banner">
          <ContentSplit className="content container">
@@ -29,7 +29,7 @@ export default function HomeTopBanner({ chartCanvas }) {
                </CTAButton>
             </div>
 
-            <HomeBannerImage className="column image-spot" chartCanvas={chartCanvas} />
+            <HomeBannerImage className="column image-spot" />
          </ContentSplit>
       </section>
    );
