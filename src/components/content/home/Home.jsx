@@ -1,38 +1,43 @@
+import Image from 'next/image';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
-import BTCSlotTilesImg from './img/BTCSlotTilesImg';
-import { useMemo } from 'react';
-import Image from 'next/image';
 import BinanceLogo from '@/assets/binance_logo.svg';
+import KeyIcon from '@mui/icons-material/Key';
+import BinanceKeysPopupImg from './img/BinanceKeysPopupImg';
 
 export default function HomeContent() {
-   const chartCanvas = useMemo(async () => <BTCSlotTilesImg />, []);
-
    return (<>
-      <HomeTopBanner chartCanvas={chartCanvas} />
+      <HomeTopBanner />
 
       <div className="home-content">
-         <section className="features">
-            <div className="container">
-               <h2 className="title">Binance API Integration</h2>
+         <section className="content-section">
+            <div className="section-header">
+               <div className="container">
+                  <Image className="binance-logo" src={BinanceLogo} alt="Binance Logo" height={150} width={150} />
+                  <h2 className="title">BINANCE API Integration</h2>
+               </div>
+            </div>
 
+            <div className="container">
                <ContentSplit className="content">
                   <div className="column image-spot">
                      <div className="dashed-wrap">
-                        <span className="watermark">API INTEGRATION</span>
-                     </div>
+                        <div className="watermark">
+                           <KeyIcon className="key-icon" />
+                           <span className="mark-text">API INTEGRATION</span>
+                        </div>
 
-                     <Image className="binance-logo" src={BinanceLogo} alt="Binance Logo" height={150} width={150} />
-                     {chartCanvas}
+                        <BinanceKeysPopupImg />
+                     </div>
                   </div>
 
                   <div className="column marketing-cta right">
-                     <h3 className="message line1">Generate an <span className="grad-txt">API/SECRET KEY</span> and</h3>
-                     <span className="message line2">Connect your <span className="grad-txt">BINANCE</span> wallet</span>
+                     <h3 className="message line1">Integrate your <span className="grad-txt">BINANCE FUTURES</span> account</h3>
+                     <span className="message line2">Sign-in to <span className="grad-txt">INTEGRATE</span></span>
 
                      <p className="description">
-                        Automate your Binance Futures trades chossing a bot available on the store.
+                        You can integrate your Binance Futures account to be able of automate your trades. It's easy to generate an API Key on Binance side to connect your CandlePilot account with Binance Account.
                      </p>
 
                      <CTAButton className="d-large" size="medium" url="/dashboard">Let&apos;s Start</CTAButton>
