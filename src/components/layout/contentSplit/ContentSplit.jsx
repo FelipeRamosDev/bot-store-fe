@@ -27,7 +27,7 @@
  * }
  * 
  * @param {Object} [props] The react componect properties.
- * @param {string} [propsbreakpoint='m'] - The breakpoint at which the layout changes. Valid values are `'xs'`, `'s'`, `'m'`, `'l'`, and `'xl'`.
+ * @param {string} [props.breakpoint='m'] - The breakpoint at which the layout changes. Valid values are `'xs'`, `'s'`, `'m'`, `'l'`, and `'xl'`.
  * @param {boolean} [props.columnDirection=false] - If true, arranges the sections in a column direction.
  * @param {boolean} [props.useContainer=false] - If true, adds the full-container CSS class.
  * @param {React.ReactNode[]} props.children - The content to be displayed in the two sections.

@@ -1,27 +1,26 @@
 .home-content {
    .content-section {
       .section-header {
-         background-color: $background-grey1;
          overflow: hidden;
+
+         &.dark-header {
+            background-color: $background-grey1;
+         }
 
          .container {
             display: flex;
             align-items: flex-end;
             gap: 2rem;
+         }
 
-            .title {
-               font-size: 1.4rem;
-               font-weight: 900;
-               color: $text-darken;
-               transform: translateY(1rem);
+         .title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: $text-darken;
+            transform: translateY(1rem);
 
-               @media screen and (min-width: $screen-m) {
-                  font-size: 3rem;
-               }
-            }
-
-            .binance-logo {
-               transform: translateY(1rem);
+            @media screen and (min-width: $screen-m) {
+               font-size: 3rem;
             }
          }
       }
@@ -30,11 +29,7 @@
          display: flex;
          justify-content: space-between;
          align-items: center;
-         padding: 0 0 1rem 0;
-
-         @media screen and (min-width: $screen-m) {
-            padding: 7rem 0;
-         }
+         padding: 7rem 0;
 
          .column {
             flex: 1;
@@ -50,149 +45,9 @@
          align-items: center;
          position: relative;
          width: 100%;
-         margin-top: 3rem;
-         padding-bottom: 7rem;
-         padding-left: 5%;
-
-         @media screen and (min-width: $screen-m) {
-            margin-top: 0;
-            padding-left: 0;
-         }
 
          &.right {
             justify-content: right;
-         }
-
-         .dashed-wrap {
-            position: relative;
-            border: 3px dashed $text-darken;
-            border-radius: $radius-l;
-            width: 85%;
-            height: 265px;
-
-            @media screen and (min-width: $screen-m) {
-               width: 75%;
-            }
-
-            .watermark {
-               color: $text-darken;
-               display: flex;
-               align-items: center;
-               gap: 1rem;
-               padding: $padding-s $padding-m;
-
-               .key-icon {
-                  font-size: 1.3rem;
-                  font-weight: 700;
-
-                  @media screen and (min-width: $screen-m) {
-                     font-size: 3rem;
-                  }
-               }
-
-               .mark-text  {
-                  font-size: 1.3rem;
-                  font-weight: 800;
-
-                  @media screen and (min-width: $screen-m) {
-                     font-size: 1.5rem;
-                  }
-               }
-            }
-         }
-
-         .image {
-            width: 85%;
-         }
-
-         .slot-tile {
-            position: absolute;
-            width: 80%;
-            top: 0;
-
-            @media screen and (min-width: $screen-m) {
-               width: 70%;
-            }
-
-            &.slot-a {
-               left: 5%;
-               z-index: 3;
-
-               @media screen and (min-width: $screen-m) {
-                  left: 0;
-               }
-            }
-
-            &.slot-b {
-               left: 5%;
-               margin-top: 30%;
-               z-index: 4;
-
-               @media screen and (min-width: $screen-m) {
-                  right: -3%;
-                  left: auto;
-               }
-            }
-         }
-      }
-   }
-}
-
-.binance-keys-popup {
-   position: absolute;
-   height: 100%;
-   width: 100%;
-   top: 4rem;
-   left: 8%;
-   overflow: hidden;
-
-   @media screen and (min-width: $screen-m) {
-      top: 7rem;
-      left: 25%;
-   }
-
-   .card-header {
-      padding: 1rem;
-      display: flex;
-      gap: 0.5rem;
-      background-color: $background-paper;
-      align-items: center;
-
-      .lock-icon {
-         font-size: 2.3rem;
-      }
-
-      .header-title {
-         font-size: 1.2rem;
-         font-weight: 700;
-      }
-   }
-
-   .input-wraps {
-      display: flex;
-      padding: 1.5rem;
-      gap: 1rem;
-      flex-direction: column;
-
-      .dummy-input {
-         padding: 1rem;
-         border-radius: $radius-s;
-         background-color: $background-paper;
-         display: flex;
-         flex-direction: column;
-         gap: 0.5rem;
-
-         label {
-            color: $success;
-         }
-
-         .key {
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
          }
       }
    }
@@ -235,7 +90,11 @@
       }
 
       @media screen and (min-width: $screen-l) {
-         font-size: 2.9rem;
+         font-size: 2.4rem;
+      }
+
+      @media screen and (min-width: $screen-xl) {
+         font-size: 2.7rem;
       }
 
       &.line1 {
@@ -243,10 +102,14 @@
          line-height: 1.4em;
 
          @media screen and (min-width: $screen-s) {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
          }
 
          @media screen and (min-width: $screen-m) {
+            font-size: 1.5rem;
+         }
+
+         @media screen and (min-width: $screen-l) {
             font-size: 1.6rem;
          }
 
@@ -261,7 +124,7 @@
       font-size: 0.97rem;
 
       @media screen and (min-width: $screen-m) {
-         font-size: 1.2rem;
+         font-size: 1.1rem;
       }
    }
 

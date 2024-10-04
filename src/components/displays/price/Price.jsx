@@ -7,6 +7,7 @@ import { toMoneyString, toMoney } from '@/helpers/format';
  * @param {string} setup.className - Additional CSS classes for styling.
  * @param {string} setup.symbol - Currency symbol (default is 'USD').
  * @param {boolean} setup.noColor - If true, disables color styling based on value.
+ * @param {'success'|'error'|'warn'} setup.forceColor - To force a color ignoring the number reference.
  * @param {boolean} setup.noSymbol - If true, hides the currency symbol.
  * @param {boolean} setup.dashedZero - If true, shows "---" for zero values.
  * @param {number} setup.fractional - Number of decimal places to display.
@@ -23,6 +24,7 @@ export default function Price({
    noColor = false,
    noSymbol = false,
    dashedZero = false,
+   forceColor,
    fractional,
    amount,
    size,
@@ -51,6 +53,10 @@ export default function Price({
       } else if (amount < 0) {
          color = 'error';
       }
+   }
+
+   if (forceColor) {
+      color = forceColor;
    }
 
    // Render the formatted monetary value
