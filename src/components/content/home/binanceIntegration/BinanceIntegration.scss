@@ -1,0 +1,120 @@
+.binance-integration {
+   .section-header {
+      .binance-logo {
+         transform: translateY(1rem);
+      }
+   }
+
+   .binance-keys-popup {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 4rem;
+      left: 8%;
+      overflow: hidden;
+
+      @media screen and (min-width: $screen-m) {
+         top: 7rem;
+         left: 25%;
+      }
+
+      .card-header {
+         padding: 1rem;
+         display: flex;
+         gap: 0.5rem;
+         background-color: $background-paper;
+         align-items: center;
+
+         .lock-icon {
+            font-size: 2.3rem;
+         }
+
+         .header-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+         }
+      }
+
+      .input-wraps {
+         display: flex;
+         padding: 1.5rem;
+         gap: 1rem;
+         flex-direction: column;
+
+         .dummy-input {
+            padding: 1rem;
+            border-radius: $radius-s;
+            background-color: $background-paper;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            label {
+               color: $success;
+            }
+
+            .key {
+               font-size: 1.2rem;
+               font-weight: 700;
+               text-overflow: ellipsis;
+               overflow: hidden;
+               white-space: nowrap;
+               text-overflow: ellipsis;
+            }
+         }
+      }
+   }
+
+   .image-spot {
+      margin-top: 3rem;
+      padding-bottom: 7rem;
+      padding-left: 5%;
+
+      @media screen and (min-width: $screen-m) {
+         margin-top: 0;
+         padding-left: 0;
+      }
+
+      .dashed-wrap {
+         position: relative;
+         border: 3px dashed $text-darken;
+         border-radius: $radius-l;
+         width: 85%;
+         height: 265px;
+
+         @media screen and (min-width: $screen-m) {
+            width: 75%;
+         }
+
+         .watermark {
+            color: $text-darken;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: $padding-s $padding-m;
+
+            .key-icon {
+               font-size: 1.3rem;
+               font-weight: 700;
+
+               @media screen and (min-width: $screen-m) {
+                  font-size: 3rem;
+               }
+            }
+
+            .mark-text  {
+               font-size: 1.3rem;
+               font-weight: 800;
+
+               @media screen and (min-width: $screen-m) {
+                  font-size: 1.5rem;
+               }
+            }
+         }
+      }
+
+      .image {
+         width: 85%;
+      }
+   }
+}

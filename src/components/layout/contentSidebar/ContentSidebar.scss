@@ -36,6 +36,7 @@
 
       @media screen and (min-width: $screen-l) {
          flex: calc(30% - 1rem);
+         max-width: calc(30% - 1rem);
       }
 
       >* {
