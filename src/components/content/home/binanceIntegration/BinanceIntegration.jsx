@@ -14,6 +14,7 @@ export default function BinanceIntegration() {
                <h2 className="title">BINANCE API Integration</h2>
             </div>
          </div>
+         <div className="gradient-divider"></div>
 
          <div className="container">
             <ContentSplit className="content" breakpoint="l">

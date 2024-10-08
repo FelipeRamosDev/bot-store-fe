@@ -1,54 +1,39 @@
 .content-split {
    display: flex;
-   gap: 1.5rem;
+   flex-direction: column;
+   gap: 0.5rem;
 
-   @media screen and (max-width: $screen-xl) {
+   @media screen and (min-width: $screen-xl) {
       gap: 1.5rem;
    }
 
-   @media screen and (max-width: $screen-l) {
+   @media screen and (min-width: $screen-l) {
       gap: 1rem;
    }
 
-   @media screen and (max-width: $screen-m) {
+   @media screen and (min-width: $screen-m) {
       gap: 0.8rem;
-   }
-
-   @media screen and (max-width: $screen-s) {
-      gap: 0.5rem;
    }
 
    &.column-direction {
       flex-direction: column;
    }
 
-   @media screen and (max-width: $screen-xs) {
-      &.breakpoint-xs {
-         flex-direction: column;
+   &.breakpoint-m {
+      @media screen and (min-width: $screen-m) {
+         flex-direction: row;
       }
    }
 
-   @media screen and (max-width: $screen-s) {
-      &.breakpoint-s {
-         flex-direction: column;
+   &.breakpoint-l {
+      @media screen and (min-width: $screen-l) {
+         flex-direction: row;
       }
    }
 
-   @media screen and (max-width: $screen-m) {
-      &.breakpoint-m {
-         flex-direction: column;
-      }
-   }
-
-   @media screen and (max-width: $screen-l) {
-      &.breakpoint-l {
-         flex-direction: column;
-      }
-   }
-
-   @media screen and (max-width: $screen-xl) {
-      &.breakpoint-xl {
-         flex-direction: column;
+   &.breakpoint-xl {
+      @media screen and (min-width: $screen-xl) {
+         flex-direction: row;
       }
    }
 

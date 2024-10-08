@@ -14,6 +14,7 @@ export default function ChooseBot() {
                <h2 className="title">Choose a PILOT BOT</h2>
             </div>
          </div>
+         <div className="gradient-divider"></div>
 
          <div className="container">
             <ContentSplit className="content" breakpoint="l">

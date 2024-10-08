@@ -11,6 +11,7 @@
             display: flex;
             align-items: flex-end;
             gap: 2rem;
+            position: relative;
          }
 
          .title {
@@ -23,6 +24,12 @@
                font-size: 3rem;
             }
          }
+      }
+
+      .gradient-divider {
+         background: $grad-primary-tertiary-light;
+         height: 4px;
+         width: 100%;
       }
 
       .content {
