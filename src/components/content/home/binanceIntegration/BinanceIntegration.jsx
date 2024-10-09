@@ -10,7 +10,7 @@ export default function BinanceIntegration() {
       <section className="binance-integration content-section">
          <div className="dark-header section-header">
             <div className="container">
-               <Image className="binance-logo" src={BinanceLogo} alt="Binance Logo" height={150} width={150} />
+               <Image className="binance-logo" src={BinanceLogo} alt="Binance Logo" height={130} width={130} />
                <h2 className="title">BINANCE API Integration</h2>
             </div>
          </div>
@@ -30,11 +30,11 @@ export default function BinanceIntegration() {
                </div>
 
                <div className="column marketing-cta right">
-                  <h3 className="message line1">Integrate your <span className="grad-txt">BINANCE FUTURES</span> account</h3>
+                  <h3 className="message line1">Integrate with <span className="grad-txt">BINANCE API</span></h3>
                   <span className="message line2">Start to <span className="grad-txt">INTEGRATE</span></span>
 
                   <p className="description">
-                     {"You can integrate your Binance Futures account to be able of automate your trades. It's easy to generate an API Key on Binance side to connect your CandlePilot account with Binance Account."}
+                     {"You can integrate your Binance Futures account to automate your trades. It's easy to generate an API key on Binance, allowing you to seamlessly connect your CandlePilot account with your Binance account."}
                   </p>
 
                   <CTAButton className="d-large" size="medium" url="/dashboard">Let&apos;s Start</CTAButton>

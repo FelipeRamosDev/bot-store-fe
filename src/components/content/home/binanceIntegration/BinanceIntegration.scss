@@ -1,8 +1,38 @@
 .binance-integration {
    .section-header {
+      &.dark-header {
+         .container {
+            gap: 1rem;
+   
+            @media screen and (min-width: $screen-m) {
+               gap: 2rem;
+            }
+         }
+      }
+
       .binance-logo {
          transform: translateY(1rem);
+         height: 100px;
+         width: 100px;
+         margin-left: 1rem;
+
+         @media screen and (min-width: $screen-m) {
+            width: 130px;
+            height: 130px;
+            margin-left: 0;
+            transform: translateY(1.6rem);
+         }
+
+         @media screen and (min-width: $screen-l) {
+            width: 150px;
+            height: 150px;
+         }
       }
+   }
+
+   .content-split {
+      flex-direction: column-reverse;
+      gap: 3rem;
    }
 
    .binance-keys-popup {

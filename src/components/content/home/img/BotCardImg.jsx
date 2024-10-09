@@ -9,8 +9,8 @@ import Percent from '@/components/displays/percent/Percent';
 
 const dummyBot = {
    name: 'Bender',
-   description: 'This is a description test, in order to use during the development.',
-   score: 4578
+   description: 'A bot focused on day trading trends, optimized for 15-minute charts or smaller time frames.',
+   score: 1290
 };
 
 export default function BotCardImg({ bot = dummyBot }) {
@@ -44,10 +44,6 @@ export default function BotCardImg({ bot = dummyBot }) {
          radius="s"
          elevation={30}
       >
-         <div className="card-header">
-            <strong className="header-title">{bot.name}</strong>
-         </div>
-
          <div className="card-body">
             <div className="avatar-wrap">
                <div className="avatar-mask">
@@ -55,6 +51,7 @@ export default function BotCardImg({ bot = dummyBot }) {
                </div>
             </div>
 
+            <h5 className="bot-name">{bot.name}</h5>
             <p className="description">{bot.description}</p>
 
             <div className="score">
@@ -64,32 +61,32 @@ export default function BotCardImg({ bot = dummyBot }) {
 
             <ContainedTable tableData={[
                {
-                  label: 'Day Win/Loss',
+                  label: 'Day Wins/Loses',
                   value: (<>
-                     <Price amount={50} noSymbol={true} forceColor="success" /> / <Price amount={50} noSymbol={true} forceColor="error" />
+                     <Price amount={89} noSymbol={true} forceColor="success" /> / <Price amount={40} noSymbol={true} forceColor="error" />
                   </>)
                },
                {
-                  label: 'Month Win/Loss',
+                  label: 'Month Wins/Loses',
                   value: (<>
-                     <Price amount={50} noSymbol={true} forceColor="success" /> / <Price amount={50} noSymbol={true} forceColor="error" />
+                     <Price amount={345} noSymbol={true} forceColor="success" /> / <Price amount={150} noSymbol={true} forceColor="error" />
                   </>)
                },
                {
                   label: 'Today ROI',
-                  value: <Percent value={50} noSymbol={true} forceColor="success" />
+                  value: <Percent value={4} noSymbol={true} forceColor="success" />
                },
                {
                   label: 'Yesterday ROI',
-                  value: <Percent value={50} noSymbol={true} forceColor="success" />
+                  value: <Percent value={-2.35} noSymbol={true} forceColor="success" />
                },
                {
                   label: 'Month ROI',
-                  value: <Percent value={50} noSymbol={true} forceColor="success" />
+                  value: <Percent value={12.2} noSymbol={true} forceColor="success" />
                },
                {
                   label: 'Last Month ROI',
-                  value: <Percent value={50} noSymbol={true} forceColor="success" />
+                  value: <Percent value={23.9} noSymbol={true} forceColor="success" />
                }
             ]} />
          </div>

@@ -27,7 +27,7 @@ export default function HomeTopBanner() {
                <p className="message line1">Let the <span className="grad-txt">Machine Trade</span> for you</p>
                <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to Start</span>
 
-               <p className="description">Choose a trader bot to start and automate your trades, let the machine trade for you.</p>
+               <p className="description">Choose a trading bot to get started and automate your trades. Let the machine handle the trading for you.</p>
                <CTAButton
                   className="d-large"
                   size="medium" 
