@@ -2,7 +2,7 @@ export default function BotValueSingleDummy() {
    return (
       <div
          className="price-card watermark-price-card bottom bot-value-single card p-xs r-s"
-         style={{ boxShadow: '0 0 50px #111111DD' }}
+         style={{ boxShadow: '0 0 50px #111111EE', borderRadius: '10px' }}
          border-color="disabled"
          border-side="bottom"
       >

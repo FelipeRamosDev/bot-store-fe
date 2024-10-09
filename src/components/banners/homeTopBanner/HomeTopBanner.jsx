@@ -31,6 +31,12 @@ export default function HomeTopBanner() {
 
             <HomeBannerImage className="column image-spot" />
          </ContentSplit>
+
+         <div className="bg-1"></div>
+         <div className="bg-2"></div>
+         <div className="bg-3"></div>
+         <div className="bg-4"></div>
+         <div className="bg-rect"></div>
       </section>
    );
 }

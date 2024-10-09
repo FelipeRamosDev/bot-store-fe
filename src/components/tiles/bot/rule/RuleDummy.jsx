@@ -3,16 +3,17 @@ export default function RuleDummy({ elevation = 50, fontSize = 23 }) {
       <div
          className="price-card watermark-price-card bottom bot-rule card p-xs r-s"
          style={{
-            boxShadow: `0 0 ${elevation}px #111111DD`,
+            boxShadow: `0 0 ${elevation}px #111111EE`,
             paddingTop: '3.4rem',
-            fontSize: `${fontSize}px`
+            fontSize: `${fontSize}px`,
+            borderRadius: '10px'
          }}
          border-color="disabled"
          border-side="bottom"
       >
          <span className="watermark" style={{ fontSize: '23px' }} border-side="bottom">Evaluate</span>
          <div className="lock-layer"></div>
-         <div className="rule-header">
+         <div className="rule-header" style={{ background: '#1c2122' }}>
             <span>LESS THAN</span>
          </div>
          <div className="bot-value function">
