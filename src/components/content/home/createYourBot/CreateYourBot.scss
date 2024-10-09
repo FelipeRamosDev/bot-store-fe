@@ -25,9 +25,13 @@
    }
 
    .content-split.container {
-      padding: 5rem 0;
+      padding: 3rem 0 5rem 0;
       margin-bottom: 3rem;
       gap: 2rem;
+
+      @media screen and (min-width: $screen-m) {
+         padding: 5rem 0;
+      }
 
       .content-a {
          flex: 100%;
@@ -64,6 +68,11 @@
             color: $text-darken;
             margin: 0 0 1.5rem 0;
          }
+
+         .summary {
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+         }
       }
 
       .quoted-title {
@@ -88,7 +97,7 @@
 
          p {
             margin: 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: $text-darken;
          }
       }
@@ -97,8 +106,6 @@
    .image-spot {
       position: relative;
       border-radius: $radius-l;
-      background: $grad-dark-primary-tertiary;
-      overflow: hidden;
       padding: $padding-m;
       flex-direction: column;
       align-items: flex-end;
@@ -121,7 +128,7 @@
    
          p {
             color: $background-grey1;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             width: 100%;
             margin-top: 1rem;
@@ -203,59 +210,6 @@
                }
             }
          }
-      }
-
-      .bg-1,
-      .bg-2,
-      .bg-3,
-      .bg-4 {
-         position: absolute;
-         border-radius: 100%;
-      }
-      
-      .bg-1,
-      .bg-3 {
-         background: $grad-rad-primary-tertiary-light;
-         opacity: 0.6;
-      }
-
-      .bg-2,
-      .bg-4 {
-         background: $grad-primary-tertiary-light-inverted;
-         opacity: 0.5;
-      }
-
-      .bg-1 {
-         top: 26%;
-         left: -24%;
-         height: 107%;
-         width: 82%;
-      }
-
-      .bg-2 {
-         top: -61%;
-         right: -24%;
-         height: 115%;
-         width: 115%;
-      }
-
-      .bg-3 {
-         top: -43%;
-         left: -24%;
-         width: 82%;
-         height: 140%;
-      }
-
-      .bg-4 {
-         top: -43%;
-         right: -24%;
-         width: 64%;
-         height: 236%;
-      }
-
-      .bg-3,
-      .bg-4 {
-         transform: rotate(90deg);
       }
    }
 }

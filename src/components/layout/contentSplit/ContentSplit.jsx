@@ -33,31 +33,44 @@
  * @param {React.ReactNode[]} props.children - The content to be displayed in the two sections.
  * @returns {JSX.Element} A div element with two sections (`content-a` and `content-b`), styled based on the breakpoint and direction.
  */
-export default function ContentSplit({ className = '', breakpoint = 'm', useContainer = false, columnDirection = false, children }) {
-   let breakpointCSS = '';
+export default function ContentSplit({ className = '', breakpoint = 'm', reverse = false, useContainer = false, columnDirection = false, children }) {
+   let classes = 'content-split';
 
    if (breakpoint === 'xs') {
-      breakpointCSS = 'breakpoint-xs';
+      classes += ' breakpoint-xs';
    }
 
    if (breakpoint === 's') {
-      breakpointCSS = 'breakpoint-s';
+      classes += ' breakpoint-s';
    }
 
    if (breakpoint === 'm') {
-      breakpointCSS = 'breakpoint-m';
+      classes += ' breakpoint-m';
    }
 
    if (breakpoint === 'l') {
-      breakpointCSS = 'breakpoint-l';
+      classes += ' breakpoint-l';
    }
 
    if (breakpoint === 'xl') {
-      breakpointCSS = 'breakpoint-xl';
+      classes += ' breakpoint-xl';
+   }
+
+   if (columnDirection) {
+      classes += ' column-direction';
+   }
+
+   if (useContainer) {
+      classes += ' full-container';
+   }
+
+   if (className) {
+      classes += ' ';
+      classes += className;
    }
 
    return (
-      <div className={`content-split ${className} ${breakpointCSS} ${columnDirection ? 'column-direction' : ''} ${useContainer ? 'full-container' : ''}`}>
+      <div className={classes}>
          {children.length && <div className="content-a">
             {children[0]}
          </div>}
