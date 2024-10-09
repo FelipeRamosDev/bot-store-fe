@@ -15,7 +15,15 @@ export default function HomeTopBanner() {
       <section className="top-banner">
          <ContentSplit className="content container">
             <div className="column marketing-cta left">
-               <Image className="big-logo" src={Logo} alt="BotStore Logo" width={130} height={130} />
+               <Image
+                  className="big-logo"
+                  src={Logo}
+                  alt="CandlePilot Logo"
+                  loading="eager"
+                  width={130}
+                  height={130}
+               />
+
                <p className="message line1">Let the <span className="grad-txt">Machine Trade</span> for you</p>
                <span className="message line2"> <span className="grad-txt">CHOOSE A BOT</span> to Start</span>
 
