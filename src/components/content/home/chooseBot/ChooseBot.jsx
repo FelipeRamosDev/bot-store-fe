@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import PilotLogo from '@/assets/logo_icon.svg';
+import PilotLogo from '@/assets/icons/logo_icon.svg';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import BotsTableImg from '../img/BotsTableImg';
