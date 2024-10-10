@@ -74,7 +74,7 @@
          right: -20%;
          width: 80%;
          transform: translateX(100vw);
-         transition: transform 400ms;
+         transition: transform 250ms;
 
          @media screen and (min-width: $screen-m) {
             width: 400px;

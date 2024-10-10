@@ -1,4 +1,4 @@
-import RuleDummy from '@/components/tiles/bot/rule/RuleDummy';
+import RuleDummy from '@/components/content/home/img/RuleDummy';
 import MasterTileDummy from '@/components/tiles/masterTileDefault/MasterTileDummy';
 import BotValueSingleDummy from '@/components/tiles/bot/botValueSingle/BotValueSingleDummy';
 import BTCSlotTilesImg from '@/components/content/home/img/BTCSlotTilesImg';

@@ -20,7 +20,7 @@ export default function BotCardImg({ bot = dummyBot }) {
    function handleScroll() {
       if (!card.current) return;
       const isExpanded = card.current.classList.contains('expanded');
-      const isOnScreen = isElementOnScreen(card, 0.25);
+      const isOnScreen = isElementOnScreen(card, 0.4);
 
       if (!isExpanded && isOnScreen) {
          card.current.classList.add('expanded');

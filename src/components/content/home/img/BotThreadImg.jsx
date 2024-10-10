@@ -1,6 +1,6 @@
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';
 import BotThreadDivider from '@/components/tiles/bot/botThreadDivider/BotThreadDivider';
-import RuleDummy from '@/components/tiles/bot/rule/RuleDummy';
+import RuleDummy from '@/components/content/home/img/RuleDummy';
 import BlurLinearIcon from '@mui/icons-material/BlurLinear';
 
 export default function BotThreadImg() {
@@ -28,10 +28,7 @@ export default function BotThreadImg() {
             <RuleDummy elevation={10} />
 
             <BotThreadDivider text="AND" />
-            <RuleDummy elevation={10} />
-
-            <BotThreadDivider text="OR" />
-            <RuleDummy elevation={10} />
+            <RuleDummy elevation={10} indicatorName="Moving Average" ruleHeaderText="GREATER THAN" />
          </div>
       </WatermarkPriceCard>
    );
