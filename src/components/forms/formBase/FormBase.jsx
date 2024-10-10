@@ -120,6 +120,7 @@ export function FormBase({
    return <FormBaseContext.Provider value={{ form, errors, loading }}>
       <AlertModal
          title="Error"
+         isErrorDialog={true}
          open={alertDialog}
          handleOk={() => {
             form?.clearAll();

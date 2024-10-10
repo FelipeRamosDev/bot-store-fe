@@ -106,7 +106,9 @@ function parseValidationErrorMsg(err) {
       return msg || field || pre;
    }
    
-   else {
+   else if (err?.message && err?.error) {
+      return err.message;
+   } else {
       return 'Unknown error caught!';
    }
 }
