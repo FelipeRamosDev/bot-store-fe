@@ -1,9 +1,9 @@
 'use client';
 
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { confirmEmail } from './EmailConfirmation.helper';
-import APIContext from '@/contexts/4HandsAPI';
+import { API } from '@/contexts/4HandsAPI';
 
 /**
  * `EmailConfirmation` is a React component that handles the email confirmation process.
@@ -15,7 +15,6 @@ import APIContext from '@/contexts/4HandsAPI';
  * @returns {JSX.Element} An empty React fragment.
  */
 export default function EmailConfirmation({ confirmationToken }) {
-   const API = useContext(APIContext);
    const router = useRouter();
 
    useEffect(() => {
