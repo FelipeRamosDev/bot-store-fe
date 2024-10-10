@@ -33,6 +33,8 @@ export default function BotsTableImg() {
    const table = useRef();
 
    function handleScroll() {
+      if (!table.current) return;
+
       const isExpanded = table.current.classList.contains('expanded');
       const isOnScreen = isElementOnScreen(table, 0.7);
 
