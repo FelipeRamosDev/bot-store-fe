@@ -21,7 +21,7 @@ export default function BasePage({ className = '', fullContainer, headerMenu, Cu
          {!CustomHeader && <TopHeaderPublic fullContainer={fullContainer} type={headerMenu} />}
          {CustomHeader && <CustomHeader fullContainer={fullContainer} type={headerMenu} />}
 
-         <div className={`page-content ${className}`}>
+         <div className={`page-content`}>
             {children}
          </div>
 

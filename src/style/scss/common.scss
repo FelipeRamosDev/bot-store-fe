@@ -43,7 +43,16 @@ html {
    background-repeat: no-repeat;
    font-size: 14px;
    color: $text;
-   min-height: 100%;
+   min-height: 100vh;
+
+   body {
+      min-height: inherit;
+
+      main {
+         position: relative;
+         min-height: inherit;
+      }
+   }
 }
 
 .cursor-pointer {

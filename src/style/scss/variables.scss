@@ -3,6 +3,7 @@ $primary-light: lighten($color: $primary, $amount: 20);
 $primary-dark: darken($color: $primary, $amount: 20);
 
 $secondary: #0C3845;
+$secondary-soft: #283f46;
 $secondary-light: lighten($color: $secondary, $amount: 20);
 $secondary-dark: darken($color: $secondary, $amount: 20);
 
@@ -25,6 +26,8 @@ $background-grey2-dark: darken($color: $background-grey2, $amount: 2);
 $background-grey2-darken: darken($color: $background-grey2, $amount: 5);
 $background-grad: radial-gradient(100vh, #28373C, #212A2D);
 
+$grad-dark-primary: radial-gradient(#2c3235, #111a1c);
+$grad-dark-primary-bluesh: radial-gradient($secondary-soft, $secondary-dark);
 $grad-dark-primary-tertiary: radial-gradient(#36505a 0%, rgb(48 189 107) 100%);
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);
 $grad-primary-tertiary-light-inverted: linear-gradient(80deg, $tertiary-light, $primary-light);
