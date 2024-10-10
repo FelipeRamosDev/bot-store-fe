@@ -42,6 +42,12 @@
       top: 4rem;
       left: 8%;
       overflow: hidden;
+      transition: transform 300ms ease-in-out;
+      transform: translateX(-150vh);
+
+      &.animated {
+         transform: translateX(0);
+      }
 
       @media screen and (min-width: $screen-m) {
          top: 7rem;

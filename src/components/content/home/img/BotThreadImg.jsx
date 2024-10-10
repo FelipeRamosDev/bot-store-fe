@@ -1,11 +1,11 @@
 import WatermarkPriceCard from '@/components/common/watermarkPriceCard/WatermarkPriceCard';
 import BotThreadDivider from '@/components/tiles/bot/botThreadDivider/BotThreadDivider';
 import RuleDummy from '@/components/tiles/bot/rule/RuleDummy';
-import PolylineIcon from '@mui/icons-material/Polyline';
+import BlurLinearIcon from '@mui/icons-material/BlurLinear';
 
 export default function BotThreadImg() {
-   const titleCustom = { fontSize: 25, fontWeight: 800, color: 'rgb(44 50 50)', transform: 'translateY(17px)' };
-   const iconCustom = { fontSize: 50, marginTop: -15, color: 'rgb(44 50 50)', transform: 'translateY(16px)' };
+   const titleCustom = { fontSize: 25, fontWeight: 800, color: 'rgb(44 50 50)', transform: 'translateY(3px)' };
+   const iconCustom = { fontSize: 35, marginTop: -10, color: 'rgb(44 50 50)', transform: 'translateY(7px)' };
 
    return (
       <WatermarkPriceCard
@@ -18,7 +18,7 @@ export default function BotThreadImg() {
          elevation={50}
       >
          <div className="content-header thread-header">
-            <PolylineIcon style={iconCustom} />
+            <BlurLinearIcon style={iconCustom} />
 
             <h5 className="card-title" style={titleCustom}>Open Short</h5>
             <div className="toolbar"></div>
@@ -34,6 +34,5 @@ export default function BotThreadImg() {
             <RuleDummy elevation={10} />
          </div>
       </WatermarkPriceCard>
-
    );
 }
