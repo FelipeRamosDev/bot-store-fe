@@ -29,7 +29,7 @@ $grad-dark-primary-tertiary: radial-gradient(#36505a 0%, rgb(48 189 107) 100%);
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);
 $grad-primary-tertiary-light-inverted: linear-gradient(80deg, $tertiary-light, $primary-light);
 $grad-rad-primary-tertiary-light: radial-gradient($primary 0%, $tertiary-light 100%);
-$grad-home-banner: radial-gradient(rgb(34 39 40 / 30%) 20%, #1C2123 100%);
+$grad-home-banner: radial-gradient(circle at 50% 100%, rgb(34 39 40 / 30%) 0%, #1C2123 100%);
 $grad-home-banner-desktop: radial-gradient(rgb(34 39 40 / 85%) 0%, #1C2123 100%);
 
 $success: #80d8a3;
