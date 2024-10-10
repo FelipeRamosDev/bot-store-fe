@@ -6,6 +6,7 @@ import Image from 'next/image';
 import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import Price from '@/components/displays/price/Price';
 import Percent from '@/components/displays/percent/Percent';
+import { isElementOnScreen } from '@/helpers/scroll';
 
 const dummyBot = {
    name: 'Bender',
@@ -17,18 +18,14 @@ export default function BotCardImg({ bot = dummyBot }) {
    const card = useRef();
 
    function handleScroll() {
-      if (card.current) {
-         const triggerStart = window.innerHeight * 0.7;
-         const cardPos = card.current.getBoundingClientRect();
-         const isExpanded = card.current.classList.contains('expanded');
+      if (!card.current) return;
+      const isExpanded = card.current.classList.contains('expanded');
+      const isOnScreen = isElementOnScreen(card, 0.25);
 
-         if (triggerStart > cardPos.top && !isExpanded) {
-            card.current.classList.add('expanded');
-         }
-         
-         else if (triggerStart < cardPos.top && isExpanded) {
-            card.current.classList.remove('expanded');
-         }
+      if (!isExpanded && isOnScreen) {
+         card.current.classList.add('expanded');
+      } else if (isExpanded && !isOnScreen) {
+         card.current.classList.remove('expanded');
       }
    }
 

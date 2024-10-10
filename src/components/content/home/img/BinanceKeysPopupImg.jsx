@@ -1,9 +1,32 @@
+'use client';
+import { useEffect, useRef } from 'react';
 import Card from '@/components/common/card/Card';
 import LockIcon from '@mui/icons-material/Lock';
+import { isElementOnScreen } from '@/helpers/scroll';
 
 export default function BinanceKeysPopupImg({ className = '' }) {
+   const cardElm = useRef();
+
+   function handleScroll() {
+      if (!cardElm.current) return;
+      const isAnimated = cardElm.current.classList.contains('animated');
+      const isOnScreen = isElementOnScreen(cardElm, 0.6);
+
+      if (!isAnimated && isOnScreen) {
+         cardElm.current.classList.add('animated');
+      } else if (isAnimated && !isOnScreen) {
+         cardElm.current.classList.remove('animated');
+      }
+   }
+
+   useEffect(() => {
+      window.removeEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll);
+   }, []);
+
    return (
       <Card
+         prevRef={cardElm}
          className={`binance-keys-popup ${className}`}
          radius="m"
          elevation={40}

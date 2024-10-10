@@ -1,3 +1,5 @@
+'use client';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Avatar from '@mui/material/Avatar';
 import Card from '@/components/common/card/Card';
@@ -12,6 +14,7 @@ import KaiohIMG from '@/assets/avatar_demo/kaioh.webp';
 import BenderIMG from '@/assets/avatar_demo/bender.webp';
 import WallEIMG from '@/assets/avatar_demo/wall-e.webp';
 import PeterGriffinIMG from '@/assets/avatar_demo/peter_griffin.webp';
+import { isElementOnScreen } from '@/helpers/scroll';
 
 const baseParams = {
    align: 'center',
@@ -27,8 +30,26 @@ const dummy = [
 ];
 
 export default function BotsTableImg() {
+   const table = useRef();
+
+   function handleScroll() {
+      const isExpanded = table.current.classList.contains('expanded');
+      const isOnScreen = isElementOnScreen(table, 0.7);
+
+      if (!isExpanded && isOnScreen) {
+         table.current?.classList.add('expanded');
+      } else if (isExpanded && !isOnScreen) {
+         table.current?.classList.remove('expanded');
+      }
+   }
+
+   useEffect(() => {
+      window.removeEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll);
+   }, []);
+
    return (
-      <Card className="table-image" padding="m" elevation={80}>
+      <Card prevRef={table} className="table-image" padding="m" elevation={80}>
          <Table>
             <TableHead>
                <TableRow>

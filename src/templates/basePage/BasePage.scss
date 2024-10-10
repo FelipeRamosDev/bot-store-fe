@@ -31,12 +31,13 @@ header {
    &.auth-page {
       .page-content {
          padding-top: 3rem;
+         padding-bottom: 2.6rem;
       }
    }
-}
 
-.page-content {
-   padding-bottom: 7rem;
+   .page-content {
+      min-height: inherit;
+   }
 }
 
 footer {

@@ -6,12 +6,13 @@
       .section-title {
          font-size: 1.7rem;
          margin: 0 0 0.9rem 0;
-         line-height: 2.2rem;
+         line-height: 2.3rem;
          color: $text-darken;
 
          @media screen and (min-width: $screen-m) {
             font-size: 3rem;
-            margin: 2rem 0 2.2rem 0;
+            margin: 1rem 0 1.5rem 0;
+            line-height: 2.9rem;
          }
       }
 
@@ -26,7 +27,6 @@
 
    .content-split.container {
       padding: 3rem 0 5rem 0;
-      margin-bottom: 3rem;
       gap: 2rem;
 
       @media screen and (min-width: $screen-m) {
@@ -139,7 +139,7 @@
       .image-wrap {
          position: relative;
          width: 100%;
-         transition: transform 80ms ease-in-out;
+         transition: transform 120ms ease-in-out;
          transform: translateX(100%);
          z-index: 2;
    
