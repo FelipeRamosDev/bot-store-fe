@@ -1,4 +1,3 @@
-import React from 'react';
 import MainFooter from '@/components/footers/mainFooter/MainFooter';
 import TopHeaderPublic from '@/components/headers/topHeader/TopHeaderPublic';
 
@@ -20,6 +19,8 @@ export default function BasePage({ className = '', fullContainer, headerMenu, Cu
       <main className={`${className} base-page`}>
          {!CustomHeader && <TopHeaderPublic fullContainer={fullContainer} type={headerMenu} />}
          {CustomHeader && <CustomHeader fullContainer={fullContainer} type={headerMenu} />}
+
+         <div id="topbar-portal"></div>
 
          <div className={`page-content`}>
             {children}
