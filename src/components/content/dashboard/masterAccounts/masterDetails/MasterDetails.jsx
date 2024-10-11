@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import MasterDetailsHeader from './MasterDetailsHeader';
 import MasterDetailsContent from './MasterDetailsContent';
@@ -20,10 +21,19 @@ export default function MasterDetails({ index }) {
    const [ uInstance, setUInstance ] = useState();
    const [ editSlotModal, setEditSlotModal  ] = useState();
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState();
+   const [ mounted, setMounted ] = useState(false);
+
+   function ToolbarPortal() {
+      return mounted && createPortal(<ExchangeKeysMissingTopbar />, document.getElementById('topbar-portal'));
+   }
+
+   useEffect(() => {
+      setMounted(true);
+   }, []);
 
    return (<>
       <DBQuery type="doc" collection="master_accounts" filter={{ index }} subscribe={true}>
-         <ExchangeKeysMissingTopbar />
+         <ToolbarPortal />
 
          <ContentSidebar className="master-details" isFullContainer={true}>
             <MasterDetailsContent uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
