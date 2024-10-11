@@ -1,16 +1,107 @@
 .top-banner {
-   background-image: url(../../../assets/bg_shape_1.svg);
-   background-repeat: no-repeat;
-   background-position: center;
-   background-size: auto 100%;
+   position: relative;
    width: 100%;
-   min-height: 80vh;
+   min-height: 85vh;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   overflow: hidden;
 
    @media screen and (min-width: $screen-m) {
       background-position: left;
+   }
+
+   .bg-rect {
+      position: absolute;
+      z-index: 1;
+      background: $grad-home-banner;
+      width: 100%;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      
+      @media screen and (min-width: $screen-m) {
+         width: 212%;
+         height: 138%;
+         left: -90%;
+         top: -19%;
+         transform: rotateZ(42deg);
+         background: $grad-home-banner-desktop;
+      }
+   }
+
+   @keyframes rot1 {
+      0% {
+         transform: rotateZ(0deg) translateY(-25%);
+      }
+      100% {
+         transform: rotateZ(360deg) translateY(25%);
+      }
+   }
+
+   @keyframes rot2 {
+      0% {
+         transform: rotateZ(90deg) translateX(-25%);
+      }
+      100% {
+         transform: rotateZ(450deg) translateX(25%);
+      }
+   }
+
+   .bg-1,
+   .bg-2,
+   .bg-3,
+   .bg-4 {
+      position: absolute;
+      border-radius: 100%;
+   }
+
+   .bg-1,
+   .bg-3 {
+      background: $grad-rad-primary-tertiary-light;
+      opacity: 0.6;
+      animation: rot1 150s ease-in-out infinite;
+   }
+
+   .bg-2,
+   .bg-4 {
+      background: $grad-primary-tertiary-light-inverted;
+      opacity: 0.5;
+      animation: rot2 200s ease-in-out infinite;
+   }
+
+   .bg-1 {
+      top: 26%;
+      left: -124%;
+      height: 150%;
+      width: 200%;
+   }
+
+   .bg-2 {
+      top: -61%;
+      right: -24%;
+      height: 115%;
+      width: 115%;
+   }
+
+   .bg-3 {
+      top: -43%;
+      left: -24%;
+      height: 182%;
+      width: 240%;
+   }
+
+   .bg-4 {
+      top: -43%;
+      right: -24%;
+      width: 150%;
+      height: 236%;
+   }
+
+   .bg-3,
+   .bg-4 {
+      transform: rotate(90deg);
    }
 
    >.content-split {
@@ -25,6 +116,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 2;
 
       .column {
          flex: 1;

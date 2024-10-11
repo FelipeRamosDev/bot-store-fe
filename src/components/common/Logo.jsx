@@ -20,6 +20,7 @@ export default function Logo({ ...props }) {
       alt="Company's Logo"
       src={LogoImage}
       priority={true}
+      loading="eager"
       height={55}
       width={55}
       {...props}

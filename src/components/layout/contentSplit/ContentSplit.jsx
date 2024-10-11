@@ -27,37 +27,50 @@
  * }
  * 
  * @param {Object} [props] The react componect properties.
- * @param {string} [propsbreakpoint='m'] - The breakpoint at which the layout changes. Valid values are `'xs'`, `'s'`, `'m'`, `'l'`, and `'xl'`.
+ * @param {string} [props.breakpoint='m'] - The breakpoint at which the layout changes. Valid values are `'xs'`, `'s'`, `'m'`, `'l'`, and `'xl'`.
  * @param {boolean} [props.columnDirection=false] - If true, arranges the sections in a column direction.
  * @param {boolean} [props.useContainer=false] - If true, adds the full-container CSS class.
  * @param {React.ReactNode[]} props.children - The content to be displayed in the two sections.
  * @returns {JSX.Element} A div element with two sections (`content-a` and `content-b`), styled based on the breakpoint and direction.
  */
-export default function ContentSplit({ className = '', breakpoint = 'm', useContainer = false, columnDirection = false, children }) {
-   let breakpointCSS = '';
+export default function ContentSplit({ className = '', breakpoint = 'm', reverse = false, useContainer = false, columnDirection = false, children }) {
+   let classes = 'content-split';
 
    if (breakpoint === 'xs') {
-      breakpointCSS = 'breakpoint-xs';
+      classes += ' breakpoint-xs';
    }
 
    if (breakpoint === 's') {
-      breakpointCSS = 'breakpoint-s';
+      classes += ' breakpoint-s';
    }
 
    if (breakpoint === 'm') {
-      breakpointCSS = 'breakpoint-m';
+      classes += ' breakpoint-m';
    }
 
    if (breakpoint === 'l') {
-      breakpointCSS = 'breakpoint-l';
+      classes += ' breakpoint-l';
    }
 
    if (breakpoint === 'xl') {
-      breakpointCSS = 'breakpoint-xl';
+      classes += ' breakpoint-xl';
+   }
+
+   if (columnDirection) {
+      classes += ' column-direction';
+   }
+
+   if (useContainer) {
+      classes += ' full-container';
+   }
+
+   if (className) {
+      classes += ' ';
+      classes += className;
    }
 
    return (
-      <div className={`content-split ${className} ${breakpointCSS} ${columnDirection ? 'column-direction' : ''} ${useContainer ? 'full-container' : ''}`}>
+      <div className={classes}>
          {children.length && <div className="content-a">
             {children[0]}
          </div>}

@@ -1,0 +1,77 @@
+.texture-paper-ellipses {
+   background: $grad-dark-primary-tertiary;
+   overflow: hidden;
+
+   @keyframes rot1 {
+      0% {
+         transform: rotateZ(0deg) translateY(-25%);
+      }
+      100% {
+         transform: rotateZ(360deg) translateY(25%);
+      }
+   }
+
+   @keyframes rot2 {
+      0% {
+         transform: rotateZ(90deg) translateX(-25%);
+      }
+      100% {
+         transform: rotateZ(450deg) translateX(25%);
+      }
+   }
+
+   .bg-1,
+   .bg-2,
+   .bg-3,
+   .bg-4 {
+      position: absolute;
+      border-radius: 100%;
+   }
+
+   .bg-1,
+   .bg-3 {
+      background: $grad-rad-primary-tertiary-light;
+      opacity: 0.6;
+      animation: rot1 100s ease-in-out infinite;
+   }
+
+   .bg-2,
+   .bg-4 {
+      background: $grad-primary-tertiary-light-inverted;
+      opacity: 0.5;
+      animation: rot2 80s ease-in-out infinite;
+   }
+
+   .bg-1 {
+      top: -30%;
+      left: -110%;
+      height: 107%;
+      width: 82%;
+   }
+
+   .bg-2 {
+      top: -61%;
+      right: -24%;
+      height: 115%;
+      width: 115%;
+   }
+
+   .bg-3 {
+      top: -43%;
+      left: -24%;
+      width: 82%;
+      height: 140%;
+   }
+
+   .bg-4 {
+      top: -43%;
+      right: -24%;
+      width: 64%;
+      height: 236%;
+   }
+
+   .bg-3,
+   .bg-4 {
+      transform: rotate(90deg);
+   }
+}

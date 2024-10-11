@@ -25,18 +25,22 @@ header {
 }
 
 .base-page {
-   position: relative;
-   min-height: 100vh;
-
    &.auth-page {
       .page-content {
          padding-top: 3rem;
+         padding-bottom: 2.6rem;
       }
    }
-}
 
-.page-content {
-   padding-bottom: 7rem;
+   .page-content {
+      min-height: inherit;
+   }
+
+   .topbar-portal {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+   }
 }
 
 footer {

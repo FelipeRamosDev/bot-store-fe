@@ -11,6 +11,7 @@ import { toPercentString } from '@/helpers/format';
  * @param {number} props.value - The percentage value to display.
  * @param {string} props.size - Optional size of the displayed percentage.
  * @param {number} props.fontSize - Optional font-size of the displayed percentage.
+ * @param {'success'|'error'|'warn'} setup.forceColor - To force a color ignoring the number reference.
  * @param {string} props.prefix - A prefix to be displayed before the element.
  * @param {string} props.posfix - A posfix to be displayed after the element.
  * @returns {JSX.Element} The rendered percentage value with optional styling.
@@ -23,6 +24,7 @@ export default function Percent({
    value,
    size,
    fontSize,
+   forceColor,
    prefix,
    posfix
 }) {
@@ -39,6 +41,10 @@ export default function Percent({
 
    // Format the percentage value
    const percent = toPercentString(value, { fractional });
+
+   if (forceColor) {
+      color = forceColor;
+   }
 
    // Render the percentage value
    return <span

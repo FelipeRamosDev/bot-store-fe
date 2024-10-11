@@ -49,21 +49,18 @@ export default function BotsTable({ title = 'Bots' }) {
             {
                label: 'Bot',
                propKey: 'name',
-               style: { width: '10rem' },
+               style: { minWidth: '10rem' },
                format: (value) => {
                   return value;
                }
             },
             {
-               label: 'Summary',
-               propKey: 'description'
-            },
-            {
                label: 'SCORE',
                propKey: 'score',
-               align: 'right',
+               align: 'center',
+               style: { minWidth: '5rem' },
                format: (value) => {
-                  return <Price amount={value} noSymbol={true} fractional={0} />
+                  return <Price size="xl" amount={1450} noSymbol={true} fractional={0} />
                }
             }
          ]}

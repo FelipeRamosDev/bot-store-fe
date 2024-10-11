@@ -3,6 +3,7 @@ $primary-light: lighten($color: $primary, $amount: 20);
 $primary-dark: darken($color: $primary, $amount: 20);
 
 $secondary: #0C3845;
+$secondary-soft: #283f46;
 $secondary-light: lighten($color: $secondary, $amount: 20);
 $secondary-dark: darken($color: $secondary, $amount: 20);
 
@@ -25,7 +26,14 @@ $background-grey2-dark: darken($color: $background-grey2, $amount: 2);
 $background-grey2-darken: darken($color: $background-grey2, $amount: 5);
 $background-grad: radial-gradient(100vh, #28373C, #212A2D);
 
+$grad-dark-primary: radial-gradient(#2c3235, #111a1c);
+$grad-dark-primary-bluesh: radial-gradient($secondary-soft, $secondary-dark);
+$grad-dark-primary-tertiary: radial-gradient(#36505a 0%, rgb(48 189 107) 100%);
 $grad-primary-tertiary-light: linear-gradient(80deg, $primary-light, $tertiary);
+$grad-primary-tertiary-light-inverted: linear-gradient(80deg, $tertiary-light, $primary-light);
+$grad-rad-primary-tertiary-light: radial-gradient($primary 0%, $tertiary-light 100%);
+$grad-home-banner: radial-gradient(circle at 50% 100%, rgb(34 39 40 / 30%) 0%, #1C2123 100%);
+$grad-home-banner-desktop: radial-gradient(rgb(34 39 40 / 85%) 0%, #1C2123 100%);
 
 $success: #80d8a3;
 $success-light: lighten($color: $success, $amount: 20);
@@ -39,7 +47,7 @@ $warn: #ddca6b;
 $warn-light: lighten($color: $warn, $amount: 20);
 $warn-dark: darken($color: $warn, $amount: 20);
 
-$grey: #808080;
+$grey: #565d5d;
 $grey-light: lighten($color: $grey, $amount: 25);
 $grey-dark: darken($color: $grey, $amount: 25);
 $grey-mark: #515151;
@@ -48,7 +56,8 @@ $white: #FAFAFA;
 $black: #111;
 
 $text: #FAFAFA;
-$text-darken: darken($color: $text, $amount: 20);
+$text-darken: darken($color: $text, $amount: 15);
+$text-grey-darken: #292d2e;
 $text-secondary: $text-darken;
 $text-tertiary: darken($color: $tertiary, $amount: 70);
 $text-success: darken($color: $success, $amount: 40);

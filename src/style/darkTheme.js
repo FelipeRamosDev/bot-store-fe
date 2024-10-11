@@ -1,7 +1,16 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
+import { Montserrat } from 'next/font/google';
+
+const appFont = Montserrat({
+   weight: ['300', '400', '500', '600', '700', '800', '900'],
+   subsets: ['latin']
+});
 
 export const darkTheme = createTheme({
+   typography: {
+      fontFamily: appFont.style.fontFamily
+   },
    palette: {
       mode: 'dark',
       primary: {
