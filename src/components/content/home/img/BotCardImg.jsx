@@ -44,7 +44,7 @@ export default function BotCardImg({ bot = dummyBot }) {
          <div className="card-body">
             <div className="avatar-wrap">
                <div className="avatar-mask">
-                  <Image src={BenderImg} alt="Bot Avatar" style={{ width: 'auto' }} width={0} height={130} />
+                  <Image src={BenderImg} alt="Bot Avatar" style={{ width: 175.52, height: 130 }} />
                </div>
             </div>
 

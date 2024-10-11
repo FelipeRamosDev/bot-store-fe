@@ -19,6 +19,7 @@ export default function HomeTopBanner() {
                   className="big-logo"
                   src={Logo}
                   alt="CandlePilot Logo"
+                  priority={true}
                   loading="eager"
                   width={130}
                   height={130}
