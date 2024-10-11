@@ -22,11 +22,11 @@ const baseParams = {
 };
 
 const dummy = [
-   { Avatar: TerminatorIMG, name: 'Terminator', score: 2431, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 3, monthlyROI: 15 },
-   { Avatar: KaiohIMG, name: 'Mr. Kaioh', score: 1845, avgDailyWins: 8, avgDailyLoses: 7, avgMonthlyWins: 150, avgMonthlyLoses: 26, dailyROI: -1, monthlyROI: 14 },
-   { Avatar: BenderIMG, name: 'Bender', score: 1290, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 4, monthlyROI: 22 },
-   { Avatar: WallEIMG, name: 'Wall', score: 978, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: -0.45, monthlyROI: 12 },
-   { Avatar: PeterGriffinIMG, name: 'Peter Grifin', score: 574, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 3, monthlyROI: 5 },
+   { Avatar: TerminatorIMG, avatarW: 40, avatarH: 40, name: 'Terminator', score: 2431, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 3, monthlyROI: 15 },
+   { Avatar: KaiohIMG, avatarW: 48, avatarH: 40, name: 'Mr. Kaioh', score: 1845, avgDailyWins: 8, avgDailyLoses: 7, avgMonthlyWins: 150, avgMonthlyLoses: 26, dailyROI: -1, monthlyROI: 14 },
+   { Avatar: BenderIMG, avatarW: 54, avatarH: 40, name: 'Bender', score: 1290, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 4, monthlyROI: 22 },
+   { Avatar: WallEIMG, avatarW: 71, avatarH: 40, name: 'Wall', score: 978, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: -0.45, monthlyROI: 12 },
+   { Avatar: PeterGriffinIMG, avatarW: 71, avatarH: 40, name: 'Peter Grifin', score: 574, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 3, monthlyROI: 5 },
 ];
 
 export default function BotsTableImg() {
@@ -58,7 +58,7 @@ export default function BotsTableImg() {
                   <TableCell {...baseParams} align="left">Avatar</TableCell>
                   <TableCell {...baseParams} align="left" sx={{ minWidth: '10rem' }}>Name</TableCell>
                   <TableCell {...baseParams}>Score</TableCell>
-                  <TableCell {...baseParams} className="hide-mobile">Daily WINS/LOSES</TableCell>
+                  <TableCell {...baseParams}>Daily WINS/LOSES</TableCell>
                   <TableCell {...baseParams} className="hide-mobile">Daily ROI</TableCell>
                   <TableCell {...baseParams} className="hide-mobile">Monthly ROI</TableCell>
                </TableRow>
@@ -76,10 +76,9 @@ export default function BotsTableImg() {
                                  className="avatar"
                                  src={row.Avatar}
                                  alt={row.name}
-                                 height={40}
-                                 width={0}
-                                 quality={20}
-                                 style={{ width: 'auto' }}
+                                 quality={40}
+                                 width={row.avatarW}
+                                 height={row.avatarH}
                               />
                            )}
                         </Avatar>
@@ -90,7 +89,7 @@ export default function BotsTableImg() {
                      <TableCell className="big-value" {...baseParams}>
                         <span className="profit">{row.score}</span>
                      </TableCell>
-                     <TableCell className="big-value hide-mobile" {...baseParams}>
+                     <TableCell className="big-value" {...baseParams}>
                         <span className="profit">{row.avgDailyWins}</span> / <span className="loss">{row.avgDailyLoses}</span>
                      </TableCell>
                      <TableCell className="big-value hide-mobile" {...baseParams}>
