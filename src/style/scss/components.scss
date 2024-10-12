@@ -106,6 +106,9 @@
 @import "../../components/tiles/slotTile/SlotTile.scss";
 @import "../../components/tiles/userInstance/UserInstance.scss";
 
+// Tooltips
+@import "../../components/tooltips/base/TooltipBase.scss";
+
 .price-display,
 .percent-display {
    font-size: 1rem;

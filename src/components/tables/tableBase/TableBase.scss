@@ -30,6 +30,21 @@
       cursor: pointer;
    }
 
+   thead {
+      > tr {
+         > th {
+            font-size: 0.75rem;
+
+            .tooltip-head {
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               gap: 0.4rem;
+            }
+         }
+      }
+   }
+
    .seemore-button {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
