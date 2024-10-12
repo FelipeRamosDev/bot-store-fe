@@ -8,6 +8,9 @@ import DBQueryContext from '@/contexts/DBQuery';
 import Percent from '@/components/displays/percent/Percent';
 import PrettyDate from '@/components/displays/prettyDate/PrettyDate';
 import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
+import NotionalRoiTooltip from './tooltips/NotionalRoiTooltip';
+import MarginRoiTooltip from './tooltips/MarginRoiTooltip';
+import MasterRoiTooltip from './tooltips/MasterRoiTooltip';
 
 /**
  * A table component that displays trading positions with various details.
@@ -74,13 +77,28 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
             },
             {
                propKey: 'realizedProfit',
-               label: 'Realized',
+               label: (<div className="tooltip-head">
+                  Realized (ROI)
+                  <NotionalRoiTooltip />
+               </div>),
                align: 'center',
-               style: {
-                  minWidth: '140px',
-               },
+               style: { minWidth: '140px' },
                format: (value, item) => {
-                  return <Price amount={value} fontSize="1rem" />
+                  return (<>
+                     <Price amount={value} fontSize="1rem" /> <Percent value={item.notionalROI} prefix="(" posfix=")" fontSize="0.8rem" />
+                  </>);
+               }
+            },
+            {
+               propKey: 'masterPnlROI',
+               label: (<div className="tooltip-head">
+                  ROI / Balance
+                  <MasterRoiTooltip />
+               </div>),
+               align: 'center',
+               style: { minWidth: '140px' },
+               format: (value) => {
+                  return (<Percent value={value} size="m" />);
                }
             },
             {
@@ -143,7 +161,10 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
             },
             {
                propKey: 'pnl',
-               label: 'PNL / ROI',
+               label: (<div className="tooltip-head">
+                  PNL (ROI)
+                  <MarginRoiTooltip />
+               </div>),
                align: 'center',
                style: {
                   minWidth: '140px',
