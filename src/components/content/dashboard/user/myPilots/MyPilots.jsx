@@ -19,7 +19,7 @@ export default function MyBots() {
                type="query"
                collection="bots"
                filter={{ author: user._id }}
-               sort={{ modifiedAt: -1 }}
+               sort={{ 'currentResults.profitRatio': -1 }}
                limit={10}
             >
                <BotsTable hideHeader={true} />
