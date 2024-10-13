@@ -6,7 +6,7 @@ import { AccountCircle, CurrencyExchange, Logout } from '@mui/icons-material';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import APIContext from '@/contexts/4HandsAPI';
-import LogoIcon from '@/assets/icons/logo_icon.svg';
+import LogoIcon from '@/assets/icons/logo_icon_text.svg';
 
 /**
  * AccountMenu component that provides user account options such as viewing profile, 
