@@ -40,7 +40,7 @@ export default function DashboardSidebar() {
             type="query"
             collection="bots"
             filter={{ author: user._id }}
-            sort={{ modifiedAt: -1 }}
+            sort={{ 'currentResults.profitRatio': -1 }}
             limit={6}
          >
             <BotsTable title="My Bots" />

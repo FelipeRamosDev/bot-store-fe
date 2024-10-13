@@ -14,7 +14,7 @@ export default function PilotStore() {
                type="query"
                collection="bots"
                filter={{ status: 'public' }}
-               sort={{ modifiedAt: -1 }}
+               sort={{ 'currentResults.profitRatio': -1 }}
                limit={10}
             >
                <BotsTable hideHeader={true} />
