@@ -63,35 +63,35 @@ export default function BotsTable({ title = 'Bots', hideHeader }) {
                format: (value, item) => <Price amount={item.currentResults?.winLossIndex || 0} noSymbol={true} noColor={true} size="m" />
             },
             {
-               label: 'Accum. ROI / Day',
+               label: 'Accum. ROI (24h)',
                propKey: 'accumRoiDay',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.accumRoi24 || 0} dashedZero={true} />
             },
             {
-               label: 'Accum. ROI / Month',
+               label: 'Accum. ROI (30d)',
                propKey: 'accumRoiMonth',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.accumRoiMonth || 0} dashedZero={true} />
             },
             {
-               label: 'Pos. ROI / Day',
+               label: 'Pos. ROI (24h)',
                propKey: 'avgDayRoi',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoi24 || 0} dashedZero={true} />
             },
             {
-               label: 'Pos. ROI / Month',
+               label: 'Pos. ROI (30d)',
                propKey: 'avgMonthRoi',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoiMonth || 0} dashedZero={true} />
             },
             {
-               label: 'Day WINS/LOSES',
+               label: 'WINS/LOSES (24h)',
                propKey: 'winsLosesDay',
                align: 'center',
                style: { minWidth: '10rem' },
@@ -104,7 +104,7 @@ export default function BotsTable({ title = 'Bots', hideHeader }) {
                }
             },
             {
-               label: 'Month WINS/LOSES',
+               label: 'WINS/LOSES (30d)',
                propKey: 'winsLosesMonth',
                align: 'center',
                style: { minWidth: '10rem' },
