@@ -8,8 +8,9 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import Add from '@mui/icons-material/Add';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
-import { SmartToy } from '@mui/icons-material';
 import Percent from '@/components/displays/percent/Percent';
+import LogoIconImg from '@/assets/icons/logo_icon_text.svg';
+import Image from 'next/image';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
@@ -19,7 +20,7 @@ import Percent from '@/components/displays/percent/Percent';
  *
  * @returns {React.Element} The rendered table of recent bots.
  */
-export default function BotsTable({ title = 'Bots', hideHeader }) {
+export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent }) {
    const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const [ createBotModal, setCreateBotModal ] = useState(false);
    const nav = useRouter();
@@ -30,12 +31,31 @@ export default function BotsTable({ title = 'Bots', hideHeader }) {
       parsedLimit = limit -1;
    }
 
+   function AddButton() {
+      return (
+         <RoundIconButton
+            Icon={Add}
+            color="tertiary"
+            variant="contained"
+            onClick={() => setCreateBotModal(true)}
+         />
+      )
+   }
+
+   function LogoIcon() {
+      return <Image src={LogoIconImg} alt="CandlePilot Logo Icon" width={23} height={23} />
+   }
+
    return <div className="bots-table">
-      {!hideHeader && <ContentHeader
-         Toolbar={() => <RoundIconButton Icon={Add} color="tertiary" variant="contained" onClick={() => setCreateBotModal(true)} />}
-      >
-         <SmartToy /> <h3 className="header-title">{title}</h3>
-      </ContentHeader>}
+      {!hideHeader && (
+         <ContentHeader Toolbar={AddButton}>
+            {!HeaderContent && (<>
+               <LogoIcon /> <h3 className="header-title">{title}</h3>
+            </>)}
+
+            {HeaderContent && <HeaderContent />}
+         </ContentHeader>
+      )}
 
       <TableBase
          items={bots}
@@ -56,42 +76,49 @@ export default function BotsTable({ title = 'Bots', hideHeader }) {
                }
             },
             {
-               label: 'WIN/LOSS Index',
-               propKey: 'winLossIndex',
+               label: 'Profit Ratio',
+               propKey: 'profitRatio',
                align: 'center',
                style: { minWidth: '8rem' },
-               format: (value, item) => <Price amount={item.currentResults?.winLossIndex || 0} noSymbol={true} noColor={true} size="m" />
+               format: (value, item) => <Price amount={item.currentResults?.profitRatio || 0} noSymbol={true} noColor={true} size="m" />
             },
             {
-               label: 'Accum. ROI (24h)',
+               label: 'ROI (24h)',
                propKey: 'accumRoiDay',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.accumRoi24 || 0} dashedZero={true} />
             },
             {
-               label: 'Accum. ROI (30d)',
+               label: 'ROI (30d)',
                propKey: 'accumRoiMonth',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.accumRoiMonth || 0} dashedZero={true} />
             },
             {
-               label: 'Pos. ROI (24h)',
+               label: 'Daily ROI (μ)',
+               propKey: 'avgDailyROI',
+               align: 'center',
+               style: { minWidth: '8rem' },
+               format: (value, item) => <Percent value={item.currentResults?.avgDailyROI || 0} dashedZero={true} />
+            },
+            {
+               label: 'Position ROI (24h/μ)',
                propKey: 'avgDayRoi',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoi24 || 0} dashedZero={true} />
             },
             {
-               label: 'Pos. ROI (30d)',
+               label: 'Position ROI (30d/μ)',
                propKey: 'avgMonthRoi',
                align: 'center',
                style: { minWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoiMonth || 0} dashedZero={true} />
             },
             {
-               label: 'WINS/LOSES (24h)',
+               label: 'W/L ROI (24h/μ)',
                propKey: 'winsLosesDay',
                align: 'center',
                style: { minWidth: '10rem' },
@@ -104,7 +131,7 @@ export default function BotsTable({ title = 'Bots', hideHeader }) {
                }
             },
             {
-               label: 'WINS/LOSES (30d)',
+               label: 'W/L ROI (30d/μ)',
                propKey: 'winsLosesMonth',
                align: 'center',
                style: { minWidth: '10rem' },
@@ -117,15 +144,28 @@ export default function BotsTable({ title = 'Bots', hideHeader }) {
                }
             },
             {
-               label: 'WINS/LOSES Rate',
-               propKey: 'winsLosesRate',
+               label: 'W/L (24h)',
+               propKey: 'winsLosesRate24',
                align: 'center',
                style: { minWidth: '10rem' },
                format: (value, item) => {
                   return (<>
-                     <Percent value={item.currentResults?.winsRate || 0} dashedZero={true} />
+                     <Percent value={item.currentResults?.winsRate24 || 0} dashedZero={true} />
                      {' / '}
-                     <Percent value={(item.currentResults?.losesRate || 0) * -1} dashedZero={true} />
+                     <Percent value={(item.currentResults?.losesRate24 || 0) * -1} dashedZero={true} />
+                  </>);
+               }
+            },
+            {
+               label: 'W/L (30d/μ)',
+               propKey: 'winsLosesRateMonth',
+               align: 'center',
+               style: { minWidth: '10rem' },
+               format: (value, item) => {
+                  return (<>
+                     <Percent value={item.currentResults?.winsRateMonth || 0} dashedZero={true} />
+                     {' / '}
+                     <Percent value={(item.currentResults?.losesRateMonth || 0) * -1} dashedZero={true} />
                   </>);
                }
             }

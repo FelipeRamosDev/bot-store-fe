@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import AccountMenu from '../dropdown/accountMenu/AccountMenu';
 import { AccountBalanceWallet, Dashboard } from '@mui/icons-material';
-import StorefrontIcon from '@mui/icons-material/Storefront';
+import StoreIcon from '@mui/icons-material/Store';
 
 /**
  * TopHeaderDesktopMenu component renders a desktop navigation menu with links
@@ -22,7 +21,7 @@ export default function TopHeaderDesktopMenu({ setSpinner }) {
             Dashboard
          </Link>
          <Link href="/dashboard/bots/pilot-store">
-            <StorefrontIcon />
+            <StoreIcon />
             Pilot Store
          </Link>
          <Link href="/dashboard/master-accounts">
