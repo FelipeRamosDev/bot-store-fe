@@ -34,7 +34,7 @@ export default function Price({
 }) {
    // Handle dashed zero display
    if (dashedZero && !amount) {
-      return <span className={`price-display ${className}`}>$ ---</span>;
+      return <span className={`price-display ${className}`}>---</span>;
    }
 
    // Determine value and color based on props
