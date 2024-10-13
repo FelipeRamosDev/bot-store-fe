@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useContext } from 'react';
 import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from '@mui/material';
@@ -5,6 +6,7 @@ import { AccountCircle, CurrencyExchange, Logout } from '@mui/icons-material';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import APIContext from '@/contexts/4HandsAPI';
+import LogoIcon from '@/assets/icons/logo_icon.svg';
 
 /**
  * AccountMenu component that provides user account options such as viewing profile, 
@@ -70,6 +72,13 @@ export default function AccountMenu({ setSpinner = () => {} }) {
                   <AccountCircle />
                </ListItemIcon>
                My Profile
+            </MenuItem>
+
+            <MenuItem onClick={() => router.push('/dashboard/user/my-pilots')}>
+               <ListItemIcon>
+                  <Image src={LogoIcon} alt="CandlePilot Logo Icon" width={20} height={20} />
+               </ListItemIcon>
+               My Pilots
             </MenuItem>
             
             <MenuItem onClick={() => setExchangeModal(true)}>

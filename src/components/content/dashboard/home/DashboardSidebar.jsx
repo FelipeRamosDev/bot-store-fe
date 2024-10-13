@@ -39,6 +39,7 @@ export default function DashboardSidebar() {
          <DBQuery
             type="query"
             collection="bots"
+            filter={{ author: user._id }}
             sort={{ modifiedAt: -1 }}
             limit={6}
          >

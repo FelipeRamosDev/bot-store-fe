@@ -30,6 +30,7 @@
 @import "../../components/content/home/binanceIntegration/BinanceIntegration.scss";
 @import "../../components/content/home/chooseBot/ChooseBot.scss";
 @import "../../components/content/home/createYourBot/CreateYourBot.scss";
+@import "../../components/content/dashboard/user/myPilots/MyPilots.scss";
 
 // Editors
 @import "../../components/editors/scheduleEditor/ScheduleEditor.scss";
@@ -63,6 +64,7 @@
 @import "../../components/inputs/sliderInput/SliderInput.scss";
 
 // Layouts
+@import "../../components/layout/contentFullwidth/ContentFullwidth.scss";
 @import "../../components/layout/contentSidebar/ContentSidebar.scss";
 @import "../../components/layout/contentSplit/ContentSplit.scss";
 
