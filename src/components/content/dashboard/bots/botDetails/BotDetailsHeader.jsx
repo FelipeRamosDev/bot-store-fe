@@ -1,14 +1,14 @@
 'use client';
 import { useContext } from 'react';
-import DBQueryContext from '@/contexts/DBQuery';
-import Card from '@/components/common/card/Card';
-import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
-import ContainedTable from '@/components/tables/containedTable/ContainedTable';
-import APIContext from '@/contexts/4HandsAPI';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
-import { handleStatusChange } from './BotDetails.helper';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 import configs from '@/config.json';
+import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
+import Image from 'next/image';
+import BotInfos from './BotInfos';
+import DBQueryContext from '@/contexts/DBQuery';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -18,15 +18,14 @@ import configs from '@/config.json';
  */
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
-   const API = useContext(APIContext);
 
    return <div className="page-header">
       <div className="cover"></div>
 
       <div className="bot-info">
-         <div className="full-container">
+         <ContentFullwidth useContainer={true}>
             <div className="avatar">
-               <SmartToyIcon className="robot-icon" />
+               <Image src={LogoIcon} className="robot-icon" alt="Avatar Placeholder" width={180} heigth={180} priority={true} />
             </div>
 
             <div className="summary">
@@ -34,29 +33,23 @@ export default function BotDetailsHeader() {
                <p className="brief">{doc.description}</p>
             </div>
 
-            <Card className="infos" padding="s" elevation={40}>
-               {doc.status && <CheckButtonGroupInput
-                  onChange={(ev) => handleStatusChange(ev, API, doc)}
-                  schema={{
-                     key: 'status',
-                     defaultValue: doc.status,
-                     options: [
-                        { label: 'Draft', value: 'draft' },
-                        { label: 'Private', value: 'private' },
-                        { label: 'Public', value: 'public' }
-                     ]
-                  }}
-               />}
+            <BotInfos bot={doc} />
+         </ContentFullwidth>
 
-               <ContainedTable
-                  tableData={[
-                     { label: 'ID', value: doc.cod },
-                     { label: 'Created At', value: new Date(doc.createdAt).toLocaleString() },
-                     { label: 'Modified At', value: new Date(doc.modifiedAt).toLocaleString() },
-                  ]}
-               />
-            </Card>
-         </div>
+         <ContentFullwidth className="analysis" useContainer={true}>
+            <ContentHeader>
+               <QueryStatsIcon fontSize="large" className="title-icon" />
+               <h2 className="header-title">Results History</h2>
+            </ContentHeader>
+
+            <div className="charts">
+               <div>Chart A</div>
+               <div>Chart B</div>
+               <div>Chart C</div>
+               <div>Chart D</div>
+               <div>Chart E</div>
+            </div>
+         </ContentFullwidth>
 
          <div className="settings-painel">
             <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>

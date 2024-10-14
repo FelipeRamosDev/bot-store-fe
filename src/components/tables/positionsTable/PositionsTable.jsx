@@ -122,8 +122,12 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                style: {
                   minWidth: '110px',
                },
-               format: (value) => {
-                  return <Price amount={value} noColor={true} />
+               format: (value, item) => {
+                  return <>
+                     <Price amount={value} noColor={true} fractional={3} />
+                     {' '}
+                     <Percent value={(value * 100) / item.grossBalance} noColor prefix="(" posfix=")" fontSize="0.8rem" />
+                  </>
                }
             },
             {
