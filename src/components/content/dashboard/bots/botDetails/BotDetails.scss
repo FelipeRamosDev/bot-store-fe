@@ -42,7 +42,7 @@
             height: $side;
             border-radius: $side;
             background-color: $background;
-            box-shadow: $shadow-5;
+            box-shadow: $shadow-3;
             margin: calc(($side * 0.6) * -1) auto 0 auto;
 
             .robot-icon {
@@ -58,17 +58,19 @@
             .brief {
                padding-right: 3rem;
                color: $text-darken;
+               white-space: pre;
             }
          }
 
          .infos {
-            width: 35%;
-            transform: translateY(-40%);
-            
-            @media screen and (max-width: $screen-m) {
-               width: 100%;
-               transform: translateY(0);
-               margin-bottom: 3rem;
+            width: 100%;
+            transform: translateY(0);
+            margin-bottom: 3rem;
+
+            @media screen and (min-width: $screen-m) {
+               width: 35%;
+               margin-top: -150px;
+               margin-bottom: 5rem;
             }
 
             .check-button-group {
@@ -92,18 +94,24 @@
             align-items: center;
 
             .painel-title {
+               $fontSize: 2.1rem;
+
                display: block;
-               transform: translateY(5px);
+               transform: translateY(calc($fontSize * 0.3));
                margin-top: 0;
                margin-right: 0;
                margin-left: 3%;
                margin-bottom: 0;
                color: $background-paper-dark;
-               font-size: 2.1rem;
-               font-weight: 800;
+               line-height: calc($fontSize * 1.6);
+               font-size: $fontSize;
+               font-weight: 900;
 
                @media screen and (min-width: $screen-m) {
-                  font-size: 4rem;
+                  $fontSize: 4rem;
+                  transform: translateY(calc($fontSize * 0.095));
+                  line-height: calc($fontSize * 0.9);
+                  font-size: $fontSize;
                }
 
                @media screen and (min-width: $screen-s) and (max-width: $screen-m) {
@@ -114,6 +122,34 @@
             .rubber-button {
                transform: translateY(-1.5rem);
             }
+         }
+      }
+
+      .analysis {
+         width: 95%;
+         flex-direction: column;
+         margin-bottom: 3rem;
+
+         .content-header {
+            gap: 1.5rem;
+            padding: 0;
+            margin-bottom: 0;
+            color: $text-darken;
+
+            .title-icon {
+               font-size: 3.4rem;
+            }
+
+            .header-title {
+               font-size: 1.8rem;
+               font-weight: 700;
+            }
+         }
+
+         .charts {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
          }
       }
    }
