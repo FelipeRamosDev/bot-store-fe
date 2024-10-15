@@ -8,7 +8,7 @@ import defaultChartOptions from '../defaultChartOptions';
 export default function CutLineChartBase({ className, chartOptions, cutValue = 0, dataSet = [] }) {
    const chartSpot = useRef();
    const chart = useRef();
-   const lineChart = useRef();
+   const cutLineChart = useRef();
 
    const topLineColor = darkTheme.palette.success.main;
    const topFillColor1 = topLineColor + '47';
@@ -24,7 +24,7 @@ export default function CutLineChartBase({ className, chartOptions, cutValue = 0
       if (!chart.current && chartSpot.current) {
          chart.current = createChart(chartSpot.current, chartOptions);
 
-         lineChart.current = chart.current.addBaselineSeries({
+         cutLineChart.current = chart.current.addBaselineSeries({
             baseValue: { type: 'price', price: cutValue },
             topLineColor,
             topFillColor1,
@@ -34,7 +34,8 @@ export default function CutLineChartBase({ className, chartOptions, cutValue = 0
             bottomFillColor2
          });
 
-         lineChart.current.setData(dataSet);
+         cutLineChart.current.setData(dataSet);
+         chart.current.timeScale().fitContent();
       }
    }, [ chartOptions, cutValue, topLineColor, topFillColor1, topFillColor2, bottomLineColor, bottomFillColor1, bottomFillColor2, dataSet ]);
 
