@@ -126,11 +126,10 @@
       }
 
       .analysis {
-         width: 95%;
          flex-direction: column;
          margin-bottom: 3rem;
 
-         .content-header {
+         >.content-header {
             gap: 1.5rem;
             padding: 0;
             margin-bottom: 0;
@@ -146,13 +145,31 @@
             }
          }
 
-         .charts {
+         &.charts {
             display: flex;
-            gap: 3rem;
+            gap: 1rem;
             padding: 1rem 0;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            @media screen and (min-width: $screen-m) {
+               flex-direction: row;
+               gap: 2rem;
+            }
+
+            @media screen and (min-width: $screen-xl) {
+               flex-direction: row;
+               gap: 3rem;
+            }
 
             .chart {
-               flex: calc(25% - 3rem);
+               flex: 100%;
+               padding-right: 0.6rem;
+               background-color: $background-grey2-dark;
+
+               @media screen and (min-width: $screen-m) {
+                  flex: calc(25% - 3rem);
+               }
             }
          }
       }
