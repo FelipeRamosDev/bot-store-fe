@@ -5,6 +5,9 @@ import { darkTheme } from '@/style/darkTheme';
 import { parseClassName } from '@/helpers/parser';
 import defaultChartOptions from '../defaultChartOptions';
 import LineChartConfig from '@/models/LineChartConfig';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import Card from '@/components/common/card/Card';
+import SsidChartIcon from '@mui/icons-material/SsidChart';
 
 /**
  * A React component that renders a line chart using the Lightweight Charts library. 
@@ -20,7 +23,7 @@ import LineChartConfig from '@/models/LineChartConfig';
  * 
  * @returns {JSX.Element} - A div element that holds the chart.
  */
-export default function LineChartBase({ className, chartOptions, singleLine = [], singleLineColor, multiline }) {
+export default function LineChartBase({ className, headerTitle, HeaderToolbar, chartOptions, singleLine = [], singleLineColor, multiline }) {
    const chartSpot = useRef();
    const chart = useRef();
    const lineChart = useRef();
@@ -31,8 +34,10 @@ export default function LineChartBase({ className, chartOptions, singleLine = []
    chartOptions = { ...defaultChartOptions, ...chartOptions };
 
    useEffect(() => {
-      if (!chart.current && chartSpot.current) {
-         chart.current = createChart(chartSpot.current, chartOptions);
+      if (chartSpot.current) {
+         if (!chart.current) {
+            chart.current = createChart(chartSpot.current, chartOptions);
+         }
 
          if (!multiline) {
             lineChart.current = chart.current.addLineSeries({ color: singleLineColor });
@@ -55,9 +60,16 @@ export default function LineChartBase({ className, chartOptions, singleLine = []
 
          chart.current.timeScale().fitContent();
       }
-   }, [ chartOptions, singleLine, singleLineColor ]);
+   }, [ chartOptions, singleLine, singleLineColor, multiline ]);
 
    return (
-      <div ref={chartSpot} className={className}></div>
+      <Card className={className} padding="s" elevation={35}>
+         {headerTitle && <ContentHeader Toolbar={HeaderToolbar}>
+            <SsidChartIcon />
+            <h3 className="header-title">{headerTitle}</h3>
+         </ContentHeader>}
+
+         <div ref={chartSpot} className="chart-spot"></div>
+      </Card>
    );
 }

@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
 import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 import configs from '@/config.json';
@@ -11,6 +11,11 @@ import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import CutLineChartBase from '@/components/charts/base/cutLineChartBase/CutLineChartBase';
 import LineChartBase from '@/components/charts/base/lineChartBase/LineChartBase';
+import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
+import APIContext from '@/contexts/4HandsAPI';
+import AvgDailyROI from '@/components/charts/avgDailyROIChart/AvgDailyROIChart';
+import AccumROIChart from '@/components/charts/accumROIChart/AccumROIChart';
+import WinLossRate from '@/components/charts/winLossRate/WinLossRate';
 
 const parsetDummyTime = (multiplier) => Date.now() - ((1000 * 60 * 60 * 24) * multiplier);
 const dataSet = [
@@ -52,6 +57,27 @@ const dataSet2 = [
  */
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
+   const API = useContext(APIContext);
+   const [ resultsLine, setResultsLine ] = useState();
+   const requested = useRef();
+
+   useEffect(() => {
+      const notEmpty = Object.keys(doc).length;
+
+      if (notEmpty && !requested.current && !resultsLine) {
+         requested.current = true;
+
+         API.ajax.authGet('/bot/results', {
+            botUID: doc._id
+         }).then(({ success, results }) => {
+            if (!success) return;
+
+            setResultsLine(results);
+         }).catch(err => {
+            throw err;
+         });
+      }
+   }, [doc]);
 
    return <div className="page-header">
       <div className="cover"></div>
@@ -70,21 +96,15 @@ export default function BotDetailsHeader() {
             <BotInfos bot={doc} />
          </ContentFullwidth>
 
-         <ContentFullwidth className="analysis" useContainer={true}>
-            <ContentHeader>
-               <QueryStatsIcon fontSize="large" className="title-icon" />
-               <h2 className="header-title">Results History</h2>
-            </ContentHeader>
-
-            <div className="charts">
-               <CutLineChartBase className="chart" dataSet={dataSet} />
-               <CutLineChartBase className="chart" dataSet={dataSet} />
-               <CutLineChartBase className="chart" dataSet={dataSet} />
-               <LineChartBase className="chart" multiline={[
-                  { id: 'profit', label: 'Profit', values: dataSet },
-                  { id: 'test', label: 'Test', values: dataSet2 }
-               ]} />
-            </div>
+         <ContentFullwidth className="analysis charts" useContainer={true}>
+            <ProfitRatioChart results={resultsLine} />
+            <AvgDailyROI results={resultsLine} />
+            <AccumROIChart results={resultsLine} period="24h" />
+            <AccumROIChart results={resultsLine} period="30d" />
+            <WinLossRate results={resultsLine} period="24h" type="roi" />
+            <WinLossRate results={resultsLine} period="30d" type="roi" />
+            <WinLossRate results={resultsLine} period="24h" type="rate" />
+            <WinLossRate results={resultsLine} period="30d" type="rate" />
          </ContentFullwidth>
 
          <div className="settings-painel">
