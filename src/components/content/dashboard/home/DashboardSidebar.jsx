@@ -43,7 +43,7 @@ export default function DashboardSidebar() {
             sort={{ 'currentResults.profitRatio': -1 }}
             limit={6}
          >
-            <BotsTable title="My Bots" />
+            <BotsTable title="My Pilots" />
          </DBQuery>
       </>
    );

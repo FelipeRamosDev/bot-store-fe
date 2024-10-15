@@ -1,0 +1,14 @@
+.line-chart-base {
+   .content-header {
+      padding: 0;
+      color: $text-darken;
+
+      .header-title {
+         font-size: 0.9rem;
+      }
+   }
+
+   .chart-spot {
+      height: 200px;
+   }
+}

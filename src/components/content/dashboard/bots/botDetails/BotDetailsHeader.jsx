@@ -1,14 +1,53 @@
 'use client';
-import { useContext } from 'react';
-import DBQueryContext from '@/contexts/DBQuery';
-import Card from '@/components/common/card/Card';
-import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
-import ContainedTable from '@/components/tables/containedTable/ContainedTable';
-import APIContext from '@/contexts/4HandsAPI';
+import { useContext, useEffect, useState, useRef } from 'react';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
-import { handleStatusChange } from './BotDetails.helper';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 import configs from '@/config.json';
+import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
+import Image from 'next/image';
+import BotInfos from './BotInfos';
+import DBQueryContext from '@/contexts/DBQuery';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import CutLineChartBase from '@/components/charts/base/cutLineChartBase/CutLineChartBase';
+import LineChartBase from '@/components/charts/base/lineChartBase/LineChartBase';
+import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
+import APIContext from '@/contexts/4HandsAPI';
+import AvgDailyROI from '@/components/charts/avgDailyROIChart/AvgDailyROIChart';
+import AccumROIChart from '@/components/charts/accumROIChart/AccumROIChart';
+import WinLossRate from '@/components/charts/winLossRate/WinLossRate';
+
+const parsetDummyTime = (multiplier) => Date.now() - ((1000 * 60 * 60 * 24) * multiplier);
+const dataSet = [
+   { value: 1, time: parsetDummyTime(12) },
+   { value: 2, time: parsetDummyTime(11) },
+   { value: 3, time: parsetDummyTime(10) },
+   { value: 2, time: parsetDummyTime(9) },
+   { value: 1, time: parsetDummyTime(8) },
+   { value: -1, time: parsetDummyTime(7) },
+   { value: -2, time: parsetDummyTime(6) },
+   { value: 0, time: parsetDummyTime(5) },
+   { value: 2, time: parsetDummyTime(4) },
+   { value: 4, time: parsetDummyTime(3) },
+   { value: 6, time: parsetDummyTime(2) },
+   { value: 5, time: parsetDummyTime(1) },
+   { value: 7, time: Date.now() },
+];
+const dataSet2 = [
+   { value: 10, time: parsetDummyTime(12) },
+   { value: 20, time: parsetDummyTime(11) },
+   { value: 30, time: parsetDummyTime(10) },
+   { value: 20, time: parsetDummyTime(9) },
+   { value: 10, time: parsetDummyTime(8) },
+   { value: -10, time: parsetDummyTime(7) },
+   { value: -20, time: parsetDummyTime(6) },
+   { value: 0, time: parsetDummyTime(5) },
+   { value: 20, time: parsetDummyTime(4) },
+   { value: 40, time: parsetDummyTime(3) },
+   { value: 60, time: parsetDummyTime(2) },
+   { value: 50, time: parsetDummyTime(1) },
+   { value: 70, time: Date.now() },
+];
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -19,14 +58,34 @@ import configs from '@/config.json';
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
+   const [ resultsLine, setResultsLine ] = useState();
+   const requested = useRef();
+
+   useEffect(() => {
+      const notEmpty = Object.keys(doc).length;
+
+      if (notEmpty && !requested.current && !resultsLine) {
+         requested.current = true;
+
+         API.ajax.authGet('/bot/results', {
+            botUID: doc._id
+         }).then(({ success, results }) => {
+            if (!success) return;
+
+            setResultsLine(results);
+         }).catch(err => {
+            throw err;
+         });
+      }
+   }, [doc]);
 
    return <div className="page-header">
       <div className="cover"></div>
 
       <div className="bot-info">
-         <div className="full-container">
+         <ContentFullwidth useContainer={true}>
             <div className="avatar">
-               <SmartToyIcon className="robot-icon" />
+               <Image src={LogoIcon} className="robot-icon" alt="Avatar Placeholder" width={180} heigth={180} priority={true} />
             </div>
 
             <div className="summary">
@@ -34,29 +93,19 @@ export default function BotDetailsHeader() {
                <p className="brief">{doc.description}</p>
             </div>
 
-            <Card className="infos" padding="s" elevation={40}>
-               {doc.status && <CheckButtonGroupInput
-                  onChange={(ev) => handleStatusChange(ev, API, doc)}
-                  schema={{
-                     key: 'status',
-                     defaultValue: doc.status,
-                     options: [
-                        { label: 'Draft', value: 'draft' },
-                        { label: 'Private', value: 'private' },
-                        { label: 'Public', value: 'public' }
-                     ]
-                  }}
-               />}
+            <BotInfos bot={doc} />
+         </ContentFullwidth>
 
-               <ContainedTable
-                  tableData={[
-                     { label: 'ID', value: doc.cod },
-                     { label: 'Created At', value: new Date(doc.createdAt).toLocaleString() },
-                     { label: 'Modified At', value: new Date(doc.modifiedAt).toLocaleString() },
-                  ]}
-               />
-            </Card>
-         </div>
+         <ContentFullwidth className="analysis charts" useContainer={true}>
+            <ProfitRatioChart results={resultsLine} />
+            <AvgDailyROI results={resultsLine} />
+            <AccumROIChart results={resultsLine} period="24h" />
+            <AccumROIChart results={resultsLine} period="30d" />
+            <WinLossRate results={resultsLine} period="24h" type="roi" />
+            <WinLossRate results={resultsLine} period="30d" type="roi" />
+            <WinLossRate results={resultsLine} period="24h" type="rate" />
+            <WinLossRate results={resultsLine} period="30d" type="rate" />
+         </ContentFullwidth>
 
          <div className="settings-painel">
             <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>
