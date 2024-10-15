@@ -9,6 +9,24 @@ import BotInfos from './BotInfos';
 import DBQueryContext from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import CutLineChartBase from '@/components/charts/base/lineChartBase/CutLineChartBase';
+
+const parsetDummyTime = (multiplier) => Date.now() - ((1000 * 60 * 60 * 24) * multiplier);
+const dataSet = [
+   { value: 1, time: parsetDummyTime(12) },
+   { value: 2, time: parsetDummyTime(11) },
+   { value: 3, time: parsetDummyTime(10) },
+   { value: 2, time: parsetDummyTime(9) },
+   { value: 1, time: parsetDummyTime(8) },
+   { value: -1, time: parsetDummyTime(7) },
+   { value: -2, time: parsetDummyTime(6) },
+   { value: 0, time: parsetDummyTime(5) },
+   { value: 2, time: parsetDummyTime(4) },
+   { value: 4, time: parsetDummyTime(3) },
+   { value: 6, time: parsetDummyTime(2) },
+   { value: 5, time: parsetDummyTime(1) },
+   { value: 7, time: Date.now() },
+]
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -43,11 +61,10 @@ export default function BotDetailsHeader() {
             </ContentHeader>
 
             <div className="charts">
-               <div>Chart A</div>
-               <div>Chart B</div>
-               <div>Chart C</div>
-               <div>Chart D</div>
-               <div>Chart E</div>
+               <CutLineChartBase className="chart" dataSet={dataSet} />
+               <CutLineChartBase className="chart" dataSet={dataSet} />
+               <CutLineChartBase className="chart" dataSet={dataSet} />
+               <CutLineChartBase className="chart" dataSet={dataSet} />
             </div>
          </ContentFullwidth>
 

@@ -148,8 +148,12 @@
 
          .charts {
             display: flex;
-            gap: 1rem;
+            gap: 3rem;
             padding: 1rem 0;
+
+            .chart {
+               flex: calc(25% - 3rem);
+            }
          }
       }
    }
