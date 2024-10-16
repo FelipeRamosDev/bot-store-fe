@@ -1,11 +1,10 @@
 .bot-results-grid {
    display: flex;
    flex-wrap: wrap;
-   margin-top: 2rem;
    gap: 1rem;
 
    .card {
-      flex: calc(25% - 1rem);
+      flex: calc(50% - 1rem);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -14,17 +13,46 @@
       margin-bottom: 0;
       -webkit-user-select: none;
       user-select: none;
-      min-width: 11rem;
+      padding: 0.7rem 0.5rem;
+
+      &.big-value {
+         flex: calc(33% - 1rem);
+
+         span {
+            font-size: 1.1rem;
+            font-weight: 700;
+
+            @media screen and (min-width: $screen-m) {
+               font-size: 1.4rem;
+               font-weight: 700;
+            }
+         }
+      }
 
       label {
-         font-size: 0.8rem;
+         font-size: 0.65rem;
          text-transform: uppercase;
          color: $text-darken;
+         text-align: center;
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 0.75rem;
+         }
       }
 
       .value-wrap {
          display: flex;
          gap: 0.5rem;
+
+         span {
+            font-size: 1rem;
+            font-weight: 500;
+            
+            @media screen and (min-width: $screen-m) {
+               font-size: 1.2rem;
+               font-weight: 600;
+            }
+         }
       }
    }
 }

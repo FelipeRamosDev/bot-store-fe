@@ -29,7 +29,7 @@ export default function Percent({
    posfix
 }) {
    // Handle dashed zero case
-   if (dashedZero && value === 0) {
+   if (dashedZero && (value === 0 || !value)) {
       return <span className={`percent-display`}>---</span>;
    }
 

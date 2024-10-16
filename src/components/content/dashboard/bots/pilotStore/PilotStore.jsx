@@ -17,7 +17,7 @@ export default function PilotStore() {
                sort={{ 'currentResults.profitRatio': -1 }}
                limit={10}
             >
-               <BotsTable hideHeader={true} />
+               <BotsTable hideHeader={true} onSelectAction="modal" />
             </DBQuery>
          </ContentFullwidth>
       </div>

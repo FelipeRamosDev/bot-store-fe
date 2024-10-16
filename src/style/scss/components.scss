@@ -57,6 +57,7 @@
 // Headers
 @import "../../components/headers/contentHeader/ContentHeader.scss";
 @import "../../components/headers/topHeader/TopHeader.scss";
+@import "../../components/headers/altModalHeader/AltModalHeader.scss";
 
 // Inputs
 @import "../../components/inputs/checkButtonGroupInput/CheckButtonGroupInput.scss";
@@ -85,7 +86,8 @@
 @import "../../components/modals/base/contentModal/ContentModal.scss";
 @import "../../components/modals/botValueModal/BotValuesModal.scss";
 @import "../../components/modals/quickviews/positionQuickview/PositionQuickview.scss";
-@import "../../components/modals/quickviews/SlotQuickview/SlotQuickview.scss";
+@import "../../components/modals/quickviews/slotQuickview/SlotQuickview.scss";
+@import "../../components/modals/quickviews/botQuickview/BotQuickview.scss";
 
 // Shared
 @import "../../components/shared/accountSettings/AccountSettings.scss";

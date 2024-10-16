@@ -11,18 +11,23 @@ import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 import Percent from '@/components/displays/percent/Percent';
 import LogoIconImg from '@/assets/icons/logo_icon_text.svg';
 import Image from 'next/image';
+import BotQuickview from '@/components/modals/quickviews/botQuickview/BotQuickview';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
  * The component fetches bot data from a context and displays it in a table format.
  * @param {Object} props
  * @param {string} props.title - The header title.
+ * @param {boolean} props.hideHeader - if used it will hide the header.
+ * @param {React.ReactDOM} props.HeaderContent - An custom header, provided as a ReactDOM component
+ * @param {'link'|'modal'} props.onSelectAction - The type of action to perform when a row is clicked
  *
  * @returns {React.Element} The rendered table of recent bots.
  */
-export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent }) {
+export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, onSelectAction = 'link' }) {
    const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const [ createBotModal, setCreateBotModal ] = useState(false);
+   const [ quickviewModal, setQuickviewModal ] = useState(false);
    const nav = useRouter();
    const bots = query;
    let parsedLimit = limit;
@@ -46,6 +51,16 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent })
       return <Image src={LogoIconImg} alt="CandlePilot Logo Icon" width={23} height={23} />
    }
 
+   function handleRowClick(doc) {
+      if (onSelectAction === 'link') {
+         nav.push(`/dashboard/bots/${doc.index}`);
+      }
+
+      if (onSelectAction === 'modal') {
+         setQuickviewModal(doc);
+      }
+   }
+
    return <div className="bots-table">
       {!hideHeader && (
          <ContentHeader Toolbar={AddButton}>
@@ -61,7 +76,7 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent })
          items={bots}
          pagination={{}}
          loading={isLoading}
-         onClickRow={(doc) => nav.push(`/dashboard/bots/${doc.index}`)}
+         onClickRow={handleRowClick}
          useSeeMorePage={true}
          itemsPerPage={parsedLimit}
          onPageNav={goPage}
@@ -173,5 +188,6 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent })
       />
 
       <CreateBotModal open={createBotModal} setModal={setCreateBotModal} />
+      <BotQuickview open={Boolean(quickviewModal)} bot={quickviewModal} setModal={setQuickviewModal} />
    </div>
 }

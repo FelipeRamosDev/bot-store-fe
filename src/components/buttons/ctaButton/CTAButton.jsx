@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
  *
  * @param {Object} props - The props object.
  * @param {React.ReactNode} [props.children] - The content to be displayed inside the button.
+ * @param {string} [props.url] - The URL to redirect.
  * @param {string} [props.className] - CSS classes.
  *
  * @returns {JSX.Element} The rendered `CTAButton` component.
@@ -20,7 +21,7 @@ export default function CTAButton({ url, className = '', children, ...props }) {
          className={`cta-button ${className}`}
          variant="contained"
          color="tertiary"
-         onClick={() => router.push(url)}
+         onClick={() => url && router.push(url)}
          {...props}
       >
          {children}
