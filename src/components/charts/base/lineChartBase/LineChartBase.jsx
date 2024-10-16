@@ -44,8 +44,13 @@ export default function LineChartBase({ className, headerTitle, HeaderToolbar, c
             lineChart.current.setData(singleLine);
          }
          
-         else if (Array.isArray(multiline)) {
+         if (!multiLineChart.current && Array.isArray(multiline)) {
             multiLineChart.current = new Map();
+         }
+
+         else if (multiLineChart.current) {
+            multiLineChart.current.forEach(item => item.chart.setData([]))
+            multiLineChart.current.clear();
 
             multiline.map(lineData => {
                const line = new LineChartConfig(lineData);

@@ -7,47 +7,11 @@ import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwi
 import Image from 'next/image';
 import BotInfos from './BotInfos';
 import DBQueryContext from '@/contexts/DBQuery';
-import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import CutLineChartBase from '@/components/charts/base/cutLineChartBase/CutLineChartBase';
-import LineChartBase from '@/components/charts/base/lineChartBase/LineChartBase';
 import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
 import APIContext from '@/contexts/4HandsAPI';
 import AvgDailyROI from '@/components/charts/avgDailyROIChart/AvgDailyROIChart';
 import AccumROIChart from '@/components/charts/accumROIChart/AccumROIChart';
-import WinLossRate from '@/components/charts/winLossRate/WinLossRate';
-
-const parsetDummyTime = (multiplier) => Date.now() - ((1000 * 60 * 60 * 24) * multiplier);
-const dataSet = [
-   { value: 1, time: parsetDummyTime(12) },
-   { value: 2, time: parsetDummyTime(11) },
-   { value: 3, time: parsetDummyTime(10) },
-   { value: 2, time: parsetDummyTime(9) },
-   { value: 1, time: parsetDummyTime(8) },
-   { value: -1, time: parsetDummyTime(7) },
-   { value: -2, time: parsetDummyTime(6) },
-   { value: 0, time: parsetDummyTime(5) },
-   { value: 2, time: parsetDummyTime(4) },
-   { value: 4, time: parsetDummyTime(3) },
-   { value: 6, time: parsetDummyTime(2) },
-   { value: 5, time: parsetDummyTime(1) },
-   { value: 7, time: Date.now() },
-];
-const dataSet2 = [
-   { value: 10, time: parsetDummyTime(12) },
-   { value: 20, time: parsetDummyTime(11) },
-   { value: 30, time: parsetDummyTime(10) },
-   { value: 20, time: parsetDummyTime(9) },
-   { value: 10, time: parsetDummyTime(8) },
-   { value: -10, time: parsetDummyTime(7) },
-   { value: -20, time: parsetDummyTime(6) },
-   { value: 0, time: parsetDummyTime(5) },
-   { value: 20, time: parsetDummyTime(4) },
-   { value: 40, time: parsetDummyTime(3) },
-   { value: 60, time: parsetDummyTime(2) },
-   { value: 50, time: parsetDummyTime(1) },
-   { value: 70, time: Date.now() },
-];
+import WinLossChart from '@/components/charts/winLossChart/WinLossChart';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -101,10 +65,10 @@ export default function BotDetailsHeader() {
             <AvgDailyROI results={resultsLine} />
             <AccumROIChart results={resultsLine} period="24h" />
             <AccumROIChart results={resultsLine} period="30d" />
-            <WinLossRate results={resultsLine} period="24h" type="roi" />
-            <WinLossRate results={resultsLine} period="30d" type="roi" />
-            <WinLossRate results={resultsLine} period="24h" type="rate" />
-            <WinLossRate results={resultsLine} period="30d" type="rate" />
+            <WinLossChart results={resultsLine} period="24h" type="roi" />
+            <WinLossChart results={resultsLine} period="30d" type="roi" />
+            <WinLossChart results={resultsLine} period="24h" type="rate" />
+            <WinLossChart results={resultsLine} period="30d" type="rate" />
          </ContentFullwidth>
 
          <div className="settings-painel">

@@ -10,7 +10,7 @@ import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
 import SlotConfigsMenu from '@/components/menus/dropdown/SlotConfigsMenu/SlotConfigsMenu';
-import SlotQuickview from '@/components/modals/quickviews/SlotQuickview/SlotQuickview';
+import SlotQuickview from '@/components/modals/quickviews/slotQuickview/SlotQuickview';
 
 /**
  * SlotsGrid component displays a grid of slots associated with a master entity.

@@ -1,0 +1,140 @@
+.bot-quickview {
+   .modal-body {
+      display: flex;
+      flex-direction: column;
+
+      &.padding-s {
+         padding: 0;
+      }
+
+      .body-header {
+         position: relative;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-end;
+
+         .cover {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            img {
+               object-fit: cover;
+               object-position: center;
+            }
+         }
+
+         .header-content {
+            display: flex;
+            gap: 1rem;
+            background-color: $background-grey2-dark;
+            flex-direction: column;
+            margin-top: 15rem;
+            padding: 0 1rem;
+
+            @media screen and (min-width: $screen-l) {
+               flex-direction: row;
+            }
+
+            .avatar-wrap {
+               background-color: $background-grey2-dark;
+               margin-top: -75px;
+               margin-left: 2%;
+               border-radius: 130px;
+               height: 160px;
+               width: 160px;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+            }
+
+            .bot-data {
+               padding: 1rem 2%;
+
+               .content-header {
+                  padding-top: 0;
+               }
+
+               .bot-name {
+                  font-size: 1.4rem;
+                  margin-bottom: 0.5rem;
+
+                  @media screen and (min-width: $screen-m) {
+                     font-size: 1.8rem;
+                  }
+               }
+
+               .bot-summary {
+                  color: $text-darken;
+                  margin-bottom: 0;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  white-space: pre;
+               }
+            }
+
+            .bot-status {
+               flex: 1;
+               position: relative;
+
+               @media screen and (min-width: $screen-l) {
+                  min-width: 37%;
+               }
+
+               .status-card {
+                  &.card {
+                     @media screen and (min-width: $screen-m) {
+                        padding: 1.2rem;
+                     }
+                  }
+   
+                  @media screen and (min-width: $screen-l) {
+                     margin-top: -75px;
+                     margin-left: auto;
+                     max-width: 650px;
+                     margin-right: 2%;
+                  }
+
+                  .bot-results-grid {
+                     margin-bottom: 0;
+                  }
+               }
+            }
+         }
+      }
+
+      .charts {
+         background-color: $background-grey2-dark;
+         padding: 1rem 0 2rem 0;
+
+         .content-fullwidth {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            >.content-header {
+               padding-top: 0;
+            }
+   
+            @media screen and (min-width: $screen-m) {
+               flex-direction: row;
+               gap: 2rem;
+            }
+            
+            .chart {
+               flex: 100%;
+               padding-right: 0.6rem;
+               background-color: $background-grey2-dark;
+
+               @media screen and (min-width: $screen-m) {
+                  flex: calc(25% - 3rem);
+               }
+            }
+         }
+      }
+   }
+}

@@ -6,24 +6,41 @@ import { useState } from 'react';
 const priceCardProps = {
    borderSide: 'bottom',
    radius: 'xs',
-   padding: 's',
+   padding: 'xs',
    elevation: 10
 }
 const priceProps = {
-   size: 'm'
+   size: 'm',
+   dashedZero: true
 }
 
 export default function BotResultsGrid({ bot = {} }) {
-   const [accumState, setAccumState] = useState(false);
-   const [wlRate, setWLRate] = useState(false);
-   const { profitRatio, accumRoi24, accumRoiMonth, avgDailyROI, winsRate24, losesRate24, winsRateMonth, losesRateMonth } = bot.currentResults || {};
+   const [ accumState, setAccumState ] = useState(false);
+   const [ wlRateState, setWLRateState ] = useState(false);
+   const [ wlRoiState, setWLRoiState ] = useState(false);
+   const {
+      profitRatio,
+      accumRoi24,
+      accumRoiMonth,
+      avgDailyROI,
+      winsRate24,
+      losesRate24,
+      winsRateMonth,
+      losesRateMonth,
+      avgWinsRoi24,
+      avgLosesRoi24,
+      avgWinsRoiMonth,
+      avgLosesRoiMonth
+   } = bot.currentResults || {};
 
    const handleAccum = () => setAccumState(prev => !prev);
-   const handleWL = () => setWLRate(prev => !prev);
+   const handleWL = () => setWLRateState(prev => !prev);
+   const handleWLROI = () => setWLRoiState(prev => !prev);
 
    function ProfitRatio() {
       return (
          <PriceCard
+            className="big-value"
             value={profitRatio}
             {...priceCardProps}
          >
@@ -36,7 +53,7 @@ export default function BotResultsGrid({ bot = {} }) {
    function Accumulated() {
       return (<>
          {!accumState && <PriceCard
-            className="clickable"
+            className="big-value clickable"
             value={accumRoi24}
             onClick={handleAccum}
             {...priceCardProps}
@@ -46,7 +63,7 @@ export default function BotResultsGrid({ bot = {} }) {
          </PriceCard>}
 
          {accumState && <PriceCard
-            className="clickable"
+            className="big-value clickable"
             value={accumRoiMonth}
             onClick={handleAccum}
             {...priceCardProps}
@@ -60,6 +77,7 @@ export default function BotResultsGrid({ bot = {} }) {
    function DailyROI() {
       return (
          <PriceCard
+            className="big-value"
             value={avgDailyROI}
             {...priceCardProps}
          >
@@ -69,9 +87,43 @@ export default function BotResultsGrid({ bot = {} }) {
       );
    }
 
+   function WLROI() {
+      return (<>
+         {!wlRoiState && <PriceCard
+            className="clickable"
+            value={avgWinsRoi24}
+            onClick={handleWLROI}
+            {...priceCardProps}
+         >
+            <label>W/L ROI (24h)</label>
+
+            <div className="value-wrap">
+               <Percent value={avgWinsRoi24} {...priceProps} />
+               {'/'}
+               <Percent value={avgLosesRoi24} {...priceProps} />
+            </div>
+         </PriceCard>}
+
+         {wlRoiState && <PriceCard
+            className="clickable"
+            value={avgWinsRoiMonth}
+            onClick={handleWLROI}
+            {...priceCardProps}
+         >
+            <label>W/L ROI (30d)</label>
+
+            <div className="value-wrap">
+               <Percent value={avgWinsRoiMonth} {...priceProps} />
+               {'/'}
+               <Percent value={avgLosesRoiMonth} {...priceProps} />
+            </div>
+         </PriceCard>}
+      </>);
+   }
+
    function WLRate() {
       return (<>
-         {!wlRate && <PriceCard
+         {!wlRateState && <PriceCard
             className="clickable"
             value={avgDailyROI}
             onClick={handleWL}
@@ -86,7 +138,7 @@ export default function BotResultsGrid({ bot = {} }) {
             </div>
          </PriceCard>}
 
-         {wlRate && <PriceCard
+         {wlRateState && <PriceCard
             className="clickable"
             value={avgDailyROI}
             onClick={handleWL}
@@ -106,8 +158,9 @@ export default function BotResultsGrid({ bot = {} }) {
    return (
       <div className="bot-results-grid">
          <ProfitRatio />
-         <Accumulated />
          <DailyROI />
+         <Accumulated />
+         <WLROI />
          <WLRate />
       </div>
    )
