@@ -14,7 +14,6 @@ import { Edit, QueryStats } from '@mui/icons-material';
 import Card from '@/components/common/card/Card';
 import BotResultsGrid from '@/components/grids/botResultsGrid/BotResultsGrid';
 import AltModalHeader from '@/components/headers/altModalHeader/AltModalHeader';
-import { Button } from '@mui/material';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
 export default function BotQuickview({ open, bot, setModal }) {
@@ -26,7 +25,6 @@ export default function BotQuickview({ open, bot, setModal }) {
       if (!bot) return;
 
       const notEmpty = Object.keys(bot).length;
-
       if (notEmpty) {
          requested.current = true;
 
@@ -40,7 +38,7 @@ export default function BotQuickview({ open, bot, setModal }) {
             throw err;
          });
       }
-   }, [bot]);
+   }, [ bot, API.ajax ]);
 
    if (!bot) {
       return <></>;
@@ -101,7 +99,7 @@ export default function BotQuickview({ open, bot, setModal }) {
             <ContentFullwidth useContainer>
                <ContentHeader>
                   <QueryStats fontSize="large" />
-                  <h4 className="header-title">Pilot's Analysis</h4>
+                  <h4 className="header-title">{"Pilot's Analysis"}</h4>
                </ContentHeader>
 
                <ProfitRatioChart results={resultsLine} />

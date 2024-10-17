@@ -10,7 +10,6 @@ export default function MasterRoiTooltip() {
          <span>{formula}</span>
 
          <p>{descr}</p>
-         <i>{note}</i>
       </HelpTooltip>
    );
 }

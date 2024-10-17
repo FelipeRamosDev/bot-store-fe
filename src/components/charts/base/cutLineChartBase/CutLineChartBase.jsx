@@ -7,8 +7,9 @@ import defaultChartOptions from '../defaultChartOptions';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import Card from '@/components/common/card/Card';
 import SsidChartIcon from '@mui/icons-material/SsidChart';
+import HelpTooltip from '@/components/tooltips/helpTooltip/HelpTooltip';
 
-export default function CutLineChartBase({ className, headerTitle, HeaderToolbar, chartOptions, cutValue = 0, dataSet = [] }) {
+export default function CutLineChartBase({ className, headerTitle, HeaderToolbar, tooltipHeader, TooltipContent, chartOptions, cutValue = 0, dataSet = [] }) {
    const chartSpot = useRef();
    const chart = useRef();
    const cutLineChart = useRef();
@@ -55,6 +56,12 @@ export default function CutLineChartBase({ className, headerTitle, HeaderToolbar
          {headerTitle && <ContentHeader Toolbar={HeaderToolbar}>
             <SsidChartIcon />
             <h3 className="header-title">{headerTitle}</h3>
+
+            {(TooltipContent || tooltipHeader) && (
+               <HelpTooltip headerTitle={tooltipHeader} iconSize="medium">
+                  {TooltipContent && <TooltipContent />}
+               </HelpTooltip>
+            )}
          </ContentHeader>}
 
          <div ref={chartSpot} className="chart-spot"></div>

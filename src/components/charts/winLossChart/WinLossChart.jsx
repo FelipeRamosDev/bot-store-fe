@@ -1,5 +1,7 @@
 import { darkTheme } from '@/style/darkTheme';
 import LineChartBase from '../base/lineChartBase/LineChartBase';
+import WinLossCountTooltip from '@/components/tables/botsTable/tooltips/WinLossCountTooltip';
+import WinLossROITooltip from '@/components/tables/botsTable/tooltips/WinLossROITooltip';
 
 export default function WinLossChart({ results = [], type = 'rate', period = '24h' }) {
    const dataSet = [
@@ -13,7 +15,15 @@ export default function WinLossChart({ results = [], type = 'rate', period = '24
          dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.losesRate24 });
       });
    
-      return <LineChartBase className="chart" headerTitle="WIN/LOSS Rate (24h)" multiline={dataSet} />;
+      return (
+         <LineChartBase
+            className="chart"
+            headerTitle="WIN/LOSS Rate (24h)"
+            tooltipHeader="WIN/LOSS Rate (24h)"
+            TooltipContent={() => <WinLossCountTooltip period={period} onlyContent={true} />}
+            multiline={dataSet}
+         />
+      );
    }
 
    if (type === 'rate' && period === '30d') {
@@ -22,7 +32,15 @@ export default function WinLossChart({ results = [], type = 'rate', period = '24
          dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.losesRateMonth });
       });
    
-      return <LineChartBase className="chart" headerTitle="WIN/LOSS Rate (30d)" multiline={dataSet} />;
+      return (
+         <LineChartBase
+            className="chart"
+            headerTitle="WIN/LOSS Rate (30d)"
+            tooltipHeader="WIN/LOSS Rate (30d)"
+            TooltipContent={() => <WinLossCountTooltip period={period} onlyContent={true} />}
+            multiline={dataSet}
+         />
+      );
    }
 
    if (type === 'roi' && period === '24h') {
@@ -31,7 +49,15 @@ export default function WinLossChart({ results = [], type = 'rate', period = '24
          dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.avgLosesRoi24 * -1 });
       });
    
-      return <LineChartBase className="chart" headerTitle="WIN/LOSS ROI (24h)" multiline={dataSet} />;
+      return (
+         <LineChartBase
+            className="chart"
+            headerTitle="WIN/LOSS ROI (24h)"
+            tooltipHeader="WIN/LOSS ROI (24h)"
+            TooltipContent={() => <WinLossROITooltip period={period} onlyContent={true} />}
+            multiline={dataSet}
+         />
+      );
    }
 
    if (type === 'roi' && period === '30d') {
@@ -40,6 +66,14 @@ export default function WinLossChart({ results = [], type = 'rate', period = '24
          dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.avgLosesRoiMonth * -1 });
       });
    
-      return <LineChartBase className="chart" headerTitle="WIN/LOSS ROI (30d)" multiline={dataSet} />;
+      return (
+         <LineChartBase
+            className="chart"
+            headerTitle="WIN/LOSS ROI (30d)"
+            tooltipHeader="WIN/LOSS ROI (30d)"
+            TooltipContent={() => <WinLossROITooltip period={period} onlyContent={true} />}
+            multiline={dataSet}
+         />
+      );
    }
 }

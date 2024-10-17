@@ -59,6 +59,10 @@ a,
 a:visited {
    color: $tertiary;
    line-height: 1em;
+
+   &.no-underline {
+      text-decoration: none;
+   }
 }
 
 ul {

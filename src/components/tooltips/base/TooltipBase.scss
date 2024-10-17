@@ -21,6 +21,16 @@
          font-weight: 400;
          margin: 0.5rem 0;
          line-height: 1rem;
+
+         &.no-margin {
+            margin: 0;
+         }
       }
+   }
+}
+
+.MuiPopper-root {
+   .MuiTooltip-tooltip {
+      max-width: 930px;
    }
 }

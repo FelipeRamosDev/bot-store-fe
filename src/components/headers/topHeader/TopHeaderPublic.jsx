@@ -31,7 +31,7 @@ export default function TopHeaderPublic({ type = 'public', fullContainer = true 
       <div className={fullContainer ? 'full-container' : 'container'}>
          <Link className="logo-wrap" href="/">
             <Logo />
-            <h1 className="logotype">Candle<span className="grad-txt">Pilot</span></h1>
+            <span className="logotype">Candle<span className="grad-txt">Pilot</span></span>
          </Link>
 
          <TopNavPublic />

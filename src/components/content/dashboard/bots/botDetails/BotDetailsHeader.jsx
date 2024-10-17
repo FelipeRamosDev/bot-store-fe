@@ -41,7 +41,7 @@ export default function BotDetailsHeader() {
             throw err;
          });
       }
-   }, [doc]);
+   }, [ doc, API.ajax, resultsLine ]);
 
    return <div className="page-header">
       <div className="cover"></div>

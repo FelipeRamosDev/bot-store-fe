@@ -10,7 +10,6 @@ export default function NotionalRoiTooltip() {
          <span>{formula}</span>
 
          <p>{descr}</p>
-         <i>{note}</i>
       </HelpTooltip>
    );
 }
