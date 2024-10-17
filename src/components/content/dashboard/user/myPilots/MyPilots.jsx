@@ -1,12 +1,14 @@
 'use client';
+import { useContext, useState } from 'react';
+import { DBQuery } from '@/contexts/DBQuery';
 import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
 import BotsTable from '@/components/tables/botsTable/BotsTable';
 import AuthUserContext from '@/contexts/AuthUser';
-import { DBQuery } from '@/contexts/DBQuery';
-import { useContext } from 'react';
+import CreateBotFloatButton from '@/components/buttons/createBotFloatButton/CreateBotFloatButton';
 
 export default function MyBots() {
    const { user } = useContext(AuthUserContext);
+   const [ createModal, setCreateModal ] = useState(false);
 
    return (
       <div className="my-pilots">
@@ -25,6 +27,8 @@ export default function MyBots() {
                <BotsTable hideHeader={true} />
             </DBQuery>}
          </ContentFullwidth>
+
+         <CreateBotFloatButton />
       </div>
    );
 }

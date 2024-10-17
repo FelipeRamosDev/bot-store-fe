@@ -12,7 +12,6 @@ export default function AccumROIChart({ results = [], period = '24h' }) {
             headerTitle="Accumulated ROI (24h)"
             tooltipHeader="Accumulated ROI (24h)"
             TooltipContent={() => <AccumROITooltip period={period} onlyContent={true} />}
-            cutValue={1}
             dataSet={dataSet}
          />
       );
@@ -26,7 +25,6 @@ export default function AccumROIChart({ results = [], period = '24h' }) {
             headerTitle="Accumulated ROI (30d)"
             tooltipHeader="Accumulated ROI (30d)"
             TooltipContent={() => <AccumROITooltip period={period} onlyContent={true} />}
-            cutValue={1}
             dataSet={dataSet}
          />
       );
