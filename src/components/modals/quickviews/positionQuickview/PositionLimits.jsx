@@ -4,6 +4,7 @@ import StatusBadge from "@/components/common/statusBedge/StatusBadge";
 import Percent from "@/components/displays/percent/Percent";
 import Price from "@/components/displays/price/Price";
 import ContainedTable from "@/components/tables/containedTable/ContainedTable";
+import Link from "next/link";
 
 const priceCard = {
    borderSide: 'bottom',
@@ -70,6 +71,10 @@ export default function PositionLimits({ position = {}, ...props }) {
 
          <ContainedTable
             tableData={[
+               { label: 'Parent Slot', value: `${position.botSlot?.name} (${position.botSlot?.cod})` },
+               { label: 'Parent Master', value: position.master?.index ? (
+                  <Link href={`/dashboard/master-accounts/${position.master?.index}`}>{position.master?.name}</Link>
+               ) : '---' },
                { label: 'Type', value: <StatusBadge type="account-type" variant="light">{position.type}</StatusBadge> },
                { label: 'Status', value: <StatusBadge type="position-status" variant="light">{position.status}</StatusBadge> },
                { label: 'Side', value: <StatusBadge type="position-side" variant="light">{position.positionType}</StatusBadge> },
