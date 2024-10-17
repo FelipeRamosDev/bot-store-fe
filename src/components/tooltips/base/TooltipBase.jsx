@@ -10,6 +10,9 @@ export default function TooltipBase({ headerTitle, Content, className = '', chil
    return (
       <Tooltip
          arrow
+         enterTouchDelay={0}
+         leaveTouchDelay={10000}
+         className={classes.join(' ')}
          title={<div className="tooltip-content">
             {headerTitle && <label>{headerTitle}</label>}
 
@@ -17,7 +20,6 @@ export default function TooltipBase({ headerTitle, Content, className = '', chil
                {Content}
             </div>
          </div>}
-         className={classes.join(' ')}
       >
          {children}
       </Tooltip>

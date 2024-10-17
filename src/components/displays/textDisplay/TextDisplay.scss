@@ -1,0 +1,26 @@
+.text-display {
+   margin-bottom: 1.5rem;
+   width: 100%;
+
+   .textarea {
+      width: 100%;
+      border: none;
+      background: none;
+      resize: none;
+   
+      &.expandable {
+         overflow: hidden;
+         height: 3rem;
+      }
+   
+      &[disabled] {
+         color: $text-darken;
+         border: none;
+         background: none;
+      }
+   }
+
+   .link {
+      font-size: 0.8rem;
+   }
+}

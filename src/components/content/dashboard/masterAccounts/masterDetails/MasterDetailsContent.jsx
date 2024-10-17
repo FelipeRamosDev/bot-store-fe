@@ -6,12 +6,7 @@ import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import MasterPnlGrid from '@/components/grids/masterPnlGrid/MasterPnlGrid';
 import WalletGrid from '@/components/grids/walletGrid/WalletGrid';
 import SlotsGrid from '@/components/grids/slotsGrid/SlotsGrid';
-import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
-import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
-import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
-import Card from '@/components/common/card/Card';
-import MasterClosedPositions from './MasterClosedPositions';
 
 /**
  * MasterDetailsContent component displays detailed information about a master account,
@@ -25,7 +20,6 @@ import MasterClosedPositions from './MasterClosedPositions';
  */
 export default function MasterDetailsContent({ uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
    const { doc, isLoading } = useContext(DBQueryContext);
-   const masterUID = doc?._id;
    const positions = [];
 
    if (isLoading) {
@@ -54,15 +48,5 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
 
       {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
       <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
-
-      <DBQuery
-         type="query"
-         collection="positions"
-         filter={{ status: 'closed', master: masterUID }}
-         sort={{ closeTime: -1 }}
-         limit={11}
-      >
-         <MasterClosedPositions />
-      </DBQuery>
    </>;
 }
