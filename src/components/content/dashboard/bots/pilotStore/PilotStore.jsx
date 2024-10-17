@@ -1,8 +1,9 @@
+import { DBQuery } from '@/contexts/DBQuery';
 import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
 import BotsTable from '@/components/tables/botsTable/BotsTable';
 import StoreIcon from '@mui/icons-material/Store';
-import { DBQuery } from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import CreateBotFloatButton from '@/components/buttons/createBotFloatButton/CreateBotFloatButton';
 
 export default function PilotStore() {
    return (
@@ -24,6 +25,8 @@ export default function PilotStore() {
                <BotsTable hideHeader={true} onSelectAction="modal" />
             </DBQuery>
          </ContentFullwidth>
+
+         <CreateBotFloatButton />
       </div>
    )
 }

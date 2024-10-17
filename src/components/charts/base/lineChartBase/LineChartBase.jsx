@@ -26,7 +26,17 @@ import HelpTooltip from '@/components/tooltips/helpTooltip/HelpTooltip';
  * 
  * @returns {JSX.Element} - A div element that holds the chart.
  */
-export default function LineChartBase({ className, headerTitle, HeaderToolbar, tooltipHeader, TooltipContent, chartOptions, singleLine = [], singleLineColor, multiline }) {
+export default function LineChartBase({
+   className,
+   headerTitle,
+   HeaderToolbar,
+   tooltipHeader,
+   TooltipContent,
+   chartOptions,
+   singleLine = [],
+   singleLineColor,
+   multiline
+}) {
    const chartSpot = useRef();
    const chart = useRef();
    const lineChart = useRef();
