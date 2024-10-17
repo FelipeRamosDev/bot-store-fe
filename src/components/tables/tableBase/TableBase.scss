@@ -30,10 +30,14 @@
       cursor: pointer;
    }
 
+   tr, td, .MuiTableCell-head {
+      padding: 1.1rem 0.5rem;
+   }
+
    thead {
       > tr {
          > th {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
 
             .tooltip-head {
                display: flex;

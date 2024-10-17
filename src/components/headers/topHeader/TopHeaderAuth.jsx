@@ -4,11 +4,11 @@ import TopNavAuth from './TopNavAuth';
 import Link from 'next/link';
 
 export default function TopHeaderAuth({ type = 'public', fullContainer = true }) {
-   return <header className="top-header">
+   return <header className="top-header auth-header">
       <div className={fullContainer ? 'full-container' : 'container'}>
          <Link className="logo-wrap" href="/">
-            <Logo />
-            <h1 className="logotype">Candle<span className="grad-txt">Pilot</span></h1>
+            <Logo width={40} height={40} />
+            <span className="logotype">Candle<span className="grad-txt">Pilot</span></span>
          </Link>
 
          <TopNavAuth />

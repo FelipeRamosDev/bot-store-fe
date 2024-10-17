@@ -12,6 +12,12 @@ import Percent from '@/components/displays/percent/Percent';
 import LogoIconImg from '@/assets/icons/logo_icon_text.svg';
 import Image from 'next/image';
 import BotQuickview from '@/components/modals/quickviews/botQuickview/BotQuickview';
+import ProfitRatioTip from '../../shared/bot/tooltips/ProfitRatioTooltip';
+import DailyROITooltip from '../../shared/bot/tooltips/DailyROITooltip';
+import AccumROITooltip from '../../shared/bot/tooltips/AccumROITooltip';
+import WinLossROITooltip from './tooltips/WinLossROITooltip';
+import PositionROIAvgTooltip from './tooltips/PositionROIAvgTooltip';
+import WinLossCountTooltip from './tooltips/WinLossCountTooltip';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
@@ -83,60 +89,60 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, o
          onRowsPerPageChange={reloadLimit}
          headerConfigs={[
             {
-               label: 'Bot',
+               label: 'Pilot Name',
                propKey: 'name',
-               style: { minWidth: '10rem' },
+               style: { minWidth: '10rem', maxWidth: '10rem' },
                format: (value) => {
                   return value;
                }
             },
             {
-               label: 'Profit Ratio',
+               label: <ProfitRatioTip />,
                propKey: 'profitRatio',
                align: 'center',
-               style: { minWidth: '8rem' },
-               format: (value, item) => <Price amount={item.currentResults?.profitRatio || 0} noSymbol={true} noColor={true} size="m" />
+               style: { minWidth: '10rem', maxWidth: '10rem' },
+               format: (value, item) => <Price amount={item.currentResults?.profitRatio || 0} noSymbol={true} noColor={true} size="l" />
             },
             {
-               label: 'ROI (24h)',
+               label: <DailyROITooltip />,
+               propKey: 'avgDailyROI',
+               align: 'center',
+               style: { minWidth: '9rem', maxWidth: '9rem' },
+               format: (value, item) => <Percent value={item.currentResults?.avgDailyROI || 0} dashedZero={true} size="l" />
+            },
+            {
+               label: <AccumROITooltip period="24h" />,
                propKey: 'accumRoiDay',
                align: 'center',
-               style: { minWidth: '8rem' },
-               format: (value, item) => <Percent value={item.currentResults?.accumRoi24 || 0} dashedZero={true} />
+               style: { minWidth: '8rem', maxWidth: '8rem' },
+               format: (value, item) => <Percent value={item.currentResults?.accumRoi24 || 0} dashedZero={true} size="l" />
             },
             {
-               label: 'ROI (30d)',
+               label: <AccumROITooltip period="30d" />,
                propKey: 'accumRoiMonth',
                align: 'center',
-               style: { minWidth: '8rem' },
+               style: { minWidth: '8rem', maxWidth: '8rem' },
                format: (value, item) => <Percent value={item.currentResults?.accumRoiMonth || 0} dashedZero={true} />
             },
             {
-               label: 'Daily ROI (μ)',
-               propKey: 'avgDailyROI',
-               align: 'center',
-               style: { minWidth: '8rem' },
-               format: (value, item) => <Percent value={item.currentResults?.avgDailyROI || 0} dashedZero={true} />
-            },
-            {
-               label: 'Position ROI (24h/μ)',
+               label: <PositionROIAvgTooltip period="24h" />,
                propKey: 'avgDayRoi',
                align: 'center',
-               style: { minWidth: '8rem' },
+               style: { minWidth: '9rem', maxWidth: '9rem' },
                format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoi24 || 0} dashedZero={true} />
             },
             {
-               label: 'Position ROI (30d/μ)',
+               label: <PositionROIAvgTooltip period="30d" />,
                propKey: 'avgMonthRoi',
                align: 'center',
-               style: { minWidth: '8rem' },
+               style: { minWidth: '9rem', maxWidth: '9rem' },
                format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoiMonth || 0} dashedZero={true} />
             },
             {
-               label: 'W/L ROI (24h/μ)',
+               label: <WinLossROITooltip period="24h" />,
                propKey: 'winsLosesDay',
                align: 'center',
-               style: { minWidth: '10rem' },
+               style: { minWidth: '10rem', maxWidth: '10rem' },
                format: (value, item) => {
                   return (<>
                      <Percent value={item.currentResults?.avgWinsRoi24 || 0} dashedZero={true} />
@@ -146,7 +152,7 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, o
                }
             },
             {
-               label: 'W/L ROI (30d/μ)',
+               label: <WinLossROITooltip period="30d" />,
                propKey: 'winsLosesMonth',
                align: 'center',
                style: { minWidth: '10rem' },
@@ -159,7 +165,7 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, o
                }
             },
             {
-               label: 'W/L (24h)',
+               label: <WinLossCountTooltip period="24h" />,
                propKey: 'winsLosesRate24',
                align: 'center',
                style: { minWidth: '10rem' },
@@ -172,7 +178,7 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, o
                }
             },
             {
-               label: 'W/L (30d/μ)',
+               label: <WinLossCountTooltip period="30d" />,
                propKey: 'winsLosesRateMonth',
                align: 'center',
                style: { minWidth: '10rem' },

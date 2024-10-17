@@ -14,15 +14,15 @@ import LogoImage from '@/assets/logo.svg';
  *
  * @returns {JSX.Element} The rendered `Image` component with the logo.
  */
-export default function Logo({ ...props }) {
+export default function Logo({ width = 55, height = 55, ...props }) {
    return <Image
       className="logo-image"
       alt="Company's Logo"
       src={LogoImage}
       priority={true}
       loading="eager"
-      height={55}
-      width={55}
+      height={height}
+      width={width}
       {...props}
    />
 }

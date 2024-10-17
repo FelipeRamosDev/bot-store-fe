@@ -78,7 +78,7 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
                </ListItem>
             </List>
 
-            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard')}>
+            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/bots/pilot-store')}>
                <Storefront />
                Go To Store
             </CTAButton>

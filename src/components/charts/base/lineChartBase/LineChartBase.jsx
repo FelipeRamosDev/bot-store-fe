@@ -8,6 +8,7 @@ import LineChartConfig from '@/models/LineChartConfig';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import Card from '@/components/common/card/Card';
 import SsidChartIcon from '@mui/icons-material/SsidChart';
+import HelpTooltip from '@/components/tooltips/helpTooltip/HelpTooltip';
 
 /**
  * A React component that renders a line chart using the Lightweight Charts library. 
@@ -20,10 +21,12 @@ import SsidChartIcon from '@mui/icons-material/SsidChart';
  * @param {array} props.singleLine - Data array for a single line chart series.
  * @param {string} props.singleLineColor - Color for the single line chart (optional).
  * @param {[]LineChartConfig} props.multiline - Array of line data for multi-line chart series (optional).
+ * @param {string} props.tooltipHeader - To set a tooltip, set the header title.
+ * @param {ReactDOM} props.TooltipContent - Provide a React component to render the tooltip content.
  * 
  * @returns {JSX.Element} - A div element that holds the chart.
  */
-export default function LineChartBase({ className, headerTitle, HeaderToolbar, chartOptions, singleLine = [], singleLineColor, multiline }) {
+export default function LineChartBase({ className, headerTitle, HeaderToolbar, tooltipHeader, TooltipContent, chartOptions, singleLine = [], singleLineColor, multiline }) {
    const chartSpot = useRef();
    const chart = useRef();
    const lineChart = useRef();
@@ -72,6 +75,12 @@ export default function LineChartBase({ className, headerTitle, HeaderToolbar, c
          {headerTitle && <ContentHeader Toolbar={HeaderToolbar}>
             <SsidChartIcon />
             <h3 className="header-title">{headerTitle}</h3>
+
+            {(TooltipContent || tooltipHeader) && (
+               <HelpTooltip headerTitle={tooltipHeader} iconSize="medium">
+                  {TooltipContent && <TooltipContent />}
+               </HelpTooltip>
+            )}
          </ContentHeader>}
 
          <div ref={chartSpot} className="chart-spot"></div>
