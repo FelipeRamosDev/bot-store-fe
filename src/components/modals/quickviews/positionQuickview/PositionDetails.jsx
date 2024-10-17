@@ -1,5 +1,5 @@
-import Card from "@/components/common/card/Card";
-import ContainedTable from "@/components/tables/containedTable/ContainedTable";
+import Card from '@/components/common/card/Card';
+import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 
 /**
  * PositionDetails Component

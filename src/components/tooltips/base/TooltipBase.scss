@@ -1,6 +1,10 @@
 .tooltip-base {
    &.MuiSvgIcon-root {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
+
+      @media screen and (min-width: $screen-m) {
+         font-size: 1.1rem;
+      }
    }
 }
 
