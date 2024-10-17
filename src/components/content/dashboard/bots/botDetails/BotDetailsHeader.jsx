@@ -12,6 +12,7 @@ import APIContext from '@/contexts/4HandsAPI';
 import AvgDailyROI from '@/components/charts/avgDailyROIChart/AvgDailyROIChart';
 import AccumROIChart from '@/components/charts/accumROIChart/AccumROIChart';
 import WinLossChart from '@/components/charts/winLossChart/WinLossChart';
+import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -54,7 +55,7 @@ export default function BotDetailsHeader() {
 
             <div className="summary">
                <h1 className="title">{doc.name}</h1>
-               <p className="brief">{doc.description}</p>
+               <TextDisplay isExpandable={true}>{doc.description}</TextDisplay>
             </div>
 
             <BotInfos bot={doc} />

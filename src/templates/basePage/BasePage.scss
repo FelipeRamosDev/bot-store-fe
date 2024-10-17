@@ -1,7 +1,7 @@
 header {
    background-color: $background-dark;
    padding: 0.7rem 0;
-   position: sticky;
+   position: absolute;
    top: 0;
    width: 100%;
    z-index: 10;
@@ -27,13 +27,25 @@ header {
 .base-page {
    &.auth-page {
       .page-content {
-         padding-top: 3rem;
-         padding-bottom: 2.6rem;
+         $header-height: 4.82rem;
+         $footer-height: 2.56rem;
+
+         padding-top: calc(3rem + $header-height);
+         padding-bottom: calc(2.6rem + $footer-height);
       }
    }
 
    .page-content {
       min-height: inherit;
+
+      .page-title-icon {
+         font-size: 3.2rem;
+      }
+
+      .page-title {
+         margin: 0;
+         font-size: 1.8rem;
+      }
    }
 
    .topbar-portal {

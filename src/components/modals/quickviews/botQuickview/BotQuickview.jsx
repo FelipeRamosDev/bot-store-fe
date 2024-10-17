@@ -15,6 +15,7 @@ import Card from '@/components/common/card/Card';
 import BotResultsGrid from '@/components/grids/botResultsGrid/BotResultsGrid';
 import AltModalHeader from '@/components/headers/altModalHeader/AltModalHeader';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
+import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
 
 export default function BotQuickview({ open, bot, setModal }) {
    const API = useContext(APIContext);
@@ -79,7 +80,7 @@ export default function BotQuickview({ open, bot, setModal }) {
                      <h3 className="bot-name">{bot.name}</h3>
                   </ContentHeader>
 
-                  <p className="bot-summary">{bot.description}</p>
+                  <TextDisplay className="bot-summary" isExpandable={true}>{bot.description}</TextDisplay>
                </div>
 
                <div className="bot-status">

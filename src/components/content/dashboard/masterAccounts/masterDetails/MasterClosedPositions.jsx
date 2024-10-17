@@ -1,9 +1,10 @@
 import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import { Refresh } from '@mui/icons-material';
+import { Money, Refresh } from '@mui/icons-material';
 import { useContext } from 'react';
-import DBQueryContext from '@/contexts/DBQuery';
+import DBQueryContext, { DBQuery } from '@/contexts/DBQuery';
+import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
 
 /**
  * MasterClosedPositions component displays a list of opened positions for a given master account.
@@ -13,15 +14,26 @@ import DBQueryContext from '@/contexts/DBQuery';
  * @returns {JSX.Element} The rendered component displaying opened positions.
  */
 export default function MasterClosedPositions() {
-   const { refresh } = useContext(DBQueryContext);
+   const { doc, refresh } = useContext(DBQueryContext);
 
    return (
-      <div className="closed-positions">
-         <ContentHeader Toolbar={() => <RoundIconButton Icon={Refresh} onClick={refresh} />}>
-            <h3 className="header-title">Closed Positions</h3>
-         </ContentHeader>
+      <ContentFullwidth useContainer={true}>
+         {doc && <DBQuery
+            type="query"
+            collection="positions"
+            filter={{ status: 'closed', master: doc._id }}
+            sort={{ closeTime: -1 }}
+            limit={11}
+         >
+            <div className="closed-positions">
+               <ContentHeader Toolbar={() => <RoundIconButton Icon={Refresh} onClick={refresh} />}>
+                  <Money />
+                  <h3 className="header-title">Closed Positions</h3>
+               </ContentHeader>
 
-         <PositionsTable exclude={['type']} />
-      </div>
+               <PositionsTable exclude={['type']} />
+            </div>
+         </DBQuery>}
+      </ContentFullwidth>
    );
 }

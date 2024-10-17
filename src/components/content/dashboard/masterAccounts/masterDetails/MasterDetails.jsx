@@ -9,6 +9,7 @@ import { DBQuery } from '@/contexts/DBQuery';
 import ExchangeKeysMissingTopbar from '@/components/bars/topBars/exchangeKeysMissing/ExchangeKeysMissing';
 import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
 import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
+import MasterClosedPositions from './MasterClosedPositions';
 
 /**
  * MasterDetails component displays detailed information and management options for a specific master account.
@@ -41,6 +42,8 @@ export default function MasterDetails({ index }) {
 
             <MasterDetailsHeader />
          </ContentSidebar>
+
+         <MasterClosedPositions />
       </DBQuery>
 
       <CreateSlotModal

@@ -1,5 +1,5 @@
 import { useState, useContext, useMemo } from 'react';
-import { Add } from '@mui/icons-material';
+import { Add, DataArray } from '@mui/icons-material';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import SlotTile from "@/components/tiles/slotTile/SlotTile";
@@ -61,6 +61,7 @@ export default function SlotsGrid({ slots = [], master = {}, className = '', uIn
       <ContentHeader Toolbar={() => (<>
          <RoundIconButton Icon={Add} variant="contained" color="tertiary" onClick={() => setCreateSlot(true)} />
       </>)}>
+         <DataArray />
          <h2 className="header-title">Slots <SlotConfigsMenu chartsDisplay={chartsDisplay} setChartsDisplay={setChartsDisplay} /></h2>
       </ContentHeader>
 

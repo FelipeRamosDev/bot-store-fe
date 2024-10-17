@@ -40,6 +40,7 @@ export default function MasterDetailsSidebar({ setUInstance }) {
          <DBQuery
             type="query"
             collection="master_accounts"
+            limit={5}
             filter={{
                user: userUID,
                $nor: [{ _id: doc._id }]

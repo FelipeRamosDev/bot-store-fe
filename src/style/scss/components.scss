@@ -25,6 +25,7 @@
 
 // Content
 @import "../../components/content/dashboard/bots/botDetails/BotDetails.scss";
+@import "../../components/content/dashboard/bots/pilotStore/PilotStore.scss";
 @import "../../components/content/dashboard/home/DashboardHome.scss";
 @import "../../components/content/dashboard/login/Login.scss";
 @import "../../components/content/dashboard/masterAccounts/masterDetails/MasterDetails.scss";
@@ -33,6 +34,9 @@
 @import "../../components/content/home/chooseBot/ChooseBot.scss";
 @import "../../components/content/home/createYourBot/CreateYourBot.scss";
 @import "../../components/content/dashboard/user/myPilots/MyPilots.scss";
+
+// Displays
+@import "../../components/displays/textDisplay/TextDisplay.scss";
 
 // Editors
 @import "../../components/editors/scheduleEditor/ScheduleEditor.scss";

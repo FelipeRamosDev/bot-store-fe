@@ -33,6 +33,7 @@
             flex-direction: column;
             margin-top: 15rem;
             padding: 0 1rem;
+            z-index: 1;
 
             @media screen and (min-width: $screen-l) {
                flex-direction: row;
@@ -52,6 +53,7 @@
 
             .bot-data {
                padding: 1rem 2%;
+               flex: 1;
 
                .content-header {
                   padding-top: 0;
@@ -69,16 +71,14 @@
                .bot-summary {
                   color: $text-darken;
                   margin-bottom: 0;
-                  overflow: hidden;
-                  white-space: nowrap;
-                  text-overflow: ellipsis;
-                  white-space: pre;
                }
             }
 
             .bot-status {
                flex: 1;
                position: relative;
+               max-width: 650px;
+               margin-left: auto;
 
                @media screen and (min-width: $screen-l) {
                   min-width: 37%;

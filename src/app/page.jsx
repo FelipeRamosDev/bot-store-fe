@@ -13,7 +13,7 @@ import HomeContent from '@/components/content/home/Home';
  */
 export default function HomePage() {
    return (
-      <BasePage fullContainer={false}>
+      <BasePage className="home-page" fullContainer={false}>
          <HomeContent />
       </BasePage>
    );

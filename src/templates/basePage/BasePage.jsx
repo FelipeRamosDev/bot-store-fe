@@ -24,9 +24,9 @@ export default function BasePage({ className = '', fullContainer, headerMenu, Cu
 
          <div className={`page-content`}>
             {children}
-         </div>
 
-         <MainFooter className="absolute-bottom" />
+            <MainFooter className="absolute-bottom" />
+         </div>
       </main>
    );
 }

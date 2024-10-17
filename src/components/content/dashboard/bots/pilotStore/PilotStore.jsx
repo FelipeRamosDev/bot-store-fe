@@ -1,12 +1,16 @@
-import ContentFullwidth from "@/components/layout/contentFullwidth/ContentFullwidth";
-import BotsTable from "@/components/tables/botsTable/BotsTable";
-import { DBQuery } from "@/contexts/DBQuery";
+import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
+import BotsTable from '@/components/tables/botsTable/BotsTable';
+import StoreIcon from '@mui/icons-material/Store';
+import { DBQuery } from '@/contexts/DBQuery';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 
 export default function PilotStore() {
    return (
       <div className="pilot-store">
-         <ContentFullwidth className="page-header" useContainer={true}>
-            <h1 className="page-title">Pilot Store</h1>
+         <ContentFullwidth useContainer={true}>
+            <ContentHeader className="page-header" useContainer={true}>
+               <StoreIcon className="page-title-icon" /> <h1 className="page-title">Pilot Store</h1>
+            </ContentHeader>
          </ContentFullwidth>
 
          <ContentFullwidth className="content" useContainer={true}>
