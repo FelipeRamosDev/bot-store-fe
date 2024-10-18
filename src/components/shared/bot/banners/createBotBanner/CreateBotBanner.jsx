@@ -8,7 +8,7 @@ export default function CreateBotBanner() {
    return (<>
       <SectionHeaderBanner
          onButtonClick={() => setCreateBotModal(true)}
-         title="Build yout Pilot"
+         title="Build your Pilot"
          description="Create your trader pilot bot."
          buttonLabel="Create One"
          noAnimation={true}
