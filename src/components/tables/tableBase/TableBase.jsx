@@ -26,6 +26,7 @@ import { Button } from '@mui/material';
  * @param {number} [props.itemsPerPage] - The number of items to list per page.
  * @param {boolean} [props.usePagination=false] - Set to true if you need the pagination footer.
  * @param {boolean} [props.useSeeMorePage=false] - Set to true if you need the "see more" button to paginate.
+ * @param {boolean} [props.noDocumentsText=false] - Set to true wants to customize the text when no documents are listed.
  * @param {Array} [props.headerConfigs] - Configuration for table headers.
  * @param {React.Component} [props.CustomTableItem] - Custom component for rendering table rows.
  * @param {Array} [props.include] - Optional array of column keys to include.
@@ -46,6 +47,7 @@ export default function TableBase({
    itemsPerPage = 10,
    usePagination = false,
    useSeeMorePage = false,
+   noDocumentsText = `There is no documents to list!`,
    headerConfigs,
    CustomTableItem,
    include,
@@ -120,7 +122,7 @@ export default function TableBase({
 
       
       {(!loading && slicedSlots.length === 0) && (
-         <NoDocumentsTile noBorder={true} Icon={false} message={`There is no documents to list!`} />
+         <NoDocumentsTile noBorder={true} Icon={false} message={noDocumentsText} />
       )}
 
       {usePagination && (

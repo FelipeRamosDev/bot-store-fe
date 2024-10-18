@@ -18,6 +18,7 @@ import AccumROITooltip from '../../shared/bot/tooltips/AccumROITooltip';
 import WinLossROITooltip from './tooltips/WinLossROITooltip';
 import PositionROIAvgTooltip from './tooltips/PositionROIAvgTooltip';
 import WinLossCountTooltip from './tooltips/WinLossCountTooltip';
+import { parseClassName } from '@/helpers/parser';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
@@ -25,12 +26,13 @@ import WinLossCountTooltip from './tooltips/WinLossCountTooltip';
  * @param {Object} props
  * @param {string} props.title - The header title.
  * @param {boolean} props.hideHeader - if used it will hide the header.
+ * @param {boolean} props.noMargin - if used it will use ZERO margin.
  * @param {React.ReactDOM} props.HeaderContent - An custom header, provided as a ReactDOM component
  * @param {'link'|'modal'} props.onSelectAction - The type of action to perform when a row is clicked
  *
  * @returns {React.Element} The rendered table of recent bots.
  */
-export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, onSelectAction = 'link' }) {
+export default function BotsTable({ className, title = 'Bots', hideHeader, noMargin, HeaderContent, onSelectAction = 'link' }) {
    const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const [ createBotModal, setCreateBotModal ] = useState(false);
    const [ quickviewModal, setQuickviewModal ] = useState(false);
@@ -67,7 +69,7 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, o
       }
    }
 
-   return <div className="bots-table">
+   return <div className={parseClassName(className , [ 'bots-table', noMargin ? 'no-margin' : '' ])}>
       {!hideHeader && (
          <ContentHeader Toolbar={AddButton}>
             {!HeaderContent && (<>
@@ -87,6 +89,7 @@ export default function BotsTable({ title = 'Bots', hideHeader, HeaderContent, o
          itemsPerPage={parsedLimit}
          onPageNav={goPage}
          onRowsPerPageChange={reloadLimit}
+         noDocumentsText="You doesn't have any pilot yet"
          headerConfigs={[
             {
                label: 'Pilot Name',

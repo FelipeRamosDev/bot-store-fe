@@ -56,7 +56,8 @@ $white: #FAFAFA;
 $black: #111;
 
 $text: #FAFAFA;
-$text-darken: darken($color: $text, $amount: 15);
+$text-background-blend: rgb(35 46 50);
+$text-darken: darken($color: $text, $amount: 13);
 $text-grey-darken: #292d2e;
 $text-secondary: $text-darken;
 $text-tertiary: darken($color: $tertiary, $amount: 70);
