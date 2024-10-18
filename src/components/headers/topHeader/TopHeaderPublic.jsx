@@ -1,5 +1,5 @@
 
-import Logo from '@/components/common/Logo';
+import Logo from '@/components/common/logo/Logo';
 import TopNavPublic from './TopNavPublic';
 import Link from 'next/link';
 

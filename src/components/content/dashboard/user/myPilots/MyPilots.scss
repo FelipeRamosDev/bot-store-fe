@@ -4,4 +4,20 @@
          font-size: 1.8rem;
       }
    }
+
+   .draft-accordion {
+      margin-top: 3rem;
+
+      .title-wrap {
+         display: flex;
+         gap: 0.6rem;
+         align-items: center;
+         font-size: 1.4rem;
+         font-weight: 600;
+   
+         .draft-icon {
+            font-size: 2.2rem;
+         }
+      }
+   }
 }
