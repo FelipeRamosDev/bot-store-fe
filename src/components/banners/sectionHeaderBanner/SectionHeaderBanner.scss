@@ -1,0 +1,69 @@
+.create-first-pilot {
+   position: relative;
+   color: $text-background-blend;
+   font-weight: 500;
+
+   .banner-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 0;
+   }
+
+   .banner-descr {
+      font-size: 1rem;
+      margin: 0;
+      max-width: 75%;
+   }
+
+   .create-button {
+      color: $text-darken;
+      font-weight: 300;
+      margin-top: 0.5rem;
+   }
+
+   .icon {
+      position: absolute;
+      top: -50%;
+      left: 80%;
+      height: 200%;
+   }
+
+   &.texture-paper-ellipses {
+      background: $grad-primary-tertiary-light;
+
+      &.no-animation {
+         .bg-1, .bg-2, .bg-3, .bg-4 {
+            animation: none;
+         }
+      }
+
+      .bg-1 {
+         top: -50%;
+         left: -30%;
+         height: 250px;
+         width: 82%;
+      }
+
+      .bg-2 {
+         top: -50%;
+         right: -30%;
+         height: 250px;
+         width: 82%;
+         transform: rotate(177deg);
+      }
+
+      .bg-3 {
+         top: -70%;
+         left: -50%;
+         height: 250px;
+         width: 82%;
+      }
+
+      .bg-4 {
+         top: -50%;
+         right: 40%;
+         height: 250px;
+         width: 82%;
+      }
+   }
+}

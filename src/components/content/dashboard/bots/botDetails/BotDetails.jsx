@@ -2,6 +2,7 @@ import { DBQuery } from '@/contexts/DBQuery';
 import BotDetailsHeader from './BotDetailsHeader';
 import BotThreads from './BotThreads';
 import BotSettings from './BotSettings';
+import NotFoundPage from '@/app/not-found';
 
 /**
  * The BotDetails component fetches and displays detailed information about a bot.
@@ -13,6 +14,10 @@ import BotSettings from './BotSettings';
  * @returns {JSX.Element} The rendered component, including bot details, settings, and threads.
  */
 export default function BotDetails({ botIndex }) {
+   if (!botIndex) {
+      return <NotFoundPage />
+   }
+
    return <DBQuery
       type="doc"
       collection="bots"
