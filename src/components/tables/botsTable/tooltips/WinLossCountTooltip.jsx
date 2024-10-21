@@ -4,8 +4,8 @@ import HelpTooltip from '@/components/tooltips/helpTooltip/HelpTooltip';
 export default function WinLossCountTooltip({ period, onlyContent }) {
    if (period) period = period.toUpperCase();
 
-   const descr1 = `On the left side, you can see the percentage of winning positions over the last ${period}.`;
-   const descr2 = `On the right side, you can see the percentage of losing positions over the last ${period}.`;
+   const descr1 = `On GREEN, you can see the percentage of winning positions over the last ${period}.`;
+   const descr2 = `On RED, you can see the percentage of losing positions over the last ${period}.`;
 
    function Content() {
       return (<>

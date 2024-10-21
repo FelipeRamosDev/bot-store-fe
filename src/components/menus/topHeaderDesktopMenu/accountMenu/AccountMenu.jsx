@@ -7,6 +7,7 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import APIContext from '@/contexts/4HandsAPI';
 import LogoIcon from '@/assets/icons/logo_icon_text.svg';
+import LogoIconLight from '@/components/common/logo/LogoIconLight';
 
 /**
  * AccountMenu component that provides user account options such as viewing profile, 
@@ -76,7 +77,7 @@ export default function AccountMenu({ setSpinner = () => {} }) {
 
             <MenuItem onClick={() => router.push('/dashboard/user/my-pilots')}>
                <ListItemIcon>
-                  <Image src={LogoIcon} alt="CandlePilot Logo Icon" width={20} height={20} />
+                  <LogoIconLight fontSize={20} />
                </ListItemIcon>
                My Pilots
             </MenuItem>

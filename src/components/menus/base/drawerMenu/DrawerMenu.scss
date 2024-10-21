@@ -6,7 +6,7 @@
 
       .MuiDrawer-paper {
          height: auto;
-         margin-top: 4.65rem;
+         margin-top: 4.25rem;
          border-bottom-left-radius: $radius-m;
       }
    }
@@ -16,6 +16,7 @@
       justify-content: left;
       padding-top: 0.8rem;
       padding-bottom: 0.8rem;
+      box-shadow: none;
 
       .MuiSvgIcon-root {
          margin-right: 35px;
@@ -23,6 +24,7 @@
    }
 
    .MuiList-root {
+      padding-top: 0;
       padding-bottom: 0;
    }
 }
