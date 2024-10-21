@@ -6,7 +6,7 @@ export default function WinLossROITooltip({ period, onlyContent }) {
 
    const formula1 = `Average ROI for winning positions = SUM(ROI of winning positions) / Number of winning positions`;
    const formula2 = `Average ROI for losing positions = SUM(ROI of losing positions) / Number of losing positions`;
-   const descr1 = `On the left side, you can see the average ROI of winning positions and the average ROI of losing positions over the last ${period}.`;
+   const descr1 = `On GREEN line, you can see the average ROI of winning positions and RED for the average ROI of losing positions over the last ${period}.`;
 
    function Content() {
       return (<>

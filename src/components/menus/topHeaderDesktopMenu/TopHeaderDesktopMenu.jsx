@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import AccountMenu from '../dropdown/accountMenu/AccountMenu';
+import AccountMenu from './accountMenu/AccountMenu';
 import { AccountBalanceWallet, Dashboard } from '@mui/icons-material';
 import StoreIcon from '@mui/icons-material/Store';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';

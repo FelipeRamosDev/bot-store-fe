@@ -1,12 +1,12 @@
 'use client';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import DrawerMenu from '@/components/menus/base/drawerMenu/DrawerMenu';
-import APIContext from '@/contexts/4HandsAPI';
 import { AccountBalanceWallet, Storefront, Dashboard, Logout } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Button } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccountMenuMobile from './accountMenu/AccountMenuMobile';
+import { useRouter } from 'next/navigation';
 
 /**
  * TopHeaderMobileMenu component renders a mobile navigation menu with links to
@@ -21,21 +21,8 @@ import MenuIcon from '@mui/icons-material/Menu';
  * @returns {JSX.Element} The rendered mobile navigation menu inside a drawer.
  */
 export default function TopHeaderMobileMenu({ setSpinner }) {
-   const [ open, setOpen ] = useState(false);
    const router = useRouter();
-   const API = useContext(APIContext);
-
-   async function signOut() {
-      setSpinner('Signing Out');
-
-      try {
-         await API.auth.signOut();
-         router.push('/');
-      } catch (error) {
-         setSpinner(false);
-         throw error;
-      }
-   }
+   const [ open, setOpen ] = useState(false);
 
    return (
       <nav className="mobile-menu">
@@ -44,6 +31,11 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
          </Button>
 
          <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/bots/pilot-store')}>
+               <Storefront />
+               Go To Store
+            </CTAButton>
+
             <List>
                <ListItem disablePadding>
                   <ListItemButton onClick={() => router.push('/dashboard')}>
@@ -67,21 +59,8 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
 
                <Divider />
 
-               <ListItem disablePadding>
-                  <ListItemButton onClick={signOut}>
-                     <ListItemIcon>
-                        <Logout />
-                     </ListItemIcon>
-
-                     <ListItemText primary="Sign-out" />
-                  </ListItemButton>
-               </ListItem>
+               <AccountMenuMobile setSpinner={setSpinner} />
             </List>
-
-            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/bots/pilot-store')}>
-               <Storefront />
-               Go To Store
-            </CTAButton>
          </DrawerMenu>
       </nav>
    );

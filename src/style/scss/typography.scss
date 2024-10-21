@@ -107,3 +107,13 @@ li.with-margin {
       text-decoration: underline;
    }
 }
+
+.link-wrapper {
+   display: inline-flex;
+   text-decoration: none;
+
+   button {
+      flex: 1;
+      text-decoration: none;
+   }
+}
