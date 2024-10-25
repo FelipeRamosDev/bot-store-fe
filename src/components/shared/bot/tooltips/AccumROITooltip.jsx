@@ -22,9 +22,9 @@ export default function AccumROITooltip({ period, onlyContent }) {
 
    return (
       <TooltipTableHead>
-         ROI ({period})
+         ROS ({period})
 
-         <HelpTooltip headerTitle={`Accumulated ROI (${period})`}>
+         <HelpTooltip headerTitle={`Accumulated ROS (${period})`}>
             <Content /> 
          </HelpTooltip>
       </TooltipTableHead>

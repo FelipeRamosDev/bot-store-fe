@@ -45,15 +45,15 @@ export default function WinLossChart({ results = [], type = 'rate', period = '24
 
    if (type === 'roi' && period === '24h') {
       results.map(result => {
-         dataSet[0].values.push({ time: new Date(result.refDate).getTime(), value: result.avgWinsRoi24 });
-         dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.avgLosesRoi24 * -1 });
+         dataSet[0].values.push({ time: new Date(result.refDate).getTime(), value: result.avgWinsROS24 });
+         dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.avgLosesROS24 * -1 });
       });
    
       return (
          <LineChartBase
             className="chart"
-            headerTitle="WIN/LOSS ROI (24h)"
-            tooltipHeader="WIN/LOSS ROI (24h)"
+            headerTitle="WIN/LOSS ROS (24h)"
+            tooltipHeader="WIN/LOSS ROS (24h)"
             TooltipContent={() => <WinLossROITooltip period={period} onlyContent={true} />}
             multiline={dataSet}
          />
@@ -62,15 +62,15 @@ export default function WinLossChart({ results = [], type = 'rate', period = '24
 
    if (type === 'roi' && period === '30d') {
       results.map(result => {
-         dataSet[0].values.push({ time: new Date(result.refDate).getTime(), value: result.avgWinsRoiMonth });
-         dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.avgLosesRoiMonth * -1 });
+         dataSet[0].values.push({ time: new Date(result.refDate).getTime(), value: result.avgWinsROSMonth });
+         dataSet[1].values.push({ time: new Date(result.refDate).getTime(), value: result.avgLosesROSMonth * -1 });
       });
    
       return (
          <LineChartBase
             className="chart"
-            headerTitle="WIN/LOSS ROI (30d)"
-            tooltipHeader="WIN/LOSS ROI (30d)"
+            headerTitle="WIN/LOSS ROS (30d)"
+            tooltipHeader="WIN/LOSS ROS (30d)"
             TooltipContent={() => <WinLossROITooltip period={period} onlyContent={true} />}
             multiline={dataSet}
          />

@@ -108,38 +108,38 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
             },
             {
                label: <DailyROITooltip />,
-               propKey: 'avgDailyROI',
+               propKey: 'avgDailyROS',
                align: 'center',
                style: { minWidth: '9rem', maxWidth: '9rem' },
-               format: (value, item) => <Percent value={item.currentResults?.avgDailyROI || 0} dashedZero={true} size="l" />
+               format: (value, item) => <Price amount={item.currentResults?.avgDailyROS || 0} dashedZero={true} noSymbol={true} size="l" />
             },
             {
                label: <AccumROITooltip period="24h" />,
-               propKey: 'accumRoiDay',
+               propKey: 'accumROSDay',
                align: 'center',
                style: { minWidth: '8rem', maxWidth: '8rem' },
-               format: (value, item) => <Percent value={item.currentResults?.accumRoi24 || 0} dashedZero={true} size="l" />
+               format: (value, item) => <Price amount={item.currentResults?.accumROS24 || 0} dashedZero={true} noSymbol={true} size="l" />
             },
             {
                label: <AccumROITooltip period="30d" />,
-               propKey: 'accumRoiMonth',
+               propKey: 'accumROSMonth',
                align: 'center',
                style: { minWidth: '8rem', maxWidth: '8rem' },
-               format: (value, item) => <Percent value={item.currentResults?.accumRoiMonth || 0} dashedZero={true} />
+               format: (value, item) => <Price amount={item.currentResults?.accumROSMonth || 0} dashedZero={true} noSymbol={true} />
             },
             {
                label: <PositionROIAvgTooltip period="24h" />,
-               propKey: 'avgDayRoi',
+               propKey: 'avgDayROS',
                align: 'center',
                style: { minWidth: '9rem', maxWidth: '9rem' },
-               format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoi24 || 0} dashedZero={true} />
+               format: (value, item) => <Price amount={item.currentResults?.avgROS24 || 0} dashedZero={true} noSymbol={true} />
             },
             {
                label: <PositionROIAvgTooltip period="30d" />,
-               propKey: 'avgMonthRoi',
+               propKey: 'avgMonthROS',
                align: 'center',
                style: { minWidth: '9rem', maxWidth: '9rem' },
-               format: (value, item) => <Percent value={item.currentResults?.avgNotionalRoiMonth || 0} dashedZero={true} />
+               format: (value, item) => <Price amount={item.currentResults?.avgROSMonth || 0} dashedZero={true} noSymbol={true} />
             },
             {
                label: <WinLossROITooltip period="24h" />,
@@ -148,9 +148,9 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                style: { minWidth: '10rem', maxWidth: '10rem' },
                format: (value, item) => {
                   return (<>
-                     <Percent value={item.currentResults?.avgWinsRoi24 || 0} dashedZero={true} />
+                     <Price amount={item.currentResults?.avgWinsROS24 || 0} dashedZero={true} noSymbol={true} />
                      {' / '}
-                     <Percent value={item.currentResults?.avgLosesRoi24 || 0} dashedZero={true} />
+                     <Price amount={item.currentResults?.avgLosesROS24 || 0} dashedZero={true} noSymbol={true} />
                   </>);
                }
             },
@@ -161,9 +161,9 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                style: { minWidth: '10rem' },
                format: (value, item) => {
                   return (<>
-                     <Percent value={item.currentResults?.avgWinsRoiMonth || 0} dashedZero={true} />
+                     <Price amount={item.currentResults?.avgWinsROSMonth || 0} dashedZero={true} noSymbol={true} />
                      {' / '}
-                     <Percent value={item.currentResults?.avgLosesRoiMonth || 0} dashedZero={true} />
+                     <Price amount={item.currentResults?.avgLosesROSMonth || 0} dashedZero={true} noSymbol={true} />
                   </>);
                }
             },
