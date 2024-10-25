@@ -27,13 +27,22 @@ header {
 .base-page {
    &.auth-page {
       .page-content {
+         $footer-height: 2.56rem;
+
          padding-top: 3rem;
-         padding-bottom: 2.6rem;
+         padding-bottom: calc(2.6rem + $footer-height);
       }
    }
 
    .page-content {
-      min-height: inherit;
+      .page-title-icon {
+         font-size: 3.2rem;
+      }
+
+      .page-title {
+         margin: 0;
+         font-size: 1.8rem;
+      }
    }
 
    .topbar-portal {

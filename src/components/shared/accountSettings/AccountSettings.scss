@@ -12,6 +12,8 @@
          padding: 0.5rem;
          border-radius: $radius-xs;
          background-color: $background-paper-light;
+         display: flex;
+         align-items: center;
       }
 
       p,

@@ -5,7 +5,7 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import TableBase from '@/components/tables/tableBase/TableBase';
 import EdgeLight from '@/components/common/edgeLight/EdgeLight';
 import DBQueryContext from '@/contexts/DBQuery';
-import SlotQuickview from '@/components/modals/quickviews/SlotQuickview/SlotQuickview';
+import SlotQuickview from '@/components/modals/quickviews/slotQuickview/SlotQuickview';
 import Percent from '@/components/displays/percent/Percent';
 
 /**

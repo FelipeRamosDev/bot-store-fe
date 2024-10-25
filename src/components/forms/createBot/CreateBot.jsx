@@ -41,7 +41,7 @@ export default function CreateBotForm({ editData, onSuccess = () => {} }) {
                throw created;
             }
 
-
+            return onSuccess(created.bot);
          } else {
             const saved = await API.ajax.authPost('/bot/update', {
                botUID: editData._id,
@@ -51,9 +51,9 @@ export default function CreateBotForm({ editData, onSuccess = () => {} }) {
             if (saved.error) {
                throw saved;
             }
-         }
 
-         return onSuccess();
+            return onSuccess(saved);
+         }
       } catch (err) {
          throw err;
       }

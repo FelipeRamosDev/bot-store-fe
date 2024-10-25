@@ -2,8 +2,6 @@
 	"Create React Component": {
 		"prefix": "react:component",
 		"body": [
-			"import './${1:ComponentName}.scss';",
-			"",
 			"export default function ${1:ComponentName}() {",
 			"\treturn ${2:<></>};",
 			"}",

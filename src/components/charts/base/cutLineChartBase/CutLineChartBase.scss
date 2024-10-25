@@ -1,0 +1,15 @@
+.cutline-chart-base {
+   .content-header {
+      padding: 0;
+      color: $text-darken;
+      margin-bottom: 1.5rem;
+
+      .header-title {
+         font-size: 0.9rem;
+      }
+   }
+
+   .chart-spot {
+      height: 200px;
+   }
+}

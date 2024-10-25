@@ -44,7 +44,7 @@ export default function SlotResultsGrid({ slot = {} }) {
          </PriceCard>
 
          <PriceCard {...priceCardProps} {...hozPriceCardProps} value={slot.pnl}>
-            <label>Acumulated PNL</label>
+            <label>Accumulated PNL</label>
             <Price {...priceProps} amount={slot.pnl} />
          </PriceCard>
          

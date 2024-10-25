@@ -1,5 +1,6 @@
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 import MasterDetails from '@/components/content/dashboard/masterAccounts/masterDetails/MasterDetails';
+import NotFoundPage from '@/app/not-found';
 
 /**
  * MasterAccountPage Component
@@ -14,6 +15,10 @@ import MasterDetails from '@/components/content/dashboard/masterAccounts/masterD
  * @returns {JSX.Element} The rendered master accounts page.
  */
 export default function MasterAccountPage({ params: { index } }) {
+   if (!index) {
+      return <NotFoundPage />
+   }
+
    return (
       <AuthBasePage className="master-accounts-page">
          <MasterDetails index={index} />

@@ -56,7 +56,6 @@ export default function PositionQuickview({ position, className = '', onClose = 
          <ContentSidebar isFullContainer={true}>
             <>
                <PositionValuesGrid position={position} />
-               <PositionParents position={position} />
 
                {isMobile && <PositionSidebar position={position} isMobile={isMobile} />}
                {position.type === 'position-demo' && <PositionDetails position={position} />}

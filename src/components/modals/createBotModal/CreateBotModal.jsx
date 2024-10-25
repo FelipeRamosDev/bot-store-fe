@@ -1,5 +1,6 @@
 import CreateBotForm from "@/components/forms/createBot/CreateBot";
 import ContentModal from "../base/contentModal/ContentModal";
+import { useRouter } from "next/navigation";
 
 /**
  * CreateBotModal is a modal component for creating a new bot.
@@ -15,6 +16,8 @@ import ContentModal from "../base/contentModal/ContentModal";
  * @returns {JSX.Element} The CreateBotModal component.
  */
 export default function CreateBotModal({ bot, open, setModal }) {
+   const nav = useRouter();
+
    return (
       <ContentModal
          title="Create Bot"
@@ -23,7 +26,16 @@ export default function CreateBotModal({ bot, open, setModal }) {
          size="small"
          onClose={() => setModal(false)}
       >
-         <CreateBotForm editData={bot} onSuccess={() => setModal(false)} />
+         <CreateBotForm
+            editData={bot}
+            onSuccess={(created) => {
+               setModal(false);
+
+               if (created?.index) {
+                  nav.push(`/dashboard/bots/${created?.index}`);
+               }
+            }}
+         />
       </ContentModal>
    );
 }

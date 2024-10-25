@@ -2,6 +2,11 @@
    background: $grad-dark-primary-tertiary;
    overflow: hidden;
 
+   .content-wrap {
+      position: relative;
+      width: 100%;
+   }
+
    @keyframes rot1 {
       0% {
          transform: rotateZ(0deg) translateY(-25%);

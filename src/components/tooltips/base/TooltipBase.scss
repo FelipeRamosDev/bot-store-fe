@@ -1,0 +1,40 @@
+.tooltip-base {
+   &.MuiSvgIcon-root {
+      font-size: 1.3rem;
+
+      @media screen and (min-width: $screen-m) {
+         font-size: 1.1rem;
+      }
+   }
+}
+
+.tooltip-content {
+   label {
+      font-size: 1rem;
+   }
+
+   .tooltip-body {
+      margin-top: 0.5rem;
+
+      span {
+         font-size: 0.75rem;
+      }
+
+      p {
+         font-size: 0.75rem;
+         font-weight: 400;
+         margin: 0.5rem 0;
+         line-height: 1rem;
+
+         &.no-margin {
+            margin: 0;
+         }
+      }
+   }
+}
+
+.MuiPopper-root {
+   .MuiTooltip-tooltip {
+      max-width: 930px;
+   }
+}

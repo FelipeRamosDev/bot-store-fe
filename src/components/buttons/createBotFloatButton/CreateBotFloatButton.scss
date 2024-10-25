@@ -1,0 +1,23 @@
+.create-pilot-button.MuiFab-root {
+   position: absolute;
+   bottom: 5rem;
+   right: 1.5%;
+
+   @media screen and (min-width: $screen-m) {
+      bottom: 4.5rem;
+   }
+
+   &.desktop {
+      display: none;
+
+      @media screen and (min-width: $screen-m) {
+         display: flex;
+      }
+   }
+
+   &.mobile {
+      @media screen and (min-width: $screen-m) {
+         display: none;
+      }
+   }
+}

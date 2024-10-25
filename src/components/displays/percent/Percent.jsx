@@ -29,8 +29,8 @@ export default function Percent({
    posfix
 }) {
    // Handle dashed zero case
-   if (dashedZero && value === 0) {
-      return <span className={`percent-display`}>---%</span>;
+   if (dashedZero && (value === 0 || !value)) {
+      return <span className={`percent-display`}>---</span>;
    }
 
    // Determine color based on value and noColor flag

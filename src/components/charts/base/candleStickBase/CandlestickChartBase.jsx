@@ -6,6 +6,7 @@ import { darkTheme } from '@/style/darkTheme';
 import FitSpinner from '@/components/load/fitSpinner/FitSpinner';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { OpenInFull, CloseFullscreen } from '@mui/icons-material';
+import defaultChartOptions from '../defaultChartOptions';
 
 /**
  * A React component for rendering a candlestick chart using the lightweight-charts library.
@@ -33,7 +34,7 @@ export default function CandlestickChartBase({ candles, interval, position, clas
    }
 
    chartOptions = {
-      autoSize: true,
+      ...defaultChartOptions,
       timeScale: {
          fixLeftEdge: true,
          tickMarkFormatter: (time) => {
@@ -63,29 +64,8 @@ export default function CandlestickChartBase({ candles, interval, position, clas
             }
          }
       },
-      localization: {
-         timeFormatter: (time) => {
-            return new Date(time).toLocaleString()
-         }
-      },
-      layout: {
-         textColor: darkTheme.palette.text.darken,
-         background: {
-            type: 'solid',
-            color: 'transparent'
-         }
-      },
-      grid: {
-         vertLines: {
-            style: 3,
-            color: darkTheme.palette.grey.softMark
-         },
-         horzLines: {
-            color: darkTheme.palette.grey.softMark
-         }
-      },
       ...chartOptions
-   };
+   }
 
    styleOptions = {
       upColor: darkTheme.palette.success.main,

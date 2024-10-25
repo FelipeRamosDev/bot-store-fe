@@ -5,6 +5,8 @@ import BotsTable from '@/components/tables/botsTable/BotsTable';
 import UserInstanceTileDash from '@/components/tiles/userInstance/Userinstance';
 import { DBQuery } from '@/contexts/DBQuery';
 import AuthUserContext from "@/contexts/AuthUser";
+import SectionHeaderBanner from '@/components/banners/sectionHeaderBanner/SectionHeaderBanner';
+import CreateBotBanner from '@/components/shared/bot/banners/createBotBanner/CreateBotBanner';
 
 /**
  * DashboardSidebar component renders the sidebar content for the dashboard page.
@@ -36,13 +38,15 @@ export default function DashboardSidebar() {
             <UserInstanceTileDash />
          </DBQuery>
 
+         <CreateBotBanner />
          <DBQuery
             type="query"
             collection="bots"
-            sort={{ modifiedAt: -1 }}
+            filter={{ author: user._id }}
+            sort={{ 'currentResults.profitRatio': -1 }}
             limit={6}
          >
-            <BotsTable title="My Bots" />
+            <BotsTable title="My Pilots" hideHeader={true} noMargin={true} />
          </DBQuery>
       </>
    );

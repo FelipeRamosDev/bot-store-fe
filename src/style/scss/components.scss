@@ -1,6 +1,7 @@
 // Banners
 @import "../../components/banners/homeTopBanner/HomeTopBanner.scss";
 @import "../../components/banners/homeTopBanner/homeBannerImage/HomeBannerImage.scss";
+@import "../../components/banners/sectionHeaderBanner/SectionHeaderBanner.scss";
 
 // Bars
 @import "../../components/bars/base/topAlertBar/TopAlertBar.scss";
@@ -9,9 +10,12 @@
 @import "../../components/buttons/checkButton/CheckButton.scss";
 @import "../../components/buttons/ctaButton/CTAButton.scss";
 @import "../../components/buttons/rubberButton/RubberButton.scss";
+@import "../../components/buttons/createBotFloatButton/CreateBotFloatButton.scss";
 
 // Charts
 @import "../../components/charts/base/candleStickBase/CandlestickChartBase.scss";
+@import "../../components/charts/base/lineChartBase/LineChartBase.scss";
+@import "../../components/charts/base/cutLineChartBase/CutLineChartBase.scss";
 
 // Common
 @import "../../components/common/card/Card.scss";
@@ -23,6 +27,7 @@
 
 // Content
 @import "../../components/content/dashboard/bots/botDetails/BotDetails.scss";
+@import "../../components/content/dashboard/bots/pilotStore/PilotStore.scss";
 @import "../../components/content/dashboard/home/DashboardHome.scss";
 @import "../../components/content/dashboard/login/Login.scss";
 @import "../../components/content/dashboard/masterAccounts/masterDetails/MasterDetails.scss";
@@ -30,6 +35,10 @@
 @import "../../components/content/home/binanceIntegration/BinanceIntegration.scss";
 @import "../../components/content/home/chooseBot/ChooseBot.scss";
 @import "../../components/content/home/createYourBot/CreateYourBot.scss";
+@import "../../components/content/dashboard/user/myPilots/MyPilots.scss";
+
+// Displays
+@import "../../components/displays/textDisplay/TextDisplay.scss";
 
 // Editors
 @import "../../components/editors/scheduleEditor/ScheduleEditor.scss";
@@ -41,6 +50,7 @@
 @import "../../components/forms/logicalOperatorForm/LogicalOperatorForm.scss";
 
 // Grids
+@import "../../components/grids/botResultsGrid/BotResultsGrid.scss";
 @import "../../components/grids/botValuesGrid/BotValuesGrid.scss";
 @import "../../components/grids/mastersGrid/MastersGrid.scss";
 @import "../../components/grids/ordersGrid/OrdersGrid.scss";
@@ -53,6 +63,7 @@
 // Headers
 @import "../../components/headers/contentHeader/ContentHeader.scss";
 @import "../../components/headers/topHeader/TopHeader.scss";
+@import "../../components/headers/altModalHeader/AltModalHeader.scss";
 
 // Inputs
 @import "../../components/inputs/checkButtonGroupInput/CheckButtonGroupInput.scss";
@@ -63,6 +74,7 @@
 @import "../../components/inputs/sliderInput/SliderInput.scss";
 
 // Layouts
+@import "../../components/layout/contentFullwidth/ContentFullwidth.scss";
 @import "../../components/layout/contentSidebar/ContentSidebar.scss";
 @import "../../components/layout/contentSplit/ContentSplit.scss";
 
@@ -80,7 +92,8 @@
 @import "../../components/modals/base/contentModal/ContentModal.scss";
 @import "../../components/modals/botValueModal/BotValuesModal.scss";
 @import "../../components/modals/quickviews/positionQuickview/PositionQuickview.scss";
-@import "../../components/modals/quickviews/SlotQuickview/SlotQuickview.scss";
+@import "../../components/modals/quickviews/slotQuickview/SlotQuickview.scss";
+@import "../../components/modals/quickviews/botQuickview/BotQuickview.scss";
 
 // Shared
 @import "../../components/shared/accountSettings/AccountSettings.scss";
@@ -105,6 +118,9 @@
 @import "../../components/tiles/scheduleTile/ScheduleTile.scss";
 @import "../../components/tiles/slotTile/SlotTile.scss";
 @import "../../components/tiles/userInstance/UserInstance.scss";
+
+// Tooltips
+@import "../../components/tooltips/base/TooltipBase.scss";
 
 .price-display,
 .percent-display {

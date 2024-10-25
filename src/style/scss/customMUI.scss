@@ -123,6 +123,14 @@
    height: 32;
 
    &.MuiAvatar-colorDefault {
-      background-color: $tertiary-light;
+      background-color: $text-darken;
+   }
+}
+
+.MuiFab-root {
+   &.MuiFab-tertiary {
+      &:hover {
+         background-color: $tertiary-light;
+      }
    }
 }

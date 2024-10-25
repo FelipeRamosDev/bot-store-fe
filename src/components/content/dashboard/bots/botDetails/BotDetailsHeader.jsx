@@ -1,14 +1,18 @@
 'use client';
-import { useContext } from 'react';
-import DBQueryContext from '@/contexts/DBQuery';
-import Card from '@/components/common/card/Card';
-import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/CheckButtonGroupInput';
-import ContainedTable from '@/components/tables/containedTable/ContainedTable';
-import APIContext from '@/contexts/4HandsAPI';
+import { useContext, useEffect, useState, useRef } from 'react';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
-import { handleStatusChange } from './BotDetails.helper';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 import configs from '@/config.json';
+import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
+import Image from 'next/image';
+import BotInfos from './BotInfos';
+import DBQueryContext from '@/contexts/DBQuery';
+import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
+import APIContext from '@/contexts/4HandsAPI';
+import AvgDailyROI from '@/components/charts/avgDailyROSChart/AvgDailyROSChart';
+import AccumROIChart from '@/components/charts/accumROSChart/AccumROSChart';
+import WinLossChart from '@/components/charts/winLossChart/WinLossChart';
+import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -19,44 +23,54 @@ import configs from '@/config.json';
 export default function BotDetailsHeader() {
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
+   const [ resultsLine, setResultsLine ] = useState();
+   const requested = useRef();
+
+   useEffect(() => {
+      const notEmpty = Object.keys(doc).length;
+
+      if (notEmpty && !requested.current && !resultsLine) {
+         requested.current = true;
+
+         API.ajax.authGet('/bot/results', {
+            botUID: doc._id
+         }).then(({ success, results }) => {
+            if (!success) return;
+
+            setResultsLine(results);
+         }).catch(err => {
+            throw err;
+         });
+      }
+   }, [ doc, API.ajax, resultsLine ]);
 
    return <div className="page-header">
       <div className="cover"></div>
 
       <div className="bot-info">
-         <div className="full-container">
+         <ContentFullwidth useContainer={true}>
             <div className="avatar">
-               <SmartToyIcon className="robot-icon" />
+               <Image src={LogoIcon} className="robot-icon" alt="Avatar Placeholder" width={180} heigth={180} priority={true} />
             </div>
 
             <div className="summary">
                <h1 className="title">{doc.name}</h1>
-               <p className="brief">{doc.description}</p>
+               <TextDisplay isExpandable={true}>{doc.description}</TextDisplay>
             </div>
 
-            <Card className="infos" padding="s" elevation={40}>
-               {doc.status && <CheckButtonGroupInput
-                  onChange={(ev) => handleStatusChange(ev, API, doc)}
-                  schema={{
-                     key: 'status',
-                     defaultValue: doc.status,
-                     options: [
-                        { label: 'Draft', value: 'draft' },
-                        { label: 'Private', value: 'private' },
-                        { label: 'Public', value: 'public' }
-                     ]
-                  }}
-               />}
+            <BotInfos bot={doc} />
+         </ContentFullwidth>
 
-               <ContainedTable
-                  tableData={[
-                     { label: 'ID', value: doc.cod },
-                     { label: 'Created At', value: new Date(doc.createdAt).toLocaleString() },
-                     { label: 'Modified At', value: new Date(doc.modifiedAt).toLocaleString() },
-                  ]}
-               />
-            </Card>
-         </div>
+         <ContentFullwidth className="analysis charts" useContainer={true}>
+            <ProfitRatioChart results={resultsLine} />
+            <AvgDailyROI results={resultsLine} />
+            <AccumROIChart results={resultsLine} period="24h" />
+            <AccumROIChart results={resultsLine} period="30d" />
+            <WinLossChart results={resultsLine} period="24h" type="roi" />
+            <WinLossChart results={resultsLine} period="30d" type="roi" />
+            <WinLossChart results={resultsLine} period="24h" type="rate" />
+            <WinLossChart results={resultsLine} period="30d" type="rate" />
+         </ContentFullwidth>
 
          <div className="settings-painel">
             <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>
