@@ -24,9 +24,9 @@ export default function WinLossROITooltip({ period, onlyContent }) {
 
    return (
       <TooltipTableHead>
-         W/L ROI ({period}/μ)
+         W/L ROS ({period}/μ)
 
-         <HelpTooltip headerTitle={`WIN/LOSS ROI ${period}`}>
+         <HelpTooltip headerTitle={`WIN/LOSS ROS ${period}`}>
             <Content />
          </HelpTooltip>
       </TooltipTableHead>

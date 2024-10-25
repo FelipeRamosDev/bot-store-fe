@@ -26,6 +26,11 @@ export default function CutLineChartBase({ className, headerTitle, HeaderToolbar
 
    dataSet = dataSet.map(data => {
       data.time = new Date(data.time).getTime();
+
+      if (!data.value) {
+         data.value = 0;
+      }
+
       return data;
    });
 
