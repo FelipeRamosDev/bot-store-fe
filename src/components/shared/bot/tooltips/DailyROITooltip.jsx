@@ -20,9 +20,9 @@ export default function DailyROITooltip({ onlyContent }) {
 
    return (
       <TooltipTableHead>
-         Daily ROI (μ)
+         Daily ROS (μ)
 
-         <HelpTooltip headerTitle="Daily ROI (μ)">
+         <HelpTooltip headerTitle="Daily ROS (μ)">
             <Content />
          </HelpTooltip>
       </TooltipTableHead>

@@ -9,8 +9,8 @@ import BotInfos from './BotInfos';
 import DBQueryContext from '@/contexts/DBQuery';
 import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
 import APIContext from '@/contexts/4HandsAPI';
-import AvgDailyROI from '@/components/charts/avgDailyROIChart/AvgDailyROIChart';
-import AccumROIChart from '@/components/charts/accumROIChart/AccumROIChart';
+import AvgDailyROI from '@/components/charts/avgDailyROSChart/AvgDailyROSChart';
+import AccumROIChart from '@/components/charts/accumROSChart/AccumROSChart';
 import WinLossChart from '@/components/charts/winLossChart/WinLossChart';
 import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
 

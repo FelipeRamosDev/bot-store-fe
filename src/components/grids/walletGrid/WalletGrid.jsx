@@ -34,7 +34,7 @@ export default function WalletGrid({ master = {} }) {
    return <div className="wallet-grid pnl-grid" padding="s" elevation={25}>
       <PNLTile
          {...commonProps}
-         label="Acumulated PNL"
+         label="Accumulated PNL"
          value={master.pnl}
       />
 

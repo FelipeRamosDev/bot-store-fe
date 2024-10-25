@@ -11,7 +11,8 @@ const priceCardProps = {
 }
 const priceProps = {
    size: 'm',
-   dashedZero: true
+   dashedZero: true,
+   noSymbol: true
 }
 
 export default function BotResultsGrid({ bot = {} }) {
@@ -20,17 +21,17 @@ export default function BotResultsGrid({ bot = {} }) {
    const [ wlRoiState, setWLRoiState ] = useState(false);
    const {
       profitRatio,
-      accumRoi24,
-      accumRoiMonth,
-      avgDailyROI,
+      accumROS24,
+      accumROSMonth,
+      avgDailyROS,
       winsRate24,
       losesRate24,
       winsRateMonth,
       losesRateMonth,
-      avgWinsRoi24,
-      avgLosesRoi24,
-      avgWinsRoiMonth,
-      avgLosesRoiMonth
+      avgWinsROS24,
+      avgLosesROS24,
+      avgWinsROSMonth,
+      avgLosesROSMonth
    } = bot.currentResults || {};
 
    const handleAccum = () => setAccumState(prev => !prev);
@@ -54,22 +55,22 @@ export default function BotResultsGrid({ bot = {} }) {
       return (<>
          {!accumState && <PriceCard
             className="big-value clickable"
-            value={accumRoi24}
+            value={accumROS24}
             onClick={handleAccum}
             {...priceCardProps}
          >
-            <label>Accum. ROI (24h)</label>
-            <Percent value={accumRoi24} {...priceProps} />
+            <label>Accum. ROS (24h)</label>
+            <Price amount={accumROS24} {...priceProps} />
          </PriceCard>}
 
          {accumState && <PriceCard
             className="big-value clickable"
-            value={accumRoiMonth}
+            value={accumROSMonth}
             onClick={handleAccum}
             {...priceCardProps}
          >
-            <label>Accum. ROI (30d)</label>
-            <Percent value={accumRoiMonth} {...priceProps} />
+            <label>Accum. ROS (30d)</label>
+            <Price amount={accumROSMonth} {...priceProps} />
          </PriceCard>}
       </>)
    }
@@ -78,11 +79,11 @@ export default function BotResultsGrid({ bot = {} }) {
       return (
          <PriceCard
             className="big-value"
-            value={avgDailyROI}
+            value={avgDailyROS}
             {...priceCardProps}
          >
             <label>Avg. Daily ROI</label>
-            <Percent value={avgDailyROI} {...priceProps} />
+            <Percent value={avgDailyROS} {...priceProps} />
          </PriceCard>
       );
    }
@@ -91,31 +92,31 @@ export default function BotResultsGrid({ bot = {} }) {
       return (<>
          {!wlRoiState && <PriceCard
             className="clickable"
-            value={avgWinsRoi24}
+            value={avgWinsROS24}
             onClick={handleWLROI}
             {...priceCardProps}
          >
-            <label>W/L ROI (24h)</label>
+            <label>W/L ROS (24h)</label>
 
             <div className="value-wrap">
-               <Percent value={avgWinsRoi24} {...priceProps} />
+               <Price amount={avgWinsROS24} {...priceProps} />
                {'/'}
-               <Percent value={avgLosesRoi24} {...priceProps} />
+               <Price amount={avgLosesROS24} {...priceProps} />
             </div>
          </PriceCard>}
 
          {wlRoiState && <PriceCard
             className="clickable"
-            value={avgWinsRoiMonth}
+            value={avgWinsROSMonth}
             onClick={handleWLROI}
             {...priceCardProps}
          >
-            <label>W/L ROI (30d)</label>
+            <label>W/L ROS (30d)</label>
 
             <div className="value-wrap">
-               <Percent value={avgWinsRoiMonth} {...priceProps} />
+               <Price amount={avgWinsROSMonth} {...priceProps} />
                {'/'}
-               <Percent value={avgLosesRoiMonth} {...priceProps} />
+               <Price amount={avgLosesROSMonth} {...priceProps} />
             </div>
          </PriceCard>}
       </>);
@@ -125,7 +126,7 @@ export default function BotResultsGrid({ bot = {} }) {
       return (<>
          {!wlRateState && <PriceCard
             className="clickable"
-            value={avgDailyROI}
+            value={avgDailyROS}
             onClick={handleWL}
             {...priceCardProps}
          >
@@ -140,7 +141,7 @@ export default function BotResultsGrid({ bot = {} }) {
 
          {wlRateState && <PriceCard
             className="clickable"
-            value={avgDailyROI}
+            value={avgDailyROS}
             onClick={handleWL}
             {...priceCardProps}
          >
