@@ -8,4 +8,32 @@
          margin-top: 2rem;
       }
    }
+
+   .master-analysis {
+      margin: 1.5rem 0;
+
+      .charts {
+         display: flex;
+         gap: 1rem;
+         margin-top: 1rem;
+         flex-direction: column;
+
+         @media screen and (min-width: $screen-m) {
+            flex-direction: row;
+         }
+
+         .chart {
+            flex: calc(35% - 1rem);
+            margin-bottom: 0;
+
+            &.accumulated-chart {
+               flex: calc(65% - 1rem);
+            }
+
+            >.content-header {
+               padding-top: 0;
+            }
+         }
+      }
+   }
 }
