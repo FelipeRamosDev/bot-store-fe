@@ -7,6 +7,7 @@ import MasterPnlGrid from '@/components/grids/masterPnlGrid/MasterPnlGrid';
 import WalletGrid from '@/components/grids/walletGrid/WalletGrid';
 import SlotsGrid from '@/components/grids/slotsGrid/SlotsGrid';
 import PositionsGrid from '@/components/grids/positionsGrid/PositionsGrid';
+import MasterAnalysis from './MasterAnalysis';
 
 /**
  * MasterDetailsContent component displays detailed information about a master account,
@@ -46,6 +47,7 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
          <WalletGrid master={doc} />
       </ContentSplit>
 
+      <MasterAnalysis master={doc} />
       {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
       <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
    </>;
