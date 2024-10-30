@@ -75,17 +75,17 @@ export default function MasterAnalysis({ master = {} }) {
                color={showCharts ? 'error' : 'tertiary'}
                sx={{ minWidth: 150 }}
                onClick={() => setShowCharts(prev => !prev)}
-            >{showCharts ? 'hide charts' : 'show charts'}</Button>
+            >{showCharts ? 'show less' : 'show more'}</Button>
          </>}>
             <QueryStats />
             <h2 className="header-title">Master Analysis</h2>
          </ContentHeader>
 
-         {showCharts && <div className="charts">
+         <div className="charts">
             {masterAccumulated}
             {masterDailyAvg}
             {masterProfitRatio}
-         </div>}
+         </div>
          {showCharts && <div className="charts">
             {masterWinLossRate24h}
             {masterWinLossRate30d}
