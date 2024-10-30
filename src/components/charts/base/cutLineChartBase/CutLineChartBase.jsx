@@ -98,16 +98,19 @@ export default function CutLineChartBase({
                   </HelpTooltip>
                )}
 
-               {switcherSet.length > 0 && <ButtonGroup className="switcher" variant="contained" color="rubber">
-                  {switcherSet.map(button => (
-                     <Button
-                        className={isSelected(button.value)}
-                        onClick={() => handleSwitcher(button.value)}
-                     >
-                        {button.label}
-                     </Button>
-                  ))}
-               </ButtonGroup>}
+               {switcherSet.length > 0 && (
+                  <ButtonGroup className="switcher" variant="contained" color="rubber">
+                     {switcherSet.map((button, i) => (
+                        <Button
+                           key={button.value + i}
+                           className={isSelected(button.value)}
+                           onClick={() => handleSwitcher(button.value)}
+                        >
+                           {button.label}
+                        </Button>
+                     ))}
+                  </ButtonGroup>
+               )}
             </>
          </ContentHeader>}
 

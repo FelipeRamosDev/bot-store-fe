@@ -2,13 +2,10 @@ import CutLineChartBase from '@/components/charts/base/cutLineChartBase/CutLineC
 import { parseClassName } from '@/helpers/parser';
 
 export default function MasterAccumulatedChart({ className, analysisData = [] }) {
-   const chartDataUSD = analysisData.map(data => ({ time: data.refDate, value: data.accumUSD30d }));
-
    return (
       <CutLineChartBase
          className={parseClassName(className, [ 'accumulated-chart', 'chart' ])}
          headerTitle="Accumulated Profit"
-         dataSet={chartDataUSD}
          switcherSet={[
             {
                label: '$',
