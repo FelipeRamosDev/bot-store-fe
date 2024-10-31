@@ -1,5 +1,5 @@
 import AuthBasePage from "@/templates/authBasePage/AuthBasePage";
-import MasterAccounts from "@/components/content/dashboard/masterAccounts/MasterAccounts";
+import MasterAccounts from "@/components/content/dashboard/masterAccounts/masterAccountsPage/MasterAccounts";
 
 /**
  * MasterAccountsPage Component

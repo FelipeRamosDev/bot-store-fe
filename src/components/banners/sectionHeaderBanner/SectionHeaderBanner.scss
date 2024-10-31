@@ -3,6 +3,35 @@
    color: $text-background-blend;
    font-weight: 500;
 
+   &.flex-view {
+      position: relative;
+
+      .content-wrap {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+         .banner-title {
+            margin-left: 1rem;
+            order: 1;
+            margin-right: auto;
+         }
+
+         img,
+         .icon {
+            position: relative;
+            height: 4rem;
+            left: auto;
+            width: auto;
+            order: 0;
+         }
+
+         button {
+            order: 2;
+         }
+      }
+   }
+
    .banner-title {
       font-size: 1.5rem;
       font-weight: 800;
