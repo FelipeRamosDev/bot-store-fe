@@ -13,7 +13,7 @@ import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterFo
  *
  * @returns {React.Element} The rendered modal dialog with the `CreateMasterForm` inside.
  */
-export default function CreateMasterModal({ editMode, title, open, setOpen = () => {}, master }) {
+export default function CreateMasterModal({ editMode, title, open, setOpen = () => {}, onSuccess = () => {}, master }) {
    // Determine the title based on editMode and provided title
    if (!title && editMode) {
       title = 'Edit Master';
@@ -31,7 +31,13 @@ export default function CreateMasterModal({ editMode, title, open, setOpen = () 
          open={open}
          onClose={() => setOpen(false)}
       >
-         <CreateMasterForm editMode={editMode} master={master} onSuccess={() => setOpen(false)} />
+         <CreateMasterForm
+            editMode={editMode}
+            master={master}
+            onSuccess={() => {
+               setOpen(false);
+               onSuccess();
+            }} />
       </ContentModal>
    );
 }
