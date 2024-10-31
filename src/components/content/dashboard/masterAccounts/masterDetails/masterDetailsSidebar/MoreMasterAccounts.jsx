@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import MastersGrid from '@/components/grids/mastersGrid/MastersGrid';
 import { AccountBalanceWallet } from '@mui/icons-material';
+import MastersTable from '@/components/tables/mastersTable/MastersTable';
 
 /**
  * MoreMasterAccounts component displays additional master accounts associated with a user, excluding the current master.
@@ -28,7 +28,7 @@ export default function MoreMasterAccounts() {
             <h3 className="header-title">Master Accounts</h3>
          </ContentHeader>
 
-         <MastersGrid verticalAlign={true} />
+         <MastersTable />
       </div>
    );
 }
