@@ -36,6 +36,7 @@ export function FormBase({
    appendUserToBody = false,
    onSubmit = async () => {},
    onReady = () => {},
+   onUnmount = () => {},
    hideSubmit = false,
    clearPrevent = false,
    editData,
@@ -122,10 +123,7 @@ export function FormBase({
          title="Error"
          isErrorDialog={true}
          open={alertDialog}
-         handleOk={() => {
-            form?.clearAll();
-            setAlertDialog(false)
-         }}
+         handleOk={() => setAlertDialog(false)}
       >
          <p>{alertDialog?.message}</p>
       </AlertModal>
