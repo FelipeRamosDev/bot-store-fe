@@ -8,31 +8,31 @@
          margin-top: 2rem;
       }
    }
+}
 
-   .master-analysis {
-      margin: 1.5rem 0;
+.master-analysis {
+   margin: 1.5rem 0;
 
-      .charts {
-         display: flex;
-         gap: 1rem;
-         margin-top: 1rem;
-         flex-direction: column;
+   .charts {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-direction: column;
 
-         @media screen and (min-width: $screen-m) {
-            flex-direction: row;
+      @media screen and (min-width: $screen-m) {
+         flex-direction: row;
+      }
+
+      .chart {
+         flex: calc(35% - 1rem);
+         margin-bottom: 0;
+
+         &.large {
+            flex: calc(65% - 1rem);
          }
 
-         .chart {
-            flex: calc(35% - 1rem);
-            margin-bottom: 0;
-
-            &.large {
-               flex: calc(65% - 1rem);
-            }
-
-            >.content-header {
-               padding-top: 0;
-            }
+         >.content-header {
+            padding-top: 0;
          }
       }
    }

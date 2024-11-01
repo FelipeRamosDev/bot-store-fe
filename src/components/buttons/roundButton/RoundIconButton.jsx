@@ -12,14 +12,14 @@ import IconButton from '@mui/material/IconButton';
  *
  * @returns {JSX.Element} The rendered `RoundIconButton` component.
  */
-export default function RoundIconButton({ className = '', Icon, size = 'medium', ...props }) {
+export default function RoundIconButton({ className = '', Icon, iconClassName, size = 'medium', ...props }) {
    return (
       <IconButton
          className={`round-button ${className}`}
          size={size}
          {...props}
       >
-         <Icon fontSize="inherit" />
+         <Icon className={iconClassName} fontSize="inherit" />
       </IconButton>
    );
 }
