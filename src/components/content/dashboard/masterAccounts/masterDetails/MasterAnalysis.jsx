@@ -1,19 +1,15 @@
-import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
-import APIContext from '@/contexts/4HandsAPI';
-import QueryStats from '@mui/icons-material/QueryStats';
 import { useContext, useEffect, useMemo, useState } from 'react';
+import SwipeDrawer from '@/components/drawers/base/swipeDrawerTab/SwipeDrawerTab';
+import APIContext from '@/contexts/4HandsAPI';
 import MasterAccumulatedChart from './charts/MasterAccumutaledChart';
 import MasterDailyAvgChart from './charts/MasterDailyAvgChart';
 import MasterProfitRatioChart from './charts/MasterProfitRatioChart';
 import MasterWinLossChart from './charts/MasterWinLossChart';
-import { Button } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import QueryStats from '@mui/icons-material/QueryStats';
 
 export default function MasterAnalysis({ master = {} }) {
    const API = useContext(APIContext);
    const [ analysisData, setAnalysisData ] = useState();
-   const [ showCharts, setShowCharts ] = useState(false);
    const masterUID = master._id;
 
    const wlRateProp24h = {
@@ -68,30 +64,24 @@ export default function MasterAnalysis({ master = {} }) {
    const masterWinLossUSD30d = useMemo(() => <MasterWinLossChart {...wlUSDProp30d} />, [ analysisData ]);
 
    return (
-      <div className="master-analysis">
-         <ContentHeader Toolbar={() => <>
-            <Button
-               startIcon={!showCharts ? <VisibilityIcon /> : <VisibilityOffIcon />}
-               color={showCharts ? 'error' : 'tertiary'}
-               sx={{ minWidth: 150 }}
-               onClick={() => setShowCharts(prev => !prev)}
-            >{showCharts ? 'show less' : 'show more'}</Button>
-         </>}>
-            <QueryStats />
-            <h2 className="header-title">Master Analysis</h2>
-         </ContentHeader>
-
+      <SwipeDrawer
+         className="master-analysis"
+         headerTitle="Analysis Charts"
+         HeaderIcon={QueryStats}
+         // drawerBleeding={57}
+      >
          <div className="charts">
             {masterAccumulated}
             {masterDailyAvg}
             {masterProfitRatio}
          </div>
-         {showCharts && <div className="charts">
+
+         <div className="charts">
             {masterWinLossRate24h}
             {masterWinLossRate30d}
             {masterWinLossUSD24h}
             {masterWinLossUSD30d}
-         </div>}
-      </div>
+         </div>
+      </SwipeDrawer>
    );
 }
