@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import MasterDetailsHeader from './MasterDetailsHeader';
 import MasterDetailsContent from './MasterDetailsContent';
 import MasterDetailsSidebar from './masterDetailsSidebar/MasterDetailsSidebar';
@@ -10,6 +9,7 @@ import ExchangeKeysMissingTopbar from '@/components/bars/topBars/exchangeKeysMis
 import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
 import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
 import MasterClosedPositions from './MasterClosedPositions';
+import ContentSidebarDrawer from '@/components/layout/contentSidebarDrawer/ContentSidebarDrawer';
 
 /**
  * MasterDetails component displays detailed information and management options for a specific master account.
@@ -23,6 +23,7 @@ export default function MasterDetails({ index }) {
    const [ editSlotModal, setEditSlotModal  ] = useState();
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState();
    const [ mounted, setMounted ] = useState(false);
+   const [ sidebar, setSidebar ] = useState();
 
    function ToolbarPortal() {
       return mounted && createPortal(<ExchangeKeysMissingTopbar />, document.getElementById('topbar-portal'));
@@ -36,12 +37,12 @@ export default function MasterDetails({ index }) {
       <DBQuery type="doc" collection="master_accounts" filter={{ index }} subscribe={true}>
          <ToolbarPortal />
 
-         <ContentSidebar className="master-details" isFullContainer={true}>
+         <ContentSidebarDrawer className="master-details" sidebarState={sidebar} setSidebarState={setSidebar} isFullContainer>
             <MasterDetailsContent uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
             <MasterDetailsSidebar setUInstance={setUInstance} />
 
-            <MasterDetailsHeader />
-         </ContentSidebar>
+            <MasterDetailsHeader setSidebarState={setSidebar} />
+         </ContentSidebarDrawer>
 
          <MasterClosedPositions />
       </DBQuery>

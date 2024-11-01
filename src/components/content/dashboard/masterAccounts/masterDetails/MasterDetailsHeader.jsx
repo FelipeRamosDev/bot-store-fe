@@ -6,6 +6,8 @@ import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 import { formatMasterBadges } from '@/helpers/format';
 import MasterMenu from '@/components/menus/dropdown/masterMenu/MasterMenu';
 import { MenuProvider } from '@/contexts/MenuContext';
+import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 /**
  * MasterDetailsHeader component displays the header section of the master details page,
@@ -13,7 +15,7 @@ import { MenuProvider } from '@/contexts/MenuContext';
  * 
  * @returns {JSX.Element} The rendered header component.
  */
-export default function MasterDetailsHeader() {
+export default function MasterDetailsHeader({ setSidebarState }) {
    const { doc, isLoading } = useContext(DBQueryContext);
    const { badgeColor, accountType } = formatMasterBadges(doc);
    const stableDoc = useRef();
@@ -27,18 +29,25 @@ export default function MasterDetailsHeader() {
    const contentMemo = useMemo(() => {
       return (
          <ContentHeader
-            Toolbar={() => (
+            Toolbar={() => (<>
                <MasterMenu
                   noTrasition={true}
                   isDemo={(stableDoc.current?.type === 'master-demo')}
                   master={stableDoc.current}
                />
-            )}
+
+               <RoundIconButton
+                  className="toggle-sidebar"
+                  title="Toggle Sidebar"
+                  Icon={MenuOpenIcon}
+                  onClick={() => setSidebarState(prev => !prev)}
+               />
+            </>)}
          >
             <div className="header-title">
                <StatusBadge color={badgeColor}>{accountType}</StatusBadge>
                <h1 className="title">{stableDoc.current?.name}</h1>
-               <p className="description">{stableDoc.current?.description}</p>
+               {stableDoc.current?.description && <p className="description">{stableDoc.current?.description}</p>}
             </div>
          </ContentHeader>
       );

@@ -41,6 +41,7 @@
 @import "../../components/displays/textDisplay/TextDisplay.scss";
 
 // Drawers
+@import "../../components/drawers/base/swipeDrawer/SwipeDrawer.scss";
 @import "../../components/drawers/base/swipeDrawerTab/SwipeDrawerTab.scss";
 
 // Editors
@@ -80,7 +81,7 @@
 @import "../../components/layout/contentFullwidth/ContentFullwidth.scss";
 @import "../../components/layout/contentSidebar/ContentSidebar.scss";
 @import "../../components/layout/contentSplit/ContentSplit.scss";
-@import "../../components/layout/contentFoldSidebar/ContentFoldSidebar.scss";
+@import "../../components/layout/contentSidebarDrawer/ContentSidebarDrawer.scss";
 
 // Load
 @import "../../components/load/fitSpinner/FitSpinner.scss";
