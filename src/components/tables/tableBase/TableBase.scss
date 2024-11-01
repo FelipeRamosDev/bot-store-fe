@@ -31,13 +31,14 @@
    }
 
    tr, td, .MuiTableCell-head {
-      padding: 1.1rem 0.5rem;
+      padding: 0.9rem 0.5rem;
    }
 
    thead {
       > tr {
          > th {
             font-size: 0.7rem;
+            line-height: 0.9rem;
 
             .tooltip-head {
                display: flex;

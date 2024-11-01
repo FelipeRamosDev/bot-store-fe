@@ -1,0 +1,12 @@
+.swipe-drawer {
+   .MuiDrawer-paper {
+      max-width: 85%;
+      padding: $padding-xs;
+      background: $acrylic-dark;
+      padding-bottom: 7rem;
+
+      .content-header {
+         padding: 0;
+      }
+   }
+}

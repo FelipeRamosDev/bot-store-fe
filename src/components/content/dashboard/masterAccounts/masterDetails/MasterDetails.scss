@@ -8,6 +8,46 @@
          margin-top: 2rem;
       }
    }
+
+   .toggle-sidebar {
+      @media screen and (min-width: $screen-l) {
+         display: none;
+      }
+   }
+}
+
+.sidebar.swipe-drawer {
+   .MuiDrawer-paper {
+      .user-instance {
+         .status {
+            small {
+               display: none;
+            }
+         }
+      }
+
+      .master-accounts {
+         margin-top: 2rem;
+      }
+
+      .setting {
+         .setting-label {
+            font-size: 0.75rem;
+         }
+
+         .setting-value p {
+            font-size: 0.8rem;
+         }
+
+         .column {
+            padding: 0.3rem 0.5rem 0.1rem 0.5rem;
+         }
+      }
+
+      .card-title {
+         margin: 0;
+      }
+   }
 }
 
 .master-analysis {
@@ -15,7 +55,6 @@
 
    .charts {
       display: flex;
-      gap: 1rem;
       margin-top: 1rem;
       flex-direction: column;
 

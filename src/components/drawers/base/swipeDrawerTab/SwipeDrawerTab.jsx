@@ -110,7 +110,7 @@ export default function SwipeDrawerTab({
    return (<>
       <SwipeableDrawer
          ref={drawer}
-         className={parseClassName(className, [ 'swipe-drawer', anchorSide ])}
+         className={parseClassName(className, [ 'swipe-drawer-tab', anchorSide ])}
          container={containerRef}
          anchor={anchorSide}
          open={setOpenDrawer ? openDrawer : open}
