@@ -5,6 +5,9 @@ import { useRef, useState } from 'react';
 
 export default function SwipeDrawer({
    containerRef,
+   headerTitle,
+   HeaderIcon,
+   hideHeader = false,
    anchorSide = 'right',
    drawerBleeding = 57,
    disableSwipeToOpen = true,
@@ -40,6 +43,12 @@ export default function SwipeDrawer({
          ModalProps={{ keepMounted: true, ...ModalProps }}
          SwipeAreaProps={{ className: 'swipe-area', ...SwipeAreaProps }}
       >
+         {!hideHeader && (
+            <div className="drawer-header">
+               <HeaderIcon className="header-icon" />
+               <h3 className="header-title">{headerTitle}</h3>
+            </div>
+         )}
          <ContentFullwidth className="drawer-content" useContainer>
             {children}
          </ContentFullwidth>

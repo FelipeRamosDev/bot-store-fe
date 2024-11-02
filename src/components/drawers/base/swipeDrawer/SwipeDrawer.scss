@@ -1,12 +1,46 @@
 .swipe-drawer {
    .MuiDrawer-paper {
       max-width: 85%;
-      padding: 1.5rem $padding-xs 7rem $padding-xs;
       background: $acrylic-dark;
       padding-bottom: 7rem;
 
       .content-header {
          padding: 0;
+      }
+
+      .drawer-header {
+         $titleSize: 2rem;
+
+         background-color: $background-blue-grey;
+         min-height: 59px;
+         max-height: 59px;
+         position: relative;
+
+         .header-icon {
+            font-size: $titleSize * 1.4;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(10px);
+            margin-left: 1rem;
+            color: $acrylic-dark;
+         }
+
+         .header-title {
+            position: absolute;
+            bottom: 0;
+            font-size: $titleSize;
+            font-weight: 900;
+            display: inline-block;
+            transform: translateY(5px);
+            line-height: $titleSize;
+            margin: 0;
+            color: $acrylic-dark;
+            padding-left: 4rem;
+         }
+      }
+
+      .drawer-content {
+         padding: 1.5rem $padding-xs 7rem $padding-xs;
       }
    }
 }

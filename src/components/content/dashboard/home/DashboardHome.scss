@@ -18,3 +18,9 @@
       min-width: calc(50% - 1.5rem);
    }
 }
+
+.round-button.toggle-sidebar {
+   @media screen and (min-width: $screen-l) {
+      display: none;
+   }
+}
