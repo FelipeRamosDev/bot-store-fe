@@ -1,7 +1,8 @@
 import ContentModal from '@/components/modals/base/contentModal/ContentModal';
 import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
-import { Add } from '@mui/icons-material';
+import AddIcon from '@mui/icons-material/Add';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 /**
  * DashboardHeader component provides the header functionality for the dashboard.
@@ -16,17 +17,25 @@ import { Add } from '@mui/icons-material';
  * 
  * @returns {JSX.Element} The rendered header with toolbar and modal.
  */
-export default function DashboardHeader({ createMasterModal, setCreateMasterModal }) {
+export default function DashboardHeader({ createMasterModal, setCreateMasterModal, setSidebarState }) {
    return <>
       {/* Toolbar with Create Master Button */}
       <div className="toolbar">
          <RoundIconButton
             variant="contained"
-            Icon={Add}
+            Icon={AddIcon}
             size="medium"
             color="tertiary"
             title="Create a new master account"
             onClick={() => setCreateMasterModal(true)}
+         />
+
+         <RoundIconButton
+            className="toggle-sidebar"
+            Icon={MenuOpenIcon}
+            size="medium"
+            title="Toggle Sidebar"
+            onClick={() => setSidebarState(true)}
          />
       </div>
 

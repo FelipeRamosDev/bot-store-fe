@@ -2,6 +2,7 @@ import SwipeDrawer from '@/components/drawers/base/swipeDrawer/SwipeDrawer';
 import { useEffect, useState } from 'react';
 import config from '@/config.json';
 import { parseClassName } from '@/helpers/parser';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 /**
  * ContentSidebarDrawer component provides a layout with a main content area, a sidebar, and a header.
@@ -40,6 +41,8 @@ import { parseClassName } from '@/helpers/parser';
  */
 export default function ContentSidebarDrawer({
    className = '',
+   headerTitle = 'SIDEBAR',
+   HeaderIcon = MenuOpenIcon,
    isFullContainer = false,
    fitMaxWidth = false,
    sidebarState = false,
@@ -83,6 +86,8 @@ export default function ContentSidebarDrawer({
       {screen === 'mobile' && (
          <SwipeDrawer
             className="sidebar"
+            headerTitle={headerTitle}
+            HeaderIcon={HeaderIcon}
             openDrawer={sidebarState}
             setOpenDrawer={setSidebarState}
          >
