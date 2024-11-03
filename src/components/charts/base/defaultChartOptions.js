@@ -2,6 +2,8 @@ import { darkTheme } from '@/style/darkTheme';
 
 const defaultChartOptions = {
    autoSize: true,
+   handleScroll: { vertTouchDrag: false },
+   handleScale: { mouseWheel: false },
    timeScale: {
       fixLeftEdge: true,
       tickMarkFormatter: (time) => {

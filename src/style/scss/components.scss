@@ -11,6 +11,7 @@
 @import "../../components/buttons/ctaButton/CTAButton.scss";
 @import "../../components/buttons/rubberButton/RubberButton.scss";
 @import "../../components/buttons/createBotFloatButton/CreateBotFloatButton.scss";
+@import "../../components/buttons/speedDialButton/SpeedDialButton.scss";
 
 // Charts
 @import "../../components/charts/base/candleStickBase/CandlestickChartBase.scss";
@@ -39,6 +40,10 @@
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
+
+// Drawers
+@import "../../components/drawers/base/swipeDrawer/SwipeDrawer.scss";
+@import "../../components/drawers/base/swipeDrawerTab/SwipeDrawerTab.scss";
 
 // Editors
 @import "../../components/editors/scheduleEditor/ScheduleEditor.scss";
@@ -77,6 +82,7 @@
 @import "../../components/layout/contentFullwidth/ContentFullwidth.scss";
 @import "../../components/layout/contentSidebar/ContentSidebar.scss";
 @import "../../components/layout/contentSplit/ContentSplit.scss";
+@import "../../components/layout/contentSidebarDrawer/ContentSidebarDrawer.scss";
 
 // Load
 @import "../../components/load/fitSpinner/FitSpinner.scss";

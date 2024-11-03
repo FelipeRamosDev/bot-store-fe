@@ -41,6 +41,7 @@ export default function MasterDetailsSidebar({ setUInstance }) {
             type="query"
             collection="master_accounts"
             limit={5}
+            sort={{ pnl: -1 }}
             filter={{
                user: userUID,
                $nor: [{ _id: doc._id }]

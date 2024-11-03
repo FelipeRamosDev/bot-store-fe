@@ -26,6 +26,7 @@ export default function CandlestickChartBase({ candles, interval, position, clas
    const chartSpot = useRef();
    const chart = useRef();
    const candlestickSeries = useRef();
+   const entryLine = useRef();
    const stoplossLine = useRef();
    const takeprofitLine = useRef();
 
@@ -111,6 +112,13 @@ export default function CandlestickChartBase({ candles, interval, position, clas
          candlestickSeries.current.setData(candles);
 
          if (!stoplossLine.current && !takeprofitLine.current && position) {
+            entryLine.current = candlestickSeries.current.createPriceLine({
+               price: position.openPrice,
+               color: '#535f5f',
+               lineWidth: 1,
+               lineStyle: 3,
+            });
+
             stoplossLine.current = candlestickSeries.current.createPriceLine({
                price: position.stopPrice,
                color: darkTheme.palette.error.main,
@@ -132,7 +140,10 @@ export default function CandlestickChartBase({ candles, interval, position, clas
             }
          }
 
-         if (!position && (stoplossLine.current || takeprofitLine.current)) {
+         if (!position && (stoplossLine.current || takeprofitLine.current || entryLine.current)) {
+            candlestickSeries.current.removePriceLine(entryLine.current);
+            entryLine.current = null;
+
             if (stoplossLine.current) {
                candlestickSeries.current.removePriceLine(stoplossLine.current);
                stoplossLine.current = null;

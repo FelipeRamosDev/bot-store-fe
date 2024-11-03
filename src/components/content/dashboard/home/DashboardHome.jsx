@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import DashboardHeader from "./DashboardHeader";
-import DashboardContent from "./DashboardContent";
-import DashboardSidebar from "./DashboardSidebar";
-import ContentSidebar from "@/components/layout/contentSidebar/ContentSidebar";
+import DashboardHeader from './DashboardHeader';
+import DashboardContent from './DashboardContent';
+import DashboardSidebar from './DashboardSidebar';
+import ContentSidebarDrawer from '@/components/layout/contentSidebarDrawer/ContentSidebarDrawer';
 
 /**
  * DashboardHome component serves as the main layout for the dashboard page.
@@ -20,15 +20,18 @@ import ContentSidebar from "@/components/layout/contentSidebar/ContentSidebar";
  * @returns {JSX.Element} The rendered dashboard layout with header, content, and sidebar.
  */
 export default function DashboardHome() {
-   const [ createMasterModal, setCreateMasterModal ] = useState(false);
+   const [ sidebarState, setSidebarState ] = useState(false);
 
-   return <ContentSidebar isFullContainer={true}>
-      <DashboardContent createMasterModal={setCreateMasterModal} />
-      <DashboardSidebar />
+   return (
+      <ContentSidebarDrawer 
+         isFullContainer={true}
+         sidebarState={sidebarState}
+         setSidebarState={setSidebarState}
+      >
+         <DashboardContent />
+         <DashboardSidebar />
 
-      <DashboardHeader
-         createMasterModal={createMasterModal}
-         setCreateMasterModal={setCreateMasterModal}
-      />
-   </ContentSidebar>
+         <DashboardHeader setSidebarState={setSidebarState} />
+      </ContentSidebarDrawer>
+   );
 }

@@ -1,15 +1,17 @@
 'use client';
 
+import ContentModal from '@/components/modals/base/contentModal/ContentModal';
+import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterForm';
 import MastersGrid from '@/components/grids/mastersGrid/MastersGrid';
-import SlotsTable from '@/components/tables/slotsTable/SlotsTable';
-import PositionsTable from '@/components/tables/positionsTable/PositionsTable';
 import { DBQuery } from '@/contexts/DBQuery';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthUserContext from "@/contexts/AuthUser";
-import { DataArray, Money } from '@mui/icons-material';
-import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import DashboardSlotTable from './DashboardSlotTable';
 import DashboardPositionTable from './DashboardPositionTable';
+import { Wallet } from '@mui/icons-material';
+import SpeedDialButton from '@/components/buttons/speedDialButton/SpeedDialButton';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
+import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 
 /**
  * DashboardContent component displays the main content for the dashboard.
@@ -22,8 +24,23 @@ import DashboardPositionTable from './DashboardPositionTable';
  * 
  * @returns {JSX.Element} The rendered dashboard content.
  */
-export default function DashboardContent({ createMasterModal }) {
+export default function DashboardContent() {
+   const [ createMasterModal, setCreateMasterModal ] = useState(false);
+   const [ createBotModal, setCreateBotModal ] = useState(false);
    const { user } = useContext(AuthUserContext);
+
+   const addButtonOpt = [
+      {
+         Icon: <Wallet />,
+         tooltipTitle: 'Master Account',
+         onClick: () => setCreateMasterModal(true)
+      },
+      {
+         Icon: <SmartToyIcon />,
+         tooltipTitle: 'Pilot Bot',
+         onClick: () => setCreateBotModal(true)
+      }
+   ];
 
    // If the user is not authenticated, render nothing
    if (!user) {
@@ -64,5 +81,24 @@ export default function DashboardContent({ createMasterModal }) {
             <DashboardPositionTable />
          </DBQuery>
       </div>
+
+      <SpeedDialButton
+         ariaLabel="Add Button"
+         options={addButtonOpt}
+      />
+      
+      {/* Modal for Creating a Master Account */}
+      <ContentModal
+         title="Create Master"
+         padding="m"
+         size="x-large"
+         open={createMasterModal}
+         onClose={() => setCreateMasterModal(false)}
+      >
+         <CreateMasterForm onSuccess={() => setCreateMasterModal(false)} />
+      </ContentModal>
+
+      {/* Modal for Creating a Pilot */}
+      <CreateBotModal open={createBotModal} setModal={setCreateBotModal} />
    </>;
 }

@@ -12,4 +12,39 @@
    .chart-spot {
       height: 200px;
    }
+
+   .switcher {
+      &.MuiButtonGroup-root {
+         border-radius: 10rem;
+         overflow: hidden;
+
+         .MuiButtonGroup-grouped {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.9rem;
+            min-width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.selected {
+               background-color: $success;
+               color: $text-tertiary;
+               border-right: none;
+            }
+
+            &.MuiButtonGroup-firstButton,
+            &.MuiButtonGroup-middleButton {
+               border-right: 1px solid $background-grey1;
+            }
+         }
+
+         .MuiButtonGroup-grouped:first-child {
+            padding-left: 0.9rem;
+         }
+
+         .MuiButtonGroup-grouped:last-child {
+            padding-right: 0.9rem;
+         }
+      }
+   }
 }

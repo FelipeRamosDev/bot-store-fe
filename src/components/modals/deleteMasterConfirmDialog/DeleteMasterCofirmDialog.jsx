@@ -36,7 +36,7 @@ export default function DeleteMasterConfirmDialog({
          throw deleted;
       }
 
-      router.push('/dashboard');
+      router.push('/dashboard/master-accounts');
    }
 
    return (
