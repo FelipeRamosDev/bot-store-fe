@@ -5,6 +5,7 @@ import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import slotLimitsForm from './slotLimitsForm/SlotLimitsForm.config';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
+import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 
 const createSlotForm = new Form({
    dependencies: [
@@ -51,7 +52,7 @@ const createSlotForm = new Form({
             }
          }
       }),
-      new SelectFieldSchema({
+      new SearchSelectFieldSchema({
          key: 'assets',
          label: 'Crypto Symbol',
          placeholder: 'Pick an option',
