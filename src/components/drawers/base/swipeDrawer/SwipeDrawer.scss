@@ -4,6 +4,10 @@
       background: $acrylic-dark;
       padding-bottom: 7rem;
 
+      @media screen and (min-width: $screen-m) {
+         max-width: 60%;
+      }
+
       .content-header {
          padding: 0;
       }

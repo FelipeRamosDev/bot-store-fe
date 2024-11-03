@@ -19,7 +19,7 @@
    }
 }
 
-.round-button.toggle-sidebar {
+button.toggle-sidebar {
    @media screen and (min-width: $screen-l) {
       display: none;
    }
