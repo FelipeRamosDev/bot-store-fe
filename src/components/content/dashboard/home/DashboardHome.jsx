@@ -20,7 +20,6 @@ import ContentSidebarDrawer from '@/components/layout/contentSidebarDrawer/Conte
  * @returns {JSX.Element} The rendered dashboard layout with header, content, and sidebar.
  */
 export default function DashboardHome() {
-   const [ createMasterModal, setCreateMasterModal ] = useState(false);
    const [ sidebarState, setSidebarState ] = useState(false);
 
    return (
@@ -29,14 +28,10 @@ export default function DashboardHome() {
          sidebarState={sidebarState}
          setSidebarState={setSidebarState}
       >
-         <DashboardContent createMasterModal={setCreateMasterModal} />
+         <DashboardContent />
          <DashboardSidebar />
 
-         <DashboardHeader
-            createMasterModal={createMasterModal}
-            setCreateMasterModal={setCreateMasterModal}
-            setSidebarState={setSidebarState}
-         />
+         <DashboardHeader setSidebarState={setSidebarState} />
       </ContentSidebarDrawer>
    );
 }

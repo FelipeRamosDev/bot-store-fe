@@ -1,0 +1,13 @@
+.speed-dial-button {
+   position: fixed;
+
+   .MuiSpeedDial-actions {
+      .MuiSpeedDialAction-fab {
+         color: $success;
+
+         &:hover {
+            color: $text-background-blend;
+         }
+      }
+   }
+}
