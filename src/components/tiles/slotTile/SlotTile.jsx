@@ -7,11 +7,12 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import PlayIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
-import { runSlot, stopSlot } from './SlotTile.helper';
+import { runSlot } from './SlotTile.helper';
 import APIContext from '@/contexts/4HandsAPI';
 import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
+import StopSlotConfirmDialog from '@/components/modals/dialogs/stopSlotConfirmDialog/StopSlotConfirmDialog';
 
 /**
  * Represents a tile component displaying information about a slot.
@@ -47,6 +48,7 @@ export default function SlotTile({
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
+   const [ stopConfirmState, setStopConfirmState ] = useState(false);
    const botName = useRef();
    const botIndex = useRef();
    const isStating = uInstance?.status === 'starting';
@@ -99,7 +101,7 @@ export default function SlotTile({
                   Icon={StopIcon}
                   size="small"
                   color={disabled && !demoMode ? 'disabled' : 'error'}
-                  onClick={() => stopSlot(API, slot, disabled, setDisabled, setUiAlertState)}
+                  onClick={() => setStopConfirmState(true)}
                />}
             </div>}
          </div>
@@ -142,6 +144,15 @@ export default function SlotTile({
          )}
 
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
+         <StopSlotConfirmDialog
+            slot={slot}
+            API={API}
+            open={stopConfirmState}
+            setOpen={setStopConfirmState}
+            disabled={disabled}
+            setDisabled={setDisabled}
+            setUiAlertState={setUiAlertState}
+         />
       </Card>
    );
 }
