@@ -12,7 +12,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import StopIcon from '@mui/icons-material/Stop';
 import Divider from '@mui/material/Divider';
 import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositModal';
-import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
+import DeleteMasterConfirmDialog from '@/components/modals/dialogs/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
 import { useMenu } from '@/contexts/MenuContext';

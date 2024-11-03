@@ -7,7 +7,7 @@ import MasterDetailsSidebar from './masterDetailsSidebar/MasterDetailsSidebar';
 import { DBQuery } from '@/contexts/DBQuery';
 import ExchangeKeysMissingTopbar from '@/components/bars/topBars/exchangeKeysMissing/ExchangeKeysMissing';
 import CreateSlotModal from '@/components/modals/createSlotModal/CreateSlotModal';
-import DeleteSlotConfirmDialog from '@/components/modals/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
+import DeleteSlotConfirmDialog from '@/components/modals/dialogs/deleteSlotConfirmDialog/DeleteSlotCofirmDialog';
 import MasterClosedPositions from './MasterClosedPositions';
 import ContentSidebarDrawer from '@/components/layout/contentSidebarDrawer/ContentSidebarDrawer';
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AlertModal from '../base/alertModal/AlertModal';
+import AlertModal from '../../base/alertModal/AlertModal';
 
 /**
  * A confirmation dialog component that prompts the user to confirm an action.
