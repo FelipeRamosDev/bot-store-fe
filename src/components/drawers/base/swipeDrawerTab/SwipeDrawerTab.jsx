@@ -99,7 +99,7 @@ export default function SwipeDrawerTab({
       if (drawer.current) {
          const area = document.querySelector('.swipe-area');
          const listener = () => setOpen(prev => !prev);
-         
+
          if (area && window.innerWidth > config.breakpoints.m) {
             area.removeEventListener('click', listener);
             area.addEventListener('click', listener);

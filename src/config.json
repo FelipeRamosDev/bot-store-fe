@@ -1,7 +1,7 @@
 {
    "apiHost": {
       "DEV": "https://localhost",
-      "STG": "https://192.168.15.102",
+      "STG": "https://192.168.15.4",
       "PROD": "https://botstore.feliperamos.dev"
    },
    "dateTime": {
