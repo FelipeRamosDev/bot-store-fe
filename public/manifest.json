@@ -1,0 +1,21 @@
+{
+   "name": "CandlePilot",
+   "short_name": "CandlePilot",
+   "description": "CandlPilot's application wher you can follow and manage your Pilot trader bots.",
+   "start_url": "/",
+   "display": "minimal-ui",
+   "background_color": "#0A2F38",
+   "theme_color": "#0A2F38",
+   "icons": [
+      {
+         "src": "/images/candlepilot_logo-192x167.png",
+         "sizes": "192x192",
+         "type": "image/png"
+      },
+      {
+         "src": "/images/candlepilot_logo-512x512.png",
+         "sizes": "512x512",
+         "type": "image/png"
+      }
+   ]
+}
