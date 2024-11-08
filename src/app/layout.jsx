@@ -18,8 +18,7 @@ export const metadata = {
    title: 'CandlePilot',
    description: 'Use/Create trade bots for cryptocurrencies.',
    robots: 'noindex', // Prevents search engines from indexing this page
-   manifest: '/manifest.json',
-   themeColor: '#0A2F38'
+   manifest: '/manifest.json'
 };
 
 /**

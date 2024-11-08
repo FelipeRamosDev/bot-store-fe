@@ -53,8 +53,7 @@ export default function DashboardContent() {
          type="query"
          collection="master_accounts"
          filter={{ user: user._id }}
-         sort={{ pnl: -1 }}
-         subscribe={true}
+         sort={{ ['futuresWallet.totalRealizedPnl']: -1 }}
       >
          <MastersGrid createMasterModal={createMasterModal} />
       </DBQuery>
