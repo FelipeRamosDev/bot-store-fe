@@ -1,4 +1,6 @@
 .top-header {
+   box-shadow: $shadow-2;
+
    &.auth-header {
       .logo-image {
          height: 40px;

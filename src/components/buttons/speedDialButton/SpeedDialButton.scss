@@ -3,16 +3,13 @@
 
    .MuiSpeedDial-actions {
       .MuiSpeedDialAction-fab {
-         color: $success;
-
-         &:hover {
-            background-color: $text-background-blend;
-            color: $text;
-         }
+         background-color: $tertiary;
+         color: $text-grey-darken;
       }
 
       .MuiSpeedDialAction-staticTooltipLabel {
-         color: $text-darken;
+         background-color: $tertiary;
+         color: $text-grey-darken;
          white-space: nowrap;
       }
    }
