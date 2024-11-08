@@ -13,6 +13,7 @@ import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 import StopSlotConfirmDialog from '@/components/modals/dialogs/stopSlotConfirmDialog/StopSlotConfirmDialog';
+import BotQuickview from '@/components/modals/quickviews/botQuickview/BotQuickview';
 
 /**
  * Represents a tile component displaying information about a slot.
@@ -49,6 +50,7 @@ export default function SlotTile({
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
    const [ stopConfirmState, setStopConfirmState ] = useState(false);
+   const [ botQuickview, setBotQuickview ] = useState(false);
    const botName = useRef();
    const botIndex = useRef();
    const isStating = uInstance?.status === 'starting';
@@ -82,9 +84,9 @@ export default function SlotTile({
                   setDeleteConfirmDialog={setDeleteConfirmDialog}
                />}
 
-               <Link className="bot-name" href={`/dashboard/bots/${botIndex.current}`}>
+               <span className="bot-name link" onClick={() => setBotQuickview(true)}>
                   {botName.current}
-               </Link>
+               </span>
             </div>
 
             {!minified && <div className="btn-wrap">
@@ -142,6 +144,8 @@ export default function SlotTile({
                position={slot?.trades.length && slot.trades[0]}
             />
          )}
+
+         <BotQuickview bot={slot.bot} open={botQuickview} setModal={setBotQuickview} />
 
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
          <StopSlotConfirmDialog
