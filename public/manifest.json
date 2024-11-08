@@ -3,7 +3,7 @@
    "short_name": "CandlePilot",
    "description": "CandlPilot's application wher you can follow and manage your Pilot trader bots.",
    "start_url": "/",
-   "display": "minimal-ui",
+   "display": "standalone",
    "background_color": "#0A2F38",
    "theme_color": "#0A2F38",
    "icons": [
