@@ -1,5 +1,5 @@
 'use client';
-import { Wallet } from '@mui/icons-material';
+import { Add, Wallet } from '@mui/icons-material';
 import MastersTable from '@/components/tables/mastersTable/MastersTable';
 import SectionHeaderBanner from '@/components/banners/sectionHeaderBanner/SectionHeaderBanner';
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
@@ -14,10 +14,10 @@ export default function MasterAccountsContent() {
       <SectionHeaderBanner
          type="flex-view"
          title="Master Accounts"
-         buttonLabel="Create New"
+         buttonLabel="New"
          CustomImage={() => <Wallet className="icon" />}
+         startIcon={<Add />}
          onButtonClick={() => setCreateModal(true)}
-         useRoundButton
       />
 
       <MastersTable />
