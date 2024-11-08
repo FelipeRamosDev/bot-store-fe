@@ -32,12 +32,12 @@ export default function DashboardContent() {
    const addButtonOpt = [
       {
          Icon: <Wallet />,
-         tooltipTitle: 'Master Account',
+         tooltipTitle: 'New Master',
          onClick: () => setCreateMasterModal(true)
       },
       {
          Icon: <SmartToyIcon />,
-         tooltipTitle: 'Pilot Bot',
+         tooltipTitle: 'New Pilot',
          onClick: () => setCreateBotModal(true)
       }
    ];
