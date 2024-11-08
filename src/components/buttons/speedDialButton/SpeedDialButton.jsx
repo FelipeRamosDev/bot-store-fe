@@ -70,6 +70,7 @@ export default function SpeedDialButton({
                icon={action.Icon}
                color={color}
                tooltipTitle={action.tooltipTitle}
+               tooltipOpen
                onClick={action.onClick}
             />
          ))}
