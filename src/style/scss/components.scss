@@ -136,11 +136,11 @@
    font-weight: 400;
 
    &[color=success] {
-      color: $success;
+      color: $success !important;
    }
 
    &[color=error] {
-      color: $error;
+      color: $error !important;
    }
 
    &[display-size=xxs] {

@@ -18,11 +18,12 @@ export default class SearchSelectFieldSchema extends FieldSchema {
     */
    constructor(setup = {}, form) {
       super(setup, form);
-      const { OptionModel, style } = setup;
+      const { OptionModel, ListItem, style } = setup;
 
       this.type = String;
       this.OptionModel = OptionModel || SearchSelectFieldSchemaOption;
       this.Input = SearchSelectInput;
+      this.ListItem = ListItem;
       this.style = { minWidth: 200, ...style };
    }
 }

@@ -6,10 +6,10 @@ import { FormControl, FormHelperText, TextField } from '@mui/material';
 import { parseClassName } from '@/helpers/parser';
 
 export default function SearchSelectInput({ className = '', errors = [], schema = {}, fullWidth = true, onChange = () => {}, ...props }) {
-   const { label, options = [], style, inputType = 'text', placeholder, color = 'tertiary' } = schema;
+   const { label, options = [], style, inputType = 'text', placeholder, color = 'tertiary', ListItem = () => {} } = schema;
    const [ open, setOpen ] = useState(false);
-   let defaultValue;
    let inputMode = schema.inputMode;
+   let defaultValue;
 
    if (schema.form.editMode) {
       defaultValue = schema.getEditValue();
@@ -31,6 +31,7 @@ export default function SearchSelectInput({ className = '', errors = [], schema 
       setOpen(false);
    };
 
+
    return (
       <FormControl color="tertiary" className={parseClassName(className, [ 'search-select-input' ])} style={style} variant="filled" error={errors.length}>
          <Autocomplete
@@ -39,8 +40,10 @@ export default function SearchSelectInput({ className = '', errors = [], schema 
             onClose={handleClose}
             isOptionEqualToValue={(option, value) => option?.value === value?.value}
             getOptionLabel={(option) => option?.label}
-            options={options}
+            options={options.sort((a, b) => b.quoteVolume - a.quoteVolume)}
             onChange={(ev, opt) => onChange({ target: { value: opt?.value }})}
+            ListboxProps={{className: parseClassName(props.className, [ 'options-wrap' ]) }}
+            renderOption={(props, option) => <ListItem option={option} itemProps={props} />}
             renderInput={(params) => (
                <TextField
                   {...params}
@@ -54,7 +57,6 @@ export default function SearchSelectInput({ className = '', errors = [], schema 
                   error={errors.length}
                   fullWidth={fullWidth}
                   {...props}
-                  defaultValue={defaultValue}
                />
             )}
          />
