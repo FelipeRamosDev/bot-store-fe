@@ -1,8 +1,20 @@
 import Form from '@/models/Form';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
+import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
+import CryptoListItem from '../createSlotForm/CryptoListItem';
 
 const createBotForm = new Form({
+   dependencies: [
+      {
+         id: 'symbolsData',
+         queryType: 'endpoint',
+         httpRequest: {
+            method: 'GET',
+            endpoint: '/exchange/get-symbol-ticks'
+         }
+      }
+   ],
    schema: [
       new TextFieldSchema({
          key: 'name',
@@ -31,7 +43,29 @@ const createBotForm = new Form({
             { label: '1d', value: '1d' },
             { label: '1w', value: '1w' }
          ]
-      })
+      }),
+      new SearchSelectFieldSchema({
+         key: 'allowedSymbols',
+         label: 'Allowed Symbols',
+         placeholder: 'Choose...',
+         required: true,
+         useDependencies: true,
+         multiOptions: true,
+         ListItem: CryptoListItem,
+         options: function (form) {
+            const dependency = form.getDependency('symbolsData');
+
+            if (dependency && Array.isArray(dependency.data)) {
+               return dependency.data.map(item => ({
+                  ...item,
+                  label: item.symbol,
+                  value: item.symbol
+               }));
+            } else {
+               return [];
+            }
+         }
+      }),
    ]
 });
 

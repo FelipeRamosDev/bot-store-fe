@@ -23,7 +23,7 @@ export default function CreateBotModal({ bot, open, setModal }) {
          title="Create Bot"
          open={open}
          padding="s"
-         size="small"
+         size="large"
          onClose={() => setModal(false)}
       >
          <CreateBotForm
