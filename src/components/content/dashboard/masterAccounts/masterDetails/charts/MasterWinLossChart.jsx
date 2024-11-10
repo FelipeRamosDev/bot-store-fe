@@ -12,7 +12,7 @@ export default function MasterWinLossChart({ analysisData = [], winPropName, los
 
    analysisData.map(result => {
       dataSet[0].values.push({ time: result.refDate, value: result[winPropName] });
-      dataSet[1].values.push({ time: result.refDate, value: result[lossPropName] });
+      dataSet[1].values.push({ time: result.refDate, value: result[lossPropName] < 0 ? result[lossPropName] * -1 : result[lossPropName] });
    });
 
    return (

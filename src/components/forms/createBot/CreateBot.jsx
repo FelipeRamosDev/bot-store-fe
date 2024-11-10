@@ -69,6 +69,7 @@ export default function CreateBotForm({ editData, onSuccess = () => {} }) {
       >
          <FormInput path="name" />
          <FormInput path="description" multiline={true} minRows={5} />
+         <FormInput path="allowedIntervals" />
       </FormBase>
    );
 }
