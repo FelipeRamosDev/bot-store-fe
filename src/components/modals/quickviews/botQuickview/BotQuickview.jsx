@@ -25,7 +25,7 @@ export default function BotQuickview({ open, bot, setModal }) {
    const requested = useRef();
 
    useEffect(() => {
-      if (!bot) return;
+      if (typeof bot?._id !== 'string') return;
 
       const notEmpty = Object.keys(bot).length;
       if (notEmpty) {

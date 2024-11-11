@@ -27,6 +27,8 @@ export default function BotDetailsHeader() {
    const requested = useRef();
 
    useEffect(() => {
+      if (typeof doc?._id !== 'string') return;
+
       const notEmpty = Object.keys(doc).length;
 
       if (notEmpty && !requested.current && !resultsLine) {

@@ -15,6 +15,7 @@ export default function CryptoListItem({ option, itemProps }) {
       <Percent value={option.priceChangePercent} forceColor={forceColor} prefix="(" posfix=")" size="xs" />
    </>);
 
+   delete itemProps.key;
    return (
       <ListItem value={option.value} {...itemProps} sx={{ gap: '1rem' }}>
          <div className="option-column" style={{ marginRight: 'auto' }}>
