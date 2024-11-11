@@ -51,9 +51,15 @@ export default function SearchSelectInput({ className = '', errors = [], schema 
       setOpen(false);
    };
 
-
+   delete props.defaultValue;
    return (
-      <FormControl color="tertiary" className={parseClassName(className, ['search-select-input', multiOptions ? 'multi-options' : ''])} style={style} variant="filled" error={errors.length}>
+      <FormControl
+         color="tertiary"
+         style={style}
+         variant="filled"
+         error={errors.length}
+         className={parseClassName(className, ['search-select-input', multiOptions ? 'multi-options' : ''])}
+      >
          <Autocomplete
             multiple={multiOptions}
             open={open}
@@ -79,8 +85,8 @@ export default function SearchSelectInput({ className = '', errors = [], schema 
                   setValue(opt);
                }
             }}
-            ListboxProps={{ className: parseClassName(props.className, ['options-wrap']) }}
-            renderOption={(props, option) => <ListItem option={option} itemProps={props} />}
+            ListboxProps={{ className: parseClassName(props.className, [ 'options-wrap' ]) }}
+            renderOption={(props, option) => <ListItem key={option.value} option={option} itemProps={props} />}
             renderInput={(params) => (
                <TextField
                   {...params}
