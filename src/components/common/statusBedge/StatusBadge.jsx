@@ -1,3 +1,5 @@
+import ErrorIcon from '@mui/icons-material/Error';
+
 /**
  * Parses and returns badge type and color based on the given slot type.
  *
@@ -218,9 +220,13 @@ export default function StatusBadge({ className = '', type, variant, color = 'di
       color = parsedColor;
    }
 
+   if (type === 'error') {
+      color = 'error';
+   }
+
    return <span
       className={`${className} status-badge`}
       color={color}
       variant={variant}
-   >{children}</span>
+   >{type === 'error' ? <ErrorIcon color="error" fontSize="1.1rem" /> : ''}{children}</span>
 }

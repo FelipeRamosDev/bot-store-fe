@@ -5,7 +5,7 @@ import PositionValuesGrid from '@/components/grids/positionValuesGrid/PositionVa
 import OrdersGrid from '@/components/grids/ordersGrid/OrdersGrid';
 import PositionSidebar from './PositionSidebar';
 import PositionDetails from './PositionDetails';
-import PositionParents from './PositionParents';
+import PositionError from './PositionErrorFix';
 
 /**
  * PositionQuickview Component
@@ -53,6 +53,10 @@ export default function PositionQuickview({ position, className = '', onClose = 
          onClose={onClose}
          {...props}
       >
+         {position?.errorsList?.map((error) => (
+            <PositionError key={error.name} position={position} error={error} />
+         ))}
+
          <ContentSidebar isFullContainer={true}>
             <>
                <PositionValuesGrid position={position} />

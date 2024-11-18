@@ -8,23 +8,28 @@ import TextInput from "@/components/inputs/textInput/TextInput";
  * It specifies the type of field, the minimum and maximum values, and the input component to use.
  *
  * @extends FieldSchema
+ * @augments FieldSchema
  */
 export default class NumberFieldSchema extends FieldSchema {
    /**
     * Creates an instance of NumberFieldSchema.
     *
     * @param {Object} setup - Configuration settings for the number field schema.
+    * @param {number} setup.min - Minimum value for the number field.
+    * @param {number} setup.max - Maximum value for the number field.
+    * @param {React.Component} setup.CustomInput - Custom input component
     * @param {Function} form - The form instance that this field schema belongs to.
+    * @see FieldSchema#constructor
     */
    constructor(setup, form) {
       super(setup, form);
-      const { min, max } = Object(setup);
+      const { min, max, CustomInput } = Object(setup);
 
       this.type = Number; // Specifies that the type of field is Number.
       this.inputType = 'text'; // Specifies that the input type is 'text' for the number field.
       this.min = min; // Minimum value for the number field.
       this.max = max; // Maximum value for the number field.
 
-      this.Input = TextInput; // Specifies the input component as TextInput.
+      this.Input = CustomInput || TextInput; // Specifies the input component as TextInput.
    }
 }
