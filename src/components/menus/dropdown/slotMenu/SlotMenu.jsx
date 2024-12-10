@@ -7,6 +7,8 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { useMenu } from '@/contexts/MenuContext';
+import { useState } from 'react';
+import SlotRunningAlert from '@/components/modals/dialogs/slotRunningAlert/SlotRunningAlert';
 
 /**
  * SlotMenu component that provides actions for managing a slot entity.
@@ -28,8 +30,17 @@ import { useMenu } from '@/contexts/MenuContext';
  * @returns {JSX.Element} A menu with actions for editing, archiving, or deleting a slot.
  */
 export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal, setDeleteConfirmDialog }) {
+   const [ slotRunningAlert, setSlotRunningAlert ] = useState(false)
    const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
    const open = Boolean (anchorEl?.id === slot.cod);
+
+   const handleEditSlot = () => {
+      if (slot?.status === 'stopped') {
+         setEditSlotModal(slot);
+      } else {
+         setSlotRunningAlert(true);
+      }
+   }
 
    return (
       <>
@@ -45,7 +56,7 @@ export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotMo
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             transitionDuration={noTrasition ? 0 : undefined}
          >
-            <MenuItem onClick={() => setEditSlotModal(slot)}>
+            <MenuItem onClick={handleEditSlot}>
                <ListItemIcon>
                   <ModeEditIcon fontSize="small" />
                </ListItemIcon>
@@ -66,6 +77,8 @@ export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotMo
                Delete Slot
             </MenuItem>
          </Menu>
+
+         <SlotRunningAlert open={slotRunningAlert} setOpen={setSlotRunningAlert} />
       </>
    );
 }
