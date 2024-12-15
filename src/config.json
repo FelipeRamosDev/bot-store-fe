@@ -2,7 +2,7 @@
    "apiHost": {
       "DEV": "https://localhost",
       "STG": "https://192.168.15.4",
-      "PROD": "https://botstore.feliperamos.dev"
+      "PROD": "https://api.candlepilot.com"
    },
    "dateTime": {
       "weekdays": ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
