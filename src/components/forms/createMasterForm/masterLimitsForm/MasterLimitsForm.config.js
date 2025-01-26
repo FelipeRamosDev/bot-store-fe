@@ -2,15 +2,11 @@ import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import NumberFieldSchema from '@/models/Form/fieldTypes/NumberFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import SliderFieldSchema from '@/models/Form/fieldTypes/SliderFieldSchema';
-import SwitchFieldSchema from '@/models/Form/fieldTypes/SwitchFieldSchema';
 
 const masterLimitsForm = {
    schema: [
       new SliderFieldSchema({ key: 'tradesMinInterval', defaultValue: 1, min: 1, max: 1440, label: 'Min. interval between trades' }),
       new SliderFieldSchema({ key: 'marginRatioCommit', defaultValue: 25, min: 1, max: 85, label: 'Margin Ratio' }),
-      new SwitchFieldSchema({ key: 'useTrailingStop', defaultValue: false, label: 'Trailing Stop' }),
-      new SwitchFieldSchema({ key: 'autoCallbackRatio', defaultValue: true, label: 'Auto callback ratio (Recommended)' }),
-      new NumberFieldSchema({ key: 'callbackRatio', defaultValue: 0, label: 'Callback Ratiio (%)' }),
       new ObjectFieldSchema({
          key: 'monthlyLoss',
          subForm: {
