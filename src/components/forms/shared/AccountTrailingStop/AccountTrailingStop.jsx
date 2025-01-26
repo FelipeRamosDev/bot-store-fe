@@ -8,6 +8,7 @@ export default function AccountTrailingStop({ isMaster = false }) {
 
    const useTrailingStopSchema = form?.getSchema('trailingStop.useTrailingStop');
    const useMasterDefaultsSchema = form?.getSchema('trailingStop.useMasterDefaults');
+   const useActivationPriceSchema = form?.getSchema('trailingStop.useActivationPrice');
    const autoCallbackSchema = form?.getSchema('trailingStop.autoCallback');
    const callbackRatioSchema = form?.getSchema('trailingStop.callbackRatio');
    const callbackUnitSchema = form?.getSchema('trailingStop.callbackUnit');
@@ -15,6 +16,7 @@ export default function AccountTrailingStop({ isMaster = false }) {
 
    const [ states, setStates ] = useState({
       useTrailingStop: useTrailingStopSchema?.defaultValue,
+      useActivationPrice: useActivationPriceSchema?.defaultValue,
       useMasterDefaults: useMasterDefaultsSchema?.defaultValue,
       autoCallback: autoCallbackSchema?.defaultValue,
       callbackRatio: callbackRatioSchema?.defaultValue,
@@ -32,6 +34,7 @@ export default function AccountTrailingStop({ isMaster = false }) {
       if (trailingStopData) {
          setStates({
             useTrailingStop: Boolean(trailingStopData.useTrailingStop),
+            useActivationPrice: Boolean(trailingStopData.useActivationPrice),
             useMasterDefaults: Boolean(trailingStopData.useMasterDefaults),
             autoCallback: Boolean(trailingStopData.autoCallback),
             callbackRatio: trailingStopData.callbackRatio,
@@ -39,7 +42,7 @@ export default function AccountTrailingStop({ isMaster = false }) {
             callbackStopGapPercent: trailingStopData.callbackStopGapPercent,
          });
       } 
-   }, []);
+   }, [form?.editData?.trailingStop]);
 
    return (
       <Card padding="xs" elevation={15}>
@@ -47,8 +50,15 @@ export default function AccountTrailingStop({ isMaster = false }) {
 
          {(!states.useMasterDefaults || isMaster) && (<>
             <FormInput path="trailingStop.useTrailingStop" onCustomChange={(value) => handleStateChanges('useTrailingStop', value)} />
-            {states.useTrailingStop && <FormInput path="trailingStop.autoCallback" onCustomChange={(value) => handleStateChanges('autoCallback', value)} />}
-            {!states.autoCallback && states.useTrailingStop && <FormInput path="trailingStop.callbackUnit" onCustomChange={(value) => handleStateChanges('callbackUnit', value)} />}
+            <FormInput path="trailingStop.useActivationPrice" onCustomChange={(value) => handleStateChanges('useActivationPrice', value)} />
+
+            {states.useTrailingStop && (
+               <FormInput path="trailingStop.autoCallback" onCustomChange={(value) => handleStateChanges('autoCallback', value)} />
+            )}
+
+            {!states.autoCallback && states.useTrailingStop && (
+               <FormInput path="trailingStop.callbackUnit" onCustomChange={(value) => handleStateChanges('callbackUnit', value)} />
+            )}
 
             {(!states.autoCallback && states.useTrailingStop && states.callbackUnit === 'asset-percent') && (
                <FormInput path="trailingStop.callbackRatio" />
@@ -56,6 +66,10 @@ export default function AccountTrailingStop({ isMaster = false }) {
 
             {(!states.autoCallback && states.useTrailingStop && states.callbackUnit === 'stop-gap') && (
                <FormInput path="trailingStop.callbackStopGapPercent" />
+            )}
+
+            {states.useTrailingStop && states.useActivationPrice && (
+               <FormInput path="trailingStop.activationLevel" />
             )}
          </>)}
       </Card>

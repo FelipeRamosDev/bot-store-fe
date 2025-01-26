@@ -1,18 +1,24 @@
 import SliderFieldSchema from '@/models/Form/fieldTypes/SliderFieldSchema';
 import SwitchFieldSchema from '@/models/Form/fieldTypes/SwitchFieldSchema';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
+import NumberFieldSchema from '@/models/Form/fieldTypes/NumberFieldSchema';
 
 const slotTrailingForm = {
    schema: [
       new SwitchFieldSchema({
          key: 'useTrailingStop',
          defaultValue: false,
-         label: 'Trailing Stop'
+         label: 'Use trailing stop'
+      }),
+      new SwitchFieldSchema({
+         key: 'useActivationPrice',
+         defaultValue: false,
+         label: 'Use activation price'
       }),
       new SwitchFieldSchema({
          key: 'useMasterDefaults',
          defaultValue: true,
-         label: `Use trailing stop master's defaults`
+         label: `Use master's defaults`
       }),
       new SwitchFieldSchema({
          key: 'autoCallback',
@@ -39,6 +45,13 @@ const slotTrailingForm = {
             { label: 'Stop Gap', value: 'stop-gap' },
             { label: 'Asset\'s Percent', value: 'asset-percent' },
          ]
+      }),
+      new SliderFieldSchema({
+         key: 'activationLevel',
+         defaultValue: 0,
+         min: 0,
+         max: 5,
+         label: 'Activation Level (Stop Gap Unit)'
       })
    ]
 };
