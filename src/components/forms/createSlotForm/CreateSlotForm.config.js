@@ -4,6 +4,7 @@ import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import slotLimitsForm from './slotLimitsForm/SlotLimitsForm.config';
+import slotTrailingForm from '../shared/AccountTrailingStop/AccountTrailingForm.config';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
 import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 import CryptoListItem from './CryptoListItem';
@@ -121,6 +122,10 @@ const createSlotForm = new Form({
       new ObjectFieldSchema({
          key: 'limits',
          subForm: slotLimitsForm
+      }),
+      new ObjectFieldSchema({
+         key: 'trailingStop',
+         subForm: slotTrailingForm
       })
    ]
 });

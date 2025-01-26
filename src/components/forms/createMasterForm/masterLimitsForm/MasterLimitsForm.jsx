@@ -17,21 +17,6 @@ import FormBaseContext from '../../formBase/FormBase';
  * @returns {JSX.Element} - The rendered form section for configuring master account limits.
  */
 export default function MasterLimitsForm() {
-   const { form } = useContext(FormBaseContext);
-   const [ useTrailingStop, setUseTrailingStop ] = useState(false);
-   const [ autoCallbackRatio, setAutoCallbackRatio ] = useState(form?.limits?.autoCallbackRatio);
-   const handleTrailingSwitch = (value) => setUseTrailingStop(value);
-   const handleAutoCallbackRatio = (value) => setAutoCallbackRatio(value);
-
-   useEffect(() => {
-      const autoCallbackSchema = form.getSchema('limits.autoCallbackRatio');
-      const useTrailingStop = Boolean(form.editData?.limits?.useTrailingStop);
-      const autoCallbackRatio = Boolean(form?.editMode ? form.editData?.limits?.autoCallbackRatio : autoCallbackSchema?.defaultValue);
-
-      setUseTrailingStop(useTrailingStop);
-      setAutoCallbackRatio(autoCallbackRatio);
-   }, []);
-
    return <Stack flexDirection="row" flex={1}>
       <Card padding="xs" elevation={10}>
          <h4 className="card-title">Limits Configurations</h4>
@@ -47,18 +32,6 @@ export default function MasterLimitsForm() {
             <AccordionDetails>
                <MasterLimitsSet type="tradeLoss" />
                <MasterLimitsSet type="tradeGain" />
-               
-               <div className="trailing-stop-wrap">
-                  <FormInput path="limits.useTrailingStop" onCustomChange={handleTrailingSwitch} />
-                                          
-                  {useTrailingStop && (
-                     <div className="trailing-stop-fields">
-                        <FormInput path="limits.autoCallbackRatio" onCustomChange={handleAutoCallbackRatio} />
-
-                        {!autoCallbackRatio && <FormInput path="limits.callbackRatio" />}
-                     </div>
-                  )}
-               </div>
             </AccordionDetails>
          </Accordion>
 
