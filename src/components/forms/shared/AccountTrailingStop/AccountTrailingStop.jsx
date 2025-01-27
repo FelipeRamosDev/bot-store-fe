@@ -45,16 +45,19 @@ export default function AccountTrailingStop({ isMaster = false }) {
    }, [form?.editData?.trailingStop]);
 
    return (
-      <Card padding="xs" elevation={15}>
+      <Card className="account-trailing-stop" padding="xs" elevation={15}>
+         <h3 className="header-title">Trailing Stop</h3>
          {!isMaster && <FormInput path="trailingStop.useMasterDefaults" onCustomChange={(value) => handleStateChanges('useMasterDefaults', value)} />}
 
          {(!states.useMasterDefaults || isMaster) && (<>
-            <FormInput path="trailingStop.useTrailingStop" onCustomChange={(value) => handleStateChanges('useTrailingStop', value)} />
-            <FormInput path="trailingStop.useActivationPrice" onCustomChange={(value) => handleStateChanges('useActivationPrice', value)} />
+            <div className="switcher-group">
+               <FormInput path="trailingStop.useTrailingStop" onCustomChange={(value) => handleStateChanges('useTrailingStop', value)} />
+               <FormInput path="trailingStop.useActivationPrice" onCustomChange={(value) => handleStateChanges('useActivationPrice', value)} />
 
-            {states.useTrailingStop && (
-               <FormInput path="trailingStop.autoCallback" onCustomChange={(value) => handleStateChanges('autoCallback', value)} />
-            )}
+               {states.useTrailingStop && (
+                  <FormInput path="trailingStop.autoCallback" onCustomChange={(value) => handleStateChanges('autoCallback', value)} />
+               )}
+            </div>
 
             {!states.autoCallback && states.useTrailingStop && (
                <FormInput path="trailingStop.callbackUnit" onCustomChange={(value) => handleStateChanges('callbackUnit', value)} />
