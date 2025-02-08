@@ -27,7 +27,7 @@ export default function PositionQuickview({ position, className = '', onClose = 
    const open = Boolean(position);
    const isMobile = window.innerWidth < 768;
 
-   if (!position) {
+   if (!position || typeof position === 'string') {
       return <></>;
    }
 

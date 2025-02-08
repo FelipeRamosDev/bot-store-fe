@@ -14,6 +14,7 @@ import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanc
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 import StopSlotConfirmDialog from '@/components/modals/dialogs/stopSlotConfirmDialog/StopSlotConfirmDialog';
 import BotQuickview from '@/components/modals/quickviews/botQuickview/BotQuickview';
+import PositionTile from '../positionTile/PositionTile';
 
 /**
  * Represents a tile component displaying information about a slot.
@@ -44,6 +45,7 @@ export default function SlotTile({
    setDeleteConfirmDialog,
    setSlotQuickview,
    dummyCandles,
+   setModalPosition,
    ...props
 }) {
    const API = useContext(APIContext);
@@ -58,6 +60,7 @@ export default function SlotTile({
    const isOffline = uInstance?.status === 'offline';
    const symbol = slot?.assets?.length ? slot?.assets[0] : '';
    const interval = slot?.interval;
+   const positions = slot?.trades || [];
 
    if (!botName.current && slot.bot?.name && !botIndex.current && slot.bot?.index) {
       botName.current = slot.bot?.name;
@@ -132,9 +135,19 @@ export default function SlotTile({
             </div>
 
             <div className="column">
-               <Price amount={slot.pnl} size={minified ? 'l' : 'xl'} />
+               <Price amount={slot.totalRealizedPnl} size={minified ? 'l' : 'xl'} />
             </div>
          </div>
+
+         {slot.status !== 'stopped' && <div className="position-painel">
+            {positions.length ? positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />) : ''}
+            {!positions.length && (
+               <Card className="empty-tile" padding="s" elevation={10}>
+                  <span className={`led ${slot.status}`}></span>
+                  <span>Waiting for a bot match</span>
+               </Card>
+            )}
+         </div>}
 
          {chartsDisplay && (
             <CryptoCandlestickChart

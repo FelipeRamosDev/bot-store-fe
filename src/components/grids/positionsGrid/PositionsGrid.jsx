@@ -1,6 +1,8 @@
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionTile from '@/components/tiles/positionTile/PositionTile';
 import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { useState } from 'react';
 
 /**
@@ -29,6 +31,7 @@ import { useState } from 'react';
  */
 export default function PositionsGrid({ title = 'Positions', className = '', positions = [], ...props }) {
    const [ modalPosition, setModalPosition ] = useState('');
+   const [ expanded, setExpanded ] = useState(false);
    let position;
 
    if (modalPosition) {
@@ -40,11 +43,14 @@ export default function PositionsGrid({ title = 'Positions', className = '', pos
    }
 
    return <div className={`positions-grid ${className}`} {...props}>
-      <ContentHeader>
+      <ContentHeader className="header-wrap" onClick={() => setExpanded(prev => !prev)}>
          <h3 className="header-title">{title}</h3>
+
+         {expanded && <RemoveIcon fontSize="medium" />}
+         {!expanded && <AddIcon fontSize="medium" />}
       </ContentHeader>
 
-      {positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />)}
+      {expanded && positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />)}
 
       <PositionQuickview position={position} onClose={() => setModalPosition('')} />
    </div>

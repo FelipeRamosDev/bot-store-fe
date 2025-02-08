@@ -48,7 +48,13 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
       </ContentSplit>
 
       {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
-      <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
+      <SlotsGrid
+         slots={doc.slots}
+         master={doc}
+         uInstance={uInstance}
+         setEditSlotModal={setEditSlotModal}
+         setDeleteConfirmDialog={setDeleteConfirmDialog}
+      />
 
       <MasterAnalysis master={doc} />
    </>;

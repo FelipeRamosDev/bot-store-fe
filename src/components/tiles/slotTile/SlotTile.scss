@@ -91,4 +91,49 @@
          }
       }
    }
+
+   .position-painel {
+      margin: 1.3rem 0 0 0;
+
+      .empty-tile {
+         display: flex;
+         align-items: center;
+         gap: 0.5rem;
+         margin: 0;
+         
+         span {
+            font-size: 0.9rem;
+            color: $text-darken;
+         }
+
+         .led {
+            $led-radius: 7px;
+
+            display: block;
+            height: $led-radius;
+            width: $led-radius;
+            border-radius: calc($led-radius / 2);
+            background-color: $grey-light;
+            transition: all 0.1s;
+
+            &.running {
+               animation: blinking-led 2s infinite;
+            }
+         }
+      
+         @keyframes blinking-led {
+            0% {
+               background-color: $warn;
+            }
+
+            50% {
+               background-color: $tertiary;
+            }
+
+            100% {
+               background-color: $warn;
+            }
+         }
+      }
+   }
 }
