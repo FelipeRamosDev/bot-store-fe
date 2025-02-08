@@ -12,7 +12,7 @@ export async function register(parsedBody, API, router) {
       const created = await API.auth.register(parsedBody);
 
       if (created) {
-         router.push('/');
+         router.push('/dashboard?confirmationsent=true');
       }
    } catch (err) {
       throw err;
@@ -40,6 +40,10 @@ export async function login(parsedBody, API, router) {
          router.push('/dashboard');
       }
    } catch (err) {
+      if (err.name === 'USER_EMAIL_NOT_CONFIRMED') {
+         return router.push('/dashboard');
+      }
+
       throw err;
    }
 }

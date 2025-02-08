@@ -1,5 +1,7 @@
 'use client';
 
+import EmailNotConfirmed from "@/components/content/dashboard/emailNotConfirmed/EmailNotConfirmed";
+
 /**
  * ErrorPage Component
  *
@@ -13,7 +15,13 @@
  *
  * @returns {JSX.Element} The rendered error page.
  */
-export default function ErrorPage({ error = { name: 'Unknown Error', message: 'The server got an unknown error!' } }) {
+export default function ErrorPage({ searchParams, error = { name: 'Unknown Error', message: 'The server got an unknown error!' } }) {
+   if (error.name === 'USER_EMAIL_NOT_CONFIRMED') {
+      const confirmationSent = searchParams.confirmationsent;
+      
+      return <EmailNotConfirmed error={error} confirmationSent={confirmationSent} />;
+   }
+
    return (
       <>
          <h1>{error.name}</h1>
