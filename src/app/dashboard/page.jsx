@@ -9,9 +9,9 @@ import DashboardHome from "@/components/content/dashboard/home/DashboardHome";
  *
  * @returns {JSX.Element} The rendered dashboard page.
  */
-export default function DashboardPage() {
+export default function DashboardPage({ ...props }) {
    return (
-      <AuthBasePage>
+      <AuthBasePage {...props}>
          <DashboardHome />
       </AuthBasePage>
    );
