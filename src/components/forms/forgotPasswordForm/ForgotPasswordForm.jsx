@@ -1,6 +1,6 @@
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
-import loginForm from './LoginForm.config';
+import forgotPasswordForm from './ForgotPasswordForm.config';
 import Link from 'next/link';
 
 /**
@@ -14,22 +14,19 @@ import Link from 'next/link';
  *
  * @returns {JSX.Element} - Rendered login form component.
  */
-export default function LoginForm({ className, onSubmit, ...props }) {
+export default function ForgotPasswordForm({ className, onSubmit, ...props }) {
+
    return (
       <FormBase
          formID="login"
-         formSet={loginForm}
-         submitLabel="Login"
+         formSet={forgotPasswordForm}
+         submitLabel="Reset Password"
          onSubmit={onSubmit}
          {...props}
       >
-         <div className="input-wrap">
-            <FormInput path="email" />
-         </div>
-
          <div className="input-wrap forgot-password">
-            <FormInput path="password" />
-            <Link className="link" href="/dashboard/login?forgotpassword=true">Forgot my password</Link>
+            <FormInput path="email" />
+            <Link className="link" href="/dashboard/login">{'<< Back to login'}</Link>
          </div>
       </FormBase>
    );
