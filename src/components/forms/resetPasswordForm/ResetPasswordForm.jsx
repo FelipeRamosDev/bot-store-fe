@@ -1,12 +1,11 @@
+'use client';
+
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
-import loginForm from './LoginForm.config';
-import Link from 'next/link';
+import resetPasswordForm from './ResetPasswordForm.config';
 
 /**
- * `LoginForm` component for user login.
- *
- * This component renders a login form with fields for email and password.
+ * `ResetPasswordForm` component for reset password.
  *
  * @param {Object} props - Component properties.
  * @param {string} [props.className] - Optional CSS class name to apply to the component.
@@ -14,22 +13,20 @@ import Link from 'next/link';
  *
  * @returns {JSX.Element} - Rendered login form component.
  */
-export default function LoginForm({ className, onSubmit, ...props }) {
+export default function ResetPasswordForm({ className, onSubmit, ...props }) {
    return (
       <FormBase
-         formID="login"
-         formSet={loginForm}
-         submitLabel="Login"
+         formID="reset-password-form"
+         formSet={resetPasswordForm}
+         submitLabel="Reset Password"
          onSubmit={onSubmit}
          {...props}
       >
          <div className="input-wrap">
-            <FormInput path="email" />
-         </div>
-
-         <div className="input-wrap forgot-password">
             <FormInput path="password" />
-            <Link className="link" href="/dashboard/login?forgotpassword=true">Forgot my password</Link>
+         </div>
+         <div className="input-wrap">
+            <FormInput path="confirmPassword" />
          </div>
       </FormBase>
    );

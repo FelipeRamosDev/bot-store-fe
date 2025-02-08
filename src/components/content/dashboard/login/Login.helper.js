@@ -47,3 +47,18 @@ export async function login(parsedBody, API, router) {
       throw err;
    }
 }
+
+export async function forgotPassword(parsedBody, API, setIsSent) {
+   try {
+      const sent = await API.ajax.authPost('/auth/reset-password/send-email', { email: parsedBody.email });
+
+      if (sent.success) {
+         setIsSent('success');
+      } else {
+         setIsSent('fail');
+      }
+   } catch (err) {
+      setIsSent('fail');
+      throw err;
+   }
+}

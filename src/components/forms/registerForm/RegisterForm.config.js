@@ -2,7 +2,7 @@ import Form from '@/models/Form';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import PasswordFieldSchema from '@/models/Form/fieldTypes/PasswordFieldSchema';
 
-const passwordValidators = [
+export const passwordValidators = [
    function(value) {
       const lowercaseRegex = /[a-z]/;
 
