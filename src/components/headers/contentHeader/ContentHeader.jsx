@@ -29,8 +29,8 @@
  * 
  * @returns {JSX.Element} A div containing the header content and the optional toolbar.
  */
-export default function ContentHeader({ className = '', children, Toolbar = () => <></> }) {
-   return <div className={`content-header ${className}`}>
+export default function ContentHeader({ className = '', children, Toolbar = () => <></>, onClick }) {
+   return <div className={`content-header ${className}`} onClick={onClick}>
       {children}
 
       <div className="toolbar">
