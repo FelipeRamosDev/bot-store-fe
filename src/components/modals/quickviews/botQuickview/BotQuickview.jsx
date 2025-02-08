@@ -28,7 +28,7 @@ export default function BotQuickview({ open, bot, setModal }) {
       if (typeof bot?._id !== 'string') return;
 
       const notEmpty = Object.keys(bot).length;
-      if (notEmpty) {
+      if (notEmpty && !requested.current) {
          requested.current = true;
 
          API.ajax.authGet('/bot/results', {

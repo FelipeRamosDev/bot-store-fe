@@ -145,7 +145,7 @@ export default function SlotTile({
             />
          )}
 
-         <BotQuickview bot={slot.bot} open={botQuickview} setModal={setBotQuickview} />
+         {botQuickview && <BotQuickview bot={slot.bot} open={botQuickview} setModal={setBotQuickview} />}
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
          <StopSlotConfirmDialog
             slot={slot}
