@@ -144,7 +144,7 @@ export default function SlotTile({
             {!positions.length && (
                <Card className="empty-tile" padding="s" elevation={10}>
                   <span className={`led ${slot.status}`}></span>
-                  <span>Waiting for a bot match</span>
+                  <span>Looking for opportunities</span>
                </Card>
             )}
          </div>}
