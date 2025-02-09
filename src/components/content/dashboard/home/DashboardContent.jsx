@@ -54,7 +54,7 @@ export default function DashboardContent() {
       <DBQuery
          type="query"
          collection="master_accounts"
-         filter={{ user: user._id }}
+         filter={{ user: user._id, state: 'active' }}
          sort={{ ['futuresWallet.totalRealizedPnl']: -1 }}
       >
          <MastersGrid createMasterModal={setCreateMasterModal} />
@@ -65,7 +65,7 @@ export default function DashboardContent() {
          <DBQuery
             type="query"
             collection="slots"
-            filter={{ user: user._id }}
+            filter={{ user: user._id, state: 'active' }}
             sort={{ pnl: -1 }}
             limit={6}
          >

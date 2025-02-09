@@ -23,6 +23,8 @@ export default function ConfirmationDialog({
    const [error, setError] = useState(false);
    const [loading, setLoading] = useState(false);
 
+   const DEFAULT_ERROR = `Error caught during the confirmation process.`;
+
    /**
     * Handles the confirmation action, showing loading state and handling errors.
     * 
@@ -35,7 +37,7 @@ export default function ConfirmationDialog({
       try {
          await handleConfirm();
       } catch (err) {
-         setError(true);
+         setError(err);
       } finally {
          setLoading(false);
       }
@@ -60,7 +62,7 @@ export default function ConfirmationDialog({
             onClose={onClose}
             {...props}
          >
-            <p>Error caught during the confirmation process.</p>
+            <p>{error?.message || DEFAULT_ERROR}</p>
          </AlertModal>
       );
    }

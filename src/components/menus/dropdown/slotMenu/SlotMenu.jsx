@@ -9,6 +9,7 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { useMenu } from '@/contexts/MenuContext';
 import { useState } from 'react';
 import SlotRunningAlert from '@/components/modals/dialogs/slotRunningAlert/SlotRunningAlert';
+import ArchiveSlotConfirmDialog from '@/components/modals/dialogs/archiveSlotConfirmDialog/ArchiveSlotConfirmDialog';
 
 /**
  * SlotMenu component that provides actions for managing a slot entity.
@@ -29,8 +30,9 @@ import SlotRunningAlert from '@/components/modals/dialogs/slotRunningAlert/SlotR
  *
  * @returns {JSX.Element} A menu with actions for editing, archiving, or deleting a slot.
  */
-export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal, setDeleteConfirmDialog }) {
-   const [ slotRunningAlert, setSlotRunningAlert ] = useState(false)
+export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal = () => {}, setDeleteConfirmDialog = () => {} }) {
+   const [ slotRunningAlert, setSlotRunningAlert ] = useState(false);
+   const [ archiveSlotDialog, setArchiveSlotDialog ] = useState(false);
    const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
    const open = Boolean (anchorEl?.id === slot.cod);
 
@@ -63,11 +65,11 @@ export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotMo
                Edit
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={() => setArchiveSlotDialog(true)}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>
-               Archive
+               {slot.state === 'active' ? 'Archive' : 'Activate'}
             </MenuItem>
 
             <MenuItem onClick={() => setDeleteConfirmDialog(slot)}>
@@ -79,6 +81,7 @@ export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotMo
          </Menu>
 
          <SlotRunningAlert open={slotRunningAlert} setOpen={setSlotRunningAlert} />
+         <ArchiveSlotConfirmDialog slot={slot} open={archiveSlotDialog} setOpen={setArchiveSlotDialog} />
       </>
    );
 }

@@ -1,8 +1,8 @@
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionTile from '@/components/tiles/positionTile/PositionTile';
 import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useState } from 'react';
 
 /**
@@ -46,8 +46,8 @@ export default function PositionsGrid({ title = 'Positions', className = '', pos
       <ContentHeader className="header-wrap" onClick={() => setExpanded(prev => !prev)}>
          <h3 className="header-title">{title}</h3>
 
-         {expanded && <RemoveIcon fontSize="medium" />}
-         {!expanded && <AddIcon fontSize="medium" />}
+         {expanded && <ExpandLessIcon fontSize="medium" />}
+         {!expanded && <ExpandMoreIcon fontSize="medium" />}
       </ContentHeader>
 
       {expanded && positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />)}

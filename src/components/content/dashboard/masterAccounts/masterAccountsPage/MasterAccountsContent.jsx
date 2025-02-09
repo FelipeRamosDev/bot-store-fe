@@ -5,6 +5,7 @@ import SectionHeaderBanner from '@/components/banners/sectionHeaderBanner/Sectio
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import MasterFilter from '@/components/filters/masterFilter/MasterFilter';
 
 export default function MasterAccountsContent() {
    const [ createModal, setCreateModal ] = useState(false);
@@ -20,6 +21,7 @@ export default function MasterAccountsContent() {
          onButtonClick={() => setCreateModal(true)}
       />
 
+      <MasterFilter />
       <MastersTable />
       <CreateMasterModal open={createModal} setOpen={setCreateModal} onSuccess={() => router.refresh()} />
    </>);
