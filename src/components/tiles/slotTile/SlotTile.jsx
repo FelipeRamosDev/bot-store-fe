@@ -142,7 +142,7 @@ export default function SlotTile({
          {slot.status !== 'stopped' && <div className="position-painel">
             {positions.length ? positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />) : ''}
             {!positions.length && (
-               <Card className="empty-tile" padding="s" elevation={10}>
+               <Card className="empty-tile" padding="s" radius="xs" elevation={10}>
                   <span className={`led ${slot.status}`}></span>
                   <span>Looking for opportunities</span>
                </Card>
