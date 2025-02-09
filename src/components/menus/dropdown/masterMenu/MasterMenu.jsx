@@ -16,6 +16,7 @@ import DeleteMasterConfirmDialog from '@/components/modals/dialogs/deleteMasterC
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
 import { useMenu } from '@/contexts/MenuContext';
+import ArchiveMasterConfirmDialog from '@/components/modals/dialogs/archiveMasterConfirmDialog/ArchiveMasterConfirmDialog';
 
 /**
  * MasterMenu component that provides various actions for managing a master entity.
@@ -38,6 +39,7 @@ import { useMenu } from '@/contexts/MenuContext';
 export default function MasterMenu({ isDemo = false, master = {}, noTrasition = false }) {
    const [ demoDepositModal, setDemoDepositModal ] = useState(false);
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
+   const [ archiveConfirmDialog, setArchiveConfirmDialog ] = useState(false);
    const [ exchangeModal, setExchangeModal ] = useState(false);
    const [ editMasterModal, setEditMasterModal ] = useState(false);
    const { anchorEl, open, handleMenuOpen, handleMenuClose } = useMenu();
@@ -86,11 +88,11 @@ export default function MasterMenu({ isDemo = false, master = {}, noTrasition = 
                Edit
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={() => setArchiveConfirmDialog(true)}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>
-               Archive
+               {master.state === 'active' ? 'Archive' : 'Activate'}
             </MenuItem>
 
             <MenuItem onClick={() => setDeleteConfirmDialog(true)}>
@@ -109,6 +111,12 @@ export default function MasterMenu({ isDemo = false, master = {}, noTrasition = 
             master={master}
             open={deleteConfirmDialog}
             setOpen={setDeleteConfirmDialog}
+         />
+
+         <ArchiveMasterConfirmDialog
+            master={master}
+            open={archiveConfirmDialog}
+            setOpen={setArchiveConfirmDialog}
          />
       </>
    );

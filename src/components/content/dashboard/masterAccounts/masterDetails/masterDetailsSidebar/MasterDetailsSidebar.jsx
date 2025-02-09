@@ -44,6 +44,7 @@ export default function MasterDetailsSidebar({ setUInstance }) {
             sort={{ pnl: -1 }}
             filter={{
                user: userUID,
+               state: 'active',
                $nor: [{ _id: doc._id }]
             }}
          >
