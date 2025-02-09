@@ -8,6 +8,8 @@ import Settings from '@mui/icons-material/Settings';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import ArchivedSlotsModal from '@/components/modals/archivedSlotsModal/ArchivedSlotsModal';
 
 
 /**
@@ -28,8 +30,9 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
  *
  * @returns {JSX.Element} A menu with action items and modals for managing a master entity.
  */
-export default function SlotConfigsMenu({ chartsDisplay, setChartsDisplay }) {
+export default function SlotConfigsMenu({ chartsDisplay, setChartsDisplay, master }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
+   const [ archivedSlotsModal, setArchivedSlotsModal ] = useState(false);
    const open = Boolean(anchorEl);
 
    /**
@@ -72,6 +75,14 @@ export default function SlotConfigsMenu({ chartsDisplay, setChartsDisplay }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
+            <MenuItem onClick={() => setArchivedSlotsModal(true)}>
+               <ListItemIcon>
+                  <ArchiveIcon fontSize="small" />
+               </ListItemIcon>
+
+               Archived Slots
+            </MenuItem>
+
             <MenuItem onClick={handleDisplayCharts}>
                <ListItemIcon>
                   {!chartsDisplay ? <VisibilityIcon fontSize="small" /> : <VisibilityOffIcon fontSize="small" />}
@@ -80,6 +91,8 @@ export default function SlotConfigsMenu({ chartsDisplay, setChartsDisplay }) {
                {!chartsDisplay ? 'Display Charts' : 'Hide Charts'}
             </MenuItem>
          </Menu>
+
+         <ArchivedSlotsModal open={archivedSlotsModal} setOpen={setArchivedSlotsModal} master={master} />
       </>
    );
 }
