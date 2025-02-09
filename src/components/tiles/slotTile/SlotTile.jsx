@@ -14,7 +14,8 @@ import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanc
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
 import StopSlotConfirmDialog from '@/components/modals/dialogs/stopSlotConfirmDialog/StopSlotConfirmDialog';
 import BotQuickview from '@/components/modals/quickviews/botQuickview/BotQuickview';
-import PositionTile from '../positionTile/PositionTile';
+import PositionFullTile from '../positionFullTile/PositionFullTile';
+import NoPosition from './NoPosition';
 
 /**
  * Represents a tile component displaying information about a slot.
@@ -146,24 +147,20 @@ export default function SlotTile({
             </div>
          </div>
 
-         {slot.status !== 'stopped' && <div className="position-painel">
-            {positions.length ? positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />) : ''}
-            {!positions.length && (
-               <Card className="empty-tile" padding="s" radius="xs" elevation={10}>
-                  <span className={`led ${slot.status}`}></span>
-                  <span>Looking for opportunities</span>
-               </Card>
-            )}
-         </div>}
+         <div className="position-painel">
+            {positions.length ? positions.map(position => <PositionFullTile key={position._id} position={position} />) : ''}
 
-         {chartsDisplay && !archivedView && (
-            <CryptoCandlestickChart
-               symbol={symbol}
-               interval={interval}
-               dummyCandles={dummyCandles}
-               position={slot?.trades.length && slot.trades[0]}
-            />
-         )}
+            {!positions.length && <NoPosition slot={slot} uInstance={uInstance} />}
+
+            {chartsDisplay && !archivedView && (
+               <CryptoCandlestickChart
+                  symbol={symbol}
+                  interval={interval}
+                  dummyCandles={dummyCandles}
+                  position={slot?.trades.length && slot.trades[0]}
+               />
+            )}
+         </div>
 
          {botQuickview && <BotQuickview bot={slot.bot} open={botQuickview} setModal={setBotQuickview} />}
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />

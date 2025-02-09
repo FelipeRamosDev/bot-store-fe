@@ -1,11 +1,12 @@
 /**
  * PrettyDate component formats and displays a date and time in a readable format.
  *
- * @param {string} className - Additional CSS classes for styling.
- * @param {string} divisor - Separator between date and time (default is ' - ').
- * @param {number | string | Date} time - The date/time value to format.
- * @param {boolean} hideYear - If true, hides the year in the date.
- * @param {boolean} hideSeconds - If true, hides the seconds in the time.
+ * @param {Object} params - Parameters
+ * @param {string} params.className - Additional CSS classes for styling.
+ * @param {string} params.divisor - Separator between date and time (default is ' - ').
+ * @param {number | string | Date} params.time - The date/time value to format.
+ * @param {boolean} params.hideYear - If true, hides the year in the date.
+ * @param {boolean} params.hideSeconds - If true, hides the seconds in the time.
  * @returns {JSX.Element} The formatted date and time.
  */
 export default function PrettyDate({

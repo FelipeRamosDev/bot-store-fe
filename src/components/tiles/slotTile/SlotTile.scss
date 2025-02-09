@@ -95,15 +95,26 @@
          }
       }
    }
+   
+   .candlestick-chart {
+      background-color: $background-grey2-dark;
+      padding: 0.7rem 0.1rem 0.1rem 0.9rem;
+      border-radius: 0 0 $radius-xs $radius-xs;
+   }
 
    .position-painel {
-      margin: 1.3rem 0 0 0;
+      .position-full-tile {
+         border-radius: $radius-xs $radius-xs 0 0;
+      }
 
       .empty-tile {
+         background-color: $background-grey2-dark;
+         border-radius: $radius-xs $radius-xs 0 0;
          display: flex;
          align-items: center;
          gap: 0.5rem;
-         margin: 0;
+         margin: 1rem 0 0 0;
+         padding: $padding-s calc($padding-s / 1.2);
          
          span {
             font-size: 0.9rem;
@@ -127,7 +138,7 @@
       
          @keyframes blinking-led {
             0% {
-               background-color: $warn;
+               background-color: $grey-light;
             }
 
             50% {
@@ -135,7 +146,7 @@
             }
 
             100% {
-               background-color: $warn;
+               background-color: $grey-light;
             }
          }
       }
