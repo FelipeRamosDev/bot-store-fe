@@ -13,41 +13,39 @@ import { useRouter } from 'next/navigation';
  *
  * @returns {React.Element} The rendered confirmation dialog for deleting a master account.
  */
-export default function ArchiveMasterConfirmDialog({
-   master = {},
+export default function ArchiveSlotConfirmDialog({
+   slot = {},
    open = false,
    setOpen = () => {}
 }) {
    const API = useContext(APIContext);
    const router = useRouter();
 
-   /**
-    * Handles the confirmation action to delete the master account.
-    * Sends a delete request to the API and redirects to the dashboard if successful.
-    * Throws an error if the API request fails.
-    *
-    * @async
-    * @throws {Error} Throws an error if the delete request fails.
-    */
    const handleConfirm = async () => {
-      const archived = await API.ajax.authPost('/master-account/switch-state', { masterUID: master._id, newState: master.state === 'active' ? 'archived' : 'active' });
+      const params = {
+         slotUID: slot._id,
+         newState: slot.state === 'active' ? 'archived' : 'active'
+      };
 
+      const archived = await API.ajax.authPost('/slots/switch-state', params);
       if (archived.error) {
          throw archived;
       }
 
-      router.push('/dashboard/master-accounts');
+      router.refresh();
    }
 
    return (
       <ConfirmationDialog
-         title={master.state === 'active' ? 'Archive confirm' : 'Activate confirm'}
+         title={slot.state === 'active' ? 'Archive Confirm' : 'Activate Confirm'}
          open={open}
          handleConfirm={handleConfirm}
          onClose={() => setOpen(false)}
-         confirmLabel={master.state === 'active' ? 'ARCHIVE' : 'ACTIVATE'}
+         confirmLabel={slot.state === 'active' ? 'archive' : 'activate'}
       >
-         <p style={{ marginBottom: 0 }}>Are you sure you want to {master.state === 'active' ? 'ARCHIVE' : 'ACTIVATE'} the &quot;{master.name}&quot; account?</p>
+         <p style={{ marginBottom: 0 }}>
+            Are you sure you want to {slot.state === 'active' ? 'ARCHIVE' : 'ACTIVATE'} the &quot;{slot.name}&quot; account?
+         </p>
       </ConfirmationDialog>
    );
 }

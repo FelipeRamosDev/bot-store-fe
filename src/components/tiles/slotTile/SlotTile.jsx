@@ -61,6 +61,7 @@ export default function SlotTile({
    const symbol = slot?.assets?.length ? slot?.assets[0] : '';
    const interval = slot?.interval;
    const positions = slot?.trades || [];
+   const archivedView = slot?.state === 'archived';
 
    if (!botName.current && slot.bot?.name && !botIndex.current && slot.bot?.index) {
       botName.current = slot.bot?.name;
@@ -92,7 +93,7 @@ export default function SlotTile({
                </span>
             </div>
 
-            {!minified && <div className="btn-wrap">
+            {!minified && slot.state !== 'archived' && <div className="btn-wrap">
                {slot.status !== 'running' && <RoundIconButton
                   variant="contained"
                   Icon={PlayIcon}
@@ -109,6 +110,12 @@ export default function SlotTile({
                   onClick={() => setStopConfirmState(true)}
                />}
             </div>}
+
+            {slot.state === 'archived' && (
+               <div className="btn-wrap">
+                  <StatusBadge className="archived-badge" color="warn">Archived</StatusBadge>
+               </div>
+            )}
          </div>
 
          <div className="slot-data">
@@ -149,7 +156,7 @@ export default function SlotTile({
             )}
          </div>}
 
-         {chartsDisplay && (
+         {chartsDisplay && !archivedView && (
             <CryptoCandlestickChart
                symbol={symbol}
                interval={interval}
