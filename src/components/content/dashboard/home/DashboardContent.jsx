@@ -76,7 +76,7 @@ export default function DashboardContent() {
             type="query"
             collection="positions"
             filter={{ user: user._id }}
-            sort={{ modifiedAt: -1 }}
+            sort={{ closeTime: -1 }}
             limit={6}
          >
             <DashboardPositionTable />

@@ -87,6 +87,7 @@ export default function SlotTile({
                   noTrasition={true}
                   setEditSlotModal={setEditSlotModal}
                   setDeleteConfirmDialog={setDeleteConfirmDialog}
+                  isInstanceOffline={isOffline}
                />}
 
                <span className="bot-name link" onClick={() => setBotQuickview(true)}>

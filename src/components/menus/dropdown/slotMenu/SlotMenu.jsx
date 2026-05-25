@@ -30,14 +30,14 @@ import ArchiveSlotConfirmDialog from '@/components/modals/dialogs/archiveSlotCon
  *
  * @returns {JSX.Element} A menu with actions for editing, archiving, or deleting a slot.
  */
-export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal = () => {}, setDeleteConfirmDialog = () => {} }) {
+export default function SlotMenu({ slot = {}, isInstanceOffline, noTrasition = false, setEditSlotModal = () => {}, setDeleteConfirmDialog = () => {} }) {
    const [ slotRunningAlert, setSlotRunningAlert ] = useState(false);
    const [ archiveSlotDialog, setArchiveSlotDialog ] = useState(false);
    const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
    const open = Boolean (anchorEl?.id === slot.cod);
 
    const handleEditSlot = () => {
-      if (slot?.status === 'stopped') {
+      if (slot?.status === 'stopped' || isInstanceOffline) {
          setEditSlotModal(slot);
       } else {
          setSlotRunningAlert(true);

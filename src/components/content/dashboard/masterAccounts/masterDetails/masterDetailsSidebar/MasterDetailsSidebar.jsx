@@ -5,6 +5,7 @@ import UserInstanceMaster from '@/components/tiles/userInstance/Userinstance';
 import AccountSettings from '../../../../../shared/accountSettings/AccountSettings';
 import MoreMasterAccounts from './MoreMasterAccounts';
 import MasterSchedules from './MasterSchedules';
+import TrailingConfigTile from '@/components/tiles/trailingConfigTile/TrailingConfigTile';
 
 /**
  * MasterDetailsSidebar component displays detailed information and settings related to a master account.
@@ -35,12 +36,13 @@ export default function MasterDetailsSidebar({ setUInstance }) {
          </DBQuery>
 
          <AccountSettings account={doc} />
+         <TrailingConfigTile master={doc} />
          <MasterSchedules master={doc} />
 
          <DBQuery
             type="query"
             collection="master_accounts"
-            limit={5}
+            limit={10}
             sort={{ pnl: -1 }}
             filter={{
                user: userUID,
