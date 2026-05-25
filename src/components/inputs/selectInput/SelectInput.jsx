@@ -27,7 +27,7 @@ export default function SelectInput({ className = '', errors = [], schema = {}, 
       inputID.current = Math.random();
    }
 
-   if (schema.form?.editMode && !value && value !== 0) {
+   if (schema.form.editMode && !value && value !== 0) {
       const editValue = schema.getEditValue();
 
       if (editValue?._id) {

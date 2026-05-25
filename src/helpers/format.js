@@ -153,31 +153,11 @@ function formatMasterBadges(master) {
    };
 }
 
-function shortNum(number) {
-   if (number > 1000 && number < 1000000) {
-      return (number / 1000).toFixed(0) + 'K';
-   }
-
-   if (number > 1000000 && number < 1000000000) {
-      return (number / 1000000).toFixed(0) + 'MI';
-   }
-
-   if (number > 1000000000 && number < 1000000000000) {
-      return (number / 1000000000).toFixed(0) + 'BI';
-   }
-
-   if (number > 1000000000000 && number < 1000000000000000) {
-      return (number / 1000000000000).toFixed(0) + 'TRI';
-   }
-}
-
-
 module.exports = {
    toMoney,
    toMoneyString,
    toPercentString,
    formatFractional,
    parseValidationErrorMsg,
-   formatMasterBadges,
-   shortNum
+   formatMasterBadges
 };

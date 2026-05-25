@@ -11,7 +11,6 @@ import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
 import SlotConfigsMenu from '@/components/menus/dropdown/SlotConfigsMenu/SlotConfigsMenu';
 import SlotQuickview from '@/components/modals/quickviews/slotQuickview/SlotQuickview';
-import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
 
 /**
  * SlotsGrid component displays a grid of slots associated with a master entity.
@@ -40,10 +39,9 @@ import PositionQuickview from '@/components/modals/quickviews/positionQuickview/
  *
  * @returns {JSX.Element} A grid layout displaying slots, with options to create and manage slots.
  */
-export default function SlotsGrid({ hideHeader, hideNoDocumentsTile, slots = [], master = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
+export default function SlotsGrid({ slots = [], master = {}, className = '', uInstance, setEditSlotModal, setDeleteConfirmDialog }) {
    const defaultChartDisplay = window.localStorage.getItem('slot_configs:charts_display') === 'true' ? true : false;
    const [ createSlot, setCreateSlot ] = useState(false);
-   const [ modalPosition, setModalPosition ] = useState('');
    const [ chartsDisplay, setChartsDisplay ] = useState(defaultChartDisplay);
    const [ slotQuickview, setSlotQuickview ] = useState('');
    const auth = useContext(AuthUserContext);
@@ -60,12 +58,12 @@ export default function SlotsGrid({ hideHeader, hideNoDocumentsTile, slots = [],
    }
 
    return <div className={`slots-grid ${className}`}>
-      {!hideHeader && <ContentHeader Toolbar={() => (<>
+      <ContentHeader Toolbar={() => (<>
          <RoundIconButton Icon={Add} variant="contained" color="tertiary" onClick={() => setCreateSlot(true)} />
       </>)}>
          <DataArray />
-         <h2 className="header-title">Slots <SlotConfigsMenu chartsDisplay={chartsDisplay} setChartsDisplay={setChartsDisplay} master={master} /></h2>
-      </ContentHeader>}
+         <h2 className="header-title">Slots <SlotConfigsMenu chartsDisplay={chartsDisplay} setChartsDisplay={setChartsDisplay} /></h2>
+      </ContentHeader>
 
       {isLoading && new Array(6).fill('').map(() => <Skeleton
          key={Math.random()}
@@ -74,7 +72,7 @@ export default function SlotsGrid({ hideHeader, hideNoDocumentsTile, slots = [],
          height={170}
       />)}
 
-      {!slots.length && !hideNoDocumentsTile ? <NoDocumentsTile message="You have no slots created yet! Create one to start." onClick={() => setCreateSlot(true)} /> : ''}
+      {!slots.length ? <NoDocumentsTile message="You have no slots created yet! Create one to start." onClick={() => setCreateSlot(true)} /> : ''}
 
       <MenuProvider>
          {slots.map(slot => (
@@ -85,8 +83,7 @@ export default function SlotsGrid({ hideHeader, hideNoDocumentsTile, slots = [],
                setEditSlotModal={setEditSlotModal}
                setDeleteConfirmDialog={setDeleteConfirmDialog}
                setSlotQuickview={setSlotQuickview}
-               chartsDisplay={chartsDisplay && slot.state !== 'archived'}
-               setModalPosition={setModalPosition}
+               chartsDisplay={chartsDisplay}
             />
          ))}
       </MenuProvider>
@@ -102,6 +99,5 @@ export default function SlotsGrid({ hideHeader, hideNoDocumentsTile, slots = [],
       </ContentModal>
 
       <SlotQuickview master={master} slot={master.slots.find(item => item._id === slotQuickview)} onClose={() => setSlotQuickview('')} />
-      <PositionQuickview position={modalPosition} onClose={() => setModalPosition('')} />
    </div>;
 }

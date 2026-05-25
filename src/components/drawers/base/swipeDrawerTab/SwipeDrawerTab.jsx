@@ -46,7 +46,6 @@ export default function SwipeDrawerTab({
    children
 }) {
    const [ open, setOpen ] = useState(false);
-   const [ area, setArea ] = useState();
    const drawer = useRef();
    const height = drawerBleeding + 4;
 
@@ -97,18 +96,16 @@ export default function SwipeDrawerTab({
    }
 
    useEffect(() => {
-      const listener = () => setOpen(prev => !prev);
-
-      const elm = document.querySelector('.swipe-area');
-      if (elm && window.innerWidth > config.breakpoints.m) {
-         elm.removeEventListener('click', listener);
-         elm.addEventListener('click', listener);
+      if (drawer.current) {
+         const area = document.querySelector('.swipe-area');
+         const listener = () => setOpen(prev => !prev);
+         
+         if (area && window.innerWidth > config.breakpoints.m) {
+            area.removeEventListener('click', listener);
+            area.addEventListener('click', listener);
+         }
       }
-   }, [ area ]);
-
-   if (drawer.current && !area) {
-      setArea(drawer.current);
-   }
+   }, [ drawer.current ]);
 
    return (<>
       <SwipeableDrawer

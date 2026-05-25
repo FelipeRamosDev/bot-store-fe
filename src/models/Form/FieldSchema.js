@@ -11,6 +11,7 @@ export default class FieldSchema {
     * Creates an instance of FieldSchema.
     *
     * @param {Object} setup - Configuration settings for the field schema.
+    * @param {Form} form - The form instance that this field schema belongs to.
     * @param {string} [setup.key] - The unique key for the field.
     * @param {string} [setup.label] - The label for the field.
     * @param {string} [setup.placeholder] - The placeholder text for the field.
@@ -24,8 +25,7 @@ export default class FieldSchema {
     * @param {Function} [setup.parseInput] - A function to parse the input value.
     * @param {boolean} [setup.useDependencies=false] - Whether to use dependencies for the field.
     * @param {Function} [setup.onInput=(value) => {}] - A function to handle input changes.
-    * @param {Object} [style] - The CSS custom style.
-    * @param {Form} form - The form instance that this field schema belongs to.
+    * @param {Object} [s] - The CSS custom style.
     */
    constructor(setup = {}, form) {
       const {

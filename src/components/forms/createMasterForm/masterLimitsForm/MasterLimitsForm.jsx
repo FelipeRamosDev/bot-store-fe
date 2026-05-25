@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState } from 'react';
 import { Stack } from '@mui/material';
 import Card from '@/components/common/card/Card';
 import Accordion from '@mui/material/Accordion';
@@ -6,8 +5,6 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MasterLimitsSet from './masterLimitSet/MasterLimitSet';
-import FormInput from '@/components/forms/formBase/FormInput';
-import FormBaseContext from '../../formBase/FormBase';
 
 /**
  * `MasterLimitsForm` component renders a form section for configuring various limits 
@@ -23,6 +20,7 @@ export default function MasterLimitsForm() {
          <p className="help-info text-center">
             You can set limits for the slots under this account, limits are goals that once they are reached, it pauses the account and return on the next period. You can set limits by:
          </p>
+         <p className="help-info text-center"><b>Trade, Day or Month</b></p>
 
          <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>

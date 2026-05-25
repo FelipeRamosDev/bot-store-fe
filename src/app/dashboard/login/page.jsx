@@ -14,11 +14,11 @@ import BasePage from "@/templates/basePage/BasePage";
  *
  * @returns {JSX.Element} The rendered login page.
  */
-export default function LoginPage({ searchParams: { register, forgotpassword } }) {
+export default function LoginPage({ searchParams: { register } }) {
    return (
       <APIProvider>
          <BasePage className="login-page" fullContainer={false}>
-            <Login isRegister={Boolean(register)} isForgotPassword={Boolean(forgotpassword)} />
+            <Login isRegister={Boolean(register)} />
          </BasePage>
       </APIProvider>
    );

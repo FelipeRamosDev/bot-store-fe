@@ -25,7 +25,6 @@ export default function CutLineChartBase({
    const chartSpot = useRef();
    const chart = useRef();
    const cutLineChart = useRef();
-   const dupCheck = {};
 
    const topLineColor = darkTheme.palette.success.main;
    const topFillColor1 = topLineColor + '47';
@@ -43,16 +42,14 @@ export default function CutLineChartBase({
    }
 
    dataSet = dataSet.map(data => {
-      if (dupCheck[data.time]) return;
-      dupCheck[data.time] = true;
-
       data.time = new Date(data.time).getTime();
+
       if (!data.value) {
          data.value = 0;
       }
 
       return data;
-   }).filter(item => item);
+   });
 
    const isSelected = (value) => {
       if (switcher === value) {
@@ -82,7 +79,7 @@ export default function CutLineChartBase({
 
          cutLineChart.current.setData(dataSet);
          chart.current.timeScale().fitContent();
-      } else if (chartSpot.current && cutLineChart.current && chart.current) {
+      } else {
          cutLineChart.current.setData(dataSet);
          chart.current.timeScale().fitContent();
       }

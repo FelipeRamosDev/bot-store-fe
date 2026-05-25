@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Stack } from '@mui/material';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
@@ -9,7 +9,6 @@ import Card from '@/components/common/card/Card';
 import APIContext from '@/contexts/4HandsAPI';
 import AuthUser from '@/contexts/AuthUser';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
-import AccountTrailingStop from '../shared/AccountTrailingStop/AccountTrailingStop';
 
 /**
  * `CreateMasterForm` component renders a form for creating or editing a master account.
@@ -86,8 +85,6 @@ export default function CreateMasterForm({ onSuccess, editMode = false, master }
                      <FormInput path="limits.marginRatioCommit" />
                   </Stack>
                </Card>
-
-               <AccountTrailingStop isMaster />
             </Stack>
 
             <MasterLimitsForm />

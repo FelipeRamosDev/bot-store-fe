@@ -1,7 +1,6 @@
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
 import loginForm from './LoginForm.config';
-import Link from 'next/link';
 
 /**
  * `LoginForm` component for user login.
@@ -19,7 +18,7 @@ export default function LoginForm({ className, onSubmit, ...props }) {
       <FormBase
          formID="login"
          formSet={loginForm}
-         submitLabel="Login"
+         submitLabel="Get In"
          onSubmit={onSubmit}
          {...props}
       >
@@ -27,9 +26,8 @@ export default function LoginForm({ className, onSubmit, ...props }) {
             <FormInput path="email" />
          </div>
 
-         <div className="input-wrap forgot-password">
+         <div className="input-wrap">
             <FormInput path="password" />
-            <Link className="link" href="/dashboard/login?forgotpassword=true">Forgot my password</Link>
          </div>
       </FormBase>
    );

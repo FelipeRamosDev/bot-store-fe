@@ -12,7 +12,6 @@
 @import "../../components/buttons/rubberButton/RubberButton.scss";
 @import "../../components/buttons/createBotFloatButton/CreateBotFloatButton.scss";
 @import "../../components/buttons/speedDialButton/SpeedDialButton.scss";
-@import "../../components/buttons/floatButton/FloatButton.scss";
 
 // Charts
 @import "../../components/charts/base/candleStickBase/CandlestickChartBase.scss";
@@ -38,8 +37,6 @@
 @import "../../components/content/home/chooseBot/ChooseBot.scss";
 @import "../../components/content/home/createYourBot/CreateYourBot.scss";
 @import "../../components/content/dashboard/user/myPilots/MyPilots.scss";
-@import "../../components/content/dashboard/emailNotConfirmed/EmailNotConfirmed.scss";
-@import "../../components/content/dashboard/resetPassword/ResetPassword.scss";
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
@@ -51,16 +48,11 @@
 // Editors
 @import "../../components/editors/scheduleEditor/ScheduleEditor.scss";
 
-// Filters
-@import "../../components/filters/masterFilter/MasterFilter.scss";
-
 // Forms
 @import "../../components/forms/botValueForm/BotValueForm.scss";
 @import "../../components/forms/createSlotForm/CreateSlotForm.scss";
-@import "../../components/forms/createBot/CreateBotForm.scss";
 @import "../../components/forms/formBase/FormBase.scss";
 @import "../../components/forms/logicalOperatorForm/LogicalOperatorForm.scss";
-@import "../../components/forms/shared/AccountTrailingStop/AccountTrailingStop.scss";
 
 // Grids
 @import "../../components/grids/botResultsGrid/BotResultsGrid.scss";
@@ -84,7 +76,6 @@
 @import "../../components/inputs/listDocPicker/ListDocPicker.scss";
 @import "../../components/inputs/radioGroupInput/RadioGroupInput.scss";
 @import "../../components/inputs/selectInput/SelectInput.scss";
-@import "../../components/inputs/searchSelectInput/SearchSelectInput.scss";
 @import "../../components/inputs/sliderInput/SliderInput.scss";
 
 // Layouts
@@ -133,7 +124,6 @@
 @import "../../components/tiles/scheduleTile/ScheduleTile.scss";
 @import "../../components/tiles/slotTile/SlotTile.scss";
 @import "../../components/tiles/userInstance/UserInstance.scss";
-@import "../../components/tiles/positionFullTile/PositionFullTile.scss";
 
 // Tooltips
 @import "../../components/tooltips/base/TooltipBase.scss";
@@ -144,11 +134,11 @@
    font-weight: 400;
 
    &[color=success] {
-      color: $success !important;
+      color: $success;
    }
 
    &[color=error] {
-      color: $error !important;
+      color: $error;
    }
 
    &[display-size=xxs] {

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useEffect, useState, useContext, useRef } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import APIContext from './4HandsAPI';
 import LoadingPage from '@/app/loading';
@@ -23,22 +23,16 @@ export default AuthUserContext;
  *
  * @returns {JSX.Element} The context provider component with loading and error handling.
  */
-export function AuthUserProvider({ children, ...props }) {
+export function AuthUserProvider({ children }) {
    const [ userAuth, setUserAuth ] = useState();
    const [ error, setError ] = useState();
    const instance = useContext(APIContext);
    const router = useRouter();
-   const userChecked = useRef();
 
    useEffect(() => {
-      if (userChecked.current) return;
-      userChecked.current = true;
+      if (userAuth) return;
 
       instance.auth.checkUser().then(authData => {
-         if (authData.error) {
-            return setError(authData);
-         }
-
          if (authData.isLogged) {
             const userLetters = authData?.user?.fullName.split(' ').map(word => word[0]?.toUpperCase() || '').join('');
 
@@ -49,14 +43,15 @@ export function AuthUserProvider({ children, ...props }) {
          }
       }).catch(err => {
          setError(err);
+         throw err;
       });
-   }, [ instance.auth, router ]);
+   }, [ userAuth, instance.auth, router ]);
 
    return (
       <AuthUserContext.Provider value={userAuth}>
          {!userAuth && !error && <LoadingPage message="Validating User" />}
          {userAuth && !error && children}
-         {error && <ErrorPage error={error} {...props} />}
+         {error && <ErrorPage error={error} />}
       </AuthUserContext.Provider>
    );
 }

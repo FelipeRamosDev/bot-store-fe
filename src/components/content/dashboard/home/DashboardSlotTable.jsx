@@ -14,7 +14,7 @@ export default function DashboardSlotTable() {
             <DataArray /> <h2 className="card-title">Slots</h2>
          </ContentHeader>
 
-         <SlotsTable />
+         <SlotsTable exclude={['pnl']} />
       </div>
    );
 }

@@ -4,7 +4,6 @@ import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import MasterLimitsFormConfig from './masterLimitsForm/MasterLimitsForm.config';
-import AccountTrailingStopConfig from '@/components/forms/shared/AccountTrailingStop/AccountTrailingForm.config';
 
 const createMasterForm = new Form({
    schema: [
@@ -32,10 +31,6 @@ const createMasterForm = new Form({
       new ObjectFieldSchema({
          key: 'limits',
          subForm: MasterLimitsFormConfig
-      }),
-      new ObjectFieldSchema({
-         key: 'trailingStop',
-         subForm: AccountTrailingStopConfig
       })
    ]
 });

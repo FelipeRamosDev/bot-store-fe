@@ -1,4 +1,3 @@
-'use client';
 import { useContext } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '../formBase/FormInput';
@@ -9,7 +8,6 @@ import APIContext from '@/contexts/4HandsAPI';
 import Card from '@/components/common/card/Card';
 import { Stack } from '@mui/material';
 import SlotLimitsForm from './slotLimitsForm/SlotLimitsForm';
-import AccountTrailingStop from '../shared/AccountTrailingStop/AccountTrailingStop';
 
 /**
  * `CreateSlot` component provides a form for creating or editing a slot.
@@ -101,7 +99,8 @@ export default function CreateSlot({ slot = {}, master = {}, defaultType, onSucc
                <Card className="input-wrap" padding="xs" elevation={15}>
                   <FormInput path="interval" />
                </Card>
-
+            </>
+            <>
                <Card padding="xs" elevation={15}>
                   <h3 className="card-title">Risk Management</h3>
                   <p className="help-info text-center">You can customize the risk configurations or use the same as master account.</p>
@@ -112,10 +111,7 @@ export default function CreateSlot({ slot = {}, master = {}, defaultType, onSucc
                      <FormInput path="limits.leverage" />
                   </Stack>
                </Card>
-            </>
 
-            <>
-               <AccountTrailingStop />
                <SlotLimitsForm />
             </>
          </ContentSplit>

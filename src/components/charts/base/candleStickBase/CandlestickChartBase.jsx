@@ -112,14 +112,14 @@ export default function CandlestickChartBase({ candles, interval, position, clas
          candlestickSeries.current.setData(candles);
 
          if (!stoplossLine.current && !takeprofitLine.current && position) {
-            if (position.openPrice) entryLine.current = candlestickSeries.current.createPriceLine({
+            entryLine.current = candlestickSeries.current.createPriceLine({
                price: position.openPrice,
                color: '#535f5f',
                lineWidth: 1,
                lineStyle: 3,
             });
 
-            if (position.stopPrice) stoplossLine.current = candlestickSeries.current.createPriceLine({
+            stoplossLine.current = candlestickSeries.current.createPriceLine({
                price: position.stopPrice,
                color: darkTheme.palette.error.main,
                lineWidth: 1,

@@ -16,19 +16,17 @@ import BotResultsGrid from '@/components/grids/botResultsGrid/BotResultsGrid';
 import AltModalHeader from '@/components/headers/altModalHeader/AltModalHeader';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
-import AuthUserContext from '@/contexts/AuthUser';
 
 export default function BotQuickview({ open, bot, setModal }) {
    const API = useContext(APIContext);
-   const { user } = useContext(AuthUserContext);
    const [ resultsLine, setResultsLine ] = useState();
    const requested = useRef();
 
    useEffect(() => {
-      if (typeof bot?._id !== 'string') return;
+      if (!bot) return;
 
       const notEmpty = Object.keys(bot).length;
-      if (notEmpty && !requested.current) {
+      if (notEmpty) {
          requested.current = true;
 
          API.ajax.authGet('/bot/results', {
@@ -62,14 +60,14 @@ export default function BotQuickview({ open, bot, setModal }) {
             </div>
 
             <AltModalHeader backAction={() => setModal(null)}>
-               {(user?._id === bot?.author?.UID) && <CTAButton
+               <CTAButton
                   variant="contained"
                   color="tertiary"
                   url={`/dashboard/bots/${bot.index}`}
                   startIcon={<Edit />}
                >
                   Edit
-               </CTAButton>}
+               </CTAButton>
             </AltModalHeader>
 
             <div className="header-content">

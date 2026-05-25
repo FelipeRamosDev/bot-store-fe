@@ -7,15 +7,11 @@ import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import PlayIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
-import { runSlot } from './SlotTile.helper';
+import { runSlot, stopSlot } from './SlotTile.helper';
 import APIContext from '@/contexts/4HandsAPI';
 import SlotMenu from '@/components/menus/dropdown/slotMenu/SlotMenu';
 import UserInstanceAlert from '@/components/modals/userInstanceAlert/UserInstanceAlert';
 import CryptoCandlestickChart from '@/components/charts/cryptoCandlestickChart/CryptoCandlestickChart';
-import StopSlotConfirmDialog from '@/components/modals/dialogs/stopSlotConfirmDialog/StopSlotConfirmDialog';
-import BotQuickview from '@/components/modals/quickviews/botQuickview/BotQuickview';
-import PositionFullTile from '../positionFullTile/PositionFullTile';
-import NoPosition from './NoPosition';
 
 /**
  * Represents a tile component displaying information about a slot.
@@ -46,14 +42,11 @@ export default function SlotTile({
    setDeleteConfirmDialog,
    setSlotQuickview,
    dummyCandles,
-   setModalPosition,
    ...props
 }) {
    const API = useContext(APIContext);
    const [ disabled, setDisabled ] = useState(false);
    const [ uiAlertState, setUiAlertState ] = useState(false);
-   const [ stopConfirmState, setStopConfirmState ] = useState(false);
-   const [ botQuickview, setBotQuickview ] = useState(false);
    const botName = useRef();
    const botIndex = useRef();
    const isStating = uInstance?.status === 'starting';
@@ -61,8 +54,6 @@ export default function SlotTile({
    const isOffline = uInstance?.status === 'offline';
    const symbol = slot?.assets?.length ? slot?.assets[0] : '';
    const interval = slot?.interval;
-   const positions = slot?.trades || [];
-   const archivedView = slot?.state === 'archived';
 
    if (!botName.current && slot.bot?.name && !botIndex.current && slot.bot?.index) {
       botName.current = slot.bot?.name;
@@ -89,12 +80,12 @@ export default function SlotTile({
                   setDeleteConfirmDialog={setDeleteConfirmDialog}
                />}
 
-               <span className="bot-name link" onClick={() => setBotQuickview(true)}>
+               <Link className="bot-name" href={`/dashboard/bots/${botIndex.current}`}>
                   {botName.current}
-               </span>
+               </Link>
             </div>
 
-            {!minified && slot.state !== 'archived' && <div className="btn-wrap">
+            {!minified && <div className="btn-wrap">
                {slot.status !== 'running' && <RoundIconButton
                   variant="contained"
                   Icon={PlayIcon}
@@ -108,15 +99,9 @@ export default function SlotTile({
                   Icon={StopIcon}
                   size="small"
                   color={disabled && !demoMode ? 'disabled' : 'error'}
-                  onClick={() => setStopConfirmState(true)}
+                  onClick={() => stopSlot(API, slot, disabled, setDisabled, setUiAlertState)}
                />}
             </div>}
-
-            {slot.state === 'archived' && (
-               <div className="btn-wrap">
-                  <StatusBadge className="archived-badge" color="warn">Archived</StatusBadge>
-               </div>
-            )}
          </div>
 
          <div className="slot-data">
@@ -143,36 +128,20 @@ export default function SlotTile({
             </div>
 
             <div className="column">
-               <Price amount={slot.totalRealizedPnl} size={minified ? 'l' : 'xl'} />
+               <Price amount={slot.pnl} size={minified ? 'l' : 'xl'} />
             </div>
          </div>
 
-         <div className="position-painel">
-            {positions.length ? positions.map(position => <PositionFullTile key={position._id} position={position} />) : ''}
+         {chartsDisplay && (
+            <CryptoCandlestickChart
+               symbol={symbol}
+               interval={interval}
+               dummyCandles={dummyCandles}
+               position={slot?.trades.length && slot.trades[0]}
+            />
+         )}
 
-            {!positions.length && <NoPosition slot={slot} uInstance={uInstance} />}
-
-            {chartsDisplay && !archivedView && (
-               <CryptoCandlestickChart
-                  symbol={symbol}
-                  interval={interval}
-                  dummyCandles={dummyCandles}
-                  position={slot?.trades.length && slot.trades[0]}
-               />
-            )}
-         </div>
-
-         {botQuickview && <BotQuickview bot={slot.bot} open={botQuickview} setModal={setBotQuickview} />}
          <UserInstanceAlert alertState={uiAlertState} setAlertState={setUiAlertState} />
-         <StopSlotConfirmDialog
-            slot={slot}
-            API={API}
-            open={stopConfirmState}
-            setOpen={setStopConfirmState}
-            disabled={disabled}
-            setDisabled={setDisabled}
-            setUiAlertState={setUiAlertState}
-         />
       </Card>
    );
 }

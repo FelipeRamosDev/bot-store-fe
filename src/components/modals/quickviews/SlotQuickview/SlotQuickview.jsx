@@ -45,7 +45,6 @@ export default function SlotQuickview({ master, slot, onClose, ...props }) {
             collection="positions"
             filter={{ status: 'closed', botSlot: slot._id }}
             sort={{ closeTime: -1 }}
-            limit={11}
          >
             <PositionsTable />
          </DBQuery>

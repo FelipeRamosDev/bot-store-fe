@@ -51,7 +51,7 @@ export default function MasterDetailsHeader({ setSidebarState }) {
             </div>
          </ContentHeader>
       );
-   }, [ accountType, badgeColor, setSidebarState ]);
+   }, [accountType, badgeColor]);
 
    // Render nothing if data is still loading
    if (isLoading) {

@@ -17,8 +17,6 @@ export default function SectionHeaderBanner({
    imageSize = 170,
    CustomImage = LogoIconDark,
    useRoundButton,
-   startIcon,
-   endIcon,
    onButtonClick = () => {},
    ...props
 }) {
@@ -36,8 +34,6 @@ export default function SectionHeaderBanner({
             className="create-button"
             variant="contained"
             color="rubber"
-            startIcon={startIcon}
-            endIcon={endIcon}
             onClick={onButtonClick}
          >{buttonLabel}</Button>}
 

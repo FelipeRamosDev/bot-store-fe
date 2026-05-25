@@ -5,7 +5,7 @@ import PositionValuesGrid from '@/components/grids/positionValuesGrid/PositionVa
 import OrdersGrid from '@/components/grids/ordersGrid/OrdersGrid';
 import PositionSidebar from './PositionSidebar';
 import PositionDetails from './PositionDetails';
-import PositionError from './PositionErrorFix';
+import PositionParents from './PositionParents';
 
 /**
  * PositionQuickview Component
@@ -27,7 +27,7 @@ export default function PositionQuickview({ position, className = '', onClose = 
    const open = Boolean(position);
    const isMobile = window.innerWidth < 768;
 
-   if (!position || typeof position === 'string') {
+   if (!position) {
       return <></>;
    }
 
@@ -53,10 +53,6 @@ export default function PositionQuickview({ position, className = '', onClose = 
          onClose={onClose}
          {...props}
       >
-         {position?.errorsList?.map((error) => (
-            <PositionError key={error.name} position={position} error={error} />
-         ))}
-
          <ContentSidebar isFullContainer={true}>
             <>
                <PositionValuesGrid position={position} />

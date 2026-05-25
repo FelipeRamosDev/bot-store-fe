@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import SwipeDrawer from '@/components/drawers/base/swipeDrawerTab/SwipeDrawerTab';
 import APIContext from '@/contexts/4HandsAPI';
 import MasterAccumulatedChart from './charts/MasterAccumutaledChart';
@@ -54,23 +54,33 @@ export default function MasterAnalysis({ master = {} }) {
       });
    }, [ API.ajax, masterUID ]);
 
+   const masterAccumulated = useMemo(() => <MasterAccumulatedChart analysisData={analysisData} />, [ analysisData ]);
+   const masterDailyAvg = useMemo(() => <MasterDailyAvgChart analysisData={analysisData} />, [ analysisData ]);
+
+   const masterProfitRatio = useMemo(() => <MasterProfitRatioChart analysisData={analysisData} />, [ analysisData ]);
+   const masterWinLossRate24h = useMemo(() => <MasterWinLossChart {...wlRateProp24h} />, [ analysisData ]);
+   const masterWinLossRate30d = useMemo(() => <MasterWinLossChart {...wlRateProp30d} />, [ analysisData ]);
+   const masterWinLossUSD24h = useMemo(() => <MasterWinLossChart {...wlUSDProp24h} />, [ analysisData ]);
+   const masterWinLossUSD30d = useMemo(() => <MasterWinLossChart {...wlUSDProp30d} />, [ analysisData ]);
+
    return (
       <SwipeDrawer
          className="master-analysis"
          headerTitle="Analysis Charts"
          HeaderIcon={QueryStats}
+         // drawerBleeding={57}
       >
          <div className="charts">
-            <MasterAccumulatedChart analysisData={analysisData} />
-            <MasterDailyAvgChart analysisData={analysisData} />
-            <MasterProfitRatioChart analysisData={analysisData} />
+            {masterAccumulated}
+            {masterDailyAvg}
+            {masterProfitRatio}
          </div>
 
          <div className="charts">
-            <MasterWinLossChart {...wlRateProp24h} />
-            <MasterWinLossChart {...wlRateProp30d} />
-            <MasterWinLossChart {...wlUSDProp24h} />
-            <MasterWinLossChart {...wlUSDProp30d} />
+            {masterWinLossRate24h}
+            {masterWinLossRate30d}
+            {masterWinLossUSD24h}
+            {masterWinLossUSD30d}
          </div>
       </SwipeDrawer>
    );

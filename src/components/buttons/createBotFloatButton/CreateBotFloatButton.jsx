@@ -20,9 +20,8 @@ export default function CreateBotFloatButton() {
 
       <Fab
          className="create-pilot-button mobile"
-         size="large"
+         size="small"
          color="tertiary"
-         onClick={() => setCreateModal(true)}
       >
          <Add />
       </Fab>

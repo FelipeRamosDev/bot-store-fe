@@ -8,7 +8,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import BotValueModal from '@/components/modals/botValueModal/BotValueModal';
-import DeleteBotValueConfirmDialog from '@/components/modals/dialogs/deleteBotValueConfirmDialog/DeleteBotValueConfirmDialog';
+import DeleteBotValueConfirmDialog from '@/components/modals/deleteBotValueConfirmDialog/DeleteBotValueConfirmDialog';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
 import APIContext from '@/contexts/4HandsAPI';

@@ -13,10 +13,6 @@
    .status-badge {
       font-size: 0.6rem;
    }
-   
-   .archived-badge {
-      font-size: 0.7rem;
-   }
 
    .tile-header {
       display: flex;
@@ -28,7 +24,7 @@
          gap: 0.2rem 0.5rem;
          flex-wrap: wrap;
 
-         link {
+         a {
             color: $text;
             text-decoration: none;
 
@@ -92,62 +88,6 @@
          .price-display {
             margin-top: auto;
             text-align: right;
-         }
-      }
-   }
-   
-   .candlestick-chart {
-      background-color: $background-grey2-dark;
-      padding: 0.7rem 0.1rem 0.1rem 0.9rem;
-      border-radius: 0 0 $radius-xs $radius-xs;
-   }
-
-   .position-painel {
-      .position-full-tile {
-         border-radius: $radius-xs $radius-xs 0 0;
-      }
-
-      .empty-tile {
-         background-color: $background-grey2-dark;
-         border-radius: $radius-xs $radius-xs 0 0;
-         display: flex;
-         align-items: center;
-         gap: 0.5rem;
-         margin: 1rem 0 0 0;
-         padding: $padding-s calc($padding-s / 1.2);
-         
-         span {
-            font-size: 0.9rem;
-            color: $text-darken;
-         }
-
-         .led {
-            $led-radius: 7px;
-
-            display: block;
-            height: $led-radius;
-            width: $led-radius;
-            border-radius: calc($led-radius / 2);
-            background-color: $grey-light;
-            transition: all 0.1s;
-
-            &.running {
-               animation: blinking-led 2s infinite;
-            }
-         }
-      
-         @keyframes blinking-led {
-            0% {
-               background-color: $grey-light;
-            }
-
-            50% {
-               background-color: $tertiary;
-            }
-
-            100% {
-               background-color: $grey-light;
-            }
          }
       }
    }

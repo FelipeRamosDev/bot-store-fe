@@ -20,8 +20,8 @@ export default function AuthBasePage({ className, children, ...props }) {
    }
 
    return (
-      <RootAuthProvider {...props}>
-         <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAuth}>
+      <RootAuthProvider>
+         <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAuth} {...props}>
             {children}
          </BasePage>
       </RootAuthProvider>

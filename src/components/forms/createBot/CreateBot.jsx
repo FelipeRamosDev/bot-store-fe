@@ -5,7 +5,6 @@ import FormInput from '../formBase/FormInput';
 import APIContext from '@/contexts/4HandsAPI';
 import createBotForm from './CreateBot.config';
 import AuthUserContext from '@/contexts/AuthUser';
-import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 
 /**
  * A form component for creating or editing a bot.
@@ -68,17 +67,8 @@ export default function CreateBotForm({ editData, onSuccess = () => {} }) {
          editData={editData}
          onSubmit={onSubmit}
       >
-         <ContentSplit>
-            <>
-               <FormInput path="name" />
-               <FormInput path="description" multiline={true} minRows={5} />
-               <FormInput path="allowedIntervals" />
-            </>
-
-            <>
-               <FormInput path="allowedSymbols" />
-            </>
-         </ContentSplit>
+         <FormInput path="name" />
+         <FormInput path="description" multiline={true} minRows={5} />
       </FormBase>
    );
 }

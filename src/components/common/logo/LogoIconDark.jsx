@@ -5,13 +5,11 @@ import { parseClassName } from '@/helpers/parser';
 export default function LogoIconDark({ className, fontSize = 23 }) {
    return (
       <Image
-         className={parseClassName(className, [ 'logo-icon' ])}
+         className={className}
          src={LogoIMG}
          alt="CandlePilot Icon"
          width={fontSize}
          height={fontSize}
-         style={{ width: 'auto', height: 'auto' }}
-         priority
       />
    );
 }

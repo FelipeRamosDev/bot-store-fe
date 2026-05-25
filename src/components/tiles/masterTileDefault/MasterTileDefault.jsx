@@ -87,7 +87,7 @@ export default function MastersTileDefault({ demoMode, className = '', master, m
             <p><b>Month PNL:</b> {master.results?.monthPnl?.toFixed(2)} / {master.results?.monthRoi?.toFixed(2)}%</p>
          </div>
 
-         <Price amount={master.futuresWallet?.totalRealizedPnl} fontSize={18} />
+         <Price amount={master.pnl} fontSize={18} />
       </div>
    </Card>;
 }

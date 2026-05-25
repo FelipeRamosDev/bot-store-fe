@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ConfirmationDialog from '@/components/modals/dialogs/confirmationDialog/ConfirmationDialog';
+import ConfirmationDialog from '@/components/modals/confirmationDialog/ConfirmationDialog';
 import APIContext from '@/contexts/4HandsAPI';
 import { useRouter } from 'next/navigation';
 import DBQueryContext from '@/contexts/DBQuery';

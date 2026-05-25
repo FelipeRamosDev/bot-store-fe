@@ -19,7 +19,7 @@ export default function MasterAccounts() {
          {user && <DBQuery
             type="query"
             collection="master_accounts"
-            filter={{ user: user._id, state: 'active' }}
+            filter={{ user: user._id }}
             limit={10}
             sort={{ pnl: -1 }}
          >

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AlertModal from '../../base/alertModal/AlertModal';
+import AlertModal from '../base/alertModal/AlertModal';
 
 /**
  * A confirmation dialog component that prompts the user to confirm an action.
@@ -23,8 +23,6 @@ export default function ConfirmationDialog({
    const [error, setError] = useState(false);
    const [loading, setLoading] = useState(false);
 
-   const DEFAULT_ERROR = `Error caught during the confirmation process.`;
-
    /**
     * Handles the confirmation action, showing loading state and handling errors.
     * 
@@ -37,7 +35,7 @@ export default function ConfirmationDialog({
       try {
          await handleConfirm();
       } catch (err) {
-         setError(err);
+         setError(true);
       } finally {
          setLoading(false);
       }
@@ -62,7 +60,7 @@ export default function ConfirmationDialog({
             onClose={onClose}
             {...props}
          >
-            <p>{error?.message || DEFAULT_ERROR}</p>
+            <p>Error caught during the confirmation process.</p>
          </AlertModal>
       );
    }

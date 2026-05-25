@@ -61,33 +61,4 @@
          }
       }
    }
-
-   .position-error {
-      .header {
-         background-color: $error-light;
-         border-radius: $radius-xs;
-         padding: 0.5rem 0.5rem 0.5rem 0.8rem;
-         color: $text-error;
-         display: flex;
-         gap: 0.5rem;
-         align-items: center;
-
-         .action-button {
-            margin-left: auto;
-            color: $text-darken;
-         }
-      }
-
-      .fix-form {
-         margin: 1rem 0;
-
-         .buttons {
-            margin-top: 0;
-
-            button {
-               color: $success;
-            }
-         }
-      }
-   }
 }

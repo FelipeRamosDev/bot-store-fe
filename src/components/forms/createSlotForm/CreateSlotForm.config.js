@@ -4,10 +4,7 @@ import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
 import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import slotLimitsForm from './slotLimitsForm/SlotLimitsForm.config';
-import slotTrailingForm from '../shared/AccountTrailingStop/AccountTrailingForm.config';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
-import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
-import CryptoListItem from './CryptoListItem';
 
 const createSlotForm = new Form({
    dependencies: [
@@ -16,7 +13,7 @@ const createSlotForm = new Form({
          queryType: 'endpoint',
          httpRequest: {
             method: 'GET',
-            endpoint: '/exchange/get-symbol-ticks'
+            endpoint: '/exchange/get-assets'
          }
       }
    ],
@@ -54,19 +51,17 @@ const createSlotForm = new Form({
             }
          }
       }),
-      new SearchSelectFieldSchema({
+      new SelectFieldSchema({
          key: 'assets',
          label: 'Crypto Symbol',
          placeholder: 'Pick an option',
          required: true,
          useDependencies: true,
-         ListItem: CryptoListItem,
          options: function (form) {
             const dependency = form.getDependency('symbolsData');
 
             if (dependency && Array.isArray(dependency.data)) {
                return dependency.data.map(item => ({
-                  ...item,
                   label: item.symbol,
                   value: item.symbol
                }));
@@ -122,10 +117,6 @@ const createSlotForm = new Form({
       new ObjectFieldSchema({
          key: 'limits',
          subForm: slotLimitsForm
-      }),
-      new ObjectFieldSchema({
-         key: 'trailingStop',
-         subForm: slotTrailingForm
       })
    ]
 });

@@ -12,7 +12,7 @@ export async function register(parsedBody, API, router) {
       const created = await API.auth.register(parsedBody);
 
       if (created) {
-         router.push('/dashboard?confirmationsent=true');
+         router.push('/');
       }
    } catch (err) {
       throw err;
@@ -40,25 +40,6 @@ export async function login(parsedBody, API, router) {
          router.push('/dashboard');
       }
    } catch (err) {
-      if (err.name === 'USER_EMAIL_NOT_CONFIRMED') {
-         return router.push('/dashboard');
-      }
-
-      throw err;
-   }
-}
-
-export async function forgotPassword(parsedBody, API, setIsSent) {
-   try {
-      const sent = await API.ajax.authPost('/auth/reset-password/send-email', { email: parsedBody.email });
-
-      if (sent.success) {
-         setIsSent('success');
-      } else {
-         setIsSent('fail');
-      }
-   } catch (err) {
-      setIsSent('fail');
       throw err;
    }
 }

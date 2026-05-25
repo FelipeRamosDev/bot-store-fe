@@ -7,9 +7,6 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import { useMenu } from '@/contexts/MenuContext';
-import { useState } from 'react';
-import SlotRunningAlert from '@/components/modals/dialogs/slotRunningAlert/SlotRunningAlert';
-import ArchiveSlotConfirmDialog from '@/components/modals/dialogs/archiveSlotConfirmDialog/ArchiveSlotConfirmDialog';
 
 /**
  * SlotMenu component that provides actions for managing a slot entity.
@@ -30,19 +27,9 @@ import ArchiveSlotConfirmDialog from '@/components/modals/dialogs/archiveSlotCon
  *
  * @returns {JSX.Element} A menu with actions for editing, archiving, or deleting a slot.
  */
-export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal = () => {}, setDeleteConfirmDialog = () => {} }) {
-   const [ slotRunningAlert, setSlotRunningAlert ] = useState(false);
-   const [ archiveSlotDialog, setArchiveSlotDialog ] = useState(false);
+export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotModal, setDeleteConfirmDialog }) {
    const { anchorEl, handleMenuOpen, handleMenuClose } = useMenu();
    const open = Boolean (anchorEl?.id === slot.cod);
-
-   const handleEditSlot = () => {
-      if (slot?.status === 'stopped') {
-         setEditSlotModal(slot);
-      } else {
-         setSlotRunningAlert(true);
-      }
-   }
 
    return (
       <>
@@ -58,18 +45,18 @@ export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotMo
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             transitionDuration={noTrasition ? 0 : undefined}
          >
-            <MenuItem onClick={handleEditSlot}>
+            <MenuItem onClick={() => setEditSlotModal(slot)}>
                <ListItemIcon>
                   <ModeEditIcon fontSize="small" />
                </ListItemIcon>
                Edit
             </MenuItem>
 
-            <MenuItem onClick={() => setArchiveSlotDialog(true)}>
+            <MenuItem onClick={handleMenuClose}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>
-               {slot.state === 'active' ? 'Archive' : 'Activate'}
+               Archive
             </MenuItem>
 
             <MenuItem onClick={() => setDeleteConfirmDialog(slot)}>
@@ -79,9 +66,6 @@ export default function SlotMenu({ slot = {}, noTrasition = false, setEditSlotMo
                Delete Slot
             </MenuItem>
          </Menu>
-
-         <SlotRunningAlert open={slotRunningAlert} setOpen={setSlotRunningAlert} />
-         <ArchiveSlotConfirmDialog slot={slot} open={archiveSlotDialog} setOpen={setArchiveSlotDialog} />
       </>
    );
 }

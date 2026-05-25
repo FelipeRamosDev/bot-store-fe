@@ -12,11 +12,10 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import StopIcon from '@mui/icons-material/Stop';
 import Divider from '@mui/material/Divider';
 import DemoDepositModal from '@/components/modals/demoDepositModal/DemoDepositModal';
-import DeleteMasterConfirmDialog from '@/components/modals/dialogs/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
+import DeleteMasterConfirmDialog from '@/components/modals/deleteMasterConfirmDialog/DeleteMasterCofirmDialog';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import CreateMasterModal from '@/components/modals/createMasterModal/CreateMasterModal';
 import { useMenu } from '@/contexts/MenuContext';
-import ArchiveMasterConfirmDialog from '@/components/modals/dialogs/archiveMasterConfirmDialog/ArchiveMasterConfirmDialog';
 
 /**
  * MasterMenu component that provides various actions for managing a master entity.
@@ -39,7 +38,6 @@ import ArchiveMasterConfirmDialog from '@/components/modals/dialogs/archiveMaste
 export default function MasterMenu({ isDemo = false, master = {}, noTrasition = false }) {
    const [ demoDepositModal, setDemoDepositModal ] = useState(false);
    const [ deleteConfirmDialog, setDeleteConfirmDialog ] = useState(false);
-   const [ archiveConfirmDialog, setArchiveConfirmDialog ] = useState(false);
    const [ exchangeModal, setExchangeModal ] = useState(false);
    const [ editMasterModal, setEditMasterModal ] = useState(false);
    const { anchorEl, open, handleMenuOpen, handleMenuClose } = useMenu();
@@ -88,11 +86,11 @@ export default function MasterMenu({ isDemo = false, master = {}, noTrasition = 
                Edit
             </MenuItem>
 
-            <MenuItem onClick={() => setArchiveConfirmDialog(true)}>
+            <MenuItem onClick={handleMenuClose}>
                <ListItemIcon>
                   <ArchiveIcon fontSize="small" />
                </ListItemIcon>
-               {master.state === 'active' ? 'Archive' : 'Activate'}
+               Archive
             </MenuItem>
 
             <MenuItem onClick={() => setDeleteConfirmDialog(true)}>
@@ -111,12 +109,6 @@ export default function MasterMenu({ isDemo = false, master = {}, noTrasition = 
             master={master}
             open={deleteConfirmDialog}
             setOpen={setDeleteConfirmDialog}
-         />
-
-         <ArchiveMasterConfirmDialog
-            master={master}
-            open={archiveConfirmDialog}
-            setOpen={setArchiveConfirmDialog}
          />
       </>
    );

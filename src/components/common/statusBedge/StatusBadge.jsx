@@ -1,5 +1,3 @@
-import ErrorIcon from '@mui/icons-material/Error';
-
 /**
  * Parses and returns badge type and color based on the given slot type.
  *
@@ -119,33 +117,6 @@ function parsePositionStatus(status) {
    }
 }
 
-function parseLeverage(leverage) {
-   let badgeColor = 'disabled';
-
-   if (isNaN(leverage)) {
-      badgeColor = 'disabled';
-   } else {
-      leverage = Number(leverage);
-   }
-
-   if (leverage <= 10) {
-      badgeColor = 'success';
-   }
-
-   else if (leverage > 10 && leverage <= 50) {
-      badgeColor = 'warn';
-   }
-
-   else if (leverage > 50 && leverage <= 125) {
-      badgeColor = 'error';
-   }
-
-   return {
-      color: badgeColor,
-      children: leverage + 'x'
-   };
-}
-
 /**
  * Parses and returns badge side and color based on the given position side.
  *
@@ -205,15 +176,15 @@ export function parseOrderStatus(status) {
  *
  * @param {Object} props - The props object.
  * @param {string} [props.className=''] - Additional CSS classes to apply to the badge.
- * @param {'slot-status'|'account-type'|'leverage'|'position-side'|'position-status'|'order-status'|'error'} [props.type=''] - The type of badge to display (e.g., 'slot-status', 'account-type', 'position-side').
- * @param {'outlined'|'contained'|'light'} [props.variant] - The variant of the badge (e.g., 'outlined', 'contained').
+ * @param {string} [props.type=''] - The type of badge to display (e.g., 'slot-status', 'account-type', 'position-side').
+ * @param {string} [props.variant] - The variant of the badge (e.g., 'outlined', 'contained').
  * @param {boolean} [props.minified=false] - Set to true if you want the minified view.
  * @param {string} [props.color='disabled'] - The color of the badge.
  * @param {string} [props.children] - The content to display inside the badge.
  *
  * @returns {JSX.Element} The rendered `span` element with the badge.
  */
-export default function StatusBadge({ className = '', type, variant, color = 'disabled', minified = false, children, ...props }) {
+export default function StatusBadge({ className = '', type, variant, color = 'disabled', minified = false, children }) {
    if (type === 'slot-status') {
       const parsed = parseSlotStutus(children, minified);
 
@@ -235,13 +206,6 @@ export default function StatusBadge({ className = '', type, variant, color = 'di
       children = parsed.side;
    }
 
-   if (type === 'leverage') {
-      const parsed = parseLeverage(children);
-
-      color = parsed.color;
-      children = parsed.children;
-   }
-
    if (type === 'position-status') {
       const parsed = parsePositionStatus(children);
 
@@ -254,14 +218,9 @@ export default function StatusBadge({ className = '', type, variant, color = 'di
       color = parsedColor;
    }
 
-   if (type === 'error') {
-      color = 'error';
-   }
-
    return <span
       className={`${className} status-badge`}
       color={color}
       variant={variant}
-      {...props}
-   >{type === 'error' ? <ErrorIcon color="error" fontSize="1.1rem" /> : ''}{children}</span>
+   >{children}</span>
 }
