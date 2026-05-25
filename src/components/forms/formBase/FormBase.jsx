@@ -22,6 +22,8 @@ export default FormBaseContext;
  * @param {Function} [props.onReady=async () => {}] - Function to call when the form is ready to use.
  * @param {boolean} [props.clearPrevent=false] - Prevent the form to be cleared on initialization.
  * @param {Boolean} [props.hideSubmit] - If true, the submit button will not be displayed.
+ * @param {Boolean} [props.submitBtnFullwidth] - Make the submit button fullwidth.
+ * @param {Boolean} [props.submitBtnColor] - Changes the submit button color.
  * @param {Object} [props.editData] - Data to populate the form for editing.
  * @param {ReactNode} props.children - Child components or form fields to be rendered inside the form.
  *
@@ -38,6 +40,10 @@ export function FormBase({
    onReady = () => {},
    onUnmount = () => {},
    hideSubmit = false,
+   submitBtnFullwidth = false,
+   submitBtnColor = 'tertiary',
+   submitButtonStartIcon,
+   submitButtonEndIcon,
    clearPrevent = false,
    editData,
    children,
@@ -136,8 +142,11 @@ export function FormBase({
             <LoadingButton
                type="submit"
                variant="contained"
-               color="tertiary"
+               color={submitBtnColor}
                loading={loading}
+               fullWidth={submitBtnFullwidth}
+               startIcon={submitButtonStartIcon}
+               endIcon={submitButtonEndIcon}
             >{submitLabel}</LoadingButton>
          </div>}
       </form>}

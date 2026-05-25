@@ -1,0 +1,97 @@
+.email-not-confirmed {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   .info-card {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      margin-top: 10rem;
+      max-width: $screen-m;
+      padding: $padding-s;
+      width: 95%;
+
+      @media screen and (min-width: $screen-m) {
+         padding: $padding-l;
+      }
+
+      .title-wrap {
+         display: flex;
+         gap: 0.6rem;
+         width: 100%;
+         align-items: center;
+         justify-content: center;
+         transform: translateX(-4px);
+         margin-bottom: 0.5rem;
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 1rem;
+            justify-content: center;
+         }
+
+         .icon {
+            font-size: 2.5rem;
+
+            @media screen and (min-width: $screen-m) {
+               font-size: 3.6rem;
+            }
+         }
+
+         .card-title {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0;
+
+            @media screen and (min-width: $screen-m) {
+               font-size: 1.5rem;
+            }
+         }
+      }
+
+      p {
+         margin: 0;
+         font-size: 1rem;
+         line-height: 1.4rem;
+         text-align: center;
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 1rem;
+         }
+      }
+
+      .resend-message {
+         margin-top: 0.5rem;
+         font-size: 0.9rem;
+         color: $text-darken;
+      }
+
+      .callback {
+         padding: $padding-xs;
+         border-radius: $radius-s;
+         border-width: 1px;
+         border-style: solid;
+         margin-top: 0.8rem;
+         width: 100%;
+
+         .callback-text {
+            text-align: center;
+         }
+
+         &.success {
+            border-color: $success;
+            color: $success;
+         }
+
+         &.fail {
+            border-color: $error;
+            color: $error;
+         }
+      }
+
+      .resent-button {
+         margin-top: 0.8rem;
+         margin-bottom: 0;
+      }
+   }
+}

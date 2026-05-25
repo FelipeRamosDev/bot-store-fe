@@ -63,7 +63,7 @@ export default class Form {
 
          if (schema) {
             const parsed = schema.parse();
-            if (parsed) data[key] = parsed;
+            if (parsed !== undefined) data[key] = parsed;
          } else {
             if (item) data[key] = item;
          }

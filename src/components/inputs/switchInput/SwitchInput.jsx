@@ -15,8 +15,8 @@ import { FormControlLabel, Switch } from '@mui/material';
  * @returns {JSX.Element} A form control label with a switch input.
  */
 export default function SwitchInput({ className = '', schema, onChange = () => {}, style, ...props }) {
-   const { label, form } = schema || {};
-   const defaultValue = Boolean(schema.getEditValue());
+   const { label, defaultValue, form } = schema || {};
+   const editValue = Boolean(schema.getEditValue());
 
    return (
       <FormControlLabel
@@ -26,7 +26,7 @@ export default function SwitchInput({ className = '', schema, onChange = () => {
          control={(
             <Switch
                color="success"
-               defaultChecked={Boolean(defaultValue)}
+               defaultChecked={form?.editMode ? Boolean(editValue) : Boolean(defaultValue)}
                onChange={(ev) => (
                   onChange({ target: { value: ev.target.checked }})
                )}

@@ -70,8 +70,13 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
                      <p style={{ marginTop: 3 }}>
                         {value}{' '}
                         <StatusBadge variant="light" type="account-type" minified={true}>{item.type}</StatusBadge>{' '}
-                        <StatusBadge variant="light" type="position-side" minified={true}>{item.positionType}</StatusBadge>
+                        <StatusBadge variant="light" type="position-side" minified={true}>{item.positionType}</StatusBadge>{' '}
+                        {item.errorsList.length ? (
+                           <StatusBadge type="error">error</StatusBadge>
+                        ) : ''}
                      </p>
+
+                     {item.verificationError && item.verificationError.name}
                   </>;
                }
             },

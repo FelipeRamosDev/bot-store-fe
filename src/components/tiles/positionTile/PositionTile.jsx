@@ -31,7 +31,7 @@ export default function PositionTile({ position = {}, slotIsRunning = false, cla
          className={`position-tile ${className} ${cursor}`}
          padding="xs"
          radius="xs"
-         elevation={20}
+         elevation={10}
          value={position.pnl || 0}
          onClick={() => openPosition(position._id)}
          {...props}

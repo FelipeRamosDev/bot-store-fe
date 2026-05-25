@@ -64,12 +64,12 @@ export default function SpeedDialButton({
       >
          {options.map((action) => (
             <SpeedDialAction
-               PopperProps={{ color }}
                sx={{ color }}
                key={action.tooltipTitle}
                icon={action.Icon}
                color={color}
                tooltipTitle={action.tooltipTitle}
+               tooltipOpen
                onClick={action.onClick}
             />
          ))}

@@ -10,8 +10,8 @@ import CloseIcon from '@mui/icons-material/Close';
  * @param {boolean} [props.open=false] - Controls the open state of the modal.
  * @param {boolean} [props.hideHeader=false] - If true, hides the header section of the modal.
  * @param {string} [props.className=''] - Additional CSS class names for the modal.
- * @param {string} [props.size='medium'] - Size of the modal. Can be 'small', 'medium', or 'large'.
- * @param {string} [props.padding=''] - Padding around the content of the modal. Options are 'xs', 's', 'm', 'l', 'xl'.
+ * @param {'small'|'medium'|'large'} [props.size='medium'] - Size of the modal. Can be 'small', 'medium', or 'large'.
+ * @param {'xs'|'s'|'m'|'l'|'xl'} [props.padding=''] - Padding around the content of the modal. Options are 'xs', 's', 'm', 'l', 'xl'.
  * @param {function} [props.onClose=() => {}] - Callback function invoked when the modal is closed.
  * @param {string} [props.title] - Title to display in the header of the modal.
  * @param {React.ReactNode} [props.children] - Content to display inside the modal.

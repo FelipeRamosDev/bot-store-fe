@@ -12,6 +12,7 @@ import { Wallet } from '@mui/icons-material';
 import SpeedDialButton from '@/components/buttons/speedDialButton/SpeedDialButton';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
+import { useRouter } from 'next/navigation';
 
 /**
  * DashboardContent component displays the main content for the dashboard.
@@ -28,16 +29,17 @@ export default function DashboardContent() {
    const [ createMasterModal, setCreateMasterModal ] = useState(false);
    const [ createBotModal, setCreateBotModal ] = useState(false);
    const { user } = useContext(AuthUserContext);
+   const router = useRouter();
 
    const addButtonOpt = [
       {
          Icon: <Wallet />,
-         tooltipTitle: 'Master Account',
+         tooltipTitle: 'CREATE MASTER',
          onClick: () => setCreateMasterModal(true)
       },
       {
          Icon: <SmartToyIcon />,
-         tooltipTitle: 'Pilot Bot',
+         tooltipTitle: 'CREATE PILOT',
          onClick: () => setCreateBotModal(true)
       }
    ];
@@ -52,11 +54,10 @@ export default function DashboardContent() {
       <DBQuery
          type="query"
          collection="master_accounts"
-         filter={{ user: user._id }}
-         sort={{ pnl: -1 }}
-         subscribe={true}
+         filter={{ user: user._id, state: 'active' }}
+         sort={{ ['futuresWallet.totalRealizedPnl']: -1 }}
       >
-         <MastersGrid createMasterModal={createMasterModal} />
+         <MastersGrid createMasterModal={setCreateMasterModal} />
       </DBQuery>
 
       {/* Slots and Positions Tables */}
@@ -64,7 +65,7 @@ export default function DashboardContent() {
          <DBQuery
             type="query"
             collection="slots"
-            filter={{ user: user._id }}
+            filter={{ user: user._id, state: 'active' }}
             sort={{ pnl: -1 }}
             limit={6}
          >
@@ -95,7 +96,7 @@ export default function DashboardContent() {
          open={createMasterModal}
          onClose={() => setCreateMasterModal(false)}
       >
-         <CreateMasterForm onSuccess={() => setCreateMasterModal(false)} />
+         <CreateMasterForm onSuccess={(master) => master?._id && router.push(`/dashboard/master-accounts/${master.index}`)} />
       </ContentModal>
 
       {/* Modal for Creating a Pilot */}

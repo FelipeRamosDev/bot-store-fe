@@ -7,7 +7,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Folder from '@mui/icons-material/Folder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import RubberButton from '@/components/buttons/rubberButton/RubberButton';
-import DeleteBotConfirmDialog from '@/components/modals/deleteBotConfirmDialog/DeleteBotConfirmDialog';
+import DeleteBotConfirmDialog from '@/components/modals/dialogs/deleteBotConfirmDialog/DeleteBotConfirmDialog';
 import { Edit } from '@mui/icons-material';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 

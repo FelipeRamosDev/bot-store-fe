@@ -2,7 +2,7 @@
    display: flex;
    gap: 1rem;
    flex-wrap: wrap;
-   margin-top: 1rem;
+   margin: 2rem 0 1rem 0;
 
    .position-tile {
       flex: calc(33.33% - 0.666666rem);
@@ -17,5 +17,11 @@
          flex: 100%;
          max-width: 100%;
       }
+   }
+
+   .header-wrap {
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
    }
 }

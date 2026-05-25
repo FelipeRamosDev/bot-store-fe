@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import DBQueryContext, { DBQuery } from "@/contexts/DBQuery";
+import DBQueryContext from "@/contexts/DBQuery";
 import PageSpinner from '@/components/load/pageSpinner/PageSpinner';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
 import MasterPnlGrid from '@/components/grids/masterPnlGrid/MasterPnlGrid';
@@ -48,7 +48,13 @@ export default function MasterDetailsContent({ uInstance, setEditSlotModal, setD
       </ContentSplit>
 
       {positions.length > 0 && <PositionsGrid title="Ongoing Positions" positions={positions} />}
-      <SlotsGrid slots={doc.slots} master={doc} uInstance={uInstance} setEditSlotModal={setEditSlotModal} setDeleteConfirmDialog={setDeleteConfirmDialog} />
+      <SlotsGrid
+         slots={doc.slots}
+         master={doc}
+         uInstance={uInstance}
+         setEditSlotModal={setEditSlotModal}
+         setDeleteConfirmDialog={setDeleteConfirmDialog}
+      />
 
       <MasterAnalysis master={doc} />
    </>;
