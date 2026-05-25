@@ -2,6 +2,7 @@ import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
 import BinanceIntegration from './binanceIntegration/BinanceIntegration';
 import ChooseBot from './chooseBot/ChooseBot';
 import CreateYourBot from './createYourBot/CreateYourBot';
+import PlansSection from './plansSection/PlansSection';
 
 export default function HomeContent() {
    return (<>
@@ -11,6 +12,7 @@ export default function HomeContent() {
          <BinanceIntegration />
          <ChooseBot />
          <CreateYourBot />
+         <PlansSection />
       </div>
    </>);
 }
