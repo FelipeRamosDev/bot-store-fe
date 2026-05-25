@@ -1,6 +1,7 @@
 .texture-paper-ellipses {
    background: $grad-dark-primary-tertiary;
    overflow: hidden;
+   position: relative;
 
    .content-wrap {
       position: relative;

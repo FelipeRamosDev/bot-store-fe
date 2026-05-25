@@ -1,0 +1,15 @@
+.plans-section {
+   position: relative;
+   margin: 0;
+   padding: $padding-xl 0 calc($padding-xl * 2) 0;
+
+   .section-title {
+      text-align: center;
+   }
+
+   .plans-container {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+   }
+}

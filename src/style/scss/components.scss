@@ -40,6 +40,7 @@
 @import "../../components/content/dashboard/user/myPilots/MyPilots.scss";
 @import "../../components/content/dashboard/emailNotConfirmed/EmailNotConfirmed.scss";
 @import "../../components/content/dashboard/resetPassword/ResetPassword.scss";
+@import "../../components/content/home/plansSection/PlansSection.scss";
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
@@ -137,6 +138,9 @@
 
 // Tooltips
 @import "../../components/tooltips/base/TooltipBase.scss";
+
+//Payment
+@import "../../components/payment/PriceCard/PriceCard.scss";
 
 .price-display,
 .percent-display {
