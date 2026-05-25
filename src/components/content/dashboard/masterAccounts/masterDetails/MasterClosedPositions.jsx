@@ -22,7 +22,7 @@ export default function MasterClosedPositions() {
             type="query"
             collection="positions"
             filter={{ status: 'closed', master: doc._id }}
-            sort={{ modifiedAt: -1 }}
+            sort={{ closeTime: -1 }}
             limit={11}
          >
             <div className="closed-positions">

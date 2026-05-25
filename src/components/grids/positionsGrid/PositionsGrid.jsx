@@ -1,7 +1,9 @@
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import PositionTile from '@/components/tiles/positionTile/PositionTile';
 import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
-import { useState } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { useEffect, useState } from 'react';
 
 /**
  * PositionsGrid component displays a grid of positions with an optional title.
@@ -29,7 +31,17 @@ import { useState } from 'react';
  */
 export default function PositionsGrid({ title = 'Positions', className = '', positions = [], ...props }) {
    const [ modalPosition, setModalPosition ] = useState('');
+   const [ expanded, setExpanded ] = useState('expanded');
    let position;
+
+   const toggleExpanded = () => {
+      setExpanded(prev => {
+         const newVal = prev === 'expanded' ? 'folded' : 'expanded';
+
+         localStorage.setItem('ongoing_positions_expanded', newVal);
+         return newVal;
+      });
+   }
 
    if (modalPosition) {
       positions.map(item => {
@@ -39,12 +51,23 @@ export default function PositionsGrid({ title = 'Positions', className = '', pos
       });
    }
 
+   useEffect(() => {
+      const localExpanded = localStorage.getItem('ongoing_positions_expanded');
+
+      if (localExpanded) {
+         setExpanded(localExpanded);
+      }
+   }, []);
+
    return <div className={`positions-grid ${className}`} {...props}>
-      <ContentHeader>
+      <ContentHeader className="header-wrap" onClick={toggleExpanded}>
          <h3 className="header-title">{title}</h3>
+
+         {expanded === 'expanded' && <ExpandLessIcon fontSize="medium" />}
+         {expanded === 'folded' && <ExpandMoreIcon fontSize="medium" />}
       </ContentHeader>
 
-      {positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />)}
+      {expanded === 'expanded' && positions.map(position => <PositionTile key={position._id} position={position} openPosition={setModalPosition} />)}
 
       <PositionQuickview position={position} onClose={() => setModalPosition('')} />
    </div>

@@ -62,12 +62,23 @@ export default function LineChartBase({
          }
 
          else if (multiLineChart.current) {
+            const depCheck = {};
             multiLineChart.current.forEach(item => item.chart.setData([]))
             multiLineChart.current.clear();
 
-            multiline.map(lineData => {
+            multiline.map((lineData, i) => {
                const line = new LineChartConfig(lineData);
                const initChart = chart.current.addLineSeries({ color: line.lineColor || singleLineColor });
+
+               line.values = line.values.map((item) => {
+                  const key = item.time + i;
+                  if (depCheck[key]) return;
+
+                  depCheck[key] = item;
+                  item.time = new Date(item.time).getTime();
+
+                  return item;
+               }).filter(item => item);
 
                initChart.setData(line.values);
                line.setChart(initChart);

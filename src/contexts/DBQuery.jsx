@@ -30,6 +30,7 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
    const instance = useContext(APIContext);
    const [ loading, setLoading ] = useState(true);
    const [ query, setQuery ] = useState();
+   const [ customFilter, setCustomFilter ] = useState(filter);
    const [ doc, setDoc ] = useState();
    const socket = useRef();
    const subscriptionID = useRef();
@@ -126,12 +127,18 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
       }
    }
 
+   async function setFilter(data) {
+      setLoading(true);
+      setQuery(null);
+      setCustomFilter({ ...filter, ...data });
+   }
+
    useEffect(() => {
       if (query || doc) {
          return;
       }
 
-      querySet.current = instance.dbQuery(collection, filter);
+      querySet.current = instance.dbQuery(collection, customFilter);
 
       if (limit) {
          querySet.current.limit(limit);
@@ -219,7 +226,7 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
 
             break;
       }
-   }, [ instance, type, collection, filter, limit, sort, page, populateMethod, query, subscribe, doc, onData ]);
+   }, [ instance, type, collection, customFilter, limit, sort, page, populateMethod, query, subscribe, doc, onData ]);
 
    return <DBQueryContext.Provider value={{
       socket,
@@ -227,6 +234,8 @@ export function DBQuery({ type, collection, filter, limit, sort, page, populateM
       doc: doc,
       limit: querySet.current?.options?.limit || limit,
       query: query || [],
+      filter: customFilter,
+      setFilter,
       goPage,
       reloadLimit,
       refresh

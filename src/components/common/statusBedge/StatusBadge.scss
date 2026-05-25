@@ -6,6 +6,9 @@
    padding: 0.2rem 0.4rem;
    text-align: center;
    background-color: $grey;
+   display: inline-flex;
+   align-items: center;
+   gap: 0.2rem;
 
    &[color=disabled] {
       background-color: $grey;
@@ -40,6 +43,10 @@
    &[color=error] {
       background-color: $error;
       color: $text-error;
+
+      .MuiSvgIcon-colorError {
+         color: $text-error;
+      }
    }
 
    &[variant=light] {
