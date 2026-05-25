@@ -19,6 +19,8 @@
     "@mui/material": "^5.16.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-date-pickers": "^7.12.1",
+    "@stripe/react-stripe-js": "^6.4.0",
+    "@stripe/stripe-js": "^9.6.0",
     "4hands-api": "^0.7.9",
     "binance-sync": "^0.2.11",
     "dayjs": "^1.11.12",
@@ -28,6 +30,7 @@
     "react-dom": "^18",
     "sass": "^1.77.8",
     "sharp": "^0.33.5",
+    "stripe": "^22.1.1",
     "styled-components": "^6.1.12"
   },
   "devDependencies": {
