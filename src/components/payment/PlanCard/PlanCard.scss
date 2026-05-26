@@ -1,0 +1,42 @@
+.plan-card {
+   padding: $padding-m;
+   min-width: 250px;
+   min-height: 300px;
+   display: flex;
+   flex-direction: column;
+   
+   .plan-summary {
+      text-align: center;
+   }
+
+   .card-content {
+      margin-bottom: $padding-m;
+
+      .plan-title {
+         font-size: 1.4rem;
+         margin-top: 0;
+      }
+   
+      .plan-title,
+      .plan-price {
+         text-align: center;
+      }
+
+      .interval-toggle {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin: $padding-s 0;
+
+         .switch-input {
+            max-width: min-content;
+            margin-right: 0;
+            margin-left: 0;
+         }
+      }
+   }
+
+   .select-plan-button {
+      margin-top: auto;
+   }
+}
