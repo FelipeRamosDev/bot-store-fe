@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useEffect, useState, useContext, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import APIContext from './4HandsAPI';
 import LoadingPage from '@/app/loading';
 import ErrorPage from '@/app/error';
@@ -29,6 +29,7 @@ export function AuthUserProvider({ children, ...props }) {
    const instance = useContext(APIContext);
    const router = useRouter();
    const userChecked = useRef();
+   const searchParams = useSearchParams();
 
    useEffect(() => {
       if (userChecked.current) return;
@@ -40,12 +41,18 @@ export function AuthUserProvider({ children, ...props }) {
          }
 
          if (authData.isLogged) {
-            const userLetters = authData?.user?.fullName.split(' ').map(word => word[0]?.toUpperCase() || '').join('');
+            const userLetters = authData?.user?.fullName?.split(' ').map(word => word[0]?.toUpperCase() || '').join('') || '';
 
             window.localStorage.setItem('userLetters', userLetters);
+
+            if (window.location.pathname !== '/subscribe-plan' && !authData?.user?.subscribedPlan) {
+               return router.push('/subscribe-plan');
+            }
+
+            // router.push('/admin');
             setUserAuth(authData);
          } else {
-            router.push('/dashboard/login');
+            router.push(searchParams.size ? `/dashboard/login?${searchParams.toString()}` : '/dashboard/login');
          }
       }).catch(err => {
          setError(err);

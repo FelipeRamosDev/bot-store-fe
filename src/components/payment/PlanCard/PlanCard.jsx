@@ -2,7 +2,6 @@ import CTAButton from "@/components/buttons/ctaButton/CTAButton";
 import Card from "@/components/common/card/Card";
 import { FormBase } from "@/components/forms/formBase/FormBase";
 import FormInput from "@/components/forms/formBase/FormInput";
-import SwitchInput from "@/components/inputs/switchInput/SwitchInput";
 import Form from "@/models/Form";
 import SwitchFieldSchema from "@/models/Form/fieldTypes/SwitchFieldSchema";
 import { useRouter } from "next/navigation";
@@ -23,7 +22,7 @@ export default function PlanCard({ productId, title, prices = [], summary }) {
    });
 
    const handleSubmit = () => {
-      router.push(`?plan=${productId}&priceId=${selectedPrice?.priceId}`);
+      router.push(`/subscribe-plan?productId=${productId}&priceId=${selectedPrice?.priceId}&register=true`);
    };
 
    return (
