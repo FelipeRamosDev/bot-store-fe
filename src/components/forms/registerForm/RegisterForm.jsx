@@ -34,6 +34,24 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
             <FormInput path="password" />
             <FormInput path="confirmPassword" />
          </div>
+
+         <div className="input-wrap">
+            <FormInput path="billingAddress.address1" />
+         </div>
+
+         <div className="input-wrap">
+            <FormInput path="billingAddress.address2" />
+         </div>
+
+         <div className="input-wrap">
+            <FormInput path="billingAddress.city" />
+            <FormInput path="billingAddress.state" />
+         </div>
+
+         <div className="input-wrap">
+            <FormInput path="billingAddress.postalCode" />
+            <FormInput path="billingAddress.country" />
+         </div>
       </FormBase>
    );
 }
