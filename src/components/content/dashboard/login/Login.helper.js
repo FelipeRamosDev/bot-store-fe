@@ -9,7 +9,7 @@
  */
 export async function register(parsedBody, API, router) {
    try {
-      const created = await API.auth.register(parsedBody);
+      const created = await API.auth.register(parsedBody, '/user/signup');
 
       if (created) {
          router.push('/dashboard?confirmationsent=true');
