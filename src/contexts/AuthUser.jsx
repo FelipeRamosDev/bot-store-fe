@@ -41,6 +41,10 @@ export function AuthUserProvider({ children, ...props }) {
          }
 
          if (authData.isLogged) {
+            if (authData.name === 'USER_EMAIL_NOT_CONFIRMED') {
+               return setError(authData);
+            }
+
             const userLetters = authData?.user?.fullName?.split(' ').map(word => word[0]?.toUpperCase() || '').join('') || '';
 
             window.localStorage.setItem('userLetters', userLetters);
