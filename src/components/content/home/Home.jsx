@@ -1,10 +1,15 @@
+'use client';
+
 import HomeTopBanner from '@/components/banners/homeTopBanner/HomeTopBanner';
 import BinanceIntegration from './binanceIntegration/BinanceIntegration';
 import ChooseBot from './chooseBot/ChooseBot';
 import CreateYourBot from './createYourBot/CreateYourBot';
 import PlansGrid from '../../grids/plansGrid/PlansGrid';
+import usePlans from '@/hooks/usePlans';
 
 export default function HomeContent() {
+   const { plans, loading } = usePlans();
+
    return (<>
       <HomeTopBanner />
 
@@ -12,7 +17,7 @@ export default function HomeContent() {
          <BinanceIntegration />
          <ChooseBot />
          <CreateYourBot />
-         <PlansGrid />
+         <PlansGrid plans={plans} loading={loading} />
       </div>
    </>);
 }
