@@ -30,7 +30,7 @@ export async function register(parsedBody, API, router) {
  */
 export async function login(parsedBody, API, router) {
    try {
-      const logged = await API.auth.login(parsedBody.email, parsedBody.password);
+      const logged = await API.auth.login(parsedBody.email, parsedBody.password, '/user/signin');
 
       if (logged.error) {
          throw logged;

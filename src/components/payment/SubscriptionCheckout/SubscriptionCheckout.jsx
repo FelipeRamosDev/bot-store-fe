@@ -46,8 +46,8 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
             return;
          }
 
-         setClientSecret(initialized.clientSecret);
          setSubscriptionId(initialized.subscriptionId);
+         setClientSecret(initialized.clientSecret);
       } catch (err) {
          setError(err.message || 'An error occurred while initializing the subscription checkout.');
       } finally {
@@ -97,7 +97,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
             {error && <Alert severity="error">{error}</Alert>}
             {message && <Alert severity="success">{message}</Alert>}
 
-            {loading && (
+            {(loading  || !clientSecret) && (
                <Skeleton variant="rectangular" width="100%" height={200} />
             )}
 
