@@ -1,35 +1,14 @@
 'use client';
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { Skeleton } from "@mui/material";
 import PlanCard from "../../payment/PlanCard/PlanCard";
-import APIContext from "@/contexts/4HandsAPI";
-import AJAX from "4hands-api/client/services/AJAX";
 import { useSearchParams } from "next/navigation";
 
-export default function PlansGrid() {
-   const query = useRef();
-   const [plans, setPlans] = useState([]);
-   const instance = useContext(APIContext);
+export default function PlansGrid({ plans = [], loading = false }) {
    const params = useSearchParams();
    const productId = params.get("productId");
    const priceId = params.get("priceId");
    const selectedPlan = plans.find(plan => plan.productId === productId);
-   const selectedPrice = selectedPlan?.prices.find(price => price.priceId === priceId);
-
-   useEffect(() => {
-      const ajax = new AJAX({ rejectUnauthorized: false }, instance);
-
-      if (query.current) {
-         return;
-      }
-
-      query.current = ajax.get('/plans/list-active').then(res => {
-         setPlans(res);
-      }).catch(err => {
-         console.error("Error fetching plans:", err);
-         setPlans([]);
-      });
-   }, []);
 
    return (
       <section className="plans-section">
@@ -44,6 +23,7 @@ export default function PlansGrid() {
                   <PlanCard
                      key={selectedPlan.id}
                      productId={selectedPlan.productId}
+                     priceId={priceId}
                      title={selectedPlan.name}
                      prices={selectedPlan.prices}
                      summary={selectedPlan.summary}
@@ -57,7 +37,14 @@ export default function PlansGrid() {
                      summary={plan.summary}
                   />
                ))}
+
+               {loading && (<>
+                  <Skeleton className="plan-card" variant="rectangular" height={200} />
+                  <Skeleton className="plan-card" variant="rectangular" height={200} />
+                  <Skeleton className="plan-card" variant="rectangular" height={200} />
+               </>)}
             </div>
+
          </div>
       </section>
    );
