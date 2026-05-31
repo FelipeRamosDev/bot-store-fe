@@ -44,13 +44,13 @@ export function AuthUserProvider({ children, ...props }) {
             const userLetters = authData?.user?.fullName?.split(' ').map(word => word[0]?.toUpperCase() || '').join('') || '';
 
             window.localStorage.setItem('userLetters', userLetters);
-
+            setUserAuth(authData);
+            
             if (window.location.pathname !== '/subscribe-plan' && !authData?.user?.subscribedPlan) {
                return router.push('/subscribe-plan');
+            } else if (window.location.pathname === '/subscribe-plan' && authData?.user?.subscribedPlan) {
+               return router.push('/dashboard');
             }
-
-            // router.push('/admin');
-            setUserAuth(authData);
          } else {
             router.push(searchParams.size ? `/dashboard/login?${searchParams.toString()}` : '/dashboard/login');
          }
