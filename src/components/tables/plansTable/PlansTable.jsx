@@ -48,13 +48,6 @@ export default function PlansTable() {
                }
             },
             {
-               propKey: 'productId',
-               label: 'Product ID',
-               style: {
-                  minWidth: '130px',
-               },
-            },
-            {
                propKey: 'summary',
                label: 'Summary',
                style: {
