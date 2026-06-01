@@ -4,7 +4,7 @@ import TopHeaderAuth from "@/components/headers/topHeader/TopHeaderAuth";
 
 export default function AdminBasePage({ children, className, ...props }) {
    return (
-      <RootAuthProvider {...props}>
+      <RootAuthProvider rules={['master']} {...props}>
          <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAuth}>
             {children}
          </BasePage>

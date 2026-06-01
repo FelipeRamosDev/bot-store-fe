@@ -23,7 +23,7 @@ export default AuthUserContext;
  *
  * @returns {JSX.Element} The context provider component with loading and error handling.
  */
-export function AuthUserProvider({ children, ...props }) {
+export function AuthUserProvider({ children, rules = [], ...props }) {
    const [ userAuth, setUserAuth ] = useState();
    const [ error, setError ] = useState();
    const instance = useContext(APIContext);
@@ -41,6 +41,13 @@ export function AuthUserProvider({ children, ...props }) {
          }
 
          if (authData.isLogged) {
+            const userRoles = authData?.user?.rules || [];
+            const hasRequiredRole = rules.length === 0 || rules.some(role => userRoles.includes(role));
+
+            if (!hasRequiredRole) {
+               return setError({ error: true, message: 'Unauthorized: Insufficient permissions' });
+            }
+
             if (authData.name === 'USER_EMAIL_NOT_CONFIRMED') {
                return setError(authData);
             }
