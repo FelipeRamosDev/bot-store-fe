@@ -1,6 +1,7 @@
 import registerForm from './RegisterForm.config';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
+import { RuleControl } from '@/components/common/RuleControl';
 
 /**
  * `RegisterForm` component for user registration.
@@ -21,6 +22,12 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
          onSubmit={onSubmit}
          {...props}
       >
+         <RuleControl rules={['master', 'admin']}>
+            <div className="input-wrap">
+               <FormInput path="rules" />
+            </div>
+         </RuleControl>
+
          <div className="input-wrap">
             <FormInput path="firstName" />
             <FormInput path="lastName" />
@@ -28,6 +35,7 @@ export default function RegisterForm({ className, onSubmit, ...props }) {
 
          <div className="input-wrap">
             <FormInput path="email" />
+            <FormInput path="phone" />
          </div>
 
          <div className="input-wrap">

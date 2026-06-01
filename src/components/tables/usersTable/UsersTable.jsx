@@ -1,9 +1,11 @@
 import DBQueryContext from "@/contexts/DBQuery";
 import { useContext } from "react";
 import TableBase from "../tableBase/TableBase";
+import { useRouter } from "next/navigation";
 
 export default function UsersTable() {
    const { query = [], isLoading, limit, reloadLimit, goPage } = useContext(DBQueryContext);
+   const router = useRouter();
    let parsedLimit = limit;
 
    if (limit) {
@@ -19,6 +21,11 @@ export default function UsersTable() {
          itemsPerPage={parsedLimit}
          onPageNav={goPage}
          onRowsPerPageChange={reloadLimit}
+         onClickRow={(doc) => {
+            if (doc?.index) {
+               router.push(`/admin?user=${doc.index}`);
+            }
+         }}
          headerConfigs={[
             {
                propKey: 'fullName',

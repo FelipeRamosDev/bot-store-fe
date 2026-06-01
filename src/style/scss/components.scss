@@ -111,6 +111,7 @@
 @import "../../components/modals/quickviews/positionQuickview/PositionQuickview.scss";
 @import "../../components/modals/quickviews/slotQuickview/SlotQuickview.scss";
 @import "../../components/modals/quickviews/botQuickview/BotQuickview.scss";
+@import "../../components/modals/quickviews/userQuickview/UserQuickview.scss";
 
 // Shared
 @import "../../components/shared/accountSettings/AccountSettings.scss";
@@ -136,6 +137,7 @@
 @import "../../components/tiles/slotTile/SlotTile.scss";
 @import "../../components/tiles/userInstance/UserInstance.scss";
 @import "../../components/tiles/positionFullTile/PositionFullTile.scss";
+@import "../../components/tiles/planTile/PlanTile.scss";
 
 // Tooltips
 @import "../../components/tooltips/base/TooltipBase.scss";

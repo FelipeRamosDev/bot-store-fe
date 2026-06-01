@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import TableBase from '../../tableBase/TableBase';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 
-export default function TransactionsTable() {
+export default function TransactionsTable({ customerId }) {
    const [transactions, setTransactions] = useState([]);
    const [loading, setLoading] = useState(true);
    const instance = useContext(APIContext);
@@ -15,7 +15,7 @@ export default function TransactionsTable() {
          return;
       }
 
-      query.current = instance.ajax.authGet('/stripe/transactions').then(res => {
+      query.current = instance.ajax.authGet(`/stripe/transactions`, { customer: customerId }).then(res => {
          setTransactions(res?.transactions || []);
       }).catch(err => {
          console.error('Error fetching Stripe transactions:', err);
@@ -23,7 +23,7 @@ export default function TransactionsTable() {
       }).finally(() => {
          setLoading(false);
       });
-   }, []);
+   }, [customerId, instance]);
 
    return (
       <TableBase
