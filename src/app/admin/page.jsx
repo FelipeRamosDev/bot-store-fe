@@ -13,7 +13,7 @@ import AdminBasePage from '@/templates/adminBasePage/AdminBasePage';
  */
 export default function AdminHomePage() {
    return (
-      <AdminBasePage className="admin-home-page" fullContainer={false}>
+      <AdminBasePage className="admin-home-page">
          <AdminHomeContent />
       </AdminBasePage>
    );
