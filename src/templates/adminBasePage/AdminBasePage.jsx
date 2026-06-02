@@ -1,11 +1,11 @@
 import RootAuthProvider from "@/providers/RootAuthProvider";
 import BasePage from "../basePage/BasePage";
-import TopHeaderAuth from "@/components/headers/topHeader/TopHeaderAuth";
+import TopHeaderAdmin from "@/components/headers/topHeader/TopHeaderAdmin";
 
 export default function AdminBasePage({ children, className, ...props }) {
    return (
       <RootAuthProvider rules={['master']} {...props}>
-         <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAuth} fullContainer>
+         <BasePage className={className} headerMenu="auth" CustomHeader={TopHeaderAdmin} fullContainer>
             {children}
          </BasePage>
       </RootAuthProvider>

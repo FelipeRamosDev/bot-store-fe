@@ -20,7 +20,7 @@ import { useRouter } from 'next/navigation';
  * 
  * @returns {JSX.Element} The rendered mobile navigation menu inside a drawer.
  */
-export default function TopHeaderMobileMenu({ setSpinner }) {
+export default function TopHeaderMobileMenu({ type, setSpinner }) {
    const router = useRouter();
    const [ open, setOpen ] = useState(false);
 
@@ -30,7 +30,30 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
             <MenuIcon />
          </Button>
 
-         <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+         {type === 'admin' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/')}>
+               <Dashboard />
+               Dashboard
+            </CTAButton>
+
+            <List>
+               {/* <ListItem disablePadding>
+                  <ListItemButton onClick={() => router.push('/dashboard/master-accounts')}>
+                     <ListItemIcon>
+                        <AccountBalanceWallet />
+                     </ListItemIcon>
+
+                     <ListItemText primary="Master Accounts" />
+                  </ListItemButton>
+               </ListItem> */}
+
+               {/* <Divider /> */}
+
+               <AccountMenuMobile setSpinner={setSpinner} />
+            </List>
+         </DrawerMenu>}
+
+         {type !== 'admin' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
             <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/bots/pilot-store')}>
                <Storefront />
                Go To Store
@@ -61,7 +84,7 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
 
                <AccountMenuMobile setSpinner={setSpinner} />
             </List>
-         </DrawerMenu>
+         </DrawerMenu>}
       </nav>
    );
 }

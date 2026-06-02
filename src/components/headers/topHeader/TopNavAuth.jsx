@@ -21,12 +21,12 @@ import TopHeaderDesktopMenu from '@/components/menus/topHeaderDesktopMenu/TopHea
  * 
  * @returns {JSX.Element} A navigation element containing links and a sign-out button.
  */
-export default function TopNavAuth({ mobileOpen, setMobileOpen }) {
+export default function TopNavAuth({ mobileOpen, setMobileOpen, type }) {
    const [ spinner, setSpinner ] = useState(false);
 
    return (<>
       <PageSpinner spinner={spinner} />
-      <TopHeaderDesktopMenu setSpinner={setSpinner} />
-      <TopHeaderMobileMenu open={mobileOpen} setOpen={setMobileOpen} setSpinner={setSpinner} />
+      <TopHeaderDesktopMenu type={type} setSpinner={setSpinner} />
+      <TopHeaderMobileMenu type={type} open={mobileOpen} setOpen={setMobileOpen} setSpinner={setSpinner} />
    </>);
 }
