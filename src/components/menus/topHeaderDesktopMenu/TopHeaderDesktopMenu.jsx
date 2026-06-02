@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import AccountMenu from './accountMenu/AccountMenu';
-import { AccountBalanceWallet, Dashboard } from '@mui/icons-material';
+import { AccountBalanceWallet, Dashboard, Monitor } from '@mui/icons-material';
 import StoreIcon from '@mui/icons-material/Store';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 
@@ -14,22 +14,34 @@ import CTAButton from '@/components/buttons/ctaButton/CTAButton';
  * 
  * @returns {JSX.Element} The rendered top header desktop navigation menu.
  */
-export default function TopHeaderDesktopMenu({ setSpinner }) {
+export default function TopHeaderDesktopMenu({ setSpinner, type }) {
    return (
       <nav className="desktop-menu">
-         <Link href="/dashboard">
-            <Dashboard />
-            Dashboard
-         </Link>
-         <Link href="/dashboard/master-accounts">
-            <AccountBalanceWallet />
-            Master Accounts
-         </Link>
-         <Link className="no-underline" href="/dashboard/bots/pilot-store">
-            <CTAButton startIcon={<StoreIcon />}>
-               Pilot Store
-            </CTAButton>
-         </Link>
+         {type === 'admin' ? <>
+            <Link href="/admin">
+               <Monitor />
+               Painel
+            </Link>
+            <Link className="no-underline" href="/dashboard/">
+               <CTAButton startIcon={<Dashboard />}>
+                  Dashboard
+               </CTAButton>
+            </Link>
+         </> : <>
+            <Link href="/dashboard">
+               <Dashboard />
+               Dashboard
+            </Link>
+            <Link href="/dashboard/master-accounts">
+               <AccountBalanceWallet />
+               Master Accounts
+            </Link>
+            <Link className="no-underline" href="/dashboard/">
+               <CTAButton startIcon={<StoreIcon />}>
+                  Pilot Store
+               </CTAButton>
+            </Link>
+         </>}
 
          <AccountMenu setSpinner={setSpinner} />
       </nav>

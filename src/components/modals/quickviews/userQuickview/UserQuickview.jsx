@@ -1,7 +1,7 @@
 import DBQueryContext from "@/contexts/DBQuery";
 import ContentModal from "../../base/contentModal/ContentModal";
-import { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
 import { Cancel, Edit } from "@mui/icons-material";
@@ -17,20 +17,27 @@ export default function UserQuickview({ setModal = () => { } }) {
    const searchParams = useSearchParams();
    const userIndex = searchParams.get("user");
    const isOpen = !!userIndex;
+   const router = useRouter();
 
    const user = query.find(item => item.index === Number(userIndex));
    const billingAddress = user?.billingAddress || {};
 
-   const handleUpdate = (data) => update(user._id, data);
-   const EditToolbar = () => {
+   const handleUpdate = async (data) => {
+      try {
+         await update(user._id, data);
+         router.refresh();
+      } catch (error) {
+         console.error("Error updating user:", error);
+      }
+   }
+
+   const EditToolbar = useCallback(() => {
       if (!editUser) {
          return <RoundIconButton Icon={Edit} onClick={() => setEditUser(true)} />;
       } else {
-         return (<>
-            <RoundIconButton Icon={Cancel} color="error" onClick={() => setEditUser(false)} />
-         </>);
+         return <RoundIconButton Icon={Cancel} color="error" onClick={() => setEditUser(false)} />;
       }
-   }
+   }, [editUser]);
 
    useEffect(() => {
       return () => setEditUser(false);
