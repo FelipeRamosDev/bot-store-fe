@@ -1,0 +1,81 @@
+.my-profile {
+   .top-page {
+      $avatar-radius: 150px;
+      $info-height: 90px;
+
+      margin-bottom: 2rem;
+
+      .top-page-card {
+         min-height: 300px;
+         position: relative;
+         overflow: hidden;
+
+         .top-page-title {
+            position: absolute;
+            margin-left: calc(5% + #{$avatar-radius} + 2rem);
+            left: 0;
+            bottom: $info-height;
+            margin-bottom: 0;
+         }
+
+         .content-wrap {
+            background: $background-paper;
+            height: $info-height;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+            padding: 0 5%;
+
+            .avatar-wrap {
+               width: $avatar-radius;
+               height: $avatar-radius;
+               border-radius: $avatar-radius;
+               border: 7px solid $text;
+               background-color: $background-paper;
+               transform: translateY(-60%);
+               overflow: hidden;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               position: relative;
+
+               .avatar-icon {
+                  font-size: 20rem;
+                  color: $text;
+               }
+
+               .overlay {
+                  background: black;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  opacity: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 0.5rem;
+                  transition: all 100ms;
+
+                  &:hover {
+                     cursor: pointer;
+                     opacity: 0.85;
+                  }
+
+                  .overlay-text,
+                  .overlay-icon {
+                     color: $text;
+                     font-size: 1rem;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   .content-header {
+      margin-bottom: 1.5rem;
+   }
+}

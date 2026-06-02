@@ -6,8 +6,9 @@ import { AccountCircle, CurrencyExchange, Logout } from '@mui/icons-material';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
 import APIContext from '@/contexts/4HandsAPI';
-import LogoIcon from '@/assets/icons/logo_icon_text.svg';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoIconLight from '@/components/common/logo/LogoIconLight';
+import { RuleControl } from '@/components/common/RuleControl';
 
 /**
  * AccountMenu component that provides user account options such as viewing profile, 
@@ -68,7 +69,16 @@ export default function AccountMenu({ setSpinner = () => {} }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
-            <MenuItem onClick={handleMenuClose} disabled>
+            <RuleControl rules={['master', 'admin']}>
+               <MenuItem onClick={() => router.push('/admin')}>
+                  <ListItemIcon>
+                     <AdminPanelSettingsIcon />
+                  </ListItemIcon>
+                  Admin Panel
+               </MenuItem>
+            </RuleControl>
+
+            <MenuItem onClick={() => router.push('/dashboard/my-profile')}>
                <ListItemIcon>
                   <AccountCircle />
                </ListItemIcon>

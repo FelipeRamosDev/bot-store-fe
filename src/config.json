@@ -4,7 +4,7 @@
       "STG": "https://192.168.15.4",
       "PROD": "https://api.candlepilot.com"
    },
-   "allowedRules": ["admin", "user"],
+   "allowedRules": ["admin", "user", "master"],
    "dateTime": {
       "weekdays": ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
    },

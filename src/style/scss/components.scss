@@ -41,6 +41,7 @@
 @import "../../components/content/dashboard/emailNotConfirmed/EmailNotConfirmed.scss";
 @import "../../components/content/dashboard/resetPassword/ResetPassword.scss";
 @import "../../components/content/admin/adminHome/AdminHome.scss";
+@import "../../components/content/dashboard/myProfile/MyProfile.scss";
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
@@ -115,6 +116,7 @@
 
 // Shared
 @import "../../components/shared/accountSettings/AccountSettings.scss";
+@import "../../components/shared/userInfos/UserInfos.scss";
 
 // Tables
 @import "../../components/tables/botsTable/BotsTable.scss";

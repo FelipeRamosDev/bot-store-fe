@@ -14,34 +14,41 @@ import { RuleControl } from '@/components/common/RuleControl';
  *
  * @returns {JSX.Element} - Rendered registration form component.
  */
-export default function RegisterForm({ className, onSubmit, ...props }) {
+export default function RegisterForm({ className, editData, onSubmit, ...props }) {
    return (
       <FormBase
+         formID="register-form"
          formSet={registerForm}
-         submitLabel="Create"
+         submitLabel={editData ? "Save Changes" : "Sign Up"}
          onSubmit={onSubmit}
+         editData={editData}
+         submitBtnFullwidth
          {...props}
       >
+         <div className="input-wrap">
+            <FormInput path="firstName" />
+            <FormInput path="lastName" />
+         </div>
+
+         {!editData && <div className="input-wrap">
+            <FormInput path="email" />
+            <FormInput path="phone" />
+         </div>}
+
+         <div className="input-wrap">
+            <FormInput path="birthdate" />
+         </div>
+
          <RuleControl rules={['master', 'admin']}>
             <div className="input-wrap">
                <FormInput path="rules" />
             </div>
          </RuleControl>
 
-         <div className="input-wrap">
-            <FormInput path="firstName" />
-            <FormInput path="lastName" />
-         </div>
-
-         <div className="input-wrap">
-            <FormInput path="email" />
-            <FormInput path="phone" />
-         </div>
-
-         <div className="input-wrap">
+         {!editData && <div className="input-wrap">
             <FormInput path="password" />
             <FormInput path="confirmPassword" />
-         </div>
+         </div>}
 
          <div className="input-wrap">
             <FormInput path="billingAddress.address1" />

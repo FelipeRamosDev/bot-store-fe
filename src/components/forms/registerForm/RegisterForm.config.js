@@ -5,6 +5,7 @@ import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 import configs from '@/config';
 import { ListItem } from '@mui/material';
+import TimeFieldSchema from '@/models/Form/fieldTypes/TimeFieldSchema';
 
 export const passwordValidators = [
    function (value) {
@@ -72,7 +73,6 @@ const registerForm = new Form({
          label: 'Rules',
          required: true,
          multiOptions: true,
-         defaultValue: ['user'],
          options: () => configs.allowedRules.map(role => ({ label: role, value: role.toLowerCase() })),
          ListItem: ({ option, itemProps }) => (
             <ListItem value={option.value} {...itemProps}>
@@ -117,6 +117,13 @@ const registerForm = new Form({
          label: 'Phone',
          placeholder: 'Your phone number',
          inputMode: 'tel',
+         required: true,
+      }),
+      new TextFieldSchema({
+         key: 'birthdate',
+         label: 'Birthdate',
+         placeholder: 'Your birthdate',
+         inputMode: 'date',
          required: true,
       }),
       new PasswordFieldSchema({
