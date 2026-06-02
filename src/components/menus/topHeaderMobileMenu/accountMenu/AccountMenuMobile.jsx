@@ -4,6 +4,8 @@ import APIContext from '@/contexts/4HandsAPI';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import LogoIconLight from "@/components/common/logo/LogoIconLight";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { RuleControl } from "@/components/common/RuleControl";
 
 
 export default function AccountMenuMobile({ setSpinner }) {
@@ -23,8 +25,20 @@ export default function AccountMenuMobile({ setSpinner }) {
    }
 
    return (<>
+      <RuleControl rules={['master', 'admin']}>
+         <ListItem disablePadding>
+            <ListItemButton onClick={() => router.push('/admin')}>
+               <ListItemIcon>
+                  <AdminPanelSettingsIcon />
+               </ListItemIcon>
+
+               <ListItemText primary="Admin Panel" />
+            </ListItemButton>
+         </ListItem>
+      </RuleControl>
+
       <ListItem disablePadding>
-         <ListItemButton>
+         <ListItemButton onClick={() => router.push('/dashboard/my-profile')}>
             <ListItemIcon>
                <AccountCircle />
             </ListItemIcon>

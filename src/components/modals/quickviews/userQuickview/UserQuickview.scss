@@ -4,41 +4,4 @@
       justify-content: space-between;
       align-items: center;
    }
-
-   .info-section {
-      display: flex;
-      gap: 1rem;
-
-      .info-content {
-         flex: 4;
-      }
-
-      .info-sidebar {
-         flex: 2;
-      }
-   }
-
-   .info-card {
-      .info-prop {
-         display: flex;
-         flex-direction: column;
-
-         &:not(:last-child) {
-            margin-bottom: 1rem;
-         }
-
-         label {
-            font-weight: 500;
-            font-size: 0.7rem;
-            margin-bottom: 0.2rem;
-            color: $tertiary;
-            text-transform: uppercase;
-            line-height: 0.8;
-         }
-
-         span {
-            font-size: 1rem;
-         }
-      }
-   }
 }
