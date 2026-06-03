@@ -41,10 +41,6 @@ export default function CreatePriceForm({ planUID, className, onSubmit = () => {
          </div>
 
          <div className="input-wrap">
-            <FormInput path="features" />
-         </div>
-
-         <div className="input-wrap">
             <FormInput path="priceId" />
          </div>
 

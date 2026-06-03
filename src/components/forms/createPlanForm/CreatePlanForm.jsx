@@ -3,27 +3,28 @@ import APIContext from '@/contexts/4HandsAPI';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
 import createPlanForm from './CreatePlanForm.config';
+import usePlans from '@/hooks/usePlans';
 
-export default function CreatePlanForm({ className, onSubmit = () => {}, onSuccess = () => {}, ...props }) {
-   const API = useContext(APIContext);
+export default function CreatePlanForm({ className, editData, onSubmit = () => { }, onSuccess = () => { }, ...props }) {
+   const { create, update } = usePlans();
 
    const handleCreate = async (data) => {
       onSubmit(data);
 
       try {
-         const created = await API.ajax.authPut('/plans/create', data);
-
-         if (created.error) {
-            throw created;
-         }
-
-         if (created.success) {
-            onSuccess(created);
-         } else {
-            throw new Error('Unknown error when creating plan!');
-         }
+         await create(data);
+         onSuccess();
       } catch (err) {
          throw err;
+      }
+   }
+
+   const handleUpdate = async (data) => {
+      try {
+         await update(editData._id, data);
+         onSuccess();
+      } catch (error) {
+         throw error;
       }
    }
 
@@ -32,7 +33,9 @@ export default function CreatePlanForm({ className, onSubmit = () => {}, onSucce
          formID="create-plan"
          formSet={createPlanForm}
          submitLabel="Save"
-         onSubmit={handleCreate}
+         editData={editData}
+         onSubmit={editData ? handleUpdate : handleCreate}
+         submitBtnFullwidth
          {...props}
       >
          <div className="input-wrap">
@@ -44,6 +47,10 @@ export default function CreatePlanForm({ className, onSubmit = () => {}, onSucce
 
          <div className="input-wrap">
             <FormInput path="summary" />
+         </div>
+
+         <div className="input-wrap">
+            <FormInput path="features" />
          </div>
       </FormBase>
    );

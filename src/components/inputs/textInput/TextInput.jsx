@@ -40,6 +40,8 @@ export default function TextInput({ schema, errors = [], fullWidth = true, ...pr
             color={color}
             error={errors.length}
             fullWidth={fullWidth}
+            multiline={schema.multiline}
+            minRows={schema.minRows}
             {...props}
             defaultValue={defaultValue}
          />

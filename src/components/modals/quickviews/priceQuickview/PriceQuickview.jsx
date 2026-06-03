@@ -26,10 +26,6 @@ export default function PriceQuickview({ setModal = () => { } }) {
                <p className="property-value">{price?.name}</p>
             </div>
             <div className="price-property">
-               <label>Features</label>
-               <p className="property-value">{price?.features}</p>
-            </div>
-            <div className="price-property">
                <label>Price ID</label>
                <p className="property-value">{price?.priceId}</p>
             </div>

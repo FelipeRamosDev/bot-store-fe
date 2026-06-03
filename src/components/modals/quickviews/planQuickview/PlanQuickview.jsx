@@ -8,10 +8,13 @@ import { Add, DataArray } from "@mui/icons-material";
 import PricesTable from "@/components/tables/pricesTable/PricesTable";
 import CreatePriceModal from "../../createPriceModal/CreatePriceModal";
 import PriceQuickview from "../priceQuickview/PriceQuickview";
+import RubberButton from "@/components/buttons/rubberButton/RubberButton";
+import CreatePlanForm from "@/components/forms/createPlanForm/CreatePlanForm";
 
 export default function PlanQuickview({ setModal = () => { } }) {
-   const { query = [], isLoading, limit, reloadLimit, goPage } = useContext(DBQueryContext);
+   const { query = [] } = useContext(DBQueryContext);
    const [newPriceModal, setNewPriceModal] = useState(false);
+   const [editPlan, setEditPlan] = useState(false);
    const searchParams = useSearchParams();
    const planIndex = searchParams.get("plan");
    const router = useRouter();
@@ -28,7 +31,7 @@ export default function PlanQuickview({ setModal = () => { } }) {
          size="medium"
          onClose={() => setModal(null)}
       >
-         <div className="plan-properties">
+         {!editPlan && <div className="plan-properties">
             <div className="plan-property">
                <label>Plan Name</label>
                <p className="property-value">{plan?.name}</p>
@@ -41,7 +44,20 @@ export default function PlanQuickview({ setModal = () => { } }) {
                <label>Summary</label>
                <p className="property-value">{plan?.summary}</p>
             </div>
-         </div>
+            <div className="plan-property">
+               <label>Features</label>
+               <p className="property-value">{plan?.features || '---'}</p>
+            </div>
+         </div>}
+
+         {!editPlan && <RubberButton fullWidth color="success" onClick={() => setEditPlan(true)}>Edit Plan</RubberButton>}
+         {editPlan && <CreatePlanForm
+            editData={plan}
+            onSuccess={() => {
+               setEditPlan(false);
+               router.refresh();
+            }}
+         />}
 
          <div className="plan-prices">
             <ContentHeader

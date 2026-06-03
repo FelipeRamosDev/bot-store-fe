@@ -71,7 +71,6 @@ const registerForm = new Form({
       new SearchSelectFieldSchema({
          key: 'rules',
          label: 'Rules',
-         required: true,
          multiOptions: true,
          options: () => configs.allowedRules.map(role => ({ label: role, value: role.toLowerCase() })),
          ListItem: ({ option, itemProps }) => (
