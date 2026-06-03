@@ -12,11 +12,6 @@ const createPriceForm = new Form({
          required: true
       }),
       new TextFieldSchema({
-         key: 'features',
-         label: 'Features',
-         inputMode: 'textarea',
-      }),
-      new TextFieldSchema({
          key: 'priceId',
          label: 'Price ID',
          required: true
@@ -39,10 +34,10 @@ const createPriceForm = new Form({
          label: 'Billing Interval',
          required: true,
          options: [
-            { label: 'Daily', value: 'Daily' },
-            { label: 'Weekly', value: 'Weekly' },
-            { label: 'Monthly', value: 'Monthly' },
-            { label: 'Yearly', value: 'Yearly' },
+            { label: 'Daily', value: 'daily' },
+            { label: 'Weekly', value: 'weekly' },
+            { label: 'Monthly', value: 'monthly' },
+            { label: 'Yearly', value: 'yearly' },
          ]
       }),
       new SelectFieldSchema({

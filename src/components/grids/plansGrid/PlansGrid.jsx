@@ -27,6 +27,7 @@ export default function PlansGrid({ plans = [], loading = false }) {
                      title={selectedPlan.name}
                      prices={selectedPlan.prices}
                      summary={selectedPlan.summary}
+                     features={selectedPlan.features}
                   />
                ) : plans.map(plan => (
                   <PlanCard
@@ -35,6 +36,7 @@ export default function PlansGrid({ plans = [], loading = false }) {
                      title={plan.name}
                      prices={plan.prices}
                      summary={plan.summary}
+                     features={plan.features}
                   />
                ))}
 

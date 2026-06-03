@@ -17,8 +17,14 @@ const createPlanForm = new Form({
       new TextFieldSchema({
          key: 'summary',
          label: 'Summary',
-         required: false
-      })
+         required: false,
+         multiline: true
+      }),
+      new TextFieldSchema({
+         key: 'features',
+         label: 'Features',
+         multiline: true
+      }),
    ]
 });
 

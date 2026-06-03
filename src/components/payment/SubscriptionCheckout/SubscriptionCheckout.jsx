@@ -7,6 +7,8 @@ import AuthUserContext from '@/contexts/AuthUser';
 import StripeElement from './StripeElement';
 import { Alert, Skeleton } from '@mui/material';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
+import Card from '@/components/common/card/Card';
+import PlanCard from '../PlanCard/PlanCard';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -86,13 +88,14 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
 
    return (
       <ContentSidebar className="subscription-checkout">
-         {selectedPlan && selectedPrice ? <>
-            <h1 className="title">Selected Plan: {selectedPlan.name}</h1>
-
-            <p>Price: USD {selectedPrice?.price} / {selectedPrice?.name}</p>
-            <p>{selectedPlan?.summary}</p>
-            <p>{selectedPrice?.features}</p>
-         </> : <></>}
+         {selectedPlan && selectedPrice ? <PlanCard
+            cardType="billing"
+            productId={selectedPlan.id}
+            title={selectedPlan.name}
+            prices={[selectedPrice]}
+            summary={selectedPlan.summary}
+            features={selectedPlan.features}
+         /> : <></>}
          <>
             {error && <Alert severity="error">{error}</Alert>}
             {message && <Alert severity="success">{message}</Alert>}

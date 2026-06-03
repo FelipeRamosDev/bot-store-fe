@@ -1,0 +1,25 @@
+.Markdown {
+   width: 100%;
+
+   p {
+      font-size: 1rem;
+      line-height: 1.5rem;
+
+      &:not(:last-child) {
+         margin-bottom: 1rem;
+      }
+   }
+
+   h1, h2, h3, h4, h5, h6 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+   }
+
+   ul,
+   ol {
+      li {
+         margin-bottom: 0.5rem;
+         margin-left: 1.4rem;
+      }
+   }
+}

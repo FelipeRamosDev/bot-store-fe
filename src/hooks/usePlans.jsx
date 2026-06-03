@@ -22,5 +22,37 @@ export default function usePlans() {
       });
    }, []);
 
-   return { plans, setPlans, loading };
+   async function create(data) {
+      try {
+         const created = await instance.ajax.authPut('/plans/create', data);
+
+         if (created.error) {
+            throw created;
+         }
+
+         if (created.success) {
+            setPlans(prev => [...prev, created]);
+            return created;
+         }
+
+         throw new Error('Unknown error when creating plan!');
+      } catch (err) {
+         console.error("Error creating plan:", err);
+         throw err;
+      }
+   }
+
+   async function update(planId, data) {
+      try {
+         const updated = await instance.ajax.authPost(`/plans/update`, { planId, data });
+
+         setPlans(prevPlans => prevPlans.map(plan => plan.id === planId ? updated : plan));
+         return updated;
+      } catch (err) {
+         console.error("Error updating plan:", err);
+         throw err;
+      }
+   }
+
+   return { plans, setPlans, loading, create, update };
 }

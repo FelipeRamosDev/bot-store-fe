@@ -1,3 +1,4 @@
+import CTAButton from "@/components/buttons/ctaButton/CTAButton";
 import Card from "@/components/common/card/Card";
 import DBQueryContext from "@/contexts/DBQuery";
 import { useContext } from "react";
@@ -18,6 +19,8 @@ export default function PlanTile({ subscribedPlan }) {
          <div className="plan-prop">
             <label>Plan Price</label> <span>{price?.currency} {price?.price}/{price?.interval}</span>
          </div>
+
+         <CTAButton fullWidth>Upgrade</CTAButton>
       </Card>
    );
 }
