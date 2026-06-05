@@ -8,19 +8,22 @@ import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import { parseCSS } from "@/helpers/parser";
 import Form from "@/models/Form";
 import SwitchFieldSchema from "@/models/Form/fieldTypes/SwitchFieldSchema";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function PlanCard({ cardType, productId, title, prices = [], summary, features }) {
    const [interval, setInterval] = useState('monthly');
-   const selectedPrice = prices.find(price => price.interval === interval);
    const router = useRouter();
-   const isBillingCard = cardType === 'billing';
-
+   const searchParams = useSearchParams();
+   const currentPriceId = searchParams.get('currentPriceId');
+   
+   const selectedPrice = prices.find(price => price.interval === interval);
    const yearAmount = interval === 'monthly' ? selectedPrice?.price * 12 : selectedPrice?.price;
-   const yearSize = interval === 'monthly' ? 's' : 'xl';
    const monthAmount = interval === 'monthly' ? selectedPrice?.price : selectedPrice?.price / 12;
+   const yearSize = interval === 'monthly' ? 's' : 'xl';
    const monthSize = interval === 'monthly' ? 'xl' : 's';
+   const isCurrentPriceId = currentPriceId === selectedPrice?.priceId;
+   const isBillingCard = cardType === 'billing';
 
    const FORM_SET = new Form({
       schema: [
@@ -32,7 +35,11 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
    });
 
    const handleSubmit = () => {
-      router.push(`/subscribe-plan?productId=${productId}&priceId=${selectedPrice?.priceId}&register=true`);
+      const url = new URLSearchParams(window.location.search);
+
+      url.set('productId', productId);
+      url.set('priceId', selectedPrice?.priceId || '');
+      router.push(`/subscribe-plan?${url.toString()}`);
    };
 
    return (
@@ -67,7 +74,16 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
                <Markdown className="plan-features" value={features || ''} />
             </div>
 
-            {!isBillingCard && <CTAButton type="submit" className="select-plan-button" fullWidth>Select Plan</CTAButton>}
+            {!isBillingCard && (
+               <CTAButton
+                  type="submit"
+                  className="select-plan-button"
+                  disabled={isCurrentPriceId}
+                  fullWidth
+               >
+                  {isCurrentPriceId ? 'Plan already selected' : 'Select Plan'}
+               </CTAButton>
+            )}
 
             {isBillingCard && <ContentHeader>
                <h4 className="header-title">Summary</h4>
@@ -81,7 +97,9 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
                <div className="invoice-row">
                   <span className="invoice-label">{interval === 'monthly' ? 'Monthly' : 'Yearly'} amount ({selectedPrice?.currency || '---'})</span>
                   <span className="invoice-dots"></span>
-                  <span className="invoice-value"><Price amount={monthAmount} size="l" />/<small>{interval === 'monthly' ? 'Month' : 'Year'}</small></span>
+                  <span className="invoice-value">
+                     <Price amount={monthAmount} size="l" /> / <small>{interval === 'monthly' ? 'Month' : 'Year'}</small>
+                  </span>
                </div>
             </div>}
          </FormBase>
