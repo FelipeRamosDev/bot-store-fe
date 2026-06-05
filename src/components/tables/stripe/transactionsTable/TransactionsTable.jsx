@@ -29,7 +29,7 @@ export default function TransactionsTable({ customerId }) {
       <TableBase
          items={transactions}
          loading={loading}
-         itemsPerPage={10}
+         itemsPerPage={5}
          usePagination={true}
          noDocumentsText={'No transactions found.'}
          headerConfigs={[

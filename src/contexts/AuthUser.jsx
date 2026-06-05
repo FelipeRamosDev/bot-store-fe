@@ -24,12 +24,14 @@ export default AuthUserContext;
  * @returns {JSX.Element} The context provider component with loading and error handling.
  */
 export function AuthUserProvider({ children, rules = [], ...props }) {
-   const [ userAuth, setUserAuth ] = useState();
-   const [ error, setError ] = useState();
+   const [userAuth, setUserAuth] = useState();
+   const [error, setError] = useState();
    const instance = useContext(APIContext);
    const router = useRouter();
    const userChecked = useRef();
    const searchParams = useSearchParams();
+   const updatePlan = searchParams.get('updatePlan');
+   const isUpdatePlan = updatePlan === 'true';
 
    useEffect(() => {
       if (userChecked.current) return;
@@ -56,10 +58,10 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
 
             window.localStorage.setItem('userLetters', userLetters);
             setUserAuth(authData);
-            
+
             if (window.location.pathname !== '/subscribe-plan' && !authData?.user?.subscribedPlan) {
                return router.push('/subscribe-plan');
-            } else if (window.location.pathname === '/subscribe-plan' && authData?.user?.subscribedPlan) {
+            } else if (window.location.pathname === '/subscribe-plan' && authData?.user?.subscribedPlan && !isUpdatePlan) {
                return router.push('/dashboard');
             }
          } else {
@@ -68,7 +70,7 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
       }).catch(err => {
          setError(err);
       });
-   }, [ instance.auth, router ]);
+   }, [instance.auth, router]);
 
    return (
       <AuthUserContext.Provider value={userAuth}>

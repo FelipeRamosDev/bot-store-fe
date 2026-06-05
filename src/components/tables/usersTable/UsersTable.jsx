@@ -42,6 +42,21 @@ export default function UsersTable() {
                propKey: 'phone',
                label: 'Phone',
             },
+            {
+               propKey: 'billingAddress.city',
+               label: 'City',
+               format: (_, values) => values?.billingAddress?.city || '---',
+            },
+            {
+               propKey: 'billingAddress.state',
+               label: 'State',
+               format: (_, values) => values?.billingAddress?.state || '---',
+            },
+            {
+               propKey: 'billingAddress.country',
+               label: 'Country',
+               format: (_, values) => values?.billingAddress?.country || '---',
+            },
          ]}
       />
    );

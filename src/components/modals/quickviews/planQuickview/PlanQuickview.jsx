@@ -1,6 +1,6 @@
 import DBQueryContext, { DBQuery } from "@/contexts/DBQuery";
 import ContentModal from "../../base/contentModal/ContentModal";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
@@ -10,6 +10,7 @@ import CreatePriceModal from "../../createPriceModal/CreatePriceModal";
 import PriceQuickview from "../priceQuickview/PriceQuickview";
 import RubberButton from "@/components/buttons/rubberButton/RubberButton";
 import CreatePlanForm from "@/components/forms/createPlanForm/CreatePlanForm";
+import Markdown from "@/components/common/Markdown/Markdown";
 
 export default function PlanQuickview({ setModal = () => { } }) {
    const { query = [] } = useContext(DBQueryContext);
@@ -21,6 +22,12 @@ export default function PlanQuickview({ setModal = () => { } }) {
 
    const plan = query.find(p => p.index === Number(planIndex));
    const isOpen = Boolean(plan);
+
+   useEffect(() => {
+      if (!isOpen) {
+         setEditPlan(false)
+      }
+   }, [isOpen]);
 
    return (
       <ContentModal
@@ -42,11 +49,11 @@ export default function PlanQuickview({ setModal = () => { } }) {
             </div>
             <div className="plan-property">
                <label>Summary</label>
-               <p className="property-value">{plan?.summary}</p>
+               <Markdown className="property-value" value={plan?.summary || '---'} />
             </div>
             <div className="plan-property">
                <label>Features</label>
-               <p className="property-value">{plan?.features || '---'}</p>
+               <Markdown className="property-value" value={plan?.features || '---'} />
             </div>
          </div>}
 

@@ -2,16 +2,19 @@
 
 import { Skeleton } from "@mui/material";
 import PlanCard from "../../payment/PlanCard/PlanCard";
+import { forwardRef } from "react";
 import { useSearchParams } from "next/navigation";
+import usePlans from "@/hooks/usePlans";
 
-export default function PlansGrid({ plans = [], loading = false }) {
+const PlansGrid = forwardRef(function PlansGrid(_, ref) {
+   const { plans, loading } = usePlans();
    const params = useSearchParams();
    const productId = params.get("productId");
    const priceId = params.get("priceId");
    const selectedPlan = plans.find(plan => plan.productId === productId);
 
    return (
-      <section className="plans-section">
+      <section ref={ref} className="plans-section">
          <div className="section-header container">
             <h2 className="section-title">Choose Your <span className="grad-txt">Plan</span></h2>
             <div className="gradient-divider"></div>
@@ -50,4 +53,6 @@ export default function PlansGrid({ plans = [], loading = false }) {
          </div>
       </section>
    );
-}
+});
+
+export default PlansGrid;

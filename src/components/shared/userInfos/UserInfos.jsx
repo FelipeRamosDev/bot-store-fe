@@ -2,7 +2,7 @@ import Card from "@/components/common/card/Card";
 import PlanTile from "@/components/tiles/planTile/PlanTile";
 import { DBQuery } from "@/contexts/DBQuery";
 
-export default function UserInfos({ user, billingAddress }) {
+export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = false }) {
    const cardProps = {
       padding: 's',
       className: 'info-card',
@@ -52,7 +52,7 @@ export default function UserInfos({ user, billingAddress }) {
 
          <div className="info-sidebar">
             {user && <DBQuery type="doc" collection="plans" filter={{ productId: user?.subscribedPlan?.productId }}>
-               <PlanTile subscribedPlan={user?.subscribedPlan} />
+               <PlanTile subscribedPlan={user?.subscribedPlan} hideSubscriptionBtn={hideSubscriptionBtn} />
             </DBQuery>}
 
             <Card {...cardProps}>

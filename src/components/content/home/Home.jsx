@@ -5,10 +5,29 @@ import BinanceIntegration from './binanceIntegration/BinanceIntegration';
 import ChooseBot from './chooseBot/ChooseBot';
 import CreateYourBot from './createYourBot/CreateYourBot';
 import PlansGrid from '../../grids/plansGrid/PlansGrid';
-import usePlans from '@/hooks/usePlans';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HomeContent() {
-   const { plans, loading } = usePlans();
+   const [shouldLoadPlans, setShouldLoadPlans] = useState(false);
+   const sentinel = useRef();
+
+   useEffect(() => {
+      const observer = new IntersectionObserver(
+         ([entry]) => {
+            if (entry.isIntersecting) {
+               setShouldLoadPlans(true);
+               observer.disconnect();
+            }
+         },
+         { rootMargin: '500px 0px' }
+      );
+
+      if (sentinel.current) {
+         observer.observe(sentinel.current);
+      }
+
+      return () => observer.disconnect();
+   }, []);
 
    return (<>
       <HomeTopBanner />
@@ -17,7 +36,9 @@ export default function HomeContent() {
          <BinanceIntegration />
          <ChooseBot />
          <CreateYourBot />
-         <PlansGrid plans={plans} loading={loading} />
+         <div ref={sentinel}>
+            {shouldLoadPlans && <PlansGrid />}
+         </div>
       </div>
    </>);
 }

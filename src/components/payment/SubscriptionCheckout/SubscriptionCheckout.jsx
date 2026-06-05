@@ -7,7 +7,6 @@ import AuthUserContext from '@/contexts/AuthUser';
 import StripeElement from './StripeElement';
 import { Alert, Skeleton } from '@mui/material';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
-import Card from '@/components/common/card/Card';
 import PlanCard from '../PlanCard/PlanCard';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -26,6 +25,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
    const searchParams = useSearchParams();
    const productId = searchParams.get('productId');
    const priceId = searchParams.get('priceId');
+   const isUpdatePlan = searchParams.get('updatePlan') === 'true';
 
    const initCheckout = async () => {
       setLoading(true);
@@ -35,7 +35,8 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
          const initialized = await instance.ajax.authPost('/plans/stripe/create-subscription', {
             customerEmail: user.email,
             productId,
-            priceId
+            priceId,
+            overideActive: isUpdatePlan
          });
 
          if (initialized.isActive) {
@@ -64,7 +65,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
       }
 
       try {
-         const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', { subscriptionId, productId, priceId });
+         const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', { subscriptionId, productId, priceId, overideActive: isUpdatePlan });
          
          if (!confirmed.success) {
             setError(confirmed.message || 'Subscription was successful but confirming it failed. Please contact support if you have been charged.');
@@ -92,7 +93,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
             cardType="billing"
             productId={selectedPlan.id}
             title={selectedPlan.name}
-            prices={[selectedPrice]}
+            prices={selectedPlan.prices}
             summary={selectedPlan.summary}
             features={selectedPlan.features}
          /> : <></>}
