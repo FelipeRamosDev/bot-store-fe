@@ -96,6 +96,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
             prices={selectedPlan.prices}
             summary={selectedPlan.summary}
             features={selectedPlan.features}
+            selectedPrice={selectedPrice}
          /> : <></>}
          <>
             {error && <Alert severity="error">{error}</Alert>}

@@ -11,13 +11,13 @@ import SwitchFieldSchema from "@/models/Form/fieldTypes/SwitchFieldSchema";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function PlanCard({ cardType, productId, title, prices = [], summary, features }) {
+export default function PlanCard({ cardType, productId, title, prices = [], summary, features, selectedPrice: selectedPriceProp }) {
    const [interval, setInterval] = useState('monthly');
    const router = useRouter();
    const searchParams = useSearchParams();
    const currentPriceId = searchParams.get('currentPriceId');
    
-   const selectedPrice = prices.find(price => price.interval === interval);
+   const selectedPrice = selectedPriceProp || prices.find(price => price.interval === interval);
    const yearAmount = interval === 'monthly' ? selectedPrice?.price * 12 : selectedPrice?.price;
    const monthAmount = interval === 'monthly' ? selectedPrice?.price : selectedPrice?.price / 12;
    const yearSize = interval === 'monthly' ? 's' : 'xl';
@@ -92,13 +92,14 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
                <div className="invoice-row">
                   <span className="invoice-label">Interval</span>
                   <span className="invoice-dots"></span>
-                  <span className="invoice-value">{interval === 'monthly' ? 'Monthly' : 'Yearly'}</span>
+                  <span className="invoice-value">{selectedPrice?.interval === 'monthly' ? 'Monthly' : 'Yearly'}</span>
                </div>
+
                <div className="invoice-row">
-                  <span className="invoice-label">{interval === 'monthly' ? 'Monthly' : 'Yearly'} amount ({selectedPrice?.currency || '---'})</span>
+                  <span className="invoice-label">{selectedPrice?.interval === 'monthly' ? 'Monthly' : 'Yearly'} amount ({selectedPrice?.currency || '---'})</span>
                   <span className="invoice-dots"></span>
                   <span className="invoice-value">
-                     <Price amount={monthAmount} size="l" /> / <small>{interval === 'monthly' ? 'Month' : 'Year'}</small>
+                     <Price amount={selectedPrice?.price} size="l" /> / <small>{selectedPrice?.interval === 'monthly' ? 'Month' : 'Year'}</small>
                   </span>
                </div>
             </div>}
