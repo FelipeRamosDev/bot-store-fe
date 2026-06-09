@@ -6,8 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import TransactionQuickview from '@/components/modals/quickviews/transactionQuickview/TransactionQuickview';
 import useTransaction from '@/hooks/useTransaction';
 
-export default function TransactionsTable({ isAdmin = false }) {
-   const { transactions, loading } = useTransaction(isAdmin);
+export default function TransactionsTable({ isAdmin = false, customerId }) {
+   const { transactions, loading } = useTransaction({ isAdmin, customerId });
 
    const router = useRouter();
    const searchParams = useSearchParams();

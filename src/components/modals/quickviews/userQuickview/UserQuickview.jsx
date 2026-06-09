@@ -57,7 +57,7 @@ export default function UserQuickview({ setModal = () => { } }) {
          </ContentHeader>
 
          {editUser && <RegisterForm onSubmit={handleUpdate} editData={user} />}
-         {!editUser && <UserInfos user={user} billingAddress={billingAddress} hideSubscriptionBtn />}
+         {!editUser && <UserInfos user={user} billingAddress={billingAddress} customerId={user?.stripeCustomer?.id} hideSubscriptionBtn isAdmin />}
 
          <UserRelated user={user} />
       </ContentModal>

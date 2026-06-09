@@ -5,7 +5,7 @@ import TransactionsTable from "@/components/tables/stripe/transactionsTable/Tran
 import PlanTile from "@/components/tiles/planTile/PlanTile";
 import { DBQuery } from "@/contexts/DBQuery";
 
-export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = false }) {
+export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = false, isAdmin = false }) {
    const cardProps = {
       padding: 's',
       className: 'info-card',
@@ -55,7 +55,7 @@ export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = 
             <ContentHeader>
                <h4 className="header-title">Transactions</h4>
             </ContentHeader>
-            {user?.stripeCustomer?.id && <TransactionsTable customerId={user?.stripeCustomer?.id} />}
+            <TransactionsTable isAdmin={isAdmin} customerId={user?.stripeCustomer?.id} />
          </div>
 
          <div className="info-sidebar">
