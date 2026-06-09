@@ -1,6 +1,7 @@
 import ContentModal from "../../base/contentModal/ContentModal";
 import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import Card from "@/components/common/card/Card";
+import UserTile from "@/components/tiles/userTile/UserTile";
 
 const cardProps = {
    padding: 's',
@@ -159,24 +160,7 @@ export default function TransactionQuickview({ transaction, onClose = () => { } 
                   </div>
                </Card>
 
-               <Card {...cardProps}>
-                  <div className="info-prop">
-                     <label>Name:</label>
-                     <span>{`${transaction?.user?.firstName || "---"} ${transaction?.user?.lastName || ""}`}</span>
-                  </div>
-                  <div className="info-prop">
-                     <label>Email:</label>
-                     <span>{transaction?.user?.email || "---"}</span>
-                  </div>
-                  <div className="info-prop">
-                     <label>Phone:</label>
-                     <span>{transaction?.user?.phone || "---"}</span>
-                  </div>
-                  <div className="info-prop">
-                     <label>Customer ID:</label>
-                     <span>{transaction?.customer || "---"}</span>
-                  </div>
-               </Card>
+               <UserTile user={transaction?.user} />
 
                <Card {...cardProps}>
                   <div className="info-prop">

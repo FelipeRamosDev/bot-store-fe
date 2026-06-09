@@ -1,7 +1,7 @@
 import APIContext from "@/contexts/4HandsAPI";
 import { useContext, useEffect, useRef, useState } from "react";
 
-export default function useSubscriptions(isAdmin = false) {
+export default function useSubscriptions(isAdmin = false, customerId) {
    const [subscriptions, setSubscriptions] = useState([]);
    const [loading, setLoading] = useState(true);
    const instance = useContext(APIContext);
@@ -13,7 +13,7 @@ export default function useSubscriptions(isAdmin = false) {
          return;
       }
 
-      query.current = instance.ajax.authGet(fetchRoute, { status: 'all' }).then(res => {
+      query.current = instance.ajax.authGet(fetchRoute, { status: 'all', customerId }).then(res => {
          setSubscriptions(res?.subscriptions || []);
       }).catch(err => {
          console.error('Error fetching Stripe subscriptions:', err);
@@ -21,7 +21,7 @@ export default function useSubscriptions(isAdmin = false) {
       }).finally(() => {
          setLoading(false);
       });
-   }, []);
+   }, [customerId, isAdmin]);
 
    return { subscriptions, loading };
 }

@@ -6,8 +6,8 @@ import SubscriptionQuickview from '@/components/modals/quickviews/subscriptionQu
 import { useRouter, useSearchParams } from 'next/navigation';
 import useSubscriptions from '@/hooks/useSubscriptions';
 
-export default function SubscriptionsTable({ isAdmin = false }) {
-   const { subscriptions, loading } = useSubscriptions(isAdmin);
+export default function SubscriptionsTable({ isAdmin = false, customerId }) {
+   const { subscriptions, loading } = useSubscriptions(isAdmin, customerId);
 
    const searchParams = useSearchParams();
    const subscriptionId = searchParams.get("subscription");
