@@ -34,7 +34,7 @@ export default function AdminHomeContent() {
          <ContentHeader>
             <DataArray /> <h2 className="card-title">Subscriptions</h2>
          </ContentHeader>
-         <SubscriptionsTable />
+         <SubscriptionsTable isAdmin />
       </div>
 
       {createUserModal && <CreateUserModal open={createUserModal} onClose={() => setCreateUserModal(false)} />}

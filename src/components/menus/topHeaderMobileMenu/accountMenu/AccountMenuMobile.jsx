@@ -38,7 +38,7 @@ export default function AccountMenuMobile({ setSpinner }) {
       </RuleControl>
 
       <ListItem disablePadding>
-         <ListItemButton onClick={() => router.push('/dashboard/my-profile')}>
+         <ListItemButton onClick={() => router.push('/dashboard/user/my-profile')}>
             <ListItemIcon>
                <AccountCircle />
             </ListItemIcon>
