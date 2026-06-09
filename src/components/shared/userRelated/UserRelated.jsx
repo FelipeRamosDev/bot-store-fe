@@ -2,6 +2,7 @@ import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import MastersTable from "@/components/tables/mastersTable/MastersTable";
 import PositionsTable from "@/components/tables/positionsTable/PositionsTable";
 import SlotsTable from "@/components/tables/slotsTable/SlotsTable";
+import SubscriptionsTable from "@/components/tables/stripe/subscriptionsTable/SubscriptionsTable";
 import TransactionsTable from "@/components/tables/stripe/transactionsTable/TransactionsTable";
 import { DBQuery } from "@/contexts/DBQuery";
 
@@ -36,5 +37,10 @@ export default function UserRelated({ user }) {
          <h4 className="header-title">Transactions</h4>
       </ContentHeader>
       {user?.stripeCustomer?.id && <TransactionsTable customerId={user?.stripeCustomer?.id} />}
+
+      <ContentHeader>
+         <h4 className="header-title">Subscriptions History</h4>
+      </ContentHeader>
+      {user?.stripeCustomer?.id && <SubscriptionsTable />}
    </>);
 }

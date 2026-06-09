@@ -1,88 +1,86 @@
 'use client';
-import APIContext from '@/contexts/4HandsAPI';
-import { useContext, useEffect, useRef, useState } from 'react';
+
 import TableBase from '../../tableBase/TableBase';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
+import SubscriptionQuickview from '@/components/modals/quickviews/subscriptionQuickview/SubscriptionQuickview';
+import { useRouter, useSearchParams } from 'next/navigation';
+import useSubscriptions from '@/hooks/useSubscriptions';
 
-export default function SubscriptionsTable() {
-   const [subscriptions, setSubscriptions] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const instance = useContext(APIContext);
-   const query = useRef();
+export default function SubscriptionsTable({ isAdmin = false }) {
+   const { subscriptions, loading } = useSubscriptions(isAdmin);
 
-   useEffect(() => {
-      if (query.current) {
-         return;
-      }
+   const searchParams = useSearchParams();
+   const subscriptionId = searchParams.get("subscription");
+   const subscription = subscriptions.find(sub => sub.id === subscriptionId);
+   const router = useRouter();
 
-      query.current = instance.ajax.authGet('/stripe/subscriptions').then(res => {
-         setSubscriptions(res?.subscriptions || []);
-      }).catch(err => {
-         console.error('Error fetching Stripe subscriptions:', err);
-         setSubscriptions([]);
-      }).finally(() => {
-         setLoading(false);
-      });
-   }, []);
+   const handleRowClick = (subscription) => {
+      const url = new URL(window.location);
 
-   return (
+      url.searchParams.set('subscription', subscription.id);
+      router.push(url.toString(), { shallow: true });
+   };
+
+   const handleCloseQuickview = () => {
+      const url = new URL(window.location);
+
+      url.searchParams.delete('subscription');
+      router.push(url.toString(), { shallow: true });
+   };
+
+   return (<>
       <TableBase
          items={subscriptions}
          loading={loading}
          itemsPerPage={10}
          usePagination={true}
          noDocumentsText={'No subscriptions found.'}
+         onClickRow={handleRowClick}
          headerConfigs={[
             {
-               propKey: 'planDetails',
+               propKey: 'plan',
                label: 'Plan',
                align: 'left',
-               format: (value) => {
-                  return value?.name || 'N/A';
-               }
+               format: (value) => value?.name || 'N/A',
             },
             {
-               propKey: 'price',
+               propKey: 'plan',
                label: 'Price',
                align: 'left',
                style: { minWidth: '150px' },
-               format: (_, values) => {
-                  const amounts = values?.items?.data?.map(item => `${item.plan.currency.toUpperCase()} ${String(item.plan.amount / 100)}/${item.plan.interval}`) || [];
-                  return amounts.join('\n');
-               },
+               format: (value) => value?.amount && value?.interval ? `${value.amount} / ${value.interval}` : '---',
             },
             {
                propKey: 'status',
                label: 'Status',
                align: 'center',
                style: { minWidth: '120px' },
-               format: (_, values) => {
-                  const status = values?.status
-                  return <StatusBadge color={status === 'active' ? 'success' : undefined}>{status}</StatusBadge>;
+               format: (value) => {
+                  return <StatusBadge color={value === 'active' ? 'success' : undefined}>{value}</StatusBadge>;
                }
             },
             {
-               propKey: 'current_period_start',
+               propKey: 'currentPeriodStart',
                label: 'Period Start',
                align: 'center',
                style: { minWidth: '150px' },
-               format: (_, values) => {
-                  const dates = values?.items?.data?.map(item => new Date(item.current_period_start * 1000).toLocaleDateString());
-                  return dates.join('\n');
-               },
+               format: (value) => value ? new Date(value).toLocaleDateString() : '---',
             },
             {
-               propKey: 'current_period_end',
+               propKey: 'currentPeriodEnd',
                label: 'Period End',
                align: 'center',
                style: { minWidth: '150px' },
-               format: (_, values) => {
-                  const dates = values?.items?.data?.map(item => new Date(item.current_period_end * 1000).toLocaleDateString());
-                  return dates.join('\n');
-               },
+               format: (value) => value ? new Date(value).toLocaleDateString() : '---',
             },
          ]}
       />
-   );
-}
 
+      {subscription && (
+         <SubscriptionQuickview
+            subscription={subscription}
+            onClose={handleCloseQuickview}
+         />
+      )}
+   </>);
+}

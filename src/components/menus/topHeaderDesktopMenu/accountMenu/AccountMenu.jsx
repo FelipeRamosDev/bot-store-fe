@@ -78,7 +78,7 @@ export default function AccountMenu({ setSpinner = () => {} }) {
                </MenuItem>
             </RuleControl>
 
-            <MenuItem onClick={() => router.push('/dashboard/my-profile')}>
+            <MenuItem onClick={() => router.push('/dashboard/user/my-profile')}>
                <ListItemIcon>
                   <AccountCircle />
                </ListItemIcon>
