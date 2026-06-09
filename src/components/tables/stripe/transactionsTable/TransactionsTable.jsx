@@ -1,36 +1,40 @@
 'use client';
-import APIContext from '@/contexts/4HandsAPI';
-import { useContext, useEffect, useRef, useState } from 'react';
+
 import TableBase from '../../tableBase/TableBase';
 import StatusBadge from '@/components/common/statusBedge/StatusBadge';
+import { useRouter, useSearchParams } from 'next/navigation';
+import TransactionQuickview from '@/components/modals/quickviews/transactionQuickview/TransactionQuickview';
+import useTransaction from '@/hooks/useTransaction';
 
-export default function TransactionsTable({ customerId }) {
-   const [transactions, setTransactions] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const instance = useContext(APIContext);
-   const query = useRef();
+export default function TransactionsTable({ isAdmin = false }) {
+   const { transactions, loading } = useTransaction(isAdmin);
 
-   useEffect(() => {
-      if (query.current) {
-         return;
-      }
+   const router = useRouter();
+   const searchParams = useSearchParams();
+   const transactionId = searchParams.get('transaction');
+   const selectedTransaction = transactions.find(tx => tx.id === transactionId);
 
-      query.current = instance.ajax.authGet(`/stripe/transactions`, { customer: customerId }).then(res => {
-         setTransactions(res?.transactions || []);
-      }).catch(err => {
-         console.error('Error fetching Stripe transactions:', err);
-         setTransactions([]);
-      }).finally(() => {
-         setLoading(false);
-      });
-   }, [customerId, instance]);
+   const handleRowClick = (transaction) => {
+      const url = new URL(window.location);
 
-   return (
+      url.searchParams.set('transaction', transaction.id);
+      router.push(url.toString(), { shallow: true });
+   };
+
+   const handleOnClose = () => {
+      const url = new URL(window.location);
+
+      url.searchParams.delete('transaction');
+      router.push(url.toString(), { shallow: true });
+   }
+
+   return (<>
       <TableBase
          items={transactions}
          loading={loading}
          itemsPerPage={5}
          usePagination={true}
+         onClickRow={handleRowClick}
          noDocumentsText={'No transactions found.'}
          headerConfigs={[
             {
@@ -38,10 +42,7 @@ export default function TransactionsTable({ customerId }) {
                label: 'Price',
                align: 'left',
                style: { minWidth: '150px' },
-               format: (_, values) => {
-                  const amount = `${values.currency.toUpperCase()} ${String(values.amount / 100)}`
-                  return amount;
-               },
+               format: (value) => value,
             },
             {
                propKey: 'status',
@@ -49,24 +50,28 @@ export default function TransactionsTable({ customerId }) {
                align: 'left',
                style: { minWidth: '250px' },
                format: (_, values) => {
-                  const status = values?.status
-                  return <StatusBadge color={status === 'succeeded' ? 'success' : undefined}>{status}</StatusBadge>;
+                  const statusLabel = values?.statusLabel;
+                  const status = values?.status;
+                  return <StatusBadge color={status === 'succeeded' ? 'success' : undefined}>{statusLabel}</StatusBadge>;
                }
             },
             {
-               propKey: 'payment_method_details',
+               propKey: 'card',
                label: 'Payment Method',
                align: 'left',
                style: { minWidth: '150px' },
                format: (value) => {
+                  if (!value) return null;
                   return <>
-                     <StatusBadge>{value.type}</StatusBadge>{' '}
-                     <StatusBadge>{value.card?.brand}</StatusBadge>
+                     <StatusBadge>{value.network}</StatusBadge>{' '}
+                     <StatusBadge>{value.brand}</StatusBadge>
                   </>;
                },
             },
          ]}
       />
-   );
+
+      <TransactionQuickview transaction={selectedTransaction} onClose={handleOnClose} />
+   </>);
 }
 
