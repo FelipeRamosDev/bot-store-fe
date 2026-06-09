@@ -34,7 +34,7 @@ export default function AdminHomeSidebar() {
          <ContentHeader>
             <DataArray /> <h2 className="card-title">Transactions</h2>
          </ContentHeader>
-         <TransactionsTable />
+         <TransactionsTable isAdmin />
       </div>
 
       <CreatePlanModal open={newPlanModal} setModal={setNewPlanModal} />

@@ -7,7 +7,9 @@
    }
 
    .info-sidebar {
-      flex: 2;
+      flex: 30%;
+      min-width: 30%;
+      max-width: 30%;
    }
 
    .info-card {
