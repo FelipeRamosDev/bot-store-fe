@@ -2,6 +2,7 @@ import ContentModal from "../../base/contentModal/ContentModal";
 import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import Card from "@/components/common/card/Card";
 import Markdown from "@/components/common/Markdown/Markdown";
+import UserTile from "@/components/tiles/userTile/UserTile";
 
 const cardProps = {
    padding: 's',
@@ -137,6 +138,8 @@ export default function SubscriptionQuickview({ subscription, onClose = () => { 
                      <span>{price?.amount || "---"}</span>
                   </div>
                </Card>
+
+               <UserTile user={subscription?.user} />
             </div>
          </div>
       </ContentModal>
