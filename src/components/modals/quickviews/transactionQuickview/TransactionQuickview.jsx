@@ -2,6 +2,7 @@ import ContentModal from "../../base/contentModal/ContentModal";
 import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
 import Card from "@/components/common/card/Card";
 import UserTile from "@/components/tiles/userTile/UserTile";
+import CTAButton from "@/components/buttons/ctaButton/CTAButton";
 
 const cardProps = {
    padding: 's',
@@ -143,27 +144,6 @@ export default function TransactionQuickview({ transaction, onClose = () => { } 
             <div className="info-sidebar">
                <Card {...cardProps}>
                   <div className="info-prop">
-                     <label>Transaction ID:</label>
-                     <span>{transaction?.id || "---"}</span>
-                  </div>
-                  <div className="info-prop">
-                     <label>Payment Intent:</label>
-                     <span>{transaction?.paymentIntent || "---"}</span>
-                  </div>
-                  <div className="info-prop">
-                     <label>Payment Method:</label>
-                     <span>{transaction?.paymentMethod || "---"}</span>
-                  </div>
-                  <div className="info-prop">
-                     <label>Balance Transaction:</label>
-                     <span>{transaction?.balanceTransaction || "---"}</span>
-                  </div>
-               </Card>
-
-               <UserTile user={transaction?.user} />
-
-               <Card {...cardProps}>
-                  <div className="info-prop">
                      <label>Receipt Number:</label>
                      <span>{transaction?.receiptNumber || "---"}</span>
                   </div>
@@ -172,14 +152,11 @@ export default function TransactionQuickview({ transaction, onClose = () => { } 
                      <span>{transaction?.receiptEmail || "---"}</span>
                   </div>
                   <div className="info-prop">
-                     <label>Receipt URL:</label>
-                     <span>
-                        {transaction?.receiptUrl
-                           ? <a href={transaction.receiptUrl} target="_blank" rel="noreferrer">View Receipt</a>
-                           : "---"}
-                     </span>
+                     <CTAButton url={transaction?.receiptUrl} urlTarget="_blank">View Receipt</CTAButton>
                   </div>
                </Card>
+
+               <UserTile user={transaction?.user} />
 
                <Card {...cardProps}>
                   <div className="info-prop">
@@ -201,6 +178,25 @@ export default function TransactionQuickview({ transaction, onClose = () => { } 
                   <div className="info-prop">
                      <label>Message:</label>
                      <span>{outcome?.message || "---"}</span>
+                  </div>
+               </Card>
+
+               <Card {...cardProps}>
+                  <div className="info-prop">
+                     <label>Transaction ID:</label>
+                     <span>{transaction?.id || "---"}</span>
+                  </div>
+                  <div className="info-prop">
+                     <label>Payment Intent:</label>
+                     <span>{transaction?.paymentIntent || "---"}</span>
+                  </div>
+                  <div className="info-prop">
+                     <label>Payment Method:</label>
+                     <span>{transaction?.paymentMethod || "---"}</span>
+                  </div>
+                  <div className="info-prop">
+                     <label>Balance Transaction:</label>
+                     <span>{transaction?.balanceTransaction || "---"}</span>
                   </div>
                </Card>
             </div>

@@ -6,7 +6,7 @@ import UserQuickview from "@/components/modals/quickviews/userQuickview/UserQuic
 import SubscriptionsTable from "@/components/tables/stripe/subscriptionsTable/SubscriptionsTable";
 import UsersTable from "@/components/tables/usersTable/UsersTable";
 import { DBQuery } from "@/contexts/DBQuery";
-import { Add, DataArray } from "@mui/icons-material";
+import { Add, Group, Subscriptions } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -22,7 +22,7 @@ export default function AdminHomeContent() {
             sort={{ createdAt: -1 }}
          >
             <ContentHeader Toolbar={() => <RoundIconButton Icon={Add} onClick={() => setCreateUserModal(true)} />}>
-               <DataArray /> <h2 className="card-title">Users</h2>
+               <Group /> <h2 className="card-title">Users</h2>
             </ContentHeader>
 
             <UsersTable />
@@ -32,7 +32,7 @@ export default function AdminHomeContent() {
 
       <div className="widget-wrapper">
          <ContentHeader>
-            <DataArray /> <h2 className="card-title">Subscriptions</h2>
+            <Subscriptions /> <h2 className="card-title">Subscriptions</h2>
          </ContentHeader>
          <SubscriptionsTable isAdmin />
       </div>
