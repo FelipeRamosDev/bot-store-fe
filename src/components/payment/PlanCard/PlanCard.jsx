@@ -22,7 +22,8 @@ export default function PlanCard({
    features,
    selectedPrice: selectedPriceProp,
    cancelFeature = false,
-   showCoupon = false
+   showCoupon = false,
+   discountPercent = null
 }) {
    const [interval, setInterval] = useState('monthly');
    const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
@@ -127,10 +128,29 @@ export default function PlanCard({
                <div className="invoice-row">
                   <span className="invoice-label">{selectedPrice?.interval === 'monthly' ? 'Monthly' : 'Yearly'} amount ({selectedPrice?.currency || '---'})</span>
                   <span className="invoice-dots"></span>
-                  <span className="invoice-value">
-                     <Price amount={selectedPrice?.price} size="l" /> / <small>{selectedPrice?.interval === 'monthly' ? 'Month' : 'Year'}</small>
+                  <span className={`invoice-value${discountPercent ? ' strikethrough' : ''}`}>
+                     <Price amount={selectedPrice?.price} size="s" forceColor="warn" /> / <small>{selectedPrice?.interval === 'monthly' ? 'Month' : 'Year'}</small>
                   </span>
                </div>
+
+               {discountPercent != null && (
+                  <>
+                     <div className="invoice-row">
+                        <span className="invoice-label">Discount ({discountPercent}% off)</span>
+                        <span className="invoice-dots"></span>
+                        <span className="invoice-value discount">
+                           <Price forceColor="success" amount={(selectedPrice?.price * discountPercent / 100) * -1} size="m" />
+                        </span>
+                     </div>
+                     <div className="invoice-row total">
+                        <span className="invoice-label"><strong>Total</strong></span>
+                        <span className="invoice-dots"></span>
+                        <span className="invoice-value">
+                           <Price amount={selectedPrice?.price * (1 - discountPercent / 100)} size="l" /> / <small>{selectedPrice?.interval === 'monthly' ? 'Month' : 'Year'}</small>
+                        </span>
+                     </div>
+                  </>
+               )}
             </div>}
          </FormBase>
 

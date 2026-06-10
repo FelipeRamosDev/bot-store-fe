@@ -35,6 +35,7 @@ const PlansGrid = forwardRef(function PlansGrid({ showCoupon = false, title = <>
                priceId={currentPrice.priceId}
                prices={currentPlan.prices}
                selectedPrice={currentPrice}
+               discountPercent={user?.subscribedPlan?.discountPercent}
                cancelFeature
             />
          </div>}
