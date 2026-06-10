@@ -17,6 +17,10 @@ import { Business } from '@mui/icons-material';
  * @returns {JSX.Element} - Rendered registration form component.
  */
 export default function RegisterForm({ className, editData, onSubmit, ...props }) {
+   const inputProps = {
+      size: 'small'
+   };
+
    return (
       <FormBase
          formID="register-form"
@@ -28,49 +32,49 @@ export default function RegisterForm({ className, editData, onSubmit, ...props }
          {...props}
       >
          <div className="input-wrap">
-            <FormInput path="firstName" />
-            <FormInput path="lastName" />
+            <FormInput path="firstName" {...inputProps} />
+            <FormInput path="lastName" {...inputProps} />
          </div>
 
          {!editData && <div className="input-wrap">
-            <FormInput path="email" />
-            <FormInput path="phone" />
+            <FormInput path="email" {...inputProps} />
+            <FormInput path="phone" {...inputProps} />
          </div>}
 
          <div className="input-wrap">
-            <FormInput path="birthdate" />
+            <FormInput path="birthdate" {...inputProps} />
          </div>
 
          <RuleControl rules={['master', 'admin']}>
             <div className="input-wrap">
-               <FormInput path="rules" />
+               <FormInput path="rules" {...inputProps} />
             </div>
          </RuleControl>
 
          {!editData && <div className="input-wrap">
-            <FormInput path="password" />
-            <FormInput path="confirmPassword" />
+            <FormInput path="password" {...inputProps} />
+            <FormInput path="confirmPassword" {...inputProps} />
          </div>}
 
-         <ContentHeader>
-            <Business /> <h4 className="header-title">Billing Address</h4>
+         <ContentHeader className="billing-header">
+            <Business fontSize="small" /> <h4 className="header-title">Billing Address</h4>
          </ContentHeader>
          <div className="input-wrap">
-            <FormInput path="billingAddress.address1" />
+            <FormInput path="billingAddress.address1" {...inputProps} />
          </div>
 
          <div className="input-wrap">
-            <FormInput path="billingAddress.address2" />
+            <FormInput path="billingAddress.address2" {...inputProps} />
          </div>
 
          <div className="input-wrap">
-            <FormInput path="billingAddress.city" />
-            <FormInput path="billingAddress.state" />
+            <FormInput path="billingAddress.city" {...inputProps} />
+            <FormInput path="billingAddress.state" {...inputProps} />
          </div>
 
          <div className="input-wrap">
-            <FormInput path="billingAddress.postalCode" />
-            <FormInput path="billingAddress.country" />
+            <FormInput path="billingAddress.postalCode" {...inputProps} />
+            <FormInput path="billingAddress.country" {...inputProps} />
          </div>
       </FormBase>
    );
