@@ -3,7 +3,7 @@ import { DBQuery } from "@/contexts/DBQuery";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
-import { DataArray, Add } from "@mui/icons-material";
+import { Add, PriceChange, Receipt } from "@mui/icons-material";
 import CreatePlanModal from "@/components/modals/createPlanModal/CreatePlanModal";
 import PlanQuickview from "@/components/modals/quickviews/planQuickview/PlanQuickview";
 import PlansTable from "@/components/tables/plansTable/PlansTable";
@@ -22,7 +22,7 @@ export default function AdminHomeSidebar() {
             limit={6}
          >
             <ContentHeader Toolbar={() => <RoundIconButton Icon={Add} onClick={() => setNewPlanModal(true)} />}>
-               <DataArray /> <h2 className="card-title">Plans</h2>
+               <PriceChange /> <h2 className="card-title">Plans</h2>
             </ContentHeader>
 
             <PlansTable />
@@ -32,7 +32,7 @@ export default function AdminHomeSidebar() {
 
       <div className="widget-wrapper">
          <ContentHeader>
-            <DataArray /> <h2 className="card-title">Transactions</h2>
+            <Receipt /> <h2 className="card-title">Transactions</h2>
          </ContentHeader>
          <TransactionsTable isAdmin />
       </div>

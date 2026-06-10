@@ -5,7 +5,7 @@ import UserInfos from "@/components/shared/userInfos/UserInfos";
 import UserRelated from "@/components/shared/userRelated/UserRelated";
 import AuthUserContext from "@/contexts/AuthUser";
 import useUser from "@/hooks/useUser";
-import { Cancel, Edit } from "@mui/icons-material";
+import { Cancel, Edit, VerifiedUser } from "@mui/icons-material";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
@@ -52,6 +52,7 @@ export default function MyProfileInfos() {
    return (
       <div className="my-profile-infos container">
          <ContentHeader Toolbar={Toolbar}>
+            <VerifiedUser />
             <h2 className="header-title">Personal Information</h2>
          </ContentHeader>
 

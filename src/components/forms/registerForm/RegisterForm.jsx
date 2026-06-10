@@ -2,6 +2,8 @@ import registerForm from './RegisterForm.config';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
 import { RuleControl } from '@/components/common/RuleControl';
+import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
+import { Business } from '@mui/icons-material';
 
 /**
  * `RegisterForm` component for user registration.
@@ -50,6 +52,9 @@ export default function RegisterForm({ className, editData, onSubmit, ...props }
             <FormInput path="confirmPassword" />
          </div>}
 
+         <ContentHeader>
+            <Business /> <h4 className="header-title">Billing Address</h4>
+         </ContentHeader>
          <div className="input-wrap">
             <FormInput path="billingAddress.address1" />
          </div>

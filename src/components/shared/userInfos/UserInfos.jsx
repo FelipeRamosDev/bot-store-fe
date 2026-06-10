@@ -4,6 +4,7 @@ import SubscriptionsTable from "@/components/tables/stripe/subscriptionsTable/Su
 import TransactionsTable from "@/components/tables/stripe/transactionsTable/TransactionsTable";
 import PlanTile from "@/components/tiles/planTile/PlanTile";
 import { DBQuery } from "@/contexts/DBQuery";
+import { Business, Receipt, Subscriptions } from "@mui/icons-material";
 
 export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = false, isAdmin = false }) {
    const customerId = user?.stripeCustomer?.id;
@@ -31,6 +32,9 @@ export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = 
                </div>
             </Card>
 
+            <ContentHeader>
+               <Business /> <h4 className="header-title">Billing Address</h4>
+            </ContentHeader>
             <Card {...cardProps}>
                <div className="info-prop">
                   <label>Address Line 1:</label>
@@ -55,7 +59,7 @@ export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = 
             </Card>
 
             <ContentHeader>
-               <h4 className="header-title">Transactions</h4>
+               <Receipt /> <h4 className="header-title">Transactions</h4>
             </ContentHeader>
             <TransactionsTable isAdmin={isAdmin} customerId={customerId} />
          </div>
@@ -77,7 +81,7 @@ export default function UserInfos({ user, billingAddress, hideSubscriptionBtn = 
             </DBQuery>}
 
             <ContentHeader>
-               <h4 className="header-title">Subscriptions History</h4>
+               <Subscriptions /> <h4 className="header-title">Subscriptions History</h4>
             </ContentHeader>
             {customerId && <SubscriptionsTable isAdmin={isAdmin} customerId={customerId} />}
          </div>
