@@ -35,6 +35,7 @@ const PlansGrid = forwardRef(function PlansGrid({ title = <>Choose a <span class
                priceId={currentPrice.priceId}
                prices={currentPlan.prices}
                selectedPrice={currentPrice}
+               cancelFeature
             />
          </div>}
 
