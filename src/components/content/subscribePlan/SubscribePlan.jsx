@@ -23,6 +23,7 @@ export default function SubscribePlan() {
          title={gridTitle}
          plans={plans}
          setPlans={setPlans}
+         showCoupon
       />}
 
       {isSelected && <SubscriptionCheckout selectedPlan={selectedPlan} selectedPrice={selectedPrice} />}

@@ -8,6 +8,7 @@ import CancelSubscriptionConfirmDialog from "@/components/modals/dialogs/cancelS
 import { parseCSS } from "@/helpers/parser";
 import Form from "@/models/Form";
 import SwitchFieldSchema from "@/models/Form/fieldTypes/SwitchFieldSchema";
+import TextFieldSchema from "@/models/Form/fieldTypes/TextFieldSchema";
 import { Button } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -20,13 +21,15 @@ export default function PlanCard({
    summary,
    features,
    selectedPrice: selectedPriceProp,
-   cancelFeature = false
+   cancelFeature = false,
+   showCoupon = false
 }) {
    const [interval, setInterval] = useState('monthly');
    const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
-   const router = useRouter();
+   const [ openCoupon, setOpenCoupon ] = useState(false);
    const searchParams = useSearchParams();
    const currentPriceId = searchParams.get('currentPriceId');
+   const router = useRouter();
 
    const selectedPrice = selectedPriceProp || prices.find(price => price.interval === interval);
    const yearAmount = interval === 'monthly' ? selectedPrice?.price * 12 : selectedPrice?.price;
@@ -42,14 +45,20 @@ export default function PlanCard({
             key: 'selectedInterval',
             required: true,
          }),
+         new TextFieldSchema({
+            key: 'couponCode',
+            label: 'Have a promotion code?',
+            placeholder: 'Enter code here'
+         })
       ]
    });
 
-   const handleSubmit = () => {
+   const handleSubmit = (data) => {
       const url = new URLSearchParams(window.location.search);
 
       url.set('productId', productId);
       url.set('priceId', selectedPrice?.priceId || '');
+      url.set('couponCode', data?.couponCode || '');
 
       router.push(`/subscribe-plan?${url.toString()}`);
    };
@@ -85,6 +94,17 @@ export default function PlanCard({
 
                {features && <Markdown className="plan-features" value={features || ''} />}
             </div>
+
+            {showCoupon && <div className="coupon-add">
+               <label
+                  className="coupon-label link"
+                  onClick={() => setOpenCoupon(!openCoupon)}
+               >
+                  {openCoupon ? 'Hide promotion code' : 'Have a promotion code?'}
+               </label>
+
+               {openCoupon && <FormInput className="code-input" path="couponCode" />}
+            </div>}
 
             {!isBillingCard && (
                <CTAButton

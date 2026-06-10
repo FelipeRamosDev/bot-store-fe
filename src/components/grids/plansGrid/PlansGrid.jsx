@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import usePlans from "@/hooks/usePlans";
 import AuthUserContext from "@/contexts/AuthUser";
 
-const PlansGrid = forwardRef(function PlansGrid({ title = <>Choose a <span className="grad-txt">Plan</span></> }, ref) {
+const PlansGrid = forwardRef(function PlansGrid({ showCoupon = false, title = <>Choose a <span className="grad-txt">Plan</span></> }, ref) {
    const auth = useContext(AuthUserContext);
    const user = auth?.user;
    const { plans, loading } = usePlans();
@@ -50,6 +50,7 @@ const PlansGrid = forwardRef(function PlansGrid({ title = <>Choose a <span class
                      prices={selectedPlan.prices}
                      summary={selectedPlan.summary}
                      features={selectedPlan.features}
+                     showCoupon={showCoupon}
                   />
                ) : plans.map(plan => (
                   <PlanCard
@@ -59,6 +60,7 @@ const PlansGrid = forwardRef(function PlansGrid({ title = <>Choose a <span class
                      prices={plan.prices}
                      summary={plan.summary}
                      features={plan.features}
+                     showCoupon={showCoupon}
                   />
                ))}
 
