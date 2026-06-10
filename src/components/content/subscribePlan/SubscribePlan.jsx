@@ -14,9 +14,11 @@ export default function SubscribePlan() {
    const instance = useContext(APIContext);
    const productId = searchParams.get('productId');
    const priceId = searchParams.get('priceId');
+   const updatePlan = searchParams.get('updatePlan') === 'true';
    const isSelected = productId && priceId;
    const selectedPlan = plans.find(plan => plan.productId === productId);
    const selectedPrice = selectedPlan?.prices.find(price => price.priceId === priceId);
+   const gridTitle = updatePlan && <>Upgrade your <span className="grad-txt">Plan</span></>;
 
    useEffect(() => {
       const ajax = new AJAX({ rejectUnauthorized: false }, instance);
@@ -34,7 +36,12 @@ export default function SubscribePlan() {
    }, []);
 
    return (<div className="subscribe-plan container">
-      {!isSelected && <PlansGrid plans={plans} setPlans={setPlans} />}
+      {!isSelected && <PlansGrid
+         title={gridTitle}
+         plans={plans}
+         setPlans={setPlans}
+      />}
+
       {isSelected && <SubscriptionCheckout selectedPlan={selectedPlan} selectedPrice={selectedPrice} />}
    </div>);
 }

@@ -17,4 +17,21 @@
          flex-direction: row;
       }
    }
+
+   .current-plan {
+      margin-bottom: 3rem;
+      max-width: 400px;
+
+      .plan-card {
+         min-height: 50px;
+
+         .selected-plan {
+            gap: 0px;
+         }
+
+         .plan-invoice {
+            margin-top: 0;
+         }
+      }
+   }
 }
