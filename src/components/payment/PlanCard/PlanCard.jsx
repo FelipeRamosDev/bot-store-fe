@@ -54,7 +54,7 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
             <div className="card-content">
                {isBillingCard && <label className="plan-label">Selected Plan</label>}
                <h3 className="plan-title">{title}</h3>
-               <p className="plan-summary">{summary}</p>
+               {summary && <p className="plan-summary">{summary}</p>}
 
                {!isBillingCard && <div className="price-line">
                   <p className="line">
@@ -71,7 +71,7 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
                   <label className="interval-label year">Year</label>
                </div>}
 
-               <Markdown className="plan-features" value={features || ''} />
+               {features && <Markdown className="plan-features" value={features || ''} />}
             </div>
 
             {!isBillingCard && (
@@ -85,9 +85,6 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
                </CTAButton>
             )}
 
-            {isBillingCard && <ContentHeader>
-               <h4 className="header-title">Summary</h4>
-            </ContentHeader>}
             {isBillingCard && <div className="plan-invoice">
                <div className="invoice-row">
                   <span className="invoice-label">Interval</span>
