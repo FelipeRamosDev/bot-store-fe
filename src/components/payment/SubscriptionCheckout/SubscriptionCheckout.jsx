@@ -26,6 +26,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
    const productId = searchParams.get('productId');
    const priceId = searchParams.get('priceId');
    const isUpdatePlan = searchParams.get('updatePlan') === 'true';
+   const couponCode = searchParams.get('couponCode');
 
    const initCheckout = async () => {
       setLoading(true);
@@ -36,6 +37,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
             customerEmail: user.email,
             productId,
             priceId,
+            promotionCode: couponCode,
             overideActive: isUpdatePlan
          });
 
@@ -46,6 +48,24 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
                router.push('/dashboard');
             }, 4000);
 
+            return;
+         }
+
+         // Free coupon: no payment needed, confirm immediately
+         if (initialized.requiresPayment === false) {
+            const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', {
+               subscriptionId: initialized.subscriptionId,
+               productId,
+               priceId,
+               overideActive: isUpdatePlan
+            });
+
+            if (!confirmed.success) {
+               setError(confirmed.message || 'Subscription confirmed but saving it failed. Please contact support.');
+               return;
+            }
+
+            router.push('/dashboard');
             return;
          }
 
