@@ -46,10 +46,15 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
 
          if (authData.isLogged) {
             const userRoles = authData?.user?.rules || [];
+            const hasAddress = !!authData?.user?.billingAddress;
             const hasRequiredRole = rules.length === 0 || rules.some(role => userRoles.includes(role));
 
             if (!hasRequiredRole) {
                return setError({ error: true, message: 'Unauthorized: Insufficient permissions' });
+            }
+
+            if (!hasAddress && window.location.pathname !== '/dashboard/user/my-profile') {
+               return router.push('/dashboard/user/my-profile');
             }
 
             if (authData.name === 'USER_EMAIL_NOT_CONFIRMED') {

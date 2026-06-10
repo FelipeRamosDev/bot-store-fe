@@ -6,13 +6,15 @@ import UserRelated from "@/components/shared/userRelated/UserRelated";
 import AuthUserContext from "@/contexts/AuthUser";
 import useUser from "@/hooks/useUser";
 import { Cancel, Edit } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
 export default function MyProfileInfos() {
    const { user } = useContext(AuthUserContext);
    const [editUser, setEditUser] = useState(false);
    const { editMyProfile } = useUser();
+   const searchParams = useSearchParams();
+   const editMode = searchParams.get('editMode') === 'true';
    const router = useRouter();
 
    if (!user) {
@@ -36,6 +38,16 @@ export default function MyProfileInfos() {
          return <RoundIconButton Icon={Edit} onClick={() => setEditUser(true)} />;
       }
    }
+
+   useEffect(() => {
+      if (editMode) {
+         setEditUser(true);
+      }
+
+      if (user && !user.billingAddress) {
+         setEditUser(true);
+      }
+   }, [editMode, user]);
 
    return (
       <div className="my-profile-infos container">
