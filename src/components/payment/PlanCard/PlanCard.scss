@@ -101,6 +101,15 @@
 
          .invoice-value {
             white-space: nowrap;
+
+            &.strikethrough {
+               text-decoration: line-through;
+               opacity: 0.5;
+            }
+
+            &.discount {
+               color: $success;
+            }
          }
       }
    }

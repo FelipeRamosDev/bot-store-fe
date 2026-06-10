@@ -17,6 +17,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState(null);
    const [message, setMessage] = useState(null);
+   const [discountPercent, setDiscountPercent] = useState(null);
    const instance = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
    const router = useRouter();
@@ -57,6 +58,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
                subscriptionId: initialized.subscriptionId,
                productId,
                priceId,
+               promotionCode: couponCode,
                overideActive: isUpdatePlan
             });
 
@@ -71,6 +73,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
 
          setSubscriptionId(initialized.subscriptionId);
          setClientSecret(initialized.clientSecret);
+         if (initialized.discountPercent != null) setDiscountPercent(initialized.discountPercent);
       } catch (err) {
          setError(err.message || 'An error occurred while initializing the subscription checkout.');
       } finally {
@@ -85,7 +88,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
       }
 
       try {
-         const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', { subscriptionId, productId, priceId, overideActive: isUpdatePlan });
+         const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', { subscriptionId, productId, priceId, promotionCode: couponCode, overideActive: isUpdatePlan });
          
          if (!confirmed.success) {
             setError(confirmed.message || 'Subscription was successful but confirming it failed. Please contact support if you have been charged.');
@@ -117,6 +120,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
             summary={selectedPlan.summary}
             features={selectedPlan.features}
             selectedPrice={selectedPrice}
+            discountPercent={discountPercent}
          /> : <></>}
          <>
             {error && <Alert severity="error">{error}</Alert>}
