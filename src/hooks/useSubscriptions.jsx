@@ -1,7 +1,7 @@
 import APIContext from "@/contexts/4HandsAPI";
 import { useContext, useEffect, useRef, useState } from "react";
 
-export default function useSubscriptions(isAdmin = false, customerId) {
+export default function useSubscriptions({ isAdmin = false, customerId, preventLoad = false } = {}) {
    const [subscriptions, setSubscriptions] = useState([]);
    const [loading, setLoading] = useState(true);
    const instance = useContext(APIContext);
@@ -9,7 +9,7 @@ export default function useSubscriptions(isAdmin = false, customerId) {
    const fetchRoute = isAdmin ? '/stripe/subscriptions' : '/user/billing/subscriptions';
 
    useEffect(() => {
-      if (query.current) {
+      if (query.current || preventLoad) {
          return;
       }
 
@@ -21,8 +21,20 @@ export default function useSubscriptions(isAdmin = false, customerId) {
       }).finally(() => {
          setLoading(false);
       });
-   }, [customerId, isAdmin]);
+   }, [customerId, isAdmin, preventLoad]);
 
-   return { subscriptions, loading };
+   async function cancelSubscription() {
+      try {
+         const canceled = await instance.ajax.authPost('/user/billing/cancel-subscription');
+
+         if (canceled.error) {
+            throw canceled;
+         }
+      } catch (error) {
+         throw error;
+      }
+   }
+
+   return { subscriptions, loading, cancelSubscription };
 }
 

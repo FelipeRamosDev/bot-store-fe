@@ -4,19 +4,30 @@ import Markdown from "@/components/common/Markdown/Markdown";
 import Price from "@/components/displays/price/Price";
 import { FormBase } from "@/components/forms/formBase/FormBase";
 import FormInput from "@/components/forms/formBase/FormInput";
-import ContentHeader from "@/components/headers/contentHeader/ContentHeader";
+import CancelSubscriptionConfirmDialog from "@/components/modals/dialogs/cancelSubscriptionConfirmDialog/CancelSubscriptionConfirmDialog";
 import { parseCSS } from "@/helpers/parser";
 import Form from "@/models/Form";
 import SwitchFieldSchema from "@/models/Form/fieldTypes/SwitchFieldSchema";
+import { Button } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function PlanCard({ cardType, productId, title, prices = [], summary, features, selectedPrice: selectedPriceProp }) {
+export default function PlanCard({
+   cardType,
+   productId,
+   title,
+   prices = [],
+   summary,
+   features,
+   selectedPrice: selectedPriceProp,
+   cancelFeature = false
+}) {
    const [interval, setInterval] = useState('monthly');
+   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
    const router = useRouter();
    const searchParams = useSearchParams();
    const currentPriceId = searchParams.get('currentPriceId');
-   
+
    const selectedPrice = selectedPriceProp || prices.find(price => price.interval === interval);
    const yearAmount = interval === 'monthly' ? selectedPrice?.price * 12 : selectedPrice?.price;
    const monthAmount = interval === 'monthly' ? selectedPrice?.price : selectedPrice?.price / 12;
@@ -39,6 +50,7 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
 
       url.set('productId', productId);
       url.set('priceId', selectedPrice?.priceId || '');
+
       router.push(`/subscribe-plan?${url.toString()}`);
    };
 
@@ -101,6 +113,16 @@ export default function PlanCard({ cardType, productId, title, prices = [], summ
                </div>
             </div>}
          </FormBase>
+
+         {cancelFeature && <Button
+            className="cancel-subscription-button"
+            color="error"
+            variant="contained"
+            fullWidth
+            onClick={() => setCancelDialogOpen(true)}
+         >Cancel Subscription</Button>}
+
+         <CancelSubscriptionConfirmDialog subscriptionName={title} open={cancelDialogOpen} setOpen={setCancelDialogOpen} />
       </Card>
    );
 }

@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import useSubscriptions from '@/hooks/useSubscriptions';
 
 export default function SubscriptionsTable({ isAdmin = false, customerId }) {
-   const { subscriptions, loading } = useSubscriptions(isAdmin, customerId);
+   const { subscriptions, loading } = useSubscriptions({ isAdmin, customerId });
 
    const searchParams = useSearchParams();
    const subscriptionId = searchParams.get("subscription");
