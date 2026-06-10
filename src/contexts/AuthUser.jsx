@@ -38,6 +38,8 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
       userChecked.current = true;
 
       instance.auth.checkUser().then(authData => {
+         const url = new URL(window.location);
+
          if (authData.error) {
             return setError(authData);
          }
@@ -65,7 +67,15 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
                return router.push('/dashboard');
             }
          } else {
-            router.push(searchParams.size ? `/dashboard/login?${searchParams.toString()}` : '/dashboard/login');
+            url.pathname = '/dashboard/login';
+
+            if (window.location.pathname === '/subscribe-plan') {
+               url.searchParams.set('register', 'true');
+            } else {
+               url.searchParams.set('redirect', window.location.pathname);
+            }
+
+            router.push(url.toString());
          }
       }).catch(err => {
          setError(err);

@@ -11,7 +11,11 @@ export default function useUser() {
          const created = await API.auth.register(parsedBody, '/user/signup');
 
          if (created) {
-            router.push('/dashboard?confirmationsent=true');
+            const url = new URL(window.location);
+
+            url.pathname = '/dashboard';
+            url.searchParams.set('confirmationsent', 'true');
+            router.push(url.toString());
          }
       } catch (err) {
          throw err;
@@ -27,7 +31,16 @@ export default function useUser() {
          }
 
          if (logged) {
-            router.push('/dashboard');
+            const url = new URL(window.location);
+
+            if (url.searchParams.get('redirect')) {
+               const redirectPath = url.searchParams.get('redirect');
+
+               url.searchParams.delete('redirect');
+               router.push(redirectPath);
+            } else {
+               router.push('/dashboard');
+            }
          }
       } catch (err) {
          if (err.name === 'USER_EMAIL_NOT_CONFIRMED') {
