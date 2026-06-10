@@ -74,7 +74,7 @@ export default function Login({ isRegister, isForgotPassword }) {
       </Card>}
 
       {isRegister && !isForgotPassword && <Card {...cardOpt}>
-         <h1 className="card-title"><Key {...iconOpt} /> Create</h1>
+         <h1 className={`card-title ${isRegister ? 'register' : ''}`}><Key {...iconOpt} /> Create</h1>
 
          <RegisterForm onSubmit={handleRegister} />
 
