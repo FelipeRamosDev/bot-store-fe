@@ -6,6 +6,7 @@ import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldS
 import configs from '@/config';
 import { ListItem } from '@mui/material';
 import TimeFieldSchema from '@/models/Form/fieldTypes/TimeFieldSchema';
+import DateOnlyFieldSchema from '@/models/Form/fieldTypes/DateOnlyFieldSchema';
 
 export const passwordValidators = [
    function (value) {
@@ -118,7 +119,7 @@ const registerForm = new Form({
          inputMode: 'tel',
          required: true,
       }),
-      new TextFieldSchema({
+      new DateOnlyFieldSchema({
          key: 'birthdate',
          label: 'Birthdate',
          placeholder: 'Your birthdate',

@@ -1,0 +1,29 @@
+.date-only-picker {
+   flex: 1;
+}
+
+.date-picker {
+   .MuiPickersToolbarText-root {
+      color: $text;
+
+      &.Mui-selected {
+         color: $success;
+      }
+   }
+
+   .MuiPickersDay-root {
+      &.Mui-selected {
+         background-color: $success;
+
+         &:hover {
+            background-color: $success;
+         }
+      }
+   }
+
+   .MuiPickersYear-yearButton {
+      &.Mui-selected {
+         background-color: $success;
+      }
+   }
+}
