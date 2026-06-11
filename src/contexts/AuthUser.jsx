@@ -39,6 +39,7 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
 
       instance.auth.checkUser().then(authData => {
          const url = new URL(window.location);
+         const pathname = window.location.pathname;
 
          if (authData.error) {
             return setError(authData);
@@ -66,18 +67,18 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
             window.localStorage.setItem('userLetters', userLetters);
             setUserAuth(authData);
 
-            if (window.location.pathname !== '/subscribe-plan' && !authData?.user?.subscribedPlan) {
+            if ((pathname !== '/subscribe-plan' && pathname !== '/admin') && !authData?.user?.subscribedPlan) {
                return router.push('/subscribe-plan');
-            } else if (window.location.pathname === '/subscribe-plan' && authData?.user?.subscribedPlan && !isUpdatePlan) {
+            } else if (pathname === '/subscribe-plan' && authData?.user?.subscribedPlan && !isUpdatePlan) {
                return router.push('/dashboard');
             }
          } else {
             url.pathname = '/dashboard/login';
 
-            if (window.location.pathname === '/subscribe-plan') {
+            if (pathname === '/subscribe-plan') {
                url.searchParams.set('register', 'true');
             } else {
-               url.searchParams.set('redirect', window.location.pathname);
+               url.searchParams.set('redirect', pathname);
             }
 
             router.push(url.toString());
