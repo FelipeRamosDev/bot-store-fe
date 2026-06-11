@@ -14,7 +14,7 @@ const dummyBot = {
    score: 1290
 };
 
-export default function BotCardImg({ bot = dummyBot }) {
+export default function BotCardImg({ bot = dummyBot, className }) {
    const card = useRef();
 
    function handleScroll() {
@@ -37,7 +37,7 @@ export default function BotCardImg({ bot = dummyBot }) {
    return (
       <Card
          prevRef={card}
-         className={`bot-card`}
+         className={`bot-card ${className}`}
          radius="s"
          elevation={30}
       >

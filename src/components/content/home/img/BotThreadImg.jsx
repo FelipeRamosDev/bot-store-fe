@@ -3,13 +3,13 @@ import BotThreadDivider from '@/components/tiles/bot/botThreadDivider/BotThreadD
 import RuleDummy from '@/components/content/home/img/RuleDummy';
 import BlurLinearIcon from '@mui/icons-material/BlurLinear';
 
-export default function BotThreadImg() {
+export default function BotThreadImg({ className }) {
    const titleCustom = { fontSize: 25, fontWeight: 800, color: 'rgb(44 50 50)', transform: 'translateY(3px)' };
    const iconCustom = { fontSize: 35, marginTop: -10, color: 'rgb(44 50 50)', transform: 'translateY(7px)' };
 
    return (
       <WatermarkPriceCard
-         className="left bot-thread"
+         className={`left bot-thread ${className}`}
          radius="m"
          borderColor="error"
          borderSide="left"
