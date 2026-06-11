@@ -1,3 +1,4 @@
+'use client';
 
 import Logo from '@/components/common/logo/Logo';
 import TopNavPublic from './TopNavPublic';
@@ -26,7 +27,7 @@ import Link from 'next/link';
  * 
  * @returns {JSX.Element} A header element containing the logo and the appropriate navigation menu.
  */
-export default function TopHeaderPublic({ type = 'public', fullContainer = true }) {
+export default function TopHeaderPublic({ fullContainer = true }) {
    return <header className="top-header">
       <div className={fullContainer ? 'full-container' : 'container'}>
          <Link className="logo-wrap" href="/">
@@ -34,7 +35,7 @@ export default function TopHeaderPublic({ type = 'public', fullContainer = true 
             <span className="logotype">Candle<span className="grad-txt">Pilot</span></span>
          </Link>
 
-         <TopNavPublic />
+         <TopNavPublic type="public" />
       </div>
    </header>
 }
