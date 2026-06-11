@@ -53,7 +53,7 @@ export default function TopHeaderMobileMenu({ type, setSpinner }) {
             </List>
          </DrawerMenu>}
 
-         {type !== 'admin' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+         {type === 'dashboard' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
             <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/bots/pilot-store')}>
                <Storefront />
                Go To Store
@@ -83,6 +83,34 @@ export default function TopHeaderMobileMenu({ type, setSpinner }) {
                <Divider />
 
                <AccountMenuMobile setSpinner={setSpinner} />
+            </List>
+         </DrawerMenu>}
+
+         {type === 'public' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard')}>
+               <Storefront />
+               Start
+            </CTAButton>
+
+            <List>
+               <ListItem disablePadding>
+                  <ListItemButton onClick={() => router.push('/how-it-works')}>
+                     <ListItemIcon>
+                        <Dashboard />
+                     </ListItemIcon>
+
+                     <ListItemText primary="How It Works" />
+                  </ListItemButton>
+               </ListItem>
+               <ListItem disablePadding>
+                  <ListItemButton onClick={() => router.push('/pricing')}>
+                     <ListItemIcon>
+                        <Dashboard />
+                     </ListItemIcon>
+
+                     <ListItemText primary="Pricing" />
+                  </ListItemButton>
+               </ListItem>
             </List>
          </DrawerMenu>}
       </nav>

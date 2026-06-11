@@ -17,7 +17,23 @@ import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 export default function TopHeaderDesktopMenu({ setSpinner, type }) {
    return (
       <nav className="desktop-menu">
-         {type === 'admin' ? <>
+         {type === 'public' && <>
+            <Link href="/how-it-works">
+               <Monitor />
+               How It Works
+            </Link>
+            <Link href="/pricing">
+               <Monitor />
+               Pricing
+            </Link>
+            <Link className="no-underline" href="/dashboard/">
+               <CTAButton url="/dashboard">
+                  Start
+               </CTAButton>
+            </Link>
+         </>}
+
+         {type === 'admin' && <>
             <Link href="/admin">
                <Monitor />
                Painel
@@ -27,7 +43,9 @@ export default function TopHeaderDesktopMenu({ setSpinner, type }) {
                   Dashboard
                </CTAButton>
             </Link>
-         </> : <>
+         </>}
+         
+         {type === 'dashboard' && <>
             <Link href="/dashboard">
                <Dashboard />
                Dashboard
@@ -36,14 +54,14 @@ export default function TopHeaderDesktopMenu({ setSpinner, type }) {
                <AccountBalanceWallet />
                Master Accounts
             </Link>
-            <Link className="no-underline" href="/dashboard/">
+            <Link className="no-underline" href="/dashboard/bots/pilot-store">
                <CTAButton startIcon={<StoreIcon />}>
                   Pilot Store
                </CTAButton>
             </Link>
          </>}
 
-         <AccountMenu setSpinner={setSpinner} />
+         {type !== 'public' && <AccountMenu setSpinner={setSpinner} />}
       </nav>
    );
 }
