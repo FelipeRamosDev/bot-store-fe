@@ -1,7 +1,7 @@
 'use client';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import DrawerMenu from '@/components/menus/base/drawerMenu/DrawerMenu';
-import { AccountBalanceWallet, Storefront, Dashboard, Logout } from '@mui/icons-material';
+import { AccountBalanceWallet, Storefront, Dashboard, Logout, Workspaces, PriceChange } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Button } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -88,7 +88,7 @@ export default function TopHeaderMobileMenu({ type, setSpinner }) {
 
          {type === 'public' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
             <CTAButton className="menu-cta" onClick={() => router.push('/dashboard')}>
-               <Storefront />
+               <Dashboard />
                Start
             </CTAButton>
 
@@ -96,7 +96,7 @@ export default function TopHeaderMobileMenu({ type, setSpinner }) {
                <ListItem disablePadding>
                   <ListItemButton onClick={() => router.push('/how-it-works')}>
                      <ListItemIcon>
-                        <Dashboard />
+                        <Workspaces />
                      </ListItemIcon>
 
                      <ListItemText primary="How It Works" />
@@ -105,7 +105,7 @@ export default function TopHeaderMobileMenu({ type, setSpinner }) {
                <ListItem disablePadding>
                   <ListItemButton onClick={() => router.push('/pricing')}>
                      <ListItemIcon>
-                        <Dashboard />
+                        <PriceChange />
                      </ListItemIcon>
 
                      <ListItemText primary="Pricing" />

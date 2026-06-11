@@ -29,7 +29,7 @@ const dummy = [
    { Avatar: PeterGriffinIMG, avatarW: 71, avatarH: 40, name: 'Peter Grifin', score: 574, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 3, monthlyROI: 5 },
 ];
 
-export default function BotsTableImg() {
+export default function BotsTableImg({ className }) {
    const table = useRef();
 
    function handleScroll() {
@@ -51,7 +51,7 @@ export default function BotsTableImg() {
    }, []);
 
    return (
-      <Card prevRef={table} className="table-image" padding="m" elevation={80}>
+      <Card prevRef={table} className={`table-image ${className}`} padding="m" elevation={80}>
          <Table>
             <TableHead>
                <TableRow>

@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import AccountMenu from './accountMenu/AccountMenu';
-import { AccountBalanceWallet, Dashboard, Monitor } from '@mui/icons-material';
+import { AccountBalanceWallet, Dashboard, Monitor, Workspaces, PriceChange } from '@mui/icons-material';
 import StoreIcon from '@mui/icons-material/Store';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
+import { useId, useState } from 'react';
+import { Menu, MenuItem } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 /**
  * TopHeaderDesktopMenu component renders a desktop navigation menu with links
@@ -15,22 +18,54 @@ import CTAButton from '@/components/buttons/ctaButton/CTAButton';
  * @returns {JSX.Element} The rendered top header desktop navigation menu.
  */
 export default function TopHeaderDesktopMenu({ setSpinner, type }) {
+   const id = useId();
+   const menuId = `${id}-menu`;
+   const buttonId = `${id}-button`;
+   const [anchorEl, setAnchorEl] = useState(null);
+   const open = Boolean(anchorEl);
+   const router = useRouter();
+
+   const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+   };
+
+   const handleClose = () => {
+      setAnchorEl(null);
+   };
+
+
    return (
       <nav className="desktop-menu">
          {type === 'public' && <>
-            <Link href="/how-it-works">
-               <Monitor />
+            <Link href="/how-it-works" onMouseEnter={handleClick}>
+               <Workspaces />
                How It Works
             </Link>
             <Link href="/pricing">
-               <Monitor />
+               <PriceChange />
                Pricing
             </Link>
             <Link className="no-underline" href="/dashboard/">
-               <CTAButton url="/dashboard">
+               <CTAButton url="/dashboard" startIcon={<Dashboard />}>
                   Start
                </CTAButton>
             </Link>
+
+            <Menu
+               id={menuId}
+               anchorEl={anchorEl}
+               open={open}
+               onClose={handleClose}
+               slotProps={{
+                  list: { 'aria-labelledby': buttonId },
+               }}
+            >
+               <MenuItem onClick={() => router.push('/how-it-works/what-is-candlepilot')}>What is CandlePilot</MenuItem>
+               <MenuItem onClick={() => router.push('/how-it-works/wallets')}>Wallets</MenuItem>
+               <MenuItem onClick={() => router.push('/how-it-works/slots')}>Slots</MenuItem>
+               <MenuItem onClick={() => router.push('/how-it-works/positions')}>Positions</MenuItem>
+               <MenuItem onClick={() => router.push('/how-it-works/pilots')}>Pilots</MenuItem>
+            </Menu>
          </>}
 
          {type === 'admin' && <>
@@ -44,7 +79,7 @@ export default function TopHeaderDesktopMenu({ setSpinner, type }) {
                </CTAButton>
             </Link>
          </>}
-         
+
          {type === 'dashboard' && <>
             <Link href="/dashboard">
                <Dashboard />
