@@ -1,10 +1,15 @@
 import APIContext from "@/contexts/4HandsAPI";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import useFilesBucket from "./useFilesBucket";
+import AuthUserContext from "@/contexts/AuthUser";
 
 export default function useUser() {
    const API = useContext(APIContext);
+   const auth = useContext(AuthUserContext);
+   const { uploadFile, uploading, getFileUrl } = useFilesBucket();
    const router = useRouter();
+   const user = auth?.user;
 
    async function register(parsedBody) {
       try {
@@ -94,5 +99,30 @@ export default function useUser() {
       }
    }
 
-   return { register, login, update, editMyProfile, forgotPassword };
+   async function uploadAvatar(file) {
+      if (!user) {
+         throw new Error('User not defined! It is necessary to be logged in to upload an avatar.');
+      }
+
+      try {
+         const fileName = `avatar_${user?._id}`;
+         const { filePath } = await uploadFile(file, 'user/avatar', { fileName });
+         return filePath;
+      } catch (err) {
+         throw err;
+      }
+   }
+
+   return {
+      register,
+      login,
+      update,
+      editMyProfile,
+      forgotPassword,
+      avatar: {
+         uploadAvatar,
+         uploading,
+         getFileUrl
+      }
+   };
 }

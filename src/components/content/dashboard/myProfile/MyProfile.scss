@@ -24,6 +24,10 @@
             }
          }
 
+         .user-avatar {
+            position: static;
+         }
+
          .content-wrap {
             background: $background-paper;
             height: $info-height;
@@ -62,6 +66,10 @@
                   }
                }
 
+               .avatar-image {
+                  object-fit: cover;
+               }
+
                .overlay {
                   background: black;
                   position: absolute;
@@ -76,7 +84,8 @@
                   gap: 0.5rem;
                   transition: all 100ms;
 
-                  &:hover {
+                  &:hover,
+                  &.empty {
                      cursor: pointer;
                      opacity: 0.85;
                   }
