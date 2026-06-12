@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useContext } from 'react';
 import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from '@mui/material';
