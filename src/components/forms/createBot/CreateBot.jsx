@@ -1,11 +1,12 @@
-import { useContext } from 'react';
-import { useRouter } from 'next/navigation';
+import { useContext, useState } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '../formBase/FormInput';
 import APIContext from '@/contexts/4HandsAPI';
 import createBotForm from './CreateBot.config';
 import AuthUserContext from '@/contexts/AuthUser';
 import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
+import usePilot from '@/hooks/usePilot';
+import Avatar from '@/components/common/avatar/Avatar';
 
 /**
  * A form component for creating or editing a bot.
@@ -20,26 +21,40 @@ import ContentSplit from '@/components/layout/contentSplit/ContentSplit';
  * 
  * @returns {JSX.Element} The rendered form component.
  */
-export default function CreateBotForm({ editData, onSuccess = () => {} }) {
+export default function CreateBotForm({ editData, onSuccess = () => { } }) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
+   const { uploadAvatar } = usePilot();
+   const [avatarUrl, setAvatarUrl] = useState();
    const editMode = Boolean(editData);
 
-   /**
-    * Handles form submission by sending the form data to the API.
-    * Redirects to the bot's detail page upon successful creation.
-    * 
-    * @param {Object} data - The form data.
-    * @returns {Promise<void>} A promise that resolves when the operation is complete.
-    */
+   function handleAvatarChange(files) {
+      const [file] = files;
+
+      if (file) {
+         const url = URL.createObjectURL(file);
+         setAvatarUrl(url);
+      }
+   }
+
    async function onSubmit(data) {
       data.author = user._id;
+      const avatar = data?.avatar?.[0];
 
       try {
          if (!editMode) {
-            const created = await API.ajax.authPut('/bot/create', data);
+            const created = await API.ajax.authPut('/bot/create', { ...data, avatar: undefined });
             if (created.error) {
                throw created;
+            }
+
+            if (avatar) {
+               try {
+                  await uploadAvatar(avatar, created.bot.UID);
+               } catch (err) {
+                  console.error('Error uploading avatar:', err);
+                  throw err;
+               }
             }
 
             return onSuccess(created.bot);
@@ -70,12 +85,18 @@ export default function CreateBotForm({ editData, onSuccess = () => {} }) {
       >
          <ContentSplit>
             <>
+               {!editMode && (
+                  <Avatar avatarUrl={avatarUrl} size={220}>
+                     <FormInput path="avatar" onChange={handleAvatarChange} />
+                  </Avatar>
+               )}
+
                <FormInput path="name" />
                <FormInput path="description" multiline={true} minRows={5} />
-               <FormInput path="allowedIntervals" />
             </>
 
             <>
+               <FormInput path="allowedIntervals" />
                <FormInput path="allowedSymbols" />
             </>
          </ContentSplit>

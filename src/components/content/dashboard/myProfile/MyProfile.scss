@@ -37,65 +37,8 @@
             position: absolute;
             padding: 0 5%;
 
-            .avatar-wrap {
-               width: $avatar-radius;
-               height: $avatar-radius;
-               border-radius: $avatar-radius;
-               border: 3px solid $text;
-               background-color: $background-paper;
+            .avatar {
                transform: translateY(-60%);
-               overflow: hidden;
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               position: relative;
-
-               @media screen and (min-width: $screen-m) {
-                  width: 150px;
-                  height: 150px;
-                  border-radius: 150px;
-                  border: 6px solid $text;
-               }
-
-               .avatar-icon {
-                  font-size: 7rem;
-                  color: $text;
-
-                  @media screen and (min-width: $screen-m) {
-                     font-size: 20rem;
-                  }
-               }
-
-               .avatar-image {
-                  object-fit: cover;
-               }
-
-               .overlay {
-                  background: black;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  opacity: 0;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  gap: 0.5rem;
-                  transition: all 100ms;
-
-                  &:hover,
-                  &.empty {
-                     cursor: pointer;
-                     opacity: 0.85;
-                  }
-
-                  .overlay-text,
-                  .overlay-icon {
-                     color: $text;
-                     font-size: 1rem;
-                  }
-               }
             }
          }
       }

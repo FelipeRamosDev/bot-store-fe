@@ -12,11 +12,15 @@ export default function useFilesBucket() {
    });
 
    async function uploadFile(file, bucket = 'default', options = {}) {
-      const { fileName } = options;
+      options.bucket = bucket;
+
+      if (options.fileName) {
+         options.fileName = options.fileName;
+      }
 
       try {
          setUploading(true);
-         return await ajax.upload('/files', file, { bucket, fileName });
+         return await ajax.upload('/files', file, options);
       } finally {
          setUploading(false);
       }

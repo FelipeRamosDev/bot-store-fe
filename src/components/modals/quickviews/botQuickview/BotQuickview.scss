@@ -39,16 +39,9 @@
                flex-direction: row;
             }
 
-            .avatar-wrap {
-               background-color: $background-grey2-dark;
+            .avatar {
                margin-top: -75px;
                margin-left: 2%;
-               border-radius: 130px;
-               height: 160px;
-               width: 160px;
-               display: flex;
-               justify-content: center;
-               align-items: center;
             }
 
             .bot-data {

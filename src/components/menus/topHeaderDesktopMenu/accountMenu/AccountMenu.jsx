@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useContext } from 'react';
-import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Divider, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { AccountCircle, CurrencyExchange, Logout } from '@mui/icons-material';
 import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
@@ -8,6 +8,7 @@ import APIContext from '@/contexts/4HandsAPI';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import LogoIconLight from '@/components/common/logo/LogoIconLight';
 import { RuleControl } from '@/components/common/RuleControl';
+import Avatar from '@/components/common/avatar/Avatar';
 
 /**
  * AccountMenu component that provides user account options such as viewing profile, 
@@ -18,7 +19,7 @@ import { RuleControl } from '@/components/common/RuleControl';
  * 
  * @returns {JSX.Element} A menu with account-related actions and an avatar icon to toggle it.
  */
-export default function AccountMenu({ setSpinner = () => {} }) {
+export default function AccountMenu({ setSpinner = () => {}, user }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ nameLetters, setNameLetters ] = useState('');
    const [ exchangeModal, setExchangeModal ] = useState(false);
@@ -56,7 +57,7 @@ export default function AccountMenu({ setSpinner = () => {} }) {
    return (
       <>
          <RoundIconButton
-            Icon={() => <Avatar sx={avatarStyle}>{nameLetters}</Avatar>}
+            Icon={() => <Avatar avatarUrl={user?.avatarUrl} size={38} noBorder />}
             onClick={handleMenuOpen}
          />
 

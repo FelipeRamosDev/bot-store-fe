@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import FormBaseContext from '@/components/forms/formBase/FormBase';
 
 /**
@@ -22,23 +22,25 @@ export default function FormInput({ path, onCustomChange = () => {}, ...props })
    const { form, errors, loading } = useContext(FormBaseContext);
    const [ schemaState, setSchema ] = useState();
    const fixDefaultValue = useRef();
+   const schema = form?.getSchema(path);
+
+   useEffect(() => {
+      if (schema) {
+         schema.appendDispatch(setSchema);
+         setSchema(schema);
+      }
+   }, [path]);
 
    if (!form) {
       return <></>;
    }
 
-   const schema = form.getSchema(path);
    if (!schema) {
       return <></>;
    }
 
-   if (!schemaState) {
-      schema.appendDispatch(setSchema);
-      setSchema(schema);
-   }
-
    const handleInput = (ev) => {
-      const value = ev?.target?.value;
+      const value = ev instanceof FileList ? ev : ev?.target?.value;
       form.setValue(path, value);
 
       if (!form.editMode) {
@@ -61,7 +63,7 @@ export default function FormInput({ path, onCustomChange = () => {}, ...props })
    if (schema.Input) {
       return <schema.Input
          className="form-input"
-         schema={schemaState}
+         schema={schemaState || schema}
          onChange={handleInput}
          errors={errors[path]}
          defaultValue={fixDefaultValue.current}
