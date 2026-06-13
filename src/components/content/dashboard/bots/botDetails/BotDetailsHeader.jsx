@@ -13,6 +13,11 @@ import AvgDailyROI from '@/components/charts/avgDailyROSChart/AvgDailyROSChart';
 import AccumROIChart from '@/components/charts/accumROSChart/AccumROSChart';
 import WinLossChart from '@/components/charts/winLossChart/WinLossChart';
 import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
+import { FormBase } from '@/components/forms/formBase/FormBase';
+import createBotForm from '@/components/forms/createBot/CreateBot.config';
+import FormInput from '@/components/forms/formBase/FormInput';
+import usePilot from '@/hooks/usePilot';
+import Avatar from '@/components/common/avatar/Avatar';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -21,10 +26,24 @@ import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
  * @returns {JSX.Element} The rendered component.
  */
 export default function BotDetailsHeader() {
+   const [avatarError, setAvatarError] = useState(false);
+   const [resultsLine, setResultsLine] = useState();
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
-   const [ resultsLine, setResultsLine ] = useState();
    const requested = useRef();
+   const { uploadAvatar, uploading } = usePilot();
+
+   const handleAvatarChange = (files) => {
+      const [file] = files;
+
+      if (!file) {
+         return;
+      }
+
+      uploadAvatar(file, doc._id).catch(err => {
+         console.error('Error uploading file:', err);
+      });
+   }
 
    useEffect(() => {
       if (typeof doc?._id !== 'string') return;
@@ -44,16 +63,22 @@ export default function BotDetailsHeader() {
             throw err;
          });
       }
-   }, [ doc, API.ajax, resultsLine ]);
+   }, [doc, API.ajax, resultsLine]);
 
    return <div className="page-header">
       <div className="cover"></div>
 
       <div className="bot-info">
          <ContentFullwidth useContainer={true}>
-            <div className="avatar">
-               <Image src={LogoIcon} className="robot-icon" alt="Avatar Placeholder" width={180} heigth={180} priority={true} />
-            </div>
+            <FormBase formID="pilot-avatar-form" formSet={createBotForm} editData={doc} hideSubmit>
+               <Avatar avatarUrl={doc.avatarUrl} size={220}>
+                  {uploading ? <span className="uploading">Uploading...</span> : <span className="overlay-text">Change Avatar</span>}
+
+                  {!uploading && (
+                     <FormInput path="avatar" onChange={handleAvatarChange} />
+                  )}
+               </Avatar>
+            </FormBase>
 
             <div className="summary">
                <h1 className="title">{doc.name}</h1>

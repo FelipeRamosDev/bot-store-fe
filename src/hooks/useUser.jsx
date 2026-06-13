@@ -105,7 +105,7 @@ export default function useUser() {
       }
 
       try {
-         const fileName = `avatar_${user?._id}`;
+         const fileName = `user_avatar_${user?._id}`;
          const { filePath } = await uploadFile(file, 'user/avatar', { fileName });
          return filePath;
       } catch (err) {

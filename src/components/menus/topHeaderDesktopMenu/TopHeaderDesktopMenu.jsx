@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
  * 
  * @returns {JSX.Element} The rendered top header desktop navigation menu.
  */
-export default function TopHeaderDesktopMenu({ setSpinner, type }) {
+export default function TopHeaderDesktopMenu({ setSpinner, type, user }) {
    const id = useId();
    const menuId = `${id}-menu`;
    const buttonId = `${id}-button`;
@@ -96,7 +96,7 @@ export default function TopHeaderDesktopMenu({ setSpinner, type }) {
             </Link>
          </>}
 
-         {type !== 'public' && <AccountMenu setSpinner={setSpinner} />}
+         {type !== 'public' && <AccountMenu setSpinner={setSpinner} user={user} />}
       </nav>
    );
 }

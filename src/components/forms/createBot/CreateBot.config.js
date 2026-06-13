@@ -3,6 +3,7 @@ import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSch
 import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import CryptoListItem from '../createSlotForm/CryptoListItem';
+import FileInputFieldSchema from '@/models/Form/fieldTypes/FileInputFieldSchema';
 
 const createBotForm = new Form({
    dependencies: [
@@ -16,6 +17,9 @@ const createBotForm = new Form({
       }
    ],
    schema: [
+      new FileInputFieldSchema({
+         key: 'avatar',
+      }),
       new TextFieldSchema({
          key: 'name',
          label: 'Bot Name',

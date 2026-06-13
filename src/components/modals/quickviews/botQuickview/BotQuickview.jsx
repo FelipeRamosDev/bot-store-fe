@@ -1,7 +1,6 @@
 'use client';
-import Image from 'next/image';
+
 import ContentModal from '../../base/contentModal/ContentModal';
-import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
 import AvgDailyROIChart from '@/components/charts/avgDailyROSChart/AvgDailyROSChart';
@@ -17,6 +16,7 @@ import AltModalHeader from '@/components/headers/altModalHeader/AltModalHeader';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
 import AuthUserContext from '@/contexts/AuthUser';
+import Avatar from '@/components/common/avatar/Avatar';
 
 export default function BotQuickview({ open, bot, setModal }) {
    const API = useContext(APIContext);
@@ -73,9 +73,7 @@ export default function BotQuickview({ open, bot, setModal }) {
             </AltModalHeader>
 
             <div className="header-content">
-               <div className="avatar-wrap">
-                  <Image src={LogoIcon} alt="CandlePilot Icon" width={120} height={120} />
-               </div>
+               <Avatar avatarUrl={bot?.avatarUrl} size={150} />
 
                <div className="bot-data">
                   <ContentHeader>

@@ -1,32 +1,29 @@
 import Card from "@/components/common/card/Card";
-import PersonIcon from '@mui/icons-material/Person';
 import { Edit } from "@mui/icons-material";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AuthUserContext from "@/contexts/AuthUser";
 import { FormBase } from "@/components/forms/formBase/FormBase";
 import FormInput from "@/components/forms/formBase/FormInput";
 import Form from "@/models/Form";
 import FileInputFieldSchema from "@/models/Form/fieldTypes/FileInputFieldSchema";
 import useUser from "@/hooks/useUser";
-import Image from "next/image";
+import Avatar from "@/components/common/avatar/Avatar";
 
 export default function MyProfileTopPage() {
    const { user } = useContext(AuthUserContext);
-   const { avatar: { uploadAvatar} } = useUser();
-   const [avatarError, setAvatarError] = useState(false);
+   const { avatar: { uploadAvatar } } = useUser();
 
    const formSet = new Form({
       schema: [
          new FileInputFieldSchema({
-            key: 'avatar',
-            label: 'Upload your avatar',
+            key: 'avatar'
          })
       ]
    });
 
    const handleFileInputChange = async (files) => {
-      const [ file ] = files;
-      
+      const [file] = files;
+
       if (!file) {
          return;
       }
@@ -44,30 +41,18 @@ export default function MyProfileTopPage() {
             <h1 className="top-page-title">{user?.fullName}</h1>
 
             <div className="content-wrap">
-               <div className="avatar-wrap">
-                  {(!user?.avatarUrl || avatarError) && <PersonIcon className="avatar-icon" />}
-                  {user?.avatarUrl && !avatarError && (
-                     <Image
-                        className="avatar-image"
-                        alt="user avatar"
-                        src={user?.avatarUrl}
-                        onError={() => setAvatarError(true)}
-                        fill
-                     />
-                  )}
-
-                  <FormBase
-                     className={`overlay ${!user?.avatarUrl || avatarError ? 'empty' : ''}`}
-                     formID="user-avatar"
-                     formSet={formSet}
-                     hideSubmit
-                  >
+               <FormBase
+                  formID="user-avatar"
+                  formSet={formSet}
+                  hideSubmit
+               >
+                  <Avatar avatarUrl={user?.avatarUrl} size={150}>
                      <Edit className="overlay-icon" />
                      <span className="overlay-text">Edit Avatar</span>
 
                      <FormInput path="avatar" onChange={(files) => handleFileInputChange(files)} />
-                  </FormBase>
-               </div>
+                  </Avatar>
+               </FormBase>
             </div>
          </Card>
       </div>

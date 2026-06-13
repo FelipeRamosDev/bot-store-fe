@@ -19,6 +19,7 @@ import WinLossROITooltip from './tooltips/WinLossROITooltip';
 import PositionROIAvgTooltip from './tooltips/PositionROIAvgTooltip';
 import WinLossCountTooltip from './tooltips/WinLossCountTooltip';
 import { parseClassName } from '@/helpers/parser';
+import Avatar from '@/components/common/avatar/Avatar';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
@@ -91,6 +92,10 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
          onRowsPerPageChange={reloadLimit}
          noDocumentsText="You doesn't have any pilot yet"
          headerConfigs={[
+            {
+               propKey: 'avatarUrl',
+               format: (value) => <Avatar avatarUrl={value} size={40} />
+            },
             {
                label: 'Pilot Name',
                propKey: 'name',
