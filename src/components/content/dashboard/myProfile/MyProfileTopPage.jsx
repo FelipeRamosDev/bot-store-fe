@@ -47,7 +47,6 @@ export default function MyProfileTopPage() {
                   hideSubmit
                >
                   <Avatar avatarUrl={user?.avatarUrl} size={150}>
-                     <Edit className="overlay-icon" />
                      <span className="overlay-text">Edit Avatar</span>
 
                      <FormInput path="avatar" onChange={(files) => handleFileInputChange(files)} />
