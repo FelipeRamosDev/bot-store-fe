@@ -94,7 +94,7 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
          headerConfigs={[
             {
                propKey: 'avatarUrl',
-               format: (value) => <Avatar avatarUrl={value} size={40} />
+               format: (value) => <Avatar avatarUrl={value} size={40} noBorder />
             },
             {
                label: 'Pilot Name',
