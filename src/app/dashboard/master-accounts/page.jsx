@@ -1,6 +1,11 @@
 import AuthBasePage from "@/templates/authBasePage/AuthBasePage";
 import MasterAccounts from "@/components/content/dashboard/masterAccounts/masterAccountsPage/MasterAccounts";
 
+export const metadata = {
+   title: 'Master Accounts | CandlePilot',
+   description: 'Review and manage your connected master accounts.',
+};
+
 /**
  * MasterAccountsPage Component
  *

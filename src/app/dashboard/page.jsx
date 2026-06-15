@@ -1,6 +1,11 @@
 import AuthBasePage from "@/templates/authBasePage/AuthBasePage";
 import DashboardHome from "@/components/content/dashboard/home/DashboardHome";
 
+export const metadata = {
+   title: 'Dashboard | CandlePilot',
+   description: 'Track your bot activity and manage your trading workspace.',
+};
+
 /**
  * DashboardPage Component
  *

@@ -1,105 +1,26 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import { useContext, useEffect, useRef, useState } from 'react';
-import APIContext from '@/contexts/4HandsAPI';
-import { useRouter, useSearchParams } from 'next/navigation';
-import AuthUserContext from '@/contexts/AuthUser';
+import { useEffect, useRef } from 'react';
 import StripeElement from './StripeElement';
 import { Alert, Skeleton } from '@mui/material';
 import ContentSidebar from '@/components/layout/contentSidebar/ContentSidebar';
 import PlanCard from '../PlanCard/PlanCard';
+import useSubscriptions from '@/hooks/useSubscriptions';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
-   const [clientSecret, setClientSecret] = useState(null);
-   const [subscriptionId, setSubscriptionId] = useState(null);
-   const [loading, setLoading] = useState(false);
-   const [error, setError] = useState(null);
-   const [message, setMessage] = useState(null);
-   const [discountPercent, setDiscountPercent] = useState(null);
-   const instance = useContext(APIContext);
-   const { user } = useContext(AuthUserContext);
-   const router = useRouter();
    const isInit = useRef(false);
-
-   const searchParams = useSearchParams();
-   const productId = searchParams.get('productId');
-   const priceId = searchParams.get('priceId');
-   const isUpdatePlan = searchParams.get('updatePlan') === 'true';
-   const couponCode = searchParams.get('couponCode');
-
-   const initCheckout = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-         const initialized = await instance.ajax.authPost('/plans/stripe/create-subscription', {
-            customerEmail: user.email,
-            productId,
-            priceId,
-            promotionCode: couponCode,
-            overideActive: isUpdatePlan
-         });
-
-         if (initialized.isActive) {
-            setMessage('You already have an active subscription for this plan. Redirecting to dashboard...');
-
-            setTimeout(() => {
-               router.push('/dashboard');
-            }, 4000);
-
-            return;
-         }
-
-         // Free coupon: no payment needed, confirm immediately
-         if (initialized.requiresPayment === false) {
-            const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', {
-               subscriptionId: initialized.subscriptionId,
-               productId,
-               priceId,
-               promotionCode: couponCode,
-               overideActive: isUpdatePlan
-            });
-
-            if (!confirmed.success) {
-               setError(confirmed.message || 'Subscription confirmed but saving it failed. Please contact support.');
-               return;
-            }
-
-            router.push('/dashboard');
-            return;
-         }
-
-         setSubscriptionId(initialized.subscriptionId);
-         setClientSecret(initialized.clientSecret);
-         if (initialized.discountPercent != null) setDiscountPercent(initialized.discountPercent);
-      } catch (err) {
-         setError(err.message || 'An error occurred while initializing the subscription checkout.');
-      } finally {
-         setLoading(false);
-      }
-   };
-
-   const onSuccess = async () => {
-      if (!subscriptionId || !productId || !priceId) {
-         setError('Subscription confirmed but no subscription details received.');
-         return;
-      }
-
-      try {
-         const confirmed = await instance.ajax.authPost('/plans/stripe/confirm-subscription', { subscriptionId, productId, priceId, promotionCode: couponCode, overideActive: isUpdatePlan });
-         
-         if (!confirmed.success) {
-            setError(confirmed.message || 'Subscription was successful but confirming it failed. Please contact support if you have been charged.');
-            return;
-         }
-
-         router.push('/dashboard');
-      } catch (error) {
-         setError(error.message || 'Subscription was successful but confirming it failed. Please contact support if you have been charged.');
-      }
-   };
+   const {
+      discountPercent,
+      message,
+      loading,
+      clientSecret,
+      error,
+      setError,
+      initCheckout,
+      confirmSubscription
+   } = useSubscriptions({ preventLoad: true, selectedPlan, selectedPrice });
 
    useEffect(() => {
       if (isInit.current) {
@@ -132,7 +53,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
 
             {clientSecret && (
                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <StripeElement error={error} setError={setError} onSuccess={onSuccess} />
+                  <StripeElement error={error} setError={setError} onSuccess={confirmSubscription} />
                </Elements>
             )}
          </>

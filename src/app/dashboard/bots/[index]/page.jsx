@@ -1,6 +1,11 @@
 import BotDetails from '@/components/content/dashboard/bots/botDetails/BotDetails';
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 
+export const metadata = {
+   title: 'Bot Details | CandlePilot',
+   description: 'Inspect a bot configuration, status, and performance.',
+};
+
 /**
  * BotPage Component
  *

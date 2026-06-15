@@ -1,4 +1,5 @@
 import HomeBannerImage from "@/components/banners/homeTopBanner/homeBannerImage/HomeBannerImage";
+import Card from "@/components/common/card/Card";
 import StandardPageHeader from "@/components/headers/standardPageHeader/StandardPageHeader";
 import Link from "next/link";
 
@@ -63,22 +64,26 @@ export default function HowItWorks() {
          <div className="text-content container">
             <p>This page is your index for all CandlePilot How It Works guides. Choose a topic below to go directly to the section and read a focused explanation.</p>
 
-            <ul className="bullet-list">
-               {HOW_IT_WORKS_ITEMS.map((item) => (
-                  <li key={item.href}>
-                     <h2>
-                        <Link href={item.href}>{item.title}</Link>
-                     </h2>
+            <nav className="index-list">
+               {HOW_IT_WORKS_ITEMS.map((item, index) => (
+                  <Card
+                     as={Link}
+                     key={item.href + index}
+                     href={item.href}
+                     className={`index-item ${(index % 2) ? "align-right" : ""}`}
+                     padding="m"
+                  >
+                     <h2>{item.title}</h2>
 
-                     <p>
-                        {item.lines[0]}<br />
-                        {item.lines[1]}<br />
-                        {item.lines[2]}<br />
-                        {item.lines[3]}
-                     </p>
-                  </li>
+                     <ul className="item-lines">
+                        <li>{item.lines[0]}</li>
+                        <li>{item.lines[1]}</li>
+                        <li>{item.lines[2]}</li>
+                        <li>{item.lines[3]}</li>
+                     </ul>
+                  </Card>
                ))}
-            </ul>
+            </nav>
          </div>
       </div>
    );
