@@ -1,0 +1,39 @@
+.how-it-works-content {
+   padding-bottom: 5rem;
+
+   .text-content {
+      padding-top: 3rem;
+
+      h2 {
+         margin-top: 3rem;
+         margin-bottom: 1.5rem;
+      }
+
+      p,
+      ol,
+      ul {
+         font-size: 1.2rem;
+      }
+
+      .numbered-list {
+         padding-left: 1.5rem;
+
+         li {
+            margin-bottom: 1rem;
+   
+            strong {
+               display: inline-block;
+               width: 100%;
+            }
+         }
+      }
+
+      .bullet-list {
+         padding-left: 0.6rem;
+
+         li {
+            margin-bottom: 1rem;
+         }
+      }
+   }
+}

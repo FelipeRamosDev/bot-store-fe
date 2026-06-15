@@ -1,0 +1,17 @@
+.page-navigation-footer {
+   margin-top: 5rem;
+   display: flex;
+   justify-content: space-between;
+
+   .rubber-button.MuiButtonBase-root.MuiButton-containedPrimary {
+      color: $text;
+   }
+   
+   .previous-page-button {
+      margin-right: auto;
+   }
+
+   .next-page-button {
+      margin-left: auto;
+   }
+}
