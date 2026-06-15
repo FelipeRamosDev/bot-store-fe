@@ -43,6 +43,7 @@
 @import "../../components/content/dashboard/resetPassword/ResetPassword.scss";
 @import "../../components/content/admin/adminHome/AdminHome.scss";
 @import "../../components/content/dashboard/myProfile/MyProfile.scss";
+@import "../../components/content/howItWorks/HowItWorks.scss";
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
@@ -64,6 +65,9 @@
 @import "../../components/forms/formBase/FormBase.scss";
 @import "../../components/forms/logicalOperatorForm/LogicalOperatorForm.scss";
 @import "../../components/forms/shared/AccountTrailingStop/AccountTrailingStop.scss";
+
+// Footers
+@import "../../components/footers/pageNavigationFooter/PageNatigationFooter.scss";
 
 // Grids
 @import "../../components/grids/botResultsGrid/BotResultsGrid.scss";
