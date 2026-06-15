@@ -2,6 +2,11 @@ import { APIProvider } from "@/contexts/4HandsAPI";
 import Login from "@/components/content/dashboard/login/Login";
 import BasePage from "@/templates/basePage/BasePage";
 
+export const metadata = {
+   title: 'Login | CandlePilot',
+   description: 'Sign in to your CandlePilot account or create a new one.',
+};
+
 /**
  * LoginPage Component
  *

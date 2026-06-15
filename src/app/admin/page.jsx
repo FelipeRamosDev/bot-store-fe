@@ -1,6 +1,11 @@
 import AdminHomeContent from '@/components/content/admin/adminHome/AdminHome';
 import AdminBasePage from '@/templates/adminBasePage/AdminBasePage';
 
+export const metadata = {
+   title: 'Admin Dashboard | CandlePilot',
+   description: 'Manage the CandlePilot platform, users, and subscriptions.',
+};
+
 /**
  * AdminHomePage Component
  *

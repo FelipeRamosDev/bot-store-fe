@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import useFilesBucket from "./useFilesBucket";
 import AuthUserContext from "@/contexts/AuthUser";
+import Analytics from "@/helpers/analytics";
 
 export default function useUser() {
    const API = useContext(APIContext);
@@ -16,10 +17,17 @@ export default function useUser() {
          const created = await API.auth.register(parsedBody, '/user/signup');
 
          if (created) {
-            const url = new URL(window.location);
+            Analytics.trackSignUp({
+               method: 'email',
+               signup_flow: 'dashboard_login_register',
+               email: created.email,
+               full_name: created.fullName
+            });
 
+            const url = new URL(window.location);
             url.pathname = '/dashboard';
             url.searchParams.set('confirmationsent', 'true');
+
             router.push(url.toString());
          }
       } catch (err) {
@@ -114,6 +122,7 @@ export default function useUser() {
    }
 
    return {
+      user,
       register,
       login,
       update,

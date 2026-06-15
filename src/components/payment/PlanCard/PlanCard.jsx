@@ -5,6 +5,7 @@ import Price from "@/components/displays/price/Price";
 import { FormBase } from "@/components/forms/formBase/FormBase";
 import FormInput from "@/components/forms/formBase/FormInput";
 import CancelSubscriptionConfirmDialog from "@/components/modals/dialogs/cancelSubscriptionConfirmDialog/CancelSubscriptionConfirmDialog";
+import Analytics from "@/helpers/analytics";
 import { parseCSS } from "@/helpers/parser";
 import Form from "@/models/Form";
 import SwitchFieldSchema from "@/models/Form/fieldTypes/SwitchFieldSchema";
@@ -60,6 +61,13 @@ export default function PlanCard({
       url.set('productId', productId);
       url.set('priceId', selectedPrice?.priceId || '');
       url.set('couponCode', data?.couponCode || '');
+
+      Analytics.trackSelectedPlan({
+         plan: title,
+         priceApplied: selectedPrice?.price || 0,
+         interval: selectedPrice?.interval || '',
+         couponCode: data?.couponCode || ''
+      });
 
       router.push(`/subscribe-plan?${url.toString()}`);
    };

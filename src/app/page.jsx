@@ -1,6 +1,11 @@
 import BasePage from '@/templates/basePage/BasePage';
 import HomeContent from '@/components/content/home/Home';
 
+export const metadata = {
+   title: 'Home | CandlePilot',
+   description: 'Discover trading bots and automate cryptocurrency strategies with CandlePilot.',
+};
+
 /**
  * HomePage Component
  *

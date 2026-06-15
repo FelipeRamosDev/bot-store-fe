@@ -1,6 +1,11 @@
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 import MyPilots from '@/components/content/dashboard/user/myPilots/MyPilots';
 
+export const metadata = {
+   title: 'My Pilots | CandlePilot',
+   description: 'View and manage the pilot bots assigned to your account.',
+};
+
 /**
  * MyPilotsPage Component
  *

@@ -1,6 +1,11 @@
 import BasePage from "@/templates/basePage/BasePage";
 import EmailConfirmation from "@/components/content/dashboard/emailConfirmation/EmailConfirmation";
 
+export const metadata = {
+   title: 'Email Confirmation | CandlePilot',
+   description: 'Confirm your email address to activate your CandlePilot account.',
+};
+
 /**
  * EmailConfirmationPage Component
  *
