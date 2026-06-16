@@ -23,7 +23,7 @@
 export default function MainFooter({ ...props }) {
    return (
       <footer {...props}>
-         <p>BotStore (API) - v0.6.4 BETA | BotStore (Frontend) - v0.1.0 BETA</p>
+         <p>BotStore (API) - v0.6.4 BETA | BotStore (Frontend) - v0.1.0 BETA | Email: <a href="mailto:support@botstore.com">support@botstore.com</a></p>
       </footer>
    );
 }
