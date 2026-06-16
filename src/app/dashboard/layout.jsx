@@ -7,6 +7,14 @@
 export const metadata = {
    title: 'Dashboard',
    description: 'Use/Create trade bots for cryptocurrencies.',
+   robots: {
+      index: false,
+      follow: false,
+      googleBot: {
+         index: false,
+         follow: false,
+      },
+   },
 };
 
 /**
