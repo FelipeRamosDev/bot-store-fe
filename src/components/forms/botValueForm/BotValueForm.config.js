@@ -1,7 +1,8 @@
 import Form from '@/models/Form';
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
-import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
+import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
+import BotFunctionListItem from './BotFunctionListItem';
 
 /**
  * Validator function for primitive value fields.
@@ -46,12 +47,13 @@ function validateDynamic(value) {
  */
 const botValueForm = new Form({
    schema: [
-      new SelectFieldSchema({
+      new SearchSelectFieldSchema({
          key: 'functionUID',
          label: 'Function Value',
          placeholder: 'Pick an option',
          useDependencies: true,
          validators: [ validateDynamic ],
+         ListItem: BotFunctionListItem,
          options: function (form) {
             const dependency = form.getDependency('functions');
 
