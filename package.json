@@ -21,7 +21,7 @@
     "@mui/x-date-pickers": "^7.12.1",
     "@stripe/react-stripe-js": "^6.4.0",
     "@stripe/stripe-js": "^9.6.0",
-    "4hands-api": "^0.7.15",
+    "4hands-api": "^0.8.0",
     "binance-sync": "^0.2.11",
     "dayjs": "^1.11.12",
     "lightweight-charts": "^4.1.7",
