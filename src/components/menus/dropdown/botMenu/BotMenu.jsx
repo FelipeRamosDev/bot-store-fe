@@ -8,7 +8,7 @@ import Folder from '@mui/icons-material/Folder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 import DeleteBotConfirmDialog from '@/components/modals/dialogs/deleteBotConfirmDialog/DeleteBotConfirmDialog';
-import { Edit } from '@mui/icons-material';
+import { CopyAll, Edit } from '@mui/icons-material';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 
 /**
@@ -33,6 +33,20 @@ export default function BotMenu({ bot }) {
       setAnchorEl(null);
    };
 
+   const copyBotJSON = () => {
+      try {
+         const botJSON = JSON.stringify(bot, null, 2);
+   
+         navigator.clipboard.writeText(botJSON).catch(err => {
+            console.error('Error copying bot JSON:', err);
+            alert('Failed to copy bot JSON. Please try again.');
+         });
+      } catch (error) {
+         console.error('Error copying bot JSON:', error);
+         alert('Failed to copy bot JSON. Please try again.');
+      }
+   }
+
    return (
       <>
          <RubberButton color="info" endIcon={<MoreHorizIcon />} onClick={handleMenuOpen}>
@@ -47,6 +61,13 @@ export default function BotMenu({ bot }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
          >
+            <MenuItem onClick={copyBotJSON}>
+               <ListItemIcon>
+                  <CopyAll fontSize="small" />
+               </ListItemIcon>
+               Copy JSON
+            </MenuItem>
+
             <MenuItem onClick={() => setEditModal(true)}>
                <ListItemIcon>
                   <Edit fontSize="small" />
