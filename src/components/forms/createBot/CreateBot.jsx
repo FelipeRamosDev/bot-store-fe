@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '../formBase/FormInput';
 import APIContext from '@/contexts/4HandsAPI';
@@ -26,6 +26,7 @@ export default function CreateBotForm({ editData, onSuccess = () => { } }) {
    const { user } = useContext(AuthUserContext);
    const { uploadAvatar } = usePilot();
    const [avatarUrl, setAvatarUrl] = useState();
+   const avatarFile = useRef();
    const editMode = Boolean(editData);
 
    function handleAvatarChange(files) {
@@ -33,13 +34,15 @@ export default function CreateBotForm({ editData, onSuccess = () => { } }) {
 
       if (file) {
          const url = URL.createObjectURL(file);
+
+         avatarFile.current = file;
          setAvatarUrl(url);
       }
    }
 
    async function onSubmit(data) {
       data.author = user._id;
-      const avatar = data?.avatar?.[0];
+      const avatar = avatarFile.current;
 
       try {
          if (!editMode) {

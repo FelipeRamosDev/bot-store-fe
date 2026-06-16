@@ -18,6 +18,7 @@ import createBotForm from '@/components/forms/createBot/CreateBot.config';
 import FormInput from '@/components/forms/formBase/FormInput';
 import usePilot from '@/hooks/usePilot';
 import Avatar from '@/components/common/avatar/Avatar';
+import { useRouter } from 'next/navigation';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -26,12 +27,12 @@ import Avatar from '@/components/common/avatar/Avatar';
  * @returns {JSX.Element} The rendered component.
  */
 export default function BotDetailsHeader() {
-   const [avatarError, setAvatarError] = useState(false);
    const [resultsLine, setResultsLine] = useState();
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
    const requested = useRef();
    const { uploadAvatar, uploading } = usePilot();
+   const router = useRouter();
 
    const handleAvatarChange = (files) => {
       const [file] = files;
@@ -40,7 +41,9 @@ export default function BotDetailsHeader() {
          return;
       }
 
-      uploadAvatar(file, doc._id).catch(err => {
+      uploadAvatar(file, doc._id).then(() => {
+         router.refresh();
+      }).catch(err => {
          console.error('Error uploading file:', err);
       });
    }

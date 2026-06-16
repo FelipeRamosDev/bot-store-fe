@@ -1,5 +1,4 @@
 import Card from "@/components/common/card/Card";
-import { Edit } from "@mui/icons-material";
 import { useContext } from "react";
 import AuthUserContext from "@/contexts/AuthUser";
 import { FormBase } from "@/components/forms/formBase/FormBase";
@@ -8,10 +7,12 @@ import Form from "@/models/Form";
 import FileInputFieldSchema from "@/models/Form/fieldTypes/FileInputFieldSchema";
 import useUser from "@/hooks/useUser";
 import Avatar from "@/components/common/avatar/Avatar";
+import { useRouter } from "next/navigation";
 
 export default function MyProfileTopPage() {
    const { user } = useContext(AuthUserContext);
    const { avatar: { uploadAvatar } } = useUser();
+   const router = useRouter();
 
    const formSet = new Form({
       schema: [
@@ -30,6 +31,7 @@ export default function MyProfileTopPage() {
 
       try {
          await uploadAvatar(file);
+         router.refresh();
       } catch (error) {
          console.error('Error uploading file:', error);
       }
