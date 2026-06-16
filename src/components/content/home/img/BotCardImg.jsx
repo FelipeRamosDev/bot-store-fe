@@ -7,6 +7,7 @@ import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import Price from '@/components/displays/price/Price';
 import Percent from '@/components/displays/percent/Percent';
 import { isElementOnScreen } from '@/helpers/scroll';
+import Avatar from '@/components/common/avatar/Avatar';
 
 const dummyBot = {
    name: 'Bender',
@@ -43,9 +44,7 @@ export default function BotCardImg({ bot = dummyBot, className }) {
       >
          <div className="card-body">
             <div className="avatar-wrap">
-               <div className="avatar-mask">
-                  <Image src={BenderImg} alt="Bot Avatar" style={{ width: 175.52, height: 130 }} />
-               </div>
+               <Avatar avatarUrl={BenderImg} size={130} quality={5} noBorder />
             </div>
 
             <h5 className="bot-name">{bot.name}</h5>
