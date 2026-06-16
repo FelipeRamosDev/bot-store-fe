@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 
-export default function Avatar({ avatarUrl, size = 50, noBorder = false, children }) {
+export default function Avatar({ avatarUrl, size = 50, noBorder = false, quality = 30, children }) {
    const [avatarError, setAvatarError] = useState(false);
 
    const style = {
@@ -18,6 +18,7 @@ export default function Avatar({ avatarUrl, size = 50, noBorder = false, childre
             className="avatar-placeholder"
             src={LogoIcon}
             alt="CandlePilot Icon"
+            quality={quality}
             width="100%"
             height="100%"
          />}
@@ -26,8 +27,10 @@ export default function Avatar({ avatarUrl, size = 50, noBorder = false, childre
             className="avatar-image"
             src={avatarUrl}
             alt="Avatar"
+            quality={quality}
             onError={() => setAvatarError(true)}
-            fill
+            width={size}
+            height={size}
          />}
 
          {children && (

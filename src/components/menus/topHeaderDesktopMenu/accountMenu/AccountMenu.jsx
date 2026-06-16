@@ -57,7 +57,7 @@ export default function AccountMenu({ setSpinner = () => {}, user }) {
    return (
       <>
          <RoundIconButton
-            Icon={() => <Avatar avatarUrl={user?.avatarUrl} size={38} noBorder />}
+            Icon={() => <Avatar avatarUrl={user?.avatarUrl} size={38} quality={5} noBorder />}
             onClick={handleMenuOpen}
          />
 
