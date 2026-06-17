@@ -7,7 +7,6 @@ import { useState } from "react";
 
 export default function PositionFullTile({ position = {}, ...props }) {
    const [ expand, setExpand ] = useState(false);
-   console.log(position)
 
    return (
       <Card

@@ -32,7 +32,7 @@ export default function DeleteBotConfirmDialog({ open = false, setOpen = () => {
          }
 
          if (deleted.success) {
-            router.push('/dashboard');
+            router.push('/dashboard/user/my-pilots');
          }
       } catch (err) {
          throw err;

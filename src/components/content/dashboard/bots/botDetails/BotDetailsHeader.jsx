@@ -1,10 +1,10 @@
 'use client';
 import { useContext, useEffect, useState, useRef } from 'react';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
-import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import configs from '@/config.json';
 import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
-import Image from 'next/image';
 import BotInfos from './BotInfos';
 import DBQueryContext from '@/contexts/DBQuery';
 import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
@@ -19,6 +19,7 @@ import FormInput from '@/components/forms/formBase/FormInput';
 import usePilot from '@/hooks/usePilot';
 import Avatar from '@/components/common/avatar/Avatar';
 import { useRouter } from 'next/navigation';
+import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -28,6 +29,7 @@ import { useRouter } from 'next/navigation';
  */
 export default function BotDetailsHeader() {
    const [resultsLine, setResultsLine] = useState();
+   const [isChatsExpanded, setIsChatsExpanded] = useState(false);
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
    const requested = useRef();
@@ -91,7 +93,7 @@ export default function BotDetailsHeader() {
             <BotInfos bot={doc} />
          </ContentFullwidth>
 
-         <ContentFullwidth className="analysis charts" useContainer={true}>
+         {isChatsExpanded && <ContentFullwidth className="analysis charts" useContainer={true}>
             <ProfitRatioChart results={resultsLine} />
             <AvgDailyROI results={resultsLine} />
             <AccumROIChart results={resultsLine} period="24h" />
@@ -100,11 +102,18 @@ export default function BotDetailsHeader() {
             <WinLossChart results={resultsLine} period="30d" type="roi" />
             <WinLossChart results={resultsLine} period="24h" type="rate" />
             <WinLossChart results={resultsLine} period="30d" type="rate" />
-         </ContentFullwidth>
+         </ContentFullwidth>}
 
          <div className="settings-painel">
             <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>
 
+            <RubberButton
+               className="toggle-charts"
+               startIcon={isChatsExpanded ? <VisibilityOffIcon /> : <VisibilityIcon />}
+               onClick={() => setIsChatsExpanded(!isChatsExpanded)}
+            >
+               {isChatsExpanded ? 'Hide Charts' : 'Show Charts'}
+            </RubberButton>
             <BotMenu bot={doc} />
          </div>
       </div>
