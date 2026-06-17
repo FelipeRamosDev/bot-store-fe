@@ -10,6 +10,7 @@ import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 import DeleteBotConfirmDialog from '@/components/modals/dialogs/deleteBotConfirmDialog/DeleteBotConfirmDialog';
 import { CopyAll, Edit } from '@mui/icons-material';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
+import usePilot from '@/hooks/usePilot';
 
 /**
  * BotMenu renders a button that opens a menu with options to archive or delete a bot.
@@ -23,7 +24,33 @@ export default function BotMenu({ bot }) {
    const [ anchorEl, setAnchorEl ] = useState(null);
    const [ editModal, setEditModal ] = useState(false);
    const [ deleteModal, setDeleteModal ] = useState(false);
+   const { getStategy } = usePilot();
    const open = Boolean(anchorEl);
+
+   const copyTextWithFallback = async (text) => {
+      if (document.hasFocus() && navigator?.clipboard?.writeText) {
+         await navigator.clipboard.writeText(text);
+         return true;
+      }
+
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.setAttribute('readonly', '');
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      let copied = false;
+      try {
+         copied = document.execCommand('copy');
+      } finally {
+         document.body.removeChild(textArea);
+      }
+
+      return copied;
+   };
 
    const handleMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
@@ -33,19 +60,20 @@ export default function BotMenu({ bot }) {
       setAnchorEl(null);
    };
 
-   const copyBotJSON = () => {
+   const copyBotJSON = async () => {
       try {
-         const botJSON = JSON.stringify(bot, null, 2);
-   
-         navigator.clipboard.writeText(botJSON).catch(err => {
-            console.error('Error copying bot JSON:', err);
-            alert('Failed to copy bot JSON. Please try again.');
-         });
+         const strategy = await getStategy(bot._id);
+         const botJSON = JSON.stringify(strategy, null, 2);
+
+         const copied = await copyTextWithFallback(botJSON);
+         if (!copied) {
+            alert('Could not copy JSON. Focus this tab and try again.');
+         }
       } catch (error) {
          console.error('Error copying bot JSON:', error);
          alert('Failed to copy bot JSON. Please try again.');
       }
-   }
+   };
 
    return (
       <>
