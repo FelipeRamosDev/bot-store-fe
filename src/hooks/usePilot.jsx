@@ -6,12 +6,22 @@ export default function usePilot() {
    const { uploading, uploadFile } = useFilesBucket();
    const instance = useContext(APIContext);
 
-   async function getStategy(botUID) {
+   async function exportJSON(botUID) {
       try {
-        const botStategy = await instance.ajax.authGet('/bot/strategy', { botUID });
-        return botStategy;
+        const botStrategy = await instance.ajax.authGet('/bot/export', { botUID });
+        return botStrategy;
       } catch (error) {
          console.error('Error fetching bot strategy:', error);
+         throw error;
+      }
+   }
+
+   async function importJSON(botData) {
+      try {
+         const response = await instance.ajax.authPost('/bot/import', { botData });
+         return response.bot;
+      } catch (error) {
+         console.error('Error importing bot strategy:', error);
          throw error;
       }
    }
@@ -28,5 +38,5 @@ export default function usePilot() {
       return await uploadFile(file, 'pilot/avatar', { fileName: `pilot_avatar_${pilotUID}` });
    }
 
-   return { uploading, uploadAvatar, getStategy };
+   return { uploading, uploadAvatar, exportJSON, importJSON };
 }
