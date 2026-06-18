@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import APIContext from '@/contexts/4HandsAPI';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
 import createPlanForm from './CreatePlanForm.config';
@@ -51,6 +49,14 @@ export default function CreatePlanForm({ className, editData, onSubmit = () => {
 
          <div className="input-wrap">
             <FormInput path="features" />
+         </div>
+         <div className="input-wrap">
+            <FormInput path="walletLimit" />
+            <FormInput path="slotLimit" />
+         </div>
+         <div className="input-wrap">
+            <FormInput path="walletLimitDemo" />
+            <FormInput path="slotLimitDemo" />
          </div>
       </FormBase>
    );

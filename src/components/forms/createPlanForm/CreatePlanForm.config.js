@@ -1,4 +1,5 @@
 import Form from '@/models/Form';
+import NumberFieldSchema from '@/models/Form/fieldTypes/NumberFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 
 const createPlanForm = new Form({
@@ -24,6 +25,26 @@ const createPlanForm = new Form({
          key: 'features',
          label: 'Features',
          multiline: true
+      }),
+      new NumberFieldSchema({
+         key: 'walletLimit',
+         label: 'Wallet Limit',
+         required: true
+      }),
+      new NumberFieldSchema({
+         key: 'slotLimit',
+         label: 'Slot Limit',
+         required: true
+      }),
+      new NumberFieldSchema({
+         key: 'walletLimitDemo',
+         label: 'Wallet Limit (Demo)',
+         required: true
+      }),
+      new NumberFieldSchema({
+         key: 'slotLimitDemo',
+         label: 'Slot Limit (Demo)',
+         required: true
       }),
    ]
 });
