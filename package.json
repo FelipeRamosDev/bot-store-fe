@@ -22,7 +22,7 @@
     "@stripe/react-stripe-js": "^6.4.0",
     "@stripe/stripe-js": "^9.6.0",
     "4hands-api": "^0.8.0",
-    "binance-sync": "^0.2.12",
+    "binance-sync": "^0.2.13",
     "dayjs": "^1.11.12",
     "lightweight-charts": "^4.1.7",
     "marked": "^18.0.4",

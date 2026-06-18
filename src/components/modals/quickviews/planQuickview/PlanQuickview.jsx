@@ -55,6 +55,22 @@ export default function PlanQuickview({ setModal = () => { } }) {
                <label>Features</label>
                <Markdown className="property-value" value={plan?.features || '---'} />
             </div>
+            <div className="plan-property">
+               <label>Wallet Limit</label>
+               <p className="property-value">{plan?.walletLimit}</p>
+            </div>
+            <div className="plan-property">
+               <label>Slot Limit</label>
+               <p className="property-value">{plan?.slotLimit}</p>
+            </div>
+            <div className="plan-property">
+               <label>Wallet Limit (Demo)</label>
+               <p className="property-value">{plan?.walletLimitDemo}</p>
+            </div>
+            <div className="plan-property">
+               <label>Slot Limit (Demo)</label>
+               <p className="property-value">{plan?.slotLimitDemo}</p>
+            </div>
          </div>}
 
          {!editPlan && <RubberButton fullWidth color="success" onClick={() => setEditPlan(true)}>Edit Plan</RubberButton>}

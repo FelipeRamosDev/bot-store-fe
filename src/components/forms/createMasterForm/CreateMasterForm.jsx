@@ -1,5 +1,6 @@
 'use client';
-import { useContext, useState } from 'react';
+
+import { useContext } from 'react';
 import { Stack } from '@mui/material';
 import { FormBase } from '../formBase/FormBase';
 import FormInput from '@/components/forms/formBase/FormInput';
@@ -50,13 +51,13 @@ export default function CreateMasterForm({ onSuccess, editMode = false, master }
 
       try {
          const response = await reqHttp();
-         
+
          if (response.error) {
             throw response;
          }
 
          if (response.success) {
-            onSuccess(response.masterAccount);
+            return onSuccess(response.masterAccount);
          }
       } catch (err) {
          throw err;
