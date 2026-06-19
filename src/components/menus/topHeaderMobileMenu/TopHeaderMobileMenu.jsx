@@ -76,7 +76,7 @@ export default function TopHeaderMobileMenu({ type, setSpinner }) {
                         <AccountBalanceWallet />
                      </ListItemIcon>
 
-                     <ListItemText primary="Master Accounts" />
+                     <ListItemText primary="Wallets" />
                   </ListItemButton>
                </ListItem>
 
