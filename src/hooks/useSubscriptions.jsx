@@ -40,6 +40,7 @@ export default function useSubscriptions({ isAdmin = false, customerId, preventL
       }).finally(() => {
          setLoading(false);
       });
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [customerId, isAdmin, preventLoad]);
 
    async function initCheckout() {

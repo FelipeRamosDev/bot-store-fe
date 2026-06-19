@@ -23,7 +23,7 @@ export default function AddressMissing() {
          show={show}
          close={close}
       >
-         It's required to add an address in order to use your account. Please fill in the address fields below.
+         It&apos;s required to add an address in order to use your account. Please fill in the address fields below.
       </TopAlertBar>
    );
 } 

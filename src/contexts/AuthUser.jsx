@@ -67,7 +67,7 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
             window.localStorage.setItem('userLetters', userLetters);
             setUserAuth(authData);
 
-            if ((pathname !== '/subscribe-plan' && pathname !== '/admin') && !authData?.user?.subscribedPlan) {
+            if ((pathname !== '/subscribe-plan' && pathname !== '/admin') && !authData?.user?.subscribedPlan && hasAddress) {
                return router.push('/subscribe-plan');
             } else if (pathname === '/subscribe-plan' && authData?.user?.subscribedPlan && !isUpdatePlan) {
                return router.push('/dashboard');
@@ -86,6 +86,7 @@ export function AuthUserProvider({ children, rules = [], ...props }) {
       }).catch(err => {
          setError(err);
       });
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [instance.auth, router]);
 
    return (

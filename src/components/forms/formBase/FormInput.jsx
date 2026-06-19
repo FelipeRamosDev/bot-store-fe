@@ -29,6 +29,7 @@ export default function FormInput({ path, onCustomChange = () => {}, ...props })
          schema.appendDispatch(setSchema);
          setSchema(schema);
       }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [path]);
 
    if (!form) {

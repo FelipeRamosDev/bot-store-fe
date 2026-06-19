@@ -10,7 +10,7 @@ import AuthUserContext from '@/contexts/AuthUser';
 import { Skeleton } from '@mui/material';
 import { MenuProvider } from '@/contexts/MenuContext';
 import SlotConfigsMenu from '@/components/menus/dropdown/SlotConfigsMenu/SlotConfigsMenu';
-import SlotQuickview from '@/components/modals/quickviews/slotQuickview/SlotQuickview';
+import SlotQuickview from '@/components/modals/quickviews/SlotQuickview/SlotQuickview';
 import PositionQuickview from '@/components/modals/quickviews/positionQuickview/PositionQuickview';
 
 /**

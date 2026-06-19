@@ -2,8 +2,35 @@ import Image from 'next/image';
 import { useState } from 'react';
 import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
 
+const FILE_BUCKET_HOST = process.env.NEXT_PUBLIC_FILE_BUCKET_HOST;
+
+function normalizeAvatarUrl(avatarUrl) {
+   if (!avatarUrl || !FILE_BUCKET_HOST) {
+      return avatarUrl;
+   }
+
+   try {
+      const sourceUrl = new URL(avatarUrl);
+
+      if (!['localhost', '127.0.0.1'].includes(sourceUrl.hostname) || !sourceUrl.pathname.startsWith('/static/')) {
+         return avatarUrl;
+      }
+
+      const bucketUrl = new URL(FILE_BUCKET_HOST);
+
+      sourceUrl.protocol = bucketUrl.protocol;
+      sourceUrl.hostname = bucketUrl.hostname;
+      sourceUrl.port = bucketUrl.port;
+
+      return sourceUrl.toString();
+   } catch {
+      return avatarUrl;
+   }
+}
+
 export default function Avatar({ avatarUrl, size = 50, noBorder = false, quality = 30, children }) {
    const [avatarError, setAvatarError] = useState(false);
+   const normalizedAvatarUrl = normalizeAvatarUrl(avatarUrl);
 
    const style = {
       width: size,
@@ -23,9 +50,9 @@ export default function Avatar({ avatarUrl, size = 50, noBorder = false, quality
             height="100%"
          />}
 
-         {avatarUrl && !avatarError && <Image
+         {normalizedAvatarUrl && !avatarError && <Image
             className="avatar-image"
-            src={avatarUrl}
+            src={normalizedAvatarUrl}
             alt="Avatar"
             quality={quality}
             onError={() => setAvatarError(true)}

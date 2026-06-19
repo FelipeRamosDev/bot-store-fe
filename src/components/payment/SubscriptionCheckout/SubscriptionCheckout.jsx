@@ -29,6 +29,7 @@ export default function SubscriptionCheckout({ selectedPlan, selectedPrice }) {
 
       isInit.current = true;
       initCheckout();
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    return (

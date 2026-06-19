@@ -17,6 +17,16 @@ export default function MyProfileInfos() {
    const editMode = searchParams.get('editMode') === 'true';
    const router = useRouter();
 
+   useEffect(() => {
+      if (editMode) {
+         setEditUser(true);
+      }
+
+      if (user && !user.billingAddress) {
+         setEditUser(true);
+      }
+   }, [editMode, user]);
+
    if (!user) {
       return <></>;
    }
@@ -38,16 +48,6 @@ export default function MyProfileInfos() {
          return <RoundIconButton Icon={Edit} onClick={() => setEditUser(true)} />;
       }
    }
-
-   useEffect(() => {
-      if (editMode) {
-         setEditUser(true);
-      }
-
-      if (user && !user.billingAddress) {
-         setEditUser(true);
-      }
-   }, [editMode, user]);
 
    return (
       <div className="my-profile-infos container">

@@ -14,7 +14,7 @@ const APIContext = createContext();
  * throughout the application.
  */
 export const API = new _4HandsAPI({
-   apiHost: config.apiHost.DEV,
+   apiHost: config.apiHost[process.env.NODE_ENV === 'development' ? 'DEV' : 'PROD'],
    useSubscription: true,
    ajaxConfig: {
       rejectUnauthorized: false
