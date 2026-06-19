@@ -1,0 +1,37 @@
+.plans-section {
+   position: relative;
+   margin: 0;
+   padding: 6rem 0 13rem 0;
+
+   .section-title {
+      text-align: center;
+   }
+
+   .plans-container {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      flex-direction: column;
+
+      @media screen and (min-width: $screen-m) {
+         flex-direction: row;
+      }
+   }
+
+   .current-plan {
+      margin-bottom: 3rem;
+      max-width: 400px;
+
+      .plan-card {
+         min-height: 50px;
+
+         .selected-plan {
+            gap: 0px;
+         }
+
+         .plan-invoice {
+            margin-top: 0;
+         }
+      }
+   }
+}

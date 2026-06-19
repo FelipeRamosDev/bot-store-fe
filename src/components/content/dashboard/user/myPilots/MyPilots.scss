@@ -1,7 +1,18 @@
 .my-pilots {
    .page-header {
+      display: flex;
+      align-items: center;
+
       .page-title {
          font-size: 1.8rem;
+      }
+
+      .import-json-button {
+         margin-left: auto;
+      }
+
+      .rubber-button.MuiButton-containedPrimary.MuiButton-colorPrimary {
+         color: $text;
       }
    }
 

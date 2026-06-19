@@ -1,0 +1,141 @@
+.plan-card {
+   padding: $padding-m;
+   min-width: 250px;
+   min-height: 300px;
+   display: flex;
+   flex-direction: column;
+
+   &.billing {
+      min-width: auto;
+      width: 100%;
+
+      @media screen and (min-width: $screen-l) {
+         width: auto;
+         min-width: 400px;
+      }
+
+      .card-content {
+         .plan-title,
+         .plan-summary {
+            text-align: left;
+         }
+      }
+   }
+
+   .plan-summary {
+      text-align: center;
+   }
+
+   .card-content {
+      .plan-label {
+         text-transform: uppercase;
+         font-size: 0.75rem;
+         color: $tertiary;
+         margin-bottom: 1rem;
+      }
+
+      .plan-title {
+         font-size: 1.4rem;
+         margin-top: 0;
+      }
+
+      .plan-title,
+      .plan-price {
+         text-align: center;
+      }
+
+      .interval-toggle {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin: $padding-s 0;
+
+         .switch-input {
+            max-width: min-content;
+            margin-right: 0;
+            margin-left: 0;
+         }
+      }
+
+      .price-line {
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         gap: 0.2rem;
+
+         .line {
+            margin-bottom: 0;
+            font-size: 0.8rem;
+         }
+      }
+   }
+
+   .select-plan-button {
+      margin-top: auto;
+   }
+
+   .plan-invoice {
+      margin-top: $padding-s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+
+      .invoice-row {
+         display: flex;
+         align-items: baseline;
+
+         .invoice-label {
+            white-space: nowrap;
+            font-size: 0.85rem;
+         }
+
+         .invoice-dots {
+            flex: 1;
+            border-bottom: 1px dotted currentColor;
+            margin: 0 0.4rem 0.2rem;
+            opacity: 0.4;
+         }
+
+         .invoice-value {
+            white-space: nowrap;
+
+            &.strikethrough {
+               text-decoration: line-through;
+               opacity: 0.5;
+            }
+
+            &.discount {
+               color: $success;
+            }
+         }
+      }
+   }
+
+   .cancel-subscription-button {
+      margin-top: $padding-s;
+   }
+
+   .coupon-add {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .counpon-label {
+         font-size: 0.8rem;
+         margin-bottom: 0.4rem;
+
+         &.link {
+            text-decoration: underline;
+            color: $text-darken;
+         }
+      }
+
+      .code-input {
+         margin-top: 0.3rem;
+      }
+   }
+}

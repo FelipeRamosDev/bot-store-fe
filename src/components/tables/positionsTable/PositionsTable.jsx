@@ -27,7 +27,12 @@ export default function PositionsTable({ positionsSet, include, exclude }) {
    const [ positionModal, setPositionModal ] = useState('');
    const { query = [], isLoading, limit, goPage, reloadLimit } = useContext(DBQueryContext);
    const positions = positionsSet || query;
-   const selectedPosition = positions.find(item => item._id === positionModal);
+
+   if (!Array.isArray(positions)) {
+      return null;
+   }
+
+   const selectedPosition = positions?.find(item => item._id === positionModal);
    let parsedLimit = limit;
 
    const PERCENT_OPTIONS = {

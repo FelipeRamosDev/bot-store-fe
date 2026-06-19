@@ -1,8 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import PageSpinner from '@/components/load/pageSpinner/PageSpinner';
 import TopHeaderMobileMenu from '@/components/menus/topHeaderMobileMenu/TopHeaderMobileMenu';
 import TopHeaderDesktopMenu from '@/components/menus/topHeaderDesktopMenu/TopHeaderDesktopMenu';
+import AuthUserContext from '@/contexts/AuthUser';
 
 /**
  * TopNavAuth component renders the navigation menu for authenticated users.
@@ -21,12 +22,13 @@ import TopHeaderDesktopMenu from '@/components/menus/topHeaderDesktopMenu/TopHea
  * 
  * @returns {JSX.Element} A navigation element containing links and a sign-out button.
  */
-export default function TopNavAuth({ mobileOpen, setMobileOpen }) {
+export default function TopNavAuth({ mobileOpen, setMobileOpen, type }) {
    const [ spinner, setSpinner ] = useState(false);
+   const { user } = useContext(AuthUserContext);
 
    return (<>
       <PageSpinner spinner={spinner} />
-      <TopHeaderDesktopMenu setSpinner={setSpinner} />
-      <TopHeaderMobileMenu open={mobileOpen} setOpen={setMobileOpen} setSpinner={setSpinner} />
+      <TopHeaderDesktopMenu type={type} setSpinner={setSpinner} user={user} />
+      <TopHeaderMobileMenu type={type} open={mobileOpen} setOpen={setMobileOpen} setSpinner={setSpinner} user={user} />
    </>);
 }

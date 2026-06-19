@@ -1,18 +1,18 @@
 /**
- * Metadata for the Master Accounts page.
+ * Metadata for the Wallets page.
  *
- * This object contains the metadata for the Master Accounts page, including the title and description
+ * This object contains the metadata for the Wallet page, including the title and description
  * that will be used in the HTML document's head section.
  */
 export const metadata = {
-   title: "Master Accounts - CandlePilot Dashboard",
-   description: "Look after your master accounts.",
+   title: "Wallets - CandlePilot Dashboard",
+   description: "Look after your wallets.",
 };
 
 /**
  * MasterAccountsLayout Component
  *
- * This component serves as a layout wrapper for the Master Accounts page.
+ * This component serves as a layout wrapper for the Wallet page.
  * It renders the child components passed to it.
  *
  * @param {Object} props - The properties passed to this component.
@@ -20,6 +20,6 @@ export const metadata = {
  *
  * @returns {JSX.Element} The rendered child components.
  */
-export default function MasterAccountsLayout({ children }) {
+export default function WalletsLayout({ children }) {
    return children;
 }

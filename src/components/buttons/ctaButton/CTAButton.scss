@@ -2,6 +2,14 @@
    &.MuiButton-contained {
       background: $grad-primary-tertiary-light;
       color: $text-tertiary;
+
+      &:disabled {
+         background: $background-blue-grey;
+
+         &.MuiButton-containedTertiary {
+            color: $text-disabled;
+         }
+      }
    }
 
    &.MuiButton-sizeLarge {

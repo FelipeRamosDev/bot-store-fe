@@ -4,6 +4,7 @@
  *
  * @param {Object} props - The props object.
  * @param {string} [props.className=''] - Additional CSS classes to apply to the card.
+ * @param {keyof JSX.IntrinsicElements|React.ComponentType} [props.as='div'] - Wrapper element or component to render.
  * @param {number|'xs'|'s'|'m'|'l'|'xl'} [props.padding] - Padding size for the card. If specified, can be a predefined size like 's', 'm', 'l', etc.
  * @param {'xs'|'s'|'m'|'l'|'xl'} [props.radius='m'] - The border radius for the card. Can be a predefined size like 's', 'm', 'l', etc.
  * @param {number} [props.elevation=20] - The elevation of the card, which affects the shadow size. Higher values increase the shadow intensity.
@@ -14,6 +15,7 @@
  * @returns {JSX.Element} The rendered `Card` component.
  */
 export default function Card({
+   as: Wrapper = 'div',
    prevRef,
    className = '',
    padding,
@@ -30,7 +32,7 @@ export default function Card({
       customPad = 'p-' + padding;
    }
 
-   return <div
+   return <Wrapper
       ref={prevRef}
       className={`${className} card ${customPad} r-${radius}`}
       style={{
@@ -40,5 +42,5 @@ export default function Card({
       {...props}
    >
       {children}
-   </div>;
+   </Wrapper>;
 }

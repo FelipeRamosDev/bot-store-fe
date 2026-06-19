@@ -34,7 +34,7 @@ export default function DashboardContent() {
    const addButtonOpt = [
       {
          Icon: <Wallet />,
-         tooltipTitle: 'CREATE MASTER',
+         tooltipTitle: 'CREATE WALLET',
          onClick: () => setCreateMasterModal(true)
       },
       {
@@ -90,7 +90,7 @@ export default function DashboardContent() {
       
       {/* Modal for Creating a Master Account */}
       <ContentModal
-         title="Create Master"
+         title="Create Wallet"
          padding="m"
          size="x-large"
          open={createMasterModal}

@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Avatar from '@mui/material/Avatar';
 import Card from '@/components/common/card/Card';
 import Percent from '@/components/displays/percent/Percent';
 import Table from '@mui/material/Table';
@@ -15,6 +14,7 @@ import BenderIMG from '@/assets/avatar_demo/bender.webp';
 import WallEIMG from '@/assets/avatar_demo/wall-e.webp';
 import PeterGriffinIMG from '@/assets/avatar_demo/peter_griffin.webp';
 import { isElementOnScreen } from '@/helpers/scroll';
+import Avatar from '@/components/common/avatar/Avatar';
 
 const baseParams = {
    align: 'center',
@@ -29,7 +29,7 @@ const dummy = [
    { Avatar: PeterGriffinIMG, avatarW: 71, avatarH: 40, name: 'Peter Grifin', score: 574, avgDailyWins: 56, avgDailyLoses: 12, avgMonthlyWins: 325, avgMonthlyLoses: 140, dailyROI: 3, monthlyROI: 5 },
 ];
 
-export default function BotsTableImg() {
+export default function BotsTableImg({ className }) {
    const table = useRef();
 
    function handleScroll() {
@@ -51,7 +51,7 @@ export default function BotsTableImg() {
    }, []);
 
    return (
-      <Card prevRef={table} className="table-image" padding="m" elevation={80}>
+      <Card prevRef={table} className={`table-image ${className}`} padding="m" elevation={80}>
          <Table>
             <TableHead>
                <TableRow>
@@ -70,18 +70,7 @@ export default function BotsTableImg() {
                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                      <TableCell>
-                        <Avatar>
-                           {row.Avatar && (
-                              <Image
-                                 className="avatar"
-                                 src={row.Avatar}
-                                 alt={row.name}
-                                 quality={40}
-                                 width={row.avatarW}
-                                 height={row.avatarH}
-                              />
-                           )}
-                        </Avatar>
+                        <Avatar size={40} avatarUrl={row.Avatar} noBorder />
                      </TableCell>
                      <TableCell>
                         {row.name}

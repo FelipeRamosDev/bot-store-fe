@@ -21,7 +21,7 @@ export default function MasterSchedules({ master = {} }) {
 
    return <Card className="master-schedules" padding="xs">
       <ContentHeader Toolbar={Toolbar}>
-         <CalendarMonth className="icon" /> <h3 className="card-title">Master Schedules</h3>
+         <CalendarMonth className="icon" /> <h3 className="card-title">Wallet's Schedules</h3>
       </ContentHeader>
 
       <DBQuery type="query" collection="schedules" filter={{ master: master._id }}>

@@ -1,0 +1,52 @@
+.my-profile {
+   .top-page {
+      $info-height: 90px;
+
+      margin-bottom: 2rem;
+
+      .top-page-card {
+         min-height: 300px;
+         position: relative;
+         overflow: hidden;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-end;
+         align-items: center;
+
+         @media screen and (min-width: $screen-m) {
+            align-items: flex-start;
+         }
+
+         .top-page-title {
+            text-align: center;
+            font-size: 1.5rem;
+
+            @media screen and (min-width: $screen-m) {
+               font-size: 2.2rem;
+               text-align: left;
+               margin-left: calc(150px + 5rem);
+               transform: translateY(-140%);
+            }
+         }
+
+         .content-wrap {
+            background: $background-paper;
+            height: $info-height;
+            width: 100%;
+         }
+
+         .avatar {
+            margin-bottom: 1rem;
+
+            @media screen and (min-width: $screen-m) {
+               transform: translateY(60px);
+               margin-left: 3rem;
+            }
+         }
+      }
+   }
+
+   .content-header {
+      margin-bottom: 1.5rem;
+   }
+}

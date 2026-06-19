@@ -1,6 +1,11 @@
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 import PilotStore from '@/components/content/dashboard/bots/pilotStore/PilotStore';
 
+export const metadata = {
+   title: 'Pilot Store | CandlePilot',
+   description: 'Browse pilot trader bots and automate your cryptocurrency trades.',
+};
+
 /**
  * PilotStorePage Component
  *

@@ -1,7 +1,7 @@
 'use client';
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
 import DrawerMenu from '@/components/menus/base/drawerMenu/DrawerMenu';
-import { AccountBalanceWallet, Storefront, Dashboard, Logout } from '@mui/icons-material';
+import { AccountBalanceWallet, Storefront, Dashboard, Logout, Workspaces, PriceChange } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Button } from '@mui/material';
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,7 +20,7 @@ import { useRouter } from 'next/navigation';
  * 
  * @returns {JSX.Element} The rendered mobile navigation menu inside a drawer.
  */
-export default function TopHeaderMobileMenu({ setSpinner }) {
+export default function TopHeaderMobileMenu({ type, setSpinner }) {
    const router = useRouter();
    const [ open, setOpen ] = useState(false);
 
@@ -30,7 +30,30 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
             <MenuIcon />
          </Button>
 
-         <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+         {type === 'admin' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/')}>
+               <Dashboard />
+               Dashboard
+            </CTAButton>
+
+            <List>
+               {/* <ListItem disablePadding>
+                  <ListItemButton onClick={() => router.push('/dashboard/master-accounts')}>
+                     <ListItemIcon>
+                        <AccountBalanceWallet />
+                     </ListItemIcon>
+
+                     <ListItemText primary="Master Accounts" />
+                  </ListItemButton>
+               </ListItem> */}
+
+               {/* <Divider /> */}
+
+               <AccountMenuMobile setSpinner={setSpinner} />
+            </List>
+         </DrawerMenu>}
+
+         {type === 'dashboard' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
             <CTAButton className="menu-cta" onClick={() => router.push('/dashboard/bots/pilot-store')}>
                <Storefront />
                Go To Store
@@ -53,7 +76,7 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
                         <AccountBalanceWallet />
                      </ListItemIcon>
 
-                     <ListItemText primary="Master Accounts" />
+                     <ListItemText primary="Wallets" />
                   </ListItemButton>
                </ListItem>
 
@@ -61,7 +84,35 @@ export default function TopHeaderMobileMenu({ setSpinner }) {
 
                <AccountMenuMobile setSpinner={setSpinner} />
             </List>
-         </DrawerMenu>
+         </DrawerMenu>}
+
+         {type === 'public' && <DrawerMenu fitContent={true} open={open} setOpen={setOpen}>
+            <CTAButton className="menu-cta" onClick={() => router.push('/dashboard')}>
+               <Dashboard />
+               Start
+            </CTAButton>
+
+            <List>
+               <ListItem disablePadding>
+                  <ListItemButton onClick={() => router.push('/how-it-works')}>
+                     <ListItemIcon>
+                        <Workspaces />
+                     </ListItemIcon>
+
+                     <ListItemText primary="How It Works" />
+                  </ListItemButton>
+               </ListItem>
+               <ListItem disablePadding>
+                  <ListItemButton onClick={() => router.push('/pricing')}>
+                     <ListItemIcon>
+                        <PriceChange />
+                     </ListItemIcon>
+
+                     <ListItemText primary="Pricing" />
+                  </ListItemButton>
+               </ListItem>
+            </List>
+         </DrawerMenu>}
       </nav>
    );
 }

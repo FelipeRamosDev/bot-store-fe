@@ -2,6 +2,11 @@ import BasePage from "@/templates/basePage/BasePage";
 import ResetPassword from "@/components/content/dashboard/resetPassword/ResetPassword";
 import { APIProvider } from "@/contexts/4HandsAPI";
 
+export const metadata = {
+   title: 'Reset Password | CandlePilot',
+   description: 'Set a new password for your CandlePilot account.',
+};
+
 /**
  * ResetPasswordPage Component
  *

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -59,9 +59,12 @@ export default function SlotConfigsMenu({ chartsDisplay, setChartsDisplay, maste
       setChartsDisplay(newValue);
    }
 
-   if (window.localStorage.getItem('slot_configs:charts_display') === null) {
-      setChartsDisplay(true);
-   }
+   useEffect(() => {
+      if (window.localStorage.getItem('slot_configs:charts_display') === null) {
+         window.localStorage.setItem('slot_configs:charts_display', 'true');
+         setChartsDisplay(true);
+      }
+   }, [ setChartsDisplay ]);
 
    return (
       <>

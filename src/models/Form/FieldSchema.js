@@ -202,6 +202,7 @@ export default class FieldSchema {
       switch (this.type) {
          case String:
          case Array:
+         case File:
             return currentValue;
          case Number:
             return Number(currentValue);

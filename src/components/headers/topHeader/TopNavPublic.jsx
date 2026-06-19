@@ -1,4 +1,7 @@
 import CTAButton from '@/components/buttons/ctaButton/CTAButton';
+import TopHeaderDesktopMenu from '@/components/menus/topHeaderDesktopMenu/TopHeaderDesktopMenu';
+import TopHeaderMobileMenu from '@/components/menus/topHeaderMobileMenu/TopHeaderMobileMenu';
+import { useState } from 'react';
 
 /**
  * TopNav component renders the navigation menu for public users.
@@ -17,18 +20,13 @@ import CTAButton from '@/components/buttons/ctaButton/CTAButton';
  * 
  * @returns {JSX.Element} A navigation element containing public links and a call-to-action button.
  */
-export default function TopNav() {
+export default function TopNav({ mobileOpen, setMobileOpen, type }) {
+   const [ spinner, setSpinner ] = useState(false);
 
    return (
       <nav>
-         {/* <Link href="/how-it-works">How It Works</Link> */}
-         {/* <Link href="/store">Store</Link> */}
-         {/* <Link href="/pricing">Pricing</Link> */}
-         {/* <Link href="/earn-commission">Earn Commissions</Link> */}
-
-         <CTAButton size="large" url="/dashboard">
-            START
-         </CTAButton>
+         <TopHeaderDesktopMenu type={type} setSpinner={setSpinner} />
+         <TopHeaderMobileMenu type={type} open={mobileOpen} setOpen={setMobileOpen} setSpinner={setSpinner} />
       </nav>
    );
 }

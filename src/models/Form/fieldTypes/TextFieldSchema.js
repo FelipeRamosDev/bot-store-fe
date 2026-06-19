@@ -20,11 +20,13 @@ export default class TextFieldSchema extends FieldSchema {
     */
    constructor(setup = {}, form) {
       super(setup, form);
-      const { inputMode } = setup;
+      const { inputMode, multiline, minRows } = setup;
 
       this.type = String; // Specifies that the type of field is String.
       this.inputType = 'text'; // Specifies that the input type is 'text' for standard text input.
       this.inputMode = inputMode;
+      this.multiline = Boolean(multiline); // Determines if the input should be multiline based on the setup.
+      this.minRows = minRows || (this.multiline ? 3 : undefined); // Sets minimum rows for multiline input, defaulting to 3 if multiline is true.
 
       this.Input = TextInput; // Specifies the input component as TextInput.
    }

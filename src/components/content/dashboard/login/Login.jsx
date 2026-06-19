@@ -1,15 +1,13 @@
 'use client';
-import { useContext, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import LoginForm from '@/components/forms/loginForm/LoginForm';
 import RegisterForm from '@/components/forms/registerForm/RegisterForm';
 import Card from '@/components/common/card/Card';
-import APIContext from '@/contexts/4HandsAPI';
-import { login, register, forgotPassword } from './Login.helper';
 import { Key } from '@mui/icons-material';
 import ForgotPasswordForm from '@/components/forms/forgotPasswordForm/ForgotPasswordForm';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import useUser from '@/hooks/useUser';
 
 /**
  * Login component that renders either the login form or the registration form based on the `isRegister` prop.
@@ -20,8 +18,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
  */
 export default function Login({ isRegister, isForgotPassword }) {
    const [ isSent, setIsSent ] = useState(null);
-   const API = useContext(APIContext);
-   const router = useRouter();
+   const { register, login, forgotPassword } = useUser();
 
    const cardOpt = {
       padding: 's',
@@ -33,9 +30,9 @@ export default function Login({ isRegister, isForgotPassword }) {
       fontSize: 'large'
    }
 
-   const handleLogin = (data) => login(data, API, router);
-   const handleRegister = (data) => register(data, API, router);
-   const handleForgotPassword = (data) => forgotPassword(data, API, setIsSent);
+   const handleLogin = (data) => login(data);
+   const handleRegister = (data) => register(data);
+   const handleForgotPassword = (data) => forgotPassword(data, setIsSent);
 
    return <div className="login-content container text-center">
       {!isRegister && !isForgotPassword && <Card {...cardOpt}>
@@ -77,7 +74,7 @@ export default function Login({ isRegister, isForgotPassword }) {
       </Card>}
 
       {isRegister && !isForgotPassword && <Card {...cardOpt}>
-         <h1 className="card-title"><Key {...iconOpt} /> Create</h1>
+         <h1 className={`card-title ${isRegister ? 'register' : ''}`}><Key {...iconOpt} /> Create</h1>
 
          <RegisterForm onSubmit={handleRegister} />
 

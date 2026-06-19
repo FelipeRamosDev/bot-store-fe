@@ -25,7 +25,7 @@ export default function MoreMasterAccounts() {
       <div className="master-accounts">
          <ContentHeader>
             <AccountBalanceWallet />
-            <h3 className="header-title">Master Accounts</h3>
+            <h3 className="header-title">Wallets</h3>
          </ContentHeader>
 
          <MastersTable />

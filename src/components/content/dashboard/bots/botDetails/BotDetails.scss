@@ -36,23 +36,14 @@
             margin: 1rem 0 ;
          }
 
+         .form-base {
+            width: auto;
+         }
+
          .avatar {
             $side: $height * 1.1;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: $side;
-            height: $side;
-            border-radius: $side;
-            background-color: $background;
-            box-shadow: $shadow-3;
             margin: calc(($side * 0.6) * -1) auto 0 auto;
-
-            .robot-icon {
-               font-size: calc($side / 1.5);
-               color: $tertiary-light;
-            }
          }
 
          .summary {
@@ -123,6 +114,12 @@
 
             .rubber-button {
                transform: translateY(-1.5rem);
+            }
+
+            .toggle-charts {
+               color: $text;
+               margin-left: auto;
+               margin-right: 1rem;
             }
          }
       }

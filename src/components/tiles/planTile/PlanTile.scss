@@ -1,0 +1,49 @@
+.plan-tile {
+   .plan-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: $tertiary;
+      margin-bottom: 1rem;
+      display: block;
+   }
+
+   .plan-title {
+      font-size: 1.4rem;
+      margin-top: 0;
+   }
+
+   .plan-invoice {
+      margin-top: $padding-s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      margin-bottom: $padding-s;
+
+      .invoice-row {
+         display: flex;
+         align-items: baseline;
+
+         .invoice-label {
+            white-space: nowrap;
+            font-size: 0.85rem;
+         }
+
+         .invoice-dots {
+            flex: 1;
+            border-bottom: 1px dotted currentColor;
+            margin: 0 0.4rem 0.2rem;
+            opacity: 0.4;
+         }
+
+         .invoice-value {
+            white-space: nowrap;
+
+            &.strikethrough {
+               text-decoration: line-through;
+               opacity: 0.5;
+            }
+         }
+      }
+   }
+}

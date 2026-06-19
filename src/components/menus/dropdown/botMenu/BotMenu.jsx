@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,6 +11,8 @@ import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 import DeleteBotConfirmDialog from '@/components/modals/dialogs/deleteBotConfirmDialog/DeleteBotConfirmDialog';
 import { Edit } from '@mui/icons-material';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
+import usePilot from '@/hooks/usePilot';
+import DataObjectIcon from '@mui/icons-material/DataObject';
 
 /**
  * BotMenu renders a button that opens a menu with options to archive or delete a bot.
@@ -20,9 +23,10 @@ import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
  * @returns {JSX.Element} The BotMenu component.
  */
 export default function BotMenu({ bot }) {
-   const [ anchorEl, setAnchorEl ] = useState(null);
-   const [ editModal, setEditModal ] = useState(false);
-   const [ deleteModal, setDeleteModal ] = useState(false);
+   const [anchorEl, setAnchorEl] = useState(null);
+   const [editModal, setEditModal] = useState(false);
+   const [deleteModal, setDeleteModal] = useState(false);
+   const { exportJSON } = usePilot();
    const open = Boolean(anchorEl);
 
    const handleMenuOpen = (event) => {
@@ -33,9 +37,32 @@ export default function BotMenu({ bot }) {
       setAnchorEl(null);
    };
 
+   const exportBotJSON = async () => {
+      try {
+         const strategy = await exportJSON(bot._id);
+         const botJSON = JSON.stringify(strategy, null, 2);
+
+         const blob = new Blob([botJSON], { type: 'application/json' });
+         const url = URL.createObjectURL(blob);
+         const link = document.createElement('a');
+
+         link.href = url;
+         link.download = `${bot.name}_Pilot.json`;
+
+         document.body.appendChild(link);
+         link.click();
+
+         document.body.removeChild(link);
+         URL.revokeObjectURL(url);
+      } catch (error) {
+         console.error('Error exporting bot JSON:', error);
+         alert('Failed to export bot JSON. Please try again.');
+      }
+   };
+
    return (
       <>
-         <RubberButton color="info" endIcon={<MoreHorizIcon />} onClick={handleMenuOpen}>
+         <RubberButton className="more-options" color="info" endIcon={<MoreHorizIcon />} onClick={handleMenuOpen}>
             MORE
          </RubberButton>
 
@@ -51,15 +78,22 @@ export default function BotMenu({ bot }) {
                <ListItemIcon>
                   <Edit fontSize="small" />
                </ListItemIcon>
-               Edit Bot
+               Edit Pilot
             </MenuItem>
 
-            <MenuItem onClick={handleMenuClose} disabled>
+            <MenuItem onClick={exportBotJSON}>
+               <ListItemIcon>
+                  <DataObjectIcon fontSize="small" />
+               </ListItemIcon>
+               Export JSON
+            </MenuItem>
+
+            {/* <MenuItem onClick={handleMenuClose} disabled>
                <ListItemIcon>
                   <Folder fontSize="small" />
                </ListItemIcon>
                Archive
-            </MenuItem>
+            </MenuItem> */}
 
             <MenuItem onClick={() => setDeleteModal(true)}>
                <ListItemIcon>

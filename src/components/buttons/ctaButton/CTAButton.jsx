@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
  *
  * @returns {JSX.Element} The rendered `CTAButton` component.
  */
-export default function CTAButton({ url, className = '', startIcon, endIcon, children, ...props }) {
+export default function CTAButton({ url, urlTarget = "_self", className = '', startIcon, endIcon, children, ...props }) {
    const router = useRouter();
 
    return (
@@ -25,7 +25,15 @@ export default function CTAButton({ url, className = '', startIcon, endIcon, chi
          color="tertiary"
          startIcon={startIcon}
          endIcon={endIcon}
-         onClick={() => url && router.push(url)}
+         onClick={() => {
+            if (url) {
+               if (urlTarget === "_blank") {
+                  window.open(url, "_blank", "noopener,noreferrer");
+               } else {
+                  router.push(url);
+               }
+            }
+         }}
          {...props}
       >
          {children}

@@ -7,6 +7,7 @@ import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import Price from '@/components/displays/price/Price';
 import Percent from '@/components/displays/percent/Percent';
 import { isElementOnScreen } from '@/helpers/scroll';
+import Avatar from '@/components/common/avatar/Avatar';
 
 const dummyBot = {
    name: 'Bender',
@@ -14,7 +15,7 @@ const dummyBot = {
    score: 1290
 };
 
-export default function BotCardImg({ bot = dummyBot }) {
+export default function BotCardImg({ bot = dummyBot, className }) {
    const card = useRef();
 
    function handleScroll() {
@@ -37,15 +38,13 @@ export default function BotCardImg({ bot = dummyBot }) {
    return (
       <Card
          prevRef={card}
-         className={`bot-card`}
+         className={`bot-card ${className}`}
          radius="s"
          elevation={30}
       >
          <div className="card-body">
             <div className="avatar-wrap">
-               <div className="avatar-mask">
-                  <Image src={BenderImg} alt="Bot Avatar" style={{ width: 175.52, height: 130 }} />
-               </div>
+               <Avatar avatarUrl={BenderImg} size={130} quality={5} noBorder />
             </div>
 
             <h5 className="bot-name">{bot.name}</h5>

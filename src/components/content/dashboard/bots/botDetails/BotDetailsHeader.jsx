@@ -1,10 +1,10 @@
 'use client';
 import { useContext, useEffect, useState, useRef } from 'react';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
-import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import configs from '@/config.json';
 import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
-import Image from 'next/image';
 import BotInfos from './BotInfos';
 import DBQueryContext from '@/contexts/DBQuery';
 import ProfitRatioChart from '@/components/charts/profitRatioChart/ProfitRatioChart';
@@ -13,6 +13,13 @@ import AvgDailyROI from '@/components/charts/avgDailyROSChart/AvgDailyROSChart';
 import AccumROIChart from '@/components/charts/accumROSChart/AccumROSChart';
 import WinLossChart from '@/components/charts/winLossChart/WinLossChart';
 import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
+import { FormBase } from '@/components/forms/formBase/FormBase';
+import createBotForm from '@/components/forms/createBot/CreateBot.config';
+import FormInput from '@/components/forms/formBase/FormInput';
+import usePilot from '@/hooks/usePilot';
+import Avatar from '@/components/common/avatar/Avatar';
+import { useRouter } from 'next/navigation';
+import RubberButton from '@/components/buttons/rubberButton/RubberButton';
 
 /**
  * `BotDetailsHeader` is a component that displays the header information for a bot, including its name, description,
@@ -21,10 +28,27 @@ import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
  * @returns {JSX.Element} The rendered component.
  */
 export default function BotDetailsHeader() {
+   const [resultsLine, setResultsLine] = useState();
+   const [isChatsExpanded, setIsChatsExpanded] = useState(false);
    const { doc = {} } = useContext(DBQueryContext);
    const API = useContext(APIContext);
-   const [ resultsLine, setResultsLine ] = useState();
    const requested = useRef();
+   const { uploadAvatar, uploading } = usePilot();
+   const router = useRouter();
+
+   const handleAvatarChange = (files) => {
+      const [file] = files;
+
+      if (!file) {
+         return;
+      }
+
+      uploadAvatar(file, doc._id).then(() => {
+         router.refresh();
+      }).catch(err => {
+         console.error('Error uploading file:', err);
+      });
+   }
 
    useEffect(() => {
       if (typeof doc?._id !== 'string') return;
@@ -44,16 +68,22 @@ export default function BotDetailsHeader() {
             throw err;
          });
       }
-   }, [ doc, API.ajax, resultsLine ]);
+   }, [doc, API.ajax, resultsLine]);
 
    return <div className="page-header">
       <div className="cover"></div>
 
       <div className="bot-info">
          <ContentFullwidth useContainer={true}>
-            <div className="avatar">
-               <Image src={LogoIcon} className="robot-icon" alt="Avatar Placeholder" width={180} heigth={180} priority={true} />
-            </div>
+            <FormBase formID="pilot-avatar-form" formSet={createBotForm} editData={doc} hideSubmit>
+               <Avatar avatarUrl={doc.avatarUrl} size={220}>
+                  {uploading ? <span className="uploading">Uploading...</span> : <span className="overlay-text">Change Avatar</span>}
+
+                  {!uploading && (
+                     <FormInput path="avatar" onChange={handleAvatarChange} />
+                  )}
+               </Avatar>
+            </FormBase>
 
             <div className="summary">
                <h1 className="title">{doc.name}</h1>
@@ -63,7 +93,7 @@ export default function BotDetailsHeader() {
             <BotInfos bot={doc} />
          </ContentFullwidth>
 
-         <ContentFullwidth className="analysis charts" useContainer={true}>
+         {isChatsExpanded && <ContentFullwidth className="analysis charts" useContainer={true}>
             <ProfitRatioChart results={resultsLine} />
             <AvgDailyROI results={resultsLine} />
             <AccumROIChart results={resultsLine} period="24h" />
@@ -72,11 +102,18 @@ export default function BotDetailsHeader() {
             <WinLossChart results={resultsLine} period="30d" type="roi" />
             <WinLossChart results={resultsLine} period="24h" type="rate" />
             <WinLossChart results={resultsLine} period="30d" type="rate" />
-         </ContentFullwidth>
+         </ContentFullwidth>}
 
          <div className="settings-painel">
             <h3 className="painel-title">{window.innerWidth > configs.breakpoints.m ? 'BOT ' : ''}SETTINGS</h3>
 
+            <RubberButton
+               className="toggle-charts"
+               startIcon={isChatsExpanded ? <VisibilityOffIcon /> : <VisibilityIcon />}
+               onClick={() => setIsChatsExpanded(!isChatsExpanded)}
+            >
+               Charts
+            </RubberButton>
             <BotMenu bot={doc} />
          </div>
       </div>

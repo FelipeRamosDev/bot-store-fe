@@ -20,6 +20,7 @@
 @import "../../components/charts/base/cutLineChartBase/CutLineChartBase.scss";
 
 // Common
+@import "../../components/common/avatar/Avatar.scss";
 @import "../../components/common/card/Card.scss";
 @import "../../components/common/edgeLight/EdgeLight.scss";
 @import "../../components/common/priceCard/PriceCard.scss";
@@ -40,6 +41,9 @@
 @import "../../components/content/dashboard/user/myPilots/MyPilots.scss";
 @import "../../components/content/dashboard/emailNotConfirmed/EmailNotConfirmed.scss";
 @import "../../components/content/dashboard/resetPassword/ResetPassword.scss";
+@import "../../components/content/admin/adminHome/AdminHome.scss";
+@import "../../components/content/dashboard/myProfile/MyProfile.scss";
+@import "../../components/content/howItWorks/HowItWorks.scss";
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
@@ -62,6 +66,9 @@
 @import "../../components/forms/logicalOperatorForm/LogicalOperatorForm.scss";
 @import "../../components/forms/shared/AccountTrailingStop/AccountTrailingStop.scss";
 
+// Footers
+@import "../../components/footers/pageNavigationFooter/PageNatigationFooter.scss";
+
 // Grids
 @import "../../components/grids/botResultsGrid/BotResultsGrid.scss";
 @import "../../components/grids/botValuesGrid/BotValuesGrid.scss";
@@ -72,11 +79,13 @@
 @import "../../components/grids/slotResultsGrid/SlotResultsGrid.scss";
 @import "../../components/grids/slotsGrid/SlotsGrid.scss";
 @import "../../components/grids/walletGrid/WalletGrid.scss";
+@import "../../components/grids/plansGrid/PlansGrid.scss";
 
 // Headers
 @import "../../components/headers/contentHeader/ContentHeader.scss";
 @import "../../components/headers/topHeader/TopHeader.scss";
 @import "../../components/headers/altModalHeader/AltModalHeader.scss";
+@import "../../components/headers/standardPageHeader/StandardPageHeader.scss";
 
 // Inputs
 @import "../../components/inputs/checkButtonGroupInput/CheckButtonGroupInput.scss";
@@ -86,6 +95,8 @@
 @import "../../components/inputs/selectInput/SelectInput.scss";
 @import "../../components/inputs/searchSelectInput/SearchSelectInput.scss";
 @import "../../components/inputs/sliderInput/SliderInput.scss";
+@import "../../components/inputs/dateOnlyPicker/DateOnlyPicker.scss";
+@import "../../components/inputs/fileInput/FileInput.scss";
 
 // Layouts
 @import "../../components/layout/contentFullwidth/ContentFullwidth.scss";
@@ -109,9 +120,11 @@
 @import "../../components/modals/quickviews/positionQuickview/PositionQuickview.scss";
 @import "../../components/modals/quickviews/slotQuickview/SlotQuickview.scss";
 @import "../../components/modals/quickviews/botQuickview/BotQuickview.scss";
+@import "../../components/modals/quickviews/userQuickview/UserQuickview.scss";
 
 // Shared
 @import "../../components/shared/accountSettings/AccountSettings.scss";
+@import "../../components/shared/userInfos/UserInfos.scss";
 
 // Tables
 @import "../../components/tables/botsTable/BotsTable.scss";
@@ -134,9 +147,15 @@
 @import "../../components/tiles/slotTile/SlotTile.scss";
 @import "../../components/tiles/userInstance/UserInstance.scss";
 @import "../../components/tiles/positionFullTile/PositionFullTile.scss";
+@import "../../components/tiles/planTile/PlanTile.scss";
+@import "../../components/tiles/userTile/UserTile.scss";
 
 // Tooltips
 @import "../../components/tooltips/base/TooltipBase.scss";
+
+//Payment
+@import "../../components/payment/PlanCard/PlanCard.scss";
+@import "../../components/payment/SubscriptionCheckout/SubscriptionCheckout.scss";
 
 .price-display,
 .percent-display {

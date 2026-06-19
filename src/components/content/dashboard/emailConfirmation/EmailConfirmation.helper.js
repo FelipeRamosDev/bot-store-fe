@@ -17,7 +17,7 @@ export async function confirmEmail(API, confirmationToken, router) {
       const verified = await API.ajax.authPost('/auth/confirm-email', { confirmationtoken: confirmationToken });
 
       if (verified.success) {
-         router.push('/dashboard/login');
+         router.push('/dashboard');
       }
    } catch (err) {
       throw err;

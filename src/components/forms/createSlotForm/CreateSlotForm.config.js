@@ -8,6 +8,7 @@ import slotTrailingForm from '../shared/AccountTrailingStop/AccountTrailingForm.
 import CheckButtonGroupSchema from '@/models/Form/fieldTypes/CheckButtonGroupSchema';
 import SearchSelectFieldSchema from '@/models/Form/fieldTypes/SearchSelectFieldSchema';
 import CryptoListItem from './CryptoListItem';
+import PilotListItem from './PilotListItem';
 
 const createSlotForm = new Form({
    dependencies: [
@@ -35,17 +36,19 @@ const createSlotForm = new Form({
          label: 'Slot Name',
          placeholder: 'Slot name identification',
       }),
-      new SelectFieldSchema({
+      new SearchSelectFieldSchema({
          key: 'bot',
          label: 'Choose a bot',
          placeholder: 'Pick an option',
          required: true,
          useDependencies: true,
+         ListItem: PilotListItem,
          options: function (form) {
             const dependency = form.getDependency('bots');
 
             if (dependency && Array.isArray(dependency.data)) {
                return dependency.data.map(doc => ({
+                  ...doc,
                   label: doc.name,
                   value: doc._id
                }));

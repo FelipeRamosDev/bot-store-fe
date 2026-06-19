@@ -2,6 +2,11 @@ import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 import MasterDetails from '@/components/content/dashboard/masterAccounts/masterDetails/MasterDetails';
 import NotFoundPage from '@/app/not-found';
 
+export const metadata = {
+   title: 'Master Account Details | CandlePilot',
+   description: 'Inspect balances, activity, and settings for a master account.',
+};
+
 /**
  * MasterAccountPage Component
  *

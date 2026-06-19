@@ -1,5 +1,6 @@
 import MainFooter from '@/components/footers/mainFooter/MainFooter';
 import TopHeaderPublic from '@/components/headers/topHeader/TopHeaderPublic';
+import { APIProvider } from '@/contexts/4HandsAPI';
 
 /**
  * `BasePage` is a layout component that includes a top header and a main footer. 
@@ -15,7 +16,7 @@ import TopHeaderPublic from '@/components/headers/topHeader/TopHeaderPublic';
  * @returns {JSX.Element} The rendered `BasePage` component with a `TopHeader`, content area, and `MainFooter`.
  */
 export default function BasePage({ className = '', fullContainer, headerMenu, CustomHeader, children }) {
-   return (
+   return (<APIProvider>
       <main className={`${className} base-page`}>
          {!CustomHeader && <TopHeaderPublic fullContainer={fullContainer} type={headerMenu} />}
          {CustomHeader && <CustomHeader fullContainer={fullContainer} type={headerMenu} />}
@@ -28,5 +29,5 @@ export default function BasePage({ className = '', fullContainer, headerMenu, Cu
             <MainFooter className="absolute-bottom" />
          </div>
       </main>
-   );
+   </APIProvider>);
 }

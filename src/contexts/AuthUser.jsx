@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useEffect, useState, useContext, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import APIContext from './4HandsAPI';
 import LoadingPage from '@/app/loading';
 import ErrorPage from '@/app/error';
@@ -23,34 +23,70 @@ export default AuthUserContext;
  *
  * @returns {JSX.Element} The context provider component with loading and error handling.
  */
-export function AuthUserProvider({ children, ...props }) {
-   const [ userAuth, setUserAuth ] = useState();
-   const [ error, setError ] = useState();
+export function AuthUserProvider({ children, rules = [], ...props }) {
+   const [userAuth, setUserAuth] = useState();
+   const [error, setError] = useState();
    const instance = useContext(APIContext);
    const router = useRouter();
    const userChecked = useRef();
+   const searchParams = useSearchParams();
+   const updatePlan = searchParams.get('updatePlan');
+   const isUpdatePlan = updatePlan === 'true';
 
    useEffect(() => {
       if (userChecked.current) return;
       userChecked.current = true;
 
       instance.auth.checkUser().then(authData => {
+         const url = new URL(window.location);
+         const pathname = window.location.pathname;
+
          if (authData.error) {
             return setError(authData);
          }
 
          if (authData.isLogged) {
-            const userLetters = authData?.user?.fullName.split(' ').map(word => word[0]?.toUpperCase() || '').join('');
+            const userRoles = authData?.user?.rules || [];
+            const hasAddress = !!authData?.user?.billingAddress;
+            const hasRequiredRole = rules.length === 0 || rules.some(role => userRoles.includes(role));
+
+            if (!hasRequiredRole) {
+               return setError({ error: true, message: 'Unauthorized: Insufficient permissions' });
+            }
+
+            if (!hasAddress && window.location.pathname !== '/dashboard/user/my-profile') {
+               return router.push('/dashboard/user/my-profile');
+            }
+
+            if (authData.name === 'USER_EMAIL_NOT_CONFIRMED') {
+               return setError(authData);
+            }
+
+            const userLetters = authData?.user?.fullName?.split(' ').map(word => word[0]?.toUpperCase() || '').join('') || '';
 
             window.localStorage.setItem('userLetters', userLetters);
             setUserAuth(authData);
+
+            if ((pathname !== '/subscribe-plan' && pathname !== '/admin') && !authData?.user?.subscribedPlan) {
+               return router.push('/subscribe-plan');
+            } else if (pathname === '/subscribe-plan' && authData?.user?.subscribedPlan && !isUpdatePlan) {
+               return router.push('/dashboard');
+            }
          } else {
-            router.push('/dashboard/login');
+            url.pathname = '/dashboard/login';
+
+            if (pathname === '/subscribe-plan') {
+               url.searchParams.set('register', 'true');
+            } else {
+               url.searchParams.set('redirect', pathname);
+            }
+
+            router.push(url.toString());
          }
       }).catch(err => {
          setError(err);
       });
-   }, [ instance.auth, router ]);
+   }, [instance.auth, router]);
 
    return (
       <AuthUserContext.Provider value={userAuth}>

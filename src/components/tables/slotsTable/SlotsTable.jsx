@@ -23,7 +23,11 @@ export default function SlotsTable({ include, exclude }) {
    const { query = [], isLoading, limit, reloadLimit, goPage } = useContext(DBQueryContext);
    const slots = query;
    const [ slotModal, setSlotModal ] = useState('');
-   const selectedSlot = slots.find(item => item._id === slotModal);
+
+   if (!Array.isArray(slots)) {
+      return null;
+   }
+   const selectedSlot = slots?.find(item => item._id === slotModal);
    let parsedLimit = limit;
 
    const PERCENT_OPTIONS = {
