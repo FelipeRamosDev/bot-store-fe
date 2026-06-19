@@ -39,23 +39,23 @@ export default function MyProfileTopPage() {
 
    return (
       <div className="top-page container">
-         <Card className="top-page-card">
-            <h1 className="top-page-title">{user?.fullName}</h1>
+         <FormBase
+            formID="user-avatar"
+            formSet={formSet}
+            hideSubmit
+         >
+            <Card className="top-page-card">
+               <Avatar avatarUrl={user?.avatarUrl} size={150}>
+                  <span className="overlay-text">Edit Avatar</span>
 
-            <div className="content-wrap">
-               <FormBase
-                  formID="user-avatar"
-                  formSet={formSet}
-                  hideSubmit
-               >
-                  <Avatar avatarUrl={user?.avatarUrl} size={150}>
-                     <span className="overlay-text">Edit Avatar</span>
+                  <FormInput path="avatar" onChange={(files) => handleFileInputChange(files)} />
+               </Avatar>
 
-                     <FormInput path="avatar" onChange={(files) => handleFileInputChange(files)} />
-                  </Avatar>
-               </FormBase>
-            </div>
-         </Card>
+               <div className="content-wrap">
+                  <h1 className="top-page-title">{user?.fullName}</h1>
+               </div>
+            </Card>
+         </FormBase>
       </div>
    );
 }

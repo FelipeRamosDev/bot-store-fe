@@ -112,7 +112,7 @@ export default function BotDetailsHeader() {
                startIcon={isChatsExpanded ? <VisibilityOffIcon /> : <VisibilityIcon />}
                onClick={() => setIsChatsExpanded(!isChatsExpanded)}
             >
-               {isChatsExpanded ? 'Hide Charts' : 'Show Charts'}
+               Charts
             </RubberButton>
             <BotMenu bot={doc} />
          </div>
