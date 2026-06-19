@@ -1,0 +1,58 @@
+.table-base {
+   position: relative;
+   margin-top: 1.5rem;
+   background-color: $background-grey1;
+   border-radius: $radius-m;
+   overflow: hidden;
+   -webkit-user-select: none;
+   user-select: none;
+
+   &.elevate {
+      box-shadow: $shadow-5;
+   }
+
+   &.lastrow-noborder {
+      tr:last-child td {
+         border-bottom: none;
+      }
+   }
+
+   p {
+      font-size: 0.9rem;
+      margin: 0;
+   }
+
+   small {
+      font-size: 0.8rem;
+   }
+
+   tr {
+      cursor: pointer;
+   }
+
+   tr, td, .MuiTableCell-head {
+      padding: 0.9rem 0.5rem;
+   }
+
+   thead {
+      > tr {
+         > th {
+            font-size: 0.7rem;
+            line-height: 0.9rem;
+
+            .tooltip-head {
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               gap: 0.4rem;
+            }
+         }
+      }
+   }
+
+   .seemore-button {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      color: $text-darken;
+   }
+}

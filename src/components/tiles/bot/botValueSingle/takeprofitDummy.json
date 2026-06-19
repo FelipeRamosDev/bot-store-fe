@@ -1,0 +1,58 @@
+{
+   "_id": "66e797c412d77bb88f81ee85",
+   "author": "66c618eee71daab4bd950cdf",
+   "parentBot": "66e729ae24a727fc73e052b1",
+   "parentThreads": [],
+   "functionUID": {
+      "_id": "668c77b9c37e0f318dad22c9",
+      "cod": "FN1",
+      "type": "values",
+      "categories": [
+         "indicators"
+      ],
+      "title": "Period Top and Bottom",
+      "methodName": "periodCandleHighLow",
+      "options": {
+         "period": {
+            "type": "number",
+            "default": 14,
+            "label": "Candles Period"
+         },
+         "option": {
+            "type": "select",
+            "required": true,
+            "label": "Option",
+            "options": [
+               {
+                  "label": "HIGH",
+                  "value": "high"
+               },
+               {
+                  "label": "LOW",
+                  "value": "low"
+               }
+            ]
+         },
+         "startAt": {
+            "type": "number",
+            "default": 1,
+            "label": "Start at Candle"
+         }
+      },
+      "returns": [
+         "number"
+      ],
+      "createdAt": "2024-07-08T23:35:21.074Z",
+      "modifiedAt": "2024-09-26T13:52:42.562Z",
+      "index": 1,
+      "__v": 0
+   },
+   "valueType": "function",
+   "primitiveValue": null,
+   "configs": "{\"period\":5,\"option\":\"high\"}",
+   "createdAt": "2024-09-16T02:28:20.232Z",
+   "modifiedAt": "2024-09-16T17:11:34.497Z",
+   "index": 351,
+   "cod": "RPA351",
+   "__v": 0
+}

@@ -1,0 +1,22 @@
+.clock-time-picker {
+   flex: 1;
+}
+
+.clock-picker {
+   .MuiPickersToolbarText-root {
+      color: $text;
+
+      &.Mui-selected {
+         color: $success;
+      }
+   }
+
+   .MuiClock-clock {
+      .MuiClock-pin,
+      .MuiClockPointer-root,
+      .MuiClockPointer-thumb {
+         background-color: $success;
+         border-color: $success;
+      }
+   }
+}

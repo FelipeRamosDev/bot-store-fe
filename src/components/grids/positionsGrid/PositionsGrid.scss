@@ -1,0 +1,27 @@
+.positions-grid {
+   display: flex;
+   gap: 1rem;
+   flex-wrap: wrap;
+   margin: 2rem 0 1rem 0;
+
+   .position-tile {
+      flex: calc(33.33% - 0.666666rem);
+      max-width: calc(33.33% - 0.666666rem);
+
+      @media screen and (max-width: $screen-xl) {
+         flex: calc(50% - 0.5rem);
+         max-width: calc(50% - 0.5rem);
+      }
+
+      @media screen and (max-width: $screen-l) {
+         flex: 100%;
+         max-width: 100%;
+      }
+   }
+
+   .header-wrap {
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+   }
+}

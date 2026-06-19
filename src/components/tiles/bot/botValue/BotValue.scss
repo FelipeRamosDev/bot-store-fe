@@ -1,0 +1,84 @@
+.bot-value {
+   $valuePadding: 0.8rem;
+
+   padding: $valuePadding;
+   border-radius: $radius-s;
+   background-color: $background-grey2;
+   min-width: 100px;
+
+   &.minified {
+      .value-name {
+         text-align: left;
+         font-size: 0.85rem;
+      }
+
+      .string-params {
+         font-size: 0.75rem;
+      }
+   }
+
+   &.primitive {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      &.single {
+         margin-bottom: 5px;
+
+         .value-name,
+         span {
+            transform: translateY(5px);
+         }
+      }
+   }
+
+   &.primitive:not(.single) {
+      .menu-wrap {
+         right: calc($valuePadding / 1.8);
+         top: calc($valuePadding / 1.5);
+      }
+   }
+
+   &:not(.primitive) {
+      .value-name {
+         margin-right: auto;
+      }
+   }
+
+   .value-name {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $text-darken;
+   }
+
+   .primitive-value {
+      &.number,
+      &.boolean {
+         font-size: 2rem;
+         font-weight: 700;
+      }
+   }
+
+   .contained-table {
+      .table-row {
+         .table-column {
+            min-width: 80px;
+         }
+      }
+   }
+
+   .content-header {
+      padding-top: 0;
+      align-items: center;
+   }
+
+   .menu-wrap {
+      position: absolute;
+      top: 0;
+      right: 0;
+   }
+}

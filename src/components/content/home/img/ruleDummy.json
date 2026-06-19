@@ -1,0 +1,117 @@
+{
+   "_id": "66e798bd12d77bb88f81f31e",
+   "author": "66c618eee71daab4bd950cdf",
+   "type": "evaluation",
+   "children": [
+      {
+         "_id": "66e7984d12d77bb88f81f0d0",
+         "author": "66c618eee71daab4bd950cdf",
+         "parentBot": "66e729ae24a727fc73e052b1",
+         "parentThreads": [],
+         "functionUID": {
+            "_id": "66c88c90a3962560f2167e4a",
+            "cod": "FN18",
+            "type": "values",
+            "categories": [
+               "values",
+               "indicators"
+            ],
+            "title": "Cosmos 1",
+            "methodName": "bayesian",
+            "returns": [
+               "number"
+            ],
+            "createdAt": "2024-08-23T13:20:16.370Z",
+            "modifiedAt": "2024-09-26T01:02:28.170Z",
+            "index": 18,
+            "__v": 0,
+            "options": {
+               "period": {
+                  "type": "number",
+                  "default": 200,
+                  "min": 1,
+                  "label": "Period",
+                  "style": {
+                     "maxWidth": 120
+                  }
+               },
+               "direction": {
+                  "type": "select",
+                  "required": true,
+                  "label": "Direction",
+                  "style": {
+                     "maxWidth": 100
+                  },
+                  "options": [
+                     {
+                        "value": "up",
+                        "label": "UP"
+                     },
+                     {
+                        "value": "down",
+                        "label": "DOWN"
+                     }
+                  ]
+               },
+               "mode": {
+                  "type": "select",
+                  "default": "strict",
+                  "label": "Mode",
+                  "options": [
+                     {
+                        "value": "strict",
+                        "label": "Strict"
+                     },
+                     {
+                        "value": "moving-range",
+                        "label": "Moving Range"
+                     },
+                     {
+                        "value": "custom-range",
+                        "label": "Custom Range"
+                     }
+                  ]
+               },
+               "customRange": {
+                  "type": "number",
+                  "default": 0.5,
+                  "label": "Custom Range",
+                  "style": {
+                     "minWidth": "10rem",
+                     "maxWidth": "10rem"
+                  }
+               }
+            }
+         },
+         "valueType": "function",
+         "primitiveValue": null,
+         "configs": "{\"period\":30,\"direction\":\"down\",\"mode\":\"strict\"}",
+         "createdAt": "2024-09-16T02:30:37.282Z",
+         "modifiedAt": "2024-09-16T02:30:43.225Z",
+         "index": 355,
+         "cod": "RPA355",
+         "__v": 0
+      },
+      {
+         "_id": "66e798b312d77bb88f81f2a7",
+         "createdAt": "2024-09-16T02:32:19.415Z",
+         "modifiedAt": "2024-09-16T17:04:21.480Z",
+         "author": "66c618eee71daab4bd950cdf",
+         "parentBot": "66e729ae24a727fc73e052b1",
+         "parentThreads": [],
+         "valueType": "primitive",
+         "primitiveType": "number",
+         "primitiveValue": "70",
+         "configs": "{}",
+         "index": 357,
+         "cod": "RPA357",
+         "__v": 0
+      }
+   ],
+   "comparison": "<",
+   "createdAt": "2024-09-16T02:32:29.591Z",
+   "modifiedAt": "2024-09-17T02:20:10.324Z",
+   "index": 145,
+   "cod": "THR145",
+   "__v": 0
+}

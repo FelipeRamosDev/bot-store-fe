@@ -1,0 +1,16 @@
+.speed-dial-button {
+   position: fixed;
+
+   .MuiSpeedDial-actions {
+      .MuiSpeedDialAction-fab {
+         background-color: $tertiary;
+         color: $text-grey-darken;
+      }
+
+      .MuiSpeedDialAction-staticTooltipLabel {
+         background-color: $tertiary;
+         color: $text-grey-darken;
+         white-space: nowrap;
+      }
+   }
+}

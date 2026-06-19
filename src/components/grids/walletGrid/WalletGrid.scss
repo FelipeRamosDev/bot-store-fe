@@ -1,0 +1,11 @@
+.wallet-grid {
+   &.pnl-grid {
+      .pnl-tile {
+         margin-bottom: 0;
+
+         @media screen and (min-width: $screen-xl) {
+            flex: calc(33% - 1.5rem);
+         }
+      }
+   }
+}

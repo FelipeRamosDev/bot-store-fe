@@ -1,0 +1,70 @@
+import Image from 'next/image';
+import { useState } from 'react';
+import LogoIcon from '@/assets/icons/logo_icon_text-darken.svg';
+
+const FILE_BUCKET_HOST = process.env.NEXT_PUBLIC_FILE_BUCKET_HOST;
+
+function normalizeAvatarUrl(avatarUrl) {
+   if (!avatarUrl || !FILE_BUCKET_HOST) {
+      return avatarUrl;
+   }
+
+   try {
+      const sourceUrl = new URL(avatarUrl);
+
+      if (!['localhost', '127.0.0.1'].includes(sourceUrl.hostname) || !sourceUrl.pathname.startsWith('/static/')) {
+         return avatarUrl;
+      }
+
+      const bucketUrl = new URL(FILE_BUCKET_HOST);
+
+      sourceUrl.protocol = bucketUrl.protocol;
+      sourceUrl.hostname = bucketUrl.hostname;
+      sourceUrl.port = bucketUrl.port;
+
+      return sourceUrl.toString();
+   } catch {
+      return avatarUrl;
+   }
+}
+
+export default function Avatar({ avatarUrl, size = 50, noBorder = false, quality = 30, children }) {
+   const [avatarError, setAvatarError] = useState(false);
+   const normalizedAvatarUrl = normalizeAvatarUrl(avatarUrl);
+
+   const style = {
+      width: size,
+      height: size,
+      borderRadius: size / 2,
+      borderWidth: noBorder ? 0 : size * 0.025
+   };
+
+   return (
+      <div className="avatar" style={style}>
+         {avatarError && <Image
+            className="avatar-placeholder"
+            src={LogoIcon}
+            alt="CandlePilot Icon"
+            quality={quality}
+            width="100%"
+            height="100%"
+         />}
+
+         {normalizedAvatarUrl && !avatarError && <Image
+            className="avatar-image"
+            src={normalizedAvatarUrl}
+            alt="Avatar"
+            quality={quality}
+            onError={() => setAvatarError(true)}
+            width={size}
+            height={size}
+         />}
+
+         {children && (
+            <div className="avatar-overlay">
+               {children}
+            </div>
+         )}
+      </div>
+   );
+}

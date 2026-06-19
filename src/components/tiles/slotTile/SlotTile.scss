@@ -1,0 +1,154 @@
+.slot-tile {
+   width: 100%;
+   position: relative;
+
+   &.minified {
+      margin-bottom: 0;
+
+      .slot-data {
+         margin-top: 1rem;
+      }
+   }
+
+   .status-badge {
+      font-size: 0.6rem;
+   }
+   
+   .archived-badge {
+      font-size: 0.7rem;
+   }
+
+   .tile-header {
+      display: flex;
+      justify-content: space-between;
+
+      .text-wrap {
+         display: inline-flex;
+         align-items: center;
+         gap: 0.2rem 0.5rem;
+         flex-wrap: wrap;
+
+         link {
+            color: $text;
+            text-decoration: none;
+
+            &:hover {
+               text-decoration: underline;
+            }
+         }
+
+         .bot-name {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: $grey-light;
+            margin-bottom: 0;
+            min-width: 100%;
+         }
+      }
+
+      .title {
+         font-size: 1.3rem;
+         font-weight: 600;
+         margin-top: 0;
+         margin-bottom: 0;
+      }
+
+      .btn-wrap {
+         display: flex;
+         align-items: center;
+
+         >button {
+            margin-left: 0.5rem;
+         }
+      }
+   }
+
+   .slot-data {
+      display: flex;
+      width: 100%;
+      margin-top: 2rem;
+      justify-content: space-between;
+      margin-bottom: auto;
+
+      .column {
+         display: flex;
+         flex-direction: column;
+
+         .item {
+            color: $grey-light;
+            line-height: 0.9rem;
+            margin-bottom: 0.1rem;
+
+            label {
+               font-size: 0.8rem;
+               padding-inline-end: 0.4rem;
+            }
+
+            span {
+               font-size: 0.9rem;
+            }
+         }
+
+         .price-display {
+            margin-top: auto;
+            text-align: right;
+         }
+      }
+   }
+   
+   .candlestick-chart {
+      background-color: $background-grey2-dark;
+      padding: 0.7rem 0.1rem 0.1rem 0.9rem;
+      border-radius: 0 0 $radius-xs $radius-xs;
+   }
+
+   .position-painel {
+      .position-full-tile {
+         border-radius: $radius-xs $radius-xs 0 0;
+      }
+
+      .empty-tile {
+         background-color: $background-grey2-dark;
+         border-radius: $radius-xs $radius-xs 0 0;
+         display: flex;
+         align-items: center;
+         gap: 0.5rem;
+         margin: 1rem 0 0 0;
+         padding: $padding-s calc($padding-s / 1.2);
+         
+         span {
+            font-size: 0.9rem;
+            color: $text-darken;
+         }
+
+         .led {
+            $led-radius: 7px;
+
+            display: block;
+            height: $led-radius;
+            width: $led-radius;
+            border-radius: calc($led-radius / 2);
+            background-color: $grey-light;
+            transition: all 0.1s;
+
+            &.running {
+               animation: blinking-led 2s infinite;
+            }
+         }
+      
+         @keyframes blinking-led {
+            0% {
+               background-color: $grey-light;
+            }
+
+            50% {
+               background-color: $tertiary;
+            }
+
+            100% {
+               background-color: $grey-light;
+            }
+         }
+      }
+   }
+}

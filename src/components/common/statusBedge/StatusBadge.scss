@@ -1,0 +1,83 @@
+.status-badge {
+   border-radius: 3px;
+   display: inline-block;
+   font-size: 0.7rem;
+   font-weight: 600;
+   padding: 0.2rem 0.4rem;
+   text-align: center;
+   background-color: $grey;
+   display: inline-flex;
+   align-items: center;
+   gap: 0.2rem;
+
+   &[color=disabled] {
+      background-color: $grey;
+      color: $text;
+   }
+
+   &[color=primary] {
+      background-color: $primary;
+      color: $text;
+   }
+
+   &[color=secondary] {
+      background-color: $secondary;
+      color: $text-secondary;
+   }
+
+   &[color=tertiary] {
+      background-color: $tertiary;
+      color: $text-tertiary;
+   }
+
+   &[color=success] {
+      background-color: $success;
+      color: $text-success;
+   }
+
+   &[color=warn] {
+      background-color: $warn;
+      color: $text-warn;
+   }
+
+   &[color=error] {
+      background-color: $error;
+      color: $text-error;
+
+      .MuiSvgIcon-colorError {
+         color: $text-error;
+      }
+   }
+
+   &[variant=light] {
+      background-color: $background-paper-light;
+   }
+
+   &[color=disabled][variant=light] {
+      color: $text;
+   }
+
+   &[color=primary][variant=light] {
+      color: $primary;
+   }
+
+   &[color=secondary][variant=light] {
+      color: $secondary;
+   }
+
+   &[color=tertiary][variant=light] {
+      color: $tertiary;
+   }
+
+   &[color=success][variant=light] {
+      color: $success;
+   }
+
+   &[color=warn][variant=light] {
+      color: $warn;
+   }
+
+   &[color=error][variant=light] {
+      color: $error;
+   }
+}

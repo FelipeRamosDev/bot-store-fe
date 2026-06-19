@@ -1,0 +1,66 @@
+header {
+   background-color: $background-dark;
+   padding: 0.7rem 0;
+   position: sticky;
+   top: 0;
+   width: 100%;
+   z-index: 10;
+   
+   .container, .full-container {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .logo-image {
+      width: 45px;
+      height: 45px;
+      text-decoration: none;
+      
+      @media screen and (min-width: $screen-m) {
+         width: 55px;
+         height: 55px;
+      }
+   }
+}
+
+.base-page {
+   &.auth-page {
+      .page-content {
+         $footer-height: 2.56rem;
+
+         padding-top: 3rem;
+         padding-bottom: calc(2.6rem + $footer-height);
+      }
+   }
+
+   .page-content {
+      .page-title-icon {
+         font-size: 3.2rem;
+      }
+
+      .page-title {
+         margin: 0;
+         font-size: 1.8rem;
+      }
+   }
+
+   .topbar-portal {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+   }
+}
+
+footer {
+   background-color: $background-dark;
+   color: $text-darken;
+   padding: 0.6rem;
+   width: 100%;
+
+   p {
+      text-align: center;
+      margin-bottom: 0;
+      font-size: 0.85rem;
+   }
+}

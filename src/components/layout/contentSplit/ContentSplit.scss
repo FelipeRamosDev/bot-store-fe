@@ -1,0 +1,47 @@
+.content-split {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+
+   @media screen and (min-width: $screen-xl) {
+      gap: 1.5rem;
+   }
+
+   @media screen and (min-width: $screen-l) {
+      gap: 1rem;
+   }
+
+   @media screen and (min-width: $screen-m) {
+      gap: 0.8rem;
+   }
+
+   &.column-direction {
+      flex-direction: column;
+   }
+
+   &.breakpoint-m {
+      @media screen and (min-width: $screen-m) {
+         flex-direction: row;
+      }
+   }
+
+   &.breakpoint-l {
+      @media screen and (min-width: $screen-l) {
+         flex-direction: row;
+      }
+   }
+
+   &.breakpoint-xl {
+      @media screen and (min-width: $screen-xl) {
+         flex-direction: row;
+      }
+   }
+
+   >.content-a,
+   >.content-b {
+      flex: 48%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+   }
+}

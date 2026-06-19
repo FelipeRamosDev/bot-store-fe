@@ -1,0 +1,86 @@
+.top-header {
+   box-shadow: $shadow-2;
+
+   &.auth-header {
+      .logo-image {
+         height: 40px;
+         width: 40px;
+      }
+   }
+
+   .logo-wrap {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      text-decoration: none;
+      color: $white;
+      font-size: 1.6rem;
+      font-weight: 800;
+
+      .grad-txt {
+         margin: 0;
+      }
+
+      .logotype {
+         font-size: 1.1rem;
+         font-weight: 800;
+         margin: 0;
+         margin-top: 0.4rem;
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 1.4rem;
+         }
+      }
+   }
+
+   nav {
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2rem;
+
+      &.desktop-menu {
+         display: none;
+
+         @media screen and (min-width: $screen-m) {
+            display: flex;
+         }
+      }
+
+      &.mobile-menu {
+         @media screen and (min-width: $screen-m) {
+            display: none;
+         }
+      }
+
+      a {
+         font-size: 1.05rem;
+         display: inline-flex;
+         align-items: center;
+         gap: 0.5rem;
+      }
+
+      a,
+      a:visited {
+         color: $text;
+         text-decoration: none;
+         transition: color 150ms;
+      }
+
+      a:hover {
+         text-decoration: underline;
+
+         &.no-underline {
+            text-decoration: none;
+         }
+      }
+   }
+
+   .menu-button {
+      min-width: auto;
+      padding: 0.6rem;
+
+      @media screen and (min-width: $screen-m) {
+         display: none;
+      }
+   }
+}

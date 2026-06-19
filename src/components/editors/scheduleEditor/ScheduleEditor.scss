@@ -1,0 +1,25 @@
+.schedules-editor {
+   .edit-wrap {
+      display: flex;
+      gap: 0.5rem;
+
+      .schedule-tile {
+         flex: 1;
+      }
+
+      .button-wrap {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex: 0;
+      }
+   }
+
+   .buttons-wrap {
+      display: flex;
+
+      button {
+         flex: 1;
+      }
+   }
+}

@@ -1,0 +1,64 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+
+   &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+      background-color: $background-grey3;
+
+      @media screen and (min-width: $screen-m) {
+         width: 10px;
+         height: 10px;
+      }
+   }
+
+   &::-webkit-scrollbar-track {
+      background: $background-grey3;
+      border-radius: 0 5px 5px 0;
+   }
+
+   &::-webkit-scrollbar-thumb {
+      background: lighten($color: $background-grey3-light, $amount: 10);
+      border-radius: 4px;
+
+      @media screen and (min-width: $screen-m) {
+         border-radius: 10px;
+      }
+   }
+
+   &::-webkit-scrollbar-thumb:hover {
+      background: lighten($color: $background-grey3-light, $amount: 15);
+   }
+
+   &::selection {
+      color: $text;
+      background: $secondary-light;
+   }
+}
+
+html {
+   background: $background-grad;
+   background-repeat: no-repeat;
+   font-size: 13.5px;
+   color: $text;
+   min-height: 100vh;
+
+   body {
+      min-height: inherit;
+
+      main {
+         position: relative;
+         min-height: inherit;
+      }
+   }
+}
+
+.cursor-pointer {
+   cursor: pointer;
+}
+
+a#tv-attr-logo {
+   display: none;
+}

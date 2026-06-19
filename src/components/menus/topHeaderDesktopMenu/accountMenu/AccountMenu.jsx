@@ -1,0 +1,115 @@
+import { useRouter } from 'next/navigation';
+import { useEffect, useState, useContext } from 'react';
+import { Divider, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { AccountCircle, CurrencyExchange, Logout } from '@mui/icons-material';
+import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
+import ExchangeModal from '@/components/modals/exchangeModal/ExchangeModal';
+import APIContext from '@/contexts/4HandsAPI';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import LogoIconLight from '@/components/common/logo/LogoIconLight';
+import { RuleControl } from '@/components/common/RuleControl';
+import Avatar from '@/components/common/avatar/Avatar';
+
+/**
+ * AccountMenu component that provides user account options such as viewing profile, 
+ * opening an exchange API modal, and signing out.
+ *
+ * @param {object} props - The component properties.
+ * @param {function} props.setSpinner - A callback function to display loading spinner during sign out. Defaults to an empty function.
+ * 
+ * @returns {JSX.Element} A menu with account-related actions and an avatar icon to toggle it.
+ */
+export default function AccountMenu({ setSpinner = () => {}, user }) {
+   const [ anchorEl, setAnchorEl ] = useState(null);
+   const [ nameLetters, setNameLetters ] = useState('');
+   const [ exchangeModal, setExchangeModal ] = useState(false);
+   const instance = useContext(APIContext);
+   const router = useRouter();
+
+   const avatarStyle = { fontSize: '1rem', width: 32, height: 32 };
+   const open = Boolean(anchorEl);
+
+   const handleMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+   };
+
+   const handleMenuClose = () => {
+      setAnchorEl(null);
+   };
+
+   async function signOut() {
+      setSpinner('Signing Out');
+
+      try {
+         await instance.auth.signOut();
+         router.push('/');
+      } catch (error) {
+         setSpinner(false);
+         throw error;
+      }
+   }
+
+   useEffect(() => {
+      const letters = localStorage.getItem('userLetters');
+      setNameLetters(letters);
+   }, []);
+
+   return (
+      <>
+         <RoundIconButton
+            Icon={() => <Avatar avatarUrl={user?.avatarUrl} size={38} quality={5} noBorder />}
+            onClick={handleMenuOpen}
+         />
+
+         <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            onClick={handleMenuClose}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+         >
+            <RuleControl rules={['master', 'admin']}>
+               <MenuItem onClick={() => router.push('/admin')}>
+                  <ListItemIcon>
+                     <AdminPanelSettingsIcon />
+                  </ListItemIcon>
+                  Admin Panel
+               </MenuItem>
+            </RuleControl>
+
+            <MenuItem onClick={() => router.push('/dashboard/user/my-profile')}>
+               <ListItemIcon>
+                  <AccountCircle />
+               </ListItemIcon>
+               My Profile
+            </MenuItem>
+
+            <MenuItem onClick={() => router.push('/dashboard/user/my-pilots')}>
+               <ListItemIcon>
+                  <LogoIconLight fontSize={20} />
+               </ListItemIcon>
+               My Pilots
+            </MenuItem>
+            
+            <MenuItem onClick={() => setExchangeModal(true)}>
+               <ListItemIcon>
+                  <CurrencyExchange fontSize="small" />
+               </ListItemIcon>
+               Exchange API
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem onClick={signOut}>
+               <ListItemIcon>
+                  <Logout color="error" />
+               </ListItemIcon>
+               Signout
+            </MenuItem>
+         </Menu>
+
+         <ExchangeModal open={exchangeModal} setOpen={setExchangeModal} />
+      </>
+   );
+}

@@ -1,0 +1,160 @@
+.home-content {
+   .content-section {
+      .section-header {
+         overflow: hidden;
+
+         &.dark-header {
+            background-color: $background-grey1;
+         }
+
+         .container {
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+            position: relative;
+         }
+
+         .title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: $text-darken;
+            margin: 0 0 1.5rem 0;
+
+            @media screen and (min-width: $screen-m) {
+               font-size: 3rem;
+            }
+         }
+      }
+
+      .gradient-divider {
+         background: $grad-primary-tertiary-light;
+         height: 4px;
+         width: 100%;
+      }
+
+      .content {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 7rem 0;
+
+         .column {
+            flex: 1;
+         }
+      }
+
+      .content-a {
+         width: 100%;
+      }
+
+      .image-spot {
+         display: flex;
+         align-items: center;
+         position: relative;
+         width: 100%;
+
+         &.right {
+            justify-content: right;
+         }
+      }
+   }
+}
+
+.marketing-cta {
+   text-align: center;
+
+   .message {
+      text-align: center;
+   }
+
+   @media screen and (min-width: $screen-m) {
+      &.left {
+         text-align: left;
+
+         .message {
+            text-align: left;
+         }
+      }
+
+      &.right {
+         text-align: right;
+
+         .message {
+            text-align: right;
+         }
+      }
+   }
+
+   .message {
+      display: inline-block;
+      width: 100%;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 0;
+
+      @media screen and (min-width: $screen-m) {
+         font-size: 2.2rem;
+      }
+
+      @media screen and (min-width: $screen-l) {
+         font-size: 2.4rem;
+      }
+
+      @media screen and (min-width: $screen-xl) {
+         font-size: 2.7rem;
+      }
+
+      &.line1 {
+         font-size: 1.2rem;
+         line-height: 1.4em;
+
+         @media screen and (min-width: $screen-s) {
+            font-size: 1.4rem;
+         }
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 1.5rem;
+         }
+
+         @media screen and (min-width: $screen-l) {
+            font-size: 1.6rem;
+         }
+
+         @media screen and (min-width: $screen-l) {
+            font-size: 1.8rem;
+         }
+      }
+   }
+
+   .description {
+      margin-top: 1rem;
+      font-size: 0.97rem;
+
+      @media screen and (min-width: $screen-m) {
+         font-size: 1.1rem;
+      }
+   }
+
+   &.left {
+      .description {
+         @media screen and (min-width: $screen-m) {
+            padding-inline-end: 18%;
+         }
+      }
+   }
+
+   &.right {
+      .description {
+         @media screen and (min-width: $screen-m) {
+            padding-inline-start: 18%;
+         }
+      }
+   }
+}
+
+.cta-button.d-large.MuiButtonBase-root {
+   @media screen and (min-width: $screen-m) {
+      padding: 8px 22px;
+      font-size: 0.9375rem;
+   }
+}

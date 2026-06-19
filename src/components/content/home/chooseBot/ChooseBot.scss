@@ -1,0 +1,142 @@
+.choose-bot {
+   overflow: hidden;
+   background: $grad-dark-primary;
+
+   .section-header {
+      .pilot-logo {
+         transform: translateY(1rem);
+      }
+   }
+
+   .content-split {
+      gap: 8rem;
+
+      @media screen and (min-width: $screen-m) {
+         gap: 1rem;
+      }
+
+      .content-b {
+         width: 100%;
+         padding-bottom: 5%;
+      }
+   }
+
+
+   .image-spot {
+      max-width: 100%;
+
+      .table-image {
+         width: 100%;
+         overflow-x: auto;
+         margin-left: -10%;
+         transform: translateX(-100vw);
+         transition: transform 200ms ease-in-out;
+
+         @media screen and (min-width: $screen-m) {
+            margin-left: 0;
+         }
+
+         &.expanded {
+            transform: translateX(0);
+         }
+
+         .big-value {
+            font-weight: 600;
+
+            span {
+               font-size: 1.2rem;
+            }
+
+            small {
+               font-size: 1rem;
+            }
+         }
+
+         .hide-mobile {
+            display: none;
+
+            @media screen and (min-width: $screen-xl) {
+               display: table-cell;
+            }
+         }
+
+         .profit {
+            color: $success;
+         }
+
+         .loss {
+            color: $error;
+         }
+      }
+
+      .bot-card {
+         position: absolute;
+         top: -7%;
+         right: -20%;
+         width: 80%;
+         transform: translateX(100vw);
+         transition: transform 250ms;
+
+         @media screen and (min-width: $screen-m) {
+            width: 400px;
+            right: 5%;
+            top: 12%;
+         }
+
+         &.expanded {
+            transform: translateX(0);
+         }
+
+         .avatar-wrap {
+            $diameter: 130px;
+
+            min-height: $diameter * 1.3;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+
+            .avatar-mask {
+               height: $diameter;
+               width: $diameter;
+               border-radius: $diameter;
+               overflow: hidden;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+            }
+         }
+
+         .bot-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+         }
+
+         .description {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: $text-darken;
+         }
+
+         .score {
+            padding: 1rem;
+            background: $grad-primary-tertiary-light;
+            border-radius: $radius-xs;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $background-grey2;
+
+            label {
+               font-weight: 600;
+            }
+            
+            span {
+               font-size: 1.3rem;
+               font-weight: 700;
+            }
+         }
+      }
+   }
+}

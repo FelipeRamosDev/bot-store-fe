@@ -1,0 +1,219 @@
+.create-your-bot-section {
+   background-color: $background-grey1;
+   padding-top: 3rem;
+
+   .section-header {
+      .section-title {
+         font-size: 1.7rem;
+         margin: 0 0 0.9rem 0;
+         line-height: 2.3rem;
+         color: $text-darken;
+
+         @media screen and (min-width: $screen-m) {
+            font-size: 3rem;
+            margin: 1rem 0 1.5rem 0;
+            line-height: 2.9rem;
+         }
+      }
+
+      .gradient-divider {
+         width: 80%;
+         
+         @media screen and (min-width: $screen-m) {
+            width: 60%;
+         }
+      }
+   }
+
+   .content-split.container {
+      padding: 3rem 0 5rem 0;
+      gap: 2rem;
+
+      @media screen and (min-width: $screen-m) {
+         padding: 5rem 0;
+      }
+
+      .content-a {
+         flex: 100%;
+
+         @media screen and (min-width: $screen-m) {
+            flex: 40%;
+            max-width: 40%;
+         }
+      }
+
+      .content-b {
+         flex: 100%;
+
+         @media screen and (min-width: $screen-m) {
+            flex: 60%;
+            max-width: 60%;
+         }
+      }
+
+   }
+
+   .text-spot {
+      border-radius: $radius-l;
+      background-color: $background-grey2-light;
+      padding: $padding-m;
+      color: $text-darken;
+      height: 100%;
+
+      .text-spot-header {
+         margin-bottom: 1.5rem;
+
+         h3 {
+            font-size: 1.9rem;
+            color: $text-darken;
+            margin: 0 0 1.5rem 0;
+         }
+
+         .summary {
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+         }
+      }
+
+      .quoted-title {
+         border-left: 3px solid $text-darken;
+         padding: $padding-xs $padding-s;
+         margin-bottom: 1.5rem;
+         margin-left: 0.5rem;
+
+         &:last-child {
+            margin-bottom: 0;
+         }
+
+         h3 {
+            margin: 0;
+            line-height: 2.5rem;
+            font-size: 1.4rem;
+            color: $text-darken;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+         }
+
+         p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: $text-darken;
+         }
+      }
+   }
+   
+   .image-spot {
+      position: relative;
+      border-radius: $radius-l;
+      padding: $padding-m;
+      flex-direction: column;
+      align-items: flex-end;
+      display: flex;
+      margin-bottom: 0;
+      height: 100%;
+
+      .text-wrap {
+         z-index: 1;
+         margin-bottom: 2rem;
+
+         .image-title {
+            font-size: 2.1rem;
+            line-height: 2.6rem;
+            font-weight: 800;
+            margin: 0 0 3rem 0;
+            color: $background-grey1;
+            width: 100%;
+         }
+   
+         p {
+            color: $background-grey1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+         }
+      }
+
+      .image-wrap {
+         position: relative;
+         width: 100%;
+         transition: transform 120ms ease-in-out;
+         transform: translateX(100%);
+         z-index: 2;
+   
+         &.animation {
+            transform: translateX(0);
+
+            .bot-thread {
+               .card-body {
+                  .watermark-price-card,
+                  .bot-divider {
+                     transform: translateX(0);
+                  }
+               }
+            }
+         }
+
+         .bot-thread {
+            transform: translateX(10%);
+            border: none;
+
+            .card-body {
+               flex-wrap: nowrap;
+
+               >:nth-of-type(2), >:nth-of-type(3), >:nth-of-type(4), >:nth-of-type(5) {
+                  display: none;
+               }
+
+               @media screen and (min-width: $screen-m) {
+                  >:nth-of-type(2), >:nth-of-type(3) {
+                     display: flex;
+                  }
+               }
+
+               @media screen and (min-width: $screen-l) {
+                  >:nth-of-type(4), >:nth-of-type(5) {
+                     display: flex;
+                  }
+               }
+
+               
+               >:nth-of-type(1){
+                  transition: transform 200ms ease-in-out;
+               }
+
+               >:nth-of-type(2) {
+                  transition: transform 230ms ease-in-out;
+               }
+
+               >:nth-of-type(3) {
+                  transition: transform 260ms ease-in-out;
+               }
+
+               >:nth-of-type(4) {
+                  transition: transform 390ms ease-in-out;
+               }
+
+               >:nth-of-type(5) {
+                  transition: transform 420ms ease-in-out;
+               }
+
+               .watermark-price-card {
+                  min-width: 362px;
+
+                  &.wider {
+                     min-width: 436px;
+                  }
+               }
+
+               .watermark-price-card,
+               .bot-divider {
+                  transform: translateX(300%);
+               }
+            }
+         }
+      }
+   }
+}
