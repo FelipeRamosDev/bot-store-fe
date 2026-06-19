@@ -87,7 +87,7 @@ export default function TopHeaderDesktopMenu({ setSpinner, type, user }) {
             </Link>
             <Link href="/dashboard/master-accounts">
                <AccountBalanceWallet />
-               Master Accounts
+               Wallets
             </Link>
             <Link className="no-underline" href="/dashboard/bots/pilot-store">
                <CTAButton startIcon={<StoreIcon />}>

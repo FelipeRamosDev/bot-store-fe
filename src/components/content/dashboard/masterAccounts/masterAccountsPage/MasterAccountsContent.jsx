@@ -14,7 +14,7 @@ export default function MasterAccountsContent() {
    return (<>
       <SectionHeaderBanner
          type="flex-view"
-         title="Master Accounts"
+         title="Wallets"
          buttonLabel="New"
          CustomImage={() => <Wallet className="icon" />}
          startIcon={<Add />}

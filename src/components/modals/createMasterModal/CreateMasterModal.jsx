@@ -16,11 +16,11 @@ import CreateMasterForm from '@/components/forms/createMasterForm/CreateMasterFo
 export default function CreateMasterModal({ editMode, title, open, setOpen = () => {}, onSuccess = () => {}, master }) {
    // Determine the title based on editMode and provided title
    if (!title && editMode) {
-      title = 'Edit Master';
+      title = 'Edit Wallet';
    }
 
    if (!title && !editMode) {
-      title = 'Create Master';
+      title = 'Create Wallet';
    }
 
    return (

@@ -13,7 +13,7 @@ export default function UserRelated({ user }) {
    return (<>
 
       <ContentHeader>
-         <AccountBalanceWallet /> <h4 className="header-title">Master Accounts</h4>
+         <AccountBalanceWallet /> <h4 className="header-title">Wallets</h4>
       </ContentHeader>
       {user && <DBQuery type="query" collection="master_accounts" filter={{ user: user?._id }} limit={5}>
          <MastersTable />
