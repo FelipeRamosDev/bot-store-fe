@@ -9,7 +9,7 @@ import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRig
 import { useChatContext } from "./ChatBase";
 
 export default function ChatInput() {
-   const {  } = useChatContext(); // Access chat context if needed for sending messages
+   const { onSubmit, newHistoryItem } = useChatContext(); // Access chat context if needed for sending messages
 
    const formConfig = new Form({
       schema: [
@@ -20,9 +20,17 @@ export default function ChatInput() {
       ]
    });
 
-   const handleSubmit = async (data) => {
-      return { success: true, data };
-   };
+   const handleSubmit = async (formData) => {
+      newHistoryItem({
+         messageId: `temp-${Date.now()}`,
+         role: 'user',
+         content: formData.message
+      });
+
+      if (onSubmit) {
+         await onSubmit(formData);
+      }
+   }
 
    return (
       <FormBase
@@ -32,7 +40,12 @@ export default function ChatInput() {
          onSubmit={handleSubmit}
          hideSubmit
       >
-         <FormInput path="message" multiline minRows={3} maxRows={8} />
+         <FormInput
+            path="message"
+            minRows={3}
+            maxRows={8}
+            multiline
+         />
 
          <RoundIconButton
             type="submit"
