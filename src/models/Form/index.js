@@ -446,6 +446,8 @@ export default class Form {
             configurable: true
          });
       }
+
+      return this;
    }
 
    /**

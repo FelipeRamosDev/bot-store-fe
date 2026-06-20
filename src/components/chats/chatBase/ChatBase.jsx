@@ -15,12 +15,17 @@ export function useChatContext() {
    return useContext(ChatContext);
 }
 
-export default function ChatBase({ headerTitle, headerIcon, elevation = 30 }) {
+export default function ChatBase({ history = [], onSubmit, onOpen, headerTitle, headerIcon, newHistoryItem, elevation = 30 }) {
    const [open, setOpen] = useState(false);
    const openCSS = open && 'open';
 
+   const handleOpen = async () => {
+      if (onOpen) await onOpen();
+      setOpen(true);
+   }
+
    return (
-      <ChatContext.Provider value={{ open, setOpen }}>
+      <ChatContext.Provider value={{ open, setOpen, history, onSubmit, newHistoryItem }}>
          <Card className={parseCSS([ 'chat-base', openCSS ])} elevation={elevation}>
             <ChatHeader title={headerTitle} icon={headerIcon} />
 
@@ -34,7 +39,7 @@ export default function ChatBase({ headerTitle, headerIcon, elevation = 30 }) {
             className={parseCSS([ 'chat-toggle-button', openCSS ])}
             size="large"
             Icon={Chat}
-            onClick={() => setOpen(!open)}
+            onClick={handleOpen}
          />
       </ChatContext.Provider>
    );

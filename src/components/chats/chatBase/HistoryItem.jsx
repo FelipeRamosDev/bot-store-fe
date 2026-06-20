@@ -11,7 +11,7 @@ export default function HistoryItem({ message }) {
             value={message?.content || '_Empty message_'}
          />
 
-         <small className="history-item-time">{message?.createdAt?.toLocaleTimeString()}</small>
+         <small className="history-item-time">{new Date(message?.createdAt).toLocaleTimeString()}</small>
       </div>
    );
 }
