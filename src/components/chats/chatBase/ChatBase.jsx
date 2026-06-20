@@ -1,0 +1,41 @@
+'use client';
+
+import Card from "@/components/common/card/Card";
+import ChatHeader from "./ChatHeader";
+import ChatHistory from "./ChatHistory";
+import ChatInput from "./ChatInput";
+import { createContext, useContext, useRef, useState } from "react";
+import { parseCSS } from "@/helpers/parser";
+import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
+import { Chat } from "@mui/icons-material";
+
+export const ChatContext = createContext();
+
+export function useChatContext() {
+   return useContext(ChatContext);
+}
+
+export default function ChatBase({ headerTitle, headerIcon, elevation = 30 }) {
+   const [open, setOpen] = useState(false);
+   const openCSS = open && 'open';
+
+   return (
+      <ChatContext.Provider value={{ open, setOpen }}>
+         <Card className={parseCSS([ 'chat-base', openCSS ])} elevation={elevation}>
+            <ChatHeader title={headerTitle} icon={headerIcon} />
+
+            <div className="chat-content">
+               <ChatHistory />
+               <ChatInput />
+            </div>
+         </Card>
+
+         <RoundIconButton
+            className={parseCSS([ 'chat-toggle-button', openCSS ])}
+            size="large"
+            Icon={Chat}
+            onClick={() => setOpen(!open)}
+         />
+      </ChatContext.Provider>
+   );
+}
