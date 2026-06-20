@@ -1,0 +1,185 @@
+.chat-base {
+   position: fixed;
+   bottom: 3rem;
+   right: 3rem;
+   width: 96%;
+   height: 80vh;
+   max-height: 650px;
+   max-width: 500px;
+   z-index: 1000;
+   overflow: hidden;
+   margin-bottom: 0;
+   display: flex;
+   flex-direction: column;
+   transform: translateY(150%);
+   transition: transform 0.3s ease-in-out;
+
+   &.card {
+      background-color: $background;
+   }
+
+   &.open {
+      transform: translateY(0);
+   }
+
+   .chat-header {
+      border-bottom: 1px solid $background-grey3-light;
+      padding: $padding-s $padding-s;
+      background-color: $background-paper;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex: 0;
+      position: relative;
+      padding-right: 4rem;
+      cursor: pointer;
+
+      .MuiSvgIcon-root {
+         color: $text-soft;
+      }
+
+      .chat-header-title {
+         margin: 0;
+         font-size: 1rem;
+         font-weight: 500;
+         color: $text-soft;
+         -webkit-user-select: none;
+         user-select: none;
+      }
+
+      .chat-header-close-button {
+         position: absolute;
+         margin-left: auto;
+         top: 50%;
+         transform: translateY(-50%);
+         right: 0.5rem;
+      }
+   }
+
+   .chat-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      .chat-history {
+         flex: 1;
+         max-height: 30.7%;
+         border-radius: $radius-s;
+         padding: 1rem;
+         overflow-y: auto;
+
+         .history-item {
+            width: fit-content;
+            border-radius: $radius-s;
+            margin-bottom: 2rem;
+            padding: 0.7rem;
+
+            &:last-child {
+               border-bottom: none;
+            }
+
+            &.user-message {
+               max-width: 90%;
+               margin-left: auto;
+               background-color: $background-paper;
+
+               .history-item-time {
+                  width: 100%;
+                  display: inline-block;
+                  text-align: right;
+               }
+            }
+
+            .Markdown {
+               color: $text-soft;
+               border-bottom: 1px solid $background-grey3-light;
+               padding-bottom: 0.3rem;
+
+               p,
+               li {
+                  font-size: 0.95rem;
+               }
+
+               p:last-child {
+                  margin-bottom: 0;
+               }
+
+               h1 {
+                  font-size: 1.3rem;
+                  margin-top: 0.4rem;
+               }
+
+               h2 {
+                  font-size: 1.2rem;
+               }
+
+               h3 {
+                  font-size: 1.1rem;
+               }
+
+               h4 {
+                  font-size: 1rem;
+               }
+
+               code {
+                  background-color: $background-grey3-light;
+                  padding: 0.1rem 0.2rem;
+                  border-radius: $radius-xs;
+                  font-family: 'Source Code Pro', monospace;
+                  font-size: 0.95em;
+               }
+            }
+
+            .history-item-time {
+               color: $text-softer;
+               font-size: 0.75rem;
+            }
+         }
+      }
+
+      .chat-input {
+         flex: 0;
+         position: relative;
+         padding: 1rem;
+
+         .MuiFilledInput-root {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            padding: 0.8rem 4rem 0.8rem 0.8rem;
+            font-size: 0.9rem;
+
+            &::after {
+               border-bottom: 0;
+            }
+         }
+
+         .chat-send-button {
+            position: absolute;
+            bottom: 1.4rem;
+            right: 1.3rem;
+            background: $background;
+         }
+      }
+   }
+}
+
+.chat-toggle-button {
+   bottom: 3rem;
+   right: 3rem;
+   z-index: 1001;
+   transition: transform 0.3s ease-in;
+
+   &.open {
+      transform: translateY(200px);
+   }
+
+   &.MuiIconButton-root {
+      position: fixed;
+      background-color: $success;
+      color: $black;
+
+      &:hover {
+         background-color: lighten($success, 10%);
+      }
+   }
+}
