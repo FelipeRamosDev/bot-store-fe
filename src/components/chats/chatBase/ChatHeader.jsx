@@ -10,7 +10,7 @@ export default function ChatHeader({ title, icon = <Chat /> }) {
          {icon}
 
          <h2 className="chat-header-title">{title}</h2>
-         <RoundIconButton className="chat-header-close-button" Icon={Close} onClick={() => setOpen(!open)} />
+         <RoundIconButton className="chat-header-close-button" Icon={Close} onClick={() => setOpen(false)} />
       </div>
    );
 }

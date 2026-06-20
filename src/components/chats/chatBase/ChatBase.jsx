@@ -15,7 +15,15 @@ export function useChatContext() {
    return useContext(ChatContext);
 }
 
-export default function ChatBase({ history = [], onSubmit, onOpen, headerTitle, headerIcon, newHistoryItem, elevation = 30 }) {
+export default function ChatBase({
+   history = [],
+   onSubmit,
+   onOpen,
+   headerTitle,
+   headerIcon,
+   newHistoryItem,
+   elevation = 30
+}) {
    const [open, setOpen] = useState(false);
    const openCSS = open && 'open';
 
