@@ -11,6 +11,9 @@ export default function useChat(chatLabel) {
    const [chatId, setChatId] = useState(null);
    const instance = useContext(APIContext);
    const messages = useRef(new Map());
+   const socketRef = useRef(null);
+   const chatIdRef = useRef(null);
+   const startChatPromiseRef = useRef(null);
 
    const newHistoryItem = (message, preventRerender = false) => {
       const { messageId, role, content } = message;
@@ -26,7 +29,9 @@ export default function useChat(chatLabel) {
       });
 
       messages.current.set(messageId, newMessage);
-      {!preventRerender && setHistory(Array.from(messages.current.values()));}
+      if (!preventRerender) {
+         setHistory(Array.from(messages.current.values()));
+      }
 
       return newMessage;
    }
@@ -51,9 +56,9 @@ export default function useChat(chatLabel) {
    }
 
    const connect = async () => {
-      if (socket) {
+      if (socketRef.current) {
          console.log('Already connected to chat socket');
-         return socket;
+         return socketRef.current;
       }
 
       return new Promise((resolve, reject) => {
@@ -91,12 +96,17 @@ export default function useChat(chatLabel) {
                   setHistory(Array.from(messages.current.values()));
                });
 
+               socketRef.current = this;
                setSocket(this);
                resolve(this);
             },
             onDisconnect: () => {
                console.log('Disconnected from chat socket');
+               socketRef.current = null;
+               chatIdRef.current = null;
+               startChatPromiseRef.current = null;
                setSocket(null);
+               setChatId(null);
             },
             onError: (error) => {
                console.error('Error in chat socket:', error);
@@ -107,32 +117,55 @@ export default function useChat(chatLabel) {
    }
 
    async function startChat(chatName) {
-      setLoading(true);
-
-      try {
-         const connected = await connect();
-
-         connected.sendTo('start-chat', { label: chatLabel, chatName }, (response) => {
-            if (response.error) {
-               throw new Error(response.error);
-            }
-
-            setChatId(response.chatId);
-         });
-      } catch (error) {
-         throw new Error('Error starting ai chat: ' + error.message);
-      } finally {
-         setLoading(false);
+      if (chatIdRef.current) {
+         return chatIdRef.current;
       }
+
+      if (startChatPromiseRef.current) {
+         return startChatPromiseRef.current;
+      }
+
+      setLoading(true);
+      startChatPromiseRef.current = (async () => {
+         try {
+            const connected = await connect();
+
+            return await new Promise((resolve, reject) => {
+               connected.sendTo('start-chat', { label: chatLabel, chatName }, (response) => {
+                  if (response.error) {
+                     reject(new Error(response.error));
+                     return;
+                  }
+
+                  chatIdRef.current = response.chatId;
+                  setChatId(response.chatId);
+                  resolve(response.chatId);
+               });
+            });
+         } catch (error) {
+            throw new Error('Error starting ai chat: ' + error.message);
+         } finally {
+            startChatPromiseRef.current = null;
+            setLoading(false);
+         }
+      })();
+
+      return startChatPromiseRef.current;
    }
 
    async function sendMessage(message, agentId, stream) {
-      if (!socket) {
+      const activeSocket = socketRef.current;
+      const activeChatId = chatIdRef.current;
+
+      if (!activeSocket) {
          throw new Error('Socket is not connected. Please start the chat first.');
       }
 
+      if (!activeChatId) {
+         throw new Error('Chat is not initialized yet. Please wait for the chat to open.');
+      }
 
-      socket.sendTo('message-in', { roomId: chatId, message, agentId, stream }, (response) => {
+      activeSocket.sendTo('message-in', { roomId: activeChatId, message, agentId, stream }, (response) => {
          if (response.error) {
             console.error('Error sending message:', response.error);
             return;
