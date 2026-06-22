@@ -1,7 +1,6 @@
 import Form from '@/models/Form';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 import RadioGroupSchema from '@/models/Form/fieldTypes/RadioGroupSchema';
-import SelectFieldSchema from '@/models/Form/fieldTypes/SelectFieldSchema';
 import ObjectFieldSchema from '@/models/Form/fieldTypes/ObjectFieldSchema';
 import slotLimitsForm from './slotLimitsForm/SlotLimitsForm.config';
 import slotTrailingForm from '../shared/AccountTrailingStop/AccountTrailingForm.config';

@@ -2,6 +2,7 @@
 
 import ChatMessage from "@/components/chats/chatBase/models/ChatMessage";
 import APIContext from "@/contexts/4HandsAPI";
+import AuthUserContext from "@/contexts/AuthUser";
 import { useContext, useRef, useState } from "react";
 
 export default function useChat(chatLabel) {
@@ -10,6 +11,7 @@ export default function useChat(chatLabel) {
    const [socket, setSocket] = useState(null);
    const [chatId, setChatId] = useState(null);
    const instance = useContext(APIContext);
+   const auth = useContext(AuthUserContext);
    const messages = useRef(new Map());
    const socketRef = useRef(null);
    const chatIdRef = useRef(null);
@@ -131,7 +133,7 @@ export default function useChat(chatLabel) {
             const connected = await connect();
 
             return await new Promise((resolve, reject) => {
-               connected.sendTo('start-chat', { label: chatLabel, chatName }, (response) => {
+               connected.sendTo('start-chat', { label: chatLabel, chatName, userUID: auth?.user?._id }, (response) => {
                   if (response.error) {
                      reject(new Error(response.error));
                      return;
@@ -173,5 +175,5 @@ export default function useChat(chatLabel) {
       });
    }
 
-   return { history, loading, connect, startChat, newHistoryItem, sendMessage };
+   return { socket, chatId, history, loading, connect, startChat, newHistoryItem, sendMessage };
 }

@@ -1,3 +1,5 @@
+import { isValidElement } from 'react';
+
 /**
  * ContainedTableRow Component
  * 
@@ -13,15 +15,37 @@
  * @returns {JSX.Element} The rendered ContainedTableRow component.
  */
 export function ContainedTableRow({ label, value, Value, ...props }) {
+   const hasValue = value !== undefined && value !== null && value !== '';
+
+   const renderValue = () => {
+      if (!hasValue) {
+         return null;
+      }
+
+      if (isValidElement(value)) {
+         return value;
+      }
+
+      if (typeof value === 'object') {
+         try {
+            return JSON.stringify(value);
+         } catch {
+            return String(value);
+         }
+      }
+
+      return String(value);
+   };
+
    return (
       <div className="table-row" {...props}>
          <div className="table-column">
             {label && <label>{label}</label>}
          </div>
          <div className="table-column value">
-            {value && value}
+            {renderValue()}
             {Value && <Value />}
-            {!value && !Value && '---'}
+            {!hasValue && !Value && '---'}
          </div>
       </div>
    )

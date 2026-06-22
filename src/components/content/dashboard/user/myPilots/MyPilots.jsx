@@ -14,6 +14,8 @@ import DesignServices from '@mui/icons-material/DesignServices';
 import { DataObject } from '@mui/icons-material';
 import usePilot from '@/hooks/usePilot';
 import { useRouter } from 'next/navigation';
+import RubberButton from '@/components/buttons/rubberButton/RubberButton';
+import { PilotBuilderChat } from '@/components/chats';
 
 export default function MyBots() {
    const { user } = useContext(AuthUserContext);
@@ -65,20 +67,19 @@ export default function MyBots() {
                <LogoIcon fontSize={45} />
                <h1 className="page-title">My Pilots</h1>
 
-               <Button
+               <RubberButton
                   variant="contained"
                   className="import-json-button"
-                  color="secondary"
                   startIcon={<DataObject />}
                   onClick={handleImportJSON}
                   disabled={loading}
-               >{!loading ? 'Import JSON' : 'Importing'}</Button>
+               >{!loading ? 'Import JSON' : 'Importing'}</RubberButton>
             </ContentHeader>
 
             {user && <DBQuery
                type="query"
                collection="bots"
-               filter={{ author: user._id, $nor: [{ status: 'draft' }] }}
+               filter={{ ownership: user._id, $nor: [{ status: 'draft' }] }}
                sort={{ 'currentResults.profitRatio': -1 }}
                limit={10}
             >
@@ -96,10 +97,10 @@ export default function MyBots() {
                      {user && <DBQuery
                         type="query"
                         collection="bots"
-                        sort={{ 'currentResults.profitRatio': -1 }}
+                        sort={{ createdAt: -1 }}
                         limit={5}
                         filter={{
-                           author: user._id,
+                           ownership: user._id,
                            status: 'draft'
                         }}
                      >
@@ -111,6 +112,7 @@ export default function MyBots() {
          </ContentFullwidth>
 
          <CreateBotFloatButton />
+         <PilotBuilderChat />
       </div>
    );
 }
