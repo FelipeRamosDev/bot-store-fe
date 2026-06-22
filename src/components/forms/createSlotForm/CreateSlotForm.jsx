@@ -69,7 +69,7 @@ export default function CreateSlot({ slot = {}, master = {}, defaultType, onSucc
          queryType: 'query',
          collection: 'bots',
          filter: { $or: [
-            { status: 'private', user: userUID },
+            { status: 'private', ownership: userUID },
             { status: 'public' }
          ]}
       });
