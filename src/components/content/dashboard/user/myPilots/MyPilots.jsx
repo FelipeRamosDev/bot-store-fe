@@ -5,7 +5,6 @@ import { DBQuery } from '@/contexts/DBQuery';
 import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
 import BotsTable from '@/components/tables/botsTable/BotsTable';
 import AuthUserContext from '@/contexts/AuthUser';
-import CreateBotFloatButton from '@/components/buttons/createBotFloatButton/CreateBotFloatButton';
 import LogoIcon from '@/components/common/logo/LogoIconLight';
 import ContentHeader from '@/components/headers/contentHeader/ContentHeader';
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material';
@@ -15,7 +14,6 @@ import { DataObject } from '@mui/icons-material';
 import usePilot from '@/hooks/usePilot';
 import { useRouter } from 'next/navigation';
 import RubberButton from '@/components/buttons/rubberButton/RubberButton';
-import { PilotBuilderChat } from '@/components/chats';
 
 export default function MyBots() {
    const { user } = useContext(AuthUserContext);
@@ -110,9 +108,6 @@ export default function MyBots() {
                </Accordion>
             </div>
          </ContentFullwidth>
-
-         <CreateBotFloatButton />
-         <PilotBuilderChat />
       </div>
    );
 }

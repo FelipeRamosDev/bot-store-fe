@@ -3,6 +3,7 @@ import BotDetailsHeader from './BotDetailsHeader';
 import BotThreads from './BotThreads';
 import BotSettings from './BotSettings';
 import NotFoundPage from '@/app/not-found';
+import { PilotBuilderChat } from '@/components/chats';
 
 /**
  * The BotDetails component fetches and displays detailed information about a bot.
@@ -28,5 +29,7 @@ export default function BotDetails({ botIndex }) {
 
       <BotSettings />
       <BotThreads />
+
+      <PilotBuilderChat type="edit" />
    </DBQuery>;
 }

@@ -7,7 +7,8 @@ import ChatInput from "./ChatInput";
 import { createContext, useContext, useRef, useState } from "react";
 import { parseCSS } from "@/helpers/parser";
 import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
-import { Chat } from "@mui/icons-material";
+import { Chat, ChatRounded } from "@mui/icons-material";
+import { Fab } from "@mui/material";
 
 export const ChatContext = createContext();
 
@@ -21,6 +22,7 @@ export default function ChatBase({
    onOpen,
    headerTitle,
    headerIcon,
+   floatButtonLabel,
    newHistoryItem,
    elevation = 30
 }) {
@@ -43,12 +45,13 @@ export default function ChatBase({
             </div>
          </Card>
 
-         <RoundIconButton
-            className={parseCSS([ 'chat-toggle-button', openCSS ])}
-            size="large"
-            Icon={Chat}
+         <Fab
+            className={parseCSS([ 'chat-toggle-button', [ openCSS, floatButtonLabel && 'extended' ] ])}
+            variant={floatButtonLabel ? 'extended' : 'circular'}
             onClick={handleOpen}
-         />
+         >
+            <ChatRounded className="chat-toggle-icon" /> {floatButtonLabel}
+         </Fab>
       </ChatContext.Provider>
    );
 }

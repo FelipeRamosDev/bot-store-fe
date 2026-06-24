@@ -178,7 +178,8 @@
       transform: translateY(200px);
    }
 
-   &.MuiIconButton-root {
+   &.MuiIconButton-root,
+   &.MuiFab-root {
       position: fixed;
       background-color: $success;
       color: $black;
@@ -186,5 +187,9 @@
       &:hover {
          background-color: lighten($success, 10%);
       }
+   }
+
+   &.extented.chat-toggle-icon {
+      margin-right: 0.6rem;
    }
 }
