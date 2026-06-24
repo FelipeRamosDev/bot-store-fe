@@ -1,4 +1,3 @@
-import { PilotBuilderChat } from '@/components/chats';
 import BotDetails from '@/components/content/dashboard/bots/botDetails/BotDetails';
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 
@@ -23,8 +22,6 @@ export default function BotPage({ params: { index } }) {
    return (
       <AuthBasePage className="bot-details">
          <BotDetails botIndex={index} />
-
-         <PilotBuilderChat />
       </AuthBasePage>
    );
 }

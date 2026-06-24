@@ -1,5 +1,6 @@
 import AuthBasePage from '@/templates/authBasePage/AuthBasePage';
 import MyPilots from '@/components/content/dashboard/user/myPilots/MyPilots';
+import { PilotBuilderChat } from '@/components/chats';
 
 export const metadata = {
    title: 'My Pilots | CandlePilot',
@@ -18,6 +19,8 @@ export default function MyPilotsPage() {
    return (
       <AuthBasePage>
          <MyPilots />
+
+         <PilotBuilderChat type="create" />
       </AuthBasePage>
    );
 }

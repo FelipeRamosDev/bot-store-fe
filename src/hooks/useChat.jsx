@@ -12,10 +12,10 @@ export default function useChat(chatLabel) {
    const [chatId, setChatId] = useState(null);
    const instance = useContext(APIContext);
    const auth = useContext(AuthUserContext);
+   const startChatPromiseRef = useRef(null);
    const messages = useRef(new Map());
    const socketRef = useRef(null);
    const chatIdRef = useRef(null);
-   const startChatPromiseRef = useRef(null);
 
    const newHistoryItem = (message, preventRerender = false) => {
       const { messageId, role, content } = message;
@@ -104,9 +104,11 @@ export default function useChat(chatLabel) {
             },
             onDisconnect: () => {
                console.log('Disconnected from chat socket');
+
                socketRef.current = null;
                chatIdRef.current = null;
                startChatPromiseRef.current = null;
+
                setSocket(null);
                setChatId(null);
             },
@@ -118,7 +120,7 @@ export default function useChat(chatLabel) {
       });
    }
 
-   async function startChat(chatName) {
+   async function startChat(chatName, context) {
       if (chatIdRef.current) {
          return chatIdRef.current;
       }
@@ -133,7 +135,14 @@ export default function useChat(chatLabel) {
             const connected = await connect();
 
             return await new Promise((resolve, reject) => {
-               connected.sendTo('start-chat', { label: chatLabel, chatName, userUID: auth?.user?._id }, (response) => {
+               const payload = {
+                  userUID: auth?.user?._id,
+                  label: chatLabel,
+                  chatName,
+                  context,
+               };
+
+               connected.sendTo('start-chat', payload, (response) => {
                   if (response.error) {
                      reject(new Error(response.error));
                      return;
