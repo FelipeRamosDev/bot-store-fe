@@ -26,7 +26,7 @@ export default function FunctionValue({ demoMode, className = '', parentThread, 
       return <></>;
    }
 
-   Object.keys(valueFunction.options).map(key => {
+   Object.keys(valueFunction.options || {}).map(key => {
       const optValue = valueFunction.options[key];
       const paramValue = params[key];
 
