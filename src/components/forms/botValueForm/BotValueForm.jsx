@@ -37,6 +37,7 @@ export default function BotValueForm({
    initView = 'ask',
    parentRule,
    parentThreads,
+   eventName,
    editMode = false,
    editData,
    bot,
@@ -109,6 +110,10 @@ export default function BotValueForm({
 
          if (parentThreads) {
             botValueForm.setValue('parentThreads', parentThreads);
+         }
+
+         if (eventName) {
+            botValueForm.setValue('eventName', eventName);
          }
       }
 

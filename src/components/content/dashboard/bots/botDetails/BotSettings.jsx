@@ -20,7 +20,7 @@ import AddBotValuesMenu from '@/components/menus/dropdown/addBotValuesMenu/AddBo
  */
 export default function BotSettings() {
    const { doc } = useContext(DBQueryContext);
-   const [ createValueModal, setCreateValueModal ] = useState('');
+   const [createValueModal, setCreateValueModal] = useState('');
 
    if (!doc) {
       return <></>;
@@ -38,9 +38,7 @@ export default function BotSettings() {
          case 'takeProfitLong':
          case 'takeProfitShort':
             const thread = doc.eval[eventName];
-            if (!thread) return;
-
-            setCreateValueModal({ parentThreads: thread._id, valueType: 'function' });
+            setCreateValueModal({ parentThreads: thread?._id, eventName, valueType: 'function' });
             break;
       }
    }
