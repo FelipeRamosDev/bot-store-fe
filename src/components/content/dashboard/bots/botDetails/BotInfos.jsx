@@ -6,12 +6,15 @@ import CheckButtonGroupInput from '@/components/inputs/checkButtonGroupInput/Che
 import ContainedTable from '@/components/tables/containedTable/ContainedTable';
 import APIContext from '@/contexts/4HandsAPI';
 import BotResultsGrid from '@/components/grids/botResultsGrid/BotResultsGrid';
+import VersionControl from '@/components/shared/bot/versionControl/VersionControl';
 
 export default function BotInfos({ bot }) {
    const API = useContext(APIContext);
 
    return (
       <Card className="infos" padding="s" elevation={40}>
+         <VersionControl />
+
          {bot.status && <CheckButtonGroupInput
             onChange={(ev) => handleStatusChange(ev, API, bot)}
             schema={{

@@ -6,6 +6,21 @@ export default function usePilot() {
    const { uploading, uploadFile } = useFilesBucket();
    const instance = useContext(APIContext);
 
+   async function getPilotVersions(pilotUID) {
+      try {
+         const list = await instance.ajax.authGet('/bot/version/list', { pilotUID });
+
+         if (!list) {
+            throw new Error('Failed to fetch pilot versions');
+         }
+
+         return list;
+      } catch (error) {
+         console.error('Error fetching pilot versions:', error);
+         throw error;
+      }
+   }
+
    async function exportJSON(botUID) {
       try {
         const botStrategy = await instance.ajax.authGet('/bot/export', { botUID });
@@ -38,5 +53,35 @@ export default function usePilot() {
       return await uploadFile(file, 'pilot/avatar', { fileName: `pilot_avatar_${pilotUID}` });
    }
 
-   return { uploading, uploadAvatar, exportJSON, importJSON };
+   async function newVersion(pilotUID) {
+      try {
+         const response = await instance.ajax.authPost('/bot/version/new-version', { pilotUID });
+
+         if (!response || response.error) {
+            throw new Error('Failed to create new bot version');
+         }
+
+         return response;
+      } catch (error) {
+         console.error('Error creating new bot version:', error);
+         throw error;
+      }
+   }
+
+   async function switchVersion(pilotUID, version) {
+      try {
+         const response = await instance.ajax.authPost('/bot/version/switch-version', { pilotUID, version });
+
+         if (!response || response.error) {
+            throw new Error('Failed to switch bot version');
+         }
+
+         return response;
+      } catch (error) {
+         console.error('Error switching bot version:', error);
+         throw error;
+      }
+   }
+
+   return { uploading, uploadAvatar, exportJSON, importJSON, newVersion, switchVersion, getPilotVersions};
 }

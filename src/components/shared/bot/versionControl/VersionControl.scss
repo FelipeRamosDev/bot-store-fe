@@ -1,0 +1,123 @@
+.version-control {
+   margin-bottom: 1rem;
+   border-radius: $radius-s;
+   position: relative;
+   -webkit-user-select: none;
+   user-select: none;
+
+   .version-control-header {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: $padding-s;
+      background-color: $background-paper-dark;
+      border-bottom: 4px solid $grey;
+      border-radius: $radius-s;
+      transition: background-color 0.2s ease;
+      text-transform: none;
+      cursor: pointer;
+
+      &:hover {
+         background-color: $background-paper;
+      }
+
+      .MuiSvgIcon-root {
+         color: $text-soft;
+      }
+
+      .version-title {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+
+         label,
+         span {
+            text-align: left;
+         }
+
+         label {
+            font-size: 0.7rem;
+            color: $text-soft;
+            text-transform: uppercase;
+         }
+
+         span {
+            font-size: 1.1rem;
+            color: $text;
+         }
+      }
+   }
+
+   .version-control-body {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background-color: $background-paper-dark;
+      width: calc(100% - 8px);
+      border-radius: 0 0 $radius-s $radius-s;
+      border-bottom: 4px solid $grey-light;
+      overflow: hidden;
+      z-index: 10000;
+
+      .version-list {
+         max-height: 250px;
+         overflow-y: auto;
+
+         .version-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-radius: 0;
+            text-transform: none;
+
+            &:hover {
+               background-color: $background-paper;
+            }
+
+            &.active {
+               background-color: $success;
+
+               .version-info {
+
+                  .version-name,
+                  .version-description {
+                     color: $text-grey-darken;
+                  }
+               }
+            }
+
+            .version-info {
+               display: flex;
+               flex-direction: column;
+
+               .version-name,
+               .version-description {
+                  color: $text-soft;
+               }
+
+               .version-name {
+                  font-size: 1rem;
+                  font-weight: 500;
+               }
+
+               .version-description {
+                  font-size: 0.8rem;
+                  margin-bottom: 0;
+               }
+            }
+         }
+      }
+
+      .version-control-footer {
+         padding: 0.5rem;
+      }
+   }
+}
