@@ -68,7 +68,7 @@ export default function SearchSelectInput({ className = '', errors = [], schema 
             isOptionEqualToValue={(option, value) => option?.value === value?.value}
             getOptionLabel={(option) => option?.label}
             options={options.sort((a, b) => b.quoteVolume - a.quoteVolume)}
-            value={multiOptions ? (value ?? defaultValue ?? []) : (value || defaultValue)}
+            value={multiOptions ? (value ?? defaultValue ?? []) : (value ?? defaultValue ?? null)}
             onChange={(ev, opt) => {
                if (multiOptions) {
                   const newValue = [

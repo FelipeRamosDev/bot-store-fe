@@ -12,7 +12,7 @@ const createBotForm = new Form({
          queryType: 'endpoint',
          httpRequest: {
             method: 'GET',
-            endpoint: '/exchange/get-symbol-ticks'
+            endpoint: '/exchange/get-symbol-ticks',
          }
       }
    ],
