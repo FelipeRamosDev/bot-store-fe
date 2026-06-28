@@ -123,7 +123,7 @@ export function parseListSubTitle(valueDoc) {
  * 
  * @returns {Promise<void>}
  */
-export async function listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess) {
+export async function listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess, eventName) {
    let updated;
 
    try {
@@ -134,12 +134,20 @@ export async function listSelect(valueDoc, API, user, bot, parentThreads, parent
             botUID: bot._id,
             appendThread: parentThreads
          });
-      } else {
+      } else if (parentRule) {
          updated = await API.ajax.authPost('/bot/update-rule', {
             appendValue: valueDoc._id,
             ruleUID: parentRule?._id,
             botUID: bot._id
          });
+      } else {
+         const created = await API.ajax.authPut('/bot/add-value', { ...valueDoc, eventName });
+
+         if (created.error) {
+            throw created;
+         }
+
+         updated = created;
       }
 
       if (updated.error) {

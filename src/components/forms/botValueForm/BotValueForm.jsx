@@ -43,12 +43,12 @@ export default function BotValueForm({
    bot,
    slug,
    valueType = 'function',
-   onSuccess = () => {}
+   onSuccess = () => { }
 }) {
    const API = useContext(APIContext);
    const { user } = useContext(AuthUserContext);
-   const [ formType, setFormType ] = useState(initView);
-   const [ paramsForm, setParamsForm ] = useState();
+   const [formType, setFormType] = useState(initView);
+   const [paramsForm, setParamsForm] = useState();
    const functions = useRef();
    const formNode = useRef();
    const paramsFormNode = useRef();
@@ -61,7 +61,7 @@ export default function BotValueForm({
                return paramsValidate;
             }
          }
-   
+
          await onCreateSubmit(data, API, user, editMode, editData, paramsForm, onSuccess);
       } catch (err) {
          throw err;
@@ -69,7 +69,7 @@ export default function BotValueForm({
    }
 
    const handleSetForm = (data) => presetForm(data, functions, botValueForm, editMode, editData, setParamsForm);
-   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess);
+   const handleListSelect = (valueDoc) => listSelect(valueDoc, API, user, bot, parentThreads, parentRule, onSuccess, eventName);
    const handleEditSubmit = () => formNode.current?.requestSubmit();
 
    // ASK MODE
