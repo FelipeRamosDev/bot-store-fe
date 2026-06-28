@@ -4,10 +4,9 @@ import Card from "@/components/common/card/Card";
 import ChatHeader from "./ChatHeader";
 import ChatHistory from "./ChatHistory";
 import ChatInput from "./ChatInput";
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { parseCSS } from "@/helpers/parser";
-import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
-import { Chat, ChatRounded } from "@mui/icons-material";
+import { ChatRounded } from "@mui/icons-material";
 import { Fab } from "@mui/material";
 
 export const ChatContext = createContext();
@@ -46,7 +45,7 @@ export default function ChatBase({
          </Card>
 
          <Fab
-            className={parseCSS([ 'chat-toggle-button', [ openCSS, floatButtonLabel && 'extended' ] ])}
+            className={parseCSS([ 'chat-toggle-button', openCSS ])}
             variant={floatButtonLabel ? 'extended' : 'circular'}
             onClick={handleOpen}
          >
