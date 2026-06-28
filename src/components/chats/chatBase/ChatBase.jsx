@@ -16,6 +16,7 @@ export function useChatContext() {
 }
 
 export default function ChatBase({
+   className,
    history = [],
    onSubmit,
    onOpen,
@@ -23,26 +24,35 @@ export default function ChatBase({
    headerIcon,
    floatButtonLabel,
    newHistoryItem,
-   elevation = 30
+   elevation = 30,
+   children
 }) {
    const [open, setOpen] = useState(false);
    const openCSS = open && 'open';
 
    const handleOpen = async () => {
       if (onOpen) await onOpen();
-      setOpen(true);
+      setOpen(prev => !prev);
    }
 
    return (
-      <ChatContext.Provider value={{ open, setOpen, history, onSubmit, newHistoryItem }}>
-         <Card className={parseCSS([ 'chat-base', openCSS ])} elevation={elevation}>
-            <ChatHeader title={headerTitle} icon={headerIcon} />
-
-            <div className="chat-content">
-               <ChatHistory />
-               <ChatInput />
+      <ChatContext.Provider value={{ className, open, setOpen, history, onSubmit, newHistoryItem }}>
+         <div className={parseCSS([ 'chat-base-container', className, openCSS ])}>
+            <div className="chat-page-content">
+               {children}
             </div>
-         </Card>
+
+            {open && <div className="chat-base-sidebar">
+               <div className="chat-base" elevation={elevation}>
+                  <ChatHeader title={headerTitle} icon={headerIcon} />
+
+                  <div className="chat-content">
+                     <ChatHistory />
+                     <ChatInput />
+                  </div>
+               </div>
+            </div>}
+         </div>
 
          <Fab
             className={parseCSS([ 'chat-toggle-button', openCSS ])}

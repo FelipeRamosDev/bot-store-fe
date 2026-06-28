@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
 import configs from '@/config.json';
 
-export default function PilotBuilderChat({ type = 'create' }) {
+export default function PilotBuilderChat({ className, type = 'create', children }) {
    const { history, startChat, newHistoryItem, sendMessage } = useChat('strategy-assistant');
    const agentId = (type === 'create') ? 'pilot-builder' : 'pilot-editor';
    const query = useContext(DBQueryContext);
@@ -51,6 +51,7 @@ export default function PilotBuilderChat({ type = 'create' }) {
 
    return (
       <ChatBase
+         className={className}
          history={history}
          headerIcon={<Handyman />}
          headerTitle={type === 'create' ? "Pilot Builder" : "Pilot Editor"}
@@ -58,6 +59,8 @@ export default function PilotBuilderChat({ type = 'create' }) {
          floatButtonLabel="Pilot Editor"
          onSubmit={onSubmit}
          onOpen={onOpen}
-      />
+      >
+         {children}
+      </ChatBase>
    );
 }

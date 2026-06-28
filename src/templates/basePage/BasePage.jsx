@@ -1,6 +1,7 @@
 import MainFooter from '@/components/footers/mainFooter/MainFooter';
 import TopHeaderPublic from '@/components/headers/topHeader/TopHeaderPublic';
 import { APIProvider } from '@/contexts/4HandsAPI';
+import { parseCSS } from '@/helpers/parser';
 
 /**
  * `BasePage` is a layout component that includes a top header and a main footer. 
@@ -17,13 +18,13 @@ import { APIProvider } from '@/contexts/4HandsAPI';
  */
 export default function BasePage({ className = '', fullContainer, headerMenu, CustomHeader, children }) {
    return (<APIProvider>
-      <main className={`${className} base-page`}>
+      <main className={parseCSS([ 'base-page', className ])}>
          {!CustomHeader && <TopHeaderPublic fullContainer={fullContainer} type={headerMenu} />}
          {CustomHeader && <CustomHeader fullContainer={fullContainer} type={headerMenu} />}
 
          <div id="topbar-portal"></div>
 
-         <div className={`page-content`}>
+         <div className="page-content">
             {children}
 
             <MainFooter className="absolute-bottom" />
