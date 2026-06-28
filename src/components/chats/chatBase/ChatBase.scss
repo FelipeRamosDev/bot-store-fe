@@ -174,22 +174,24 @@
    z-index: 1001;
    transition: transform 0.3s ease-in;
 
-   &.open {
-      transform: translateY(200px);
-   }
-
    &.MuiIconButton-root,
    &.MuiFab-root {
       position: fixed;
-      background-color: $success;
-      color: $black;
+      background-color: $primary;
+      color: $text;
 
       &:hover {
-         background-color: lighten($success, 10%);
+         background-color: lighten($primary, 10%);
       }
    }
 
-   &.extented.chat-toggle-icon {
-      margin-right: 0.6rem;
+   &.MuiFab-extended {
+      .chat-toggle-icon {
+         margin-right: 0.5rem;
+      } 
+   }
+
+   &.open {
+      transform: translateY(200px);
    }
 }
