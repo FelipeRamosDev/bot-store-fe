@@ -25,11 +25,11 @@ export default function BotDetails({ botIndex }) {
       filter={{ index: botIndex }}
       subscribe={true}
    >
-      <BotDetailsHeader />
+      <PilotBuilderChat type="edit">
+         <BotDetailsHeader />
 
-      <BotSettings />
-      <BotThreads />
-
-      <PilotBuilderChat type="edit" />
+         <BotSettings />
+         <BotThreads />
+      </PilotBuilderChat>
    </DBQuery>;
 }
