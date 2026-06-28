@@ -18,5 +18,9 @@
       "m": 768,
       "l": 1024,
       "xl": 1440
+   },
+   "chat": {
+      "pilotBuilderWelcome": "Welcome to the **Pilot Builder**! I'm here to help you create a new **trading** pilot and design a **strategy** to automate your trades.\n\nTell me what you're looking for in your **trading** **strategy**, your goals, preferred indicators, risk level, market conditions, or any other requirements and I'll help you build the best possible pilot.",
+      "pilotEditorWelcome": "Welcome to the **Pilot Editor**! I'm here to help you refine and improve your **trading** pilot's **strategy**.\n\nTell me what you'd like to change, optimize, or add to your pilot, and I'll help you enhance its **strategy**. Feel free to describe your goals, current challenges, or any specific improvements you'd like to make."
    }
 }

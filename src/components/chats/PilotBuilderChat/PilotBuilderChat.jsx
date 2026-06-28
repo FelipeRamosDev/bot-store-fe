@@ -5,6 +5,7 @@ import { Handyman } from '@mui/icons-material';
 import useChat from '@/hooks/useChat';
 import { useContext } from 'react';
 import DBQueryContext from '@/contexts/DBQuery';
+import configs from '@/config.json';
 
 export default function PilotBuilderChat({ type = 'create' }) {
    const { history, startChat, newHistoryItem, sendMessage } = useChat('strategy-assistant');
@@ -13,13 +14,34 @@ export default function PilotBuilderChat({ type = 'create' }) {
 
    const onOpen = async () => {
       const chatName = type === 'create' ? 'Pilot Builder Chat' : 'Pilot Editor Chat';
+      let chatRes;
 
-      if (type === 'edit' && query) {
-         const { doc } = query;
+      try {
+         if (type === 'edit' && query) {
+            const { doc } = query;
 
-         await startChat(chatName, { pilot: doc });
-      } else if (type === 'create') {
-         await startChat(chatName);
+            chatRes = await startChat(chatName, { pilot: doc }, {
+               welcomeMessage: configs.chat.pilotEditorWelcome
+            });
+         } else if (type === 'create') {
+            chatRes = await startChat(chatName, null, {
+               welcomeMessage: configs.chat.pilotBuilderWelcome
+            });
+         }
+
+         if (!chatRes || chatRes.error) {
+            throw new Error(chatRes?.message || 'Failed to start chat');
+         }
+
+         if (chatRes.welcomeMessage) {
+            newHistoryItem({
+               messageId: `welcome-${Date.now()}`,
+               role: 'assistant',
+               content: chatRes.welcomeMessage,
+            });
+         }
+      } catch (error) {
+         console.error('Error starting chat:', error);
       }
    };
 

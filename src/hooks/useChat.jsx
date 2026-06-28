@@ -120,7 +120,7 @@ export default function useChat(chatLabel) {
       });
    }
 
-   async function startChat(chatName, context) {
+   async function startChat(chatName, context, options = { welcomeMessage: 'Welcome to CandlePilot! I am your assistant.' }) {
       if (chatIdRef.current) {
          return chatIdRef.current;
       }
@@ -140,6 +140,7 @@ export default function useChat(chatLabel) {
                   label: chatLabel,
                   chatName,
                   context,
+                  options
                };
 
                connected.sendTo('start-chat', payload, (response) => {
@@ -150,7 +151,7 @@ export default function useChat(chatLabel) {
 
                   chatIdRef.current = response.chatId;
                   setChatId(response.chatId);
-                  resolve(response.chatId);
+                  resolve(response);
                });
             });
          } catch (error) {
