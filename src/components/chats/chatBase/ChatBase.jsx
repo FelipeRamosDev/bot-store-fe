@@ -3,7 +3,7 @@
 import ChatHeader from "./ChatHeader";
 import ChatHistory from "./ChatHistory";
 import ChatInput from "./ChatInput";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { parseCSS } from "@/helpers/parser";
 import { ChatRounded } from "@mui/icons-material";
 import { Fab } from "@mui/material";
@@ -35,6 +35,7 @@ export default function ChatBase({
    const [position, setPosition] = useState(null);
    const [size, setSize] = useState(null);
    const [isDragging, setIsDragging] = useState(false);
+   const [isMobile, setIsMobile] = useState(true);
    const [chatType, setChatType] = useState(initialChatType);
    const dragRef = useRef(null);
    const chatBaseRef = useRef(null);
@@ -310,6 +311,33 @@ export default function ChatBase({
       }
       : undefined;
 
+
+   const handleBackdropClick = (event) => {
+      if (event.target === event.currentTarget) {
+         setOpen(false);
+      }
+   };
+
+   useLayoutEffect(() => {
+      if (isMobile !== (window.innerWidth <= 768)) {
+         setIsMobile(window.innerWidth <= 768);
+      }
+   }, [open]);
+
+   useEffect(() => {
+      const handleResize = () => {
+         if (isMobile !== (window.innerWidth <= 768)) {
+            setIsMobile(window.innerWidth <= 768);
+         }
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+         window.removeEventListener('resize', handleResize);
+      };
+   }, [isMobile]);
+
    return (
       <ChatContext.Provider value={{
          className,
@@ -326,7 +354,7 @@ export default function ChatBase({
                {children}
             </div>
 
-            {open && <div className="chat-base-sidebar">
+            {open && <div className="chat-base-sidebar" onClick={handleBackdropClick}>
                <div
                   className={parseCSS([ 'chat-base' ], [ isFloating && 'draggable', isFloating && 'resizable', isDragging && 'dragging' ])}
                   ref={chatBaseRef}
@@ -348,10 +376,10 @@ export default function ChatBase({
 
          <Fab
             className={parseCSS([ 'chat-toggle-button', openCSS ])}
-            variant={floatButtonLabel ? 'extended' : 'circular'}
+            variant={floatButtonLabel ? !isMobile ? 'extended' : 'circular' : 'circular'}
             onClick={handleOpen}
          >
-            <ChatRounded className="chat-toggle-icon" /> {floatButtonLabel}
+            <ChatRounded className="chat-toggle-icon" /> {!isMobile && floatButtonLabel}
          </Fab>
       </ChatContext.Provider>
    );
