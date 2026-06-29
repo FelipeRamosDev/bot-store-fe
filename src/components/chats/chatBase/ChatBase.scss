@@ -55,6 +55,29 @@ $bottom-offset: 34.55px;
             min-width: 25%;
          }
       }
+
+      &.minimized.is-mobile,
+      &.minimized.floating {
+         .chat-base-sidebar {
+            top: auto;
+
+            .chat-base {
+               min-height: 0;
+               height: auto !important;
+               inset: auto !important;
+               bottom: $bottom-offset !important;
+               right: 3rem !important;
+               resize: none !important;
+               box-shadow: none;
+               border-radius: $radius-m $radius-m 0 0;
+
+               .chat-content {
+                  max-height: 0;
+                  overflow: hidden;
+               }
+            }
+         }
+      }
    }
 
    .chat-page-content {
@@ -118,7 +141,7 @@ $bottom-offset: 34.55px;
    .chat-header {
       border-bottom: 1px solid $background-grey3-light;
       padding: $padding-xs $padding-xs $padding-xs $padding-s;
-      background-color: $background-paper;
+      background-color: $secondary;
       border-radius: $radius-s $radius-s 0 0;
       display: flex;
       align-items: center;
@@ -318,11 +341,11 @@ $bottom-offset: 34.55px;
    &.MuiIconButton-root,
    &.MuiFab-root {
       position: fixed;
-      background-color: $primary;
+      background-color: $secondary;
       color: $text;
 
       &:hover {
-         background-color: lighten($primary, 10%);
+         background-color: lighten($secondary, 10%);
       }
    }
 

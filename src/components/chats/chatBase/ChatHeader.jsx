@@ -1,20 +1,45 @@
 import RoundIconButton from "@/components/buttons/roundButton/RoundIconButton";
-import { Chat, Close, OpenInNew, KeyboardTab, Minimize } from "@mui/icons-material";
+import { Chat, Close, OpenInNew, KeyboardTab, Minimize, Expand } from "@mui/icons-material";
 import { useChatContext } from "./ChatBase";
 
-export default function ChatHeader({ title, icon = <Chat /> }) {
-   const { setOpen, chatType, setChatType } = useChatContext();
+export default function ChatHeader({ title, icon = <Chat />, isMobile }) {
+   const { setOpen, chatType, setChatType, isMinimized, setIsMinimized } = useChatContext();
+
+   const handleMobileTabClick = () => {
+      if (!isMobile) {
+         return;
+      }
+
+      setIsMinimized(prev => !prev);
+   }
+
+   const handleMinimizeClick = (e) => {
+      e.stopPropagation();
+      setIsMinimized(true);
+   }
+
+   const handleExpandClick = (e) => {
+      e.stopPropagation();
+      setIsMinimized(false);
+   }
 
    return (
-      <div className="chat-header">
+      <div className="chat-header" onClick={handleMobileTabClick}>
          {icon}
          <h2 className="chat-header-title">{title}</h2>
 
-         {chatType === 'floating' && (
+         {((chatType === 'floating' || isMobile) && !isMinimized) && (
             <RoundIconButton
                className="chat-header-button"
                Icon={Minimize}
-               onClick={() => setOpen(false)}
+               onClick={handleMinimizeClick}
+            />
+         )}
+         {((chatType === 'floating' || isMobile) && isMinimized) && (
+            <RoundIconButton
+               className="chat-header-button"
+               Icon={Expand}
+               onClick={handleExpandClick}
             />
          )}
 
@@ -36,7 +61,7 @@ export default function ChatHeader({ title, icon = <Chat /> }) {
 
          {chatType === 'sidebar' && (
             <RoundIconButton
-               className="chat-header-button"
+               className="chat-header-button hide-mobile"
                Icon={Close}
                onClick={() => setOpen(false)}
             />

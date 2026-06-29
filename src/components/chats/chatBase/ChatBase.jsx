@@ -37,10 +37,11 @@ export default function ChatBase({
    const [isDragging, setIsDragging] = useState(false);
    const [isMobile, setIsMobile] = useState(true);
    const [chatType, setChatType] = useState(initialChatType);
+   const [isMinimized, setIsMinimized] = useState(false);
    const dragRef = useRef(null);
    const chatBaseRef = useRef(null);
    const openCSS = open && 'open';
-   const containerCSS = parseCSS([ 'chat-base-container'], [ className, openCSS, chatType ]);
+   const containerCSS = parseCSS(['chat-base-container'], [className, openCSS, chatType, isMinimized && 'minimized', isMobile && 'is-mobile']);
    const isFloating = containerCSS.split(' ').includes('floating');
 
    const clampPositionToViewport = (nextPosition) => {
@@ -343,8 +344,10 @@ export default function ChatBase({
          className,
          open,
          setOpen,
-         chatType, 
+         chatType,
          setChatType,
+         isMinimized,
+         setIsMinimized,
          history,
          onSubmit,
          newHistoryItem
@@ -356,7 +359,7 @@ export default function ChatBase({
 
             {open && <div className="chat-base-sidebar" onClick={handleBackdropClick}>
                <div
-                  className={parseCSS([ 'chat-base' ], [ isFloating && 'draggable', isFloating && 'resizable', isDragging && 'dragging' ])}
+                  className={parseCSS(['chat-base'], [isFloating && 'draggable', isFloating && 'resizable', isDragging && 'dragging'])}
                   ref={chatBaseRef}
                   onPointerDown={handleDragStart}
                   onPointerMove={handleDragMove}
@@ -364,7 +367,7 @@ export default function ChatBase({
                   onPointerCancel={handleDragEnd}
                   style={floatingStyle}
                >
-                  <ChatHeader title={headerTitle} icon={headerIcon} />
+                  <ChatHeader title={headerTitle} icon={headerIcon} isMobile={isMobile} />
 
                   <div className="chat-content">
                      <ChatHistory />
@@ -375,7 +378,7 @@ export default function ChatBase({
          </div>
 
          <Fab
-            className={parseCSS([ 'chat-toggle-button', openCSS ])}
+            className={parseCSS(['chat-toggle-button', openCSS])}
             variant={floatButtonLabel ? !isMobile ? 'extended' : 'circular' : 'circular'}
             onClick={handleOpen}
          >
