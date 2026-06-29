@@ -197,12 +197,63 @@ $bottom-offset: 34.55px;
                font-size: 0.75rem;
             }
          }
+
+         .history-item-status-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: flex-start;
+            margin-left: 0.5rem;
+
+            .spinner-block {
+               position: relative;
+               min-width: auto;
+               transform: none;
+               display: flex;
+               align-items: center;
+
+               .spinner-item {
+                  margin: 0;
+
+                  .lds-ring {
+                     $size: 1rem;
+
+                     width: $size;
+                     height: $size;
+
+                     div {
+                        width: $size;
+                        height: $size;
+                        border-width: 1.5px;
+                        margin: 0;
+                     }
+                  }
+               }
+            }
+
+            .history-item-status {
+               color: $text-softer;
+               display: block;
+               font-size: 0.75rem;
+               margin-bottom: 0.25rem;
+
+               &.thinking,
+               &.writing {
+                  color: $primary-light;
+               }
+
+               &.error {
+                  color: $error;
+               }
+            }
+         }
       }
 
       .chat-input {
          flex: 0;
          position: relative;
-         padding: 1rem;
+         padding: 0 1rem 1rem 1rem;
 
          .MuiFilledInput-root {
             border-bottom-left-radius: 4px;
