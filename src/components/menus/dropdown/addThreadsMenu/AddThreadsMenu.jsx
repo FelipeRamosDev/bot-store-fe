@@ -54,7 +54,7 @@ export default function AddThreadsMenu({ createThread }) {
 
    return (
       <>
-         <RoundIconButton Icon={Add} variant="contained" color="tertiary" onClick={handleMenuOpen} />
+         <RoundIconButton Icon={Add} variant="contained" color="info" onClick={handleMenuOpen} />
 
          <Menu
             anchorEl={anchorEl}

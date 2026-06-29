@@ -42,7 +42,7 @@ export default function useChat(chatLabel) {
       const message = messages.current.get(messageId);
 
       if (message) {
-         const updatedMessage = message.appendChunk(chunk);
+         const updatedMessage = message.appendChunk(chunk).setStatus('writing', 'Writing response...');
          messages.current.set(messageId, updatedMessage);
       } else {
          const newMessage = newHistoryItem({
@@ -51,6 +51,27 @@ export default function useChat(chatLabel) {
             content: chunk
          }, true);
 
+         newMessage.setStatus('writing', 'Writing response...');
+         messages.current.set(messageId, newMessage);
+      }
+
+      setHistory(Array.from(messages.current.values()));
+   }
+
+   const handleMessageStatus = (messageId, status, label) => {
+      const message = messages.current.get(messageId);
+
+      if (message) {
+         message.setStatus(status, label);
+         messages.current.set(messageId, message);
+      } else {
+         const newMessage = newHistoryItem({
+            messageId,
+            role: 'assistant',
+            content: ''
+         }, true);
+
+         newMessage.setStatus(status, label);
          messages.current.set(messageId, newMessage);
       }
 
@@ -78,12 +99,19 @@ export default function useChat(chatLabel) {
                   handleEditMessage(messageId, chunk);
                });
 
+               this.listenTo('message_status', (data) => {
+                  const { messageId, status, label } = data;
+
+                  handleMessageStatus(messageId, status, label);
+               });
+
                this.listenTo('message_end', (data) => {
                   const { messageId, finalOutput } = data;
                   const chatMessage = messages.current.get(messageId);
 
                   if (chatMessage) {
                      chatMessage.content = finalOutput;
+                     chatMessage.setStatus('done', 'Done');
                      messages.current.set(messageId, chatMessage);
                   } else {
                      const newMessage = new ChatMessage({
@@ -92,9 +120,26 @@ export default function useChat(chatLabel) {
                         content: finalOutput
                      });
 
+                     newMessage.setStatus('done', 'Done');
+
                      messages.current.set(messageId, newMessage);
                   }
 
+                  setHistory(Array.from(messages.current.values()));
+               });
+
+               this.listenTo('message_error', (data) => {
+                  const { roomId, error } = data;
+                  const lastAssistantMessage = Array.from(messages.current.values())
+                     .filter((message) => message.role === 'assistant')
+                     .at(-1);
+
+                  if (!lastAssistantMessage) {
+                     return;
+                  }
+
+                  lastAssistantMessage.setStatus('error', error?.message || `Error in chat ${roomId}`);
+                  messages.current.set(lastAssistantMessage.id, lastAssistantMessage);
                   setHistory(Array.from(messages.current.values()));
                });
 
@@ -120,7 +165,7 @@ export default function useChat(chatLabel) {
       });
    }
 
-   async function startChat(chatName, context) {
+   async function startChat(chatName, context, options = { welcomeMessage: 'Welcome to CandlePilot! I am your assistant.' }) {
       if (chatIdRef.current) {
          return chatIdRef.current;
       }
@@ -140,6 +185,7 @@ export default function useChat(chatLabel) {
                   label: chatLabel,
                   chatName,
                   context,
+                  options
                };
 
                connected.sendTo('start-chat', payload, (response) => {
@@ -150,7 +196,7 @@ export default function useChat(chatLabel) {
 
                   chatIdRef.current = response.chatId;
                   setChatId(response.chatId);
-                  resolve(response.chatId);
+                  resolve(response);
                });
             });
          } catch (error) {

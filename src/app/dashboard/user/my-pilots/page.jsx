@@ -17,10 +17,10 @@ export const metadata = {
  */
 export default function MyPilotsPage() {
    return (
-      <AuthBasePage>
-         <MyPilots />
-
-         <PilotBuilderChat type="create" />
+      <AuthBasePage className="no-padding">
+         <PilotBuilderChat type="create">
+            <MyPilots />
+         </PilotBuilderChat>
       </AuthBasePage>
    );
 }
