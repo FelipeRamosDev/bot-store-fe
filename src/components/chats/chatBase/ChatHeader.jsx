@@ -17,6 +17,7 @@ export default function ChatHeader({ title, icon = <Chat /> }) {
                onClick={() => setOpen(false)}
             />
          )}
+
          {chatType === 'floating' && (
             <RoundIconButton
                className="chat-header-button"
@@ -27,12 +28,11 @@ export default function ChatHeader({ title, icon = <Chat /> }) {
 
          {chatType === 'sidebar' && (
             <RoundIconButton
-               className="chat-header-button"
+               className="chat-header-button hide-mobile"
                Icon={OpenInNew}
                onClick={() => setChatType('floating')}
             />
          )}
-
 
          {chatType === 'sidebar' && (
             <RoundIconButton
