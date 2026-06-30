@@ -31,13 +31,6 @@ export default function AddBotRuleMenu({ parentBlock = {} }) {
       setAnchorEl(null);
    };
 
-   /**
-    * Sends a request to create a block rule or evaluation rule for the bot.
-    * 
-    * @async
-    * @param {string} type - The type of rule to create ('rules' for evaluation rule, 'blocks' for block rule).
-    * @throws {Error} If either the bot UID (`doc._id`) or the parent block UID (`parentBlock._id`) is missing.
-    */
    async function createBlockRule(type) {
       if (!doc?._id || !parentBlock._id) {
          throw new Error('The bot UID or the parent block UID is missing!');

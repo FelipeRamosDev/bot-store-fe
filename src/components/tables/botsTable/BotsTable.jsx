@@ -20,6 +20,7 @@ import PositionROIAvgTooltip from './tooltips/PositionROIAvgTooltip';
 import WinLossCountTooltip from './tooltips/WinLossCountTooltip';
 import { parseClassName } from '@/helpers/parser';
 import Avatar from '@/components/common/avatar/Avatar';
+import StatusBadge from '@/components/common/statusBedge/StatusBadge';
 
 /**
  * A table component displaying a list of recent bots along with their scores.
@@ -90,7 +91,7 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
          itemsPerPage={parsedLimit}
          onPageNav={goPage}
          onRowsPerPageChange={reloadLimit}
-         noDocumentsText="You doesn't have any pilot yet"
+         noDocumentsText="There are no pilots available."
          headerConfigs={[
             {
                propKey: 'avatarUrl',
@@ -102,6 +103,16 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                style: { minWidth: '10rem', maxWidth: '10rem' },
                format: (value) => {
                   return value;
+               }
+            },
+            {
+               propKey: 'status',
+               label: 'Status',
+               align: 'center',
+               format: (value) => {
+                  const label = value.toUpperCase();
+                  const color = value === 'public' ? 'success' : value === 'private' ? 'primary' : value === 'draft' ? 'secondary' : '';
+                  return <StatusBadge color={color}>{label}</StatusBadge>;
                }
             },
             {
@@ -118,13 +129,13 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                style: { minWidth: '9rem', maxWidth: '9rem' },
                format: (value, item) => <Price amount={item.currentResults?.avgDailyROS || 0} dashedZero={true} noSymbol={true} size="l" />
             },
-            {
-               label: <AccumROITooltip period="24h" />,
-               propKey: 'accumROSDay',
-               align: 'center',
-               style: { minWidth: '8rem', maxWidth: '8rem' },
-               format: (value, item) => <Price amount={item.currentResults?.accumROS24 || 0} dashedZero={true} noSymbol={true} size="l" />
-            },
+            // {
+            //    label: <AccumROITooltip period="24h" />,
+            //    propKey: 'accumROSDay',
+            //    align: 'center',
+            //    style: { minWidth: '8rem', maxWidth: '8rem' },
+            //    format: (value, item) => <Price amount={item.currentResults?.accumROS24 || 0} dashedZero={true} noSymbol={true} size="l" />
+            // },
             {
                label: <AccumROITooltip period="30d" />,
                propKey: 'accumROSMonth',
@@ -132,13 +143,13 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                style: { minWidth: '8rem', maxWidth: '8rem' },
                format: (value, item) => <Price amount={item.currentResults?.accumROSMonth || 0} dashedZero={true} noSymbol={true} />
             },
-            {
-               label: <PositionROIAvgTooltip period="24h" />,
-               propKey: 'avgDayROS',
-               align: 'center',
-               style: { minWidth: '9rem', maxWidth: '9rem' },
-               format: (value, item) => <Price amount={item.currentResults?.avgROS24 || 0} dashedZero={true} noSymbol={true} />
-            },
+            // {
+            //    label: <PositionROIAvgTooltip period="24h" />,
+            //    propKey: 'avgDayROS',
+            //    align: 'center',
+            //    style: { minWidth: '9rem', maxWidth: '9rem' },
+            //    format: (value, item) => <Price amount={item.currentResults?.avgROS24 || 0} dashedZero={true} noSymbol={true} />
+            // },
             {
                label: <PositionROIAvgTooltip period="30d" />,
                propKey: 'avgMonthROS',
@@ -146,19 +157,19 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                style: { minWidth: '9rem', maxWidth: '9rem' },
                format: (value, item) => <Price amount={item.currentResults?.avgROSMonth || 0} dashedZero={true} noSymbol={true} />
             },
-            {
-               label: <WinLossROITooltip period="24h" />,
-               propKey: 'winsLosesDay',
-               align: 'center',
-               style: { minWidth: '10rem', maxWidth: '10rem' },
-               format: (value, item) => {
-                  return (<>
-                     <Price amount={item.currentResults?.avgWinsROS24 || 0} dashedZero={true} noSymbol={true} />
-                     {' / '}
-                     <Price amount={item.currentResults?.avgLosesROS24 || 0} dashedZero={true} noSymbol={true} />
-                  </>);
-               }
-            },
+            // {
+            //    label: <WinLossROITooltip period="24h" />,
+            //    propKey: 'winsLosesDay',
+            //    align: 'center',
+            //    style: { minWidth: '10rem', maxWidth: '10rem' },
+            //    format: (value, item) => {
+            //       return (<>
+            //          <Price amount={item.currentResults?.avgWinsROS24 || 0} dashedZero={true} noSymbol={true} />
+            //          {' / '}
+            //          <Price amount={item.currentResults?.avgLosesROS24 || 0} dashedZero={true} noSymbol={true} />
+            //       </>);
+            //    }
+            // },
             {
                label: <WinLossROITooltip period="30d" />,
                propKey: 'winsLosesMonth',
@@ -172,19 +183,19 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
                   </>);
                }
             },
-            {
-               label: <WinLossCountTooltip period="24h" />,
-               propKey: 'winsLosesRate24',
-               align: 'center',
-               style: { minWidth: '10rem' },
-               format: (value, item) => {
-                  return (<>
-                     <Percent value={item.currentResults?.winsRate24 || 0} dashedZero={true} />
-                     {' / '}
-                     <Percent value={(item.currentResults?.losesRate24 || 0) * -1} dashedZero={true} />
-                  </>);
-               }
-            },
+            // {
+            //    label: <WinLossCountTooltip period="24h" />,
+            //    propKey: 'winsLosesRate24',
+            //    align: 'center',
+            //    style: { minWidth: '10rem' },
+            //    format: (value, item) => {
+            //       return (<>
+            //          <Percent value={item.currentResults?.winsRate24 || 0} dashedZero={true} />
+            //          {' / '}
+            //          <Percent value={(item.currentResults?.losesRate24 || 0) * -1} dashedZero={true} />
+            //       </>);
+            //    }
+            // },
             {
                label: <WinLossCountTooltip period="30d" />,
                propKey: 'winsLosesRateMonth',
