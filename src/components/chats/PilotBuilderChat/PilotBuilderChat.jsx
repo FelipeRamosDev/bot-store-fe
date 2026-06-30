@@ -56,7 +56,7 @@ export default function PilotBuilderChat({ className, type = 'create', children 
          headerIcon={<Handyman />}
          headerTitle={type === 'create' ? "Pilot Builder" : "Pilot Editor"}
          newHistoryItem={newHistoryItem}
-         floatButtonLabel="Pilot Editor"
+         floatButtonLabel={type === 'create' ? "Pilot Builder" : "Pilot Editor"}
          onSubmit={onSubmit}
          onOpen={onOpen}
       >
