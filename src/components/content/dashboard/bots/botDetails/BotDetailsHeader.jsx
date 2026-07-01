@@ -1,12 +1,11 @@
 'use client';
 
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useState } from 'react';
 import BotMenu from '@/components/menus/dropdown/botMenu/BotMenu';
 import configs from '@/config.json';
 import ContentFullwidth from '@/components/layout/contentFullwidth/ContentFullwidth';
 import BotInfos from './BotInfos';
 import DBQueryContext from '@/contexts/DBQuery';
-import APIContext from '@/contexts/4HandsAPI';
 import TextDisplay from '@/components/displays/textDisplay/TextDisplay';
 import { FormBase } from '@/components/forms/formBase/FormBase';
 import createBotForm from '@/components/forms/createBot/CreateBot.config';
@@ -27,11 +26,8 @@ import { ShowChart } from '@mui/icons-material';
  * @returns {JSX.Element} The rendered component.
  */
 export default function BotDetailsHeader() {
-   const [resultsLine, setResultsLine] = useState();
    const [isChartsExpanded, setIsChartsExpanded] = useState(false);
    const { doc = {} } = useContext(DBQueryContext);
-   const API = useContext(APIContext);
-   const requested = useRef();
    const { uploadAvatar, uploading } = usePilot();
    const router = useRouter();
 
@@ -48,26 +44,6 @@ export default function BotDetailsHeader() {
          console.error('Error uploading file:', err);
       });
    }
-
-   // useEffect(() => {
-   //    if (typeof doc?._id !== 'string') return;
-
-   //    const notEmpty = Object.keys(doc).length;
-
-   //    if (notEmpty && !requested.current && !resultsLine) {
-   //       requested.current = true;
-
-   //       API.ajax.authGet('/bot/results', {
-   //          botUID: doc._id
-   //       }).then(({ success, results }) => {
-   //          if (!success) return;
-
-   //          setResultsLine(results);
-   //       }).catch(err => {
-   //          throw err;
-   //       });
-   //    }
-   // }, [doc, API.ajax, resultsLine]);
 
    return <div className="page-header">
       <div className="cover">
