@@ -1,10 +1,31 @@
 import RegisterForm from "@/components/forms/registerForm/RegisterForm";
 import ContentModal from "../base/contentModal/ContentModal";
-import useUser from "@/hooks/useUser";
+import useAdmin from "@/hooks/useAdmin";
+import { useRouter } from "next/navigation";
 
 export default function CreateUserModal({ open, onClose }) {
-   const { register } = useUser();
-   const handleRegister = (data) => register(data);
+   const { createUser } = useAdmin();
+   const router = useRouter();
+
+   const handleRegister = async (data) => {
+      try {
+         if (data.rules.includes('agent')) {
+            data.isAgent = true;
+         }
+
+         const result = await createUser(data);
+         if (!result.success) {
+            // Handle error
+            throw new Error(result.data?.message || "Failed to create user");
+         }
+
+         onClose();
+         router.refresh();
+         return result;
+      } catch (error) {
+         throw new Error(error.message);
+      }
+   };
 
    return (
       <ContentModal

@@ -42,7 +42,7 @@ export default function DashboardSidebar() {
          <DBQuery
             type="query"
             collection="bots"
-            filter={{ author: user._id }}
+            filter={{ ownership: user._id }}
             sort={{ 'currentResults.profitRatio': -1 }}
             limit={6}
          >
