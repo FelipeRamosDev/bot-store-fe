@@ -1,8 +1,9 @@
 import { parseCSS } from '@/helpers/parser';
 import styles from './Markdown.module.scss';
 import { marked } from 'marked';
+import { forwardRef } from 'react';
 
-export default function Markdown({ className, value }) {
+const Markdown = forwardRef(function Markdown({ className, value, ...props }, ref) {
    const htmlValue = marked(value || '');
    const CSS = parseCSS(className, [
       'Markdown',
@@ -10,6 +11,13 @@ export default function Markdown({ className, value }) {
    ]);
    
    return (
-      <div className={CSS} dangerouslySetInnerHTML={{ __html: htmlValue }}></div>
+      <div
+         ref={ref}
+         className={CSS}
+         dangerouslySetInnerHTML={{ __html: htmlValue }}
+         {...props}
+      ></div>
    );
-}
+});
+
+export default Markdown;

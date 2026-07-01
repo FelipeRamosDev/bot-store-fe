@@ -1,9 +1,10 @@
+import Markdown from "@/components/common/Markdown/Markdown";
 import { parseClassName } from "@/helpers/parser";
 import { useEffect, useRef, useState } from "react";
 
 export default function TextDisplay({ className, isExpandable, children }) {
-   const [ expandedH, setExpandedH ] = useState();
-   const [ displayShowMore, setDisplayShowMore ] = useState();
+   const [expandedH, setExpandedH] = useState();
+   const [displayShowMore, setDisplayShowMore] = useState();
    const textArea = useRef();
    const classesWrap = ['text-display'];
    const classesText = ['textarea'];
@@ -32,12 +33,11 @@ export default function TextDisplay({ className, isExpandable, children }) {
 
    return (
       <div className={parseClassName(className, classesWrap)}>
-         <textarea
+         <Markdown
             ref={textArea}
             className={parseClassName('', classesText)}
-            value={children}
             style={{ height: expandedH }}
-            disabled
+            value={children}
          />
 
          {displayShowMore && <span className="link" onClick={handleExpland}>{!Boolean(expandedH) ? 'Show More' : 'Show Less'}</span>}

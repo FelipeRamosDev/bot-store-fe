@@ -13,6 +13,7 @@ import LogicalOperatorForm from '@/components/forms/logicalOperatorForm/LogicalO
 import Delete from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import AddBotRuleMenu from '@/components/menus/dropdown/addBotRuleMenu/AddBotRuleMenu';
+import { parseCSS } from '@/helpers/parser';
 
 /**
  * Renders a bot thread card, which includes a header with a logical operator form and delete button,
@@ -26,7 +27,7 @@ import AddBotRuleMenu from '@/components/menus/dropdown/addBotRuleMenu/AddBotRul
  * 
  * @returns {JSX.Element} The rendered component.
  */
-export default function BotThread({ threadID, createThread, title, color, watermarkSize, iconSize, paddingSize, ...props }) {
+export default function BotThread({ className, threadID, createThread, title, color, watermarkSize, iconSize, paddingSize, ...props }) {
    const API = useContext(APIContext);
    const { doc = {} } = useContext(DBQueryContext);
    const evalThread = doc.eval;
@@ -56,7 +57,7 @@ export default function BotThread({ threadID, createThread, title, color, waterm
    }
 
    // Display a tile to create a new thread if the thread does not exist and the threadID is 'openLong' or 'openShort'.
-   if (!thread && (threadID === 'openLong' || threadID === 'openShort')) {
+   if (!thread) {
       return <NoDocumentsTile message={title} onClick={() => createThread(threadID)} />;
    }
 
@@ -70,7 +71,7 @@ export default function BotThread({ threadID, createThread, title, color, waterm
 
    return (
       <WatermarkPriceCard
-         className="bot-thread"
+         className={parseCSS('bot-thread', className)}
          watermark="Thread"
          radius="s"
          borderColor={color}

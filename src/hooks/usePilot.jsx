@@ -1,10 +1,13 @@
 import APIContext from "@/contexts/4HandsAPI";
 import useFilesBucket from "./useFilesBucket";
 import { useContext } from "react";
+import DBQueryContext from "@/contexts/DBQuery";
 
 export default function usePilot() {
    const { uploading, uploadFile } = useFilesBucket();
    const instance = useContext(APIContext);
+   const pilot = useContext(DBQueryContext);
+   const { doc } = pilot || {};
 
    async function getPilotVersions(pilotUID) {
       try {
@@ -83,5 +86,37 @@ export default function usePilot() {
       }
    }
 
-   return { uploading, uploadAvatar, exportJSON, importJSON, newVersion, switchVersion, getPilotVersions};
+   async function getPilotResults(pilotUID) {
+      try {
+         const response = await instance.ajax.authGet('/bot/results', { botUID: pilotUID });
+
+         if (!response || response.error) {
+            throw new Error('Failed to fetch pilot results');
+         }
+
+         return response.results;
+      } catch (error) {
+         console.error('Error fetching pilot results:', error);
+         throw error;
+      }
+   }
+
+   async function createThread(eventName) {
+      try {
+         const created = await instance.ajax.authPut('/bot/add-thread', {
+            eventName: eventName,
+            botUID: doc._id
+         });
+
+         if (created.error) {
+            throw created;
+         }
+
+         return created;
+      } catch (err) {
+         throw err;
+      }
+   }
+
+   return { uploading, uploadAvatar, exportJSON, importJSON, newVersion, switchVersion, getPilotVersions, getPilotResults, createThread };
 }

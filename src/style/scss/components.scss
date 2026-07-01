@@ -50,6 +50,7 @@
 
 // Displays
 @import "../../components/displays/textDisplay/TextDisplay.scss";
+@import "../../components/displays/tabDisplay/TabDisplay.scss";
 
 // Drawers
 @import "../../components/drawers/base/swipeDrawer/SwipeDrawer.scss";
@@ -124,6 +125,8 @@
 @import "../../components/modals/quickviews/SlotQuickview/SlotQuickview.scss";
 @import "../../components/modals/quickviews/botQuickview/BotQuickview.scss";
 @import "../../components/modals/quickviews/userQuickview/UserQuickview.scss";
+@import "../../components/modals/quickviews/botValueQuickview/BotValueQuickview.scss";
+@import "../../components/modals/pilotChartsModal/PilotChartsModal.scss";
 
 // Shared
 @import "../../components/shared/accountSettings/AccountSettings.scss";

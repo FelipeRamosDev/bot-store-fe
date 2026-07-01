@@ -100,9 +100,12 @@ export default function BotsTable({ className, title = 'Bots', hideHeader, noMar
             {
                label: 'Pilot Name',
                propKey: 'name',
-               style: { minWidth: '10rem', maxWidth: '10rem' },
-               format: (value) => {
-                  return value;
+               style: { minWidth: '20rem', maxWidth: '20rem' },
+               format: (value, item) => {
+                  return <>
+                     <span className="name">{value}</span>
+                     <span className="subtitle">{item.subTitle || '---'}</span>
+                  </>;
                }
             },
             {

@@ -1,0 +1,51 @@
+.tab-display {
+   .tab-header {
+      background-color: $background-paper-dark;
+      margin-bottom: 2rem;
+
+      .tab-header-content {
+         padding: 2rem 0;
+
+         .tab-title {
+            margin: 0;
+            text-transform: uppercase;
+            color: $text-darken;
+            font-size: 1.4rem;
+
+            @media screen and (min-width: $screen-m) {
+               font-size: 1.8rem;
+            }
+         }
+
+         .tabs {
+            margin: 0 0 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+
+            @media screen and (min-width: $screen-m) {
+               justify-content: flex-start;
+            }
+
+            .tab-button {
+               flex: calc(33.3333% - 1rem);
+               background-color: $background-paper;
+               margin-right: 0;
+               border-bottom: 2px solid $grey;
+               color: $text-darken;
+               min-width: 100px;
+
+               @media screen and (min-width: $screen-m) {
+                  flex: 1;
+               }
+
+               &.active {
+                  background-color: lighten($background-paper, 5%);
+                  border-bottom: 3px solid $success;
+                  color: $success;
+               }
+            }
+         }
+      }
+   }
+}

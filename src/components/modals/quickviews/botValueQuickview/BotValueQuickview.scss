@@ -1,0 +1,14 @@
+.bot-value-quickview {
+   padding: 0;
+
+   .MuiModal-backdrop {
+      background-color: transparent;
+      -webkit-backdrop-filter: blur(0);
+      backdrop-filter: blur(0);
+   }
+
+   .modal {
+      background-color: transparent;
+      box-shadow: none;
+   }
+}
