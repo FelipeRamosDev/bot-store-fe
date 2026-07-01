@@ -22,7 +22,12 @@ const createBotForm = new Form({
       }),
       new TextFieldSchema({
          key: 'name',
-         label: 'Bot Name',
+         label: 'Pilot Name',
+         required: true
+      }),
+      new TextFieldSchema({
+         key: 'subTitle',
+         label: 'Pilot Subtitle',
          required: true
       }),
       new TextFieldSchema({

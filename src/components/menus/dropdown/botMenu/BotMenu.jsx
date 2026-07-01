@@ -5,14 +5,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Folder from '@mui/icons-material/Folder';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import RubberButton from '@/components/buttons/rubberButton/RubberButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteBotConfirmDialog from '@/components/modals/dialogs/deleteBotConfirmDialog/DeleteBotConfirmDialog';
 import { Edit } from '@mui/icons-material';
 import CreateBotModal from '@/components/modals/createBotModal/CreateBotModal';
 import usePilot from '@/hooks/usePilot';
 import DataObjectIcon from '@mui/icons-material/DataObject';
+import RoundIconButton from '@/components/buttons/roundButton/RoundIconButton';
 
 /**
  * BotMenu renders a button that opens a menu with options to archive or delete a bot.
@@ -62,9 +61,7 @@ export default function BotMenu({ bot }) {
 
    return (
       <>
-         <RubberButton className="more-options" color="info" endIcon={<MoreHorizIcon />} onClick={handleMenuOpen}>
-            MORE
-         </RubberButton>
+         <RoundIconButton color="secondary" variant="contained" Icon={MoreVertIcon} onClick={handleMenuOpen} />
 
          <Menu
             anchorEl={anchorEl}
@@ -87,13 +84,6 @@ export default function BotMenu({ bot }) {
                </ListItemIcon>
                Export JSON
             </MenuItem>
-
-            {/* <MenuItem onClick={handleMenuClose} disabled>
-               <ListItemIcon>
-                  <Folder fontSize="small" />
-               </ListItemIcon>
-               Archive
-            </MenuItem> */}
 
             <MenuItem onClick={() => setDeleteModal(true)}>
                <ListItemIcon>

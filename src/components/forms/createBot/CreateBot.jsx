@@ -95,6 +95,7 @@ export default function CreateBotForm({ editData, onSuccess = () => { } }) {
                )}
 
                <FormInput path="name" />
+               <FormInput path="subTitle" />
                <FormInput path="description" multiline={true} minRows={5} />
             </>
 

@@ -24,7 +24,7 @@ export default function BotValueSingle({ botValue, eventName, title = 'Bot Value
    const foundValue = botValue || docThread?.linkedValue;
    let borderColor;
 
-   if (!foundValue && eventName.indexOf('stopLoss') >= 0) {
+   if (!foundValue && eventName?.indexOf('stopLoss') >= 0) {
       if (eventName === 'stopLossLong') {
          return <NoDocumentsTile className="stoploss" message="STOPLOSS [LONG]" onClick={() => openCreateModal(eventName)} />
       }
@@ -34,7 +34,7 @@ export default function BotValueSingle({ botValue, eventName, title = 'Bot Value
       }
    }
 
-   if (!foundValue && eventName.indexOf('takeProfit') >= 0) {
+   if (!foundValue && eventName?.indexOf('takeProfit') >= 0) {
       if (eventName === 'takeProfitLong') {
          return <NoDocumentsTile className="takeprofit" message="TAKEPROFIT [LONG]" onClick={() => openCreateModal(eventName)} />
       }

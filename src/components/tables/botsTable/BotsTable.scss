@@ -1,6 +1,28 @@
 .bots-table {
    margin: 2rem 0 0 0;
 
+   tbody {
+      tr {
+         td {
+            span {
+               display: inline-block;
+               width: 100%;
+            }
+
+            .name {
+               font-size: 1rem;
+               margin-bottom: 0;
+               color: $text;
+            }
+
+            .subtitle {
+               font-size: 0.8rem;
+               color: $text-soft;
+            }
+         }
+      }
+   }
+
    &.no-margin {
       margin: 0;
    }
