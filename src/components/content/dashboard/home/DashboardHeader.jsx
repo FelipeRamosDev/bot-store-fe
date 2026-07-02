@@ -16,7 +16,6 @@ import { Button } from '@mui/material';
  */
 export default function DashboardHeader({ setSidebarState }) {
    return <>
-      {/* Toolbar with Create Master Button */}
       <div className="toolbar">
          <Button
             className="toggle-sidebar"
@@ -26,6 +25,5 @@ export default function DashboardHeader({ setSidebarState }) {
             onClick={() => setSidebarState(true)}
          >Sidebar</Button>
       </div>
-
    </>;
 }

@@ -151,6 +151,18 @@ export default function useSubscriptions({ isAdmin = false, customerId, preventL
       }
    }
 
+   async function enableAIUsage() {
+      try {
+         const enabled = await instance.ajax.authPost('/user/billing/enable-ai-usage');
+
+         if (enabled.error) {
+            throw enabled;
+         }
+      } catch (error) {
+         throw error;
+      }
+   }
+
    return {
       subscriptions,
       discountPercent,
@@ -164,7 +176,8 @@ export default function useSubscriptions({ isAdmin = false, customerId, preventL
       setDiscountPercent,
       initCheckout,
       confirmSubscription,
-      cancelSubscription
+      cancelSubscription,
+      enableAIUsage
    };
 }
 

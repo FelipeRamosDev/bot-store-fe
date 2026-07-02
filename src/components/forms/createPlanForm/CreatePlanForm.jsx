@@ -44,6 +44,10 @@ export default function CreatePlanForm({ className, editData, onSubmit = () => {
          </div>
 
          <div className="input-wrap">
+            <FormInput path="isAiUsage" />
+         </div>
+
+         <div className="input-wrap">
             <FormInput path="summary" />
          </div>
 

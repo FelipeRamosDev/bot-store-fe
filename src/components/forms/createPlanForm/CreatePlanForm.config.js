@@ -1,5 +1,6 @@
 import Form from '@/models/Form';
 import NumberFieldSchema from '@/models/Form/fieldTypes/NumberFieldSchema';
+import SwitchFieldSchema from '@/models/Form/fieldTypes/SwitchFieldSchema';
 import TextFieldSchema from '@/models/Form/fieldTypes/TextFieldSchema';
 
 const createPlanForm = new Form({
@@ -14,6 +15,11 @@ const createPlanForm = new Form({
          key: 'productId',
          label: 'Product ID',
          required: true
+      }),
+      new SwitchFieldSchema({
+         key: 'isAiUsage',
+         label: 'AI Usage Plan',
+         defaultValue: false
       }),
       new TextFieldSchema({
          key: 'summary',

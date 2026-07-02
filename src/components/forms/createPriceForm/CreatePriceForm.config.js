@@ -21,7 +21,8 @@ const createPriceForm = new Form({
          label: 'Price Type',
          required: true,
          options: [
-            { label: 'Flat Rate', value: 'flat-rate' }
+            { label: 'Flat Rate', value: 'flat-rate' },
+            { label: 'Usage-based', value: 'usage-based' },
          ]
       }),
       new NumberFieldSchema({
