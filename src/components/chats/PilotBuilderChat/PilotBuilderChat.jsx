@@ -59,6 +59,7 @@ export default function PilotBuilderChat({ className, type = 'create', children 
          floatButtonLabel={type === 'create' ? "Pilot Builder" : "Pilot Editor"}
          onSubmit={onSubmit}
          onOpen={onOpen}
+         requireSubscription
       >
          {children}
       </ChatBase>

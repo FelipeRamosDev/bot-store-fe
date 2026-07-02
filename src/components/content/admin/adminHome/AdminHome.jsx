@@ -11,6 +11,7 @@ export default function AdminHome() {
 
    return (
       <ContentSidebarDrawer
+         isFullContainer={true}
          sidebarState={sidebarState}
          setSidebarState={setSidebarState}
       >

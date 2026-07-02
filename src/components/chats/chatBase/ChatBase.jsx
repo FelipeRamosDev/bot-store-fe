@@ -7,6 +7,8 @@ import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState
 import { parseCSS } from "@/helpers/parser";
 import { ChatRounded } from "@mui/icons-material";
 import { Fab } from "@mui/material";
+import AuthUserContext from "@/contexts/AuthUser";
+import EnableAIModal from "@/components/modals/enableAIModal/EnableAIModal";
 
 export const ChatContext = createContext();
 const CHAT_FLOATING_POSITION_KEY = 'chat-base-floating-position';
@@ -28,9 +30,11 @@ export default function ChatBase({
    headerIcon,
    floatButtonLabel,
    newHistoryItem,
+   requireSubscription = false,
    initialChatType = 'sidebar',
    children
 }) {
+   const auth = useContext(AuthUserContext);
    const [open, setOpen] = useState(false);
    const [position, setPosition] = useState(null);
    const [size, setSize] = useState(null);
@@ -38,6 +42,7 @@ export default function ChatBase({
    const [isMobile, setIsMobile] = useState(true);
    const [chatType, setChatType] = useState(initialChatType);
    const [isMinimized, setIsMinimized] = useState(false);
+   const [enableAIModalOpen, setEnableAIModalOpen] = useState(false);
    const dragRef = useRef(null);
    const chatBaseRef = useRef(null);
    const openCSS = open && 'open';
@@ -76,8 +81,22 @@ export default function ChatBase({
    };
 
    const handleOpen = async () => {
-      if (onOpen) await onOpen();
-      setOpen(prev => !prev);
+      const { user } = auth || {};
+
+      try {
+         if (requireSubscription && user && !user.aiUsageEnabled) {
+            setEnableAIModalOpen(true);
+            return;
+         }
+
+         if (onOpen) {
+            await onOpen();
+         }
+
+         setOpen(prev => !prev);
+      } catch (error) {
+         throw error;
+      }
    }
 
    const handleDragStart = (event) => {
@@ -384,6 +403,8 @@ export default function ChatBase({
          >
             <ChatRounded className="chat-toggle-icon" /> {!isMobile && floatButtonLabel}
          </Fab>
+
+         <EnableAIModal open={enableAIModalOpen} onClose={() => setEnableAIModalOpen(false)} />
       </ChatContext.Provider>
    );
 }
